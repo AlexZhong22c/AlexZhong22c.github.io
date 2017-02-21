@@ -332,8 +332,15 @@ $.cachedScript('//hm.baidu.com/hm.js?<%=theme.baidu_tongji%>').done(function () 
 });
 <% } %>
 if(isPostPage) {
+var curProtocol = window.location.protocol.split(':')[0];
+if (curProtocol === 'https') {
 $.cachedScript('//zz.bdstatic.com/linksubmit/push.js').done(function () {
 });
+} else {
+$.cachedScript('//push.zhanzhang.baidu.com/push.js').done(function () {
+});	
+}
+
 }
 addTextAnimation();
 playTextAnimation();
