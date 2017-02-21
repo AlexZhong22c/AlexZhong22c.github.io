@@ -119,7 +119,7 @@ markdown:
   render:
     html: true
     xhtmlOut: false
-    breaks: true
+    breaks: false
     linkify: true
     typographer: true
     quotes: '“”‘’'
