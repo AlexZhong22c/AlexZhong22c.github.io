@@ -119,6 +119,8 @@ npm install hexo、npm install、npm install hexo-deployer-git
 
 git是一个[版本控制](http://lib.csdn.net/base/git)的工具，而github有点类似于远程仓库，用于存放用git管理的各种项目。自行进一步理解git能够对搭建hexo博客的过程有理性的认识。
 
+关于git的一些基本操作的含义可以看这里：[个人常用命令add,commit以及push-黄杉](http://blog.csdn.net/mchdba/article/details/12083965?utm_source=tuicool&utm_medium=referral)
+
 ------
 
 ### .gitignore文件
@@ -170,6 +172,8 @@ git是一个[版本控制](http://lib.csdn.net/base/git)的工具，而github有
 一次偶然的机会，我收取了一个网友50元，在他整个搭建过程中向他提供问题咨询，包学包会。结果发现他在整个过程中能免除很多痛苦，而且节省了他大量的时间。两个星期的问题能够在三四天时间内轻松解决，其实这50元还真的挺值。
 
 后来我陆续接了几单咨询来做，通过这个互利的过程，我对咨询和解决方案行业的态度发生的巨大的改观。我个人也欢迎联系付费咨询的合作！
+
+---
 
 ## 本文补充
 

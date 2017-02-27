@@ -8,6 +8,7 @@
       <url>https://alexzhong22c.github.io/2017/02/22/my-hexo-theme/</url>
       <content type="html"><![CDATA[<p>从找一个喜欢的hexo主题到修改好bug发布到博客上面，整个过程花了我不少时间，下面是对这个改bug过程中发现的小问题做的总结。</p>
 <p>此文无图。</p>
+<a id="more"></a>
 <hr>
 <p>一开始我是在知乎上面找好看的主题，找了很长一段时间才找到一个我比较喜欢的主题，并且挑选了一个已经被大神们优化得不错的主题来借鉴借鉴。</p>
 <p>我的hexo主题其实就是直接Fork了<a href="http://ngudream.com/2017/01/24/n-hexo-blog/" target="_blank" rel="external">ngudream</a>的主题，只不过该大神日常比较忙碌，我自己琢磨了一下代码，把一些报错的小bug给修复了，暂时还没有为这个主题添加什么特殊的功能。（原因是这个主题在各位大神的努力下，功能已经非常齐全炫酷了。）</p>
@@ -142,6 +143,7 @@
       <title><![CDATA[搭建hexo博客个人总结]]></title>
       <url>https://alexzhong22c.github.io/2017/02/22/my-hexo-blog/</url>
       <content type="html"><![CDATA[<p>因为大神们在这个方面的文献已经很多了，所以我觉得我没有必要再写一个教程了。关于教程，可以推荐<a href="http://blog.csdn.net/itjia_0203/article/details/52504837" target="_blank" rel="external">sylujia的hexo搭建教程</a>来看看，写得很详细而且思路也很好，但是我记得这个教程有一两点步骤不太妥当，如果完全按照教程来搞会报错，但如果自身有一点基本知识的话，这点问题真的算不上是问题。</p>
+<a id="more"></a>
 <hr>
 <p>我是按照<a href="http://blog.csdn.net/itjia_0203/article/details/52504837" target="_blank" rel="external">sylujia的hexo搭建教程</a>来搭建的，发现这个教程有几个不周全的地方。</p>
 <h2 id="这个教程的不周全之处"><a class="header-anchor" href="#这个教程的不周全之处"></a>这个教程的不周全之处</h2>
