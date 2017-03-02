@@ -4,6 +4,180 @@
   
     
     <entry>
+      <title><![CDATA[桌面端和移动端图标的引入]]></title>
+      <url>https://alexzhong22c.github.io/2017/02/27/icon-usage/</url>
+      <content type="html"><![CDATA[<blockquote>
+<p>本文翻译自<a href="https://bitsofco.de/all-about-favicons-and-touch-icons/" target="_blank" rel="external">All About Favicons-bitsofcode</a></p>
+</blockquote>
+<p>这星期我决定找到一些合适的方式来使用网站的favicon（另外还包括移动端的touch icon）。我想总结一下我自己的观点并且通过简明的语言来表述清楚：</p>
+<a id="more"></a>
+<hr>
+<h2 id="一些基础的知识"><a class="header-anchor" href="#一些基础的知识"></a>一些基础的知识</h2>
+<p>favicon 是浏览器展示web网页时用到的一种图片。最典型的就是16x16像素大小，不过现在通常需要更多更大的尺寸以供不同的用途使用：</p>
+<ul>
+<li>地址栏</li>
+<li>链接栏</li>
+<li>书签</li>
+<li>标签</li>
+<li>桌面图标</li>
+</ul>
+<p>如果没有指明favicon的位置，所有主流的浏览器（甚至包括IE5时代的浏览器）都会默认去网站根目录找一个叫&quot;favicon.ico&quot;的文件。从技术层面来讲，这意味着我们不需要用作任何声明就能在网站中使用图标。</p>
+<p>然而，这种情况下图标的格式需要受到限制。另外还不支持带透明的图标，这并不是一个最优的办法。因为现在我们能使用更多格式的图标：<a href="http://caniuse.com/#feat=link-icon-png" target="_blank" rel="external">png</a>, gif, jpeg，在某些情况下还有<a href="http://caniuse.com/#feat=link-icon-svg" target="_blank" rel="external">svg</a> 。</p>
+<h2 id="favicon声明和link标签"><a class="header-anchor" href="#favicon声明和link标签"></a>favicon声明和link标签</h2>
+<p>你可以用link标签设置你喜欢的图标：</p>
+<pre><code class="language-JavaScript">&lt;link rel=&quot;&quot; type=&quot;&quot; sizes=&quot;&quot; href=&quot;&quot;&gt;  
+</code></pre>
+<h3 id="rel属性"><a class="header-anchor" href="#rel属性"></a>rel属性</h3>
+<p>用于声明链接目标和html文档的关系。通常用来引入css样式表。如果是图标，比较官方的写法应该是：</p>
+<pre><code class="language-JavaScript">&lt;link rel=&quot;icon&quot;&gt;
+</code></pre>
+<p>曾经你可能见过这种写法：</p>
+<pre><code class="language-JavaScript"> &lt;link rel=&quot;shortcut icon&quot;&gt;
+</code></pre>
+<p>这是因为某些老浏览器（IE8或者更早）需要这么写，否则浏览器会忽略这整个link标签。因此，即便<code>rel=&quot;shortcut icon&quot;</code>不在HTML5标准里面，它依然在现代浏览器中有效。然而后面我们会讲到，在实际中你可能只需要使用<code>&lt;link rel=&quot;icon&quot;&gt;</code> 这一种写法即可。</p>
+<h3 id="type属性"><a class="header-anchor" href="#type属性"></a>type属性</h3>
+<p>用来	指定链接目标的<a href="http://www.iana.org/assignments/media-types/media-types.xhtml#image" target="_blank" rel="external">MIME type format</a>。比如，指定一个图标文件是<code>image/x-icon</code> 类型还一个png文件 <code>image/png</code>。</p>
+<p>根据W3C，指定type类型仅仅只是一个建议。但除此之外，IE9和IE10需要指定type属性。在这些版本的浏览器里面，虽然不必指定<code>rel=&quot;shortcut icon&quot;</code>，作为替代，它们需要指定媒体文件的type为 <code>image/x-icon</code> 。</p>
+<p>幸运的是，IE11和其他现代浏览器不需要指定媒体文件的type。</p>
+<h3 id="sizes属性"><a class="header-anchor" href="#sizes属性"></a>sizes属性</h3>
+<p>用于声明特定被链接的文件的大小，不同大小用于不同用途。你能为每种用途提供各自最优的文件。这对使用png图片的情景尤为重要，因为png是不能拓展的。这是一张很好的<a href="https://github.com/audreyr/favicon-cheat-sheet" target="_blank" rel="external">备忘单</a>,它会告诉你应该使用的文件的大小和用途。</p>
+<h3 id="href属性"><a class="header-anchor" href="#href属性"></a>href属性</h3>
+<p>不必多说，这是用来指定图标的位置和地址的。</p>
+<h2 id="做个小结"><a class="header-anchor" href="#做个小结"></a>做个小结</h2>
+<table>
+<thead>
+<tr>
+<th>Browser</th>
+<th>Link “rel”/ “type”</th>
+<th>Accepted Formats</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IE 8 and below</td>
+<td>link rel=”shortcut icon”</td>
+<td>ico</td>
+</tr>
+<tr>
+<td>IE 9, IE 10</td>
+<td>link rel=”icon” type=”image/x-icon” or link rel=”shortcut icon”</td>
+<td>ico</td>
+</tr>
+<tr>
+<td>IE 11</td>
+<td>link rel=”icon”</td>
+<td>ico, png, gif</td>
+</tr>
+<tr>
+<td>Chrome</td>
+<td>link rel=”icon”</td>
+<td>ico, png, gif</td>
+</tr>
+<tr>
+<td>Firefox</td>
+<td>link rel=”icon”</td>
+<td>ico, png, gif, <a href="http://caniuse.com/#feat=link-icon-svg" target="_blank" rel="external">svg*</a></td>
+</tr>
+<tr>
+<td>Safari</td>
+<td>link rel=”icon”</td>
+<td>ico, png, gif</td>
+</tr>
+<tr>
+<td>Opera</td>
+<td>link rel=”icon”</td>
+<td>ico, png, gif</td>
+</tr>
+</tbody>
+</table>
+<p>看上去，最好的方案应该是声明两个版本，用现代浏览器的方法引用png，IE8的方法引用ico文件。</p>
+<p>然而，如果ico和png同时被引用，现代浏览器会不论标签顺序的先后，只选择ico。这意味着，如果我们要兼容老浏览器，现代浏览器可能会被提供一个错误的图片文件的格式。</p>
+<p>因此，最佳的方案应该是<strong>只声明引入png，让老浏览器使用默认的方式引入ico</strong>，这样最稳妥。</p>
+<pre><code class="language-JavaScript">&lt;!-- For IE 10 and below --&gt;  
+&lt;!--  No link, just place a file called favicon.ico in the root directory --&gt;
+
+&lt;!-- For IE 11, Chrome, Firefox, Safari, Opera --&gt;  
+&lt;link rel=&quot;icon&quot; href=&quot;path/to/favicon-16.png&quot; sizes=&quot;16x16&quot; type=&quot;image/png&quot;&gt;  
+&lt;link rel=&quot;icon&quot; href=&quot;path/to/favicon-32.png&quot; sizes=&quot;32x32&quot; type=&quot;image/png&quot;&gt;  
+&lt;link rel=&quot;icon&quot; href=&quot;path/to/favicon-48.png&quot; sizes=&quot;48x48&quot; type=&quot;image/png&quot;&gt;  
+&lt;link rel=&quot;icon&quot; href=&quot;path/to/favicon-62.png&quot; sizes=&quot;62x62&quot; type=&quot;image/png&quot;&gt;  
+</code></pre>
+<h2 id="移动设备的touch-icon"><a class="header-anchor" href="#移动设备的touch-icon"></a>移动设备的touch Icon</h2>
+<p>一些移动设备允许用户自定义浏览器主页书签。像原生app图标一样，在这种情景下，我们应该提供专门的图标。</p>
+<p>怎么指定这个图标由浏览器/移动设备决定：</p>
+<table>
+<thead>
+<tr>
+<th>Device / Browser</th>
+<th>Link “rel”</th>
+<th>Sizes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Apple / Safari</td>
+<td>link rel=”apple-touch-icon” or link rel=”apple-touch-icon-precomposed”</td>
+<td>76x76 - iPad 2 and iPad mini ;120x120 - iPhone 4s, 5, 6 ;152x152 - iPad (retina) ;180x180 - iPhone 6 Plus</td>
+</tr>
+<tr>
+<td>Apple / Opera Coast</td>
+<td>link rel=”icon” (<a href="https://dev.opera.com/articles/opera-coast/" target="_blank" rel="external">Will also accept Safari and Windows formats</a>)</td>
+<td>228x228</td>
+</tr>
+<tr>
+<td>Android / Chrome</td>
+<td>link rel=”icon” (<a href="https://developer.chrome.com/multidevice/android/installtohomescreen" target="_blank" rel="external">Will, for a limited time, also accept Safari format</a>)</td>
+<td>192x192</td>
+</tr>
+</tbody>
+</table>
+<p>对于Windows，这些图标应该用meta标签指定。</p>
+<p>For Windows 8 / IE 10 -</p>
+<pre><code class="language-html">&lt;meta name=&quot;msapplication-TileImage&quot; content=&quot;pinned-tile.png&quot;&gt;  
+&lt;meta name=&quot;msapplication-TileColor&quot; content=&quot;#009900&quot;&gt;  
+</code></pre>
+<p>For Windows 8.1 / IE 11 -</p>
+<pre><code class="language-html">&lt;!-- In &lt;head&gt; --&gt;  
+&lt;meta name=&quot;msapplication-config&quot; content=&quot;ieconfig.xml&quot; /&gt;
+
+&lt;!--  In ieconfig.xml --&gt;  
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
+&lt;browserconfig&gt;  
+  &lt;msapplication&gt;
+    &lt;tile&gt;
+      &lt;square70x70logo src=&quot;images/smalltile.png&quot;/&gt;
+      &lt;square150x150logo src=&quot;images/mediumtile.png&quot;/&gt;
+      &lt;wide310x150logo src=&quot;images/widetile.png&quot;/&gt;
+      &lt;square310x310logo src=&quot;images/largetile.png&quot;/&gt;
+      &lt;TileColor&gt;#009900&lt;/TileColor&gt;
+    &lt;/tile&gt;
+  &lt;/msapplication&gt;
+&lt;/browserconfig&gt;  
+</code></pre>
+<p>就是这样，用到 favicon的地方还挺多的。如果是一个很基础的网站，我可能只会使用ico图标	。期待 SVG favicon 时代的到来。</p>
+<p>另可参考：<a href="https://github.com/audreyr/favicon-cheat-sheet" target="_blank" rel="external">https://github.com/audreyr/favicon-cheat-sheet</a></p>
+]]></content>
+      
+        <categories>
+            
+            <category> HTML </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 图标 </tag>
+            
+            <tag> meta标签 </tag>
+            
+            <tag> link标签 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[yelee主题改bug总结]]></title>
       <url>https://alexzhong22c.github.io/2017/02/22/my-hexo-theme/</url>
       <content type="html"><![CDATA[<p>从找一个喜欢的hexo主题到修改好bug发布到博客上面，整个过程花了我不少时间，下面是对这个改bug过程中发现的小问题做的总结。</p>
@@ -213,6 +387,7 @@ npm install hexo、npm install、npm install hexo-deployer-git
 <h3 id="git与github区别"><a class="header-anchor" href="#git与github区别"></a>Git与GitHub区别</h3>
 <p>理解Git与GitHub是两个不同的概念，这有利于理解搭建hexo博客的过程，万一报错了自己也能解决。</p>
 <p>git是一个<a href="http://lib.csdn.net/base/git" target="_blank" rel="external">版本控制</a>的工具，而github有点类似于远程仓库，用于存放用git管理的各种项目。自行进一步理解git能够对搭建hexo博客的过程有理性的认识。</p>
+<p>关于git的一些基本操作的含义可以看这里：<a href="http://blog.csdn.net/mchdba/article/details/12083965?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">个人常用命令add,commit以及push-黄杉</a></p>
 <hr>
 <h3 id="gitignore文件"><a class="header-anchor" href="#gitignore文件"></a>.gitignore文件</h3>
 <p>.gitignore顾名思义就是告诉git需要忽略的文件，这是一个很重要并且很实用的文件。</p>
@@ -239,6 +414,7 @@ npm install hexo、npm install、npm install hexo-deployer-git
 <hr>
 <p>一次偶然的机会，我收取了一个网友50元，在他整个搭建过程中向他提供问题咨询，包学包会。结果发现他在整个过程中能免除很多痛苦，而且节省了他大量的时间。两个星期的问题能够在三四天时间内轻松解决，其实这50元还真的挺值。</p>
 <p>后来我陆续接了几单咨询来做，通过这个互利的过程，我对咨询和解决方案行业的态度发生的巨大的改观。我个人也欢迎联系付费咨询的合作！</p>
+<hr>
 <h2 id="本文补充"><a class="header-anchor" href="#本文补充"></a>本文补充</h2>
 <p>之前讲到的几个博文链接地址我都已经放上了，另外还有一篇原创的不错的文章，地址挂了，我把全文截图放在这里，可以右键另存为来看：</p>
 <p><img src="http://olqa2s510.bkt.clouddn.com/CrazyMilk-%20blog.png" alt=""></p>

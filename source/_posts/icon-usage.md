@@ -5,7 +5,7 @@ categories: [HTML]
 tags: [图标,meta标签,link标签]
 ---
 
-> 本文翻译自[All About Favicons-bitsofcode](https://bitsofco.de/all-about-favicons-and-touch-icons/)
+> 本文翻译自[All About Favicons-bitsofcode](https://bitsofco.de/all-about-favicons-and-touch-icons/) ：
 
 这星期我决定找到一些合适的方式来使用网站的favicon（另外还包括移动端的touch icon）。我想总结一下我自己的观点并且通过简明的语言来表述清楚：
 
@@ -26,6 +26,8 @@ tags: [图标,meta标签,link标签]
 如果没有指明favicon的位置，所有主流的浏览器（甚至包括IE5时代的浏览器）都会默认去网站根目录找一个叫"favicon.ico"的文件。从技术层面来讲，这意味着我们不需要用作任何声明就能在网站中使用图标。
 
 然而，这种情况下图标的格式需要受到限制。另外还不支持带透明的图标，这并不是一个最优的办法。因为现在我们能使用更多格式的图标：[png](http://caniuse.com/#feat=link-icon-png), gif, jpeg，在某些情况下还有[svg](http://caniuse.com/#feat=link-icon-svg) 。
+
+---
 
 ## favicon声明和link标签
 
@@ -67,6 +69,8 @@ tags: [图标,meta标签,link标签]
 
 不必多说，这是用来指定图标的位置和地址的。
 
+---
+
 ## 做个小结
 
 | Browser        | Link “rel”/ “type”                       | Accepted Formats                         |
@@ -83,7 +87,16 @@ tags: [图标,meta标签,link标签]
 
 然而，如果ico和png同时被引用，现代浏览器会不论标签顺序的先后，只选择ico。这意味着，如果我们要兼容老浏览器，现代浏览器可能会被提供一个错误的图片文件的格式。
 
-因此，最佳的方案应该是**只声明引入png，让老浏览器使用默认的方式引入ico**，这样最稳妥。
+### 当只引入ico时
+
+```html
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+```
+
+### 当需要引入ico和png
+
+最佳的方案应该是**只声明引入png，让老浏览器使用默认的方式引入ico**，这样最稳妥。(但实际上，把ico文件放在根目录时，某些现代浏览器可能并不会引入它)
 
 ```JavaScript
 <!-- For IE 10 and below -->  
@@ -95,6 +108,8 @@ tags: [图标,meta标签,link标签]
 <link rel="icon" href="path/to/favicon-48.png" sizes="48x48" type="image/png">  
 <link rel="icon" href="path/to/favicon-62.png" sizes="62x62" type="image/png">  
 ```
+
+---
 
 ## 移动设备的touch Icon
 
