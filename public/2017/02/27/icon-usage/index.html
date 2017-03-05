@@ -78,20 +78,20 @@
 
 
 
-<meta name="description" content="本文翻译自All About Favicons-bitsofcode
+<meta name="description" content="本文翻译自All About Favicons-bitsofcode ：
 
 这星期我决定找到一些合适的方式来使用网站的favicon（另外还包括移动端的touch icon）。我想总结一下我自己的观点并且通过简明的语言来表述清楚：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="桌面端和移动端图标的引入">
 <meta property="og:url" content="https://alexzhong22c.github.io/2017/02/27/icon-usage/index.html">
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
-<meta property="og:description" content="本文翻译自All About Favicons-bitsofcode
+<meta property="og:description" content="本文翻译自All About Favicons-bitsofcode ：
 
 这星期我决定找到一些合适的方式来使用网站的favicon（另外还包括移动端的touch icon）。我想总结一下我自己的观点并且通过简明的语言来表述清楚：">
-<meta property="og:updated_time" content="2017-02-27T09:36:42.352Z">
+<meta property="og:updated_time" content="2017-03-02T09:50:59.512Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="桌面端和移动端图标的引入">
-<meta name="twitter:description" content="本文翻译自All About Favicons-bitsofcode
+<meta name="twitter:description" content="本文翻译自All About Favicons-bitsofcode ：
 
 这星期我决定找到一些合适的方式来使用网站的favicon（另外还包括移动端的touch icon）。我想总结一下我自己的观点并且通过简明的语言来表述清楚：">
 
@@ -394,7 +394,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/link标签/">link标签</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meta标签/">meta标签</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/theme/">theme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yelee/">yelee</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图标/">图标</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/心得/">心得</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/link标签/">link标签</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meta标签/">meta标签</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/theme/">theme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yelee/">yelee</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图标/">图标</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工程/">工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/心得/">心得</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a></li></ul>
                     </div>
                 </section>
                 
@@ -523,7 +523,7 @@
 
 	<br />
 	<p style="height:7px;"/>
-	<p style="height:20px;font-family:KaiTi,LiSu,'宋体',sans-serif;color:#DBDBDB;font-size:12px;">预计阅读5分钟</p>
+	<p style="height:20px;font-family:KaiTi,LiSu,'宋体',sans-serif;color:#DBDBDB;font-size:12px;">预计阅读6分钟</p>
 
     </div>
   
@@ -560,11 +560,10 @@
           <div id="article-content" class="article-entry" itemprop="articleBody">
 			  
 			<blockquote>
-<p>本文翻译自<a href="https://bitsofco.de/all-about-favicons-and-touch-icons/" target="_blank" rel="external">All About Favicons-bitsofcode</a></p>
+<p>本文翻译自<a href="https://bitsofco.de/all-about-favicons-and-touch-icons/" target="_blank" rel="external">All About Favicons-bitsofcode</a> ：</p>
 </blockquote>
 <p>这星期我决定找到一些合适的方式来使用网站的favicon（另外还包括移动端的touch icon）。我想总结一下我自己的观点并且通过简明的语言来表述清楚：</p>
 <a id="more"></a>
-<hr>
 <h2 id="一些基础的知识"><a class="header-anchor" href="#一些基础的知识"></a>一些基础的知识</h2>
 <p>favicon 是浏览器展示web网页时用到的一种图片。最典型的就是16x16像素大小，不过现在通常需要更多更大的尺寸以供不同的用途使用：</p>
 <ul>
@@ -645,7 +644,12 @@
 </table>
 <p>看上去，最好的方案应该是声明两个版本，用现代浏览器的方法引用png，IE8的方法引用ico文件。</p>
 <p>然而，如果ico和png同时被引用，现代浏览器会不论标签顺序的先后，只选择ico。这意味着，如果我们要兼容老浏览器，现代浏览器可能会被提供一个错误的图片文件的格式。</p>
-<p>因此，最佳的方案应该是<strong>只声明引入png，让老浏览器使用默认的方式引入ico</strong>，这样最稳妥。</p>
+<h3 id="当只引入ico时"><a class="header-anchor" href="#当只引入ico时"></a>当只引入ico时</h3>
+<pre><code class="language-html">&lt;link rel=&quot;icon&quot; href=&quot;favicon.ico&quot; type=&quot;image/x-icon&quot; /&gt;
+&lt;link rel=&quot;shortcut icon&quot; href=&quot;favicon.ico&quot; type=&quot;image/x-icon&quot; /&gt;
+</code></pre>
+<h3 id="当需要引入ico和png"><a class="header-anchor" href="#当需要引入ico和png"></a>当需要引入ico和png</h3>
+<p>最佳的方案应该是<strong>只声明引入png，让老浏览器使用默认的方式引入ico</strong>，这样最稳妥。(但实际上，把ico文件放在根目录时，某些现代浏览器可能并不会引入它)</p>
 <pre><code class="language-JavaScript">&lt;!-- For IE 10 and below --&gt;  
 &lt;!--  No link, just place a file called favicon.ico in the root directory --&gt;
 
@@ -718,7 +722,7 @@
         <p><span>本文标题:</span><a href="/2017/02/27/icon-usage/">桌面端和移动端图标的引入</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2017-02-27, 17:28:51</p>
-        <!-- <p><span>最后更新:</span>2017-02-27, 17:36:42</p> -->
+        <!-- <p><span>最后更新:</span>2017-03-02, 17:50:59</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="桌面端和移动端图标的引入" href="/2017/02/27/icon-usage/">https://alexzhong22c.github.io/2017/02/27/icon-usage/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://alexzhong22c.github.io/2017/02/27/icon-usage/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -731,6 +735,12 @@
 
 
     <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2017/03/02/gulp-usage/">
+                    gulp的入门和一些简单使用
+                </a>
+            </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
@@ -748,7 +758,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一些基础的知识"><span class="toc-number">1.</span> <span class="toc-text">一些基础的知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#favicon声明和link标签"><span class="toc-number">2.</span> <span class="toc-text">favicon声明和link标签</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#rel属性"><span class="toc-number">2.1.</span> <span class="toc-text">rel属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#type属性"><span class="toc-number">2.2.</span> <span class="toc-text">type属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sizes属性"><span class="toc-number">2.3.</span> <span class="toc-text">sizes属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#href属性"><span class="toc-number">2.4.</span> <span class="toc-text">href属性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#做个小结"><span class="toc-number">3.</span> <span class="toc-text">做个小结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#移动设备的touch-icon"><span class="toc-number">4.</span> <span class="toc-text">移动设备的touch Icon</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一些基础的知识"><span class="toc-number">1.</span> <span class="toc-text">一些基础的知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#favicon声明和link标签"><span class="toc-number">2.</span> <span class="toc-text">favicon声明和link标签</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#rel属性"><span class="toc-number">2.1.</span> <span class="toc-text">rel属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#type属性"><span class="toc-number">2.2.</span> <span class="toc-text">type属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sizes属性"><span class="toc-number">2.3.</span> <span class="toc-text">sizes属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#href属性"><span class="toc-number">2.4.</span> <span class="toc-text">href属性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#做个小结"><span class="toc-number">3.</span> <span class="toc-text">做个小结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#当只引入ico时"><span class="toc-number">3.1.</span> <span class="toc-text">当只引入ico时</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#当需要引入ico和png"><span class="toc-number">3.2.</span> <span class="toc-text">当需要引入ico和png</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#移动设备的touch-icon"><span class="toc-number">4.</span> <span class="toc-text">移动设备的touch Icon</span></a></li></ol>
         
     </div>
     <style>
@@ -866,7 +876,9 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a href="/2017/03/02/gulp-usage/" title="上一篇: gulp的入门和一些简单使用">
+                <i class="fa fa-angle-left"></i>
+            </a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
@@ -878,7 +890,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/02/27/icon-usage/">桌面端和移动端图标的引入</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/my-hexo-theme/">yelee主题改bug总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/my-hexo-blog/">搭建hexo博客个人总结</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/gulp-usage/">gulp的入门和一些简单使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/27/icon-usage/">桌面端和移动端图标的引入</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/my-hexo-theme/">yelee主题改bug总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/my-hexo-blog/">搭建hexo博客个人总结</a></li></ul>
 
 
 
@@ -901,7 +913,7 @@
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					
-						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,266</span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,327</span>
 					
 				</div>
             </div>
@@ -1614,8 +1626,10 @@ if($(this).attr("exist-number") != undefined) {
 existNumber = true;
 return false;
 }
-$(this).css("margin-top", "0.5em");
-$(this).css("margin-bottom", "0.3em");
+$(this).css("padding-top", "0.6em");
+$(this).css("margin-top", "1em");
+$(this).css("padding-bottom", "0.3em");
+$(this).css("border-top", "1px solid #ddd");
 var attr = $(this).attr("exist-number");
 if(null == attr || undefined == attr){
 $(this).attr("exist-number", true);
@@ -1713,7 +1727,7 @@ if (is_post()){
 jQuery.getScript("//cdn.bootcss.com/prettify/r298/prettify.min.js")
 .done(function() {
 /* 执行成功后的处理 */
-$('pre').addClass('prettyprint linenums').attr('style', 'white-space:pre;word-break: keep-all;overflow:auto;height:auto;width:auto;padding-top:5px;padding-bottom:5px;');
+$('pre').addClass('prettyprint linenums').attr('style', 'white-space:pre;word-break: keep-all;overflow:auto;height:auto;width:auto;padding-top:5px;padding-bottom:5px;margin-bottom:10px;');
 <!-- 控制代码高度和滚动条 -->
 prettyPrint();
 })

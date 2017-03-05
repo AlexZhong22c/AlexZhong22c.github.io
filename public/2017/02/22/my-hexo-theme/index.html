@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
 <meta property="og:description" content="从找一个喜欢的hexo主题到修改好bug发布到博客上面，整个过程花了我不少时间，下面是对这个改bug过程中发现的小问题做的总结。
 此文无图。">
-<meta property="og:updated_time" content="2017-02-22T12:02:28.328Z">
+<meta property="og:updated_time" content="2017-03-02T09:22:10.463Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="yelee主题改bug总结">
 <meta name="twitter:description" content="从找一个喜欢的hexo主题到修改好bug发布到博客上面，整个过程花了我不少时间，下面是对这个改bug过程中发现的小问题做的总结。
@@ -391,7 +391,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/link标签/">link标签</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meta标签/">meta标签</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/theme/">theme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yelee/">yelee</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图标/">图标</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/心得/">心得</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/link标签/">link标签</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meta标签/">meta标签</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/theme/">theme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yelee/">yelee</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图标/">图标</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工程/">工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/心得/">心得</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a></li></ul>
                     </div>
                 </section>
                 
@@ -559,7 +559,6 @@
 			<p>从找一个喜欢的hexo主题到修改好bug发布到博客上面，整个过程花了我不少时间，下面是对这个改bug过程中发现的小问题做的总结。</p>
 <p>此文无图。</p>
 <a id="more"></a>
-<hr>
 <p>一开始我是在知乎上面找好看的主题，找了很长一段时间才找到一个我比较喜欢的主题，并且挑选了一个已经被大神们优化得不错的主题来借鉴借鉴。</p>
 <p>我的hexo主题其实就是直接Fork了<a href="http://ngudream.com/2017/01/24/n-hexo-blog/" target="_blank" rel="external">ngudream</a>的主题，只不过该大神日常比较忙碌，我自己琢磨了一下代码，把一些报错的小bug给修复了，暂时还没有为这个主题添加什么特殊的功能。（原因是这个主题在各位大神的努力下，功能已经非常齐全炫酷了。）</p>
 <p>直接参考ngudream的这篇文章就可以了，在此在此表示一万个感谢：</p>
@@ -577,7 +576,6 @@
 <li>生成一次页面</li>
 <li>再把刚刚的search文件夹剪切回<code>yelee\source</code>文件夹下即可</li>
 </ul>
-<hr>
 <h3 id="cb-search-json-404-not-found"><a class="header-anchor" href="#cb-search-json-404-not-found"></a>cb-search.json 404 (Not Found)</h3>
 <ul>
 <li>是因为没有安装右下角搜索栏插件</li>
@@ -585,10 +583,8 @@
 <ul>
 <li>如果安装插件之后语法报错，就把别人项目的文件代码复制过来就行了，省得去检查语法</li>
 </ul>
-<hr>
 <h3 id="百度分享因为混合内容报错"><a class="header-anchor" href="#百度分享因为混合内容报错"></a>百度分享因为混合内容报错</h3>
 <p>如果因为混合内容报错（即https网站引用了http的资源），你可以将百度分享的地址改为：<code>https://github.com/hrwhisper/baiduShare</code>；本来我想把static文件夹放在外面一点的，但是有bug，我现在只是做到不报错而已，具体的百度分享内容都没弄</p>
-<hr>
 <h3 id="百度站长要重新配置"><a class="header-anchor" href="#百度站长要重新配置"></a>百度站长要重新配置</h3>
 <ul>
 <li>查阅相关资料，依照资料放baidu_verify_QshFoK3ZRz.html在yelee的source文件夹下通过站长验证，放googleeff62ed1566e185e.html也是同理。</li>
@@ -603,7 +599,6 @@
 </ul>
 </li>
 </ul>
-<hr>
 <h2 id="温馨提示"><a class="header-anchor" href="#温馨提示"></a>温馨提示</h2>
 <ul>
 <li>多说也是会因为混合内容而报错，但是我只能改良，不能彻底解决这个问题
@@ -626,7 +621,6 @@
 </li>
 <li>插件这种东西最好不要复制，所以<strong>在重新搭建博客的时候</strong>我没有直接复制node_modules文件夹，这也容易令人忽略了大神自己在这个文件夹下改良的index.js和search.ejs文件</li>
 </ul>
-<hr>
 <h2 id="请不要fork我的主题"><a class="header-anchor" href="#请不要fork我的主题"></a>请不要Fork我的主题</h2>
 <p>去Fork大神ngudream的主题就可以了，因为我的个人改动比较私人化，所以Fork之后别人可能会看不懂。另外我的主题作了几个不好的改动：</p>
 <ul>
@@ -656,7 +650,6 @@
 <li>谷歌分析到现在也不会，所以先不用，应该和百度站长是差不多的，没心思搞</li>
 <li>好像就只有360浏览器看不到emoji表情，所以即便安装了插件，文章尽量不要用emoji</li>
 </ul>
-<hr>
 <h2 id="整个过程的心得"><a class="header-anchor" href="#整个过程的心得"></a>整个过程的心得</h2>
 <ul>
 <li>在这过程中学会了用HTML-beautify来美化sublime中的html代码排版</li>
@@ -677,7 +670,7 @@
         <p><span>本文标题:</span><a href="/2017/02/22/my-hexo-theme/">yelee主题改bug总结</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2017-02-22, 23:06:34</p>
-        <!-- <p><span>最后更新:</span>2017-02-22, 20:02:28</p> -->
+        <!-- <p><span>最后更新:</span>2017-03-02, 17:22:10</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="yelee主题改bug总结" href="/2017/02/22/my-hexo-theme/">https://alexzhong22c.github.io/2017/02/22/my-hexo-theme/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://alexzhong22c.github.io/2017/02/22/my-hexo-theme/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -845,7 +838,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/02/27/icon-usage/">桌面端和移动端图标的引入</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/my-hexo-theme/">yelee主题改bug总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/my-hexo-blog/">搭建hexo博客个人总结</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/gulp-usage/">gulp的入门和一些简单使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/27/icon-usage/">桌面端和移动端图标的引入</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/my-hexo-theme/">yelee主题改bug总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/my-hexo-blog/">搭建hexo博客个人总结</a></li></ul>
 
 
 
@@ -1581,8 +1574,10 @@ if($(this).attr("exist-number") != undefined) {
 existNumber = true;
 return false;
 }
-$(this).css("margin-top", "0.5em");
-$(this).css("margin-bottom", "0.3em");
+$(this).css("padding-top", "0.6em");
+$(this).css("margin-top", "1em");
+$(this).css("padding-bottom", "0.3em");
+$(this).css("border-top", "1px solid #ddd");
 var attr = $(this).attr("exist-number");
 if(null == attr || undefined == attr){
 $(this).attr("exist-number", true);
@@ -1680,7 +1675,7 @@ if (is_post()){
 jQuery.getScript("//cdn.bootcss.com/prettify/r298/prettify.min.js")
 .done(function() {
 /* 执行成功后的处理 */
-$('pre').addClass('prettyprint linenums').attr('style', 'white-space:pre;word-break: keep-all;overflow:auto;height:auto;width:auto;padding-top:5px;padding-bottom:5px;');
+$('pre').addClass('prettyprint linenums').attr('style', 'white-space:pre;word-break: keep-all;overflow:auto;height:auto;width:auto;padding-top:5px;padding-bottom:5px;margin-bottom:10px;');
 <!-- 控制代码高度和滚动条 -->
 prettyPrint();
 })

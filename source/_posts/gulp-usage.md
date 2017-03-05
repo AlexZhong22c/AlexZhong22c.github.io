@@ -9,8 +9,6 @@ tags: [工程]
 
 <!--more-->
 
----
-
 建议参考 [gulp详细入门教程-一点](http://www.ydcss.com/archives/18)
 
 大概的过程为
@@ -70,6 +68,12 @@ npm install gulp --save-dev
 ### 安装组件
 
 [Gulp安装及配合组件构建前端开发一体化](http://www.dbpoo.com/getting-started-with-gulp/)
+
+#### gulp-jshint
+
+[gulp-jshint](https://www.npmjs.com/package/gulp-jshint)
+
+如果无法在文件夹创建`.jshintrc`文件的话，就去网上别人的工程里面下载一个：[GMU-github](https://github.com/fex-team/GMU)
 
 ---
 

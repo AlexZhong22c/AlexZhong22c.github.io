@@ -9,8 +9,6 @@ tags: [hexo,心得,教程]
 
 <!--more-->
 
----
-
 我是按照[sylujia的hexo搭建教程](http://blog.csdn.net/itjia_0203/article/details/52504837)来搭建的，发现这个教程有几个不周全的地方。
 
 ## 这个教程的不周全之处
@@ -42,8 +40,6 @@ tags: [hexo,心得,教程]
 
 对于这段代码的解释可以参考原文[冷星1024的hexo搭建教程](http://www.cnblogs.com/ld1024/p/5913169.html) 。这一步应该在git与github建立联系之后，在安装hexo之前完成。
 
-------
-
 ### 不周之处二
 
 看到这一步：
@@ -67,8 +63,6 @@ $ git push -f origin hexo  #把本地库强制push到远端库的hexo分支
 ```
 
 接着往下做就行了，一直到教程的**优化与部署**环节。不建议小白看**优化与部署**及之后的内容，只不过是把之前的内容重新过一遍而已，最后那段内容甚至可能涉及抄袭，有点敷衍，不看就行了。
-
-------
 
 ## 原始文件和部署文件分离
 
@@ -94,8 +88,6 @@ git push origin hexo
 
 3\. 执行`hexo g -d`发布网站到master分支上。
 
-------
-
 ### 如果本地资料丢失，之前所做的备份就能实现还原
 
 重装电脑或者想在其他电脑上修改博客，可以使用下列步骤：
@@ -109,8 +101,6 @@ npm install hexo、npm install、npm install hexo-deployer-git
 （注意：不需要hexo init这条指令）
 ```
 
-------
-
 ## 理解过程和解决bug可能会用到的知识点
 
 ### Git与GitHub区别
@@ -120,8 +110,6 @@ npm install hexo、npm install、npm install hexo-deployer-git
 git是一个[版本控制](http://lib.csdn.net/base/git)的工具，而github有点类似于远程仓库，用于存放用git管理的各种项目。自行进一步理解git能够对搭建hexo博客的过程有理性的认识。
 
 关于git的一些基本操作的含义可以看这里：[个人常用命令add,commit以及push-黄杉](http://blog.csdn.net/mchdba/article/details/12083965?utm_source=tuicool&utm_medium=referral)
-
-------
 
 ### .gitignore文件
 
@@ -133,15 +121,11 @@ git是一个[版本控制](http://lib.csdn.net/base/git)的工具，而github有
 
 这时我们就需要.gitignore了。
 
-------
-
 ### 强制push
 
 如果`git push origin master`不行的话，是因为**检测到远程的仓库和你本地仓库里面的文件各不相同**所以不允许commit。
 
 这时候你可以选择使用`git push -f origin master`强制地push，硬将你的内容推到github仓库上。
-
-------
 
 ### 遇到不能切换分支问题
 
@@ -152,8 +136,6 @@ git是一个[版本控制](http://lib.csdn.net/base/git)的工具，而github有
 使用`git clean  -d  -fx ""`把以前的git记录清除掉就行了，
 
 但是这也会删掉本地的文件，不要乱用。
-
-------
 
 ## hexo搭建过程咨询服务
 
@@ -167,13 +149,9 @@ git是一个[版本控制](http://lib.csdn.net/base/git)的工具，而github有
 
 可见，**选对教程**、**理解原理**能大大减少自我摸索过程中的痛苦。
 
-------
-
 一次偶然的机会，我收取了一个网友50元，在他整个搭建过程中向他提供问题咨询，包学包会。结果发现他在整个过程中能免除很多痛苦，而且节省了他大量的时间。两个星期的问题能够在三四天时间内轻松解决，其实这50元还真的挺值。
 
 后来我陆续接了几单咨询来做，通过这个互利的过程，我对咨询和解决方案行业的态度发生的巨大的改观。我个人也欢迎联系付费咨询的合作！
-
----
 
 ## 本文补充
 

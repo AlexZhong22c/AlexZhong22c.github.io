@@ -2926,7 +2926,7 @@ img.emoji {
 }
 .article-entry blockquote {
   padding: 0.4em 20px;
-  margin: 0.5em auto;
+  margin: 0.6em auto;
   border-left: 4px solid rgba(147,181,224,0.4);
   -webkit-box-shadow: 1px 1px 1px rgba(0,0,0,0.1);
   box-shadow: 1px 1px 1px rgba(0,0,0,0.1);

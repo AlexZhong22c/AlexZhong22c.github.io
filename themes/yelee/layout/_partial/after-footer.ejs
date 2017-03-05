@@ -663,8 +663,10 @@ if($(this).attr("exist-number") != undefined) {
 existNumber = true;
 return false;
 }
-$(this).css("margin-top", "0.5em");
-$(this).css("margin-bottom", "0.3em");
+$(this).css("padding-top", "0.6em");
+$(this).css("margin-top", "1em");
+$(this).css("padding-bottom", "0.3em");
+$(this).css("border-top", "1px solid #ddd");
 var attr = $(this).attr("exist-number");
 if(null == attr || undefined == attr){
 $(this).attr("exist-number", true);
@@ -762,7 +764,7 @@ if (is_post()){
 jQuery.getScript("//cdn.bootcss.com/prettify/r298/prettify.min.js")
 .done(function() {
 /* 执行成功后的处理 */
-$('pre').addClass('prettyprint linenums').attr('style', 'white-space:pre;word-break: keep-all;overflow:auto;height:auto;width:auto;padding-top:5px;padding-bottom:5px;');
+$('pre').addClass('prettyprint linenums').attr('style', 'white-space:pre;word-break: keep-all;overflow:auto;height:auto;width:auto;padding-top:5px;padding-bottom:5px;margin-bottom:10px;');
 <!-- 控制代码高度和滚动条 -->
 prettyPrint();
 })

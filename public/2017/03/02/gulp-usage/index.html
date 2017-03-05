@@ -78,15 +78,16 @@
 
 
 
-<meta name="description" content="Alex Zhong&apos;s blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Web前端 | Alex Zhong">
-<meta property="og:url" content="https://alexzhong22c.github.io/archives/2017/02/index.html">
+<meta name="description" content="总结gulp的入门和一些简单使用，以便于快速上手。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="gulp的入门和一些简单使用">
+<meta property="og:url" content="https://alexzhong22c.github.io/2017/03/02/gulp-usage/index.html">
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
-<meta property="og:description" content="Alex Zhong&apos;s blog">
+<meta property="og:description" content="总结gulp的入门和一些简单使用，以便于快速上手。">
+<meta property="og:updated_time" content="2017-03-02T09:50:29.413Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Web前端 | Alex Zhong">
-<meta name="twitter:description" content="Alex Zhong&apos;s blog">
+<meta name="twitter:title" content="gulp的入门和一些简单使用">
+<meta name="twitter:description" content="总结gulp的入门和一些简单使用，以便于快速上手。">
 
 
     <link rel="alternate" href="/atom.xml" title="Web前端 | Alex Zhong" type="application/atom+xml" data-no-instant>
@@ -120,7 +121,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>学无止镜: 2017/2 | Web前端 | Alex Zhong</title>
+<title>gulp的入门和一些简单使用 | Web前端 | Alex Zhong</title>
 
 
 </script>
@@ -132,8 +133,8 @@
         fancybox: false,
         animate: false,
         isHome: false,
-        isPost: false,
-        isArchive: true,
+        isPost: true,
+        isArchive: false,
         isTag: false,
         isCategory: false,
         fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
@@ -504,143 +505,280 @@
     <link class="menu-list" tags="标签" friends="友情链接" about="个人签名"/>
 </nav>
 
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-gulp-usage" class="article article-type-post" itemscope itemprop="blogPost">
   
+    <div class="article-meta">
+      <a href="/2017/03/02/gulp-usage/" class="article-date">
+      <time datetime="2017-03-02T02:51:41.000Z" itemprop="datePublished">2017-03-02</time>
+</a>
+
+
+
+
+	<br />
+	<p style="height:7px;"/>
+	<p style="height:20px;font-family:KaiTi,LiSu,'宋体',sans-serif;color:#DBDBDB;font-size:12px;">预计阅读3分钟</p>
+
+    </div>
   
-    
-    
+
+   <!-- 文章主内容 -->
+  
+      <header id="id_header_post" class="article-header">
+        
+  
+    <h1 class="article-title-big" itemprop="name">
+      gulp的入门和一些简单使用
+    </h1>
+  
+
+      </header>
       
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/gulp/">gulp</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/工程/">工程</a></li></ul>
+    </div>
+
+
+        <div class="clearfix"></div>
+      </div>
       
-      <section id="id_archives" class="archives-wrap article">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2017/02/27/icon-usage/" class="archive-article-date">
-      <time datetime="2017-02-27T09:28:51.000Z" itemprop="datePublished">02-27</time>
-</a>
+          <div id="article-content" class="article-entry" itemprop="articleBody">
+			  
+			<p>总结gulp的入门和一些简单使用，以便于快速上手。</p>
+<a id="more"></a>
+<p>建议参考 <a href="http://www.ydcss.com/archives/18" target="_blank" rel="external">gulp详细入门教程-一点</a></p>
+<p>大概的过程为</p>
+<ol>
+<li>安装nodejs</li>
+<li>安装npm</li>
+<li>全局安装gulp</li>
+<li>新建package.json文件</li>
+<li>本地安装gulp插件</li>
+<li>新建gulpfile.js文件</li>
+<li>运行gulp</li>
+</ol>
+<h2 id="某些过程的详细介绍"><a class="header-anchor" href="#某些过程的详细介绍"></a>某些过程的详细介绍</h2>
+<h3 id="全局安装gulp"><a class="header-anchor" href="#全局安装gulp"></a>全局安装gulp</h3>
+<p>命令行执行<code>npm install gulp -g</code>或者<code>cnpm install gulp -g</code></p>
+<p>查看是否正确安装：命令提示符执行<code>gulp -v</code>，出现版本号即为正确安装。</p>
+<h3 id="应不应该共用node-modules文件夹"><a class="header-anchor" href="#应不应该共用node-modules文件夹"></a>应不应该共用node_modules文件夹</h3>
+<p>共用node_modules有好处也有不便之处。npm的设计之初就不考虑共用node_modules的问题，所以如果硬要多个项目共用同一个node_modules会有许多不便之处。应该为每一个项目创建一个node_modules。</p>
+<p>在提交项目的时候在.gitignore文件中设置不提交node_modules文件夹即可。</p>
+<p>或者使用</p>
+<pre><code>rm -rf node_modules
+</code></pre>
+<p>PS：不要直接删除本地插件包</p>
+<p>删除node_modules文件夹再提交项目，下载项目的时候用<code>npm install</code>就能下载回来在 package.json 中记录的插件。</p>
+<h3 id="安装参数-save-dev"><a class="header-anchor" href="#安装参数-save-dev"></a>安装参数–save-dev</h3>
+<p>当你为你的模块安装一个依赖模块时，正常情况下你得先安装他们（在模块根目录下<code>npm install module-name</code>），然后连同版本号手动将他们添加到模块配置文件package.json中的依赖里（<code>dependencies</code>）。</p>
+<p><code>-save</code>和<code>save-dev</code>可以省掉你手动修改package.json文件的步骤。
+<code>spm install module-name -save</code> 自动把模块和版本号添加到dependencies部分
+<code>spm install module-name -save-dve</code> 自动把模块和版本号添加到devdependencies部分</p>
+<p>至于配置文件区分这俩部分， 是用于区别开发依赖模块和产品依赖模块， 以我见过的情况来看 <code>devDepandencies</code>主要是配置测试框架， 例如jshint、mocha。</p>
+<blockquote>
+<p>再做一个试验就懂得了区别：删除node_modules目录，然后执行 npm install --production，可以看到，npm只帮我们自动安装package.json中dependencies部分的模块；如果执行npm install ，则package.json中指定的dependencies和devDependencies都会被自动安装进来。</p>
+</blockquote>
+<h3 id="本地安装gulp插件"><a class="header-anchor" href="#本地安装gulp插件"></a>本地安装gulp插件</h3>
+<pre><code>npm install gulp --save-dev
+</code></pre>
+<p>全局安装可以通过命令行在任何地方调用它，本地安装将安装在定位目录的node_modules文件夹下，通过require()调用</p>
+<h3 id="安装组件"><a class="header-anchor" href="#安装组件"></a>安装组件</h3>
+<p><a href="http://www.dbpoo.com/getting-started-with-gulp/" target="_blank" rel="external">Gulp安装及配合组件构建前端开发一体化</a></p>
+<h4 id="gulp-jshint"><a class="header-anchor" href="#gulp-jshint"></a>gulp-jshint</h4>
+<p><a href="https://www.npmjs.com/package/gulp-jshint" target="_blank" rel="external">gulp-jshint</a></p>
+<p>如果无法在文件夹创建<code>.jshintrc</code>文件的话，就去网上别人的工程里面下载一个：<a href="https://github.com/fex-team/GMU" target="_blank" rel="external">GMU-github</a></p>
+<hr>
+<p>入门和进阶视频教程：</p>
+<p><a href="https://ninghao.net/video/2003" target="_blank" rel="external">ninghao.net</a></p>
+<p>一些比较细致介绍和问题的解决：</p>
+<p><a href="http://web.jobbole.com/86025/" target="_blank" rel="external">gulp使用小结(一)</a></p>
+<p>[<a href="http://jeffjade.com/2015/11/25/2015-11-25-toss-gulp/" target="_blank" rel="external">Gulp探究折腾之路(I)</a>](<a href="http://jeffjade.com/2015/11/25/2015-11-25-toss-gulp/" target="_blank" rel="external">http://jeffjade.com/2015/11/25/2015-11-25-toss-gulp/</a>)</p>
 
-
-
-
-        </div>
-         
+		</div>
+      
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/02/27/icon-usage/">桌面端和移动端图标的引入</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive"> 
-          
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/HTML/">HTML</a>
+     <!-- 版权署名授权 -->
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/03/02/gulp-usage/">gulp的入门和一些简单使用</a></p>
+        <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
+        <p style="color: #696969;"><span>发布时间:</span>2017-03-02, 10:51:41</p>
+        <!-- <p><span>最后更新:</span>2017-03-02, 17:50:29</p> -->
+        <p>
+            <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="gulp的入门和一些简单使用" href="/2017/03/02/gulp-usage/">https://alexzhong22c.github.io/2017/03/02/gulp-usage/</a>
+            <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://alexzhong22c.github.io/2017/03/02/gulp-usage/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+        </p>
+        <p style="color: #696969;">
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i><a id="copyright_license" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target = "_blank" class="hint  hint--bottom" data-hint="中国大陆 (CC BY-NC-SA 3.0 CN)">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
     </div>
 
 
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/link标签/">link标签</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/meta标签/">meta标签</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/图标/">图标</a></li></ul>
-    </div>
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/02/27/icon-usage/">
+                    桌面端和移动端图标的引入
+                </a>
+            </div>
+        
+    </nav>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
+  
 </article>
-  
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#某些过程的详细介绍"><span class="toc-number">1.</span> <span class="toc-text">某些过程的详细介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#全局安装gulp"><span class="toc-number">1.1.</span> <span class="toc-text">全局安装gulp</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#应不应该共用node-modules文件夹"><span class="toc-number">1.2.</span> <span class="toc-text">应不应该共用node_modules文件夹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装参数-save-dev"><span class="toc-number">1.3.</span> <span class="toc-text">安装参数–save-dev</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#本地安装gulp插件"><span class="toc-number">1.4.</span> <span class="toc-text">本地安装gulp插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装组件"><span class="toc-number">1.5.</span> <span class="toc-text">安装组件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#gulp-jshint"><span class="toc-number">1.5.1.</span> <span class="toc-text">gulp-jshint</span></a></li></ol></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+
     
+<div class="share">
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2017/02/22/my-hexo-theme/" class="archive-article-date">
-      <time datetime="2017-02-22T15:06:34.000Z" itemprop="datePublished">02-22</time>
-</a>
-
-
-
-
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
         </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/02/22/my-hexo-theme/">yelee主题改bug总结</a>
-    </h1>
-  
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"gulp的入门和一些简单使用　| Web前端 | Alex Zhong　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
 
-        <div class="article-info info-on-archive"> 
-          
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/hexo/">hexo</a>
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2017/03/02/gulp-usage/" data-title="gulp的入门和一些简单使用" data-url="https://alexzhong22c.github.io/2017/03/02/gulp-usage/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"null"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = 'https://alexzhong22c.github.io/js/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+            // Add comment count
+            $(function(){
+                var jsonUrl = "https://api.duoshuo.com/threads/counts.jsonp?short_name=null&threads=2017/03/02/gulp-usage/&callback=?";
+                $.getJSON(jsonUrl, function(result){
+                    $.each(result.response, function(i, field){
+                        var value = field.comments;
+                        if (value > 0) {
+                            $(".count-comment").text(value);
+                            return;
+                        }
+                    })
+                })
+            })
+        
+    </script>
+    
+    <aside class="comment-bar">
+        <a href="javascript:void(0);">
+            <i class="fa fa-commenting-o animated infinite pulse"></i>
+            <i class="fa fa-spinner fa-pulse"></i>
+            <span class="count-comment"></span>
+        </a>
+    </aside>
+    <script>
+        var $commentBar = $("#comments aside.comment-bar");
+        var load$hide = function(){
+            $commentBar.find("a > i").toggle();
+            loadJS("https://alexzhong22c.github.io/js/embed.js", function(){
+              if (typeof DUOSHUO !== 'undefined'){
+		              DUOSHUO.EmbedThread('.ds-thread');
+              }
+            })
+            $commentBar.fadeOut(800);
+
+        }
+        $commentBar.click(function(){
+            load$hide();
+        })
+        $commentBar.children("a").hover(function(){
+            load$hide();
+        })
+        if (window.location.hash === "#comments") {
+            load$hide();
+        }
+    </script>
+
+
+</div>
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/02/27/icon-usage/" title="下一篇: 桌面端和移动端图标的引入">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
     </div>
 
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/theme/">theme</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/yelee/">yelee</a></li></ul>
-    </div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2017/02/22/my-hexo-blog/" class="archive-article-date">
-      <time datetime="2017-02-22T09:29:25.000Z" itemprop="datePublished">02-22</time>
-</a>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/gulp-usage/">gulp的入门和一些简单使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/27/icon-usage/">桌面端和移动端图标的引入</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/my-hexo-theme/">yelee主题改bug总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/my-hexo-blog/">搭建hexo博客个人总结</a></li></ul>
 
 
 
 
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/02/22/my-hexo-blog/">搭建hexo博客个人总结</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive"> 
-          
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/hexo/">hexo</a>
-    </div>
-
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/心得/">心得</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/教程/">教程</a></li></ul>
-    </div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-
+    <script>
+        
+    </script>
 
 </div>
       <footer id="footer">
@@ -656,7 +794,7 @@
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					
-						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">总字数：5.6k</span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：698</span>
 					
 				</div>
             </div>
@@ -672,9 +810,15 @@
                     </span>
                 
 				
-					<span style="vertical-align:middle;">|&thinsp;</span><span class="hint  hint--top  hint--success" data-hint="以微薄之力，让世界更美" style="vertical-align:middle;" data-no-instant><a class="htmleaf-links" id="publicwelfare" href="../404.html" style="color:green;cursor:pointer;">公益404</a>
-					</span>
-					<i class="fa fa-heart animated infinite pulse" style="color:red;margin-left:2px;"></i><!-- 红心-->
+					
+						<span id="divider_span" style="vertical-align:middle;">|&thinsp;</span>
+					
+					
+						<span id="busuanzi_container_page_pv" style="display:none;text-align:center;">
+							<span id="page-visit" class="hint  hint--top  hint--info" data-hint="本文热度" style="vertical-align:middle;"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span><span>°C</span>
+							</span>
+						</span>
+					
 				
             </div>
         
