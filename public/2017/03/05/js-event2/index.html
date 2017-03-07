@@ -78,15 +78,16 @@
 
 
 
-<meta name="description" content="Alex Zhong&apos;s blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Web前端 | Alex Zhong">
-<meta property="og:url" content="https://alexzhong22c.github.io/categories/gulp/index.html">
+<meta name="description" content="此文内容深度其实不大，个人还需要进一步学习。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="事件进阶话题">
+<meta property="og:url" content="https://alexzhong22c.github.io/2017/03/05/js-event2/index.html">
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
-<meta property="og:description" content="Alex Zhong&apos;s blog">
+<meta property="og:description" content="此文内容深度其实不大，个人还需要进一步学习。">
+<meta property="og:updated_time" content="2017-03-06T02:54:01.041Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Web前端 | Alex Zhong">
-<meta name="twitter:description" content="Alex Zhong&apos;s blog">
+<meta name="twitter:title" content="事件进阶话题">
+<meta name="twitter:description" content="此文内容深度其实不大，个人还需要进一步学习。">
 
 
     <link rel="alternate" href="/atom.xml" title="Web前端 | Alex Zhong" type="application/atom+xml" data-no-instant>
@@ -120,7 +121,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Category: gulp | Web前端 | Alex Zhong</title>
+<title>事件进阶话题 | Web前端 | Alex Zhong</title>
 
 
 </script>
@@ -132,10 +133,10 @@
         fancybox: false,
         animate: false,
         isHome: false,
-        isPost: false,
+        isPost: true,
         isArchive: false,
         isTag: false,
-        isCategory: true,
+        isCategory: false,
         fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
         scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
         search: true
@@ -504,63 +505,331 @@
     <link class="menu-list" tags="标签" friends="友情链接" about="个人签名"/>
 </nav>
 
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-js-event2" class="article article-type-post" itemscope itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section id="id_archives" class="archives-wrap article">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2017/03/02/gulp-usage/" class="archive-article-date">
-      <time datetime="2017-03-02T02:51:41.000Z" itemprop="datePublished">03-02</time>
+    <div class="article-meta">
+      <a href="/2017/03/05/js-event2/" class="article-date">
+      <time datetime="2017-03-05T15:51:06.000Z" itemprop="datePublished">2017-03-05</time>
 </a>
 
 
 
 
-        </div>
-         
+	<br />
+	<p style="height:7px;"/>
+	<p style="height:20px;font-family:KaiTi,LiSu,'宋体',sans-serif;color:#DBDBDB;font-size:12px;">预计阅读7分钟</p>
+
+    </div>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/02/gulp-usage/">gulp的入门和一些简单使用</a>
+
+   <!-- 文章主内容 -->
+  
+      <header id="id_header_post" class="article-header">
+        
+  
+    <h1 class="article-title-big" itemprop="name">
+      事件进阶话题
     </h1>
   
 
-        <div class="article-info info-on-archive"> 
-          
+      </header>
+      
+      <div class="article-info article-info-post">
+        
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/gulp/">gulp</a>
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
     </div>
 
 
-          
+        
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/工程/">工程</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/事件/">事件</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/进阶/">进阶</a></li></ul>
     </div>
 
 
-        </div>
         <div class="clearfix"></div>
-    </header>
-  </div>
+      </div>
+      
+    
+          <div id="article-content" class="article-entry" itemprop="articleBody">
+			  
+			<p>此文内容深度其实不大，个人还需要进一步学习。</p>
+<a id="more"></a>
+<h2 id="常用事件和技巧"><a class="header-anchor" href="#常用事件和技巧"></a>常用事件和技巧</h2>
+<p>用户的操作有很多种，所以有很多事件。为了开发方便，浏览器又提供了一些事件，所以有很多很多的事件。这里只介绍几种常用的事件和使用技巧。</p>
+<h4 id="load"><a class="header-anchor" href="#load"></a><code>load</code></h4>
+<p><code>load</code> 事件在资源加载完成时触发。这个资源可以是图片、CSS 文件、JS 文件、视频、document 和 window 等等。</p>
+<p>比较常用的就是监听 window 的 <code>load</code> 事件，当页面内所有资源全部加载完成之后就会触发。比如用 JS 对图片以及其他资源处理，我们在 <code>load</code> 事件中触发，可以保证 JS 不会在资源未加载完成就开始处理资源导致报错。</p>
+<p>同样的，也可以监听图片等其他资源加载情况。</p>
+<h4 id="beforeunload"><a class="header-anchor" href="#beforeunload"></a><code>beforeunload</code></h4>
+<p>当浏览者在页面上的输入框输入一些内容时，未保存、误操作关掉网页可能会导致输入信息丢失。</p>
+<p>当浏览者输入信息但未保存时关掉网页，我们就可以开始监听这个事件，例如：</p>
+<pre><code>window.addEventListener(&quot;beforeunload&quot;, function( event ) {
+    event.returnValue = &quot;放弃当前未保存内容而关闭页面？&quot;;
+});
+</code></pre>
+<p>这时候试图关闭网页的时候，会弹窗阻止操作，点击确认之后才会关闭。当然，如果没有必要，就不要监听，不要以为使用它可以为你留住浏览者。</p>
+<h4 id="resize"><a class="header-anchor" href="#resize"></a><code>resize</code></h4>
+<p>当节点尺寸发生变化时，触发这个事件。通常用在 window 上，这样可以监听浏览器窗口的变化。通常用在复杂布局和响应式上。</p>
+<p>常见的视差滚动效果网站以及同类比较复杂的布局网站，往往使用 JavaScript 来计算尺寸、位置。如果用户调整浏览器大小，尺寸、位置不随着改变则会出现错位情况。在 window 上监听该事件，触发时调用计算尺寸、位置的函数，可以根据浏览器的大小来重新计算。</p>
+<p>但需要注意一点，当浏览器发生任意变化都会触发 <code>resize</code> 事件，哪怕是缩小 1px 的浏览器宽度，这样调整浏览器时会触发大量的 <code>resize</code> 事件，你的回调函数就会被大量的执行，导致变卡、崩溃等。</p>
+<p>你可以使用函数 throttle 或者 debounce 技巧来进行优化，throttle 方法大体思路就是在某一段时间内无论多次调用，只执行一次函数，到达时间就执行；debounce 方法大体思路就是在某一段时间内等待是否还会重复调用，如果不会再调用，就执行函数，如果还有重复调用，则不执行继续等待。关于它们更详细的信息，我后面会介绍一下发表在我的博客上，这里不再赘述。</p>
+<h4 id="error"><a class="header-anchor" href="#error"></a><code>error</code></h4>
+<p>当我们加载资源失败或者加载成功但是只加载一部分而无法使用时，就会触发 <code>error</code> 事件，我们可以通过监听该事件来提示一个友好的报错或者进行其他处理。比如 JS 资源加载失败，则提示尝试刷新；图片资源加载失败，在图片下面提示图片加载失败等。该事件不会冒泡。因为子节点加载失败，并不意味着父节点加载失败，所以你的处理函数必须精确绑定到目标节点。</p>
+<p>需要注意的是，对于该事件，你可以使用 <code>addEventListener</code> 等进行监听，但是有时候会出现失效情况（看<a href="http://jsbin.com/esimAWA/2/quiet" target="_blank" rel="external">这个例子</a>），这是因为 <code>error</code> 事件都触发过了，你的 JS 监听处理代码还没有加载进来执行。为了避免这种情况，用内联法更好一些：</p>
+<pre><code>&lt;img src=&quot;not-found.jpg&quot; onerror=&quot;doSomething&quot; /&gt;
+</code></pre>
+<p>如果还有其他常用事件，欢迎留言补充。</p>
+<h2 id="事件回调函数的作用域问题"><a class="header-anchor" href="#事件回调函数的作用域问题"></a>事件回调函数的作用域问题</h2>
+<p>与事件绑定在一起的回调函数作用域会有问题，我们来看个例子：</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=utf-8 /&gt;
+  &lt;title&gt;Events in JavaScript: Removing event listeners&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;button id=&quot;element&quot;&gt;Click Me&lt;/button&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>JavaScript代码：</p>
+<pre><code class="language-javascript">var element = document.getElementById('element');
+
+var user = {
+ firstname: 'Bob',
+ greeting: function(){
+   alert('My name is ' + this.firstname);
+ }
+};
+
+// Attach user.greeting as a callback
+element.addEventListener('click', user.greeting);
+</code></pre>
+<p>回调函数调用的 <code>user.greeting</code> 函数作用域应该是在 <code>user</code> 下的，本期望输出 <code>My name is Bob</code> 结果却输出了 <code>My name is undefined</code>。这是因为事件绑定函数时，该函数会以当前元素为作用域执行。为了证明这一点，我们可以为当前 <code>element</code> 添加属性：</p>
+<pre><code>element.firstname = 'jiangshui';
+</code></pre>
+<p>再次点击，可以正确弹出 <code>My name is jiangshui</code>。那么我们来解决一下这个问题：</p>
+<h3 id="使用匿名函数-办法一"><a class="header-anchor" href="#使用匿名函数-办法一"></a>使用匿名函数——办法一</h3>
+<p>将JavaScript代码修改为：</p>
+<pre><code>var element = document.getElementById('element');
+
+var user = {
+ firstname: 'Bob',
+ greeting: function(){
+   alert('My name is ' + this.firstname);
+ }
+};
+
+// Call the method with the correct
+// context inside an anonymouse function
+element.addEventListener('click', function() {
+  user.greeting();
+});
+</code></pre>
+<p>包裹之后，虽然匿名函数的作用域被指向事件触发元素，但执行的内容就像直接调用一样，不会影响其作用域。</p>
+<h3 id="使用-bind-方法"><a class="header-anchor" href="#使用-bind-方法"></a>使用 bind 方法</h3>
+<p>使用匿名函数是有缺陷的，每次调用都包裹进匿名函数里面，增加了冗余代码等，此外如果想使用<code>removeEventListener</code> 解除绑定，还需要再创建一个函数引用。<code>Function</code> 类型提供了 <code>bind</code> 方法，可以为函数绑定作用域，无论函数在哪里调用，都不会改变它的作用域。通过如下语句绑定作用域：</p>
+<pre><code>user.greeting = user.greeting.bind(user);
+</code></pre>
+<p>这样我们就可以直接使用：</p>
+<pre><code>element.addEventListener('click', user.greeting);
+</code></pre>
+<h2 id="ie-浏览器的差异和兼容性问题"><a class="header-anchor" href="#ie-浏览器的差异和兼容性问题"></a>IE 浏览器的差异和兼容性问题</h2>
+<p>IE 浏览器就是特立独行，它对于事件的操作与标准有一些差异。不过 IE 浏览器现在也开始慢慢努力改造，让浏览器变得更加标准。</p>
+<h3 id="ie-下绑定事件"><a class="header-anchor" href="#ie-下绑定事件"></a>IE 下绑定事件</h3>
+<p>在 IE 下面绑定一个事件监听，在 IE9- 无法使用标准的 <code>addEventListener</code> 函数，而是使用自家的 <code>attachEvent</code>，具体用法：</p>
+<pre><code>element.attachEvent(&lt;event-name&gt;, &lt;callback&gt;);
+</code></pre>
+<p>其中 `` 参数需要注意，它需要为事件名称添加 <code>on</code> 前缀，比如有个事件叫 <code>click</code>，标准事件监听函数监听 <code>click</code>，IE 这里需要监听 <code>onclick</code>。</p>
+<p>另一个，它没有第三个参数，也就是说它只支持监听在冒泡阶段触发的事件，所以为了统一，在使用标准事件监听函数的时候，第三参数传递 false。</p>
+<p>当然，这个方法在 IE9 已经被抛弃，在 IE11 已经被移除了，IE 也在慢慢变好。</p>
+<h3 id="ie-中-event-对象需要注意的地方"><a class="header-anchor" href="#ie-中-event-对象需要注意的地方"></a>IE 中 Event 对象需要注意的地方</h3>
+<p>IE 中往回调函数中传递的事件对象与标准也有一些差异，你需要使用 <code>window.event</code> 来获取事件对象。所以你通常会写出下面代码来获取事件对象：</p>
+<pre><code>event = event || window.event
+</code></pre>
+<p>此外还有一些事件属性有差别，比如比较常用的 <code>event.target</code> 属性，IE 中没有，而是使用 <code>event.srcElement</code> 来代替。如果你的回调函数需要处理触发事件的节点，那么需要写：</p>
+<pre><code>node = event.srcElement || event.target;
+</code></pre>
+<p>常见的就是这点，更细节的不再多说。在概念学习中，我们没必要为不标准的东西支付学习成本；在实际应用中，类库已经帮我们封装好这些兼容性问题。可喜的是 IE 浏览器现在也开始不断向标准进步。</p>
+<p>摘自：<a href="http://yujiangshui.com/javascript-event/#%E4%BA%8B%E4%BB%B6%E8%BF%9B%E9%98%B6%E8%AF%9D%E9%A2%98" target="_blank" rel="external">于江水</a></p>
+
+		</div>
+      
+  
+     <!-- 版权署名授权 -->
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/03/05/js-event2/">事件进阶话题</a></p>
+        <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
+        <p style="color: #696969;"><span>发布时间:</span>2017-03-05, 23:51:06</p>
+        <!-- <p><span>最后更新:</span>2017-03-06, 10:54:01</p> -->
+        <p>
+            <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="事件进阶话题" href="/2017/03/05/js-event2/">https://alexzhong22c.github.io/2017/03/05/js-event2/</a>
+            <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://alexzhong22c.github.io/2017/03/05/js-event2/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+        </p>
+        <p style="color: #696969;">
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i><a id="copyright_license" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target = "_blank" class="hint  hint--bottom" data-hint="中国大陆 (CC BY-NC-SA 3.0 CN)">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/03/05/js-event/">
+                    
+                </a>
+            </div>
+        
+    </nav>
+
+
+  
 </article>
-  
-  
-    </div></section>
-  
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#常用事件和技巧"><span class="toc-number">1.</span> <span class="toc-text">常用事件和技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#load"><span class="toc-number">1.0.1.</span> <span class="toc-text">load</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#beforeunload"><span class="toc-number">1.0.2.</span> <span class="toc-text">beforeunload</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#resize"><span class="toc-number">1.0.3.</span> <span class="toc-text">resize</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#error"><span class="toc-number">1.0.4.</span> <span class="toc-text">error</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件回调函数的作用域问题"><span class="toc-number">2.</span> <span class="toc-text">事件回调函数的作用域问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用匿名函数-办法一"><span class="toc-number">2.1.</span> <span class="toc-text">使用匿名函数——办法一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用-bind-方法"><span class="toc-number">2.2.</span> <span class="toc-text">使用 bind 方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ie-浏览器的差异和兼容性问题"><span class="toc-number">3.</span> <span class="toc-text">IE 浏览器的差异和兼容性问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ie-下绑定事件"><span class="toc-number">3.1.</span> <span class="toc-text">IE 下绑定事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ie-中-event-对象需要注意的地方"><span class="toc-number">3.2.</span> <span class="toc-text">IE 中 Event 对象需要注意的地方</span></a></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"事件进阶话题　| Web前端 | Alex Zhong　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2017/03/05/js-event2/" data-title="事件进阶话题" data-url="https://alexzhong22c.github.io/2017/03/05/js-event2/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"null"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = 'https://alexzhong22c.github.io/js/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+            // Add comment count
+            $(function(){
+                var jsonUrl = "https://api.duoshuo.com/threads/counts.jsonp?short_name=null&threads=2017/03/05/js-event2/&callback=?";
+                $.getJSON(jsonUrl, function(result){
+                    $.each(result.response, function(i, field){
+                        var value = field.comments;
+                        if (value > 0) {
+                            $(".count-comment").text(value);
+                            return;
+                        }
+                    })
+                })
+            })
+        
+    </script>
+    
+    <aside class="comment-bar">
+        <a href="javascript:void(0);">
+            <i class="fa fa-commenting-o animated infinite pulse"></i>
+            <i class="fa fa-spinner fa-pulse"></i>
+            <span class="count-comment"></span>
+        </a>
+    </aside>
+    <script>
+        var $commentBar = $("#comments aside.comment-bar");
+        var load$hide = function(){
+            $commentBar.find("a > i").toggle();
+            loadJS("https://alexzhong22c.github.io/js/embed.js", function(){
+              if (typeof DUOSHUO !== 'undefined'){
+		              DUOSHUO.EmbedThread('.ds-thread');
+              }
+            })
+            $commentBar.fadeOut(800);
+
+        }
+        $commentBar.click(function(){
+            load$hide();
+        })
+        $commentBar.children("a").hover(function(){
+            load$hide();
+        })
+        if (window.location.hash === "#comments") {
+            load$hide();
+        }
+    </script>
+
+
+</div>
 
     
 
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/03/05/js-event/" title="下一篇: ">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/03/05/js-event2/">事件进阶话题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/05/js-event/">js-event</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/float-n-absolute/">float和绝对定位比较</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/about-margin/">和margin有关的知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/gulp-usage/">gulp的入门和一些简单使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/27/icon-usage/">桌面端和移动端图标的引入</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/my-hexo-theme/">yelee主题改bug总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/my-hexo-blog/">搭建hexo博客个人总结</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
 
 </div>
       <footer id="footer">
@@ -576,7 +845,7 @@
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					
-						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">总字数：11.6k</span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,911</span>
 					
 				</div>
             </div>
@@ -592,9 +861,15 @@
                     </span>
                 
 				
-					<span style="vertical-align:middle;">|&thinsp;</span><span class="hint  hint--top  hint--success" data-hint="以微薄之力，让世界更美" style="vertical-align:middle;" data-no-instant><a class="htmleaf-links" id="publicwelfare" href="../404.html" style="color:green;cursor:pointer;">公益404</a>
-					</span>
-					<i class="fa fa-heart animated infinite pulse" style="color:red;margin-left:2px;"></i><!-- 红心-->
+					
+						<span id="divider_span" style="vertical-align:middle;">|&thinsp;</span>
+					
+					
+						<span id="busuanzi_container_page_pv" style="display:none;text-align:center;">
+							<span id="page-visit" class="hint  hint--top  hint--info" data-hint="本文热度" style="vertical-align:middle;"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span><span>°C</span>
+							</span>
+						</span>
+					
 				
             </div>
         
