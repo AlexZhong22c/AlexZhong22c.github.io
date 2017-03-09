@@ -126,14 +126,6 @@ element.addEventListener('click', function() {
     </entry>
     
     <entry>
-      <title></title>
-      <url>https://alexzhong22c.github.io/2017/03/05/js-event/</url>
-      <content type="html"></content>
-      
-        
-    </entry>
-    
-    <entry>
       <title><![CDATA[float和绝对定位比较]]></title>
       <url>https://alexzhong22c.github.io/2017/03/04/float-n-absolute/</url>
       <content type="html"><![CDATA[<p>因为float实现的效果和绝对定位比较类似，稍后会对它们进行比较。</p>
@@ -818,6 +810,184 @@ npm install hexo、npm install、npm install hexo-deployer-git
             <tag> 心得 </tag>
             
             <tag> 教程 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[js事件绑定基础回顾]]></title>
+      <url>https://alexzhong22c.github.io/2017/01/29/js-event/</url>
+      <content type="html"><![CDATA[<p>此文用于快速回顾，不适合用来入门。</p>
+<a id="more"></a>
+<h2 id="绑定事件监听"><a class="header-anchor" href="#绑定事件监听"></a>绑定事件监听</h2>
+<p>在 JavaScript 中，有三种常用的绑定事件的方法：</p>
+<ol>
+<li>HTML 内联属性（避免使用）</li>
+<li>DOM 属性绑定</li>
+<li>使用事件监听函数</li>
+</ol>
+<h3 id="html-内联属性-避免使用"><a class="header-anchor" href="#html-内联属性-避免使用"></a>HTML 内联属性（避免使用）</h3>
+<pre><code>&lt;button onclick=&quot;alert('你点击了这个按钮');&quot;&gt;点击这个按钮&lt;/button&gt;
+</code></pre>
+<p>使用这种方法，JavaScript 代码与 HTML 代码耦合在了一起，不便于维护和开发。所以除非在必须使用的情况（例如统计链接点击数据）下，尽量避免使用这种方法。</p>
+<h3 id="在javascript代码中绑定"><a class="header-anchor" href="#在javascript代码中绑定"></a>在JavaScript代码中绑定</h3>
+<pre><code>element.onclick = function(event){
+    alert('你点击了这个按钮');
+};
+
+</code></pre>
+<p>缺陷是：因为直接赋值给对应属性，如果你在后面代码中再次为 <code>element</code> 绑定一个回调函数，会覆盖掉之前回调函数的内容。</p>
+<p>虽然也可以用一些方法实现多个绑定，但还是推荐下面的标准事件监听函数。</p>
+<h3 id="绑定事件监听函数"><a class="header-anchor" href="#绑定事件监听函数"></a>绑定事件监听函数</h3>
+<pre><code>var btn = document.getElementsByTagName('button');
+btn[0].addEventListener('click', function() {
+    alert('你点击了这个按钮');
+}, false);
+
+</code></pre>
+<p>最后一个参数表示该事件监听是在“捕获”阶段中监听（设置为 true）还是在“冒泡”阶段中监听（设置为 false）。</p>
+<p>但一般使用时我们往往传递 false，这是因为 IE 浏览器不支持在捕获阶段监听事件，毕竟 IE 浏览器的份额是不可忽略的。</p>
+<h2 id="移除事件监听"><a class="header-anchor" href="#移除事件监听"></a>移除事件监听</h2>
+<p>需要注意的是，绑定事件时的回调函数不能是匿名函数，必须是一个声明的函数，因为解除事件绑定时需要传递这个回调函数的引用，才可以断开绑定。例如：</p>
+<pre><code>var fun = function() {
+    // function logic
+};
+
+element.addEventListener('click', fun, false);
+element.removeEventListener('click', fun, false);
+
+</code></pre>
+<h2 id="事件触发过程"><a class="header-anchor" href="#事件触发过程"></a>事件触发过程</h2>
+<ol>
+<li>
+<p>捕获阶段（Capture Phase）</p>
+</li>
+<li>
+<p>目标阶段（Target Phase）</p>
+</li>
+<li>
+<p>冒泡阶段（Bubbling Phase）</p>
+</li>
+</ol>
+<h2 id="使用事件代理-event-delegate-提升性能"><a class="header-anchor" href="#使用事件代理-event-delegate-提升性能"></a>使用事件代理（Event Delegate）提升性能</h2>
+<p>使用事件代理主要有两个优势：</p>
+<ol>
+<li>减少事件绑定，提升性能。之前你需要绑定一堆子节点，而现在你只需要绑定一个父节点即可。减少了绑定事件监听函数的数量。</li>
+<li>动态变化的 DOM 结构，仍然可以监听。以前，当一个 DOM 动态创建之后，不会带有任何事件监听，除非你重新执行事件监听函数；而使用事件监听无须担忧这个问题。</li>
+</ol>
+<p>如果使用原生的方式实现事件代理，需要注意过滤非目标节点，可以通过 id、class 或者 tagname 等等，例如：</p>
+<pre><code>element.addEventListener('click', function(event) {
+    // 判断是否是 a 节点
+    if ( event.target.tagName == 'A' ) {
+        // a 的一些交互操作
+    }
+}, false);
+</code></pre>
+<h2 id="停止事件冒泡-stoppropagation"><a class="header-anchor" href="#停止事件冒泡-stoppropagation"></a>停止事件冒泡（stopPropagation）</h2>
+<pre><code>element.addEventListener('click', function(event) {
+    event.stopPropagation();
+}, false);
+
+</code></pre>
+<h2 id="事件的-event-对象"><a class="header-anchor" href="#事件的-event-对象"></a>事件的 Event 对象</h2>
+<p>事件对象包括很多有用的信息，比如事件触发时，鼠标在屏幕上的坐标、被触发的 DOM 详细信息、以及上图最下面继承过来的停止冒泡方法（stopPropagation）。下面介绍一下比较常用的几个属性和方法：</p>
+<h3 id="type-string"><a class="header-anchor" href="#type-string"></a><code>type</code>(string)</h3>
+<p>事件的名称，比如 “click”。</p>
+<h3 id="target-node"><a class="header-anchor" href="#target-node"></a><code>target</code>(node)</h3>
+<p>事件要触发的目标节点。</p>
+<h3 id="bubbles-boolean"><a class="header-anchor" href="#bubbles-boolean"></a><code>bubbles</code> (boolean)</h3>
+<p>表明该事件是否是在冒泡阶段触发的。</p>
+<h3 id="preventdefault-function"><a class="header-anchor" href="#preventdefault-function"></a><code>preventDefault</code> (function)</h3>
+<p>这个方法可以禁止一切默认的行为，例如点击 <code>a</code> 标签时，会打开一个新页面，如果为 <code>a</code> 标签监听事件 <code>click</code> 同时调用该方法，则不会打开新页面。</p>
+<h3 id="stoppropagation-function"><a class="header-anchor" href="#stoppropagation-function"></a><code>stopPropagation</code> (function)</h3>
+<p>停止冒泡，上面有提到，不再赘述。</p>
+<h3 id="stopimmediatepropagation-function"><a class="header-anchor" href="#stopimmediatepropagation-function"></a><code>stopImmediatePropagation</code> (function)</h3>
+<p>与 <code>stopPropagation</code> 类似，就是阻止触发其他监听函数。但是与 <code>stopPropagation</code> 不同的是，它更加 “强力”，阻止除了目标之外的事件触发，甚至阻止针对同一个目标节点的相同事件。</p>
+<h2 id="jquery-中的事件"><a class="header-anchor" href="#jquery-中的事件"></a>jQuery 中的事件</h2>
+<p>如果你在写文章或者 Demo，为了简单，你当然可以用上面的事件监听函数，以及那些事件对象提供的方法等。*<em>但在实际中，有一些方法和属性是有兼容性问题的，所以我们会使用 jQuery 来消除兼容性问题。 *</em></p>
+<h3 id="绑定事件和事件代理"><a class="header-anchor" href="#绑定事件和事件代理"></a>绑定事件和事件代理</h3>
+<pre><code>$( &quot;#dataTable tbody tr&quot; ).on( &quot;click&quot;, function() {
+  console.log( $( this ).text() );
+});
+
+</code></pre>
+<h3 id="处理过兼容性的事件对象-event-object"><a class="header-anchor" href="#处理过兼容性的事件对象-event-object"></a>处理过兼容性的事件对象（Event Object）</h3>
+<p>事件对象有些方法等也有兼容性差异，jQuery 将其封装处理，并提供跟标准一直的命名。</p>
+<p>如果你想在 jQuery 事件回调函数中访问原来的事件对象，需要使用 <code>event.originalEvent</code>，它指向原生的事件对象。</p>
+<h3 id="触发事件-trigger-方法"><a class="header-anchor" href="#触发事件-trigger-方法"></a>触发事件 <code>trigger</code> 方法</h3>
+<p>点击某个绑定了 <code>click</code> 事件的节点，自然会触发该节点的 <code>click</code> 事件，从而执行对应回调函数。</p>
+<p><code>trigger</code> 方法可以模拟触发事件，我们单击另一个节点 elementB，可以使用：</p>
+<pre><code>$(elementB).on('click', function(){
+    $(elementA).trigger( &quot;click&quot; );
+});
+
+</code></pre>
+<p>来触发 elementA 节点的单击监听回调函数。详情请看文档 <a href="http://api.jquery.com/trigger/" target="_blank" rel="external">.trigger()</a>。</p>
+<h2 id="原生js事件绑定兼容"><a class="header-anchor" href="#原生js事件绑定兼容"></a>原生js事件绑定兼容</h2>
+<p>Dean Edward 所写的 addEvent() 函数</p>
+<pre><code>function addEvent(element, type, handler) {
+    if (!handler.$$guid) handler.$$guid = addEvent.guid++;
+    if (!element.events) element.events = {};
+        var handlers = element.events[type];
+    if (!handlers) {
+        handlers = element.events[type] = {};
+        if (element[&quot;on&quot; + type]) {
+            handlers[0] = element[&quot;on&quot; + type];
+        }
+    }
+    handlers[handler.$$guid] = handler;
+    element[&quot;on&quot; + type] = handleEvent;
+}
+
+addEvent.guid = 1;
+    
+function removeEvent(element, type, handler) {
+    if (element.events &amp;&amp; element.events[type]) {
+        delete element.events[type][handler.$$guid];
+    }
+}
+function handleEvent(event) {
+    var returnValue = true;
+    event = event || fixEvent(window.event);
+    var handlers = this.events[event.type];
+    for (var i in handlers) {
+        this.$$handleEvent = handlers[i];
+        if (this.$$handleEvent(event) === false) {
+            returnValue = false;
+        }
+    }
+    return returnValue;
+};
+    
+function fixEvent(event) {
+    event.preventDefault = fixEvent.preventDefault;
+    event.stopPropagation = fixEvent.stopPropagation;
+    return event;
+};
+fixEvent.preventDefault = function() {
+    this.returnValue = false;
+};
+fixEvent.stopPropagation = function() {
+    this.cancelBubble = true;
+};
+</code></pre>
+]]></content>
+      
+        <categories>
+            
+            <category> JavaScript </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 事件 </tag>
+            
+            <tag> 回顾 </tag>
+            
+            <tag> 基础 </tag>
             
         </tags>
         

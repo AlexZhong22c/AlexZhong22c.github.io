@@ -165,7 +165,7 @@ $(elementB).on('click', function(){
 
 ## 原生js事件绑定兼容
 
-Dean Edward 所写的 addEvent() 函数 
+Dean Edward 所写的 addEvent() 函数：
 
 ```
 function addEvent(element, type, handler) {
