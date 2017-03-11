@@ -974,7 +974,7 @@ a || b : 将a, b转换为Boolean类型, 再执行逻辑或, true返回a, false�
 </li>
 </ul>
 <h2 id="相等操作符"><a class="header-anchor" href="#相等操作符"></a>相等操作符</h2>
-<p>见另外一篇文章</p>
+<p>见另外一篇文章 <a href="https://alexzhong22c.github.io/2017/02/11/equality-operators/">相等操作符</a></p>
 ]]></content>
       
         <categories>
