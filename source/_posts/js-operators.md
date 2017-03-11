@@ -113,4 +113,4 @@ a % b：
 
 ## 相等操作符
 
-见另外一篇文章
+见另外一篇文章 [相等操作符](https://alexzhong22c.github.io/2017/02/11/equality-operators/)

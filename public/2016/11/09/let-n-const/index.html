@@ -86,7 +86,7 @@ const声明的变量只可以在声明时赋值，它被设计的本意就是不
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
 <meta property="og:description" content="简单来说是： let是修复了var的作用域的一些bug，变的更加好用。let是更好的var。var的作用于是函数作用于，而let是块级别（大括号括起来的内容）
 const声明的变量只可以在声明时赋值，它被设计的本意就是不可随意修改，这是最大的特点。">
-<meta property="og:updated_time" content="2017-03-09T09:30:37.825Z">
+<meta property="og:updated_time" content="2017-03-09T09:51:22.022Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="let和const回顾">
 <meta name="twitter:description" content="简单来说是： let是修复了var的作用域的一些bug，变的更加好用。let是更好的var。var的作用于是函数作用于，而let是块级别（大括号括起来的内容）
@@ -391,7 +391,7 @@ const声明的变量只可以在声明时赋值，它被设计的本意就是不
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/">bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/float/">float</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/link标签/">link标签</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/margin/">margin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meta标签/">meta标签</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/theme/">theme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yelee/">yelee</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件/">事件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回顾/">回顾</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图标/">图标</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/基础/">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工程/">工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/心得/">心得</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/绝对定位/">绝对定位</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/进阶/">进阶</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/">bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/float/">float</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/link标签/">link标签</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/margin/">margin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meta标签/">meta标签</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/theme/">theme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yelee/">yelee</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件/">事件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回顾/">回顾</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图标/">图标</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/基础/">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工程/">工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/心得/">心得</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/操作符/">操作符</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/绝对定位/">绝对定位</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/进阶/">进阶</a></li></ul>
                     </div>
                 </section>
                 
@@ -585,11 +585,11 @@ for (var i = 0; i &lt; messages.length; i++) {
 <ul>
 <li>
 <p>**let声明的变量直到控制流到达该变量被定义的代码行时才会被装载，所以在到达之前使用该变量会触发错误。**举个例子：</p>
-<pre><code>    function update() {
-      console.log(&quot;当前时间:&quot;, t);  // 引用错误（ReferenceError）
-      ...
-      let t = readTachymeter();
-    }
+<pre><code>function update() {
+	console.log(&quot;当前时间:&quot;, t);  // 引用错误（ReferenceError）
+	...
+	let t = readTachymeter();
+}
 </code></pre>
 <p>不可访问的这段时间变量一直处于作用域中，但是尚未装载，它们位于<em>临时死区（Temporal Dead Zone，简称TDZ</em>）中。我一直想用科幻小说来类比这个脑洞大开的行话，但是还没想好怎么搞。</p>
 <p>（脆弱的性能细节：在大多数情况下，查看代码就可以区分声明是否已经执行，所以事实上，JavaScript引擎不需要在每次代码运行时都额外执行 一次变量可访问检查来确保变量已经被初始化。然而在闭包内部有时不是透明的，这时JavaScript引擎将会做一个运行时检查，也就意味着<code>let</code>相对<code>var</code>而言比较慢。）</p>
@@ -609,15 +609,15 @@ for (var i = 0; i &lt; messages.length; i++) {
 <p>是的，还有一个新的关键词！</p>
 <p>ES6引入的第三个声明类关键词与<code>let</code>类似：<code>const</code>。</p>
 <p><code>const</code>声明的变量与<code>let</code>声明的变量类似，它们的不同之处在于，<code>const</code>声明的变量只可以在声明时赋值，不可随意修改，否则会导致<code>SyntaxError</code>（语法错误）。</p>
-<pre><code>    const MAX_CAT_SIZE_KG = 3000; // 正确
+<pre><code>const MAX_CAT_SIZE_KG = 3000; // 正确
 
-    MAX_CAT_SIZE_KG = 5000; // 语法错误（SyntaxError）
-    MAX_CAT_SIZE_KG++; // 虽然换了一种方式，但仍然会导致语法错误
+MAX_CAT_SIZE_KG = 5000; // 语法错误（SyntaxError）
+MAX_CAT_SIZE_KG++; // 虽然换了一种方式，但仍然会导致语法错误
 </code></pre>
 <p>当然，规范设计的足够明智，用<code>const</code>声明变量后必须要赋值，否则也抛出语法错误。</p>
-<pre><code>    const theFairest;  // 依然是语法错误，你这个倒霉蛋
+<pre><code>const theFairest;  // 依然是语法错误，你这个倒霉蛋
 </code></pre>
-<h2 id="我现在可以使用let和const了么？"><a class="header-anchor" href="#我现在可以使用let和const了么？"></a>我现在可以使用let和const了么？</h2>
+<h2 id="现在可以使用let和const了么？"><a class="header-anchor" href="#现在可以使用let和const了么？"></a>现在可以使用let和const了么？</h2>
 <p>是的。如果要在web上使用<code>let</code>和<code>const</code>特性，你需要使用一个诸如<a href="http://babeljs.io/" target="_blank" rel="external">Babel</a>、<a href="https://github.com/google/traceur-compiler#what-is-traceur" target="_blank" rel="external">Traceur</a>或<a href="http://www.typescriptlang.org/" target="_blank" rel="external">TypeScript</a>的ES6转译器。（Babel和Traceur暂不支持临时死区特性。）</p>
 <p>io.js支持<code>let</code>和<code>const</code>，但是只在严格模式下编码可以使用。Node.js同样支持，但是需要启用<code>--harmony</code>选项</p>
 
@@ -629,7 +629,7 @@ for (var i = 0; i &lt; messages.length; i++) {
         <p><span>本文标题:</span><a href="/2016/11/09/let-n-const/">let和const回顾</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2016-11-09, 17:28:05</p>
-        <!-- <p><span>最后更新:</span>2017-03-09, 17:30:37</p> -->
+        <!-- <p><span>最后更新:</span>2017-03-09, 17:51:22</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="let和const回顾" href="/2016/11/09/let-n-const/">https://alexzhong22c.github.io/2016/11/09/let-n-const/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://alexzhong22c.github.io/2016/11/09/let-n-const/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -659,7 +659,7 @@ for (var i = 0; i &lt; messages.length; i++) {
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#let"><span class="toc-number">1.</span> <span class="toc-text">let</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#const"><span class="toc-number">2.</span> <span class="toc-text">const</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#我现在可以使用let和const了么？"><span class="toc-number">3.</span> <span class="toc-text">我现在可以使用let和const了么？</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#let"><span class="toc-number">1.</span> <span class="toc-text">let</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#const"><span class="toc-number">2.</span> <span class="toc-text">const</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#现在可以使用let和const了么？"><span class="toc-number">3.</span> <span class="toc-text">现在可以使用let和const了么？</span></a></li></ol>
         
     </div>
     <style>
@@ -789,7 +789,7 @@ for (var i = 0; i &lt; messages.length; i++) {
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/03/05/js-event2/">事件进阶话题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/float-n-absolute/">float和绝对定位比较</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/about-margin/">和margin有关的知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/gulp-usage/">gulp的入门和一些简单使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/27/icon-usage/">桌面端和移动端图标的引入</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/my-hexo-theme/">yelee主题改bug总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/my-hexo-blog/">搭建hexo博客个人总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/29/js-event/">js事件绑定基础回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/09/let-n-const/">let和const回顾</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/03/05/js-event2/">事件进阶话题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/float-n-absolute/">float和绝对定位比较</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/about-margin/">和margin有关的知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/gulp-usage/">gulp的入门和一些简单使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/27/icon-usage/">桌面端和移动端图标的引入</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/my-hexo-theme/">yelee主题改bug总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/my-hexo-blog/">搭建hexo博客个人总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/equality-operators/">相等操作符回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/js-operators/">操作符回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/29/js-event/">js事件绑定基础回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/09/let-n-const/">let和const回顾</a></li></ul>
 
 
 
@@ -812,7 +812,7 @@ for (var i = 0; i &lt; messages.length; i++) {
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					
-						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,723</span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,722</span>
 					
 				</div>
             </div>

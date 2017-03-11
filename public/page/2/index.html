@@ -77,17 +77,19 @@
 </script>
 
 
+    
+    
 
-<meta name="description" content="此文用于快速回顾，不适合用来入门。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="js事件绑定基础回顾">
-<meta property="og:url" content="https://alexzhong22c.github.io/2017/01/29/js-event/index.html">
+
+<meta name="description" content="Alex Zhong&apos;s blog">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Web前端 | Alex Zhong">
+<meta property="og:url" content="https://alexzhong22c.github.io/page/2/index.html">
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
-<meta property="og:description" content="此文用于快速回顾，不适合用来入门。">
-<meta property="og:updated_time" content="2017-03-07T17:27:04.529Z">
+<meta property="og:description" content="Alex Zhong&apos;s blog">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="js事件绑定基础回顾">
-<meta name="twitter:description" content="此文用于快速回顾，不适合用来入门。">
+<meta name="twitter:title" content="Web前端 | Alex Zhong">
+<meta name="twitter:description" content="Alex Zhong&apos;s blog">
 
 
     <link rel="alternate" href="/atom.xml" title="Web前端 | Alex Zhong" type="application/atom+xml" data-no-instant>
@@ -121,7 +123,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>js事件绑定基础回顾 | Web前端 | Alex Zhong</title>
+<title>Blog | Web前端 | Alex Zhong</title>
 
 
 </script>
@@ -132,8 +134,8 @@
     var yiliaConfig = {
         fancybox: false,
         animate: false,
-        isHome: false,
-        isPost: true,
+        isHome: true,
+        isPost: false,
         isArchive: false,
         isTag: false,
         isCategory: false,
@@ -155,6 +157,9 @@
 
 
 
+
+	<link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/semantic-ui/0.19.3/css/semantic.min.css" data-no-instant>
+	<script src="//cdn.bootcss.com/semantic-ui/0.19.3/javascript/semantic.min.js" data-no-instant></script>
 
 	<!-- 右下角搜索 -->
 <script><!-- 移动端不需要的样式不加载 -->
@@ -505,294 +510,93 @@
     <link class="menu-list" tags="标签" friends="友情链接" about="个人签名"/>
 </nav>
 
-      <div class="body-wrap"><article id="post-js-event" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap">
+  
+    <article id="post-let-n-const" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/01/29/js-event/" class="article-date">
-      <time datetime="2017-01-29T15:51:06.000Z" itemprop="datePublished">2017-01-29</time>
+      <a href="/2016/11/09/let-n-const/" class="article-date">
+      <time datetime="2016-11-09T09:28:05.000Z" itemprop="datePublished">2016-11-09</time>
 </a>
 
+ 
+    <a class="hint  hint--left" href="/2016/11/09/let-n-const/#comments" data-hint="查看评论">
+        <i class="fa fa-comments-o" aria-hidden="true"></i>
+        <span class="count-comment"></span>
+        
+            <span class="ds-thread-count"  data-thread-key="2016/11/09/let-n-const/" ></span>
+        
+        
+    </a>
 
 
-
-	<br />
-	<p style="height:7px;"/>
-	<p style="height:20px;font-family:KaiTi,LiSu,'宋体',sans-serif;color:#DBDBDB;font-size:12px;">预计阅读5分钟</p>
 
     </div>
   
 
-   <!-- 文章主内容 -->
+   <!-- 文章简介，即首页列表 -->
+
+  <!-- 首页标题背景色 -->
+	
+
+	
+
+  <div class="ui piled raised segment box-archive-item" itemscope itemtype="http://schema.org/Article" style="background-color:#fafafa !important">
+
+    
+
+	<div class="ui purple ribbon label" style="line-height: 1.3; min-width:100px; max-width:450px;"> <!-- 标题 -->
+		<span class="archive-item-title" style="display:block; height:100%; max-width:400px;white-space:nowrap; text-transform:capitalize;" >
+			
   
-      <header id="id_header_post" class="article-header">
-        
-  
-    <h1 class="article-title-big" itemprop="name">
-      js事件绑定基础回顾
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/09/let-n-const/">let和const回顾</a>
     </h1>
   
 
-      </header>
+		</span>
+	</div>
+  
+    <div onclick="window.open('/2016/11/09/let-n-const/','_self')" id="id_description_div" style="margin-top:20px; line-height: 1.65em;cursor:pointer">
+        <p>简单来说是： let是修复了var的作用域的一些bug，变的更加好用。let是更好的var。var的作用于是函数作用于，而let是块级别（大括号括起来的内容）
+const声明的变量只可以在声明时赋值，它被设计的本意就是不可随意修改，这是最大的特点。</p>
+    </div>
+  
+
+    
+    <div class="article-info article-info-index">
       
-      <div class="article-info article-info-post">
-        
+      
     <div class="article-category tagcloud">
     <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
     </div>
 
 
-        
+      
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/事件/">事件</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/回顾/">回顾</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/基础/">基础</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/回顾/">回顾</a></li></ul>
     </div>
 
 
-        <div class="clearfix"></div>
-      </div>
       
-    
-          <div id="article-content" class="article-entry" itemprop="articleBody">
-			  
-			<p>此文用于快速回顾，不适合用来入门。</p>
-<a id="more"></a>
-<h2 id="绑定事件监听"><a class="header-anchor" href="#绑定事件监听"></a>绑定事件监听</h2>
-<p>在 JavaScript 中，有三种常用的绑定事件的方法：</p>
-<ol>
-<li>HTML 内联属性（避免使用）</li>
-<li>DOM 属性绑定</li>
-<li>使用事件监听函数</li>
-</ol>
-<h3 id="html-内联属性-避免使用"><a class="header-anchor" href="#html-内联属性-避免使用"></a>HTML 内联属性（避免使用）</h3>
-<pre><code>&lt;button onclick=&quot;alert('你点击了这个按钮');&quot;&gt;点击这个按钮&lt;/button&gt;
-</code></pre>
-<p>使用这种方法，JavaScript 代码与 HTML 代码耦合在了一起，不便于维护和开发。所以除非在必须使用的情况（例如统计链接点击数据）下，尽量避免使用这种方法。</p>
-<h3 id="在javascript代码中绑定"><a class="header-anchor" href="#在javascript代码中绑定"></a>在JavaScript代码中绑定</h3>
-<pre><code>element.onclick = function(event){
-    alert('你点击了这个按钮');
-};
-
-</code></pre>
-<p>缺陷是：因为直接赋值给对应属性，如果你在后面代码中再次为 <code>element</code> 绑定一个回调函数，会覆盖掉之前回调函数的内容。</p>
-<p>虽然也可以用一些方法实现多个绑定，但还是推荐下面的标准事件监听函数。</p>
-<h3 id="绑定事件监听函数"><a class="header-anchor" href="#绑定事件监听函数"></a>绑定事件监听函数</h3>
-<pre><code>var btn = document.getElementsByTagName('button');
-btn[0].addEventListener('click', function() {
-    alert('你点击了这个按钮');
-}, false);
-
-</code></pre>
-<p>最后一个参数表示该事件监听是在“捕获”阶段中监听（设置为 true）还是在“冒泡”阶段中监听（设置为 false）。</p>
-<p>但一般使用时我们往往传递 false，这是因为 IE 浏览器不支持在捕获阶段监听事件，毕竟 IE 浏览器的份额是不可忽略的。</p>
-<h2 id="移除事件监听"><a class="header-anchor" href="#移除事件监听"></a>移除事件监听</h2>
-<p>需要注意的是，绑定事件时的回调函数不能是匿名函数，必须是一个声明的函数，因为解除事件绑定时需要传递这个回调函数的引用，才可以断开绑定。例如：</p>
-<pre><code>var fun = function() {
-    // function logic
-};
-
-element.addEventListener('click', fun, false);
-element.removeEventListener('click', fun, false);
-
-</code></pre>
-<h2 id="事件触发过程"><a class="header-anchor" href="#事件触发过程"></a>事件触发过程</h2>
-<ol>
-<li>
-<p>捕获阶段（Capture Phase）</p>
-</li>
-<li>
-<p>目标阶段（Target Phase）</p>
-</li>
-<li>
-<p>冒泡阶段（Bubbling Phase）</p>
-</li>
-</ol>
-<h2 id="使用事件代理-event-delegate-提升性能"><a class="header-anchor" href="#使用事件代理-event-delegate-提升性能"></a>使用事件代理（Event Delegate）提升性能</h2>
-<p>使用事件代理主要有两个优势：</p>
-<ol>
-<li>减少事件绑定，提升性能。之前你需要绑定一堆子节点，而现在你只需要绑定一个父节点即可。减少了绑定事件监听函数的数量。</li>
-<li>动态变化的 DOM 结构，仍然可以监听。以前，当一个 DOM 动态创建之后，不会带有任何事件监听，除非你重新执行事件监听函数；而使用事件监听无须担忧这个问题。</li>
-</ol>
-<p>如果使用原生的方式实现事件代理，需要注意过滤非目标节点，可以通过 id、class 或者 tagname 等等，例如：</p>
-<pre><code>element.addEventListener('click', function(event) {
-    // 判断是否是 a 节点
-    if ( event.target.tagName == 'A' ) {
-        // a 的一些交互操作
-    }
-}, false);
-</code></pre>
-<h2 id="停止事件冒泡-stoppropagation"><a class="header-anchor" href="#停止事件冒泡-stoppropagation"></a>停止事件冒泡（stopPropagation）</h2>
-<pre><code>element.addEventListener('click', function(event) {
-    event.stopPropagation();
-}, false);
-
-</code></pre>
-<h2 id="事件的-event-对象"><a class="header-anchor" href="#事件的-event-对象"></a>事件的 Event 对象</h2>
-<p>事件对象包括很多有用的信息，比如事件触发时，鼠标在屏幕上的坐标、被触发的 DOM 详细信息、以及上图最下面继承过来的停止冒泡方法（stopPropagation）。下面介绍一下比较常用的几个属性和方法：</p>
-<h3 id="type-string"><a class="header-anchor" href="#type-string"></a><code>type</code>(string)</h3>
-<p>事件的名称，比如 “click”。</p>
-<h3 id="target-node"><a class="header-anchor" href="#target-node"></a><code>target</code>(node)</h3>
-<p>事件要触发的目标节点。</p>
-<h3 id="bubbles-boolean"><a class="header-anchor" href="#bubbles-boolean"></a><code>bubbles</code> (boolean)</h3>
-<p>表明该事件是否是在冒泡阶段触发的。</p>
-<h3 id="preventdefault-function"><a class="header-anchor" href="#preventdefault-function"></a><code>preventDefault</code> (function)</h3>
-<p>这个方法可以禁止一切默认的行为，例如点击 <code>a</code> 标签时，会打开一个新页面，如果为 <code>a</code> 标签监听事件 <code>click</code> 同时调用该方法，则不会打开新页面。</p>
-<h3 id="stoppropagation-function"><a class="header-anchor" href="#stoppropagation-function"></a><code>stopPropagation</code> (function)</h3>
-<p>停止冒泡，上面有提到，不再赘述。</p>
-<h3 id="stopimmediatepropagation-function"><a class="header-anchor" href="#stopimmediatepropagation-function"></a><code>stopImmediatePropagation</code> (function)</h3>
-<p>与 <code>stopPropagation</code> 类似，就是阻止触发其他监听函数。但是与 <code>stopPropagation</code> 不同的是，它更加 “强力”，阻止除了目标之外的事件触发，甚至阻止针对同一个目标节点的相同事件。</p>
-<h2 id="jquery-中的事件"><a class="header-anchor" href="#jquery-中的事件"></a>jQuery 中的事件</h2>
-<p>如果你在写文章或者 Demo，为了简单，你当然可以用上面的事件监听函数，以及那些事件对象提供的方法等。*<em>但在实际中，有一些方法和属性是有兼容性问题的，所以我们会使用 jQuery 来消除兼容性问题。 *</em></p>
-<h3 id="绑定事件和事件代理"><a class="header-anchor" href="#绑定事件和事件代理"></a>绑定事件和事件代理</h3>
-<pre><code>$( &quot;#dataTable tbody tr&quot; ).on( &quot;click&quot;, function() {
-  console.log( $( this ).text() );
-});
-
-</code></pre>
-<h3 id="处理过兼容性的事件对象-event-object"><a class="header-anchor" href="#处理过兼容性的事件对象-event-object"></a>处理过兼容性的事件对象（Event Object）</h3>
-<p>事件对象有些方法等也有兼容性差异，jQuery 将其封装处理，并提供跟标准一直的命名。</p>
-<p>如果你想在 jQuery 事件回调函数中访问原来的事件对象，需要使用 <code>event.originalEvent</code>，它指向原生的事件对象。</p>
-<h3 id="触发事件-trigger-方法"><a class="header-anchor" href="#触发事件-trigger-方法"></a>触发事件 <code>trigger</code> 方法</h3>
-<p>点击某个绑定了 <code>click</code> 事件的节点，自然会触发该节点的 <code>click</code> 事件，从而执行对应回调函数。</p>
-<p><code>trigger</code> 方法可以模拟触发事件，我们单击另一个节点 elementB，可以使用：</p>
-<pre><code>$(elementB).on('click', function(){
-    $(elementA).trigger( &quot;click&quot; );
-});
-
-</code></pre>
-<p>来触发 elementA 节点的单击监听回调函数。详情请看文档 <a href="http://api.jquery.com/trigger/" target="_blank" rel="external">.trigger()</a>。</p>
-<h2 id="原生js事件绑定兼容"><a class="header-anchor" href="#原生js事件绑定兼容"></a>原生js事件绑定兼容</h2>
-<p>Dean Edward 所写的 addEvent() 函数：</p>
-<pre><code>function addEvent(element, type, handler) {
-    if (!handler.$$guid) handler.$$guid = addEvent.guid++;
-    if (!element.events) element.events = {};
-        var handlers = element.events[type];
-    if (!handlers) {
-        handlers = element.events[type] = {};
-        if (element[&quot;on&quot; + type]) {
-            handlers[0] = element[&quot;on&quot; + type];
-        }
-    }
-    handlers[handler.$$guid] = handler;
-    element[&quot;on&quot; + type] = handleEvent;
-}
-
-addEvent.guid = 1;
-    
-function removeEvent(element, type, handler) {
-    if (element.events &amp;&amp; element.events[type]) {
-        delete element.events[type][handler.$$guid];
-    }
-}
-function handleEvent(event) {
-    var returnValue = true;
-    event = event || fixEvent(window.event);
-    var handlers = this.events[event.type];
-    for (var i in handlers) {
-        this.$$handleEvent = handlers[i];
-        if (this.$$handleEvent(event) === false) {
-            returnValue = false;
-        }
-    }
-    return returnValue;
-};
-    
-function fixEvent(event) {
-    event.preventDefault = fixEvent.preventDefault;
-    event.stopPropagation = fixEvent.stopPropagation;
-    return event;
-};
-fixEvent.preventDefault = function() {
-    this.returnValue = false;
-};
-fixEvent.stopPropagation = function() {
-    this.cancelBubble = true;
-};
-</code></pre>
-
-		</div>
+        <p class="article-more-link">
+          <a  href="/2016/11/09/let-n-const/#more">
+				<span class="link link--yaku">
+					<span>发</span><span>现</span><span>更</span><span>多 >></span>
+				</span>
+		  </a>
+		  <!-- 发现更多 >> -->
+        </p>
       
-  
-     <!-- 版权署名授权 -->
-    <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/01/29/js-event/">js事件绑定基础回顾</a></p>
-        <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
-        <p style="color: #696969;"><span>发布时间:</span>2017-01-29, 23:51:06</p>
-        <!-- <p><span>最后更新:</span>2017-03-08, 01:27:04</p> -->
-        <p>
-            <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="js事件绑定基础回顾" href="/2017/01/29/js-event/">https://alexzhong22c.github.io/2017/01/29/js-event/</a>
-            <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://alexzhong22c.github.io/2017/01/29/js-event/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
-        </p>
-        <p style="color: #696969;">
-            <span>许可协议:</span><i class="fa fa-creative-commons"></i><a id="copyright_license" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target = "_blank" class="hint  hint--bottom" data-hint="中国大陆 (CC BY-NC-SA 3.0 CN)">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
-        </p>
+      <div class="clearfix"></div>
     </div>
+    
+  </div>
 
-
-
-    <nav id="article-nav">
-        
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2017/02/11/js-operators/">
-                    操作符回顾
-                </a>
-            </div>
-        
-        
-            <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/11/09/let-n-const/">
-                    let和const回顾
-                </a>
-            </div>
-        
-    </nav>
-
-
+ 
   
 </article>
 
-    <div id="toc" class="toc-article">
-        <strong class="toc-title">文章目录</strong>
-        
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#绑定事件监听"><span class="toc-number">1.</span> <span class="toc-text">绑定事件监听</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#html-内联属性-避免使用"><span class="toc-number">1.1.</span> <span class="toc-text">HTML 内联属性（避免使用）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在javascript代码中绑定"><span class="toc-number">1.2.</span> <span class="toc-text">在JavaScript代码中绑定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#绑定事件监听函数"><span class="toc-number">1.3.</span> <span class="toc-text">绑定事件监听函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#移除事件监听"><span class="toc-number">2.</span> <span class="toc-text">移除事件监听</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件触发过程"><span class="toc-number">3.</span> <span class="toc-text">事件触发过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用事件代理-event-delegate-提升性能"><span class="toc-number">4.</span> <span class="toc-text">使用事件代理（Event Delegate）提升性能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#停止事件冒泡-stoppropagation"><span class="toc-number">5.</span> <span class="toc-text">停止事件冒泡（stopPropagation）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件的-event-对象"><span class="toc-number">6.</span> <span class="toc-text">事件的 Event 对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#type-string"><span class="toc-number">6.1.</span> <span class="toc-text">type(string)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#target-node"><span class="toc-number">6.2.</span> <span class="toc-text">target(node)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bubbles-boolean"><span class="toc-number">6.3.</span> <span class="toc-text">bubbles (boolean)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#preventdefault-function"><span class="toc-number">6.4.</span> <span class="toc-text">preventDefault (function)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#stoppropagation-function"><span class="toc-number">6.5.</span> <span class="toc-text">stopPropagation (function)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#stopimmediatepropagation-function"><span class="toc-number">6.6.</span> <span class="toc-text">stopImmediatePropagation (function)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jquery-中的事件"><span class="toc-number">7.</span> <span class="toc-text">jQuery 中的事件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#绑定事件和事件代理"><span class="toc-number">7.1.</span> <span class="toc-text">绑定事件和事件代理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#处理过兼容性的事件对象-event-object"><span class="toc-number">7.2.</span> <span class="toc-text">处理过兼容性的事件对象（Event Object）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#触发事件-trigger-方法"><span class="toc-number">7.3.</span> <span class="toc-text">触发事件 trigger 方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原生js事件绑定兼容"><span class="toc-number">8.</span> <span class="toc-text">原生js事件绑定兼容</span></a></li></ol>
-        
-    </div>
-    <style>
-        .left-col .switch-btn,
-        .left-col .switch-area {
-            display: none;
-        }
-        .toc-level-3 i,
-        .toc-level-3 ol {
-            display: none !important;
-        }
-    </style>
-    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
-    <script>
-        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
-    </script>
-
-
-
-
-    
-<div class="share">
-    
-        <div class="bdsharebuttonbox">
-            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
-            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
-            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
-            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
-            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
-            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
-            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
-        </div>
-        <script>
-            window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"js事件绑定基础回顾　| Web前端 | Alex Zhong　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
-        </script>
-    
-
-    
-</div>
 
 
 
@@ -800,98 +604,15 @@ fixEvent.stopPropagation = function() {
 
 
 
-    
-      <div class="duoshuo" id="comments">
-    <div id="comment-box" ></div>
-    <div class="ds-thread" id="ds-thread" data-thread-key="2017/01/29/js-event/" data-title="js事件绑定基础回顾" data-url="https://alexzhong22c.github.io/2017/01/29/js-event/"></div>
-    <script>
-        var duoshuoQuery = {short_name:"null"};
-        var loadComment = function(){
-            var d = document, s = d.createElement('script');
-            s.src = 'https://alexzhong22c.github.io/js/embed.js';
-            s.async = true; s.charset = 'UTF-8';
-            (d.head || d.body).appendChild(s);
-        }
-
-        
-            // Add comment count
-            $(function(){
-                var jsonUrl = "https://api.duoshuo.com/threads/counts.jsonp?short_name=null&threads=2017/01/29/js-event/&callback=?";
-                $.getJSON(jsonUrl, function(result){
-                    $.each(result.response, function(i, field){
-                        var value = field.comments;
-                        if (value > 0) {
-                            $(".count-comment").text(value);
-                            return;
-                        }
-                    })
-                })
-            })
-        
-    </script>
-    
-    <aside class="comment-bar">
-        <a href="javascript:void(0);">
-            <i class="fa fa-commenting-o animated infinite pulse"></i>
-            <i class="fa fa-spinner fa-pulse"></i>
-            <span class="count-comment"></span>
-        </a>
-    </aside>
-    <script>
-        var $commentBar = $("#comments aside.comment-bar");
-        var load$hide = function(){
-            $commentBar.find("a > i").toggle();
-            loadJS("https://alexzhong22c.github.io/js/embed.js", function(){
-              if (typeof DUOSHUO !== 'undefined'){
-		              DUOSHUO.EmbedThread('.ds-thread');
-              }
-            })
-            $commentBar.fadeOut(800);
-
-        }
-        $commentBar.click(function(){
-            load$hide();
-        })
-        $commentBar.children("a").hover(function(){
-            load$hide();
-        })
-        if (window.location.hash === "#comments") {
-            load$hide();
-        }
-    </script>
-
-
-</div>
-
-    
 
 
 
-
-    <div class="scroll" id="post-nav-button">
-        
-            <a href="/2017/02/11/js-operators/" title="上一篇: 操作符回顾">
-                <i class="fa fa-angle-left"></i>
-            </a>
-        
-
-        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
-
-        
-            <a href="/2016/11/09/let-n-const/" title="下一篇: let和const回顾">
-                <i class="fa fa-angle-right"></i>
-            </a>
-        
-    </div>
-
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/03/05/js-event2/">事件进阶话题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/float-n-absolute/">float和绝对定位比较</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/about-margin/">和margin有关的知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/gulp-usage/">gulp的入门和一些简单使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/27/icon-usage/">桌面端和移动端图标的引入</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/my-hexo-theme/">yelee主题改bug总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/my-hexo-blog/">搭建hexo博客个人总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/equality-operators/">相等操作符回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/js-operators/">操作符回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/29/js-event/">js事件绑定基础回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/09/let-n-const/">let和const回顾</a></li></ul>
-
-
-
-
-    <script>
-        
-    </script>
+  
+  
+    <nav id="page-nav" >
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    </nav>
+  
 
 </div>
       <footer id="footer">
@@ -907,7 +628,7 @@ fixEvent.stopPropagation = function() {
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					
-						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,384</span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">总字数：16.3k</span>
 					
 				</div>
             </div>
@@ -923,15 +644,9 @@ fixEvent.stopPropagation = function() {
                     </span>
                 
 				
-					
-						<span id="divider_span" style="vertical-align:middle;">|&thinsp;</span>
-					
-					
-						<span id="busuanzi_container_page_pv" style="display:none;text-align:center;">
-							<span id="page-visit" class="hint  hint--top  hint--info" data-hint="本文热度" style="vertical-align:middle;"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span><span>°C</span>
-							</span>
-						</span>
-					
+					<span style="vertical-align:middle;">|&thinsp;</span><span class="hint  hint--top  hint--success" data-hint="以微薄之力，让世界更美" style="vertical-align:middle;" data-no-instant><a class="htmleaf-links" id="publicwelfare" href="../404.html" style="color:green;cursor:pointer;">公益404</a>
+					</span>
+					<i class="fa fa-heart animated infinite pulse" style="color:red;margin-left:2px;"></i><!-- 红心-->
 				
             </div>
         
@@ -958,6 +673,12 @@ fixEvent.stopPropagation = function() {
 
 <script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js" defer async="true" data-no-instant></script>
 
+
+    
+      <!-- 多说已经移动到after-footer -->
+    
+
+    
 
 
 
@@ -2296,6 +2017,21 @@ clearInterval(timer);
 //多说评论首页显示评论数
 var duoshuoQuery = {short_name:"null"};
 var duoshuoComments = function() {
+
+if ($(".left-col").is(":visible")) {
+var duoshuoPath = 'https://alexzhong22c.github.io/js/embed.js';
+jQuery.getScript(duoshuoPath)
+.done(function() {
+var $duoshuoCount = $(".ds-thread-count");
+$duoshuoCount.bind("DOMNodeInserted", function(e) {
+var num = $(this).text().replace(/[^0-9]/ig,"");
+$(this).siblings(".count-comment").text(num);
+$(this).remove();
+})
+})
+.fail(function() {
+});
+}
 
 }
 //隐藏categories、tags页面下的标签
