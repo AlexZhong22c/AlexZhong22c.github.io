@@ -48,11 +48,11 @@ for (var i = 0; i < messages.length; i++) {
 - **let声明的变量直到控制流到达该变量被定义的代码行时才会被装载，所以在到达之前使用该变量会触发错误。**举个例子：
 
   ```
-      function update() {
-        console.log("当前时间:", t);  // 引用错误（ReferenceError）
-        ...
-        let t = readTachymeter();
-      }
+  function update() {
+  	console.log("当前时间:", t);  // 引用错误（ReferenceError）
+  	...
+  	let t = readTachymeter();
+  }
   ```
 
   不可访问的这段时间变量一直处于作用域中，但是尚未装载，它们位于*临时死区（Temporal Dead Zone，简称TDZ*）中。我一直想用科幻小说来类比这个脑洞大开的行话，但是还没想好怎么搞。
@@ -84,19 +84,19 @@ ES6引入的第三个声明类关键词与`let`类似：`const`。
 `const`声明的变量与`let`声明的变量类似，它们的不同之处在于，`const`声明的变量只可以在声明时赋值，不可随意修改，否则会导致`SyntaxError`（语法错误）。
 
 ```
-    const MAX_CAT_SIZE_KG = 3000; // 正确
+const MAX_CAT_SIZE_KG = 3000; // 正确
 
-    MAX_CAT_SIZE_KG = 5000; // 语法错误（SyntaxError）
-    MAX_CAT_SIZE_KG++; // 虽然换了一种方式，但仍然会导致语法错误
+MAX_CAT_SIZE_KG = 5000; // 语法错误（SyntaxError）
+MAX_CAT_SIZE_KG++; // 虽然换了一种方式，但仍然会导致语法错误
 ```
 
 当然，规范设计的足够明智，用`const`声明变量后必须要赋值，否则也抛出语法错误。
 
 ```
-    const theFairest;  // 依然是语法错误，你这个倒霉蛋
+const theFairest;  // 依然是语法错误，你这个倒霉蛋
 ```
 
-## 我现在可以使用let和const了么？
+## 现在可以使用let和const了么？
 
 是的。如果要在web上使用`let`和`const`特性，你需要使用一个诸如[Babel](http://babeljs.io/)、[Traceur](https://github.com/google/traceur-compiler#what-is-traceur)或[TypeScript](http://www.typescriptlang.org/)的ES6转译器。（Babel和Traceur暂不支持临时死区特性。）
 

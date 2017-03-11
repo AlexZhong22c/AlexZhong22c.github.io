@@ -84,7 +84,7 @@
 <meta property="og:url" content="https://alexzhong22c.github.io/2017/01/29/js-event/index.html">
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
 <meta property="og:description" content="此文用于快速回顾，不适合用来入门。">
-<meta property="og:updated_time" content="2017-03-07T17:11:50.091Z">
+<meta property="og:updated_time" content="2017-03-07T17:27:04.529Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js事件绑定基础回顾">
 <meta name="twitter:description" content="此文用于快速回顾，不适合用来入门。">
@@ -660,7 +660,7 @@ element.removeEventListener('click', fun, false);
 </code></pre>
 <p>来触发 elementA 节点的单击监听回调函数。详情请看文档 <a href="http://api.jquery.com/trigger/" target="_blank" rel="external">.trigger()</a>。</p>
 <h2 id="原生js事件绑定兼容"><a class="header-anchor" href="#原生js事件绑定兼容"></a>原生js事件绑定兼容</h2>
-<p>Dean Edward 所写的 addEvent() 函数</p>
+<p>Dean Edward 所写的 addEvent() 函数：</p>
 <pre><code>function addEvent(element, type, handler) {
     if (!handler.$$guid) handler.$$guid = addEvent.guid++;
     if (!element.events) element.events = {};
@@ -716,7 +716,7 @@ fixEvent.stopPropagation = function() {
         <p><span>本文标题:</span><a href="/2017/01/29/js-event/">js事件绑定基础回顾</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2017-01-29, 23:51:06</p>
-        <!-- <p><span>最后更新:</span>2017-03-08, 01:11:50</p> -->
+        <!-- <p><span>最后更新:</span>2017-03-08, 01:27:04</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="js事件绑定基础回顾" href="/2017/01/29/js-event/">https://alexzhong22c.github.io/2017/01/29/js-event/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://alexzhong22c.github.io/2017/01/29/js-event/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -736,6 +736,12 @@ fixEvent.stopPropagation = function() {
                 </a>
             </div>
         
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/11/09/let-n-const/">
+                    let和const回顾
+                </a>
+            </div>
         
     </nav>
 
@@ -872,11 +878,13 @@ fixEvent.stopPropagation = function() {
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a href="/2016/11/09/let-n-const/" title="下一篇: let和const回顾">
+                <i class="fa fa-angle-right"></i>
+            </a>
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/03/05/js-event2/">事件进阶话题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/float-n-absolute/">float和绝对定位比较</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/about-margin/">和margin有关的知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/gulp-usage/">gulp的入门和一些简单使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/27/icon-usage/">桌面端和移动端图标的引入</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/my-hexo-theme/">yelee主题改bug总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/my-hexo-blog/">搭建hexo博客个人总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/29/js-event/">js事件绑定基础回顾</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/03/05/js-event2/">事件进阶话题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/float-n-absolute/">float和绝对定位比较</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/about-margin/">和margin有关的知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/gulp-usage/">gulp的入门和一些简单使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/27/icon-usage/">桌面端和移动端图标的引入</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/my-hexo-theme/">yelee主题改bug总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/my-hexo-blog/">搭建hexo博客个人总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/29/js-event/">js事件绑定基础回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/09/let-n-const/">let和const回顾</a></li></ul>
 
 
 
