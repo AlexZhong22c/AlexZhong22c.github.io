@@ -4,6 +4,84 @@
   
     
     <entry>
+      <title></title>
+      <url>https://alexzhong22c.github.io/2017/03/11/try-eslint/</url>
+      <content type="html"><![CDATA[<p>title: eslint折腾记
+date: 2017-03-11 21:50:31
+categories: [essay]
+tags: [eslint, ]</p>
+<p>关于 eslint 这一个简单的工具的使用，本人目前仍在摸索。</p>
+<a id="more"></a>
+<h2 id="卸载干净"><a class="header-anchor" href="#卸载干净"></a>卸载干净</h2>
+<p>在同类型的 jslint 、jshint 、eslint 当中我选择了 eslint 。</p>
+<p>为了简单起见，我先从 sublime 的 eslint 插件入手。</p>
+<p>一开始我想着对自己要求严格一点，那就用 airbnb 版的 eslint 插件配置吧。</p>
+<p>没想到：</p>
+<ul>
+<li>airbnb 对ES6的使用非常深入，这使得我如果不按照ES6来写的话会遭遇大量的错误，即便把要使用ES6的配置关闭，这个代码校正也让我无法承受</li>
+<li>网上不建议初学者直接上手 ES6</li>
+<li>最近做一个小项目，我的前端搭档要求 JavaScript 代码要兼容比较老的一些浏览器</li>
+<li>用babel 可以将ES6转成ES5，但是最后是在你的工程中配置了babel</li>
+</ul>
+<p>为了 airbnb 版，我安装了一堆npm插件，大概是卸载干净了。</p>
+<p>最终，我只安装了<a href="https://github.com/SublimeLinter/SublimeLinter3" target="_blank" rel="external">SublimeLinter</a>和<a href="https://github.com/roadhump/SublimeLinter-eslint" target="_blank" rel="external">SublimeLinter-contrib-eslint</a> 和cssLint，xxxx。另外的这一篇 <a href="http://www.tuicool.com/articles/faANRvj" target="_blank" rel="external">《在Sublime3中使用ESLint》</a> 也值得一读。</p>
+<h2 id="私人配置"><a class="header-anchor" href="#私人配置"></a>私人配置</h2>
+<p>我用的是eslintrc.json文件来自定义配置，这样的一个好处是，可以通过</p>
+<pre><code>&quot;extends&quot;: &quot;standard&quot;,
+</code></pre>
+<p>引入 standar 版的 eslint 插件配置，作为我的配置的主题。然后它就像css 一样，写在文件后方的配置可以<strong>覆盖</strong>前方的同名配置，这样就可以私人订制一些个别的修改，经过了一个晚上的奋战，下面这些就是我私人添加的配置，仅供参考：</p>
+<pre><code>{
+  &quot;extends&quot;: &quot;standard&quot;,					//引入大神的配置作为主体
+  &quot;globals&quot;: {
+    &quot;$&quot;: true,                                //zepto
+    &quot;define&quot;: true,                           //requirejs
+    &quot;require&quot;: true                           //requirejs
+  },
+  &quot;env&quot;: {
+    &quot;browser&quot;: true                           //执行环境 浏览器
+  },
+  &quot;rules&quot;: {
+    //官方文档 http://eslint.org/docs/rules/
+    &quot;no-unused-vars&quot;: [1, { &quot;vars&quot;: &quot;all&quot;, &quot;args&quot;: &quot;none&quot;, &quot;ignoreRestSiblings&quot;: true }],                 //变量定义后未使用
+    &quot;quotes&quot;: [1, &quot;single&quot;, { &quot;avoidEscape&quot;: true, &quot;allowTemplateLiterals&quot;: true }],
+    // &quot;no-inner-declarations&quot;: [0, &quot;both&quot;],     //不建议在{}代码块内部声明变量或函数
+    &quot;no-extra-boolean-cast&quot;: 1,               //多余的感叹号转布尔型
+    &quot;no-extra-semi&quot;: 1,                       //多余的分号
+    &quot;no-extra-parens&quot;: 1,                     //多余的括号
+    &quot;no-empty&quot;: 1,                            //空代码块
+    &quot;no-use-before-define&quot;: [1, &quot;nofunc&quot;],    //使用前未定义
+    &quot;complexity&quot;: [1, 10],                    //圈复杂度大于10 警告
+    &quot;no-cond-assign&quot;: [2, &quot;always&quot;],          //条件语句中禁止赋值操作
+    &quot;no-native-reassign&quot;: 2,                  //禁止覆盖原生对象
+
+    //代码风格优化
+        &quot;operator-linebreak&quot;: [&quot;error&quot;, &quot;before&quot;],
+    &quot;no-else-return&quot;: 1,                      //在else代码块中return，else是多余的
+    &quot;no-multi-spaces&quot;: 1,                     //不允许多个空格
+    &quot;key-spacing&quot;: [1, {&quot;beforeColon&quot;: false, &quot;afterColon&quot;: true}],//object直接量建议写法 : 后一个空格前面不留空格
+    &quot;block-scoped-var&quot;: 2,                    //变量应在外部上下文中声明，不应在{}代码块中
+    &quot;consistent-return&quot;: 2,                   //函数返回值可能是不同类型
+
+    &quot;no-loop-func&quot;: 2,                        //禁止在循环体中定义函数
+    &quot;no-return-assign&quot;: [2, &quot;always&quot;],        //不允return时有赋值操作
+    &quot;no-redeclare&quot;: [2, {&quot;builtinGlobals&quot;: true}],//不允许重复声明
+    &quot;no-unused-expressions&quot;: [2, {&quot;allowShortCircuit&quot;: true, &quot;allowTernary&quot;: true}],//不执行的表达式
+    &quot;no-useless-concat&quot;: 2,                   //无意义的string concat
+    &quot;no-void&quot;: 2,                             //禁用void
+    &quot;no-with&quot;: 1,                             //禁用with
+    &quot;valid-jsdoc&quot;: [2, {&quot;requireParamDescription&quot;: true, &quot;requireReturnDescription&quot;: true}],//jsdoc
+    &quot;no-warning-comments&quot;: [2, { &quot;terms&quot;: [&quot;todo&quot;, &quot;fixme&quot;, &quot;any other term&quot;], &quot;location&quot;: &quot;anywhere&quot; }],//标记未写注释
+    &quot;curly&quot;: 1                                //if、else、while、for代码块用{}包围
+  }
+}
+</code></pre>
+<h2 id="none"><a class="header-anchor" href="#none"></a></h2>
+]]></content>
+      
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[事件进阶话题]]></title>
       <url>https://alexzhong22c.github.io/2017/03/05/js-event2/</url>
       <content type="html"><![CDATA[<p>此文内容深度其实不大，个人还需要进一步学习。</p>
@@ -1150,6 +1228,53 @@ fixEvent.preventDefault = function() {
 fixEvent.stopPropagation = function() {
     this.cancelBubble = true;
 };
+</code></pre>
+<p>eslint版：</p>
+<pre><code>function addEvent (element, type, handler) {
+  if (!handler.$$guid) handler.$$guid = addEvent.guid++
+  if (!element.events) element.events = {}
+  let handlers = element.events[type]
+  if (!handlers) {
+    handlers = element.events[type] = {}
+    if (element['on' + type]) {
+      handlers[0] = element['on' + type]
+    }
+  }
+  handlers[handler.$$guid] = handler
+  element['on' + type] = handleEvent
+}
+addEvent.guid = 1
+
+function removeEvent (element, type, handler) {
+  if (element.events &amp;&amp; element.events[type]) {
+    delete element.events[type][handler.$$guid]
+  }
+}
+
+function handleEvent (event) {
+  var returnValue = true
+  event = event || fixEvent(window.event)
+  var handlers = this.events[event.type]
+  for (var i in handlers) {
+    this.$$handleEvent = handlers[i]
+    if (this.$$handleEvent(event) === false) {
+      returnValue = false
+    }
+  }
+  return returnValue
+}
+
+function fixEvent (event) {
+  event.preventDefault = fixEvent.preventDefault
+  event.stopPropagation = fixEvent.stopPropagation
+  return event
+}
+fixEvent.preventDefault = function () {
+  this.returnValue = false
+}
+fixEvent.stopPropagation = function () {
+  this.cancelBubble = true
+}
 </code></pre>
 ]]></content>
       

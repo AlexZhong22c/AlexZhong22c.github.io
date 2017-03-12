@@ -1,7 +1,9 @@
-title: eslint折腾记
+---
+title:  eslint折腾记
 date: 2017-03-11 21:50:31
 categories: [essay]
-tags: [eslint, ]
+tags: [eslint,配置,插件]
+---
 
 关于 eslint 这一个简单的工具的使用，本人目前仍在摸索。
 

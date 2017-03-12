@@ -84,7 +84,7 @@
 <meta property="og:url" content="https://alexzhong22c.github.io/2017/01/29/js-event/index.html">
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
 <meta property="og:description" content="此文用于快速回顾，不适合用来入门。">
-<meta property="og:updated_time" content="2017-03-07T17:27:04.529Z">
+<meta property="og:updated_time" content="2017-03-12T15:03:02.244Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js事件绑定基础回顾">
 <meta name="twitter:description" content="此文用于快速回顾，不适合用来入门。">
@@ -356,7 +356,7 @@
                             <!-- 菜单 -->
                             <li class="cl-effect-1">
                                 
-                                <a href="/categories/随想天地">
+                                <a href="/categories/essay">
                                     随想天地
                                 </a>
                                 
@@ -478,7 +478,7 @@
                 
                     <li><a href="/tags/回顾">助记回顾</a></li>
                 
-                    <li><a href="/categories/随想天地">随想天地</a></li>
+                    <li><a href="/categories/essay">随想天地</a></li>
                 
                 <div class="clearfix"></div>
                 </ul>
@@ -517,7 +517,7 @@
 
 	<br />
 	<p style="height:7px;"/>
-	<p style="height:20px;font-family:KaiTi,LiSu,'宋体',sans-serif;color:#DBDBDB;font-size:12px;">预计阅读5分钟</p>
+	<p style="height:20px;font-family:KaiTi,LiSu,'宋体',sans-serif;color:#DBDBDB;font-size:12px;">预计阅读6分钟</p>
 
     </div>
   
@@ -707,6 +707,53 @@ fixEvent.stopPropagation = function() {
     this.cancelBubble = true;
 };
 </code></pre>
+<p>eslint版：</p>
+<pre><code>function addEvent (element, type, handler) {
+  if (!handler.$$guid) handler.$$guid = addEvent.guid++
+  if (!element.events) element.events = {}
+  let handlers = element.events[type]
+  if (!handlers) {
+    handlers = element.events[type] = {}
+    if (element['on' + type]) {
+      handlers[0] = element['on' + type]
+    }
+  }
+  handlers[handler.$$guid] = handler
+  element['on' + type] = handleEvent
+}
+addEvent.guid = 1
+
+function removeEvent (element, type, handler) {
+  if (element.events &amp;&amp; element.events[type]) {
+    delete element.events[type][handler.$$guid]
+  }
+}
+
+function handleEvent (event) {
+  var returnValue = true
+  event = event || fixEvent(window.event)
+  var handlers = this.events[event.type]
+  for (var i in handlers) {
+    this.$$handleEvent = handlers[i]
+    if (this.$$handleEvent(event) === false) {
+      returnValue = false
+    }
+  }
+  return returnValue
+}
+
+function fixEvent (event) {
+  event.preventDefault = fixEvent.preventDefault
+  event.stopPropagation = fixEvent.stopPropagation
+  return event
+}
+fixEvent.preventDefault = function () {
+  this.returnValue = false
+}
+fixEvent.stopPropagation = function () {
+  this.cancelBubble = true
+}
+</code></pre>
 
 		</div>
       
@@ -716,7 +763,7 @@ fixEvent.stopPropagation = function() {
         <p><span>本文标题:</span><a href="/2017/01/29/js-event/">js事件绑定基础回顾</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2017-01-29, 23:51:06</p>
-        <!-- <p><span>最后更新:</span>2017-03-08, 01:27:04</p> -->
+        <!-- <p><span>最后更新:</span>2017-03-12, 23:03:02</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="js事件绑定基础回顾" href="/2017/01/29/js-event/">https://alexzhong22c.github.io/2017/01/29/js-event/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://alexzhong22c.github.io/2017/01/29/js-event/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -884,7 +931,7 @@ fixEvent.stopPropagation = function() {
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/03/05/js-event2/">事件进阶话题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/float-n-absolute/">float和绝对定位比较</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/about-margin/">和margin有关的知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/gulp-usage/">gulp的入门和一些简单使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/27/icon-usage/">桌面端和移动端图标的引入</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/my-hexo-theme/">yelee主题改bug总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/my-hexo-blog/">搭建hexo博客个人总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/equality-operators/">相等操作符回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/js-operators/">操作符回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/29/js-event/">js事件绑定基础回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/09/let-n-const/">let和const回顾</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/03/11/try-eslint/">try-eslint</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/05/js-event2/">事件进阶话题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/float-n-absolute/">float和绝对定位比较</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/about-margin/">和margin有关的知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/gulp-usage/">gulp的入门和一些简单使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/27/icon-usage/">桌面端和移动端图标的引入</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/my-hexo-theme/">yelee主题改bug总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/my-hexo-blog/">搭建hexo博客个人总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/equality-operators/">相等操作符回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/js-operators/">操作符回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/29/js-event/">js事件绑定基础回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/09/let-n-const/">let和const回顾</a></li></ul>
 
 
 
@@ -907,7 +954,7 @@ fixEvent.stopPropagation = function() {
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					
-						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,384</span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,511</span>
 					
 				</div>
             </div>
