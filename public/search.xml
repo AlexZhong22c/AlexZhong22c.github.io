@@ -4,13 +4,9 @@
   
     
     <entry>
-      <title></title>
+      <title><![CDATA[eslint折腾记]]></title>
       <url>https://alexzhong22c.github.io/2017/03/11/try-eslint/</url>
-      <content type="html"><![CDATA[<p>title: eslint折腾记
-date: 2017-03-11 21:50:31
-categories: [essay]
-tags: [eslint, ]</p>
-<p>关于 eslint 这一个简单的工具的使用，本人目前仍在摸索。</p>
+      <content type="html"><![CDATA[<p>关于 eslint 这一个简单的工具的使用，本人目前仍在摸索。</p>
 <a id="more"></a>
 <h2 id="卸载干净"><a class="header-anchor" href="#卸载干净"></a>卸载干净</h2>
 <p>在同类型的 jslint 、jshint 、eslint 当中我选择了 eslint 。</p>
@@ -78,6 +74,22 @@ tags: [eslint, ]</p>
 <h2 id="none"><a class="header-anchor" href="#none"></a></h2>
 ]]></content>
       
+        <categories>
+            
+            <category> essay </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> eslint </tag>
+            
+            <tag> 配置 </tag>
+            
+            <tag> 插件 </tag>
+            
+        </tags>
         
     </entry>
     
