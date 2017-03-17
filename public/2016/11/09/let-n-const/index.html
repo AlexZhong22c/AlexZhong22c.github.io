@@ -86,7 +86,7 @@ const声明的变量只可以在声明时赋值，它被设计的本意就是不
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
 <meta property="og:description" content="简单来说是： let是修复了var的作用域的一些bug，变的更加好用。let是更好的var。var的作用于是函数作用于，而let是块级别（大括号括起来的内容）
 const声明的变量只可以在声明时赋值，它被设计的本意就是不可随意修改，这是最大的特点。">
-<meta property="og:updated_time" content="2017-03-17T16:13:07.025Z">
+<meta property="og:updated_time" content="2017-03-17T16:22:40.930Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="let和const回顾">
 <meta name="twitter:description" content="简单来说是： let是修复了var的作用域的一些bug，变的更加好用。let是更好的var。var的作用于是函数作用于，而let是块级别（大括号括起来的内容）
@@ -564,8 +564,8 @@ const声明的变量只可以在声明时赋值，它被设计的本意就是不
 <p><code>let</code>与<code>var</code>还是有不同之处的，所以如果你只是在代码中将<code>var</code>全局搜索替换为<code>let</code>，一些依赖<code>var</code>声明的独特特性（可能你不是故意这样写）的代码可能无法正常运行。但对于绝大多数代码来说，在ES6的新代码模式下，你应该停止使用<code>var</code>声明变量，能使用<code>let</code>就用吧！</p>
 <p>这一规则可以帮助你捕捉bug，除了<code>NaN</code>错误以外，每一个异常都会在当前行抛出。</p>
 <ul>
-<li><strong>let声明的变量拥有块级作用域</strong> 。也就是说用<code>let</code>声明的变量的作用域只是外层块，而不是整个外层函数。</li>
-<li><strong>let声明的全局变量不是全局对象的属性</strong> 。这就意味着，你不可 以通过<code>window.变量名</code>的方式访问这些变量。它们只存在于一个不可见的块的作用域中，这个块理论上是Web页面中运行的所有JS代码的外层块。</li>
+<li><strong>let声明的变量拥有块级作用域。</strong> 也就是说用<code>let</code>声明的变量的作用域只是外层块，而不是整个外层函数。</li>
+<li><strong>let声明的全局变量不是全局对象的属性。</strong> 这就意味着，你不可 以通过<code>window.变量名</code>的方式访问这些变量。它们只存在于一个不可见的块的作用域中，这个块理论上是Web页面中运行的所有JS代码的外层块。</li>
 <li><strong>形如for (let x…)的循环在每次迭代时都为x创建新的绑定。</strong></li>
 </ul>
 <p>可以看一个<strong>循环内变量过度共享</strong>的例子：</p>
@@ -627,7 +627,7 @@ MAX_CAT_SIZE_KG++; // 虽然换了一种方式，但仍然会导致语法错误
         <p><span>本文标题:</span><a href="/2016/11/09/let-n-const/">let和const回顾</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2016-11-09, 17:28:05</p>
-        <!-- <p><span>最后更新:</span>2017-03-18, 00:13:07</p> -->
+        <!-- <p><span>最后更新:</span>2017-03-18, 00:22:40</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="let和const回顾" href="/2016/11/09/let-n-const/">https://alexzhong22c.github.io/2016/11/09/let-n-const/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://alexzhong22c.github.io/2016/11/09/let-n-const/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
