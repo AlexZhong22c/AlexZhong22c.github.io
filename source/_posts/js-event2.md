@@ -57,6 +57,8 @@ window.addEventListener("beforeunload", function( event ) {
 
 如果还有其他常用事件，欢迎留言补充。
 
+
+
 ## 事件回调函数的作用域问题
 
 与事件绑定在一起的回调函数作用域会有问题，我们来看个例子：

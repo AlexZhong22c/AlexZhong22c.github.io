@@ -78,19 +78,18 @@
 
 
 
-<meta name="description" content="从找一个喜欢的hexo主题到修改好bug发布到博客上面，整个过程花了我不少时间，下面是对这个改bug过程中发现的小问题做的总结。
-此文无图。">
+<meta name="description" content="完成了百度IFE2015的 task3 ，实现了一个功能颇为丰富的ToDo小应用。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="yelee主题改bug总结">
-<meta property="og:url" content="https://alexzhong22c.github.io/2017/02/22/my-hexo-theme/index.html">
+<meta property="og:title" content="ToDo小应用完工总结">
+<meta property="og:url" content="https://alexzhong22c.github.io/2017/02/17/todo-app/index.html">
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
-<meta property="og:description" content="从找一个喜欢的hexo主题到修改好bug发布到博客上面，整个过程花了我不少时间，下面是对这个改bug过程中发现的小问题做的总结。
-此文无图。">
-<meta property="og:updated_time" content="2017-03-05T01:13:53.105Z">
+<meta property="og:description" content="完成了百度IFE2015的 task3 ，实现了一个功能颇为丰富的ToDo小应用。">
+<meta property="og:image" content="http://olqa2s510.bkt.clouddn.com/caller%E7%9A%84%E7%BB%8F%E5%85%B8%E7%94%A8%E6%B3%95.png">
+<meta property="og:updated_time" content="2017-03-17T14:59:40.982Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="yelee主题改bug总结">
-<meta name="twitter:description" content="从找一个喜欢的hexo主题到修改好bug发布到博客上面，整个过程花了我不少时间，下面是对这个改bug过程中发现的小问题做的总结。
-此文无图。">
+<meta name="twitter:title" content="ToDo小应用完工总结">
+<meta name="twitter:description" content="完成了百度IFE2015的 task3 ，实现了一个功能颇为丰富的ToDo小应用。">
+<meta name="twitter:image" content="http://olqa2s510.bkt.clouddn.com/caller%E7%9A%84%E7%BB%8F%E5%85%B8%E7%94%A8%E6%B3%95.png">
 
 
     <link rel="alternate" href="/atom.xml" title="Web前端 | Alex Zhong" type="application/atom+xml" data-no-instant>
@@ -124,7 +123,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>yelee主题改bug总结 | Web前端 | Alex Zhong</title>
+<title>ToDo小应用完工总结 | Web前端 | Alex Zhong</title>
 
 
 </script>
@@ -508,11 +507,11 @@
     <link class="menu-list" tags="标签" friends="友情链接" about="个人签名"/>
 </nav>
 
-      <div class="body-wrap"><article id="post-my-hexo-theme" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-todo-app" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/02/22/my-hexo-theme/" class="article-date">
-      <time datetime="2017-02-22T15:06:34.000Z" itemprop="datePublished">2017-02-22</time>
+      <a href="/2017/02/17/todo-app/" class="article-date">
+      <time datetime="2017-02-17T14:44:31.000Z" itemprop="datePublished">2017-02-17</time>
 </a>
 
 
@@ -531,7 +530,7 @@
         
   
     <h1 class="article-title-big" itemprop="name">
-      yelee主题改bug总结
+      ToDo小应用完工总结
     </h1>
   
 
@@ -540,13 +539,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/hexo/">hexo</a>
+    <a class="article-category-link" href="/categories/项目总结/">项目总结</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/theme/">theme</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/yelee/">yelee</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/App/">App</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/caller/">caller</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/优化/">优化</a></li></ul>
     </div>
 
 
@@ -556,124 +555,201 @@
     
           <div id="article-content" class="article-entry" itemprop="articleBody">
 			  
-			<p>从找一个喜欢的hexo主题到修改好bug发布到博客上面，整个过程花了我不少时间，下面是对这个改bug过程中发现的小问题做的总结。</p>
-<p>此文无图。</p>
+			<p>完成了百度IFE2015的 <a href="https://github.com/baidu-ife/ife/tree/master/2015_spring/task/task0003" target="_blank" rel="external">task3</a> ，实现了一个功能颇为丰富的ToDo小应用。</p>
 <a id="more"></a>
-<p>一开始我是在知乎上面找好看的主题，找了很长一段时间才找到一个我比较喜欢的主题，并且挑选了一个已经被大神们优化得不错的主题来借鉴借鉴。</p>
-<p>我的hexo主题其实就是直接Fork了<a href="http://ngudream.com/2017/01/24/n-hexo-blog/" target="_blank" rel="external">ngudream</a>的主题，只不过该大神日常比较忙碌，我自己琢磨了一下代码，把一些报错的小bug给修复了，暂时还没有为这个主题添加什么特殊的功能。（原因是这个主题在各位大神的努力下，功能已经非常齐全炫酷了。）</p>
-<p>直接参考ngudream的这篇文章就可以了，在此在此表示一万个感谢：</p>
-<p><a href="http://ngudream.com/2017/01/24/n-hexo-blog/" target="_blank" rel="external">http://ngudream.com/2017/01/24/n-hexo-blog/</a></p>
-<p>在这个过程中我发现了一些小问题：</p>
-<h2 id="左右搜索栏"><a class="header-anchor" href="#左右搜索栏"></a>左右搜索栏</h2>
-<p>一定要先根据这个来安装插件：</p>
-<p><a href="http://gaomf.cn/2016/10/10/%E4%B8%BAHexo%E5%8D%9A%E5%AE%A2Yilia%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0%E6%9C%AC%E5%9C%B0%E7%AB%99%E5%86%85%E6%90%9C%E7%B4%A2%E5%8A%9F%E8%83%BD/" target="_blank" rel="external">Yilia主题添加本地站内搜索-高明飞</a></p>
-<h3 id="找不到content-json"><a class="header-anchor" href="#找不到content-json"></a>找不到content.json</h3>
+<h2 id="知识收获"><a class="header-anchor" href="#知识收获"></a>知识收获</h2>
+<h3 id="在javascript-中创建元素-用createelement-还是innerhtml好一点？"><a class="header-anchor" href="#在javascript-中创建元素-用createelement-还是innerhtml好一点？"></a>在JavaScript 中创建元素，用createElement()还是innerHTML好一点？</h3>
 <ul>
-<li>这是因为左下角搜索栏找不到content.json</li>
+<li>
+<p>最叼的好像是 使用<a href="https://github.com/xwcoder/template" target="_blank" rel="external">模板技术</a>,其实我的静态博客用的就是这种。</p>
+</li>
+<li>
+<p>在用js代码的循环创建元素的时候就顺便一个个绑定好事件好像比较简单，这样就不用给每个元素增加属性了。</p>
+<p>那么，用createElement来创建元素和用innerHTML，不知道哪个比较好用呢??</p>
+<p>而如果用innerHTML来创建元素的话肯定不能在形成元素的循环里面给元素绑定事件了，这样太硬编码了。</p>
+</li>
+<li>
+<blockquote>
+<p>《高性能JavaScript》：</p>
+<ul>
+<li>如果在对性能有苛刻要求更新一大段的HTML，innerHTML在大多数浏览器中执行更快。在旧版本浏览器中innerHTML方法更快，在基于Webkit内核却相反。</li>
+<li>对于大多数日常操作而言，差异不大，根据代码可读性、可维护性、团队习惯、代码风格来决定采用哪种方法。</li>
+<li>某答主说：**他一般大段就使用innerHTML了，而用dom创建单个元素或少量元素。 **</li>
+<li>或者DOM结构嵌套的级数比较多的就用innerHTML</li>
+<li>如果要使用createElement()，推荐一下createDocumentFragment()
+<ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/DocumentFragment" target="_blank" rel="external">documentFragment</a> 被所有主流浏览器支持，甚至是IE 6。所以，没有理由不用。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<h3 id="html属性用双引号-使用小写英文"><a class="header-anchor" href="#html属性用双引号-使用小写英文"></a>html属性用双引号、使用小写英文</h3>
+<ul>
+<li>
+<p>**HTML4标准里没有单引号的对应实体，**所以单引号里写单引号很麻烦。后来XML规范才加入了’ 并由XHTML 1.0引入HTML。不过考虑到兼容性，前端几乎从来不写。</p>
+<ul>
+<li>刚才在单引号里面写单引号只能用实体不能用反斜杠转移字符，根据HTML标准，反斜杠是不行的。</li>
+</ul>
+</li>
+<li>
+<p><strong>而JS中字符串用单引号，其实可能是HTML属性用双引号的结果。</strong></p>
+</li>
+<li>
+<p>另外，一般大家惯用的做法是 HTML 用双引号，JS 用单引号的原因是，这样在 JS 中拼 HTML 片段不用转义：</p>
+<ul>
+<li>
+<pre><code>elem.innerHTML = '&lt;div class=&quot;post&quot;&gt;&lt;/div&gt;';
+</code></pre>
+</li>
+<li>
+<p>当然你要反过来也可以，但不是主流做法。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>HTML属性不仅仅只有URL，另外引号出现在URL也是合法的。</p>
+</li>
+<li>
+<p>根据W3Cschool的说法，<strong>要求属性和属性值使用小写，属性值应该始终被包括在引号内</strong></p>
+<ul>
+<li>
+<p>用innerHTML来创建taskid=1和cateid=0这种属性好像没有用啊，因为浏览器自动解析成：</p>
+<p>taskid=&quot;1&quot;和cateid=“0”</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="jquery"><a class="header-anchor" href="#jquery"></a>JQuery</h3>
+<ul>
+<li>JQuery的not()方法非常好用，each()也非常好</li>
 </ul>
 <ul>
-<li>将<code>yelee\source</code>文件夹下的search文件夹剪切到 根目录的source文件夹里面</li>
-<li>生成一次页面</li>
-<li>再把刚刚的search文件夹剪切回<code>yelee\source</code>文件夹下即可</li>
+<li>在绑定事件 函数中的JQuery选择器在函数触发后才会去选择对象</li>
+<li>像这个App中分类列表的单击交互，如果想要只有被单击选择的HTML元素有 高亮，那么在绑定单击事件来响应单击选择的时候，记得先清除所有同类HTML元素的 高亮</li>
 </ul>
-<h3 id="cb-search-json-404-not-found"><a class="header-anchor" href="#cb-search-json-404-not-found"></a>cb-search.json 404 (Not Found)</h3>
+<h4 id="jquery中-this-和-this-有区别："><a class="header-anchor" href="#jquery中-this-和-this-有区别："></a>JQuery中 this 和 $(“this”)有区别：</h4>
+<p><a href="http://www.jb51.net/article/57376.htm" target="_blank" rel="external">JQuery中 this 和 $(“this”)有区别</a></p>
+<p>如果你要使用html元素本身的属性或方法就需要使用this,如果你要使用jQuery包装后的方法或属性就要$(this),一般则有如下的关系.</p>
+<pre><code>$(this)[0] == this;
+</code></pre>
+<p>上文的代码是要使用this的地方是要调用表单form的有reset方法,而这一方法jQuery没有包装支持,所以才有this.reset(),也可以使用$(this)[0].reset();</p>
+<hr>
+<p>关于什么时候使用二者?可以看如下例子:</p>
+<pre><code>$('a').click(function(){
+        this.innerHTML==$(this).html()=='jQuery';//三者是一样的.
+        this.getAttribute('href')==this.href==$(this).attr('href')//三者是一样的;
+        this.getAttribute('target')==this.target==$(this).attr('target')//三者是一样的;
+        this.getAttribute('data-id')==$(this).attr('data-id')//二者是一样的;
+    });
+</code></pre>
+<h3 id="caller的经典用法"><a class="header-anchor" href="#caller的经典用法"></a>caller的经典用法</h3>
+<p>注：<strong>该特性是非标准的，请尽量不要在生产环境中使用它！</strong></p>
+<p><img src="http://olqa2s510.bkt.clouddn.com/caller%E7%9A%84%E7%BB%8F%E5%85%B8%E7%94%A8%E6%B3%95.png" alt=""></p>
+<h2 id="匠心勿失"><a class="header-anchor" href="#匠心勿失"></a>匠心勿失</h2>
+<h3 id="html-css"><a class="header-anchor" href="#html-css"></a>HTML+CSS</h3>
 <ul>
-<li>是因为没有安装右下角搜索栏插件</li>
+<li><a href="http://blog.bingo929.com/CSS-coding-semantic-naming.html" target="_blank" rel="external">CSS命名惯例语义化</a></li>
+<li>虽然DOM结构是由js代码渲染的，在HTML留下一些<strong>模板</strong>方便参考和编写代码</li>
+</ul>
+<h3 id="javascript"><a class="header-anchor" href="#javascript"></a>JavaScript</h3>
+<ul>
+<li>优化了 JavaScript 函数的命名，使得风格统一，语义明确。
+<ul>
+<li>这个App里面，用来控制视图层的函数最好用refresh来命名，用update命名的函数用于更新数据库的信息</li>
+</ul>
+</li>
 </ul>
 <ul>
-<li>如果安装插件之后语法报错，就把别人项目的文件代码复制过来就行了，省得去检查语法</li>
+<li>一般留下数组index为0的位置来存放一些默认的数组元素。比如存储“分类”的数组就将“默认分类”设为是它的0号元素。</li>
+<li>深刻感受到使用主键等等概念管理数据库的简便</li>
+<li>如果是 JavaScript 对象字面量，键值对的 键 最好不要用&quot;“包着，转成JSON的时候 键 会自动被”&quot;包上</li>
+<li><strong>util.js</strong>是基于前面的小任务写的，它的功能很薄弱。例如<code>$(#modal-foot button)</code>返回来的只是一个元素对象，不合理，所以为了省事我直接用JQuery库就好了。</li>
 </ul>
-<h3 id="百度分享因为混合内容报错"><a class="header-anchor" href="#百度分享因为混合内容报错"></a>百度分享因为混合内容报错</h3>
-<p>如果因为混合内容报错（即https网站引用了http的资源），你可以将百度分享的地址改为：<code>https://github.com/hrwhisper/baiduShare</code>；本来我想把static文件夹放在外面一点的，但是有bug，我现在只是做到不报错而已，具体的百度分享内容都没弄</p>
-<h3 id="百度站长要重新配置"><a class="header-anchor" href="#百度站长要重新配置"></a>百度站长要重新配置</h3>
+<h3 id="改进代码"><a class="header-anchor" href="#改进代码"></a>改进代码</h3>
+<pre><code>function queryCateById(id) {
+    var allCates = queryAllCates();
+    var result = null;
+    for (var i = 0; i &lt; allCates.length; i++) {
+        if (allCates[i].id == id) {
+            result = allCates[i];
+            break;
+        }
+    }
+    return result;
+}
+</code></pre>
+<p>简化为：</p>
+<pre><code>function queryCateById(id) {
+    var allCates = queryAllCates();
+    for (var i = 0; i &lt; allCates.length; i++) {
+        if (allCates[i].id == id) {
+            return allCates[i];
+        }
+    }
+}
+</code></pre>
+<h3 id="容易犯的错误"><a class="header-anchor" href="#容易犯的错误"></a>容易犯的错误</h3>
 <ul>
-<li>查阅相关资料，依照资料放baidu_verify_QshFoK3ZRz.html在yelee的source文件夹下通过站长验证，放googleeff62ed1566e185e.html也是同理。</li>
+<li>JQuery中使用id选择器返回的也是<code>元素数组</code>。</li>
 </ul>
-<p>百度sitemap要另外安装：</p>
-<pre><code>npm install hexo-generator-baidu-sitemap --save 
+<pre><code>console.log($(&quot;#modal-foot&quot;))// 元素数组
+console.log($(&quot;#modal-foot&quot;)[0])// 这才是想要的元素
 </code></pre>
 <ul>
-<li>如果想要给谷歌提交网站，只需要在<a href="https://www.google.com/webmasters/tools/home?hl=zh-CN" target="_blank" rel="external">Search Console</a>验证网站，并提交站点地图就可以了。谷歌真的好简单啊！谷歌的<code>sitemap.xml</code>不需要写到配置文件中，自动生效。
-<ul>
-<li>有个问题是，Github禁止百度爬虫，所以提交的sitemap迟早会显示失败，成功几率非常小</li>
+<li>HTML会自动忽略空格，要空格请用<code>&amp;nbsp;</code></li>
 </ul>
-</li>
-</ul>
-<h2 id="温馨提示"><a class="header-anchor" href="#温馨提示"></a>温馨提示</h2>
-<ul>
-<li>多说也是会因为混合内容而报错，但是我只能改良，不能彻底解决这个问题
-<ul>
-<li>将多说的<code>embed.js</code>本地化，	将这个文件的地址改动到<code>duoshuo.ejs</code>和<code>click2show.ejs</code>和layout的<code>after-footer.ejs</code>文件里面，但是依然报错</li>
-<li>见到http就给它加s</li>
-</ul>
-</li>
-<li>在Markdown文章头部的标注信息的冒号后面要加一个空格，这是语法要求</li>
-</ul>
-<ul>
-<li>在hexo s调试下，百度站长push报错属于正常现象</li>
-<li>在hexo s调试下，文章导航的特效会失灵，属于正常现象</li>
-</ul>
-<ul>
-<li>发现大神每篇文章文件的名字都是英文，Markdown里面的标题才是中英随意的，不然isPost()函数会出错
-<ul>
-<li>用cmd创文件名的时候英文全小写，空格用-表示，为了风格统一</li>
-</ul>
-</li>
-<li>插件这种东西最好不要复制，所以<strong>在重新搭建博客的时候</strong>我没有直接复制node_modules文件夹，这也容易令人忽略了大神自己在这个文件夹下改良的index.js和search.ejs文件</li>
-</ul>
-<h2 id="请不要fork我的主题"><a class="header-anchor" href="#请不要fork我的主题"></a>请不要Fork我的主题</h2>
-<p>去Fork大神ngudream的主题就可以了，因为我的个人改动比较私人化，所以Fork之后别人可能会看不懂。另外我的主题作了几个不好的改动：</p>
-<ul>
-<li>为了避免报错，一开始我把一些if语句的判断条件直接改为false，原本它们的判断条件是xxx.on的</li>
-</ul>
-<ul>
-<li>还有一个feed属性没研究，应该是订阅博客的功能，好像也被我粗暴地关了</li>
-<li>报错<code>Cannot GET /plugins/css/special.css</code>，我直接把“字往下掉”动画关掉</li>
-<li>然后就是折腾在显示主页时标签栏出现的undefined，一开始我不知道那个把三项文字的标签转为二项的js文件，所以一直研究ejs代码都没弄好。后来我直接给主页加一个英文名字blog就算了。总算不出现undefined</li>
-<li>乱关乱开了一下博文最下方的分享栏，不知道会不会出问题，这个模块应该是百度分享</li>
-<li>点击微信之后，那个左右滑动的栏目我暂时改不了代码，本来我想去掉qq的，但是只好把qq的二维码弄上
-<ul>
-<li>还有就是去掉qq之后，点击微信，上面那个圆形地方就没有图案显示</li>
-</ul>
-</li>
-<li>发现search-result-list模块的文字被顶到后面
-<ul>
-<li>把.col-3的CSS的marginbottom改为4px就行了</li>
-</ul>
-</li>
-</ul>
-<h3 id="我没有完善的内容"><a class="header-anchor" href="#我没有完善的内容"></a>我没有完善的内容</h3>
-<ul>
-<li>代码压缩没搞</li>
-<li>公益404没搞</li>
-<li>右下角搜索栏搞了，但是利用的不是打分排名</li>
-<li>谷歌分析到现在也不会，所以先不用，应该和百度站长是差不多的，没心思搞</li>
-<li>好像就只有360浏览器看不到emoji表情，所以即便安装了插件，文章尽量不要用emoji</li>
-</ul>
-<h2 id="整个过程的心得"><a class="header-anchor" href="#整个过程的心得"></a>整个过程的心得</h2>
-<ul>
-<li>在这过程中学会了用HTML-beautify来美化sublime中的html代码排版</li>
-<li>对ejs的代码写法有所了解</li>
-<li>明白了代码中的partial是干嘛的：复用模板</li>
-<li>第一次发现一些私人的代码改动都是写在<code>after-footer.ejs</code>里面</li>
-<li>发现dos的报错信息还是有点用的</li>
-<li>令我困惑的是填yml文件中的url项，后来发现用来填绑定的域名，域名要自己出钱买</li>
-<li>一开始遇到<code>Cannot read property 'on' of undefined</code>不会调，后来发现是yml文件填得不好，可能是不符合语法，导致错误。再比如yml文件中代码没有在适当的地方空空格。</li>
-<li>如果在网上打开js文件发现中文变乱码，在谷歌浏览器打开查看就可以了，这是最不消耗脑力的办法</li>
-</ul>
+<hr>
+<p>在JQuery中，$(selector)[0]中的[0]会将JQuery对象转化为JavaScript对象。所以onclick有两种写法：</p>
+<pre><code>$(&quot;#modal-foot button.cancel&quot;)[0].onclick = function() {
+	// ```
+}; 
+///////分割线
+$(&quot;#modal-foot button.cancel&quot;).click(function() {
+	$(&quot;.cover&quot;).hide();
+}); 
+// $(selector).click(function() {});
+</code></pre>
+<p>另外还有一个例子可以看一下：</p>
+<pre><code>$(&quot;.cover&quot;).show();
+$(&quot;.cover&quot;).css(&quot;display&quot;,&quot;block&quot;);
+$(&quot;.cover&quot;)[0].style.display = &quot;block&quot;;
+</code></pre>
+<h3 id="优化命名"><a class="header-anchor" href="#优化命名"></a>优化命名</h3>
+<p><strong>函数名</strong>中包含&quot;all&quot;还是挺有用的，但是<strong>函数中的变量名</strong>包含&quot;all&quot;就没什么作用，如果是数组用&quot;arr&quot;命名就可以了。</p>
+<p>比如：</p>
+<pre><code>// 函数名中包含all，比较容易与其他类似的函数区分
+function queryAllCates() {
+    return JSON.parse(localStorage.cate);
+}
+</code></pre>
+<p>再比如：</p>
+<pre><code>function queryCateById(id) {
+    var allCates = JSON.parse(localStorage.cate);
+    for (var i = 0; i &lt; allCates.length; i++) {
+        if (allCates[i].id == id) {
+            return allCates[i];
+        }
+    }
+}
+// 函数内变量名带all好像也没什么用。allCates还不如直接叫cates或者叫catesArr
+</code></pre>
+<p>但是：</p>
+<p>如果用addNewTask作为函数名，肯定不够用addTask作为函数名好。</p>
 
 		</div>
       
   
      <!-- 版权署名授权 -->
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/02/22/my-hexo-theme/">yelee主题改bug总结</a></p>
+        <p><span>本文标题:</span><a href="/2017/02/17/todo-app/">ToDo小应用完工总结</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
-        <p style="color: #696969;"><span>发布时间:</span>2017-02-22, 23:06:34</p>
-        <!-- <p><span>最后更新:</span>2017-03-05, 09:13:53</p> -->
+        <p style="color: #696969;"><span>发布时间:</span>2017-02-17, 22:44:31</p>
+        <!-- <p><span>最后更新:</span>2017-03-17, 22:59:40</p> -->
         <p>
-            <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="yelee主题改bug总结" href="/2017/02/22/my-hexo-theme/">https://alexzhong22c.github.io/2017/02/22/my-hexo-theme/</a>
-            <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://alexzhong22c.github.io/2017/02/22/my-hexo-theme/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="ToDo小应用完工总结" href="/2017/02/17/todo-app/">https://alexzhong22c.github.io/2017/02/17/todo-app/</a>
+            <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://alexzhong22c.github.io/2017/02/17/todo-app/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
         </p>
         <p style="color: #696969;">
             <span>许可协议:</span><i class="fa fa-creative-commons"></i><a id="copyright_license" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target = "_blank" class="hint  hint--bottom" data-hint="中国大陆 (CC BY-NC-SA 3.0 CN)">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
@@ -685,15 +761,15 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2017/02/27/icon-usage/">
-                    桌面端和移动端图标的引入
+                <a href="/2017/02/22/my-hexo-blog/">
+                    搭建hexo博客个人总结
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2017/02/22/my-hexo-blog/">
-                    搭建hexo博客个人总结
+                <a href="/2017/02/11/equality-operators/">
+                    相等操作符回顾
                 </a>
             </div>
         
@@ -706,7 +782,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#左右搜索栏"><span class="toc-number">1.</span> <span class="toc-text">左右搜索栏</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#找不到content-json"><span class="toc-number">1.1.</span> <span class="toc-text">找不到content.json</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cb-search-json-404-not-found"><span class="toc-number">1.2.</span> <span class="toc-text">cb-search.json 404 (Not Found)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#百度分享因为混合内容报错"><span class="toc-number">1.3.</span> <span class="toc-text">百度分享因为混合内容报错</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#百度站长要重新配置"><span class="toc-number">1.4.</span> <span class="toc-text">百度站长要重新配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#温馨提示"><span class="toc-number">2.</span> <span class="toc-text">温馨提示</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#请不要fork我的主题"><span class="toc-number">3.</span> <span class="toc-text">请不要Fork我的主题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#我没有完善的内容"><span class="toc-number">3.1.</span> <span class="toc-text">我没有完善的内容</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#整个过程的心得"><span class="toc-number">4.</span> <span class="toc-text">整个过程的心得</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#知识收获"><span class="toc-number">1.</span> <span class="toc-text">知识收获</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#在javascript-中创建元素-用createelement-还是innerhtml好一点？"><span class="toc-number">1.1.</span> <span class="toc-text">在JavaScript 中创建元素，用createElement()还是innerHTML好一点？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#html属性用双引号-使用小写英文"><span class="toc-number">1.2.</span> <span class="toc-text">html属性用双引号、使用小写英文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#jquery"><span class="toc-number">1.3.</span> <span class="toc-text">JQuery</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#jquery中-this-和-this-有区别："><span class="toc-number">1.3.1.</span> <span class="toc-text">JQuery中 this 和 $(“this”)有区别：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#caller的经典用法"><span class="toc-number">1.4.</span> <span class="toc-text">caller的经典用法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#匠心勿失"><span class="toc-number">2.</span> <span class="toc-text">匠心勿失</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#html-css"><span class="toc-number">2.1.</span> <span class="toc-text">HTML+CSS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#javascript"><span class="toc-number">2.2.</span> <span class="toc-text">JavaScript</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#改进代码"><span class="toc-number">2.3.</span> <span class="toc-text">改进代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#容易犯的错误"><span class="toc-number">2.4.</span> <span class="toc-text">容易犯的错误</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#优化命名"><span class="toc-number">2.5.</span> <span class="toc-text">优化命名</span></a></li></ol></li></ol>
         
     </div>
     <style>
@@ -741,7 +817,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"yelee主题改bug总结　| Web前端 | Alex Zhong　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"ToDo小应用完工总结　| Web前端 | Alex Zhong　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -757,7 +833,7 @@
     
       <div class="duoshuo" id="comments">
     <div id="comment-box" ></div>
-    <div class="ds-thread" id="ds-thread" data-thread-key="2017/02/22/my-hexo-theme/" data-title="yelee主题改bug总结" data-url="https://alexzhong22c.github.io/2017/02/22/my-hexo-theme/"></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2017/02/17/todo-app/" data-title="ToDo小应用完工总结" data-url="https://alexzhong22c.github.io/2017/02/17/todo-app/"></div>
     <script>
         var duoshuoQuery = {short_name:"null"};
         var loadComment = function(){
@@ -770,7 +846,7 @@
         
             // Add comment count
             $(function(){
-                var jsonUrl = "https://api.duoshuo.com/threads/counts.jsonp?short_name=null&threads=2017/02/22/my-hexo-theme/&callback=?";
+                var jsonUrl = "https://api.duoshuo.com/threads/counts.jsonp?short_name=null&threads=2017/02/17/todo-app/&callback=?";
                 $.getJSON(jsonUrl, function(result){
                     $.each(result.response, function(i, field){
                         var value = field.comments;
@@ -824,7 +900,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/02/27/icon-usage/" title="上一篇: 桌面端和移动端图标的引入">
+            <a href="/2017/02/22/my-hexo-blog/" title="上一篇: 搭建hexo博客个人总结">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -832,7 +908,7 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2017/02/22/my-hexo-blog/" title="下一篇: 搭建hexo博客个人总结">
+            <a href="/2017/02/11/equality-operators/" title="下一篇: 相等操作符回顾">
                 <i class="fa fa-angle-right"></i>
             </a>
         
@@ -861,7 +937,7 @@
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					
-						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,626</span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,565</span>
 					
 				</div>
             </div>

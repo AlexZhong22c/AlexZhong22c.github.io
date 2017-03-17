@@ -11,23 +11,18 @@ tags: [App,caller,优化]
 
 ## 知识收获
 
-### 在JavaScript 中创建元素，用createElement()还是innerHTML好一点？
+### 在JavaScript 中创建HTML元素，用createElement()还是innerHTML好一点？
 
-- 最叼的好像是 使用[模板技术](https://github.com/xwcoder/template),其实我的静态博客用的就是这种。
+- 最叼的好像是 使用[模板技术](https://github.com/xwcoder/template)，其实我的静态博客用的就是这种。
 
-- 在用js代码的循环创建元素的时候就顺便一个个绑定好事件好像比较简单，这样就不用给每个元素增加属性了。
-
-  那么，用createElement来创建元素和用innerHTML，不知道哪个比较好用呢??
-
-  而如果用innerHTML来创建元素的话肯定不能在形成元素的循环里面给元素绑定事件了，这样太硬编码了。
+- 在用js代码的循环创建元素的时候就顺便一个个绑定好事件这是一种比较简单的思路，这样就不用给每个元素增加id或者class了。这时候用createElement来创建元素就比较方便绑定事件，而如果用innerHTML来创建元素的话肯定不能在形成元素的循环里面给元素绑定事件了，这样太硬编码了。
 
 - > 《高性能JavaScript》：
-  >
   > - 如果在对性能有苛刻要求更新一大段的HTML，innerHTML在大多数浏览器中执行更快。在旧版本浏览器中innerHTML方法更快，在基于Webkit内核却相反。
   > - 对于大多数日常操作而言，差异不大，根据代码可读性、可维护性、团队习惯、代码风格来决定采用哪种方法。
   > - 某答主说：**他一般大段就使用innerHTML了，而用dom创建单个元素或少量元素。 **
   > - 或者DOM结构嵌套的级数比较多的就用innerHTML
-  > - 如果要使用createElement()，推荐一下createDocumentFragment()
+  > - 如果要使用createElement()，强烈推荐一下createDocumentFragment()
   >   - [documentFragment](https://developer.mozilla.org/zh-CN/docs/Web/API/DocumentFragment) 被所有主流浏览器支持，甚至是IE 6。所以，没有理由不用。
 
 ### html属性用双引号、使用小写英文
@@ -40,9 +35,7 @@ tags: [App,caller,优化]
 
 - 另外，一般大家惯用的做法是 HTML 用双引号，JS 用单引号的原因是，这样在 JS 中拼 HTML 片段不用转义：
 
-  - ```
-    elem.innerHTML = '<div class="post"></div>';
-    ```
+  - `elem.innerHTML = '<div class="post"></div>';`
 
   - 当然你要反过来也可以，但不是主流做法。
 
