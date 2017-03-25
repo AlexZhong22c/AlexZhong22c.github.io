@@ -84,7 +84,7 @@
 <meta property="og:url" content="https://alexzhong22c.github.io/2017/03/05/js-event2/index.html">
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
 <meta property="og:description" content="此文内容深度其实不大，个人还需要进一步学习。">
-<meta property="og:updated_time" content="2017-03-17T16:29:03.961Z">
+<meta property="og:updated_time" content="2017-03-17T17:47:34.200Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="事件进阶话题">
 <meta name="twitter:description" content="此文内容深度其实不大，个人还需要进一步学习。">
@@ -557,11 +557,11 @@
 <a id="more"></a>
 <h2 id="常用事件和技巧"><a class="header-anchor" href="#常用事件和技巧"></a>常用事件和技巧</h2>
 <p>用户的操作有很多种，所以有很多事件。为了开发方便，浏览器又提供了一些事件，所以有很多很多的事件。这里只介绍几种常用的事件和使用技巧。</p>
-<h4 id="load"><a class="header-anchor" href="#load"></a>load</h4>
+<h3 id="load"><a class="header-anchor" href="#load"></a>load</h3>
 <p><code>load</code> 事件在资源加载完成时触发。这个资源可以是图片、CSS 文件、JS 文件、视频、document 和 window 等等。</p>
 <p>比较常用的就是监听 window 的 <code>load</code> 事件，当页面内所有资源全部加载完成之后就会触发。比如用 JS 对图片以及其他资源处理，我们在 <code>load</code> 事件中触发，可以保证 JS 不会在资源未加载完成就开始处理资源导致报错。</p>
 <p>同样的，也可以监听图片等其他资源加载情况。</p>
-<h4 id="beforeunload"><a class="header-anchor" href="#beforeunload"></a>beforeunload</h4>
+<h3 id="beforeunload"><a class="header-anchor" href="#beforeunload"></a>beforeunload</h3>
 <p>当浏览者在页面上的输入框输入一些内容时，未保存、误操作关掉网页可能会导致输入信息丢失。</p>
 <p>当浏览者输入信息但未保存时关掉网页，我们就可以开始监听这个事件，例如：</p>
 <pre><code>window.addEventListener(&quot;beforeunload&quot;, function( event ) {
@@ -569,18 +569,17 @@
 });
 </code></pre>
 <p>这时候试图关闭网页的时候，会弹窗阻止操作，点击确认之后才会关闭。当然，如果没有必要，就不要监听，不要以为使用它可以为你留住浏览者。</p>
-<h4 id="resize"><a class="header-anchor" href="#resize"></a>resize</h4>
+<h3 id="resize"><a class="header-anchor" href="#resize"></a>resize</h3>
 <p>当节点尺寸发生变化时，触发这个事件。通常用在 window 上，这样可以监听浏览器窗口的变化。通常用在复杂布局和响应式上。</p>
 <p>常见的视差滚动效果网站以及同类比较复杂的布局网站，往往使用 JavaScript 来计算尺寸、位置。如果用户调整浏览器大小，尺寸、位置不随着改变则会出现错位情况。在 window 上监听该事件，触发时调用计算尺寸、位置的函数，可以根据浏览器的大小来重新计算。</p>
 <p>但需要注意一点，当浏览器发生任意变化都会触发 <code>resize</code> 事件，哪怕是缩小 1px 的浏览器宽度，这样调整浏览器时会触发大量的 <code>resize</code> 事件，你的回调函数就会被大量的执行，导致变卡、崩溃等。</p>
 <p>你可以使用函数 throttle 或者 debounce 技巧来进行优化，throttle 方法大体思路就是在某一段时间内无论多次调用，只执行一次函数，到达时间就执行；debounce 方法大体思路就是在某一段时间内等待是否还会重复调用，如果不会再调用，就执行函数，如果还有重复调用，则不执行继续等待。关于它们更详细的信息，我后面会介绍一下发表在我的博客上，这里不再赘述。</p>
-<h4 id="error"><a class="header-anchor" href="#error"></a>error</h4>
+<h3 id="error"><a class="header-anchor" href="#error"></a>error</h3>
 <p>当我们加载资源失败或者加载成功但是只加载一部分而无法使用时，就会触发 <code>error</code> 事件，我们可以通过监听该事件来提示一个友好的报错或者进行其他处理。比如 JS 资源加载失败，则提示尝试刷新；图片资源加载失败，在图片下面提示图片加载失败等。该事件不会冒泡。因为子节点加载失败，并不意味着父节点加载失败，所以你的处理函数必须精确绑定到目标节点。</p>
 <p>需要注意的是，对于该事件，你可以使用 <code>addEventListener</code> 等进行监听，但是有时候会出现失效情况（看<a href="http://jsbin.com/esimAWA/2/quiet" target="_blank" rel="external">这个例子</a>），这是因为 <code>error</code> 事件都触发过了，你的 JS 监听处理代码还没有加载进来执行。为了避免这种情况，用内联法更好一些：</p>
 <pre><code>&lt;img src=&quot;not-found.jpg&quot; onerror=&quot;doSomething&quot; /&gt;
 </code></pre>
-<p>如果还有其他常用事件，欢迎留言补充。
-<br></p>
+<p>如果还有其他常用事件，欢迎留言补充。</p>
 <h2 id="事件回调函数的作用域问题"><a class="header-anchor" href="#事件回调函数的作用域问题"></a>事件回调函数的作用域问题</h2>
 <p>与事件绑定在一起的回调函数作用域会有问题，我们来看个例子：</p>
 <pre><code class="language-html">&lt;!DOCTYPE html&gt;
@@ -663,7 +662,7 @@ element.addEventListener('click', function() {
         <p><span>本文标题:</span><a href="/2017/03/05/js-event2/">事件进阶话题</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2017-03-05, 23:51:06</p>
-        <!-- <p><span>最后更新:</span>2017-03-18, 00:29:03</p> -->
+        <!-- <p><span>最后更新:</span>2017-03-18, 01:47:34</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="事件进阶话题" href="/2017/03/05/js-event2/">https://alexzhong22c.github.io/2017/03/05/js-event2/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://alexzhong22c.github.io/2017/03/05/js-event2/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -699,7 +698,7 @@ element.addEventListener('click', function() {
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#常用事件和技巧"><span class="toc-number">1.</span> <span class="toc-text">常用事件和技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#load"><span class="toc-number">1.0.1.</span> <span class="toc-text">load</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#beforeunload"><span class="toc-number">1.0.2.</span> <span class="toc-text">beforeunload</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#resize"><span class="toc-number">1.0.3.</span> <span class="toc-text">resize</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#error"><span class="toc-number">1.0.4.</span> <span class="toc-text">error</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件回调函数的作用域问题"><span class="toc-number">2.</span> <span class="toc-text">事件回调函数的作用域问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用匿名函数-办法一"><span class="toc-number">2.1.</span> <span class="toc-text">使用匿名函数——办法一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用-bind-方法"><span class="toc-number">2.2.</span> <span class="toc-text">使用 bind 方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ie-浏览器的差异和兼容性问题"><span class="toc-number">3.</span> <span class="toc-text">IE 浏览器的差异和兼容性问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ie-下绑定事件"><span class="toc-number">3.1.</span> <span class="toc-text">IE 下绑定事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ie-中-event-对象需要注意的地方"><span class="toc-number">3.2.</span> <span class="toc-text">IE 中 Event 对象需要注意的地方</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#常用事件和技巧"><span class="toc-number">1.</span> <span class="toc-text">常用事件和技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#load"><span class="toc-number">1.1.</span> <span class="toc-text">load</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#beforeunload"><span class="toc-number">1.2.</span> <span class="toc-text">beforeunload</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#resize"><span class="toc-number">1.3.</span> <span class="toc-text">resize</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#error"><span class="toc-number">1.4.</span> <span class="toc-text">error</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件回调函数的作用域问题"><span class="toc-number">2.</span> <span class="toc-text">事件回调函数的作用域问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用匿名函数-办法一"><span class="toc-number">2.1.</span> <span class="toc-text">使用匿名函数——办法一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用-bind-方法"><span class="toc-number">2.2.</span> <span class="toc-text">使用 bind 方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ie-浏览器的差异和兼容性问题"><span class="toc-number">3.</span> <span class="toc-text">IE 浏览器的差异和兼容性问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ie-下绑定事件"><span class="toc-number">3.1.</span> <span class="toc-text">IE 下绑定事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ie-中-event-对象需要注意的地方"><span class="toc-number">3.2.</span> <span class="toc-text">IE 中 Event 对象需要注意的地方</span></a></li></ol></li></ol>
         
     </div>
     <style>

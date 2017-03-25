@@ -85,4 +85,4 @@ tags: [eslint,配置,插件]
 }
 ```
 
-
+另外，[sublime 集成 ESLint](http://blog.csdn.net/lj745280746/article/details/49658249) 也值得一读
