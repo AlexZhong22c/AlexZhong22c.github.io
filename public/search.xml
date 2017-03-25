@@ -71,6 +71,7 @@
   }
 }
 </code></pre>
+<p>另外，<a href="http://blog.csdn.net/lj745280746/article/details/49658249" target="_blank" rel="external">sublime 集成 ESLint</a> 也值得一读</p>
 ]]></content>
       
         <categories>
@@ -206,9 +207,9 @@ element.addEventListener('click', function() {
         
         <tags>
             
-            <tag> 事件 </tag>
-            
             <tag> 进阶 </tag>
+            
+            <tag> 事件 </tag>
             
         </tags>
         
@@ -907,9 +908,18 @@ npm install hexo、npm install、npm install hexo-deployer-git
     <entry>
       <title><![CDATA[ToDo小应用完工总结]]></title>
       <url>https://alexzhong22c.github.io/2017/02/17/todo-app/</url>
-      <content type="html"><![CDATA[<p>完成了百度IFE2015的 <a href="https://github.com/baidu-ife/ife/tree/master/2015_spring/task/task0003" target="_blank" rel="external">task3</a> ，实现了一个功能颇为丰富的ToDo小应用。</p>
+      <content type="html"><![CDATA[<p>完成了百度IFE2015的 <a href="https://github.com/baidu-ife/ife/tree/master/2015_spring/task/task0003" target="_blank" rel="external">task3</a> ，实现了一个 ToDo 的单页应用，功能颇为强大。</p>
+<p>使用 localStorage 存储数据，JSON 模拟数据表，实现了分类和待办状态的改变，具有良好的交互体验。</p>
+<p>repository地址：<a href="https://github.com/AlexZhong22c/ToDoApp-IFE2015" target="_blank" rel="external">https://github.com/AlexZhong22c/ToDoApp-IFE2015</a></p>
+<p>在线预览地址：<a href="https://alexzhong22c.github.io/ToDoApp-IFE2015/">https://alexzhong22c.github.io/ToDoApp-IFE2015/</a></p>
 <a id="more"></a>
 <h2 id="知识收获"><a class="header-anchor" href="#知识收获"></a>知识收获</h2>
+<h3 id="自适应高度布局"><a class="header-anchor" href="#自适应高度布局"></a>自适应高度布局</h3>
+<p>分为上中下三栏，中间的一栏自适应浏览器高度。这是参考了横向的三栏布局来写的。</p>
+<ul>
+<li>中间一栏要在外面包一层div，如果外面本来就有一层div这种布局就非常合适。上栏和下栏用绝对定位即可。</li>
+<li>外面的这层div使用大面积的padding</li>
+</ul>
 <h3 id="在javascript-中创建html元素-用createelement-还是innerhtml好一点？"><a class="header-anchor" href="#在javascript-中创建html元素-用createelement-还是innerhtml好一点？"></a>在JavaScript 中创建HTML元素，用createElement()还是innerHTML好一点？</h3>
 <ul>
 <li>最叼的好像是 使用<a href="https://github.com/xwcoder/template" target="_blank" rel="external">模板技术</a>，其实我的静态博客用的就是这种。</li>
@@ -937,19 +947,31 @@ npm install hexo、npm install、npm install hexo-deployer-git
 </ul>
 </li>
 <li><strong>而JS中字符串用单引号，其实可能是HTML属性用双引号的结果。</strong></li>
-<li>另外，一般大家惯用的做法是 HTML 用双引号，JS 用单引号的原因是，这样在 JS 中拼 HTML 片段不用转义：</li>
+<li>另外，一般大家惯用的做法是 HTML 用双引号，JS 用单引号的原因是，这样在 JS 中拼 HTML 片段不用转义：
+<ul>
 <li><code>elem.innerHTML = '&lt;div class=&quot;post&quot;&gt;&lt;/div&gt;';</code></li>
 <li>当然你要反过来也可以，但不是主流做法。</li>
+</ul>
+</li>
 <li>HTML属性不仅仅只有URL，另外引号出现在URL也是合法的。</li>
-<li>根据W3Cschool的说法，<strong>要求属性和属性值使用小写，属性值应该始终被包括在引号内。</strong></li>
+<li>根据W3Cschool的说法，<strong>要求属性和属性值使用小写，属性值应该始终被包括在引号内。</strong>
+<ul>
 <li>用innerHTML来创建taskid=1和cateid=0这种属性好像没有用啊，因为浏览器自动解析成：taskid=&quot;1&quot;和cateid=“0”</li>
 </ul>
+</li>
+</ul>
+<h3 id="ul里面能放除了li的其他标签吗？"><a class="header-anchor" href="#ul里面能放除了li的其他标签吗？"></a>ul里面能放除了li的其他标签吗？</h3>
+<p>不能，<code>&lt;ul&gt;</code>里面只能放<code>&lt;li&gt;</code>。但是<code>&lt;li&gt;</code>里面可以放<code>&lt;hx&gt;</code>,<code>&lt;p&gt;</code>等标签。</p>
+<p>ul里面放其他标签，不光不符合语义，在IE7- 里面也会有问题：</p>
+<p>如果<code>&lt;other&gt;</code>标签前面有<code>&lt;li&gt;</code>标签，浏览器会认为<code>&lt;other&gt;</code>为<code>&lt;li&gt;</code>的子节点。</p>
+<h3 id="box-shadow"><a class="header-anchor" href="#box-shadow"></a>box-shadow</h3>
+<p>是CSS3里面的属性。只要shadow不占太多px的地方，用一下还是非常好的</p>
 <h3 id="jquery"><a class="header-anchor" href="#jquery"></a>JQuery</h3>
 <ul>
-<li>JQuery的not()方法非常好用，each()也非常好</li>
+<li>JQuery的<code>not()</code>方法非常好用，<code>each()</code>也非常好</li>
 </ul>
 <ul>
-<li>在绑定事件 函数中的JQuery选择器在函数触发后才会去选择对象</li>
+<li>在绑定事件 函数中的 JQuery选择器 在函数触发后才会去选择对象</li>
 <li>像这个App中分类列表的单击交互，如果想要只有被单击选择的HTML元素有 高亮，那么在绑定单击事件来响应单击选择的时候，记得先清除所有同类HTML元素的 高亮</li>
 </ul>
 <h4 id="jquery中-this-和-this-有区别："><a class="header-anchor" href="#jquery中-this-和-this-有区别："></a>JQuery中 this 和 $(“this”)有区别：</h4>
@@ -974,8 +996,18 @@ npm install hexo、npm install、npm install hexo-deployer-git
 <h3 id="html-css"><a class="header-anchor" href="#html-css"></a>HTML+CSS</h3>
 <ul>
 <li><a href="http://blog.bingo929.com/CSS-coding-semantic-naming.html" target="_blank" rel="external">CSS命名惯例语义化</a></li>
-<li>虽然DOM结构是由js代码渲染的，在HTML留下一些<strong>模板</strong>方便参考和编写代码</li>
+<li>把需要的li全都设成了<code>cursor:pointer</code></li>
+<li>虽然DOM结构是由js代码渲染的，在HTML留下一些<strong>template</strong>方便参考和编写代码</li>
+<li>将颜色抽象成单独的class，方便更换颜色：</li>
 </ul>
+<pre><code>.white-bg {background: #FFFFCC;}
+.black-bg {background: #3F3A39;}
+.green-bg {background: #CFE8CC;}
+.blue-bg {background: #5D6684;}
+.grey-bg {background: #E9E9E9;}
+.lt-blue-bg {background: #DADADA;}
+</code></pre>
+<p>我认为，只有占<strong>大块区域</strong>的元素才用色彩的class来设置<strong>背景颜色</strong>。因为如果要上色的元素很多的话，或者元素会短时间内存在再消失的话，一个一个加class就很麻烦。</p>
 <h3 id="javascript"><a class="header-anchor" href="#javascript"></a>JavaScript</h3>
 <ul>
 <li>优化了 JavaScript 函数的命名，使得风格统一，语义明确。
@@ -1015,7 +1047,7 @@ npm install hexo、npm install、npm install hexo-deployer-git
 </code></pre>
 <h3 id="容易犯的错误"><a class="header-anchor" href="#容易犯的错误"></a>容易犯的错误</h3>
 <ul>
-<li>JQuery中使用id选择器返回的也是<code>元素数组</code>。</li>
+<li>JQuery中使用id选择器返回的也是<strong>元素数组</strong>。</li>
 </ul>
 <pre><code>console.log($(&quot;#modal-foot&quot;))// 元素数组
 console.log($(&quot;#modal-foot&quot;)[0])// 这才是想要的元素
@@ -1060,6 +1092,8 @@ function queryAllCates() {
 </code></pre>
 <p>但是：</p>
 <p>如果用addNewTask作为函数名，肯定不够用addTask作为函数名好。</p>
+<h2 id="发现bug-找时间再fix"><a class="header-anchor" href="#发现bug-找时间再fix"></a>发现bug，找时间再fix</h2>
+<p>有一个bug就是修改task内容的时候，仍能按下其他任务</p>
 ]]></content>
       
         <categories>
@@ -1480,6 +1514,141 @@ fixEvent.stopPropagation = function () {
             <tag> 事件 </tag>
             
             <tag> 基础 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[内容分类--谈谈H5标签]]></title>
+      <url>https://alexzhong22c.github.io/2017/01/25/h5-new-ele/</url>
+      <content type="html"><![CDATA[<p>对内容作了调整，方便自己理解，详情请参考MDN：</p>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/HTML/Content_categories" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/Guide/HTML/Content_categories</a></p>
+<p>每一个HTML元素都必须遵循定义了它可以包含哪一类内容的规则。</p>
+<p>以下是三种类型的内容分类：</p>
+<a id="more"></a>
+<ul>
+<li>主内容类，描述了很多元素共享的内容规范；</li>
+<li>表单相关的内容类，描述了表单相关元素共有的内容规范；</li>
+<li>特殊内容类，描述了仅仅在某些特殊元素上才需要遵守的内容规范，通常这些元素都有特殊的上下文关系。</li>
+</ul>
+<p><img src="http://olqa2s510.bkt.clouddn.com/Content_categories_venn.png" alt="Content_categories_venn"></p>
+<h2 id="元数据内容模型"><a class="header-anchor" href="#元数据内容模型"></a>元数据内容模型</h2>
+<p>此类元素 修改文档其余部分的陈述或者行为，建立与其他文档的链接，或者传达其他外带信息。</p>
+<p>属于这一类的元素有：link 、meta、noscript、script、style、title等等</p>
+<h2 id="分节内容模型"><a class="header-anchor" href="#分节内容模型"></a>分节内容模型</h2>
+<p>在当前的大纲中创建一个<a href="https://developer.mozilla.org/en-US/docs/Sections_and_Outlines_of_an_HTML5_document" target="_blank" rel="external">分节</a>，此分节将定义<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/header" target="_blank" rel="external"><code>header</code></a>元素、<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/footer" target="_blank" rel="external"><code>footer</code></a> 元素和标题元素（<a href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/HTML/Content_categories#Heading_content" target="_blank" rel="external">heading content</a>）的范围。</p>
+<h3 id="article元素"><a class="header-anchor" href="#article元素"></a>article元素</h3>
+<p><code>&lt;article&gt;</code>元素表示文档、页面、应用或网站中的<strong>独立结构</strong>，其意在成为<strong>可独立分配的或可复用的结构</strong>，如在发布中，它可能是论坛帖子、杂志或新闻文章、博客、用户提交的评论、交互式组件，或者其他独立的内容项目。</p>
+<p>用时要特别注意内容的独立性：一般独立完整的内容才使用article元素，如果只是一段内容的话应该是用section元素。</p>
+<blockquote>
+<p>使用说明：</p>
+<ul>
+<li>当<code>&lt;article&gt;</code>元素嵌套使用时，则该元素代表与外层元素有关的文章。例如，代表博客评论的<code>&lt;article&gt;</code>元素可嵌套在代表博客文章的<code>&lt;article&gt;</code>元素中。</li>
+<li><code>&lt;article&gt;</code>元素的作者信息可通过<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/address" target="_blank" rel="external">``</a>元素提供，但是不适用于嵌套的<code>&lt;article&gt;</code>元素。</li>
+<li><code>&lt;article&gt;</code>元素的发布日期和时间可通过<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/time" target="_blank" rel="external">``</a>元素的<code>pubdate</code>属性表示。</li>
+</ul>
+</blockquote>
+<h3 id="section元素"><a class="header-anchor" href="#section元素"></a>section元素</h3>
+<ul>
+<li>用于定义文章中的章节(通常应该有标题和段落内容)</li>
+</ul>
+<ul>
+<li>用来定义文档中特定的内容区块，可视为一个区域分组元素。</li>
+</ul>
+<ul>
+<li>用一句话来概括它的作用就是：给内容分段，给页面分区</li>
+</ul>
+<ul>
+<li>注意它与div的区别，div强调在形式上的独立性，section强调的是内容上的独立性，注意它的语义。</li>
+</ul>
+<blockquote>
+<p>article和section对比：</p>
+<p>1. 语义不同：</p>
+<ul>
+<li>article元素是独立完整的内容，section元素页面内容分块</li>
+</ul>
+<p>2. 相同点：</p>
+<p>本质上都是带有语义的div块元素</p>
+<p>分别可以看做<code>&lt;div id=&quot;section&quot;&gt;</code>和<code>&lt;div id=&quot;article&quot;&gt;</code></p>
+</blockquote>
+<h3 id="aside元素"><a class="header-anchor" href="#aside元素"></a>aside元素</h3>
+<ul>
+<li>aside元素通常用来设置侧边栏</li>
+<li>用于定义article元素之外的内容，前提是这些内容与article元素内的内容相关。</li>
+<li>同时也可嵌套在article元素内部使用，作为主要内容的附属信息。比如与内容有关的参考资料，名词解释等。</li>
+</ul>
+<h3 id="nav元素"><a class="header-anchor" href="#nav元素"></a>nav元素</h3>
+<ul>
+<li>用来定义目录、导航栏</li>
+<li>并非所有的超链接都放在nav元素中，通常只把一个文档中的主导航栏放在nav中。</li>
+</ul>
+<h2 id="标题内容模型"><a class="header-anchor" href="#标题内容模型"></a>标题内容模型</h2>
+<p>定义了分节的标题，而这个分节可能由一个明确的分节内容元素直接标记，也可能由标题本身隐式地定义。</p>
+<p>属于此分类的元素有：h1到h6和 <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/hgroup" target="_blank" rel="external"><code>hground</code></a></p>
+<blockquote>
+<p>注意：尽管<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/header" target="_blank" rel="external"><code>header</code></a>可能包含一些标题内容，但<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/header" target="_blank" rel="external"><code>header</code></a>并不是标题内容本身。</p>
+</blockquote>
+<h2 id="表单相关内容模型"><a class="header-anchor" href="#表单相关内容模型"></a>表单相关内容模型</h2>
+<p>拥有表单父节点（exposed by a <strong>form</strong> attribute）的元素。</p>
+<p>一个表单父节点可以是form元素，也可以是其id在表单属性中被指定了的元素。</p>
+<h2 id="其他比较常用的元素"><a class="header-anchor" href="#其他比较常用的元素"></a>其他比较常用的元素</h2>
+<h3 id="header元素"><a class="header-anchor" href="#header元素"></a>header元素</h3>
+<p><code>&lt;header&gt;</code>元素表示一组引导性的帮助，可能包含标题元素，也可以包含其他元素，像logo、分节头部、搜索表单等。</p>
+<h3 id="footer元素"><a class="header-anchor" href="#footer元素"></a>footer元素</h3>
+<p><strong>HTML <code>&lt;footer&gt;</code>元素</strong>表示最近一个<a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Sections_and_Outlines_of_an_HTML5_document#Defining_Sections_in_HTML5" target="_blank" rel="external">章节内容</a>或者<a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Sections_and_Outlines_of_an_HTML5_document#Sectioning_root" target="_blank" rel="external">根节点</a>（sectioning root ）元素的页脚。一个页脚通常包含该章节作者、版权数据或者与文档相关的链接等信息。</p>
+<blockquote>
+<ul>
+<li><code>&lt;footer&gt;</code>元素内的作者信息应包含在<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/address" target="_blank" rel="external">``</a> 元素中。</li>
+<li><code>&lt;footer&gt;</code>元素不是章节内容，因此在<a href="https://developer.mozilla.org/en-US/docs/Sections_and_Outlines_of_an_HTML5_document" target="_blank" rel="external">outline</a>中不能包含新的章节。</li>
+</ul>
+</blockquote>
+<hr>
+<h3 id="time元素"><a class="header-anchor" href="#time元素"></a>time元素</h3>
+<ul>
+<li>time元素代表24小时中的某个时刻或某个日期，表示时刻允许出现时差。它可以定义很多格式的日期和时间
+<ul>
+<li>datetime属性。代表中日期和时间之间要用“T”文字分隔，“T”表示时间，请注意倒数第二行，时间加上Z文字表示给机器编码时使用UTC标准时间，表示向机器编码另一地区时间，如果是编码本地时间，则不需要添加时差。</li>
+<li>pubdate属性是个可选标签。加上它搜索引擎/浏览器就可以很方便的识别出那个日期是文章、新闻的发表日期。</li>
+</ul>
+</li>
+</ul>
+<pre><code>&lt;time datetime=&quot;2015-10-22&quot;&gt;2015年10月12日&lt;/time&gt;
+&lt;time datetime=&quot;2015-10-22T20:00&quot;&gt;2015年10月12日晚上8点&lt;/time&gt;
+&lt;time datetime=&quot;2015-10-22T20:00Z&quot;&gt;2015年10月12日晚上8点&lt;/time&gt;
+&lt;time datetime=&quot;2015-10-22T20:00+09:00&quot;&gt;美国时间2015年10月12日8点&lt;/time&gt;
+</code></pre>
+<h3 id="address元素"><a class="header-anchor" href="#address元素"></a>address元素</h3>
+<ul>
+<li>通常用来说明作者的联系信息，例如名字、E-mail、电话、地址等。</li>
+<li>address元素中的内容会以斜体显示。</li>
+</ul>
+<hr>
+<h3 id="figure元素"><a class="header-anchor" href="#figure元素"></a>figure元素</h3>
+<p>figure元素是一个媒体组合元素，也就是对其他的媒体元素进行组合，比如：图像、图标等等。</p>
+<h3 id="figcaptio元素"><a class="header-anchor" href="#figcaptio元素"></a>figcaptio元素</h3>
+<p>用来给figure元素定义标题。</p>
+<h3 id="video元素"><a class="header-anchor" href="#video元素"></a>video元素</h3>
+<ul>
+<li>src属性：音频地址</li>
+<li>loop属性：是否重复播放</li>
+<li>autoplay属性：是否自动播放</li>
+<li>controls属性：添加控制</li>
+<li>poster属性：在视频加载完成前显示什么</li>
+<li>当然这个元素对于个别浏览器会有些隐性的小问题</li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> HTML </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> H5 </tag>
             
         </tags>
         
