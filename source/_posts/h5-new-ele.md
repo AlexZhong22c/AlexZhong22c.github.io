@@ -123,10 +123,57 @@ https://developer.mozilla.org/zh-CN/docs/Web/Guide/HTML/Content_categories
 
 ### address元素
 
+HTML的`<address>`元素可以让作者为它最近的`<article>`或者`<body>`祖先元素提供联系信息。在后一种情况下，它应用于整个文档。
+
 - 通常用来说明作者的联系信息，例如名字、E-mail、电话、地址等。
 - address元素中的内容会以斜体显示。
+- 通常，`<address>`元素可以放在当前section的`<footer>`元素中，如果存在的话。
+- 浏览器兼容很好，尽量使用
 
 ------
+
+### form元素
+
+水电费水电费水电费水电费s
+
+```
+<form>
+  <label for="GET-name">Name:</label>
+  <input id="GET-name" type="text" name="name">
+  <input type="submit" value="Save">
+</form>
+```
+
+### fieldset元素
+
+fieldset元素 通常用来对表单的相关元素分组
+
+```
+<form>
+  <fieldset>
+    <legend>Title</legend>
+    <input type="radio" name="radio" id="radio"> <label for="radio">Click me</label>
+  </fieldset>
+</form>
+```
+
+### legend元素
+
+HTML的`<legend>`元素（也称为HTML的域说明元素（or HMTL
+ Legend Field Element））代表一个用于表示它的父元素`<fieldset> `的内容的标题。
+
+### label属性
+
+HTML` <label>`元素表示用户界面中项目的标题。
+
+#### 使用 label  "for" 属性 bind input "id"
+
+```
+<label for="User">Click me</label>
+<input type="text" id="User" name="Name" />
+```
+
+---
 
 ### figure元素
 
@@ -144,3 +191,39 @@ figure元素是一个媒体组合元素，也就是对其他的媒体元素进�
 - controls属性：添加控制
 - poster属性：在视频加载完成前显示什么
 - 当然这个元素对于个别浏览器会有些隐性的小问题
+
+## 另外附上提高HTML代码性能的几点建议：
+
+### 语义化标记
+
+语义指意义相关的事物，HTML 可从页面内容中看出语义：元素和属性的命名一定程度上表达了内容的角色和功能。HTML5 引入了新的语义元素，如`<header>`，`<footer>`及`<nav>`。
+
+选择合适的元素来编写代码可保证代码的易读性：
+
+- 使用`<h1>`(`<h2>`,`<h3>`…)表示标题，`<ul>`或`<ol>`实现列表
+- 注意使用`<article> `标签之前应添加`<h1>`标签；
+- 选择合适的HTML5语义元素如`<header> `，`<footer>`,`<nav>`,`<aside>`;
+- 使用`<p>`描述Body 文本，HTML5 语义元素可以形成内容，反之不成立。
+- 使用`<label>`元素，输入类型，占位符及其他属性来强制验证。
+- 将文本和元素混合，并作为另一元素的子元素，会导致布局错误
+- img元素记得加alt属性
+
+#### i/b/em/strong元素
+
+`<em>` 用于对文本内容进行强调，强调位置的不同通常会改变句子的含义。如果仅仅在语态或语气上为了突出某一个文本，那应该使用`<i>`。
+
+但如果为了突出某一部分的重要性、严重性或紧急性，那应该使用 `<strong>`。根据 W3C 对 `<b>`元素的说明，`<b>`元素应当是在其他标签都不合适的情况下最后一个考虑使用的标签。
+
+相同的，在考虑使用 `<i>` 之前，也要想想是否用` <em>`、`<strong>`、`<dfn>` 或 `<mark>` 等元素更合适。
+
+### 布局
+
+要提高HTML代码的性能，要遵循HTML 代码以实现功能和为目标，而不是样式。
+
+- 使用`<p>`元素修饰文本，而不是布局；默认`<p>`是自动提供边缘，而且其他样式也是浏览器默认提供的。
+- 避免使用`<br>`分行，可以使用block元素或CSS显示属性来代替。
+- 避免使用`<hr>`来添加水平线，可使用CSS的border-bottom 来代替。
+- 不到关键时刻不要使用div标签。
+- 尽量少用Tables来布局。
+- 可以多使用Flex Box
+- 使用CSS 来调整边距等。
