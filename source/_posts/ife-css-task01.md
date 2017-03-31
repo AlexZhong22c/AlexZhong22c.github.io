@@ -2,12 +2,12 @@
 title: IFE2017-CSS-task01笔记
 date: 2017-03-27 17:31:43
 categories: [HTML]
-tags: [HTML,H5]
+tags: [HTML,H5,IFE]
 ---
 
 因为大家对html代码不是很重视，所以整理了一些容易忽略的问题并且对一些知识点作了梳理。
 
-我的这个github仓库的地址：https://github.com/AlexZhong22c/IFE-CSS-learning
+对应代码的github仓库的地址：https://github.com/AlexZhong22c/IFE-CSS-learning
 
 <!--more-->
 
@@ -33,6 +33,10 @@ tags: [HTML,H5]
 
 - name对于radio很重要；name对于checkbox很重要
 - 可以为radio, checkbox添加checked属性以及为option添加selected属性让其默认选中
+
+### H5加id的观点
+
+虽然语义化标签好用，但是当它需要加id的时候还是加吧：id="header"
 
 ------
 
