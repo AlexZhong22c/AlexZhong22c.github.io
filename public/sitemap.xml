@@ -2,16 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://alexzhong22c.github.io/2017/03/31/css-selectors-specificity/</loc>
+    <loc>https://alexzhong22c.github.io/2017/03/27/ife-css-task01/</loc>
     
-    <lastmod>2017-03-31T10:38:52.456Z</lastmod>
+    <lastmod>2017-03-31T16:14:13.970Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://alexzhong22c.github.io/2017/03/27/ife-css-task01/</loc>
+    <loc>https://alexzhong22c.github.io/2017/04/01/ife-css-task02/</loc>
     
-    <lastmod>2017-03-28T13:57:42.210Z</lastmod>
+    <lastmod>2017-03-31T16:13:49.104Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://alexzhong22c.github.io/2017/03/04/about-margin/</loc>
+    
+    <lastmod>2017-03-31T11:33:28.736Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://alexzhong22c.github.io/2017/03/31/css-selectors-specificity/</loc>
+    
+    <lastmod>2017-03-31T11:11:49.183Z</lastmod>
     
   </url>
   
@@ -89,13 +103,6 @@
     <loc>https://alexzhong22c.github.io/2017/03/04/float-n-absolute/</loc>
     
     <lastmod>2017-03-04T03:00:12.805Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://alexzhong22c.github.io/2017/03/04/about-margin/</loc>
-    
-    <lastmod>2017-03-04T01:33:50.404Z</lastmod>
     
   </url>
   
