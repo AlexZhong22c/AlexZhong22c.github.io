@@ -78,15 +78,16 @@
 
 
 
-<meta name="description" content="Alex Zhong&apos;s blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Web前端 | Alex Zhong">
-<meta property="og:url" content="https://alexzhong22c.github.io/tags/margin/index.html">
+<meta name="description" content="本文参考 那些年我们一起清除过的浮动 ，但是 一丝冰凉 的这篇文章有很多地方我都不认同，取其精华去其糟粕，所以本文并没有包含那些我所不认同的内容。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="闭合浮动和BFC">
+<meta property="og:url" content="https://alexzhong22c.github.io/2017/04/01/clearfix-n-bfc/index.html">
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
-<meta property="og:description" content="Alex Zhong&apos;s blog">
+<meta property="og:description" content="本文参考 那些年我们一起清除过的浮动 ，但是 一丝冰凉 的这篇文章有很多地方我都不认同，取其精华去其糟粕，所以本文并没有包含那些我所不认同的内容。">
+<meta property="og:updated_time" content="2017-04-01T14:27:55.921Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Web前端 | Alex Zhong">
-<meta name="twitter:description" content="Alex Zhong&apos;s blog">
+<meta name="twitter:title" content="闭合浮动和BFC">
+<meta name="twitter:description" content="本文参考 那些年我们一起清除过的浮动 ，但是 一丝冰凉 的这篇文章有很多地方我都不认同，取其精华去其糟粕，所以本文并没有包含那些我所不认同的内容。">
 
 
     <link rel="alternate" href="/atom.xml" title="Web前端 | Alex Zhong" type="application/atom+xml" data-no-instant>
@@ -120,7 +121,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Tag: margin | Web前端 | Alex Zhong</title>
+<title>闭合浮动和BFC | Web前端 | Alex Zhong</title>
 
 
 </script>
@@ -132,9 +133,9 @@
         fancybox: false,
         animate: false,
         isHome: false,
-        isPost: false,
+        isPost: true,
         isArchive: false,
-        isTag: true,
+        isTag: false,
         isCategory: false,
         fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
         scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
@@ -504,63 +505,324 @@
     <link class="menu-list" tags="标签" friends="友情链接" about="个人签名"/>
 </nav>
 
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-clearfix-n-bfc" class="article article-type-post" itemscope itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section id="id_archives" class="archives-wrap article">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2017/03/04/about-margin/" class="archive-article-date">
-      <time datetime="2017-03-04T01:30:08.000Z" itemprop="datePublished">03-04</time>
+    <div class="article-meta">
+      <a href="/2017/04/01/clearfix-n-bfc/" class="article-date">
+      <time datetime="2017-04-01T14:24:37.000Z" itemprop="datePublished">2017-04-01</time>
 </a>
 
 
 
 
-        </div>
-         
+	<br />
+	<p style="height:7px;"/>
+	<p style="height:20px;font-family:KaiTi,LiSu,'宋体',sans-serif;color:#DBDBDB;font-size:12px;">预计阅读7分钟</p>
+
+    </div>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/04/about-margin/">和margin有关的知识</a>
+
+   <!-- 文章主内容 -->
+  
+      <header id="id_header_post" class="article-header">
+        
+  
+    <h1 class="article-title-big" itemprop="name">
+      闭合浮动和BFC
     </h1>
   
 
-        <div class="article-info info-on-archive"> 
-          
+      </header>
+      
+      <div class="article-info article-info-post">
+        
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/HTML/">HTML</a>
+    <a class="article-category-link" href="/categories/CSS/">CSS</a>
     </div>
 
 
-          
+        
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bug/">bug</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/margin/">margin</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BFC/">BFC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/伪元素/">伪元素</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/清除浮动/">清除浮动</a></li></ul>
     </div>
 
 
-        </div>
         <div class="clearfix"></div>
-    </header>
-  </div>
+      </div>
+      
+    
+          <div id="article-content" class="article-entry" itemprop="articleBody">
+			  
+			<p>本文参考 <a href="http://www.iyunlu.com/view/css-xhtml/55.html" target="_blank" rel="external">那些年我们一起清除过的浮动</a> ，但是 一丝冰凉 的这篇文章有很多地方我都不认同，取其精华去其糟粕，所以本文并没有包含那些我所不认同的内容。</p>
+<a id="more"></a>
+<h2 id="区分-清除浮动-和-闭合浮动"><a class="header-anchor" href="#区分-清除浮动-和-闭合浮动"></a>区分 清除浮动 和 闭合浮动</h2>
+<ul>
+<li>清除浮动：清除对应的英文单词是 clear，对应CSS中的属性是 clear：left | right | both | none；</li>
+<li>闭合浮动：更确切的含义是使浮动元素闭合，从而减少浮动带来的影响。</li>
+</ul>
+<p>两者的区别 <a href="http://www.iyunlu.com/demo/enclosing-float-and-clearing-float/index.html" target="_blank" rel="external">请看Demo</a></p>
+<p>闭合浮动主要用来解决<strong>因为子元素浮动导致父元素高度塌陷</strong>的问题。</p>
+<h2 id="闭合浮动的一些老方法："><a class="header-anchor" href="#闭合浮动的一些老方法："></a>闭合浮动的一些老方法：</h2>
+<ol>
+<li>在子元素们的最后追加一个<code>style=&quot;clear:both&quot;</code>的空标签，这个不好</li>
+<li>在子元素们的最后追加一个br标签，使用br标签的<code>clear=&quot;all | left | right | none&quot;</code> 属性，因为一般不建议在HTML中使用br，这个也不好</li>
+<li>通过设置父元素overflow值设置为hidden；在IE6中还需要触发 hasLayout ，例如 zoom：1；因为最终还是有补不了的bug被大家弃用</li>
+<li>通过设置父元素overflow值设置为auto，同样也有bug</li>
+<li>父元素也设置浮动，缺点是<strong>使得与父元素相邻的元素的布局会受到影响</strong>，不可能一直浮动到body，不推荐使用</li>
+<li>父元素设置display:table，盒模型属性已经改变，由此造成的一系列问题，得不偿失，不推荐使用。文章最后还会再介绍到给伪元素设置display:table。</li>
+</ol>
+<h3 id="7-使用：after伪元素"><a class="header-anchor" href="#7-使用：after伪元素"></a>7. 使用<code>：after</code>伪元素</h3>
+<blockquote>
+<p>需要注意的是 :after是伪元素，不是伪类（某些CSS手册里面称之为“伪对象”，不太对）。</p>
+</blockquote>
+<p>由于IE6-7不支持:after，使用 zoom:1触发 hasLayout。</p>
+<ul>
+<li>优点：浏览器支持好，不容易出现怪问题（目前：大型网站都有使用，如：腾迅，网易，新浪等等）</li>
+<li>缺点：复用方式不当会造成代码量增加</li>
+<li>建议：定义公共类，以减少CSS代码</li>
+</ul>
+<h3 id="不要使用方案3和4"><a class="header-anchor" href="#不要使用方案3和4"></a>不要使用方案3和4</h3>
+<p>方案3、4通过overflow闭合浮动，实际上已经创建了新的 块级格式化上下文，这将导致其布局和相对于浮动的行为等发生一系列的变化，闭合浮动只不过是一系列变化中的一个作用而已。所以为了闭合浮动去改变全局特性，这是不明智的，带来的风险就是一系列的bug，比如firefox 早期版本产生 focus，截断绝对定位的层等等。始终要明白，如果单单只是需要闭合浮动，overflow就不要使用，而不是某些文章所说的“慎用”。</p>
+<h3 id="父级div定义height的方法"><a class="header-anchor" href="#父级div定义height的方法"></a>父级div定义height的方法</h3>
+<ul>
+<li>父级div定义height，这样就<strong>不必闭合浮动</strong>了</li>
+<li>不推荐使用，只建议高度固定的布局时使用</li>
+</ul>
+<h2 id="小结"><a class="header-anchor" href="#小结"></a>小结</h2>
+<p>通过对比，我们不难发现，其实以上列举的方法，无非有两类：</p>
+<p>其一，通过在浮动元素的末尾添加一个空的元素</p>
+<p>其二，通过设置父元素 overflow 或者display：table 属性来闭合浮动，原理就是BFC，下面探讨一下：</p>
+<h2 id="bfc知识"><a class="header-anchor" href="#bfc知识"></a>BFC知识</h2>
+<p><a href="http://www.w3.org/TR/CSS21/visuren.html#block-formatting" target="_blank" rel="external">Block formatting contexts </a>（块级格式化上下文），以下简称 BFC。在CSS3里面改动后称之为flow root。</p>
+<h3 id="bfc的特性"><a class="header-anchor" href="#bfc的特性"></a>BFC的特性</h3>
+<p>一丝冰凉 对于BFC的特征的解释非常模糊，甚至不正确。我认为她这部分内容所解释的现象只适用到IE7</p>
+<p>通俗地来说就是：</p>
+<ul>
+<li>创建了 BFC的元素就是一个独立的盒子，里面的子元素不会在布局上影响外面的元素，反过来外面的元素也不影响里面的元素</li>
+<li>同时BFC仍然属于文档中的普通流</li>
+</ul>
+<h3 id="如何触发bfc"><a class="header-anchor" href="#如何触发bfc"></a>如何触发BFC</h3>
+<ul>
+<li>float 除了none以外的值</li>
+<li>overflow 除了visible 以外的值（hidden，auto，scroll ）</li>
+<li>display (table-cell，table-caption，inline-block)</li>
+<li>position（absolute，fixed）</li>
+<li>fieldset元素</li>
+</ul>
+<blockquote>
+<p>需要注意的是，display:table 本身并不会创建BFC，但是它会产生匿名框(anonymous boxes)，而匿名框中的display:table-cell可以创建新的BFC，换句话说，触发块级格式化上下文的是匿名框，而不是display:table。所以通过display:table和display:table-cell创建的BFC效果是不一样的。</p>
+<p>fieldset 元素在www.w3.org里目前没有任何有关这个触发行为的信息，直到HTML5标准里才出现。有些浏览器bugs（Webkit，Mozilla）提到过这个触发行为，但是没有任何官方声明。实际上，即使fieldset在大多数的浏览器上都能创建新的块级格式化上下文，开发者也不应该把这当做是理所当然的。CSS 2.1没有定义哪种属性适用于表单控件，也没有定义如何使用CSS来给它们添加样式。用户代理可能会给这些属性应用CSS属性，建议开发者们把这种支持当做实验性质的，更高版本的CSS可能会进一步规范这个。</p>
+</blockquote>
+<p><strong>由于浏览器的差异：</strong></p>
+<ul>
+<li>在支持BFC的浏览器（IE8+，firefox，chrome，safari）通过创建新的BFC闭合浮动；</li>
+<li>在不支持 BFC的浏览器 （IE6-7），通过触发 hasLayout 闭合浮动。IE6-7的hasLayout 可以等同于 BFC。</li>
+</ul>
+<h2 id="闭合浮动的精益求精"><a class="header-anchor" href="#闭合浮动的精益求精"></a>闭合浮动的精益求精</h2>
+<p>上面已经列举了7种闭合浮动的方法，通过第三节分析的原理，我们发现其实更多的：display：table-cell，display：inline-block等只要触发了BFC的属性值都可以闭合浮动。从各个方面比较，<strong>方案7</strong>：after伪元素闭合浮动无疑是相对比较好的解决方案了，下面详细说说该方法：</p>
+<pre><code>.clearfix:after {content:&quot;.&quot;; display:block; height:0; visibility:hidden; clear:both; }
+.clearfix { *zoom:1; }
+</code></pre>
+<ol>
+<li>
+<p>display:block 使生成的元素以块级元素显示,占满剩余空间;</p>
+</li>
+<li>
+<p>height:0 避免生成内容破坏原有布局的高度。</p>
+</li>
+<li>
+<p>visibility:hidden 使生成的内容不可见，并允许可能被生成内容盖住的内容可以进行点击和交互;</p>
+</li>
+</ol>
+<p>4）通过 content:&quot;.&quot;生成内容作为最后一个元素</p>
+<p><strong>通过分析发现，除了clear：both用来闭合浮动的，其他代码无非都是为了隐藏掉content生成的内容，这也就是其他版本的闭合浮动为什么会有font-size：0，line-height：0。</strong></p>
+<p><strong>更重要的是，我认为这个方法根本就没产生 BFC 。</strong></p>
+<blockquote>
+<p>不建议将content设置为空字符串&quot;&quot;，在firefox 7里面会看到它会产生空隙</p>
+</blockquote>
+<h3 id="创新方案：零宽度空格"><a class="header-anchor" href="#创新方案：零宽度空格"></a>创新方案：零宽度空格</h3>
+<p>相对于空标签闭合浮动的方法代码似乎还是有些冗余，通过查询发现Unicode字符里有一个“零宽度空格”，也就是<a href="http://www.fileformat.info/info/unicode/char/200b/index.htm" target="_blank" rel="external">U+200B </a>，这个字符本身是不可见的，所以我们完全可以省略掉 visibility:hidden了</p>
+<pre><code>.clearfix:after {content:&quot;200B&quot;; display:block; height:0; clear:both; }
+.clearfix { *zoom:1; }
+</code></pre>
+<p>在实际开发中，由于存在Unicode字符不适合内嵌CSS的GB2312编码的页面，使用方案7完全可以解决我们的需求了。</p>
+
+		</div>
+      
+  
+     <!-- 版权署名授权 -->
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/04/01/clearfix-n-bfc/">闭合浮动和BFC</a></p>
+        <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
+        <p style="color: #696969;"><span>发布时间:</span>2017-04-01, 22:24:37</p>
+        <!-- <p><span>最后更新:</span>2017-04-01, 22:27:55</p> -->
+        <p>
+            <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="闭合浮动和BFC" href="/2017/04/01/clearfix-n-bfc/">https://alexzhong22c.github.io/2017/04/01/clearfix-n-bfc/</a>
+            <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://alexzhong22c.github.io/2017/04/01/clearfix-n-bfc/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+        </p>
+        <p style="color: #696969;">
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i><a id="copyright_license" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target = "_blank" class="hint  hint--bottom" data-hint="中国大陆 (CC BY-NC-SA 3.0 CN)">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/04/01/ife-css-task02/">
+                    IFE2017-CSS-task02笔记
+                </a>
+            </div>
+        
+    </nav>
+
+
+  
 </article>
-  
-  
-    </div></section>
-  
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#区分-清除浮动-和-闭合浮动"><span class="toc-number">1.</span> <span class="toc-text">区分 清除浮动 和 闭合浮动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#闭合浮动的一些老方法："><span class="toc-number">2.</span> <span class="toc-text">闭合浮动的一些老方法：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-使用：after伪元素"><span class="toc-number">2.1.</span> <span class="toc-text">7. 使用：after伪元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#不要使用方案3和4"><span class="toc-number">2.2.</span> <span class="toc-text">不要使用方案3和4</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#父级div定义height的方法"><span class="toc-number">2.3.</span> <span class="toc-text">父级div定义height的方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小结"><span class="toc-number">3.</span> <span class="toc-text">小结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bfc知识"><span class="toc-number">4.</span> <span class="toc-text">BFC知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#bfc的特性"><span class="toc-number">4.1.</span> <span class="toc-text">BFC的特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何触发bfc"><span class="toc-number">4.2.</span> <span class="toc-text">如何触发BFC</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#闭合浮动的精益求精"><span class="toc-number">5.</span> <span class="toc-text">闭合浮动的精益求精</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创新方案：零宽度空格"><span class="toc-number">5.1.</span> <span class="toc-text">创新方案：零宽度空格</span></a></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"闭合浮动和BFC　| Web前端 | Alex Zhong　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2017/04/01/clearfix-n-bfc/" data-title="闭合浮动和BFC" data-url="https://alexzhong22c.github.io/2017/04/01/clearfix-n-bfc/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"null"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = 'https://alexzhong22c.github.io/js/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+            // Add comment count
+            $(function(){
+                var jsonUrl = "https://api.duoshuo.com/threads/counts.jsonp?short_name=null&threads=2017/04/01/clearfix-n-bfc/&callback=?";
+                $.getJSON(jsonUrl, function(result){
+                    $.each(result.response, function(i, field){
+                        var value = field.comments;
+                        if (value > 0) {
+                            $(".count-comment").text(value);
+                            return;
+                        }
+                    })
+                })
+            })
+        
+    </script>
+    
+    <aside class="comment-bar">
+        <a href="javascript:void(0);">
+            <i class="fa fa-commenting-o animated infinite pulse"></i>
+            <i class="fa fa-spinner fa-pulse"></i>
+            <span class="count-comment"></span>
+        </a>
+    </aside>
+    <script>
+        var $commentBar = $("#comments aside.comment-bar");
+        var load$hide = function(){
+            $commentBar.find("a > i").toggle();
+            loadJS("https://alexzhong22c.github.io/js/embed.js", function(){
+              if (typeof DUOSHUO !== 'undefined'){
+		              DUOSHUO.EmbedThread('.ds-thread');
+              }
+            })
+            $commentBar.fadeOut(800);
+
+        }
+        $commentBar.click(function(){
+            load$hide();
+        })
+        $commentBar.children("a").hover(function(){
+            load$hide();
+        })
+        if (window.location.hash === "#comments") {
+            load$hide();
+        }
+    </script>
+
+
+</div>
 
     
 
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/04/01/ife-css-task02/" title="下一篇: IFE2017-CSS-task02笔记">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/clearfix-n-bfc/">闭合浮动和BFC</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/ife-css-task02/">IFE2017-CSS-task02笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/31/css-selectors-specificity/">CSS选择器优先级</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/27/ife-css-task01/">IFE2017-CSS-task01笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/11/try-eslint/">eslint折腾记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/05/js-event2/">事件进阶话题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/float-n-absolute/">float和绝对定位比较</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/about-margin/">和margin有关的知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/gulp-usage/">gulp的入门和一些简单使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/27/icon-usage/">桌面端和移动端图标的引入</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/my-hexo-theme/">yelee主题改bug总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/my-hexo-blog/">搭建hexo博客个人总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/17/todo-app/">ToDo小应用完工总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/equality-operators/">相等操作符回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/js-operators/">操作符回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/29/js-event/">js事件绑定基础回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/25/font-face/">font-face--CSS3</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/25/h5-new-ele/">内容分类--谈谈H5标签</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/09/let-n-const/">let和const回顾</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
 
 </div>
       <footer id="footer">
@@ -576,7 +838,7 @@
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					
-						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">总字数：29.3k</span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,793</span>
 					
 				</div>
             </div>
@@ -592,9 +854,15 @@
                     </span>
                 
 				
-					<span style="vertical-align:middle;">|&thinsp;</span><span class="hint  hint--top  hint--success" data-hint="以微薄之力，让世界更美" style="vertical-align:middle;" data-no-instant><a class="htmleaf-links" id="publicwelfare" href="../404.html" style="color:green;cursor:pointer;">公益404</a>
-					</span>
-					<i class="fa fa-heart animated infinite pulse" style="color:red;margin-left:2px;"></i><!-- 红心-->
+					
+						<span id="divider_span" style="vertical-align:middle;">|&thinsp;</span>
+					
+					
+						<span id="busuanzi_container_page_pv" style="display:none;text-align:center;">
+							<span id="page-visit" class="hint  hint--top  hint--info" data-hint="本文热度" style="vertical-align:middle;"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span><span>°C</span>
+							</span>
+						</span>
+					
 				
             </div>
         
