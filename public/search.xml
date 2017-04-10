@@ -99,9 +99,9 @@
     </entry>
     
     <entry>
-      <title><![CDATA[闭合浮动和BFC]]></title>
+      <title><![CDATA[闭合浮动和BFC和阻止上下外边距的合并]]></title>
       <url>https://alexzhong22c.github.io/2017/04/01/clearfix-n-bfc/</url>
-      <content type="html"><![CDATA[<p>本文参考 <a href="http://www.iyunlu.com/view/css-xhtml/55.html" target="_blank" rel="external">那些年我们一起清除过的浮动</a> ，但是 一丝冰凉 的这篇文章有很多地方我都不认同，取其精华去其糟粕，所以本文并没有包含那些我所不认同的内容。</p>
+      <content type="html"><![CDATA[<p>本文部分内容参考 <a href="http://www.iyunlu.com/view/css-xhtml/55.html" target="_blank" rel="external">那些年我们一起清除过的浮动</a> ，但是 一丝冰凉 的这篇文章有很多地方我都不认同，取其精华去其糟粕，所以本文并没有包含那些我所不认同的内容。</p>
 <a id="more"></a>
 <h2 id="区分-清除浮动-和-闭合浮动"><a class="header-anchor" href="#区分-清除浮动-和-闭合浮动"></a>区分 清除浮动 和 闭合浮动</h2>
 <ul>
@@ -114,23 +114,23 @@
 <ol>
 <li>在子元素们的最后追加一个<code>style=&quot;clear:both&quot;</code>的空标签，这个不好</li>
 <li>在子元素们的最后追加一个br标签，使用br标签的<code>clear=&quot;all | left | right | none&quot;</code> 属性，因为一般不建议在HTML中使用br，这个也不好</li>
-<li>通过设置父元素overflow值设置为hidden；在IE6中还需要触发 hasLayout ，例如 zoom：1；因为最终还是有补不了的bug被大家弃用</li>
-<li>通过设置父元素overflow值设置为auto，同样也有bug</li>
+<li>通过<strong>设置父元素</strong>overflow值设置为hidden；在IE6中还需要触发 hasLayout ，例如 zoom：1；因为最终还是有补不了的bug被大家弃用</li>
+<li>通过<strong>设置父元素</strong>overflow值设置为auto，同样也有bug</li>
 <li>父元素也设置浮动，缺点是<strong>使得与父元素相邻的元素的布局会受到影响</strong>，不可能一直浮动到body，不推荐使用</li>
-<li>父元素设置display:table，盒模型属性已经改变，由此造成的一系列问题，得不偿失，不推荐使用。文章最后还会再介绍到给伪元素设置display:table。</li>
+<li>父元素设置display:table，盒模型属性已经改变，由此造成的一系列问题，得不偿失，不推荐使用。文章最后还会再介绍到给<strong>父元素的伪元素设置display:table</strong>。</li>
 </ol>
 <h3 id="7-使用：after伪元素"><a class="header-anchor" href="#7-使用：after伪元素"></a>7. 使用<code>：after</code>伪元素</h3>
 <blockquote>
-<p>需要注意的是 :after是伪元素，不是伪类（某些CSS手册里面称之为“伪对象”，不太对）。</p>
+<p>需要注意的是 :after是伪元素，不是伪类（另外，某些CSS手册里面称之为“伪对象”，不太对）。</p>
 </blockquote>
-<p>由于IE6-7不支持:after，使用 zoom:1触发 hasLayout。</p>
+<p>由于IE6-7不支持:after，要同时使用 zoom:1触发IE6和IE7的 hasLayout。<strong>在后面的demo中会介绍到。</strong></p>
 <ul>
 <li>优点：浏览器支持好，不容易出现怪问题（目前：大型网站都有使用，如：腾迅，网易，新浪等等）</li>
 <li>缺点：复用方式不当会造成代码量增加</li>
 <li>建议：定义公共类，以减少CSS代码</li>
 </ul>
 <h3 id="不要使用方案3和4"><a class="header-anchor" href="#不要使用方案3和4"></a>不要使用方案3和4</h3>
-<p>方案3、4通过overflow闭合浮动，实际上已经创建了新的 块级格式化上下文，这将导致其布局和相对于浮动的行为等发生一系列的变化，闭合浮动只不过是一系列变化中的一个作用而已。所以为了闭合浮动去改变全局特性，这是不明智的，带来的风险就是一系列的bug，比如firefox 早期版本产生 focus，截断绝对定位的层等等。始终要明白，如果单单只是需要闭合浮动，overflow就不要使用，而不是某些文章所说的“慎用”。</p>
+<p>方案3、4通过overflow闭合浮动，实际上已经创建了新的 块级格式化上下文，而它们设置的对象都是父元素，这将导致其布局和相对于浮动的行为等发生一系列的变化，闭合浮动只不过是一系列变化中的一个作用而已。所以为了闭合浮动去改变全局特性，这是不明智的，带来的风险就是一系列的bug，比如firefox 早期版本产生 focus，截断绝对定位的层等等。始终要明白，如果单单只是需要闭合浮动，overflow就不要使用，而不是某些文章所说的“慎用”。</p>
 <h3 id="父级div定义height的方法"><a class="header-anchor" href="#父级div定义height的方法"></a>父级div定义height的方法</h3>
 <ul>
 <li>父级div定义height，这样就<strong>不必闭合浮动</strong>了</li>
@@ -154,6 +154,7 @@
 <li>float 除了none以外的值</li>
 <li>overflow 除了visible 以外的值（hidden，auto，scroll ）</li>
 <li>display (table-cell，table-caption，inline-block)</li>
+<li>实际上，用<code>display:table</code>来产生匿名框也可以触发BFC，见文章 <a href="http://nicolasgallagher.com/micro-clearfix-hack/" target="_blank" rel="external">A new micro clearfix hack</a> 或见本节的备注</li>
 <li>position（absolute，fixed）</li>
 <li>fieldset元素</li>
 </ul>
@@ -166,34 +167,81 @@
 <li>在支持BFC的浏览器（IE8+，firefox，chrome，safari）通过创建新的BFC闭合浮动；</li>
 <li>在不支持 BFC的浏览器 （IE6-7），通过触发 hasLayout 闭合浮动。IE6-7的hasLayout 可以等同于 BFC。</li>
 </ul>
-<h2 id="闭合浮动的精益求精"><a class="header-anchor" href="#闭合浮动的精益求精"></a>闭合浮动的精益求精</h2>
-<p>上面已经列举了7种闭合浮动的方法，通过第三节分析的原理，我们发现其实更多的：display：table-cell，display：inline-block等只要触发了BFC的属性值都可以闭合浮动。从各个方面比较，<strong>方案7</strong>：after伪元素闭合浮动无疑是相对比较好的解决方案了，下面详细说说该方法：</p>
-<pre><code>.clearfix:after {content:&quot;.&quot;; display:block; height:0; visibility:hidden; clear:both; }
+<h2 id="深入理解伪元素闭合浮动"><a class="header-anchor" href="#深入理解伪元素闭合浮动"></a>深入理解伪元素闭合浮动</h2>
+<p>上面已经列举了7种闭合浮动的方法，通过第三节分析的原理，我们发现其实更多的：对父元素使用display：table-cell，display：inline-block等只要触发了BFC的属性值都可以闭合浮动。从各个方面比较，<strong>方案7</strong>：after伪元素闭合浮动无疑是相对比较好的解决方案了。这种思路的演进历史可以参考文章：<a href="https://css-tricks.com/snippets/css/clear-fix/" target="_blank" rel="external">https://css-tricks.com/snippets/css/clear-fix/</a></p>
+<p>而最后，方案7里面有两个最优的小方案：</p>
+<h3 id="最优小方案1："><a class="header-anchor" href="#最优小方案1："></a>最优小方案1：</h3>
+<pre><code>.clearfix:before, .clearfix:after {
+content:&quot;.&quot;; display:block; height:0; visibility:hidden; clear:both; }
+
 .clearfix { *zoom:1; }
 </code></pre>
-<ol>
-<li>
-<p>display:block 使生成的元素以块级元素显示,占满剩余空间;</p>
-</li>
-<li>
-<p>height:0 避免生成内容破坏原有布局的高度。</p>
-</li>
-<li>
-<p>visibility:hidden 使生成的内容不可见，并允许可能被生成内容盖住的内容可以进行点击和交互;</p>
-</li>
-</ol>
-<p>4）通过 content:&quot;.&quot;生成内容作为最后一个元素</p>
-<p><strong>通过分析发现，除了clear：both用来闭合浮动的，其他代码无非都是为了隐藏掉content生成的内容，这也就是其他版本的闭合浮动为什么会有font-size：0，line-height：0。</strong></p>
+<p>1）通过 content:&quot;.&quot;生成内容作为伪元素的内容</p>
+<p>2）display:block 使生成的元素以块级元素显示,占满剩余空间;</p>
+<p>3）height:0 避免生成内容破坏原有布局的高度。</p>
+<p>4）visibility:hidden 使生成的内容不可见，并允许可能被生成内容盖住的内容可以进行点击和交互;</p>
+<p>5）同时要使用 zoom:1触发IE6和IE7的 hasLayout</p>
+<p><strong>通过分析发现，除了clear：both用来清除浮动的，其他代码无非都是为了隐藏掉content生成的内容，这也就是其他版本的闭合浮动为什么会有font-size：0，line-height：0的缘故。</strong></p>
 <p><strong>更重要的是，我认为这个方法根本就没产生 BFC 。</strong></p>
 <blockquote>
-<p>不建议将content设置为空字符串&quot;&quot;，在firefox 7里面会看到它会产生空隙</p>
+<p>另外，不建议将content设置为空字符串&quot;&quot;，在firefox 7里面会看到它会产生空隙</p>
 </blockquote>
+<h3 id="最优小方案2："><a class="header-anchor" href="#最优小方案2："></a>最优小方案2：</h3>
+<pre><code>.clearfix:before,
+.clearfix:after {
+    content: &quot; &quot;; /* 1 */
+    display: table; /* 2 */
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    *zoom: 1;
+}
+</code></pre>
+<p>1. 使用content: &quot; &quot; 是为了避免Opera的bug，否则它会在 被清除浮动的元素的顶部和底部 产生一个看得出的空格</p>
+<p>2. 这里对伪元素使用的<code>display: table;</code>会产生一个 <a href="http://www.w3.org/TR/CSS2/tables.html#anonymous-boxes" target="_blank" rel="external">anonymous boxes</a> 和一个BFC，这个BFC意味着before伪类会阻止上外边距的合并，同时after伪类会闭合浮动。</p>
+<blockquote>
+<p>需要注意的是，display:table 本身并不会创建BFC，但是它会产生匿名框(anonymous boxes)，而匿名框中的display:table-cell可以创建新的BFC，换句话说，触发块级格式化上下文的是匿名框，而不是display:table。所以通过display:table和display:table-cell创建的BFC效果是不一样的。</p>
+</blockquote>
+<p>这个小方案的好处是：不用隐藏用content属性产生的内容，并且代码量特别少。</p>
+<h4 id="firefox-3-5版本的问题"><a class="header-anchor" href="#firefox-3-5版本的问题"></a>Firefox &lt; 3.5版本的问题</h4>
+<p>Firefox &lt; 3.5禁止在body元素和它的第一个子元素之间插入多余的空格，所以</p>
+<ul>
+<li>要么对before伪类使用<code>content:&quot;.&quot;</code></li>
+<li>要么额外加上<code>visibility:hidden</code>等等属性来隐藏这种情况下所插入的字符(但这也不能解释淘宝网闭合浮动的写法，因为淘宝网主要把它用在after伪类上)</li>
+</ul>
+<h3 id="设置before伪元素的作用："><a class="header-anchor" href="#设置before伪元素的作用："></a>设置before伪元素的作用：</h3>
+<p>设定before伪元素的属性<strong>并不是用来闭合浮动的</strong>，不过它能阻止上外边距的合并，这会带来两个好处：</p>
+<ul>
+<li>这种清除浮动的方式所表现出来的外貌看上去和 其他的清除浮动的方式(比如overflow:hidden)的 一致。</li>
+<li>和IE6/7使用zoom:1后的外貌保持一致</li>
+</ul>
+<p>毕竟，<strong>使用after伪元素闭合浮动</strong>的时候，下外边距的合并已经被阻止了，为了上下看上去对称，before伪元素也应该这样。</p>
+<p>主要译自： <a href="http://nicolasgallagher.com/micro-clearfix-hack/" target="_blank" rel="external">A new micro clearfix hack</a></p>
 <h3 id="创新方案：零宽度空格"><a class="header-anchor" href="#创新方案：零宽度空格"></a>创新方案：零宽度空格</h3>
-<p>相对于空标签闭合浮动的方法代码似乎还是有些冗余，通过查询发现Unicode字符里有一个“零宽度空格”，也就是<a href="http://www.fileformat.info/info/unicode/char/200b/index.htm" target="_blank" rel="external">U+200B </a>，这个字符本身是不可见的，所以我们完全可以省略掉 visibility:hidden了</p>
+<p>通过查询发现Unicode字符里有一个“零宽度空格”，也就是<a href="http://www.fileformat.info/info/unicode/char/200b/index.htm" target="_blank" rel="external">U+200B </a>，这个字符本身是不可见的，所以我们完全可以省略掉 visibility:hidden了</p>
 <pre><code>.clearfix:after {content:&quot;200B&quot;; display:block; height:0; clear:both; }
 .clearfix { *zoom:1; }
 </code></pre>
-<p>在实际开发中，由于存在Unicode字符不适合内嵌CSS的GB2312编码的页面，使用方案7完全可以解决我们的需求了。</p>
+<p>在实际开发中，由于存在Unicode字符不适合内嵌CSS的GB2312编码的页面，使用前面两个小方案完全可以解决我们的需求了。</p>
+<h3 id="别混淆了闭合浮动-bfc-阻止上下外边距的合并"><a class="header-anchor" href="#别混淆了闭合浮动-bfc-阻止上下外边距的合并"></a>别混淆了闭合浮动/BFC/阻止上下外边距的合并</h3>
+<p>这是一个比较详细的 <a href="https://github.com/AlexZhong22c/IFE-CSS-learning/blob/master/%E9%97%AD%E5%90%88%E6%B5%AE%E5%8A%A8%E5%92%8CBFC%E5%92%8C%E9%98%BB%E6%AD%A2%E4%B8%8A%E4%B8%8B%E5%A4%96%E8%BE%B9%E8%B7%9D%E7%9A%84%E5%90%88%E5%B9%B6.html" target="_blank" rel="external">demo</a>：</p>
+<p>这个demo里面加入了<strong>企图对伪元素用display:block配合content:&quot; &quot;闭合浮动</strong>这种不太恰当的方法。</p>
+<p>从这个demo可以看到：</p>
+<ul>
+<li><strong>使用伪元素闭合浮动</strong>必然会引发的一个效果是阻止下外边距的合并</li>
+<li>BFC必然会引发的一个效果是阻止上下外边距的合并</li>
+<li>闭合浮动 的方式不只有 触发BFC ，触发BFC 只是其中的一种方法</li>
+<li>阻止上下外边距合并的方式不只有 触发BFC，触发BFC 只是其中的一种方法</li>
+<li>而那些能触发BFC的方式可以参考本文前文的说明，其中就说明了浮动会触发BFC</li>
+<li>单独的display:block并不会触发BFC</li>
+<li>对伪元素用display:table会触发BFC</li>
+<li>不应当<strong>企图对伪元素用display:block配合content:&quot; &quot;闭合浮动</strong>，因为这种方式的清除浮动 只有在ie7以下的浏览器里才能阻止上下外边距的合并，所以使用它的话不同浏览器的样式会不统一</li>
+<li>要小心地对浮动的子元素设置下外边距，因为在IE7以下浏览器里面，如果没有其他子元素撑起父元素的高度，浮动的子元素的下外边距直接被解释为0(这是为了尽量减小页面的高度)，造成样式的不统一</li>
+</ul>
 ]]></content>
       
         <categories>
@@ -210,6 +258,8 @@
             <tag> BFC </tag>
             
             <tag> 伪元素 </tag>
+            
+            <tag> 阻止上下外边距合并 </tag>
             
         </tags>
         

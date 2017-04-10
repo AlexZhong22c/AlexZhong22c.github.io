@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://alexzhong22c.github.io/2017/04/01/clearfix-n-bfc/</loc>
+    
+    <lastmod>2017-04-10T07:55:10.571Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://alexzhong22c.github.io/2017/03/09/for-loop/</loc>
     
     <lastmod>2017-04-07T01:21:54.120Z</lastmod>
@@ -26,13 +33,6 @@
     <loc>https://alexzhong22c.github.io/2017/04/06/ife-css-task03/</loc>
     
     <lastmod>2017-04-06T15:27:33.528Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://alexzhong22c.github.io/2017/04/01/clearfix-n-bfc/</loc>
-    
-    <lastmod>2017-04-01T14:27:55.921Z</lastmod>
     
   </url>
   
