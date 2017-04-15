@@ -768,6 +768,8 @@ Legend Field Element））代表一个用于表示它的父元素<code>&lt;field
             
             <tag> 插件 </tag>
             
+            <tag> essay </tag>
+            
         </tags>
         
     </entry>
@@ -1734,6 +1736,416 @@ float:right
             <tag> meta标签 </tag>
             
             <tag> link标签 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[移动开发事件入门概述]]></title>
+      <url>https://alexzhong22c.github.io/2017/02/25/webapp-events-intro/</url>
+      <content type="html"><![CDATA[<p>本文修改自<a href="http://www.infoq.com/cn/articles/touch-pointer-event" target="_blank" rel="external">PPK的《移动Web手册》</a></p>
+<a id="more"></a>
+<h2 id="前言"><a class="header-anchor" href="#前言"></a>前言</h2>
+<p>触摸事件为苹果发明，它将触摸和鼠标两种行为区分开，而微软的指针事件则将它们合并，此标准更具前瞻性，现已被W3C采纳为正式标准。</p>
+<p>早在2007年，苹果公司就发布了第一款真正支持触摸屏的浏览器。这款浏览器会监控用户的触摸操作，并派发相应的事件。</p>
+<p>除了指针事件的发明者微软外，其他多数浏览器厂商复制谷歌或Mozilla的实现。这两套事件是本章讨论的主题。</p>
+<p>乍一看，在指针事件上，IE又是那么“与众不同”，但事实并不如你所想。</p>
+<p>微软在这方面提出了一个有趣的哲学观点，我们将在后面详细讨论。在撰写本书时，谷歌和Mozilla正在考虑着手实现指针事件。W3C也正在从触摸事件过渡到指针事件。</p>
+<p>在大多数方面，触摸事件和指针事件是普通的JavaScript事件。当触摸动作发生时，触摸事件和指针事件被触发。你可以为它们指定事件处理函数，它们的事件对象也提供了有用的触摸相关的信息。触控事件和传统的鼠标、键盘事件之间有一些技术上的差异。 此外，出于兼容性的考虑，触屏设备必须触发鼠标事件，因为很多网站仍然依赖于它们。但是，在没有鼠标的设备上触发鼠标事件会发生什么事情呢？本章专门讨论这些问题。</p>
+<p>本章的其余部分在本质上更具有哲学性。随着iPhone的推出，苹果引入了一种新的交互模式：触摸。 现在，触摸、传统鼠标、键盘三种交互模式并存。Web开发人员需要确保网站适应这三种交互模式。乍一看，触摸事件和鼠标事件差不多。那它们之间有什么区别呢？我们真的需要为触摸交互模式再设计一套事件吗？</p>
+<h2 id="触摸事件"><a class="header-anchor" href="#触摸事件"></a>触摸事件</h2>
+<ol>
+<li>touchstart，在用户的手指触摸屏幕的瞬间触发。</li>
+<li>touchmove，在用户移动手指的过程中连续触发。</li>
+<li>touchend，用户的手指离开屏幕的瞬间触发。</li>
+<li>touchcancel ，（不太被使用），其含义取决于浏览器。后面将会讨论。</li>
+</ol>
+<p>pointerdown、pointermove和pointerup事件在同一时刻触发</p>
+<p>这些事件得到了大多数触屏浏览器的支持，但IE浏览器是一个例外。还有一些很古老的和不完善的浏览器也不支持，比如塞班Anna的默认浏览器。代理浏览器也不支持，因为这些事件不适用于代理浏览模式。其中的原因我们将会在“浏览器”一章讨论。</p>
+<h3 id="touchcancel"><a class="header-anchor" href="#touchcancel"></a>touchcancel</h3>
+<p>不同浏览器对<code>touchcancel</code>的实现有所不同。</p>
+<p>幸运的是，我还没有发现必须使用touchcancel的情景。貌似其他脚本和库也几乎没有使用
+touchcancel。有些代码为了安全起见，把它等同于touchend。综上所述，本章将忽略touchcancel事件。如果在某些情况下浏览器
+没有触发touchend事件，导致一些奇怪的问题，你可以将touchend的处理函数绑定到touchcancel上。</p>
+<h2 id="指针事件"><a class="header-anchor" href="#指针事件"></a>指针事件</h2>
+<p><strong>指针事件合并了触摸和鼠标操作，它的必要性在于有一些超极本、平板电脑（Surface系列）同时支持触摸和鼠标操作，并且需要在两者间进行无缝的切换。</strong></p>
+<ul>
+<li>pointerdown</li>
+<li>pointermove</li>
+<li>pointerup</li>
+<li>pointerover</li>
+<li>pointerout</li>
+</ul>
+<h2 id="键盘事件"><a class="header-anchor" href="#键盘事件"></a>键盘事件</h2>
+<p>因为容易理解，不解释。</p>
+<h2 id="其他事件"><a class="header-anchor" href="#其他事件"></a>// 其他事件</h2>
+<h3 id="触摸：touchenter和touchleave"><a class="header-anchor" href="#触摸：touchenter和touchleave"></a>触摸：touchenter和touchleave</h3>
+<p>触摸事件规范中曾经包含<code>touchenter</code>和<code>touchleave</code>事件，这两个事件在用户手指移入
+或移出某个元素时触发。但是这两个事件从来没有被实现。微软有这两个事件的替代事件，但是只有IE浏览器支持。某些情况下可以知道用户手指滑入、滑出某个
+元素是非常有用的，所以我希望这两个事件可以重返规范。现在暂时不应该用它们。</p>
+<h3 id="缩放事件-不在规范"><a class="header-anchor" href="#缩放事件-不在规范"></a>缩放事件(不在规范)</h3>
+<p>能响应用户缩放还是很有用的：比如你可以在用户缩放后改变界面，或者只是收集缩放数据以得知页面字号是不是过小。但既然不在规范内，就不应该使用。</p>
+<h3 id="手势事件："><a class="header-anchor" href="#手势事件："></a>手势事件：</h3>
+<p>两个或多个触摸事件同时发生。放大放小图片时等等场景会用到。仅Safari和IE支持，不建议使用。</p>
+<p>手势事件存在两个问题：一来，其他浏览器不支持。二来，它们根本没什么用处。理论上，通过这套事件检
+测用户的手势听起来很不错，但实际上，你需要分析触摸坐标、移动速度甚至加速度才能搞清楚用户真正的意图。所以我们不需要手势事件，因为普通的触摸事件已
+经提供了同样的信息。所以本章不再讨论手势事件。</p>
+<h2 id="实例"><a class="header-anchor" href="#实例"></a>实例</h2>
+<p>通过实例对比触摸、指针事件与鼠标键盘事件。</p>
+<ul>
+<li>下拉菜单。对于用mouseover的下拉菜单，触摸事件几乎不可用。</li>
+<li>拖拽。触摸和鼠标差不多，键盘难操作。</li>
+<li>滚动层。鼠标难操作。</li>
+</ul>
+<h3 id="下拉菜单"><a class="header-anchor" href="#下拉菜单"></a>下拉菜单</h3>
+<p>跨设备环境的最好解决方案是使用点击事件。点击展开菜单，而不是鼠标悬停时展开。点击另一菜单项则会收起当前菜单。我们在本章后面会看到，点击事件很安全。并且基于点击的下拉菜单可以适用于鼠标和触摸交互。</p>
+<p>尽管如此，移动浏览器仍然需要与现实抗争：网上仍然有成千上万基于鼠标悬停的下拉菜单。幸运的是，下拉菜单是一个特殊的用例。苹果公司在设计触摸事件的时候已经考虑到了并且其他浏览器照搬了他们的实现。这点我们在本章后面会遇到。</p>
+<p>与下拉菜单完全不同的一个实例是拖动和拖放。用户在鼠标按下时选中一个元素，然后移动，最后松开鼠标将元素放在某个地方。最后脚本会计算放置点是否有效并根据计算结果做出处理。</p>
+<h3 id="拖放"><a class="header-anchor" href="#拖放"></a>拖放</h3>
+<p>将这个实现移植到基于触摸的交互非常简单：将mousedown替换为touchstart，mousemove替换为touchmove，mouseup替换为touchend就可以了。唯一的问题是如何确定事件的坐标。后面我们会讲到。</p>
+<p>这里的问题是键盘的可访问性。如何让用户通过键盘移动可拖动元素？你可以将一个区域的元素设置成可以 通过键盘聚焦，一旦某个元素得到焦点，就开始监听方向键。这在技术上并不困难，但是用户体验很差。这个问题基本上无法解决：拖放操作本身就是为鼠标和触摸 交互设计的，无法在键盘上得到好的体验。</p>
+<h3 id="滚动层"><a class="header-anchor" href="#滚动层"></a>滚动层</h3>
+<p>在2011年时，我需要一个可以在所有	设备上工作的水平滚动元素。那时候设备还没有原生支持，仍需要脚本，所以我写过一个。现在设备已经原生支持，那段脚本不再需要了。这点我们在CSS章节已经看到。不过这段脚本仍然是一个很有用的实例，所以我们假设仍然需要那段脚本。</p>
+<p><img src="http://olqa2s510.bkt.clouddn.com/roll-layer.png" alt="img"></p>
+<p>写这段脚本不是什么难事：在ontouchstart事件中计算滚动元素的当前位置，并初始化其他事 件处理函数；在ontouchmove事件中将元素移动相应像素的距离；在ontouchend中，运行一个函数来计算合理的减速，一旦被移动的元素停止 移动，这个函数结束。很简单吧，我花了大概两个小时。</p>
+<p>非触摸设备怎么办呢？为了让滚动层可以工作，我需要将触摸交互翻译成鼠标、键盘交互。键盘很简单，只需监听keydown事件，当用户按下左/右键时滚动元素。这点可能不是那么容易发现，但是现在这个脚本算是正式支持键盘操作了。</p>
+<p>鼠标设备怎么办？从技术上来讲，增加对mousedown、mousemove和mouseup事件的处理并不难，但是交互非常奇怪：用户必须一直按下鼠标按键才能滚动元素。这种交互和拖放一样，但是对于滚动层来说并不是那么直观。</p>
+<p>我可以用老式的滚动条箭头：当鼠标移动到箭头上时脚本开始工作。但是视觉上看，增加箭头有些零乱。除此之外，当用户触摸或者使用键盘时还得隐藏箭头。我没有找到一种安全正确的方法（我们在后面会再次遇到这个问题），最终我并没有支持鼠标交互。</p>
+<h2 id="事件和交互模式"><a class="header-anchor" href="#事件和交互模式"></a>事件和交互模式</h2>
+<ul>
+<li>鼠标事件。1996年Netscape引入</li>
+<li>键盘事件。后来引入。</li>
+<li>触摸交互。2007年左右开始出现。</li>
+</ul>
+<p>Web开发者必须确保他们的网站可以在三种交互模式下正常工作。做到这点有时候很简单，有时候却很困难，不过都是必要的。不仅是为你现在的网站增加这些支持，你应该开始思考为UI元素增加对各种操作模式的支持。</p>
+<p>在未来，我们可能会有更多的交互模式，比如Xbox
+Kinect，它将身体动作转换成屏幕动作。这样你可以用你的手来控制屏幕上的指针。从技术角度来讲，控制指针意味着将使用鼠标事件，但是从用户的角度看这是一种新的操作模式。毕竟感觉上完全不同。</p>
+<p>汽车、冰箱、可穿戴以及新兴的设备都可能为用户和Web开发人员带来新的交互模式，比如doorclose（关门）事件。</p>
+<p>思考交互模式和JavaScript事件带来三个问题：</p>
+<ol>
+<li>是不是每个交互模式都需要自己的事件？</li>
+<li>已有的交互模式的事件在新设备上不再有意义时，是否需要继续支持？</li>
+<li>如何判断设备支持哪种交互模式或用户正在使用哪种模式？</li>
+</ol>
+<p>目前来看，前两个问题的答案是肯定的，第三个问题的答案比较复杂。但是，在将来，第一个问题的答案可能是否定的。再看看Kinect的例子：我们是发明全新的硬件事件，还是使用指针和鼠标事件呢？从技术上来讲，无论用户怎么移动，指针还是指针。</p>
+<h3 id="等价事件"><a class="header-anchor" href="#等价事件"></a>等价事件</h3>
+<p>目前每种交互模式都有自己的一套事件，但这并不意味着它们是完全无关且不同的。事实上，某些事件是等价的。下面的表格给出了这方面的情况。</p>
+<p><img src="http://olqa2s510.bkt.clouddn.com/compare-3-events1.png" alt="img"></p>
+<p>很显然，触摸动作序列：touchstart-touchmove-touchend和鼠标序 列：mousedown-mousemove-mouseup以及键盘序列：keydown-keypress-keyup很相似，这并不是巧合，因为这 三种交互模式都可以描述为start-move-stop。（所以我们不需要完全不同的事件，对不对？）</p>
+<p>但是，有时候两个操作模式很像，但第三个却不。比如在下拉菜单的例子里，鼠标和键盘很像，而触摸不同。在拖放实例中，鼠标和触摸几乎一致，但键盘非常不同。在滚动层的例子里，这三种操作模式完全不同。（所以我们还是需要不同的事件，对吧？）</p>
+<p>最后是mouseover和mouseout的问题。focus和blur是它们的键盘模式的等价事件，但是触摸模式没有这样的等价事件。就像我们在“CSS”一章看到的，在触摸屏设备中不存在“悬停”。</p>
+<h3 id="触摸事件的不同之处"><a class="header-anchor" href="#触摸事件的不同之处"></a>触摸事件的不同之处</h3>
+<p>可以看出，等价事件确实存在，这取决于上下文。但是触摸、按键和鼠标事件并不完全相同。显然，由于键盘是这三种交互模式中最与众不同的，所以Web开发人员倾向于将注意力集中在鼠标与触摸上。让我们先来讨论这二者的差异吧。</p>
+<p>当鼠标指针移入某个元素，或者用户按下某个鼠标按键时，系统可以立即判断出应该触发哪个事件。而对于 触摸操作来说就不同了，**触摸操作可以引出不同的动作：在你的手指触碰屏幕的瞬间，系统还无法判断出你的意图。**你只是想轻触（Tap）某个元素？还是想滚动 某个可滚动元素？亦或是想缩放？还是想双触（Double-Tap）？浏览器必须等待一定时间间隔才能做出判断。这个时间间隔并不是非常短，而是一个可察 觉的间隔。这点在后面还会讲到。</p>
+<p>**多个触摸动作可以同时发生。**这一点对鼠标动作来说是不可能的：一台计算机只能有一个鼠标（指针）。通 常来说，多点触摸不会带来麻烦：大多数网站只支持单点触摸。单点触摸很容易用鼠标来模拟。即便是网页中有两个滑动条，它们之间也不会互相干扰。因为就算用 户同时滑动它们，你也可以认为它们之间是相互独立的。二者都可以很好地通过触摸和鼠标进行操作。</p>
+<p>当网站允许并需要多点触摸时，情况就不同了。如果脚本将同时发生的多点触摸翻译成手势、旋转或者缩放动作，鼠标就无法模拟了。多点触摸带来的问题需要具体问题具体分析。但是你必须意识到这一点。</p>
+<p>鼠标指针总是指着某一个像素，而手指触摸会覆盖很多像素点。通常，系统会从这些像素点计算出一个中心点作为触摸事件的坐标。并且在touchstart和touchend之间给手指移动留有余地。但是后面会讲到有些浏览器并没有这么做。</p>
+<p>**触摸事件是不连续的，而鼠标事件是连续的。**当你将鼠标指针从元素A移动到元素B时，鼠标指针会不可避 免地掠过AB之间的元素。鼠标移动是连续的还意味着你可以通过脚本进行监控。触摸操作就不同了，你可以放开元素A，抬起手直接去碰元素B。这正是我们在下 拉菜单实例里试图支持触摸事件时遇到的问题。下拉菜单设计之初就需要连续的事件，因为它是为鼠标环境而设计的。</p>
+<p>**触摸事件比鼠标事件携带了更多的信息。**比如，触摸屏可以探测到用户手指的温度，触摸区域的半径，触摸的压力值。现在虽然没有给出这些数据，不过将来很有可能给出。因为在IE的指针事件中，已经预留了一些对应的属性。</p>
+<p>不管怎样，鼠标和触摸虽然相似但又不完全相同。</p>
+<h3 id="指针事件-v2"><a class="header-anchor" href="#指针事件-v2"></a>指针事件</h3>
+<blockquote>
+<p>事实上因为兼容性问题，**直到现在指针事件仍是不可用的，**最好还是用苹果的触摸事件。</p>
+</blockquote>
+<p>我们发现，通常情况下鼠标事件和触摸事件非常相似，但是二者还是有一些本质区别的。有了这个认识，我们就可以更好地理解微软的指针事件，以及为什么会提出指针事件。</p>
+<p>微软认为没有必要分出鼠标、触摸两种事件。不管是鼠标指针、手指（触摸）还是触控笔（也叫定位笔），统称为指针，只要通过这些指针改变了些什么，就触发指针事件。所以，下面是微软版本的等价事件：</p>
+<p><img src="http://olqa2s510.bkt.clouddn.com/compare-3-events2.png" alt="img"></p>
+<p>现在我们有了两种事件分类方式：鼠标、触摸分离的苹果版本；鼠标、触摸整合的微软版本。到目前为止， 只有IE支持微软的版本。其他浏览器都支持苹果版本。又如我们在前面看到的，Mozilla和Google正在考虑实现指针事件 （PointerEvent）。所以未来情况可能还会发生变化。</p>
+<p>Google 之所以对指针事件感兴趣，是因为它的Chromebook Pixel笔记本和微软的Surface平板电脑一样，都有触摸屏和带触摸板的键盘。二者都支持鼠标和触摸操作。如果这两种事件能统一成一种，网站对它们的支持就会变得简单很多。</p>
+<p>微软的Surface是一个触屏平板电脑，你还可以外接一个带触摸板的键盘。在访问网站时你可以在鼠标和触摸之间切换。这种情况需要通过指针事件来处理。</p>
+<p>我个人认为微软的方案是个好主意。随着时间的推移，越来越多的设备会同时支持鼠标和触摸操作。所以指 针事件是超前意识。同时指针事件可以方便地扩展以支持其他操作，而不局限于触控笔，还包括Wacom绘图板之类的设备。在将来，可以方便地囊括体感电视遥 控器、Kinect动作。这两种操作都可以操控指针、激活元素，比如激活链接。（不过，关冰箱门事件不在这个范围内。）所以，指针事件比相互分离的鼠标和 触摸事件有更好的前景。</p>
+<p>我们来试试在刚才上面三个实例中实现指针事件。</p>
+<ol>
+<li>拖放操作完美匹配：无论用户是用鼠标还是触摸，亦或是触控笔选中了一个元素，拖动它然后放下它。指针事件都可以在不增加代码的情况下支持Kinect、电视遥控和其他类似指针的操作。</li>
+<li>滚动层可以在指针事件下正常工作。在触摸交互模式下，滚动层完美工作。当使用触控笔时，用户在滚动层按下、滚动，最后释放。这个操作也讲得 通。鼠标操作和触控笔相似，但是按下笔选取滚动层这个操作有些奇怪。这也是为什么我觉得对滚动层的操作很难移植到鼠标操作。不过，无论我们使用分离的鼠 标、触摸事件还是使用指针事件，这个问题仍然存在。所以指针事件不会带来额外的问题。</li>
+<li>下拉菜单是三个实例中最复杂的一个。pointerover和pointerout看似恰是为下拉菜单设计的。但是仔细一看，完全不是。<strong>下拉菜单无法很好地在触摸交互下工作，就算换成指针事件也一样。最好的处理方法还是用点击（click）事件。</strong></li>
+</ol>
+<p>上面的实例说明，当某种交互不是专门针对某个操作模式设计的时候，指针事件就能很好地工作。在后面我 们会讨论，如果你愿意，你还是可以<strong>通过指针事件对象的pointerType属性来判断是鼠标还是触摸操作。</strong>（指针事件的初衷是统一鼠标、触摸事件，显然 这个属性与初衷相悖，不过这也是实践所需。）</p>
+<h3 id="mouseover和-pointerover"><a class="header-anchor" href="#mouseover和-pointerover"></a>mouseover和 pointerover</h3>
+<p>pointerover融合了mouseover事件和我们虚构的“touchover”事件：在鼠 标指针或用户手指滑入某个元素时触发。pointerout则是在用户手指或鼠标指针离开某个元素时触发。这就是我们在CSS章节讨论的:hover问 题，只不过是在JavaScript上下文中。</p>
+<p>我们再一次遇到了连续事件和非连续事件的本质区别。当使用鼠标从A移动到B时，用户必须经过A、B之 间的元素，别无选择。但是触摸操作就可以先触摸A，再直接触摸B，中间不会碰到其他任何元素。除非是在拖放元素，手指不能离开屏幕。此时 pointerover就很有用了：可以在pointerover时判断当前滑入的对象是不是一个合法的放置区域。</p>
+<p>除了这种情景，pointerover与mouseover还是有本质区别的。尤其是在鼠标移入某个 区域后显示额外信息这类精细的操作中，鼠标移入（mouseover）根本无法正常工作。因为此时用户的触摸操作不太可能从某个地方移入期望的区域。更可 能的情况是，用户直接触摸相应的元素，而没有任何移入（pointerover）操作。当然，额外的信息也就无法展现出来了。</p>
+<p>解决办法是，只处理mouseover和mouseout事件。因为这两个事件在触摸操作时都会被触发。仅在触摸点移入和移出时不会触发，这一点我们在后面会详细解释。虽然有了这个解决方案，但是由于悬停操作在触摸环境下实在是太另类了，所以这个方案并不完美。</p>
+<h3 id="输入模式的渐进增强"><a class="header-anchor" href="#输入模式的渐进增强"></a>输入模式的渐进增强</h3>
+<p>渐进增强就像响应式设计教导我们的，要支持各种屏幕尺寸的设备，我们必须想办法来支持多种输入模式（这里的输入模式指鼠标、触摸、键盘等输入模式）。我们暂且称之为输入模式的渐进增强。不过“输入模式的渐进增强”的概念并没有“响应式设计”那么一目了然。</p>
+<p>“响应式设计”的基本思想是以同一个设计适应多种屏幕尺寸。而“输入模式的渐进增强”在很多情况下需要我们为不同输入模式分别编写不同的脚本。比如前面讲到的滚动层实例就需要我们为鼠标、键盘和触摸写三个不同的脚本。</p>
+<p>除此之外，在用户与网站交互的过程中，屏幕尺寸通常是不会改变的。而输入模式却可以频繁改变。以微软的Surface平板为例：在浏览同一页面时，用户可以在鼠标和触摸操作之间随意切换。而你的脚本必须支持这种复杂的操作。</p>
+<p>通常情况下，相比智能手机来说，这种支持对平板电脑来说更重要。因为手机上的输入模式相对少一些。尽管如此，也不要一厢情愿地假设在浏览页面时用户只使用一种输入模式。虽然这种假设可以让Web开发者的工作变得轻松一些，但是并不能改变这骨感的现实。</p>
+<p>我们可以从响应式设计中借鉴一些思想应用到“输入模式的渐进增强”中。在“响应式设计”中有一个好的 思想：**从限制最多的情况着手，<strong>比如最小的屏幕。类似的，D-pad可以算是最局限的输入模式了。它由四个方向键和一个OK键组成。好消息是，D-pad的 按键完全和普通键盘兼容：触发相同的事件、使用相同的键码。所以我们不需要区分D-pad和普通键盘。坏消息是，尽管如此，它们还是很有局限性。更坏的消息是，在这方面我也没有什么指导意见可以分享。因为“输入模式的渐进增强”这个概念太新了，以至于我们</strong>还没有找到普适的应对策略。**而且连一些可以帮助大家 的好点子都很少。你可以把这视为一个问题，也可以视为一个挑战。谁知道呢，没准你就是那个教会这个世界如何实现“输入模式的渐进增强”的人。</p>
+<h3 id="判断当前的交互模式"><a class="header-anchor" href="#判断当前的交互模式"></a>判断当前的交互模式</h3>
+<p>“输入模式的渐进增强”可能需要你去检测用户的当前交互模式。尽管很困难，但这在技术上可以实现。然而，我们真正的问题是，它究竟能提供哪些有用的信息呢？</p>
+<p>让我们再次以微软Surface的用户为例。你可以检测到用户正在使用鼠标。但这是否意味着他们将在 整个会话中一直使用鼠标呢?不尽其然。事实上，他们很有可能、或者至少是偶尔地会使用键盘或是触摸屏，又或者干脆把键盘和鼠标触控板折叠起来，只使用触摸 屏。假如发生了以上任一情况，那么你的互动模式检测的价值何在呢？</p>
+<p>你唯一可以确定的合理判断是，当用户以某种模式开始某个动作时，他们不会在中途切换模式。因此，如果 你检测到用户正移动鼠标进行拖放，那么他们不太可能在拖曳过程中切换到触摸操作。但是，一旦拖放完成，用户就可能选择切换到触摸、或继续使用鼠标、亦或使 用键盘，来进行下一步操作。</p>
+<p>**你必须确保所有交互在任何交互模式下均可实现，**这一点至关重要。鼠标、触摸甚至键盘都应该可以执行拖放操作。一旦做到了这一点，那么用户正在使用何种交	互模式都将无关紧要。</p>
+<p>让我们假设，你有很好的理由去寻找当前的交互模式。也许你想收集一些数据来研究用户的模式使用偏好。那么我们来看一下几种可能性。</p>
+<ul>
+<li>指针事件最简单明了：它具备pointerType属性，其值可以是mouse、touch或pen。找到当前值即可知道用户的操作。另一 个简单的情况：当有任何按键事件触发时，用户一定会使用键盘。但这与未来的交互无关——用户仍然可能随时转换到键盘或是触摸。但无论如何，这还是提供了一 些有用的信息。</li>
+<li>与之类似的，当一个触摸事件触发时，你可以肯定你的用户在当下一定正在使用触摸交互模式。同理，这并不影响未来的交互，但至少提供了一些信息。</li>
+<li>对于鼠标事件要格外小心：当用户触摸屏幕时，鼠标事件也会触发，因此检测交互模式并不适用于鼠标事件。检测鼠标使用的方法就是排除其他交互模式。如果用户没有使用触摸或键盘，那么他有可能正在使用鼠标。</li>
+</ul>
+<p>目前有很多方法可以检测到一个触摸交互模式是否可用。其中有一种由Modernizr普及，但可惜并不十分可靠的方法是：</p>
+<pre><code class="language-javascript">var hasTouch = !!('ontouchstart' in window);
+</code></pre>
+<p>“如果window对象有ontouchstart属性，说明浏览器支持触摸事件，我们就可以放心地 使用。”这可能正是你所想的。前半句的结论是“虽然正确”，但是，支持触摸事件的浏览器并不一定运行在具有触摸屏的设备上。比如，黑莓6的浏览器支持触摸 事件，但它却运行在一个非触摸设备上。老版本的Chrome浏览器也有类似的问题。并且，依赖ontouchstart的方法让IE变得无能为力。</p>
+<p>唯一安全的检测浏览器支持触摸事件、运行在触摸设备上并且用户正在使用触摸交互的方法就是看是否确实有触摸或指针事件被触发。</p>
+<pre><code class="language-javascript">    var hasTouch = false;
+    document.ontouchstart = function () { 
+        hasTouch = true;
+    }
+    document.onpointerdown = function (e) { 
+        if (e.pointerType === 'touch') {
+            hasTouch = true;
+        }
+    }
+</code></pre>
+<p><strong>最好的办法是依次检测各种交互模式：首先从指针事件开始。pointerType属性可以提供有用的信息。然后检测触摸事件。后面我们会看到触摸操作还会触发鼠标事件，所以只有当触摸事件没有触发时，才考虑鼠标事件。最后轮到键盘。</strong></p>
+<pre><code class="language-javascript">    var interactionMode;
+    document.onpointerdown = function (e) { 
+        interactionMode = e.pointerType;
+    }
+    document.ontouchstart = function () {
+        if (!interactionMode) {
+            interactionMode = 'touch';
+        }
+    }
+    document.onmousedown = function () {
+        if (!interactionMode) {
+            interactionMode = 'mouse';
+        }
+    }
+    document.onkeydown = function () { 
+        if (!interactionMode) {
+            interactionMode = 'keyboard';
+        }
+    }
+</code></pre>
+<p>登录界面或类似的地方是运行上面代码的理想场景。在这个场景中，用户必须与网站交互。当用户登录时， 用类似上面的代码检测用户正在使用哪种交互方式。要注意，这也只能说明用户在登录时使用的交互模式，并不是整个交互过程都会使用这个模式。虽然信息有限， 但这段代码还是有一定预测功能的。</p>
+<p>尽管上面的方法无法预测用户接下来会使用哪种交互模式，但是目前最好的处理不同交互模式的方法还是<strong>为鼠标、键盘和触摸编写不同的代码。</strong></p>
+<h2 id="补充"><a class="header-anchor" href="#补充"></a>补充</h2>
+<h3 id="触摸事件的级联"><a class="header-anchor" href="#触摸事件的级联"></a>触摸事件的级联</h3>
+<p>移动浏览器同时支持触摸事件和鼠标事件，会导致一个触摸动作触发多个事件。</p>
+<ul>
+<li>触摸（Tap）：touchstart/pointerdown、touchend/pointerup、mouseover、mousemove、mousedown、mouseup、click、:hover样式（需要注意的是为了兼容mouseover，抬起手指并不会触发mouseout，再次触摸才会）</li>
+<li>滑动（Swipe）：touchstart、touchmove、touchend、scroll</li>
+<li>缩放（Pinch）：touchstart、touchmove、touchend、scroll，可能还有resize</li>
+<li>双触（double-tap）：touchstart、两次touchend、scroll，可能还有resize</li>
+<li>按住（touchhold）：touchstart、touchend，有些浏览器还有contextmenu</li>
+</ul>
+<h3 id="剖析click"><a class="header-anchor" href="#剖析click"></a>剖析click</h3>
+<p>300毫秒问题，无解。（Chrome支持但苹果不可能支持）</p>
+]]></content>
+      
+        <categories>
+            
+            <category> WebApp </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> essay </tag>
+            
+            <tag> 触摸事件 </tag>
+            
+            <tag> 指针事件 </tag>
+            
+            <tag> 交互 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[移动开发入门概述]]></title>
+      <url>https://alexzhong22c.github.io/2017/02/24/webapp-intro/</url>
+      <content type="html"><![CDATA[<p><strong>PPK的《移动Web手册》</strong> 是对移动Web现状（2014年夏）的一个系统检阅，市场上有不少公司将赌注放在HTML5上，因此对于HTML5在移动Web上的应用多有炒作，但实际上如何呢？看完本书能让你有个清醒的认识。</p>
+<p>移动浏览器虽然大都实现了桌面浏览器的功能，但实际上移动设备上的情况更加复杂，而且由于Android系统的碎片化直接导致浏览器的碎片化，它们对于一些和桌面不同情况的处理，以及一些最新特性的支持都是不尽相同的。</p>
+<p><strong>所以HTML5在移动Web上的兼容性目前是很差的，</strong> 还有像触摸事件向指针事件标准化的过渡，估计最少需要5-10年才能达到一个比较理想的状态。</p>
+<a id="more"></a>
+<h2 id="浏览器相关"><a class="header-anchor" href="#浏览器相关"></a>浏览器相关</h2>
+<h3 id="浏览器的类型"><a class="header-anchor" href="#浏览器的类型"></a>浏览器的类型</h3>
+<ul>
+<li>内置浏览器</li>
+<li>可下载浏览器</li>
+<li>代理浏览器</li>
+<li>webview</li>
+</ul>
+<p>大多数内置浏览器都被紧密集成到底层的操作系统中，也就是说，无法单独升级浏览器。因此，为了得到新的Safary版本，你必须升级IOS。内置浏览器都有不同的内核比如：安卓是webkit、winphone是ie、ios是safari，大致上就是这样。</p>
+<p>可下载浏览器，顾名思义用户可下载安装的浏览器，见的多的就是firefox、chrome了、360等。</p>
+<p>代理浏览器是指服务端进行对页面的渲染，再把结果发送给客户端进行显示，比较少见。代理浏览器与完备浏览器（full browser）相对，代表为opera mini、UC mini。</p>
+<p>WebView是留给原生应用的一个操作系统浏览接口。苹果不允许在IOS设备上安装其他渲染引擎。（其他平台是可以的）因此，其他浏览器要想在IOS上安装就必须用苹果的WebView。IOS上的Chrome就是这样的，同样的还有Opera Coast。大体上，WebView是独立的程序，用了内置浏览器很多底层的组件（比如渲染引擎），但是在其他方面可能会有所不同。<strong>如果希望你的页面能在WebView里跑起来的话，你最好在WebView上测试一下。</strong></p>
+<p>补充：</p>
+<blockquote>
+<p>代理浏览器的原理：当用户请求页面，它不会发送一个普通HTTP请求而是通过加密链接发送特殊请求到一个特殊的代理服务器。代理服务器来抓取用户希望访问的内容，渲染页面，然后压缩渲染的页面成为某种图片，类似于PDF，然后代理服务器将这个文件发到客户端。</p>
+<ul>
+<li>好处：给用户节省流量。</li>
+<li>弊端：页面内的javascript不能正常工作。</li>
+</ul>
+<p>随着现在wifi的普及等原因，代理浏览器用得很少。</p>
+</blockquote>
+<hr>
+<h3 id="手机上的webkit"><a class="header-anchor" href="#手机上的webkit"></a>手机上的WebKit</h3>
+<p>先列出不使用WebKit的浏览器：</p>
+<blockquote>
+<p>1. IE Mobile(即将替换为edge)，使用Trident
+2. Opera Mini使用Presto，但是最终会换成Blink
+3. Chrome浏览器用Blink
+4. Firefox Mobile和Firefox OS使用Gecko
+5. UC Mini、Nokia Xpress还有Jolla的Sailfish OS上的内置浏览器也用的是Gecko</p>
+</blockquote>
+<p>任何没在上面提到的浏览器都用WebKit。乍一看，这么多浏览器都用WebKit的事实对于Web开发者似乎是一个强大的支持，不幸的是，一个浏览器用Webkit并不意味着它跟其他任何基于Webkit的浏览器一样。实际上，**它们有很大的不同，依赖于操作系统、键盘、鼠标还有触屏交互。平台所有者必须提供所有这些功能。**手机上的Webkit名存实亡。</p>
+<p>很多浏览器用着差不多一样的渲染引擎但是在细节上却大不相同。你最好在所有不同的基于WebKit的浏览器上测试你的网站。</p>
+<hr>
+<h3 id="测试android浏览器"><a class="header-anchor" href="#测试android浏览器"></a>测试Android浏览器</h3>
+<p>对于Android设备的浏览器，有三个必须测试的浏览器：</p>
+<blockquote>
+<p>1. 安卓WebKit4，富含不同的设备和不同版本的安卓系统。一个专门的设备实验室需要大概6到8个这样的来自不同厂商的设备。一个小型实验室必须拥有2到3个：三星、HTC和一个其他厂商的设备
+2. Google Chrome。如果你的设备上没有，下载一个。
+3. 三星Chrome（三星字Galaxy S4发布以来，三星开始使用他自己开发的基于Chromium的一款浏览器作为内置浏览器，因此出现三星Chrome）。你讲需要购买一个2013年获以后发布的三星高端手机——类似Galaxy S4或更新的设备</p>
+</blockquote>
+<h2 id="视口相关"><a class="header-anchor" href="#视口相关"></a>视口相关</h2>
+<h3 id="css像素和设备像素"><a class="header-anchor" href="#css像素和设备像素"></a>css像素和设备像素</h3>
+<p>设备像素：设备屏幕的物理像素。</p>
+<p>CSS像素：为Web开发者创造的，在CSS和JS中使用的一个抽象层。CSS像素和设备像素的比例取决于屏幕是否高DPI和用户缩放的比例。</p>
+<blockquote>
+<p>css像素是专门为我们Web开发者创造的一个抽象层。当在使用css和javascript的时候，你并不在意一个css像素跨越了多少个设备像素。你开心地将这个依赖于屏幕特性和用户缩放程度的复杂计算交给了浏览器。</p>
+<p>用户放大得越大，一个css像素覆盖的设备像素越多。</p>
+</blockquote>
+<hr>
+<h3 id="布局视口"><a class="header-anchor" href="#布局视口"></a>布局视口</h3>
+<p>CSS布局会根据它来计算，并被它约束。在手机上，为了容纳为桌面浏览器设计的网站，**默认的布局视口宽度远大于屏幕的宽度。**为了让用户看到网站全貌，它会缩小网站。</p>
+<pre><code class="language-html">&lt;!-- width属性设置布局视口的宽度为特定的值 --&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no&quot;&gt;
+</code></pre>
+<p>但在另一篇文章里面，并不推荐设置width属性。</p>
+<h3 id="视觉视口"><a class="header-anchor" href="#视觉视口"></a>视觉视口</h3>
+<p>它是用户正在看到的网站的区域。这个视口与设备屏幕一样宽。</p>
+<p>用户可以缩放来操作视觉视口，同时不会影响布局视口，布局视口仍保持在原来的宽度。视觉视口与设备屏幕一样宽，并且它的CSS像素的数量会随着用户缩放而改变。</p>
+<h3 id="理想视口"><a class="header-anchor" href="#理想视口"></a>理想视口</h3>
+<p>对于特定设备上的特定浏览器的布局视口的一个理想尺寸，在这个尺寸下，用户刚进入页面时不再需要缩放，拥有最理想的浏览和阅读的宽度。</p>
+<hr>
+<h3 id="缩放"><a class="header-anchor" href="#缩放"></a>缩放</h3>
+<p>桌面浏览器的缩放仅改变内容尺寸，不改变布局视口；移动端缩放则整体改变。</p>
+<p><strong>不要禁止缩放！</strong> 禁止缩放是邪恶的，并且浏览器可以关闭禁止缩放功能。</p>
+<p>禁止缩放的代码为：</p>
+<pre><code class="language-html">&lt;meta name=&quot;viewport&quot; content=&quot;user-scalable=no&quot;&gt;
+</code></pre>
+<h3 id="分辨率"><a class="header-anchor" href="#分辨率"></a>分辨率</h3>
+<p>物理分辨率：设备每英寸内点数（DPI）</p>
+<p>设备像素比：设备像素个数和理想视口的比（DPR）</p>
+<p>dppx和dpi：每一个像素的点数。JS中的<code>window.devicePixelRatio</code>和媒体查询的<code>device-pixel-ratio</code>的单位。IE不支持，因此要使用dpi单位：</p>
+<pre><code class="language-javascript">if(window.devicePixelRatio) {
+    // DPR大于等于2时执行
+}
+
+@media all and((-webkit-min-device-pixel-ratio:2), (min-resolution:192dpi)) {
+    // DPR大于等于2时生效
+}
+</code></pre>
+<p>1dppx = 96dpi：一英寸对应CSS中96个像素。</p>
+<h3 id="meta视口标签："><a class="header-anchor" href="#meta视口标签："></a>meta视口标签：</h3>
+<p>meta视口标签存在的主要目的是让布局视口的尺寸和理想视口的尺寸匹配。</p>
+<pre><code>&lt;meta name=&quot;viewport&quot; content=&quot;name=value,name=value&quot;&gt;
+</code></pre>
+<p>其中可用的name为：</p>
+<ul>
+<li>width：device-width适用于大多数情况。</li>
+<li>initial-scale：一般设为1，为了兼容应同时设置width=device-width。</li>
+<li>minimum-scale</li>
+<li>maximum-scale</li>
+<li>user-scalable</li>
+</ul>
+<h3 id="媒体查询"><a class="header-anchor" href="#媒体查询"></a>媒体查询</h3>
+<p>媒体类型：目前只有print被正确实现。一般使用all。</p>
+<blockquote>
+<p>Web开发者希望区分能力弱和能力强的浏览器，而弱浏览器为了避免探测开始伪装自己。</p>
+<p>过去的浏览器最多可处理WAP和HTML的子集XHTML-MP，它们大都遵循标准并实现handheld，Web开发者为这些类型提供简单的样式。而新的现代移动浏览器出现后，它们支持全部样式、JS，因此宁愿不实现handheld而获得和桌面浏览器一样的待遇。</p>
+</blockquote>
+<h3 id="javascript"><a class="header-anchor" href="#javascript"></a>JavaScript</h3>
+<p>媒体查询与JavaScript属性相对应。</p>
+<ul>
+<li>物理屏幕分辨率：screen.width/height（有兼容问题不建议使用）</li>
+<li>布局视口：document.documentElement.clientWidth</li>
+<li>视觉视口：window.innerWidth</li>
+<li>理想视口：screen.width/height（有兼容问题不建议使用）</li>
+<li>设备像素比：window.devicePixelRatio</li>
+<li>屏幕方向：window.orientation</li>
+</ul>
+<p><code>document.documentElement.clientWidth/Height</code>返回的是布局视口的尺寸，被普遍支持。</p>
+<p><code>window.innerWidth/Height</code>返回视觉视口的尺寸。接近被普遍支持。</p>
+<p><code>screen.width/height</code>返回理想视口的尺寸。有很严重的浏览器兼容性问题，	不建议使用。</p>
+<h2 id="css相关"><a class="header-anchor" href="#css相关"></a>CSS相关</h2>
+<p>移动浏览器与桌面浏览器对CSS支持的差异：</p>
+<ul>
+<li>桌面用例在移动端不存在。如hover。</li>
+<li>视口不统一。如单位vw和vh。</li>
+<li>对独立可滚动层的需求在移动设备上更难实现。如background-attachment。</li>
+<li>硬件限制。在老设备上transition和animation可能无法使用。</li>
+</ul>
+<p>以下属性都<strong>不建议</strong>在移动Web上使用:</p>
+<h3 id="position-fixed"><a class="header-anchor" href="#position-fixed"></a>position:fixed</h3>
+<p>此属性标准没有支持缩放。</p>
+<h3 id="overflow-auto"><a class="header-anchor" href="#overflow-auto"></a>overflow:auto</h3>
+<p>多个可滚动层体验不好，并且移动上默认不显示滚动条会漏掉内容。</p>
+<p><code>-webkit-overflow-scrolling:auto</code>：平滑滚动。</p>
+<h3 id="background-attachment"><a class="header-anchor" href="#background-attachment"></a>background-attachment</h3>
+<p>三个可选值scroll、fixed、local。会创建过多的可滚动层，影响性能。</p>
+<h3 id="尺寸单位vw和vh"><a class="header-anchor" href="#尺寸单位vw和vh"></a>尺寸单位vw和vh</h3>
+<p>非常冷门的单位，本来也没什么人用，这里就不多说了。</p>
+<h3 id="active和-hover"><a class="header-anchor" href="#active和-hover"></a>:active和:hover</h3>
+<p><code>:hover</code>在桌面浏览器用的过多，因此移动设备必须支持，但实际上在用户触摸元素时触发，引起事件级联。</p>
+<p><code>:active</code>相对支持的不好，可以和<code>:focus</code>同时使用，后者支持的较好。</p>
+<h3 id="transition和animation"><a class="header-anchor" href="#transition和animation"></a>transition和animation</h3>
+<p>实际上浏览器支持的很好，但这两个属性会用到GPU，而移动设备GPU很糟糕，至少是早期的很糟糕。</p>
+<h3 id="css过度和动画"><a class="header-anchor" href="#css过度和动画"></a>css过度和动画</h3>
+<p>只要你使用了过度和动画，就在你能找到的最老、最差的设备上进行测试。它们的问题不在浏览器，而在<strong>设备</strong>，浏览器对两者的支持都很好。但是为了达到非常平滑的效果，浏览器必须借助设备GPU的计算能力。在高端智能手机上不成问题，但对于早期和廉价的手机来说，它们可能根本没有响应的硬件和系统API。这就导致最终的动画效果很生硬。</p>
+<h2 id="触摸和指针事件"><a class="header-anchor" href="#触摸和指针事件"></a>触摸和指针事件</h2>
+<p>触摸事件为苹果发明，它将触摸和鼠标两种行为区分开，而微软的指针事件则将它们合并，此标准更具前瞻性，现已被W3C采纳为正式标准。</p>
+<p>内容详见另一篇文章：</p>
+<h2 id="克服过时的惯性思维"><a class="header-anchor" href="#克服过时的惯性思维"></a>克服过时的惯性思维</h2>
+<ul>
+<li>浏览器探测。事实上无论是浏览器探测还是特性探测在移动浏览器上都可能表现不佳。</li>
+</ul>
+<blockquote>
+<p>浏览器只会返回它支持某项特性，但不会告诉你支持程度有多差。</p>
+</blockquote>
+<ul>
+<li>Javascript脚本库。**在编写小功能时不要依赖脚本库而是应该用原生JS实现。 **</li>
+</ul>
+<h2 id="移动web的未来"><a class="header-anchor" href="#移动web的未来"></a>移动Web的未来</h2>
+<h3 id="html5-vs-原生应用"><a class="header-anchor" href="#html5-vs-原生应用"></a>HTML5 vs 原生应用</h3>
+<blockquote>
+<p>全面追赶原生应用并不是Web技术的关键所在。我感觉我们应该聚焦在Web擅长的方面，并将它们做得更好。或者找出我们能够做好的方面，将它们做得超越原生应用。</p>
+</blockquote>
+<h3 id="模拟原生应用"><a class="header-anchor" href="#模拟原生应用"></a>模拟原生应用</h3>
+<ul>
+<li>网络连通性和AppCache。离线存储对移动Web应用非常有意义，但是AppCache简直是个垃圾。新的Service Worker试图取代它。</li>
+<li>安装到主屏幕。被支持的并不好。</li>
+<li>设备API。第一支持不完善，标准总是落后于现实；第二有安全问题，需要授权，而像安卓的用户授权是行不通的。</li>
+</ul>
+<blockquote>
+<p>当你安装一个安卓应用时，系统会让你授权该应用可以具备哪些权限。这个设计的失败不仅在于我们需要更精细的权限控制，而且还在于它出现的时机不对：当用户安装某个应用时，用户只想尽快的用上它，他们会同意任何事情。</p>
+</blockquote>
+<h3 id="模拟web"><a class="header-anchor" href="#模拟web"></a>模拟Web</h3>
+<p>Applink，直达应用的深层页面。（注：Android M和iOS 9都有类似的更新支持这项特性）</p>
+<h3 id="分享应用"><a class="header-anchor" href="#分享应用"></a>分享应用</h3>
+<p>PPK的脑洞：Web应用由于其良好的兼容性，应该让它可以通过蓝牙、NFC等在不同设备之间共享。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> WebApp </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> H5 </tag>
+            
+            <tag> essay </tag>
             
         </tags>
         
@@ -2880,6 +3292,331 @@ Legend Field Element））代表一个用于表示它的父元素<code>&lt;field
         <tags>
             
             <tag> H5 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[js函数基础回顾]]></title>
+      <url>https://alexzhong22c.github.io/2017/01/13/js-function/</url>
+      <content type="html"><![CDATA[<p>此文用于快速回顾，不适合用来入门。</p>
+<a id="more"></a>
+<h2 id="创建函数对象的三种方法"><a class="header-anchor" href="#创建函数对象的三种方法"></a>创建函数对象的三种方法</h2>
+<h3 id="函数声明"><a class="header-anchor" href="#函数声明"></a>函数声明</h3>
+<p>就是对函数进行普通的声明</p>
+<pre><code>function add(a, b) {
+    return a + b;
+}
+</code></pre>
+<h3 id="函数表达式"><a class="header-anchor" href="#函数表达式"></a>函数表达式</h3>
+<ul>
+<li>将函数赋值给变量</li>
+</ul>
+<pre><code>// function variable
+var add = function(a, b) {
+    // body...
+};
+</code></pre>
+<ul>
+<li>立即执行函数，把匿名函数用括号括起来，再直接调用。</li>
+</ul>
+<pre><code>// IEF(Immediately Executed Function)
+(function() {
+    // body...
+})();
+</code></pre>
+<ul>
+<li>函数对象作为返回值</li>
+</ul>
+<pre><code>return function() {
+    // body...
+};
+</code></pre>
+<ul>
+<li>命名式函数表达式</li>
+</ul>
+<pre><code>//NFE(Named Function Expression)
+var add = function foo(a, b) {
+    // body...
+};
+</code></pre>
+<p>这里大家肯定会好奇，这个函数怎么调用？到底用哪个名字呢？</p>
+<p>做一个测试：</p>
+<pre><code>var func = function nfe() {};
+console.log(func === nfe);
+// 在 IE6~8，得到 false
+// 在 IE9+ 及现代浏览器中 Uncaught ReferenceError: nfe is not defined
+</code></pre>
+<p>那么命名函数表达式有什么使用场景呢？</p>
+<ul>
+<li>一般用于调试方便，如果使用匿名函数，执行的时候看不到函数名，命名函数表达式是可以看到函数名的。</li>
+<li>或者在递归时，使用名字调用自己。</li>
+</ul>
+<p>但是这两种用法都不常见。</p>
+<h3 id="function-构造器"><a class="header-anchor" href="#function-构造器"></a>Function 构造器</h3>
+<p>除了函数声明、函数表达式。还有一种创建函数对象的方式，是使用函数构造器。</p>
+<pre><code>var func = new Function('a','b','console.log(a+b);');
+func(1,2);//3
+
+var func2 = Function('a','b','console.log(a+b);');
+func2(1,2);//3
+</code></pre>
+<p>Function 中前面的参数为后面函数体的形参，最后一个参数为函数体。可以看到传入的都是字符串，这样的创建函数对象的方法是不安全的。</p>
+<p>还有一点，Function 构造器的得到的函数对象，拿不到外层函数的变量，但是可以拿到全局变量。它的作用域与众不同，这也是很少使用的原因之一。</p>
+<h3 id="三种方法的对比"><a class="header-anchor" href="#三种方法的对比"></a>// 三种方法的对比:</h3>
+<p><img src="http://olqa2s510.bkt.clouddn.com/%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95%E5%AF%B9%E6%AF%94.png" alt=""></p>
+<h2 id="变量-函数的声明前置"><a class="header-anchor" href="#变量-函数的声明前置"></a>变量 &amp; 函数的声明前置</h2>
+<p>举两个例子</p>
+<p>例1，函数声明：</p>
+<pre><code>var num = add(1,2);
+console.log(num);
+
+function add(a, b) {
+    return a + b;
+}
+</code></pre>
+<p>例2，函数表达式：</p>
+<pre><code>var num = add(1, 2);
+console.log(num);
+
+var add = function(a, b) {
+    return a + b;
+};
+</code></pre>
+<p>例1中得到的结果是 3，而例2中是 <code>Uncaught TypeError: add is not a function</code>。</p>
+<p>因为函数和变量在声明的时候，会被前置到当前作用域的顶端。例1将函数声明<code>function add(a, b)</code>前置到作用域前端，例2将声明<code>var add</code>前置到其作用域的前端了，并没有赋值。<strong>赋值的过程是在函数执行到响应位置的时候才进行的。</strong></p>
+<h2 id="调用方式"><a class="header-anchor" href="#调用方式"></a>调用方式</h2>
+<ul>
+<li>直接调用</li>
+</ul>
+<pre><code>foo();
+</code></pre>
+<ul>
+<li>对象方法</li>
+</ul>
+<pre><code>o.method();
+</code></pre>
+<ul>
+<li>构造器</li>
+</ul>
+<pre><code>new Foo();
+</code></pre>
+<ul>
+<li>call/apply/bind</li>
+</ul>
+<pre><code>func.call(o);
+</code></pre>
+<h2 id="函数属性"><a class="header-anchor" href="#函数属性"></a>函数属性</h2>
+<h3 id="arguments属性"><a class="header-anchor" href="#arguments属性"></a>arguments属性</h3>
+<p>函数的arguments属性使函数可以处理可变数量的参数。 <strong>arguments</strong> 对象的 <strong>length</strong> 属性包含了传递给函数的参数数目。 <strong>arguments</strong> 对象中包含的各个参数的访问方式与数组元素的访问方式相同。</p>
+<pre><code>function ArgTest(arg1, arg2){
+   var s = &quot;&quot;;
+   s += &quot;The individual arguments are: &quot;
+   for (n = 0; n &lt; arguments.length; n++){
+      s += ArgTest.arguments[n];
+      s += &quot; &quot;;
+   }
+   return(s);
+}
+console.log(ArgTest(1, 2, &quot;hello&quot;));
+// Output: The individual arguments are: 1 2 hello
+</code></pre>
+<h3 id="caller属性"><a class="header-anchor" href="#caller属性"></a>caller属性</h3>
+<blockquote>
+<p>functionName.caller</p>
+</blockquote>
+<p><em>functionName</em> 对象是任何正在执行的函数的名称。</p>
+<p><strong>caller</strong> 属性只有当函数正在执行时才被定义。  如果函数是从 JavaScript 程序的顶层调用的，则 <strong>caller</strong> 包含 <strong>null</strong>。</p>
+<p>如果在字符串上下文中使用 <strong>caller</strong> 属性，则其结果和 <em>functionName</em>.<strong>toString</strong> 相同，也就是说，将显示函数的反编译文本。</p>
+<p>下面的示例阐释了 <strong>caller</strong> 属性的用法：</p>
+<pre><code>function CallLevel(){
+   if (CallLevel.caller == null)
+      return(&quot;CallLevel was called from the top level.&quot;);
+   else
+      return(&quot;CallLevel was called by another function.&quot;);
+}
+
+console.log(CallLevel());
+// Output: CallLevel was called from the top level.
+</code></pre>
+<h3 id="apply属性-方法"><a class="header-anchor" href="#apply属性-方法"></a>apply属性(方法)</h3>
+<blockquote>
+<p>调用函数，并用指定对象替换函数的 <strong>this</strong> 值，同时用指定数组替换函数的参数。</p>
+<p>apply([thisObj[,argArray]])</p>
+<p><code>thisObj</code>：可选。要用作 this 对象的对象。即调用这个函数的对象。</p>
+<p><code>argArray</code>：可选。要传递到函数的一组参数。</p>
+</blockquote>
+<h3 id="call属性-方法"><a class="header-anchor" href="#call属性-方法"></a>call属性(方法)</h3>
+<p>apply 后面的参数为数组，而call 为扁平化传参</p>
+<pre><code>function foo(x, y) {
+    console.log(x, y, this);
+}
+
+foo.call(100, 1, 2); //1 2 Number {[[PrimitiveValue]]: 100}
+foo.apply(true, [3, 4]); //3 4 Boolean {[[PrimitiveValue]]: true}
+foo.apply(null); //undefined undefined Window
+foo.apply(undefined); //undefined undefined Window
+</code></pre>
+<p>传入 null/undefined 时，实际为 Window 对象
+在严格模式下：上述代码最后两行分别输出 null, undefined</p>
+<h3 id="bind属性-方法"><a class="header-anchor" href="#bind属性-方法"></a>bind属性(方法)</h3>
+<ol>
+<li>下面的代码演示如何使用 <strong>bind</strong> 方法。</li>
+</ol>
+<pre><code>// Define the original function.
+var checkNumericRange = function (value) {
+    if (typeof value !== 'number')
+        return false;
+    else
+        return value &gt;= this.minimum &amp;&amp; value &lt;= this.maximum;
+}
+
+// The range object will become the this value in the callback function.
+var range = { minimum: 10, maximum: 20 };
+
+// Bind the checkNumericRange function.
+var boundCheckNumericRange = checkNumericRange.bind(range);
+
+// Use the new function to check whether 12 is in the numeric range.
+var result = boundCheckNumericRange (12);
+document.write(result);
+console.log(result);	// true
+</code></pre>
+<ol>
+<li>在下面的示例中，thisArg 对象与包含原始方法的对象不同。</li>
+</ol>
+<pre><code>// Create an object that contains the original function.
+// Offer the range: [50,100]
+var originalObject = {
+    minimum: 50,
+    maximum: 100,
+    checkNumericRange: function (value) {
+        if (typeof value !== 'number')
+            return false;
+        else
+            return value &gt;= this.minimum &amp;&amp; value &lt;= this.maximum;
+    }
+}
+
+// Check whether 10 is in the numeric range.
+var result = originalObject.checkNumericRange(10);
+console.log(result + &quot; &quot;);
+// Output: false
+
+// The range object supplies the range for the bound function.
+// Offer the range: [10,20]
+var range = { minimum: 10, maximum: 20 };
+
+// Create a new version of the checkNumericRange function that uses range.
+var boundObjectWithRange = originalObject.checkNumericRange.bind(range);
+
+// Check whether 10 is in the numeric range.
+var result = boundObjectWithRange(10);
+console.log(result);
+// Output: true
+</code></pre>
+<p>显然后者更加灵活一点。</p>
+<p>再来一个例子：</p>
+<pre><code>this.x = 9;
+var module = {
+    x: 81,
+    getX: function() {
+        return console.log(this.x);
+    }
+};
+
+module.getX(); //81
+// 函数的调用者为module，函数的this指向module
+
+
+var getX = module.getX;
+getX(); //9
+// var getX = module.getX; 将这个方法赋值给一个全局变量，这时 this 指向了 window
+// 函数的调用者为window，函数的this指向window
+
+var boundGetX = getX.bind(module);
+boundGetX(); //81
+// 应用bind,函数的调用者为window，函数的this指向module
+</code></pre>
+<p>一般情况下，谁调用函数，函数的this就指向谁。</p>
+<p><code>bind</code> 主要用于改变函数中的 <code>this</code></p>
+<ul>
+<li><code>module.getX();</code>直接通过对象调用自己的方法，结果是 81</li>
+<li><code>var getX = module.getX;</code> 将这个方法赋值给一个全局变量，这时 this 指向了 window，所以结果为 9</li>
+<li><code>var boundGetX = getX.bind(module);</code> 使用 bind 绑定了自己的对象，这样 this 仍然指向 module 对象，所以结果为 81</li>
+</ul>
+<ol>
+<li>以下代码演示如何使用 <em>arg1[,arg2[,argN]]]</em> 参数。绑定函数将 <strong>bind</strong> 方法中指定的参数用作第一个参数和第二个参数。在调用绑定函数时指定的任何参数将用作第三个、第四个参数（依此类推）。</li>
+</ol>
+<pre><code>// Define the original function with four parameters.
+var displayArgs = function (val1, val2, val3, val4) {
+    console.log(val1 + &quot; &quot; + val2 + &quot; &quot; + val3 + &quot; &quot; + val4);
+}
+
+var emptyObject = {};
+
+// Create a new function that uses the 12 and &quot;a&quot; parameters
+// as the first and second parameters.
+var displayArgs2 = displayArgs.bind(emptyObject, 12, &quot;a&quot;);
+
+// Call the new function. The &quot;b&quot; and &quot;c&quot; parameters are used
+// as the third and fourth parameters.
+displayArgs2(&quot;b&quot;, &quot;c&quot;);
+// Output: 12 a b c 
+</code></pre>
+<h4 id="bind-与-currying"><a class="header-anchor" href="#bind-与-currying"></a>bind 与 currying</h4>
+<p>bind 可以使函数柯里化，那么什么是柯里化？</p>
+<blockquote>
+<p>在计算机科学中，柯里化（Currying）是把接受多个参数的函数变换成接受一个单一参数(最初函数的第一个参数)的函数，并且返回 <strong>接受</strong>余下的参数且<strong>返回</strong>结果的新函数 的技术。这个技术由 Christopher Strachey 以逻辑学家 Haskell Curry 命名的，尽管它是 Moses Schnfinkel 和 Gottlob Frege 发明的。</p>
+</blockquote>
+<pre><code>function add(a, b, c) {
+    return a + b + c;
+}
+
+var func = add.bind(undefined, 100);
+func(1, 2); //103
+
+var func2 = func.bind(undefined, 200);
+func2(10); //310
+</code></pre>
+<p>add 函数拥有 3 个参数。我们想先传入一个参数，再去传其他参数。</p>
+<p><code>var func = add.bind(undefined, 100);</code>add 函数对象调用 bind 方法，由于不需要将 this 指向原来的 add 函数对象，所以第一个参数写为 undefined 或 null。第二个参数 100 传给了 add 函数中的形参 a，并赋值给一个新的函数对象 func。</p>
+<p>这时，<code>func(1, 2)</code> 即相当于传入后两个参数，所以结果为 103。</p>
+<p>同理，基于 func 可以创造一个函数 func2。它只用传最后一个参数。</p>
+<h4 id="bind-与-new"><a class="header-anchor" href="#bind-与-new"></a>bind 与 new</h4>
+<pre><code>function foo() {
+    this.b = 100;
+    return this.a;
+}
+
+console.log(foo()); //undefined
+
+var func = foo.bind({
+    a: 1
+});
+
+console.log(func()); //1
+console.log(new func()); //foo {b: 100}
+</code></pre>
+<p>对于使用了 <code>new func()</code> 这种方式创建对象，其返回值<code>应为一个对象。</code></p>
+<p>而原函数 foo 的返回值不是对象，所以会直接忽视这个 return 方法。而是变为 <code>return this;</code>。并且 this 会被初始化为一个空对象，这个空对象的原型指向 foo.prototype。所以后面的 bind 是不起作用的。</p>
+<p>这里面这个 this 对象包含一个属性 <code>b = 100</code>。所以返回的是对象 <code>{b: 100}</code>。</p>
+<p>mdn有提到，bind不要和构造函数一起用，各浏览器可能结果不一样。mdn建议不要这样用。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> JavaScript </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 回顾 </tag>
+            
+            <tag> 函数属性 </tag>
             
         </tags>
         

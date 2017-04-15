@@ -2,6 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://alexzhong22c.github.io/2017/01/13/js-function/</loc>
+    
+    <lastmod>2017-04-10T12:57:02.227Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://alexzhong22c.github.io/2017/02/24/webapp-intro/</loc>
+    
+    <lastmod>2017-04-10T12:55:26.843Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://alexzhong22c.github.io/2017/02/25/webapp-events-intro/</loc>
+    
+    <lastmod>2017-04-10T12:55:15.259Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://alexzhong22c.github.io/2017/03/11/try-eslint/</loc>
+    
+    <lastmod>2017-04-10T11:45:46.809Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://alexzhong22c.github.io/2017/04/01/clearfix-n-bfc/</loc>
     
     <lastmod>2017-04-10T07:55:10.571Z</lastmod>
@@ -75,13 +103,6 @@
     <loc>https://alexzhong22c.github.io/2017/01/25/font-face/</loc>
     
     <lastmod>2017-03-25T13:58:05.634Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://alexzhong22c.github.io/2017/03/11/try-eslint/</loc>
-    
-    <lastmod>2017-03-18T08:43:27.023Z</lastmod>
     
   </url>
   
