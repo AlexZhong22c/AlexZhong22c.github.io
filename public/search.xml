@@ -4,6 +4,60 @@
   
     
     <entry>
+      <title><![CDATA[按条目展示表格数据小插件]]></title>
+      <url>https://alexzhong22c.github.io/2017/04/15/vue-table-nav/</url>
+      <content type="html"><![CDATA[<p>对应代码的github仓库的地址：<a href="https://github.com/AlexZhong22c/vue-table-nav" target="_blank" rel="external">https://github.com/AlexZhong22c/vue-table-nav</a></p>
+<p><a href="https://alexzhong22c.github.io/vue-table-nav/vue-table-nav.html">demo</a> (在线演示初次加载会有点慢，请稍等)</p>
+<a id="more"></a>
+<hr>
+<p>vue.js的出现，导致很多小插件的简单实现成为可能。</p>
+<p>这是一个关于表格数据的分页导航，按照表格中的每个条目作为单元来展示数据。</p>
+<p><strong>这样的数据呈现方式可读性更强，设计更人性化。</strong></p>
+<p>当然它只适用于少量表格数据的直观呈现，如果数据太多，还是用传统的表格来呈现比较合适。demo的下方我还展示了原始的表格，方便各位看官做做对比。</p>
+<p><img src="http://olqa2s510.bkt.clouddn.com/show-vue-table-nav.png" alt=""></p>
+<h2 id="分页导航"><a class="header-anchor" href="#分页导航"></a>分页导航</h2>
+<ul>
+<li>可设置每页显示的条目数</li>
+<li>用vue的 计算属性 和对象数组的slice()实现分页显示，非常简便</li>
+<li>在总页数比较多的情况下仍能维持导航样式的统一</li>
+</ul>
+<h2 id="引用boostrap的样式"><a class="header-anchor" href="#引用boostrap的样式"></a>引用boostrap的样式</h2>
+<ul>
+<li>css写得比较潦草，让大家见笑</li>
+<li>对于class=“pagination”，直接从bootstrap库复制了那部分的css样式</li>
+</ul>
+<h2 id="用dl-dt-dd标签展示键值对"><a class="header-anchor" href="#用dl-dt-dd标签展示键值对"></a>用dl dt dd标签展示键值对</h2>
+<ul>
+<li>阻止dt标签之后的换行</li>
+<li>阻止dd标签之前的空白</li>
+<li><strong>为了方便阅读，直接用中文作为键值对的键名。在实际工程中当然不能这样。</strong></li>
+</ul>
+<h2 id="最后："><a class="header-anchor" href="#最后："></a>最后：</h2>
+<blockquote>
+<p>如果各位看官喜欢的话去留一个Star吧！</p>
+</blockquote>
+]]></content>
+      
+        <categories>
+            
+            <category> Vue </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 插件 </tag>
+            
+            <tag> 表格 </tag>
+            
+            <tag> 条目 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[IFE2017-CSS-task03笔记：三栏式布局]]></title>
       <url>https://alexzhong22c.github.io/2017/04/06/ife-css-task03/</url>
       <content type="html"><![CDATA[<p>对应代码的github仓库的地址：<a href="https://github.com/AlexZhong22c/IFE-CSS-learning" target="_blank" rel="external">https://github.com/AlexZhong22c/IFE-CSS-learning</a></p>
@@ -674,9 +728,9 @@ Legend Field Element））代表一个用于表示它的父元素<code>&lt;field
             
             <tag> H5 </tag>
             
-            <tag> HTML </tag>
-            
             <tag> IFE </tag>
+            
+            <tag> HTML </tag>
             
         </tags>
         
@@ -1287,9 +1341,9 @@ element.addEventListener('click', function() {
         
         <tags>
             
-            <tag> 事件 </tag>
-            
             <tag> 进阶 </tag>
+            
+            <tag> 事件 </tag>
             
         </tags>
         

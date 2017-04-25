@@ -43,7 +43,7 @@ rm -rf node_modules
 
 PS：不要直接删除本地插件包
 
-删除node_modules文件夹再提交项目，下载项目的时候用`npm install`就能下载回来在 package.json 中记录的插件。
+下一次下载项目的时候用`npm install`就能下载回来在 package.json 中记录的插件，能够重新形成node_modules文件夹。
 
 ### 安装参数--save-dev
 
@@ -85,5 +85,5 @@ npm install gulp --save-dev
 
 [gulp使用小结(一)](http://web.jobbole.com/86025/)
 
-[[Gulp探究折腾之路(I)](http://jeffjade.com/2015/11/25/2015-11-25-toss-gulp/)](http://jeffjade.com/2015/11/25/2015-11-25-toss-gulp/)
+[Gulp探究折腾之路(I)](http://jeffjade.com/2015/11/25/2015-11-25-toss-gulp/)
 
