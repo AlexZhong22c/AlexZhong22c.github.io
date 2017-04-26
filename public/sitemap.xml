@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://alexzhong22c.github.io/2017/04/25/vue-time-tracker/</loc>
+    
+    <lastmod>2017-04-25T13:48:10.048Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://alexzhong22c.github.io/2017/03/02/gulp-usage/</loc>
+    
+    <lastmod>2017-04-18T11:36:20.056Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://alexzhong22c.github.io/2017/04/15/vue-table-nav/</loc>
     
     <lastmod>2017-04-15T06:55:15.564Z</lastmod>
@@ -180,13 +194,6 @@
     <loc>https://alexzhong22c.github.io/2017/02/27/icon-usage/</loc>
     
     <lastmod>2017-03-02T09:50:59.512Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://alexzhong22c.github.io/2017/03/02/gulp-usage/</loc>
-    
-    <lastmod>2017-03-02T09:50:29.413Z</lastmod>
     
   </url>
   
