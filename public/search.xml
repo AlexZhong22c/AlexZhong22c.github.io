@@ -6,7 +6,8 @@
     <entry>
       <title><![CDATA[经典vue入门全家桶]]></title>
       <url>https://alexzhong22c.github.io/2017/04/25/vue-time-tracker/</url>
-      <content type="html"><![CDATA[<p>vue-cli + vue2 + vue-router + vue-resource + vuex2 + express + MongoDB</p>
+      <content type="html"><![CDATA[<p>vue-cli + vue2 + vue-router + vue-resource + vuex2 + express + mongoose</p>
+<p>一个简单的ToDoList——经典vue入门全家桶，我在大神们demo的基础上不断地改进。</p>
 <p>对应代码的github仓库的地址：<a href="https://github.com/AlexZhong22c/vue-time-tracker" target="_blank" rel="external">https://github.com/AlexZhong22c/vue-time-tracker</a></p>
 <a id="more"></a>
 <ul>
@@ -16,7 +17,12 @@
 <li>使用vue-resource请求我们的node服务端，即express</li>
 <li>使用vuex管理我们的数据流</li>
 <li>express 和 MongoDB做后台和数据库，演示了前后台的数据交互，ajax请求</li>
+<li>使用mongoose操作MongoDB</li>
 </ul>
+<p>“计划列表”界面</p>
+<p><img src="http://olqa2s510.bkt.clouddn.com/time-tracker1.png" alt="演示图1"></p>
+<p>创建任务：</p>
+<p><img src="http://olqa2s510.bkt.clouddn.com/time-tracker2.png" alt="演示图2"></p>
 <h2 id="运行demo"><a class="header-anchor" href="#运行demo"></a>运行demo:</h2>
 <p>用<code>npm install</code>之后，总共需要打开两个命令行窗口，一个命令行运行：</p>
 <pre><code>node app.js // 会在8888端口开启一个后台
@@ -24,7 +30,29 @@
 <p>另一个命令行运行：</p>
 <pre><code>npm run dev
 </code></pre>
-<h2 id="知识速查"><a class="header-anchor" href="#知识速查"></a>知识速查</h2>
+<h3 id="历史版本的commit记录："><a class="header-anchor" href="#历史版本的commit记录："></a>历史版本的commit记录：</h3>
+<table>
+<thead>
+<tr>
+<th>commit名</th>
+<th>commit时间</th>
+<th>版本内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>finish-first-time</td>
+<td>2017/4/25</td>
+<td>vue-cli + vue2 + vue-router + vue-resource + vuex2 + express + MongoDB</td>
+</tr>
+<tr>
+<td>use-mongoose</td>
+<td>2017/4/26</td>
+<td>使用mongoose，重写app.js文件，使其简单易懂</td>
+</tr>
+</tbody>
+</table>
+<h2 id="懒人速查"><a class="header-anchor" href="#懒人速查"></a>懒人速查</h2>
 <h3 id="main-js文件"><a class="header-anchor" href="#main-js文件"></a>main.js文件</h3>
 <ul>
 <li><code>main.js</code>将会作为我们应用的入口文件而<code>App.vue</code>会作为我们应用的初始化组件</li>
@@ -65,6 +93,28 @@ this.$store.dispatch('deletePlan', timeEntry)，用vuex*通信*
 </code></pre>
 <h3 id="logtime-vue文件"><a class="header-anchor" href="#logtime-vue文件"></a>LogTime.vue文件</h3>
 <p>组件可以没有“name&quot;，如果给组件一个name可以方便在调试的时候在控制台打印错误是来自哪个组件的</p>
+<h3 id="app-js文件"><a class="header-anchor" href="#app-js文件"></a>app.js文件</h3>
+<blockquote>
+<p>demo经过了版本更新，原本使用MongoClient，现在用mongoose改写了一次</p>
+</blockquote>
+<h4 id="mpromise-mongoose-s-default-promise-library-is-deprecated"><a class="header-anchor" href="#mpromise-mongoose-s-default-promise-library-is-deprecated"></a>mpromise (mongoose’s default promise library) is deprecated</h4>
+<p><a href="http://blog.csdn.net/fd214333890/article/details/53486862" target="_blank" rel="external">http://blog.csdn.net/fd214333890/article/details/53486862</a></p>
+<p>增加一句： <code>mongoose.Promise = global.Promise</code> 即可</p>
+<h4 id="mongoose是怎么找collections的"><a class="header-anchor" href="#mongoose是怎么找collections的"></a>mongoose是怎么找collections的?</h4>
+<p><a href="https://cnodejs.org/topic/4f71363f8a04d82a3d1e4aea" target="_blank" rel="external">https://cnodejs.org/topic/4f71363f8a04d82a3d1e4aea</a></p>
+<pre><code>mongoose.model('User', UserSchema);
+</code></pre>
+<p>去命令行：</p>
+<pre><code>use node_club show collections //只能看到有一个名为users的collection，而没有User的collection
+</code></pre>
+<p>由此我们可以推断mongoose在内部创建collection时将我们传递的collection名小写化，同时如果小写化的名称后面没有字母——s,则会在其后面添加一s,针对我们刚建的collection,则会命名为：users。</p>
+<p><strong>可以通过下面两种方式更改collection的名字：</strong></p>
+<pre><code>1.xxschema = new Schema({
+…
+}, {collection: “your collection name”});
+
+2.mongoose.model(‘User’, UserSchema, “your collection name”);
+</code></pre>
 <h2 id="深入理解数据的请求"><a class="header-anchor" href="#深入理解数据的请求"></a>深入理解数据的请求</h2>
 <h3 id="生命周期和数据请求的时机"><a class="header-anchor" href="#生命周期和数据请求的时机"></a>生命周期和数据请求的时机</h3>
 <p>vue实例的生命周期看这一篇：<a href="http://blog.csdn.net/sexy_squirrel/article/details/60764504" target="_blank" rel="external">http://blog.csdn.net/sexy_squirrel/article/details/60764504</a></p>
