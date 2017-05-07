@@ -4,17 +4,17 @@
   
     
     <entry>
-      <title><![CDATA[经典vue入门全家桶]]></title>
+      <title><![CDATA[经典vue单页路由入门全家桶]]></title>
       <url>https://alexzhong22c.github.io/2017/04/25/vue-time-tracker/</url>
-      <content type="html"><![CDATA[<p>vue-cli + vue2 + vue-router + vue-resource + vuex2 + express + mongoose</p>
-<p>一个简单的ToDoList——经典vue入门全家桶，我在大神们demo的基础上不断地改进。</p>
+      <content type="html"><![CDATA[<p>vue-cli + vue2 + vue-router + axios + vuex2 + express + mongoose</p>
+<p>一个简单的ToDoList——经典vue单页路由入门全家桶，我在大神们demo的基础上不断地改进。</p>
 <p>对应代码的github仓库的地址：<a href="https://github.com/AlexZhong22c/vue-time-tracker" target="_blank" rel="external">https://github.com/AlexZhong22c/vue-time-tracker</a></p>
 <a id="more"></a>
 <ul>
 <li>使用vue-cli创建项目</li>
 <li>.vue文件组件化的开发</li>
 <li>使用vue-router实现单页路由</li>
-<li>使用vue-resource请求我们的node服务端，即express</li>
+<li>使用axios请求我们的node服务端，即express</li>
 <li>使用vuex管理我们的数据流</li>
 <li>express 和 MongoDB做后台和数据库，演示了前后台的数据交互，ajax请求</li>
 <li>使用mongoose操作MongoDB</li>
@@ -50,6 +50,11 @@
 <td>2017/4/26</td>
 <td>使用mongoose，重写app.js文件，使其简单易懂</td>
 </tr>
+<tr>
+<td>use-axios</td>
+<td>2017/5/2</td>
+<td>使用axios代替原来的vue-resource</td>
+</tr>
 </tbody>
 </table>
 <h2 id="懒人速查"><a class="header-anchor" href="#懒人速查"></a>懒人速查</h2>
@@ -59,7 +64,7 @@
 </ul>
 <ul>
 <li><code>...App</code>这句代码等价于<code>render:h =&gt; h(App)</code></li>
-<li>这个demo我们用了vue-router，官方推荐使用新的axios，之后会改为用axios做ajax请求</li>
+<li>使用axios代替原来的vue-resource做ajax请求</li>
 </ul>
 <h4 id="eslint-disable-no-new"><a class="header-anchor" href="#eslint-disable-no-new"></a>eslint-disable no-new</h4>
 <p>我们这个项目是用vue-cli帮助配置生成的，如果在生成时你选择了启用eslint检测语法，那么eslint默认是不允许你使用new的，如果eslint不通过会报错，你的项目因此就无法让webpack用浏览器调试。</p>
@@ -92,7 +97,10 @@
 this.$store.dispatch('deletePlan', timeEntry)，用vuex*通信*
 </code></pre>
 <h3 id="logtime-vue文件"><a class="header-anchor" href="#logtime-vue文件"></a>LogTime.vue文件</h3>
-<p>组件可以没有“name&quot;，如果给组件一个name可以方便在调试的时候在控制台打印错误是来自哪个组件的</p>
+<ul>
+<li>组件可以没有“name&quot;，如果给组件一个name可以方便在调试的时候在控制台打印错误是来自哪个组件的</li>
+<li>对 <a href="#axios%E5%9C%A8vue%E4%B8%AD%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8">axios</a> 的用法做了粗浅介绍</li>
+</ul>
 <h3 id="app-js文件"><a class="header-anchor" href="#app-js文件"></a>app.js文件</h3>
 <blockquote>
 <p>demo经过了版本更新，原本使用MongoClient，现在用mongoose改写了一次</p>
@@ -148,6 +156,27 @@ this.$store.dispatch('deletePlan', timeEntry)，用vuex*通信*
 <li><strong>尤其是“查”，页面切换回来或者路由切换回来的时候，需要重复再查一次此页的数据。</strong> 使用vuex后，查数据不必去用ajax访问数据库，直接从state查数据就行了</li>
 </ul>
 <p>结论：使用vuex后，原本这次需要调用fetchData函数去再查数据库，而现在直接用计算属性从state那里查就行了。</p>
+<hr>
+<blockquote>
+<p>2017/5/2更新：使用axios代替原来的vue-resource：</p>
+</blockquote>
+<h3 id="axios在vue中如何使用"><a class="header-anchor" href="#axios在vue中如何使用"></a>axios在vue中如何使用</h3>
+<p>安装其他插件的时候，可以直接在 main.js 中引入并 Vue.use()，但是 axios 并不能 use，只能在每个需要发送请求的组件中即时引入。</p>
+<p>为了解决这个问题，有两种开发思路，一是在引入 axios 之后，修改原型链，（另一种是在vuex的actions内封装一下，由于考虑到某些小伙伴不使用vuex，我们选用第一种方法）。</p>
+<blockquote>
+<p>对这方面好奇的同学可以参考：<a href="http://blog.csdn.net/fen747042796/article/details/70660419?locationNum=6&amp;fps=1" target="_blank" rel="external">http://blog.csdn.net/fen747042796/article/details/70660419?locationNum=6&amp;fps=1</a></p>
+</blockquote>
+<p>在 main.js 中引入 axios：</p>
+<pre><code>import axios from 'axios'
+Vue.prototype.$ajax = axios
+// 在 main.js 中添加了这两行代码之后，就能直接在组件的 methods 中使用 $ajax 命令
+</code></pre>
+<p><a href="http://www.cnblogs.com/wisewrong/p/6402183.html" target="_blank" rel="external">http://www.cnblogs.com/wisewrong/p/6402183.html</a></p>
+<h4 id="回调函数的this"><a class="header-anchor" href="#回调函数的this"></a>回调函数的this</h4>
+<p>当请求成功时，会执行 .then，否则执行 .catch</p>
+<p>这两个回调函数都有各自独立的作用域，<strong>如果直接在里面访问 this，将会无法访问到 Vue 实例</strong>，所以我们改为用箭头函数，详见demo中LogTime.vue文件的注释说明。</p>
+<p><a href="https://segmentfault.com/q/1010000005932552" target="_blank" rel="external">https://segmentfault.com/q/1010000005932552</a></p>
+<p><a href="http://blog.csdn.net/qtwwyl/article/details/70094361?utm_source=itdadao&amp;utm_medium=referral" target="_blank" rel="external">http://blog.csdn.net/qtwwyl/article/details/70094361?utm_source=itdadao&amp;utm_medium=referral</a></p>
 <h2 id="深入理解vuex"><a class="header-anchor" href="#深入理解vuex"></a>深入理解vuex</h2>
 <h3 id="既然vuex2-可以直接去store拿state-那getters还有什么用啊"><a class="header-anchor" href="#既然vuex2-可以直接去store拿state-那getters还有什么用啊"></a>既然vuex2 可以直接去store拿state, 那getters还有什么用啊?</h3>
 <p>getters可以看做是store的计算属性。另外，我们最好遵循vuex的通讯流程：</p>

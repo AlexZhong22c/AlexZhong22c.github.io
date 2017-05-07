@@ -78,24 +78,24 @@
 
 
 
-<meta name="description" content="vue-cli + vue2 + vue-router + vue-resource + vuex2 + express + mongoose
-一个简单的ToDoList——经典vue入门全家桶，我在大神们demo的基础上不断地改进。
+<meta name="description" content="vue-cli + vue2 + vue-router + axios + vuex2 + express + mongoose
+一个简单的ToDoList——经典vue单页路由入门全家桶，我在大神们demo的基础上不断地改进。
 对应代码的github仓库的地址：https://github.com/AlexZhong22c/vue-time-tracker">
 <meta property="og:type" content="article">
-<meta property="og:title" content="经典vue入门全家桶">
+<meta property="og:title" content="经典vue单页路由入门全家桶">
 <meta property="og:url" content="https://alexzhong22c.github.io/2017/04/25/vue-time-tracker/index.html">
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
-<meta property="og:description" content="vue-cli + vue2 + vue-router + vue-resource + vuex2 + express + mongoose
-一个简单的ToDoList——经典vue入门全家桶，我在大神们demo的基础上不断地改进。
+<meta property="og:description" content="vue-cli + vue2 + vue-router + axios + vuex2 + express + mongoose
+一个简单的ToDoList——经典vue单页路由入门全家桶，我在大神们demo的基础上不断地改进。
 对应代码的github仓库的地址：https://github.com/AlexZhong22c/vue-time-tracker">
 <meta property="og:image" content="http://olqa2s510.bkt.clouddn.com/time-tracker1.png">
 <meta property="og:image" content="http://olqa2s510.bkt.clouddn.com/time-tracker2.png">
 <meta property="og:image" content="http://olqa2s510.bkt.clouddn.com/vuex.png">
-<meta property="og:updated_time" content="2017-04-26T13:58:44.519Z">
+<meta property="og:updated_time" content="2017-05-02T08:15:34.595Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="经典vue入门全家桶">
-<meta name="twitter:description" content="vue-cli + vue2 + vue-router + vue-resource + vuex2 + express + mongoose
-一个简单的ToDoList——经典vue入门全家桶，我在大神们demo的基础上不断地改进。
+<meta name="twitter:title" content="经典vue单页路由入门全家桶">
+<meta name="twitter:description" content="vue-cli + vue2 + vue-router + axios + vuex2 + express + mongoose
+一个简单的ToDoList——经典vue单页路由入门全家桶，我在大神们demo的基础上不断地改进。
 对应代码的github仓库的地址：https://github.com/AlexZhong22c/vue-time-tracker">
 <meta name="twitter:image" content="http://olqa2s510.bkt.clouddn.com/time-tracker1.png">
 
@@ -131,7 +131,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>经典vue入门全家桶 | Web前端 | Alex Zhong</title>
+<title>经典vue单页路由入门全家桶 | Web前端 | Alex Zhong</title>
 
 
 </script>
@@ -527,7 +527,7 @@
 
 	<br />
 	<p style="height:7px;"/>
-	<p style="height:20px;font-family:KaiTi,LiSu,'宋体',sans-serif;color:#DBDBDB;font-size:12px;">预计阅读13分钟</p>
+	<p style="height:20px;font-family:KaiTi,LiSu,'宋体',sans-serif;color:#DBDBDB;font-size:12px;">预计阅读15分钟</p>
 
     </div>
   
@@ -538,7 +538,7 @@
         
   
     <h1 class="article-title-big" itemprop="name">
-      经典vue入门全家桶
+      经典vue单页路由入门全家桶
     </h1>
   
 
@@ -563,15 +563,15 @@
     
           <div id="article-content" class="article-entry" itemprop="articleBody">
 			  
-			<p>vue-cli + vue2 + vue-router + vue-resource + vuex2 + express + mongoose</p>
-<p>一个简单的ToDoList——经典vue入门全家桶，我在大神们demo的基础上不断地改进。</p>
+			<p>vue-cli + vue2 + vue-router + axios + vuex2 + express + mongoose</p>
+<p>一个简单的ToDoList——经典vue单页路由入门全家桶，我在大神们demo的基础上不断地改进。</p>
 <p>对应代码的github仓库的地址：<a href="https://github.com/AlexZhong22c/vue-time-tracker" target="_blank" rel="external">https://github.com/AlexZhong22c/vue-time-tracker</a></p>
 <a id="more"></a>
 <ul>
 <li>使用vue-cli创建项目</li>
 <li>.vue文件组件化的开发</li>
 <li>使用vue-router实现单页路由</li>
-<li>使用vue-resource请求我们的node服务端，即express</li>
+<li>使用axios请求我们的node服务端，即express</li>
 <li>使用vuex管理我们的数据流</li>
 <li>express 和 MongoDB做后台和数据库，演示了前后台的数据交互，ajax请求</li>
 <li>使用mongoose操作MongoDB</li>
@@ -607,6 +607,11 @@
 <td>2017/4/26</td>
 <td>使用mongoose，重写app.js文件，使其简单易懂</td>
 </tr>
+<tr>
+<td>use-axios</td>
+<td>2017/5/2</td>
+<td>使用axios代替原来的vue-resource</td>
+</tr>
 </tbody>
 </table>
 <h2 id="懒人速查"><a class="header-anchor" href="#懒人速查"></a>懒人速查</h2>
@@ -616,7 +621,7 @@
 </ul>
 <ul>
 <li><code>...App</code>这句代码等价于<code>render:h =&gt; h(App)</code></li>
-<li>这个demo我们用了vue-router，官方推荐使用新的axios，之后会改为用axios做ajax请求</li>
+<li>使用axios代替原来的vue-resource做ajax请求</li>
 </ul>
 <h4 id="eslint-disable-no-new"><a class="header-anchor" href="#eslint-disable-no-new"></a>eslint-disable no-new</h4>
 <p>我们这个项目是用vue-cli帮助配置生成的，如果在生成时你选择了启用eslint检测语法，那么eslint默认是不允许你使用new的，如果eslint不通过会报错，你的项目因此就无法让webpack用浏览器调试。</p>
@@ -649,7 +654,10 @@
 this.$store.dispatch('deletePlan', timeEntry)，用vuex*通信*
 </code></pre>
 <h3 id="logtime-vue文件"><a class="header-anchor" href="#logtime-vue文件"></a>LogTime.vue文件</h3>
-<p>组件可以没有“name&quot;，如果给组件一个name可以方便在调试的时候在控制台打印错误是来自哪个组件的</p>
+<ul>
+<li>组件可以没有“name&quot;，如果给组件一个name可以方便在调试的时候在控制台打印错误是来自哪个组件的</li>
+<li>对 <a href="#axios%E5%9C%A8vue%E4%B8%AD%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8">axios</a> 的用法做了粗浅介绍</li>
+</ul>
 <h3 id="app-js文件"><a class="header-anchor" href="#app-js文件"></a>app.js文件</h3>
 <blockquote>
 <p>demo经过了版本更新，原本使用MongoClient，现在用mongoose改写了一次</p>
@@ -705,6 +713,27 @@ this.$store.dispatch('deletePlan', timeEntry)，用vuex*通信*
 <li><strong>尤其是“查”，页面切换回来或者路由切换回来的时候，需要重复再查一次此页的数据。</strong> 使用vuex后，查数据不必去用ajax访问数据库，直接从state查数据就行了</li>
 </ul>
 <p>结论：使用vuex后，原本这次需要调用fetchData函数去再查数据库，而现在直接用计算属性从state那里查就行了。</p>
+<hr>
+<blockquote>
+<p>2017/5/2更新：使用axios代替原来的vue-resource：</p>
+</blockquote>
+<h3 id="axios在vue中如何使用"><a class="header-anchor" href="#axios在vue中如何使用"></a>axios在vue中如何使用</h3>
+<p>安装其他插件的时候，可以直接在 main.js 中引入并 Vue.use()，但是 axios 并不能 use，只能在每个需要发送请求的组件中即时引入。</p>
+<p>为了解决这个问题，有两种开发思路，一是在引入 axios 之后，修改原型链，（另一种是在vuex的actions内封装一下，由于考虑到某些小伙伴不使用vuex，我们选用第一种方法）。</p>
+<blockquote>
+<p>对这方面好奇的同学可以参考：<a href="http://blog.csdn.net/fen747042796/article/details/70660419?locationNum=6&amp;fps=1" target="_blank" rel="external">http://blog.csdn.net/fen747042796/article/details/70660419?locationNum=6&amp;fps=1</a></p>
+</blockquote>
+<p>在 main.js 中引入 axios：</p>
+<pre><code>import axios from 'axios'
+Vue.prototype.$ajax = axios
+// 在 main.js 中添加了这两行代码之后，就能直接在组件的 methods 中使用 $ajax 命令
+</code></pre>
+<p><a href="http://www.cnblogs.com/wisewrong/p/6402183.html" target="_blank" rel="external">http://www.cnblogs.com/wisewrong/p/6402183.html</a></p>
+<h4 id="回调函数的this"><a class="header-anchor" href="#回调函数的this"></a>回调函数的this</h4>
+<p>当请求成功时，会执行 .then，否则执行 .catch</p>
+<p>这两个回调函数都有各自独立的作用域，<strong>如果直接在里面访问 this，将会无法访问到 Vue 实例</strong>，所以我们改为用箭头函数，详见demo中LogTime.vue文件的注释说明。</p>
+<p><a href="https://segmentfault.com/q/1010000005932552" target="_blank" rel="external">https://segmentfault.com/q/1010000005932552</a></p>
+<p><a href="http://blog.csdn.net/qtwwyl/article/details/70094361?utm_source=itdadao&amp;utm_medium=referral" target="_blank" rel="external">http://blog.csdn.net/qtwwyl/article/details/70094361?utm_source=itdadao&amp;utm_medium=referral</a></p>
 <h2 id="深入理解vuex"><a class="header-anchor" href="#深入理解vuex"></a>深入理解vuex</h2>
 <h3 id="既然vuex2-可以直接去store拿state-那getters还有什么用啊"><a class="header-anchor" href="#既然vuex2-可以直接去store拿state-那getters还有什么用啊"></a>既然vuex2 可以直接去store拿state, 那getters还有什么用啊?</h3>
 <p>getters可以看做是store的计算属性。另外，我们最好遵循vuex的通讯流程：</p>
@@ -838,12 +867,12 @@ methods: {
   
      <!-- 版权署名授权 -->
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/04/25/vue-time-tracker/">经典vue入门全家桶</a></p>
+        <p><span>本文标题:</span><a href="/2017/04/25/vue-time-tracker/">经典vue单页路由入门全家桶</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2017-04-25, 21:28:56</p>
-        <!-- <p><span>最后更新:</span>2017-04-26, 21:58:44</p> -->
+        <!-- <p><span>最后更新:</span>2017-05-02, 16:15:34</p> -->
         <p>
-            <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="经典vue入门全家桶" href="/2017/04/25/vue-time-tracker/">https://alexzhong22c.github.io/2017/04/25/vue-time-tracker/</a>
+            <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="经典vue单页路由入门全家桶" href="/2017/04/25/vue-time-tracker/">https://alexzhong22c.github.io/2017/04/25/vue-time-tracker/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://alexzhong22c.github.io/2017/04/25/vue-time-tracker/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
         </p>
         <p style="color: #696969;">
@@ -871,7 +900,7 @@ methods: {
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#运行demo"><span class="toc-number">1.</span> <span class="toc-text">运行demo:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#历史版本的commit记录："><span class="toc-number">1.1.</span> <span class="toc-text">历史版本的commit记录：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#懒人速查"><span class="toc-number">2.</span> <span class="toc-text">懒人速查</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#main-js文件"><span class="toc-number">2.1.</span> <span class="toc-text">main.js文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#eslint-disable-no-new"><span class="toc-number">2.1.1.</span> <span class="toc-text">eslint-disable no-new</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#app-vue文件"><span class="toc-number">2.2.</span> <span class="toc-text">App.vue文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#timeentries-vue文件"><span class="toc-number">2.3.</span> <span class="toc-text">TimeEntries.vue文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#logtime-vue文件"><span class="toc-number">2.4.</span> <span class="toc-text">LogTime.vue文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#app-js文件"><span class="toc-number">2.5.</span> <span class="toc-text">app.js文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#mpromise-mongoose-s-default-promise-library-is-deprecated"><span class="toc-number">2.5.1.</span> <span class="toc-text">mpromise (mongoose’s default promise library) is deprecated</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mongoose是怎么找collections的"><span class="toc-number">2.5.2.</span> <span class="toc-text">mongoose是怎么找collections的?</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#深入理解数据的请求"><span class="toc-number">3.</span> <span class="toc-text">深入理解数据的请求</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#生命周期和数据请求的时机"><span class="toc-number">3.1.</span> <span class="toc-text">生命周期和数据请求的时机</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#导航钩子和数据请求的时机"><span class="toc-number">3.2.</span> <span class="toc-text">导航钩子和数据请求的时机</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vuex和数据请求"><span class="toc-number">3.3.</span> <span class="toc-text">vuex和数据请求</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#深入理解vuex"><span class="toc-number">4.</span> <span class="toc-text">深入理解vuex</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#既然vuex2-可以直接去store拿state-那getters还有什么用啊"><span class="toc-number">4.1.</span> <span class="toc-text">既然vuex2 可以直接去store拿state, 那getters还有什么用啊?</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#vuex单向数据流"><span class="toc-number">4.1.1.</span> <span class="toc-text">vuex单向数据流</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#区分-actions-和-mutations"><span class="toc-number">4.2.</span> <span class="toc-text">区分 actions 和 mutations</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#mutation-必须是同步函数-什么意思"><span class="toc-number">4.2.1.</span> <span class="toc-text">mutation 必须是同步函数，什么意思?</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#从另一个角度去理解："><span class="toc-number">4.2.1.1.</span> <span class="toc-text">从另一个角度去理解：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#作者在知乎上的解释："><span class="toc-number">4.2.1.2.</span> <span class="toc-text">作者在知乎上的解释：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mutations-需遵守-vue-的响应规则"><span class="toc-number">4.3.</span> <span class="toc-text">Mutations 需遵守 Vue 的响应规则</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vue2-新旧替换"><span class="toc-number">5.</span> <span class="toc-text">vue2 新旧替换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ready被废除"><span class="toc-number">5.1.</span> <span class="toc-text">ready被废除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dispatch被废除"><span class="toc-number">5.2.</span> <span class="toc-text">$dispatch被废除</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#单独的事件中心"><span class="toc-number">5.2.1.</span> <span class="toc-text">单独的事件中心</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#vuex"><span class="toc-number">5.2.1.1.</span> <span class="toc-text">vuex</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最后还有小尾巴："><span class="toc-number">6.</span> <span class="toc-text">最后还有小尾巴：</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#运行demo"><span class="toc-number">1.</span> <span class="toc-text">运行demo:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#历史版本的commit记录："><span class="toc-number">1.1.</span> <span class="toc-text">历史版本的commit记录：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#懒人速查"><span class="toc-number">2.</span> <span class="toc-text">懒人速查</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#main-js文件"><span class="toc-number">2.1.</span> <span class="toc-text">main.js文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#eslint-disable-no-new"><span class="toc-number">2.1.1.</span> <span class="toc-text">eslint-disable no-new</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#app-vue文件"><span class="toc-number">2.2.</span> <span class="toc-text">App.vue文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#timeentries-vue文件"><span class="toc-number">2.3.</span> <span class="toc-text">TimeEntries.vue文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#logtime-vue文件"><span class="toc-number">2.4.</span> <span class="toc-text">LogTime.vue文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#app-js文件"><span class="toc-number">2.5.</span> <span class="toc-text">app.js文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#mpromise-mongoose-s-default-promise-library-is-deprecated"><span class="toc-number">2.5.1.</span> <span class="toc-text">mpromise (mongoose’s default promise library) is deprecated</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mongoose是怎么找collections的"><span class="toc-number">2.5.2.</span> <span class="toc-text">mongoose是怎么找collections的?</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#深入理解数据的请求"><span class="toc-number">3.</span> <span class="toc-text">深入理解数据的请求</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#生命周期和数据请求的时机"><span class="toc-number">3.1.</span> <span class="toc-text">生命周期和数据请求的时机</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#导航钩子和数据请求的时机"><span class="toc-number">3.2.</span> <span class="toc-text">导航钩子和数据请求的时机</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vuex和数据请求"><span class="toc-number">3.3.</span> <span class="toc-text">vuex和数据请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#axios在vue中如何使用"><span class="toc-number">3.4.</span> <span class="toc-text">axios在vue中如何使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#回调函数的this"><span class="toc-number">3.4.1.</span> <span class="toc-text">回调函数的this</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#深入理解vuex"><span class="toc-number">4.</span> <span class="toc-text">深入理解vuex</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#既然vuex2-可以直接去store拿state-那getters还有什么用啊"><span class="toc-number">4.1.</span> <span class="toc-text">既然vuex2 可以直接去store拿state, 那getters还有什么用啊?</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#vuex单向数据流"><span class="toc-number">4.1.1.</span> <span class="toc-text">vuex单向数据流</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#区分-actions-和-mutations"><span class="toc-number">4.2.</span> <span class="toc-text">区分 actions 和 mutations</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#mutation-必须是同步函数-什么意思"><span class="toc-number">4.2.1.</span> <span class="toc-text">mutation 必须是同步函数，什么意思?</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#从另一个角度去理解："><span class="toc-number">4.2.1.1.</span> <span class="toc-text">从另一个角度去理解：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#作者在知乎上的解释："><span class="toc-number">4.2.1.2.</span> <span class="toc-text">作者在知乎上的解释：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mutations-需遵守-vue-的响应规则"><span class="toc-number">4.3.</span> <span class="toc-text">Mutations 需遵守 Vue 的响应规则</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vue2-新旧替换"><span class="toc-number">5.</span> <span class="toc-text">vue2 新旧替换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ready被废除"><span class="toc-number">5.1.</span> <span class="toc-text">ready被废除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dispatch被废除"><span class="toc-number">5.2.</span> <span class="toc-text">$dispatch被废除</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#单独的事件中心"><span class="toc-number">5.2.1.</span> <span class="toc-text">单独的事件中心</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#vuex"><span class="toc-number">5.2.1.1.</span> <span class="toc-text">vuex</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最后还有小尾巴："><span class="toc-number">6.</span> <span class="toc-text">最后还有小尾巴：</span></a></li></ol>
         
     </div>
     <style>
@@ -906,7 +935,7 @@ methods: {
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"经典vue入门全家桶　| Web前端 | Alex Zhong　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"经典vue单页路由入门全家桶　| Web前端 | Alex Zhong　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -922,7 +951,7 @@ methods: {
     
       <div class="duoshuo" id="comments">
     <div id="comment-box" ></div>
-    <div class="ds-thread" id="ds-thread" data-thread-key="2017/04/25/vue-time-tracker/" data-title="经典vue入门全家桶" data-url="https://alexzhong22c.github.io/2017/04/25/vue-time-tracker/"></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2017/04/25/vue-time-tracker/" data-title="经典vue单页路由入门全家桶" data-url="https://alexzhong22c.github.io/2017/04/25/vue-time-tracker/"></div>
     <script>
         var duoshuoQuery = {short_name:"null"};
         var loadComment = function(){
@@ -1001,7 +1030,7 @@ methods: {
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/04/25/vue-time-tracker/">经典vue入门全家桶</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/15/vue-table-nav/">按条目展示表格数据小插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/06/ife-css-task03/">IFE2017-CSS-task03笔记：三栏式布局</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/clearfix-n-bfc/">闭合浮动和BFC和阻止上下外边距的合并</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/ife-css-task02/">IFE2017-CSS-task02笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/31/css-selectors-specificity/">CSS选择器优先级</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/27/ife-css-task01/">IFE2017-CSS-task01笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/11/try-eslint/">eslint折腾记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/10/iife-intro/">IIFE回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/09/for-loop/">js的for循环回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/05/js-event2/">事件进阶话题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/float-n-absolute/">float和绝对定位比较</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/about-margin/">和margin有关的知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/gulp-usage/">gulp的入门和一些简单使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/27/icon-usage/">桌面端和移动端图标的引入</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/25/webapp-events-intro/">移动开发事件入门概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/24/webapp-intro/">移动开发入门概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/my-hexo-theme/">yelee主题改bug总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/my-hexo-blog/">搭建hexo博客个人总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/17/todo-app/">ToDo小应用完工总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/equality-operators/">相等操作符回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/js-operators/">操作符回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/29/js-event/">js事件绑定基础回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/25/font-face/">font-face--CSS3</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/25/h5-new-ele/">内容分类--谈谈H5标签</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/13/js-function/">js函数基础回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/09/let-n-const/">let和const回顾</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/04/25/vue-time-tracker/">经典vue单页路由入门全家桶</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/15/vue-table-nav/">按条目展示表格数据小插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/06/ife-css-task03/">IFE2017-CSS-task03笔记：三栏式布局</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/clearfix-n-bfc/">闭合浮动和BFC和阻止上下外边距的合并</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/ife-css-task02/">IFE2017-CSS-task02笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/31/css-selectors-specificity/">CSS选择器优先级</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/27/ife-css-task01/">IFE2017-CSS-task01笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/11/try-eslint/">eslint折腾记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/10/iife-intro/">IIFE回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/09/for-loop/">js的for循环回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/05/js-event2/">事件进阶话题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/float-n-absolute/">float和绝对定位比较</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/about-margin/">和margin有关的知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/gulp-usage/">gulp的入门和一些简单使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/27/icon-usage/">桌面端和移动端图标的引入</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/25/webapp-events-intro/">移动开发事件入门概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/24/webapp-intro/">移动开发入门概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/my-hexo-theme/">yelee主题改bug总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/my-hexo-blog/">搭建hexo博客个人总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/17/todo-app/">ToDo小应用完工总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/equality-operators/">相等操作符回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/js-operators/">操作符回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/29/js-event/">js事件绑定基础回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/25/font-face/">font-face--CSS3</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/25/h5-new-ele/">内容分类--谈谈H5标签</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/13/js-function/">js函数基础回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/09/let-n-const/">let和const回顾</a></li></ul>
 
 
 
@@ -1024,7 +1053,7 @@ methods: {
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					
-						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：3,508</span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：3,825</span>
 					
 				</div>
             </div>
