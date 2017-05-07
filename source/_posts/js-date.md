@@ -24,14 +24,14 @@ new Date(year, month[, day[, hour[, minutes[, seconds[, milliseconds]]]]]);
 // 注意：month 代表月份的整数值从0（1月）到11（12月）。
 ```
 
-> 当Date作为构造函数调用并传入**多个参数**时，所定义参数代表的是当地时间。如果需要世界协调时，使用 new Date({{jsxref("Date.UTC()", "Date.UTC(...)")}}) 和相同参数
+解释：
 
 - 如果没有输入任何参数，则Date的构造器会依据系统设置的当前时间来创建一个Date对象。
-- **JavaScript的Date对象为跨平台提供了统一的行为。**时间属性可以在不同的系统中表示相同的时刻，而如果使用了本地时间对象，则反映当地的时间。
+- **JavaScript的Date对象为跨平台提供了统一的行为。** 时间属性可以在不同的系统中表示相同的时刻，而如果使用了本地时间对象，则反映当地的时间。
 - JavaScript 的Date对象提供了数个UTC时间的方法，也相应提供了当地时间的方法。UTC，也就是我们所说的格林威治时间，指的是time中的世界时间标准。而当地时间则是指执行JavaScript的客户端电脑所设置的时间。
 
 
-- **以一个函数的形式来调用JavaScript的Date对象（i.e., 不使用 [new](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new) 操作符）会返回一个代表当前日期和时间的字符串。**
+- **以一个函数的形式来调用JavaScript的Date对象（i.e., 不使用new操作符）会返回一个代表当前日期和时间的字符串。**
 
 ## 方法
 
@@ -87,7 +87,7 @@ var UTCstring = today.toUTCString()
 
 `toTimeString()` 方法以人类易读形式返回一个日期对象时间部分的字符串，该字符串以美式英语格式化。
 
-[`Date`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date) 对象的实例引用一个具体的时间点。 调用 [`toString`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date/toString) 方法以美式英语和人类易读的形式，返回日期对象的格式化字符串。
+Date 对象的实例引用一个具体的时间点。 调用 toString 方法以美式英语和人类易读的形式，返回日期对象的格式化字符串。
 
 而`toDateString()`也同理：
 
