@@ -1,0 +1,2517 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="Alex Zhong" />
+
+<script data-no-instant><!-- 移动端不需要的样式不加载 -->
+		function includeLinkStyle(url) {
+			var link = document.createElement("link");
+			link.rel = "stylesheet";
+			link.type = "text/css";
+			link.href = url;
+			var attr = document.createAttribute('data-no-instant');
+			link.setAttributeNode(attr);
+			document.getElementsByTagName("head")[0].appendChild(link);
+		}
+
+		function includeJavaScript(url){
+			var scriptObj = document.createElement("script");
+			scriptObj.src = url;
+			scriptObj.type = "text/javascript";
+			var attr = document.createAttribute('data-no-instant');
+			scriptObj.setAttributeNode(attr);
+			document.getElementsByTagName("head")[0].appendChild(scriptObj);
+		}
+
+		if(!navigator.userAgent.match(/(iPhone|iPod|Android|ios|Opera Mini|BlackBerry|webOS)/i)){
+			includeLinkStyle("/plugins/css/special.css");
+		//	includeLinkStyle("/plugins/font/style3.css");
+
+		//	includeLinkStyle("/plugins/heart/style.css");
+		//	includeLinkStyle("/search/css/cb-search.css");
+			
+				var link = document.createElement("link");
+				link.rel = "shortcut icon";
+				link.href = "/img/favicon.ico";
+				document.getElementsByTagName("head")[0].appendChild(link);
+			
+		} else {
+			if(navigator.userAgent.match(/(iPhone|iPod|iPad|ios)/i)){
+				var link = document.createElement("link");
+				link.rel = "apple-touch-icon";
+				link.href = "/img/favicon.ico";
+				document.getElementsByTagName("head")[0].appendChild(link);
+			}
+			includeLinkStyle("/plugins/prettify/themes/space-gray-dark.css");
+			includeLinkStyle("/search/css/cb-search-mobile.css");
+		}
+
+		function loadJS(url, callback){
+			var scriptObj = document.createElement("script");
+			scriptObj.src = url;
+			scriptObj.type = "text/javascript";
+			//var attr = document.createAttribute('data-no-instant');
+			//scriptObj.setAttributeNode(attr);
+			var loaded;
+			if(typeof callback === 'function'){
+	        scriptObj.onload = scriptObj.onreadystatechange = function(){
+	            if(!loaded && (!scriptObj.readyState || /loaded|complete/.test(scriptObj.readyState))){
+	                scriptObj.onload = scriptObj.onreadystatechange = null;
+	                loaded = true;
+	                callback();
+	            }
+	        }
+	    }
+			document.getElementsByTagName("head")[0].appendChild(scriptObj);
+		}
+</script>
+
+
+
+<meta name="description" content="vue-cli + vue2 + vue-router + axios + vuex2 + express + mongoose
+一个简单的ToDoList——经典vue单页路由入门全家桶，我在大神们demo的基础上不断地改进。
+对应代码的github仓库的地址：https://github.com/AlexZhong22c/vue-time-tracker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="经典vue单页路由入门全家桶">
+<meta property="og:url" content="https://alexzhong22c.github.io/2017/04/25/vue-time-tracker/index.html">
+<meta property="og:site_name" content="Web前端 | Alex Zhong">
+<meta property="og:description" content="vue-cli + vue2 + vue-router + axios + vuex2 + express + mongoose
+一个简单的ToDoList——经典vue单页路由入门全家桶，我在大神们demo的基础上不断地改进。
+对应代码的github仓库的地址：https://github.com/AlexZhong22c/vue-time-tracker">
+<meta property="og:image" content="http://olqa2s510.bkt.clouddn.com/time-tracker1.png">
+<meta property="og:image" content="http://olqa2s510.bkt.clouddn.com/time-tracker2.png">
+<meta property="og:image" content="http://olqa2s510.bkt.clouddn.com/vuex.png">
+<meta property="og:updated_time" content="2017-05-04T06:08:30.106Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="经典vue单页路由入门全家桶">
+<meta name="twitter:description" content="vue-cli + vue2 + vue-router + axios + vuex2 + express + mongoose
+一个简单的ToDoList——经典vue单页路由入门全家桶，我在大神们demo的基础上不断地改进。
+对应代码的github仓库的地址：https://github.com/AlexZhong22c/vue-time-tracker">
+<meta name="twitter:image" content="http://olqa2s510.bkt.clouddn.com/time-tracker1.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="Web前端 | Alex Zhong" type="application/atom+xml" data-no-instant>
+
+
+
+
+
+
+
+	<script data-no-instant>
+		paceOptions = {
+			ajax: false, // disabled
+			document: false, // disabled
+			eventLag: false, // disabled
+			restartOnRequestAfter: false,
+			restartOnPushState: false,
+			elements: {
+				selectors: ['.body-wrap']
+			}
+		};
+	</script>
+  <script data-pace-options='{ "ajax": false }' src="//cdn.bootcss.com/pace/1.0.2/pace.min.js" data-no-instant></script>
+  <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-bounce.css" rel="stylesheet" data-no-instant>
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>经典vue单页路由入门全家桶 | Web前端 | Alex Zhong</title>
+
+
+</script>
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script data-no-instant>
+    var yiliaConfig = {
+        fancybox: false,
+        animate: false,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script data-no-instant> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script data-no-instant> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+
+	<!-- 右下角搜索 -->
+<script><!-- 移动端不需要的样式不加载 -->
+		if(!navigator.userAgent.match(/(iPhone|iPod|Android|ios|Opera Mini|BlackBerry|webOS)/i)){
+			document.write("<script src='/search/js/bootstrap3-typeahead.min.js' data-no-instant><\/script>");
+		} else {
+			document.write("<script src='/search/js/bootstrap3-typeahead.min-mobile.js' data-no-instant><\/script>");
+		}
+</script>
+
+	<!-- <script src="/search/js/cb-search.js"></script> 已合并到after-footer.ejs-->
+	<!-- <script src="/plugins/js/jquery.lazyload.min.js"></script> -->
+	<script src="//cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js" data-no-instant></script>
+	<!--  -->
+		<!--prettify代码高亮主题css引入。注：为了减少请求数，已将此css合并到special.css-->
+		<!--<link href="/plugins/prettify/themes/space-gray-dark.css" rel="stylesheet">-->
+	<!--  -->
+
+	<script type="text/javascript">
+        //定义一个全局script的标记数组，用来标记是否某个script已经下载到本地
+        var scriptsArray = new Array();
+        $.cachedScript = function (url, options) {
+            //循环script标记数组
+            for (var s in scriptsArray) {
+                //console.log(scriptsArray[s]);
+                //如果某个数组已经下载到了本地
+                if (scriptsArray[s]==url) {
+
+                    return {  //则返回一个对象字面量，其中的done之所以叫做done是为了与下面$.ajax中的done相对应
+                        done: function (method) {
+                            if (typeof method == 'function'){  //如果传入参数为一个方法
+                                method();
+                            }
+                        }
+                    };
+                }
+            }
+            //这里是jquery官方提供类似getScript实现的方法，也就是说getScript其实也就是对ajax方法的一个拓展
+            options = $.extend(options || {}, {
+                dataType: "script",
+                url: url,
+                cache:true //其实现在这缓存加与不加没多大区别
+            });
+            scriptsArray.push(url); //将url地址放入script标记数组中
+            return $.ajax(options);
+        };
+    </script>
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col" id="left_col_div" style="background-color:#fafafa;">
+    <div class="overlay" id="id_code_rain_div" style="opacity:0.2">
+    <canvas id="matrix" width="300" height="180"></canvas>
+</div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a id="id_avatar_a" href="/" class="profilepic">
+            <!-- <img src="/img/avatar.jpg" class="animated zoomIn"> -->
+        </a>
+        <hgroup id="id_hgroup_name">
+        <h1 id="ngudream_name" class="header-author"><!-- main.styl cl-effect-2 -->
+        <a href="/"><span style="background-color:#fafafa !important" data-hover="专注于Web前端的AZ">Alex Zhong</span></a>
+        </h1>
+        </hgroup>
+        
+        
+        <form id="search-form">
+            <!-- 搜索框相关 -->
+            <div class="col-3" style="float:left">
+                <input type="text" id="local-search-input" name="q" results="0" placeholder="搜索...(◕ܫ◕)" class="effect-2" autocomplete="off" autocorrect="off" style="padding-left:4px" />
+                <span class="focus-border"></span>
+                <!-- 搜索框动画 -->
+            </div>
+            <div style="float:right;margin-top:13px;">
+                <i id="search-delete" class="button pill" onclick="resetSearch()" style="margin-left:-26px;">删除</i>
+                <!-- 清空/重置搜索框 -->
+            </div>
+        </form>
+        <br/>
+        <br/>
+        <div id="local-search-result"></div>
+        <!-- 搜索结果区 -->
+        <p class="no-result" style="font-size:0.8em;text-align:center;">没有找到，空空如也...</p>
+        <!-- 无匹配时显示，注意请在 CSS 中设置默认隐藏 <i class='fa fa-spinner fa-pulse'></i>-->
+        
+        
+        <div id="switch-btn" class="switch-btn">
+            <div class="icon">
+                <div class="icon-ctn">
+                    <div class="icon-wrap icon-house" data-idx="0">
+                        <div class="birdhouse"></div>
+                        <div class="birdhouse_holes"></div>
+                    </div>
+                    <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                        <div class="ribbon"></div>
+                    </div>
+                    
+                    <div class="icon-wrap icon-link hide" data-idx="2">
+                        <div class="loopback_l"></div>
+                        <div class="loopback_r"></div>
+                    </div>
+                    
+                    
+                    <div class="icon-wrap icon-me hide" data-idx="3">
+                        <div class="user"></div>
+                        <div class="shoulder"></div>
+                    </div>
+                    
+                    
+                    <div class="icon-wrap icon-me hide" data-idx="4">
+                        <div class="user"></div>
+                        <div class="shoulder"></div>
+                    </div>
+                    
+                    
+                    <div class="icon-wrap icon-me hide" data-idx="5">
+                        <div class="user"></div>
+                        <div class="wechat_left"></div>
+                    </div>
+                    <div class="icon-wrap icon-me hide" data-idx="6">
+                        <div class="user"></div>
+                        <div class="wechat_left"></div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="tips-box hide">
+                <!-- 鸟屋 -->
+                <div class="tips-arrow"></div>
+                <ul class="tips-inner">
+                    <li>
+                        菜单
+                    </li>
+                    <li>
+                        标签
+                    </li>
+                    
+                    <li>
+                        友情链接
+                    </li>
+                    
+                    
+                    <li>
+                        个人签名
+                    </li>
+                    
+                    
+                    <li>
+                        最近访客
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul id="menu_ul">
+                            
+                            <!-- 菜单 -->
+                            <li class="cl-effect-1">
+                                
+                                <a href="/">
+                                    主页
+                                </a>
+                                
+                            </li>
+                            
+                            <!-- 菜单 -->
+                            <li class="cl-effect-1">
+                                
+                                <a href="/archives/">
+                                    学无止境
+                                </a>
+                                
+                            </li>
+                            
+                            <!-- 菜单 -->
+                            <li class="cl-effect-1">
+                                
+                                <a data-no-instant href="/tags/">
+                                    分类标签
+                                </a>
+                                
+                            </li>
+                            
+                            <!-- 菜单 -->
+                            <li class="cl-effect-1">
+                                
+                                <a href="/tags/回顾">
+                                    助记回顾
+                                </a>
+                                
+                            </li>
+                            
+                            <!-- 菜单 -->
+                            <li class="cl-effect-1">
+                                
+                                <a href="/about/">
+                                    求职实习
+                                </a>
+                                
+                            </li>
+                            
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            <!-- 社交 -->
+                            
+                            
+                            
+                            <span class="hint  hint--top" data-hint="知乎"><a class="fa 知乎" href="https://www.zhihu.com/people/Art-er/activities" style="margin-left:3px;"></a></span>
+                            
+                            
+                            
+                            
+                            <span class="hint  hint--top" data-hint="QQ"><a class="fa QQ" href="javascript:void(0)" style="margin-left:3px;"></a></span>
+                            
+                            
+                            
+                            <span class="hint  hint--top" data-hint="微信"><a class="fa WeChat" href="javascript:void(0)" style="margin-left:3px;"></a></span>
+                            
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/App/">App</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BFC/">BFC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS3/">CSS3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS选择器/">CSS选择器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/H5/">H5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IFE/">IFE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IIFE/">IIFE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/">bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/caller/">caller</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eslint/">eslint</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/essay/">essay</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/">express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/float/">float</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/font-face/">font-face</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/link标签/">link标签</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/list-style/">list-style</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/margin/">margin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meta标签/">meta标签</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/theme/">theme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuex/">vuex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yelee/">yelee</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件/">事件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/交互/">交互</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/优先级/">优先级</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/优化/">优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/伪元素/">伪元素</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/作用域/">作用域</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/全选/">全选</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/函数属性/">函数属性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/单例/">单例</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/双飞翼布局/">双飞翼布局</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回顾/">回顾</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图标/">图标</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/圣杯布局/">圣杯布局</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/基础/">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/复选框/">复选框</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字体/">字体</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工程/">工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异步/">异步</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/心得/">心得</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/指针事件/">指针事件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/插件/">插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/操作符/">操作符</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文字/">文字</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间/">时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/权重/">权重</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/条目/">条目</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/清除浮动/">清除浮动</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/特殊/">特殊</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/绝对定位/">绝对定位</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/表格/">表格</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/触摸事件/">触摸事件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/进阶/">进阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/配置/">配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/阻止上下外边距合并/">阻止上下外边距合并</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                        
+                        <a class="main-nav-link switch-friends-link" href="https://hexo.io">
+                            Hexo
+                        </a>
+                        
+                        <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">
+                            GitHub
+                        </a>
+                        
+                        <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">
+                            MOxFIVE
+                        </a>
+                        
+                        <a class="main-nav-link switch-friends-link" href="http://ngudream.com/">
+                            ngudream
+                        </a>
+                        
+                        <div style="margin-top:50px;">
+                            <span>感恩一路有你们的陪伴与帮助！</span>
+                        </div>
+                    </div>
+                </section>
+                
+                
+                
+                    <section class="switch-part switch-part4">
+                        
+                        <div id="js-aboutme" style="line-height:1.4rem !important">
+                            Write the code Change the world
+                        </div>
+                        <div style="text-align:center;" id="bee_div"></div>
+                    </section>
+                    
+                    
+                    <!-- 最近访客http://yeshaoting.cn/article/hexo/yelee%E4%B8%BB%E9%A2%98%E6%9C%80%E8%BF%91%E8%AE%BF%E5%AE%A2%E6%8C%82%E4%BB%B6/#more -->
+                    <section class="switch-part switch-part5">
+                        <div class="widget visitor" id="js-visitor">
+                        </div>
+                    </section>
+                    
+                    
+                    <section class="switch-part switch-part6">
+                        <div style="text-align:center;" id="qq_div">
+                        </div>
+                    </section>
+                    <section class="switch-part switch-part7" id="wechat_div">
+                        <div style="text-align:center;"></div>
+                    </section>
+                    
+                </div>
+            </div>
+        </header>
+    </div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Alex Zhong</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a id="id_avatar_a_mobile" href="/" class="profilepic">
+                <!-- <img src="/img/avatar.jpg" class="animated rotateIn" style="-vendor-animation-duration: 3s;-vendor-animation-delay: 2s;-vendor-animation-iteration-count: infinite;"> -->
+				<!--<img src="/img/avatar.jpg" > -->
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Alex Zhong</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">Coding Changes the World</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">学无止境</a></li>
+                
+                    <li><a href="/tags/">分类标签</a></li>
+                
+                    <li><a href="/tags/回顾">助记回顾</a></li>
+                
+                    <li><a href="/about/">求职实习</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+								
+									<a class="fa 知乎" target="_blank" href="https://www.zhihu.com/people/Art-er/activities" title="知乎"></a>
+								
+                            
+								
+									<a class="fa QQ" title="QQ" target="_self" href="/social/"></a>
+								
+                            
+								
+									<a class="fa WeChat" title="微信" target="_self" href="/social/""></a>
+								
+                            
+                        </ul>
+            </nav>
+        </header>
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="个人签名"/>
+</nav>
+
+      <div class="body-wrap"><article id="post-vue-time-tracker" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/04/25/vue-time-tracker/" class="article-date">
+      <time datetime="2017-04-25T13:28:56.000Z" itemprop="datePublished">2017-04-25</time>
+</a>
+
+
+
+
+	<br />
+	<p style="height:7px;"/>
+	<p style="height:20px;font-family:KaiTi,LiSu,'宋体',sans-serif;color:#DBDBDB;font-size:12px;">预计阅读15分钟</p>
+
+    </div>
+  
+
+   <!-- 文章主内容 -->
+  
+      <header id="id_header_post" class="article-header">
+        
+  
+    <h1 class="article-title-big" itemprop="name">
+      经典vue单页路由入门全家桶
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/VUE/">VUE</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MongoDB/">MongoDB</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/express/">express</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vuex/">vuex</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/异步/">异步</a></li></ul>
+    </div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+          <div id="article-content" class="article-entry" itemprop="articleBody">
+			  
+			<p>vue-cli + vue2 + vue-router + axios + vuex2 + express + mongoose</p>
+<p>一个简单的ToDoList——经典vue单页路由入门全家桶，我在大神们demo的基础上不断地改进。</p>
+<p>对应代码的github仓库的地址：<a href="https://github.com/AlexZhong22c/vue-time-tracker" target="_blank" rel="external">https://github.com/AlexZhong22c/vue-time-tracker</a></p>
+<a id="more"></a>
+<ul>
+<li>使用vue-cli创建项目</li>
+<li>.vue文件组件化的开发</li>
+<li>使用vue-router实现单页路由</li>
+<li>使用axios请求我们的node服务端，即express</li>
+<li>使用vuex管理我们的数据流</li>
+<li>express 和 MongoDB做后台和数据库，演示了前后台的数据交互，ajax请求</li>
+<li>使用mongoose操作MongoDB</li>
+</ul>
+<p>“计划列表”界面</p>
+<p><img src="http://olqa2s510.bkt.clouddn.com/time-tracker1.png" alt="演示图1"></p>
+<p>创建任务：</p>
+<p><img src="http://olqa2s510.bkt.clouddn.com/time-tracker2.png" alt="演示图2"></p>
+<h2 id="运行demo"><a class="header-anchor" href="#运行demo"></a>运行demo:</h2>
+<p>用<code>npm install</code>之后，总共需要打开两个命令行窗口，一个命令行运行：</p>
+<pre><code>node app.js // 会在8888端口开启一个后台
+</code></pre>
+<p>另一个命令行运行：</p>
+<pre><code>npm run dev
+</code></pre>
+<h3 id="历史版本的commit记录："><a class="header-anchor" href="#历史版本的commit记录："></a>历史版本的commit记录：</h3>
+<table>
+<thead>
+<tr>
+<th>commit名</th>
+<th>commit时间</th>
+<th>版本内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>finish-first-time</td>
+<td>2017/4/25</td>
+<td>vue-cli + vue2 + vue-router + vue-resource + vuex2 + express + MongoDB</td>
+</tr>
+<tr>
+<td>use-mongoose</td>
+<td>2017/4/26</td>
+<td>使用mongoose，重写app.js文件，使其简单易懂</td>
+</tr>
+<tr>
+<td>use-axios</td>
+<td>2017/5/2</td>
+<td>使用axios代替原来的vue-resource</td>
+</tr>
+</tbody>
+</table>
+<h2 id="懒人速查"><a class="header-anchor" href="#懒人速查"></a>懒人速查</h2>
+<h3 id="main-js文件"><a class="header-anchor" href="#main-js文件"></a>main.js文件</h3>
+<ul>
+<li><code>main.js</code>将会作为我们应用的入口文件而<code>App.vue</code>会作为我们应用的初始化组件</li>
+</ul>
+<ul>
+<li><code>...App</code>这句代码等价于<code>render:h =&gt; h(App)</code></li>
+<li>使用axios代替原来的vue-resource做ajax请求</li>
+</ul>
+<h4 id="eslint-disable-no-new"><a class="header-anchor" href="#eslint-disable-no-new"></a>eslint-disable no-new</h4>
+<p>我们这个项目是用vue-cli帮助配置生成的，如果在生成时你选择了启用eslint检测语法，那么eslint默认是不允许你使用new的，如果eslint不通过会报错，你的项目因此就无法让webpack用浏览器调试。</p>
+<p>解决办法有很多，正如它提示的一样：eslint-disable no-new，就是去项目的根目录找到.eslintrc.js配置文件，然后在rules字段里面添加<code>&quot;no-new&quot;: 0</code>，取消对no-new规则的检查，就像是这样：</p>
+<pre><code>  'rules': {
+    // allow paren-less arrow functions
+    'arrow-parens': 0,
+    &quot;no-new&quot;: 0,
+    // allow async-await
+    'generator-star-spacing': 0,
+    // allow debugger during development
+    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
+  }
+</code></pre>
+<p>此后，当我们调试或者打包项目的时候就不会因为这个new语法报错。</p>
+<p>如果你想要了解各个eslint配置的含义，强烈推荐去 <a href="http://eslint.cn/" target="_blank" rel="external">eslint中文官网</a> 在官网用搜索栏一搜就能查到含义。</p>
+<p>另外，可以看到这个demo的eslint配置主要是在引入 <em>eslint-config-standard</em> 的基础上稍稍修改的，其他的配置如果你不想浪费时间在自定义上，你可以参考我的博文：<a href="https://alexzhong22c.github.io/2017/03/11/try-eslint/">https://alexzhong22c.github.io/2017/03/11/try-eslint/</a></p>
+<h3 id="app-vue文件"><a class="header-anchor" href="#app-vue文件"></a>App.vue文件</h3>
+<ul>
+<li><code>main.js</code>将会作为我们应用的入口文件而<code>App.vue</code>会作为我们应用的初始化组件</li>
+<li><a href="#%60ready%60%E8%A2%AB%E5%BA%9F%E9%99%A4"><code>ready</code>已被废除</a> ，见本项目的App.vue 或 <a href="https://cn.vuejs.org/v2/guide/migration.html#ready-%E6%9B%BF%E6%8D%A2" target="_blank" rel="external">官网原文</a></li>
+</ul>
+<h3 id="timeentries-vue文件"><a class="header-anchor" href="#timeentries-vue文件"></a>TimeEntries.vue文件</h3>
+<ul>
+<li><a href="#%60$dispatch%60%E8%A2%AB%E5%BA%9F%E9%99%A4"><code>$dispatch</code>已被废除</a> ，本demo使用的就是vuex，见本项目TimeEntries.vue文件和src/store下的各个文件夹或 <a href="https://cn.vuejs.org/v2/guide/migration.html#dispatch-%E5%92%8C-broadcast-%E6%9B%BF%E6%8D%A2" target="_blank" rel="external">官网原文</a></li>
+</ul>
+<p>总结：<strong>在vue2.0中废除了使用事件的方式进行通信，所以在小项目中我们可以使用Event Bus，其余最好都使用vuex，本demo我们使用Vuex来实现数据通信</strong>。</p>
+<pre><code>// this.$dispatch('deletePlan', timeEntry)，事件*通信*的写法
+// $dispatch是vue1.x的写法，现已被废除，改为vuex来*通信*：
+this.$store.dispatch('deletePlan', timeEntry)，用vuex*通信*
+</code></pre>
+<h3 id="logtime-vue文件"><a class="header-anchor" href="#logtime-vue文件"></a>LogTime.vue文件</h3>
+<ul>
+<li>组件可以没有“name&quot;，如果给组件一个name可以方便在调试的时候在控制台打印错误是来自哪个组件的</li>
+<li>对 <a href="#axios%E5%9C%A8vue%E4%B8%AD%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8">axios</a> 的用法做了粗浅介绍</li>
+</ul>
+<h3 id="app-js文件"><a class="header-anchor" href="#app-js文件"></a>app.js文件</h3>
+<blockquote>
+<p>demo经过了版本更新，原本使用MongoClient，现在用mongoose改写了一次</p>
+</blockquote>
+<h4 id="mpromise-mongoose-s-default-promise-library-is-deprecated"><a class="header-anchor" href="#mpromise-mongoose-s-default-promise-library-is-deprecated"></a>mpromise (mongoose’s default promise library) is deprecated</h4>
+<p><a href="http://blog.csdn.net/fd214333890/article/details/53486862" target="_blank" rel="external">http://blog.csdn.net/fd214333890/article/details/53486862</a></p>
+<p>增加一句： <code>mongoose.Promise = global.Promise</code> 即可</p>
+<h4 id="mongoose是怎么找collections的"><a class="header-anchor" href="#mongoose是怎么找collections的"></a>mongoose是怎么找collections的?</h4>
+<p><a href="https://cnodejs.org/topic/4f71363f8a04d82a3d1e4aea" target="_blank" rel="external">https://cnodejs.org/topic/4f71363f8a04d82a3d1e4aea</a></p>
+<pre><code>mongoose.model('User', UserSchema);
+</code></pre>
+<p>去命令行：</p>
+<pre><code>use node_club show collections //只能看到有一个名为users的collection，而没有User的collection
+</code></pre>
+<p>由此我们可以推断mongoose在内部创建collection时将我们传递的collection名小写化，同时如果小写化的名称后面没有字母——s,则会在其后面添加一s,针对我们刚建的collection,则会命名为：users。</p>
+<p><strong>可以通过下面两种方式更改collection的名字：</strong></p>
+<pre><code>1.xxschema = new Schema({
+…
+}, {collection: “your collection name”});
+
+2.mongoose.model(‘User’, UserSchema, “your collection name”);
+</code></pre>
+<h2 id="深入理解数据的请求"><a class="header-anchor" href="#深入理解数据的请求"></a>深入理解数据的请求</h2>
+<h3 id="生命周期和数据请求的时机"><a class="header-anchor" href="#生命周期和数据请求的时机"></a>生命周期和数据请求的时机</h3>
+<p>vue实例的生命周期看这一篇：<a href="http://blog.csdn.net/sexy_squirrel/article/details/60764504" target="_blank" rel="external">http://blog.csdn.net/sexy_squirrel/article/details/60764504</a></p>
+<p>同样是向后台请求数据，App.vue是在mounted的时机，而TimeEntries是在created的时机。</p>
+<p>那主要是因为我们需要先挂载好App组件，然后再请求数据。</p>
+<p>而TimeEntries要等到请求完数据之后才会挂载上去，所以我们为TimeEntries做了一个loading提示，代表正在请求数据。</p>
+<h3 id="导航钩子和数据请求的时机"><a class="header-anchor" href="#导航钩子和数据请求的时机"></a>导航钩子和数据请求的时机</h3>
+<p>强烈推荐看这一篇：<a href="https://github.com/vuefe/vuefe.github.io/blob/1f6e110db81a0a385955ce4ec998f23e7190d2a9/src/router/advanced/data-fetching.md" target="_blank" rel="external">https://github.com/vuefe/vuefe.github.io/blob/1f6e110db81a0a385955ce4ec998f23e7190d2a9/src/router/advanced/data-fetching.md</a></p>
+<h3 id="vuex和数据请求"><a class="header-anchor" href="#vuex和数据请求"></a>vuex和数据请求</h3>
+<p>谈一谈下面这一段被注释的代码：</p>
+<pre><code>    watch: {
+      如果路由有变化，会再次执行该方法，进入和离开都会触发
+      由于我们用了vuex--让timeEntries作为计算属性就能拿到数据，不必fetchData
+      '$route': 'fetchData'
+    },
+</code></pre>
+<ul>
+<li>我们经常拿计算属性和watch做对比</li>
+<li>一般vue组件从vuex的state拿到数据的方式有二：
+<ul>
+<li>一个是计算属性</li>
+<li>一个是封装getter函数再调用getter(适用于多个组件都需要相同的state数据的情况)</li>
+</ul>
+</li>
+<li>vuex其实相当于一个前台的小数据库</li>
+<li>使用vuex的一大特点就是：有vuex帮忙管理数据，<strong>应用一开始从后台拿大量的数据也不会混乱</strong>，之后用户每次增删改查一小部分数据的时候，先ajax让后台数据库实现增删改查，成功之后直接通过vuex的actions–&gt;mutations–&gt;state来增删改查state那里的数据就行了。
+<ul>
+<li>因为ajax比较容易失败，所以一般都是ajax成功之后，再在回调函数中同步对应的前台state数据</li>
+</ul>
+</li>
+<li><strong>尤其是“查”，页面切换回来或者路由切换回来的时候，需要重复再查一次此页的数据。</strong> 使用vuex后，查数据不必去用ajax访问数据库，直接从state查数据就行了</li>
+</ul>
+<p>结论：使用vuex后，原本这次需要调用fetchData函数去再查数据库，而现在直接用计算属性从state那里查就行了。</p>
+<hr>
+<blockquote>
+<p>2017/5/2更新：使用axios代替原来的vue-resource：</p>
+</blockquote>
+<h3 id="axios在vue中如何使用"><a class="header-anchor" href="#axios在vue中如何使用"></a>axios在vue中如何使用</h3>
+<p>安装其他插件的时候，可以直接在 main.js 中引入并 Vue.use()，但是 axios 并不能 use，只能在每个需要发送请求的组件中即时引入。</p>
+<p>为了解决这个问题，有两种开发思路，一是在引入 axios 之后，修改原型链，（另一种是在vuex的actions内封装一下，由于考虑到某些小伙伴不使用vuex，我们选用第一种方法）。</p>
+<blockquote>
+<p>对这方面好奇的同学可以参考：<a href="http://blog.csdn.net/fen747042796/article/details/70660419?locationNum=6&amp;fps=1" target="_blank" rel="external">http://blog.csdn.net/fen747042796/article/details/70660419?locationNum=6&amp;fps=1</a></p>
+</blockquote>
+<p>在 main.js 中引入 axios：</p>
+<pre><code>import axios from 'axios'
+Vue.prototype.$ajax = axios
+// 在 main.js 中添加了这两行代码之后，就能直接在组件的 methods 中使用 $ajax 命令
+</code></pre>
+<p><a href="http://www.cnblogs.com/wisewrong/p/6402183.html" target="_blank" rel="external">http://www.cnblogs.com/wisewrong/p/6402183.html</a></p>
+<h4 id="回调函数的this"><a class="header-anchor" href="#回调函数的this"></a>回调函数的this</h4>
+<p>当请求成功时，会执行 .then，否则执行 .catch</p>
+<p>这两个回调函数都有各自独立的作用域，<strong>如果直接在里面访问 this，将会无法访问到 Vue 实例</strong>，所以我们改为用箭头函数，详见demo中LogTime.vue文件的注释说明。</p>
+<p><a href="https://segmentfault.com/q/1010000005932552" target="_blank" rel="external">https://segmentfault.com/q/1010000005932552</a></p>
+<p><a href="http://blog.csdn.net/qtwwyl/article/details/70094361?utm_source=itdadao&amp;utm_medium=referral" target="_blank" rel="external">http://blog.csdn.net/qtwwyl/article/details/70094361?utm_source=itdadao&amp;utm_medium=referral</a></p>
+<h2 id="深入理解vuex"><a class="header-anchor" href="#深入理解vuex"></a>深入理解vuex</h2>
+<h3 id="state的数据在内存中"><a class="header-anchor" href="#state的数据在内存中"></a>state的数据在内存中</h3>
+<p>vuex的本质作用是管理组件之间复杂的状态的（如购物车逻辑等等…）,所以当F5刷新浏览器时，这些状态也会一并被清空。</p>
+<p>如果想在F5之后不要丢失数据，一般都会采用cookie或者localStorage等方法存储：</p>
+<p><a href="https://segmentfault.com/q/1010000007336361" target="_blank" rel="external">https://segmentfault.com/q/1010000007336361</a></p>
+<p><a href="https://www.zhihu.com/question/54164220/answer/138185671" target="_blank" rel="external">https://www.zhihu.com/question/54164220/answer/138185671</a></p>
+<h3 id="既然vuex2-可以直接去store拿state-那getters还有什么用啊"><a class="header-anchor" href="#既然vuex2-可以直接去store拿state-那getters还有什么用啊"></a>既然vuex2 可以直接去store拿state, 那getters还有什么用啊?</h3>
+<p>getters可以看做是store的计算属性。另外，我们最好遵循vuex的通讯流程：</p>
+<h4 id="vuex单向数据流"><a class="header-anchor" href="#vuex单向数据流"></a>vuex单向数据流</h4>
+<p>Vuex实际上是类<a href="https://link.juejin.im/?target=https%3A%2F%2Ffacebook.github.io%2Fflux%2F" target="_blank" rel="external">Flux</a>的数据管理架构。下面这张图很好的诠释了Vuex和组件之间的通讯关系。</p>
+<p><img src="http://olqa2s510.bkt.clouddn.com/vuex.png" alt="Vuex和组件之间的通讯关系"></p>
+<p>这个图告诉我们不应该直接在vue Components去操作state中的数据，而是应该按照vue Components–&gt;actions–&gt;mutations–&gt;state这个过程来操作数据。</p>
+<blockquote>
+<p>组件永远都不应该直接改变 Vuex store 的状态。因为我们想要让状态的每次改变都很明确且可追踪，Vuex 状态的所有改变都必须在 store 的 mutation handler (变更句柄)中管理。</p>
+</blockquote>
+<h3 id="区分-actions-和-mutations"><a class="header-anchor" href="#区分-actions-和-mutations"></a>区分 actions 和 mutations</h3>
+<p>更改 Vuex 的 store 中的<strong>状态</strong>的唯一方法是提交 mutation。Vuex 中的 mutations 非常类似于事件：每个 mutation 都有一个字符串的 <strong>事件类型 (type)</strong> 和 一个 <strong>回调函数 (handler)</strong>。这个回调函数就是我们实际进行<strong>状态</strong>更改的地方，并且它会接受 state 作为第一个参数。</p>
+<h4 id="mutation-必须是同步函数-什么意思"><a class="header-anchor" href="#mutation-必须是同步函数-什么意思"></a>mutation 必须是同步函数，什么意思?</h4>
+<p>一条重要的原则就是要记住mutation 必须是<strong>同步函数</strong>，即<strong>不准在mutations中编写异步回调的操作。</strong></p>
+<pre><code>mutations: {
+  someMutation (state) {
+    api.callAsyncMethod(() =&gt; {
+      // 这句话在异步函数的回调函数中 
+      state.count++
+    })
+  }
+}
+</code></pre>
+<p>现在想象，我们正在 debug 一个 app 并且观察 devtool 中的 mutation 日志。每一条 mutation 被记录，devtools 都需要捕捉到前一状态和后一状态的快照。</p>
+<p>然而，在上面的例子中 mutation 中的<strong>异步函数中的回调</strong>让这不可能完成：(当 mutation 触发的时候，回调函数还没有被调用)，devtools 不知道什么时候<strong>回调函数实际上被调用</strong> —— 实质上任何在回调函数中进行的的状态的改变都是不可追踪记录的。</p>
+<h5 id="从另一个角度去理解："><a class="header-anchor" href="#从另一个角度去理解："></a>从另一个角度去理解：</h5>
+<p><code>Store</code>理解为一个仓库，<code>action</code>是一次操作，<code>mutation</code>是让仓库中存储的东西产生某种变化的方式，<code>state</code>则是存储的东西当前的状态。</p>
+<p>一个操作可能需要对数据产生变动，另一个操作也需要对数据产生同样的变动，那这个变动可以抽取出来，称为一个<code>mutation</code>，这样，通过<code>commit</code>触发指定<code>的mutation</code>就可以了, 不必使其与操作业务的代码混在一起，导致代码混乱、可维护性差的结果。</p>
+<h5 id="作者在知乎上的解释："><a class="header-anchor" href="#作者在知乎上的解释："></a>作者在知乎上的解释：</h5>
+<p>区分 actions 和 mutations 并不是为了解决竞态问题，而是为了能用 devtools 追踪记录状态的变化。</p>
+<p>事实上在 vuex 里面 actions 只是一个架构性的概念，并不是必须的，说到底只是一个函数，你在里面想干嘛都可以，只要最后触发 mutation 就行。异步竞态怎么处理那是用户自己的事情。vuex 真正限制你的只有 mutation 必须是同步的这一点。[在 redux 里面就好像 reducer 必须同步返回(而不能异步返回)下一个状态一样。]</p>
+<p>同步的意义在于这样每一个 mutation 执行完成后都可以对应到一个新的状态（和 reducer 一样），这样 devtools 就可以打个 snapshot 存下来，然后就可以随便 time-travel 了。</p>
+<p>如果你开着 devtool 调用一个异步的 action，你可以清楚地看到它所调用的 mutation 是何时被记录下来的，并且可以立刻查看它们对应的状态。其实尤雨溪有个点子一直没时间做，那就是把记录下来的 mutations 做成类似 rx-marble 那样的时间线图，对于理解应用的异步状态变化很有帮助。</p>
+<p>作者：尤雨溪链接：<a href="https://www.zhihu.com/question/48759748/answer/112823337" target="_blank" rel="external">https://www.zhihu.com/question/48759748/answer/112823337</a></p>
+<h3 id="mutations-需遵守-vue-的响应规则"><a class="header-anchor" href="#mutations-需遵守-vue-的响应规则"></a>Mutations 需遵守 Vue 的响应规则</h3>
+<p>1. 最好提前在你的 store 中初始化好所有所需属性。</p>
+<p>2. 当需要在对象上添加<strong>新属性</strong>时，你应该</p>
+<ul>
+<li>使用 <code>Vue.set(obj, 'newProp', 123)</code>, 或者 -</li>
+<li>以新对象替换老对象。例如，利用 stage-3 的<a href="https://github.com/sebmarkbage/ecmascript-rest-spread" target="_blank" rel="external">对象展开运算符</a>我们可以这样写：</li>
+</ul>
+<pre><code>  state.obj = { ...state.obj, newProp: 123 }
+</code></pre>
+<p>(这个demo并没有为对象添加新属性的操作，这里只是提醒一下有这个知识点)</p>
+<h2 id="vue2-新旧替换"><a class="header-anchor" href="#vue2-新旧替换"></a>vue2 新旧替换</h2>
+<h3 id="ready被废除"><a class="header-anchor" href="#ready被废除"></a><code>ready</code>被废除</h3>
+<p>使用新的 <code>mounted</code> 钩子函数替代。应该注意的是，使用 <code>mounted</code> 并不能保证钩子函数中的 <code>this.$el</code> 在 document 中。为此还应该引入 <code>Vue.nextTick</code>/<code>vm.$nextTick</code>。例如：</p>
+<pre><code class="language-vue">mounted: function () {
+  this.$nextTick(function () {
+    // 使用$nextTick，代码保证 this.$el 在 document 中
+  })
+}
+</code></pre>
+<p>见本项目的App.vue 或 <a href="https://cn.vuejs.org/v2/guide/migration.html#ready-%E6%9B%BF%E6%8D%A2" target="_blank" rel="external">官网原文</a></p>
+<h3 id="dispatch被废除"><a class="header-anchor" href="#dispatch被废除"></a><code>$dispatch</code>被废除</h3>
+<p>总结：<strong>在vue2.0中废除了使用事件的方式进行通信，所以在小项目中我们可以使用Event Bus，其余最好都使用vuex，本demo我们使用Vuex来实现数据通信</strong>。</p>
+<pre><code>// this.$dispatch('deletePlan', timeEntry)，事件*通信*的写法
+// $dispatch是vue1.x的写法，现已被废除，改为vuex来*通信*：
+this.$store.dispatch('deletePlan', timeEntry)，用vuex*通信*
+</code></pre>
+<p><code>$dispatch</code> 和 <code>$broadcast</code> 已经被弃用。因为基于组件树结构的事件流方式实在是让人难以理解，并且在组件结构扩展的过程中会变得越来越脆弱。这种事件方式确实不太好。</p>
+<p>对于<code>$dispatch</code> 和 <code>$broadcast</code>最简单的升级方式就是：通过使用事件中心，允许组件自由交流，无论组件处于组件树的哪一层。由于 Vue 实例实现了一个事件分发接口，你可以通过实例化一个空的 Vue 实例来实现这个目的。</p>
+<blockquote>
+<p>这些方法的最常见用途之一是父子组件的相互通信。在这些情况下，你可以使用 <a href="https://cn.vuejs.org/v2/guide/components.html#Form-Input-Components-using-Custom-Events" target="_blank" rel="external"><code>v-on</code>监听子组件上 $emit 的变化</a>。这可以允许你很方便的添加事件显性。</p>
+<p>然而，如果是跨多层父子组件通信的话， <code>$emit</code> 并没有什么用。相反，用集中式的事件中间件可以做到简单的升级。（这会让组件之间的通信非常顺利，即使是兄弟组件。）</p>
+</blockquote>
+<h4 id="单独的事件中心"><a class="header-anchor" href="#单独的事件中心"></a>单独的事件中心</h4>
+<p>比如，假设我们有个 todo 的应用结构如下：</p>
+<pre><code>Todos
+|-- NewTodoInput
+|-- Todo
+    |-- DeleteTodoButton
+</code></pre>
+<p>可以通过单独的事件中心管理组件间的通信：</p>
+<pre><code>// 将在各处使用该事件中心
+// 组件通过它来通信
+var eventHub = new Vue()
+</code></pre>
+<p>然后在组件中，可以使用 <code>$emit</code>, <code>$on</code>, <code>$off</code> 分别来分发、监听、取消监听事件：</p>
+<pre><code>// NewTodoInput
+// ...
+methods: {
+  addTodo: function () {
+    eventHub.$emit('add-todo', { text: this.newTodoText })
+    this.newTodoText = ''
+  }
+}
+// --------------------------------------------
+// DeleteTodoButton
+// ...
+methods: {
+  deleteTodo: function (id) {
+    eventHub.$emit('delete-todo', id)
+  }
+}
+// --------------------------------------------
+// Todos
+// ...
+created: function () {
+  eventHub.$on('add-todo', this.addTodo)
+  eventHub.$on('delete-todo', this.deleteTodo)
+},
+// 最好在组件销毁前
+// 清除事件监听
+beforeDestroy: function () {
+  eventHub.$off('add-todo', this.addTodo)
+  eventHub.$off('delete-todo', this.deleteTodo)
+},
+methods: {
+  addTodo: function (newTodo) {
+    this.todos.push(newTodo)
+  },
+  deleteTodo: function (todoId) {
+    this.todos = this.todos.filter(function (todo) {
+      return todo.id !== todoId
+    })
+  }
+}
+</code></pre>
+<p>在简单的情况下可以这样用事件中心替代 <code>$dispatch</code> 和 <code>$broadcast</code>，但是对于大多数复杂情况，更推荐使用一个专用的状态管理层如：<a href="https://github.com/vuejs/vuex" target="_blank" rel="external">Vuex</a> ，Vuex意味着更多简明清晰的组件间通信和更好的状态管理方案。</p>
+<h5 id="vuex"><a class="header-anchor" href="#vuex"></a>vuex</h5>
+<p>本demo使用的就是vuex，见本项目TimeEntries.vue文件和src/store下的各个文件夹或 <a href="https://cn.vuejs.org/v2/guide/migration.html#dispatch-%E5%92%8C-broadcast-%E6%9B%BF%E6%8D%A2" target="_blank" rel="external">官网原文</a></p>
+<h2 id="最后还有小尾巴："><a class="header-anchor" href="#最后还有小尾巴："></a>最后还有小尾巴：</h2>
+<ul>
+<li>后台的代码主要在app.js文件里，已经解决了跨域请求的问题，还没有解释这部分代码</li>
+</ul>
+
+		</div>
+      
+  
+     <!-- 版权署名授权 -->
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/04/25/vue-time-tracker/">经典vue单页路由入门全家桶</a></p>
+        <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
+        <p style="color: #696969;"><span>发布时间:</span>2017-04-25, 21:28:56</p>
+        <!-- <p><span>最后更新:</span>2017-05-04, 14:08:30</p> -->
+        <p>
+            <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="经典vue单页路由入门全家桶" href="/2017/04/25/vue-time-tracker/">https://alexzhong22c.github.io/2017/04/25/vue-time-tracker/</a>
+            <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://alexzhong22c.github.io/2017/04/25/vue-time-tracker/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+        </p>
+        <p style="color: #696969;">
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i><a id="copyright_license" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target = "_blank" class="hint  hint--bottom" data-hint="中国大陆 (CC BY-NC-SA 3.0 CN)">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2017/05/07/vue-checkbox-table/">
+                    纯vue实现带checkbox表格
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/04/15/vue-table-nav/">
+                    按条目展示表格数据小插件
+                </a>
+            </div>
+        
+    </nav>
+
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#运行demo"><span class="toc-number">1.</span> <span class="toc-text">运行demo:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#历史版本的commit记录："><span class="toc-number">1.1.</span> <span class="toc-text">历史版本的commit记录：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#懒人速查"><span class="toc-number">2.</span> <span class="toc-text">懒人速查</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#main-js文件"><span class="toc-number">2.1.</span> <span class="toc-text">main.js文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#eslint-disable-no-new"><span class="toc-number">2.1.1.</span> <span class="toc-text">eslint-disable no-new</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#app-vue文件"><span class="toc-number">2.2.</span> <span class="toc-text">App.vue文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#timeentries-vue文件"><span class="toc-number">2.3.</span> <span class="toc-text">TimeEntries.vue文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#logtime-vue文件"><span class="toc-number">2.4.</span> <span class="toc-text">LogTime.vue文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#app-js文件"><span class="toc-number">2.5.</span> <span class="toc-text">app.js文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#mpromise-mongoose-s-default-promise-library-is-deprecated"><span class="toc-number">2.5.1.</span> <span class="toc-text">mpromise (mongoose’s default promise library) is deprecated</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mongoose是怎么找collections的"><span class="toc-number">2.5.2.</span> <span class="toc-text">mongoose是怎么找collections的?</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#深入理解数据的请求"><span class="toc-number">3.</span> <span class="toc-text">深入理解数据的请求</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#生命周期和数据请求的时机"><span class="toc-number">3.1.</span> <span class="toc-text">生命周期和数据请求的时机</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#导航钩子和数据请求的时机"><span class="toc-number">3.2.</span> <span class="toc-text">导航钩子和数据请求的时机</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vuex和数据请求"><span class="toc-number">3.3.</span> <span class="toc-text">vuex和数据请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#axios在vue中如何使用"><span class="toc-number">3.4.</span> <span class="toc-text">axios在vue中如何使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#回调函数的this"><span class="toc-number">3.4.1.</span> <span class="toc-text">回调函数的this</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#深入理解vuex"><span class="toc-number">4.</span> <span class="toc-text">深入理解vuex</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#state的数据在内存中"><span class="toc-number">4.1.</span> <span class="toc-text">state的数据在内存中</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#既然vuex2-可以直接去store拿state-那getters还有什么用啊"><span class="toc-number">4.2.</span> <span class="toc-text">既然vuex2 可以直接去store拿state, 那getters还有什么用啊?</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#vuex单向数据流"><span class="toc-number">4.2.1.</span> <span class="toc-text">vuex单向数据流</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#区分-actions-和-mutations"><span class="toc-number">4.3.</span> <span class="toc-text">区分 actions 和 mutations</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#mutation-必须是同步函数-什么意思"><span class="toc-number">4.3.1.</span> <span class="toc-text">mutation 必须是同步函数，什么意思?</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#从另一个角度去理解："><span class="toc-number">4.3.1.1.</span> <span class="toc-text">从另一个角度去理解：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#作者在知乎上的解释："><span class="toc-number">4.3.1.2.</span> <span class="toc-text">作者在知乎上的解释：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mutations-需遵守-vue-的响应规则"><span class="toc-number">4.4.</span> <span class="toc-text">Mutations 需遵守 Vue 的响应规则</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vue2-新旧替换"><span class="toc-number">5.</span> <span class="toc-text">vue2 新旧替换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ready被废除"><span class="toc-number">5.1.</span> <span class="toc-text">ready被废除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dispatch被废除"><span class="toc-number">5.2.</span> <span class="toc-text">$dispatch被废除</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#单独的事件中心"><span class="toc-number">5.2.1.</span> <span class="toc-text">单独的事件中心</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#vuex"><span class="toc-number">5.2.1.1.</span> <span class="toc-text">vuex</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最后还有小尾巴："><span class="toc-number">6.</span> <span class="toc-text">最后还有小尾巴：</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"经典vue单页路由入门全家桶　| Web前端 | Alex Zhong　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2017/04/25/vue-time-tracker/" data-title="经典vue单页路由入门全家桶" data-url="https://alexzhong22c.github.io/2017/04/25/vue-time-tracker/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"null"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = 'https://alexzhong22c.github.io/js/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+            // Add comment count
+            $(function(){
+                var jsonUrl = "https://api.duoshuo.com/threads/counts.jsonp?short_name=null&threads=2017/04/25/vue-time-tracker/&callback=?";
+                $.getJSON(jsonUrl, function(result){
+                    $.each(result.response, function(i, field){
+                        var value = field.comments;
+                        if (value > 0) {
+                            $(".count-comment").text(value);
+                            return;
+                        }
+                    })
+                })
+            })
+        
+    </script>
+    
+    <aside class="comment-bar">
+        <a href="javascript:void(0);">
+            <i class="fa fa-commenting-o animated infinite pulse"></i>
+            <i class="fa fa-spinner fa-pulse"></i>
+            <span class="count-comment"></span>
+        </a>
+    </aside>
+    <script>
+        var $commentBar = $("#comments aside.comment-bar");
+        var load$hide = function(){
+            $commentBar.find("a > i").toggle();
+            loadJS("https://alexzhong22c.github.io/js/embed.js", function(){
+              if (typeof DUOSHUO !== 'undefined'){
+		              DUOSHUO.EmbedThread('.ds-thread');
+              }
+            })
+            $commentBar.fadeOut(800);
+
+        }
+        $commentBar.click(function(){
+            load$hide();
+        })
+        $commentBar.children("a").hover(function(){
+            load$hide();
+        })
+        if (window.location.hash === "#comments") {
+            load$hide();
+        }
+    </script>
+
+
+</div>
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2017/05/07/vue-checkbox-table/" title="上一篇: 纯vue实现带checkbox表格">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/04/15/vue-table-nav/" title="下一篇: 按条目展示表格数据小插件">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/05/07/js-date/">JavaScript Date对象回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/07/vue-checkbox-table/">纯vue实现带checkbox表格</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/25/vue-time-tracker/">经典vue单页路由入门全家桶</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/15/vue-table-nav/">按条目展示表格数据小插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/06/ife-css-task03/">IFE2017-CSS-task03笔记：三栏式布局</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/clearfix-n-bfc/">闭合浮动和BFC和阻止上下外边距的合并</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/ife-css-task02/">IFE2017-CSS-task02笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/31/css-selectors-specificity/">CSS选择器优先级</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/27/ife-css-task01/">IFE2017-CSS-task01笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/11/try-eslint/">eslint折腾记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/10/iife-intro/">IIFE回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/09/for-loop/">js的for循环回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/05/js-event2/">事件进阶话题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/float-n-absolute/">float和绝对定位比较</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/about-margin/">和margin有关的知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/gulp-usage/">gulp的入门和一些简单使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/27/icon-usage/">桌面端和移动端图标的引入</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/25/webapp-events-intro/">移动开发事件入门概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/24/webapp-intro/">移动开发入门概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/my-hexo-theme/">yelee主题改bug总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/my-hexo-blog/">搭建hexo博客个人总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/17/todo-app/">ToDo小应用完工总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/equality-operators/">相等操作符回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/js-operators/">操作符回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/29/js-event/">js事件绑定基础回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/25/font-face/">font-face--CSS3</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/25/h5-new-ele/">内容分类--谈谈H5标签</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/13/js-function/">js函数基础回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/09/let-n-const/">let和const回顾</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" style="text-align:center;">
+
+            <div class="footer-left" style="vertical-align:middle;margin-top:2px">
+                <img src="" style="vertical-align:middle; opacity:0" height="24">
+                <i class="fa fa-copyright" style="vertical-align:middle;"></i>
+                2017 Alex Zhong
+            </div>
+
+			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
+				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
+					
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：3,894</span>
+					
+				</div>
+            </div>
+        </div>
+
+        
+            <div id="footerdiv" class="visit" style="text-align:center;">
+			        <img src="" style="vertical-align:middle; opacity:0" height="24">
+                
+                    <span id="busuanzi_container_site_pv" style="display:none; text-align:center;">
+                        <span id="site-visit" class="hint  hint--top" data-hint="本博热度" style="vertical-align:middle;"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+				
+					
+						<span id="divider_span" style="vertical-align:middle;">|&thinsp;</span>
+					
+					
+						<span id="busuanzi_container_page_pv" style="display:none;text-align:center;">
+							<span id="page-visit" class="hint  hint--top  hint--info" data-hint="本文热度" style="vertical-align:middle;"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span><span>°C</span>
+							</span>
+						</span>
+					
+				
+            </div>
+        
+    </div>
+
+	<!-- 右下角的搜索 -->
+<div class="cb-search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+        opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+    <input type="text" class="cb-search-content" id="cb-search-content" style="width:50%;top:60px;left:300px;position:fixed; border-radius:50px; background-color:white; opacity:1 !important;" placeholder="请输入文章标题或标签" />
+
+	<div id="cb-close-div" style="position: fixed; top: 16px; right: 16px;">
+        <span class="hint  hint--left" data-hint="按ESC键关闭搜索" id="id_span_search_close"></span>
+    </div>
+</div>
+
+<div id="cb-search-div" style="position: fixed; right: 16px; bottom: 20px;">
+    <span class="hint  hint--left" data-hint="双击Ctrl键打开或关闭搜索" id="id_span_search_open"></span>
+</div>
+</footer>
+
+    </div>
+    
+<script src="/js/GithubRepoWidget.js"></script>
+
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js" defer async="true" data-no-instant></script>
+
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+             github: ".github-widget a", 
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+            
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script type="text/javascript" data-no-instant>
+String.prototype.endWith = function(s) {
+if(s==null||s==""||this.length==0||s.length>this.length)
+return false;
+if(this.substring(this.length-s.length)==s)
+return true;
+else
+return false;
+return true;
+}
+String.prototype.startWith = function(s) {
+if(s==null||s==""||this.length==0||s.length>this.length)
+return false;
+if(this.substr(0,s.length)==s)
+return true;
+else
+return false;
+return true;
+}
+//是否是文章
+function is_post(){//根据自己实际需要来判断
+var url = window.location.pathname;
+var urlArray = url.split("/");
+if(urlArray.length > 2){
+var id = $(".article").eq(0).attr("id");
+var resultUrl = "post-" + urlArray[urlArray.length - 2];
+if(resultUrl == id){
+return true;
+}
+}
+return false;
+// if($("#id_header_post").length > 0){
+//   return true;
+// }
+// return false;
+//return yiliaConfig.isPost;
+}
+function is_archive() {
+// if($("#id_archives").length > 0){
+//   return true;
+// }
+// return false;
+var url = window.location.pathname;
+if(url.startWith("/archives/")){
+return true;
+}
+return false;
+//return yiliaConfig.isArchive;
+}
+function is_tag() {
+var url = window.location.pathname;
+if(url.startWith("/tags/")){
+return true;
+}
+return false;
+}
+function is_category(){
+var url = window.location.pathname;
+if(url.startWith("/categories/")){
+return true;
+}
+return false;
+//return yiliaConfig.isCategory;
+}
+function is_home(){
+var url = window.location.pathname;
+if(url == '/'){
+return true;
+}
+return false;
+}
+var slide = function(idx) {
+// 修复IE10+切换无效的bug
+var $wrap = $(".switch-wrap"),
+transform = [
+'-webkit-transform: translate(-' + idx * 100 + '%, 0);',
+'-moz-transform: translate(-' + idx * 100 + '%, 0);',
+'-o-transform: translate(-' + idx * 100 + '%, 0);',
+'-ms-transform: translate(-' + idx * 100 + '%, 0);',
+'transform: translate(-' + idx * 100 + '%, 0);'
+];
+$wrap[0].style.cssText = transform.join('');
+$(".icon-wrap").addClass("hide");
+$(".icon-wrap").eq(idx).removeClass("hide");
+}
+var toggleTocArea = function(){
+var valueHide = yiliaConfig.toc[0];
+var valueShow = yiliaConfig.toc[1];
+if ($(".left-col").is(":hidden")) {
+$("#tocButton").attr("value", valueShow);
+}
+$("#tocButton").click(function() {
+if ($("#toc").is(":hidden")) {
+$("#tocButton").attr("value", valueHide);
+$("#toc").slideDown(320);
+$(".switch-btn, .switch-area").fadeOut(300);
+}
+else {
+$("#tocButton").attr("value", valueShow);
+$("#toc").slideUp(350);
+$(".switch-btn, .switch-area").fadeIn(500);
+}
+})
+}
+var HideTOCifNoHeader = function(){
+if (!$(".toc").length) {
+$("#toc, #tocButton").hide();
+$(".switch-btn, .switch-area").show();
+}
+}
+var clickIcon = function(){
+$("#toc .toc-item > i").click(function(){
+$(this).siblings(".toc-child").slideToggle(100);
+$(this).toggleClass("hide");
+$(this).siblings("i").toggleClass("hide");
+})
+}
+var clickTitle = function(){
+var $itemHasChild = $("#toc .toc-item:has(> .toc-child)");
+var $titleHasChild = $itemHasChild.children(".toc-link");
+$titleHasChild.dblclick(function(){//双击隐藏子目录
+$(this).siblings(".toc-child").hide(100);
+$(this).siblings("i").toggleClass("hide");
+})
+// After dblclick enent
+$titleHasChild.click(function(){
+var $curentTocChild = $(this).siblings(".toc-child");
+if ($curentTocChild.is(":hidden")) {
+$curentTocChild.show(100);
+$(this).siblings("i").toggleClass("hide");
+}
+})
+}
+var clickTocTitle = function(){
+var $itemHasChild = $("#toc .toc-item:has(> .toc-child)");
+var $titleHasChild = $itemHasChild.children(".toc-link");
+var $iconToExpand = $(".toc-item > .fa-caret-right");
+var $iconToFold = $(".toc-item > .fa-caret-down");
+var $subToc = $titleHasChild.next(".toc-child");
+$iconToExpand.addClass("hide");
+var $tocTitle = $("#toc .toc-title");
+if ($titleHasChild.length) {
+$tocTitle.addClass("clickable");
+$tocTitle.click(function(){
+if ($subToc.is(":hidden")) {
+$subToc.show(150);
+$iconToExpand.removeClass("hide");
+$iconToFold.addClass("hide");
+} else {
+$subToc.hide(100);
+$iconToExpand.addClass("hide");
+$iconToFold.removeClass("hide");
+}
+})
+// TOC on mobile
+if ($(".left-col").is(":hidden")) {
+$("#container .toc-article .toc").css("padding-left", "1.4em");
+$("#container .toc-article .toc-title").css("display", "initial");
+}
+}
+}
+var TocNoWarp = function(cond){
+if (cond) {
+var $tocLink = $(".toc li a");
+$tocLink.each(function(){
+var title = $(this).find('.toc-text').text();
+// Find elements with ellipsis
+if (this.offsetWidth < this.scrollWidth) {
+$(this).attr("title", title);
+if (!!$().tooltip) { $(this).tooltip() }
+}
+        //$(this).attr("href", "#" + title.toLowerCase());
+        //$(this).attr("onclick", alert("text"));
+})
+var isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
+if (isSafari) {
+$("#toc .toc-item i").css("bottom", ".1em");
+}
+}
+}
+// 异步加载css
+function loadCss (cssUrl, callback) {
+var elem, bl,
+isExecuted = false; // 防止在ie9中，callback执行两次
+if ( cssUrl == null ) {
+return String(cssUrl);
+}
+elem = document.createElement('link'),
+elem.rel = 'stylesheet';
+if ( typeof callback === 'function' )  {
+bl = true;
+}
+// for ie
+function handle() {
+if ( elem.readyState === 'loaded' || elem.readyState === 'complete' ) {
+if (bl && !isExecuted) {
+callback();
+isExecuted = true;
+}
+elem.onreadystatechange = null;
+}
+}
+elem.onreadystatechange = handle;
+// for 非ie
+if (bl && !isExecuted) {
+elem.onload = callback;
+isExecuted = true;
+}
+elem.href = cssUrl;
+document.getElementsByTagName('head')[0].appendChild(elem);
+}
+//异步加载js
+function loadScript(scriptUrl, callback) {
+var elem, bl,
+isExecuted = false; // 防止在ie9中，callback执行两次
+if (scriptUrl == null) {
+return String(fn);
+}
+elem = document.createElement('script');
+if ( typeof callback === 'function' )  {
+bl = true;
+}
+// for ie
+function handle(){
+var status = elem.readyState;
+if (status === 'loaded' || status === 'complete') {
+if (bl && !isExecuted) {
+callback();
+isExecuted = true;
+}
+elem.onreadystatechange = null;
+}
+}
+elem.onreadystatechange = handle;
+// for 非ie
+if (bl && !isExecuted) {
+elem.onload = callback;
+isExecuted = true;
+}
+elem.src = scriptUrl;
+document.getElementsByTagName('head')[0].appendChild(elem);
+}
+//instantclick回调
+var afterChange = function (isChange) {
+var isPostPage = null;
+if(isPostPage == null){
+isPostPage = is_post();
+}
+if(isPostPage && !isChange){//如果是文章，则设置目录功能
+$("#instantclick").remove();
+$("#instantclick-bar").remove();
+yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+toggleTocArea();
+HideTOCifNoHeader();
+var $itemHasChild = $("#toc .toc-item:has(> .toc-child)");
+var $titleHasChild = $itemHasChild.children(".toc-link");
+$itemHasChild.prepend("<i class='fa fa-caret-down'></i><i class='fa fa-caret-right'></i>");
+clickIcon();
+clickTitle();
+clickTocTitle();
+TocNoWarp(yiliaConfig.toc[2]);
+$(".article").css("opacity", "1.0");//结束后要将文章显示
+} else if(is_home() && !isChange){
+loadCss("//cdn.bootcss.com/semantic-ui/0.19.3/css/semantic.min.css", function(){
+jQuery.getScript("//cdn.bootcss.com/semantic-ui/0.19.3/javascript/semantic.min.js").done(function(){
+$(".article").removeClass("animated");
+$(".article").css("opacity", "1.0");//结束后要将文章显示
+});
+});
+} else {//暂时解决在分类标签页打开其它页面后，返回分类标签页加载页面出错的问题
+var url = window.location.pathname;
+if(!isChange){
+if(url == "/tags/"){
+window.location.reload();
+return;
+} else if(url.startWith("/page/")){
+$(".article").css("opacity", "1.0");//结束后要将文章显示
+}
+}
+}
+if(is_archive()){
+$("#id_archives").css("opacity", "1.0");
+}
+$(document).ready(function () {
+resetPageOpacity();
+hideLabels();
+resetTags();
+$("img.lazy").lazyload({
+placeholder : "/img/loading0_2.gif",
+effect : "fadeIn"
+});
+var avatarIcons = ["/img/avatar.jpg", "/img/Coding.png"];
+var iconIndex = Math.floor(Math.random()*(avatarIcons.length));
+var avatarPath = avatarIcons[iconIndex];
+//本机宽度798、高度638
+resetTitile();
+addAvatar(avatarPath);
+resetPageWidth();
+setTitleSerialNum();
+tipBoxFunc();
+otherSettings(isChange);
+baiduShare();
+if(isPostPage){
+setHightLigth();
+copyCode();
+copyRight();
+}
+leftSearch();
+mobileSearch();
+rightSearch();
+// $.cachedScript('https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js').done(function () {
+//   console.log("dddddddd");
+// });
+includeJavaScript("https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js");
+
+if(isPostPage) {
+var curProtocol = window.location.protocol.split(':')[0];
+if (curProtocol === 'https') {
+$.cachedScript('//zz.bdstatic.com/linksubmit/push.js').done(function () {
+});
+} else {
+$.cachedScript('//push.zhanzhang.baidu.com/push.js').done(function () {
+});	
+}
+
+}
+addTextAnimation();
+playTextAnimation();
+textAnimationClick(avatarPath);
+codeRain();
+duoshuoComments();
+});
+}
+//左侧搜索
+var leftSearch = function() {
+if (yiliaConfig.search) {
+jQuery.getScript(yiliaConfig.rootUrl + 'js/search.js').done(function(){
+var inputArea = document.querySelector("#local-search-input");
+var $HideWhenSearch = $("#toc, #tocButton, .post-list, #post-nav-button a:nth-child(2)");
+var $resetButton = $("#search-form .button");
+var $resultArea = $("#local-search-result");
+var getSearchFile = function() {
+var search_path = "search.xml";
+var path = yiliaConfig.rootUrl + search_path;
+searchFunc(path, 'local-search-input', 'local-search-result');
+}
+var getFileOnload = inputArea.getAttribute('searchonload');
+if (yiliaConfig.search && getFileOnload === "true") {
+getSearchFile();
+} else {
+inputArea.onfocus = function() {
+getSearchFile()
+}
+}
+var HideTocArea = function() {
+$HideWhenSearch.css("visibility", "hidden");
+$resetButton.show();
+}
+inputArea.oninput = function() {
+HideTocArea()
+}
+inputArea.onkeydown = function() {
+if (event.keyCode == 13) return false
+}
+//搜索框删除按钮
+resetSearch = function() {
+$HideWhenSearch.css("visibility", "initial");
+$resultArea.html("");
+document.querySelector("#search-form").reset();
+$resetButton.hide();
+$(".no-result").hide();
+$("#left_col_div").css("overflow-y", "hidden");
+}
+//监控搜索框内容，内容为空时主动调用删除函数
+$(function() {
+$('#local-search-input').bind('input propertychange', function() {
+$('#result').html($(this).val().length + ' characters');
+var len = $(this).val().length;
+if (len <= 0) {
+var searchDel = document.getElementById("search-delete");
+searchDel.click();
+}
+});
+})
+$resultArea.bind("DOMNodeRemoved DOMNodeInserted", function(e) {
+if (!$(e.target).text()) {
+$(".no-result").show(200);
+$("#left_col_div").css("overflow-y", "hidden");
+} else {
+$(".no-result").hide();
+$("#left_col_div").css("overflow-y", "auto").css("overflow-x", "hidden");
+}
+})
+});
+}
+}
+//弹出鸟屋
+var tipBoxFunc = function() {
+var Tips = (function() {
+var $tipBox = $(".tips-box");
+return {
+show: function() {
+$tipBox.removeClass("hide");
+},
+hide: function() {
+$tipBox.addClass("hide");
+},
+init: function() {
+}
+}
+})();
+var bind = function() {
+var switchBtn = $("#myonoffswitch");
+var tagcloud = $(".second-part");
+var navDiv = $(".first-part");
+switchBtn.click(function() {
+if (switchBtn.hasClass("clicked")) {
+switchBtn.removeClass("clicked");
+tagcloud.removeClass("turn-left");
+navDiv.removeClass("turn-left");
+} else {
+switchBtn.addClass("clicked");
+tagcloud.addClass("turn-left");
+navDiv.addClass("turn-left");
+resetTags();
+}
+});
+var timeout;
+var isEnterBtn = false;
+var isEnterTips = false;
+$(".icon").bind("mouseenter", function() {
+isEnterBtn = true;
+Tips.show();
+}).bind("mouseleave", function() {
+isEnterBtn = false;
+setTimeout(function() {
+if (!isEnterTips) {
+Tips.hide();
+}
+}, 100);
+});
+$(".tips-box").bind("mouseenter", function() {
+isEnterTips = true;
+Tips.show();
+}).bind("mouseleave", function() {
+isEnterTips = false;
+setTimeout(function() {
+if (!isEnterBtn) {
+Tips.hide();
+}
+}, 100);
+});
+$(".tips-inner li").bind("click", function() { //控制鸟屋点击事件
+var idx = $(this).index();
+if(idx == 3){
+if ($("#my_signature").length <= 0) {
+$("#bee_div").append("<img id='my_signature' src='/img/bee.png' />");
+}
+} else if(idx == 4){
+if($("#ds-recent-visitors").length <= 0){
+$("#js-visitor").append("<ul class='ds-recent-visitors' data-num-items='28' data-avatar-size='50' id='ds-recent-visitors'></ul>");
+DUOSHUO.RecentVisitors($("#ds-recent-visitors"));
+}
+}
+slide(idx);
+Tips.hide();
+});
+$(".QQ").bind("click", function() { //qq扫码
+//var idx = $(this).index();
+if ($("#my_qq").length <= 0) {
+$("#qq_div").append("<img id='my_qq' src='/img/qq.png' style='cursor:pointer; margin-top:-8px;' />");
+$("#my_qq").bind("click", function() { //qq扫码
+if ($("#my_wechat").length <= 0) {
+$("#wechat_div").append("<img id='my_wechat' src='/img/wechat.png' style='cursor:pointer; margin-left:12px;' />");
+$("#my_wechat").bind("click", function() { //微信扫码
+slide(5);
+Tips.hide();
+});
+}
+slide(6);
+Tips.hide();
+});
+}
+slide(5);
+Tips.hide();
+});
+$(".WeChat").bind("click", function() { //微信扫码
+//var idx = $(this).index();
+if ($("#my_wechat").length <= 0) {
+$("#wechat_div").append("<img id='my_wechat' src='/img/wechat.png' style='cursor:pointer; margin-left:12px;' />");
+$("#my_wechat").bind("click", function() { //微信扫码
+if ($("#my_qq").length <= 0) {
+$("#qq_div").append("<img id='my_qq' src='/img/qq.png' style='cursor:pointer; margin-top:-8px;' />");
+$("#my_qq").bind("click", function() { //qq扫码
+slide(6);
+Tips.hide();
+});
+}
+slide(5);
+Tips.hide();
+});
+}
+slide(6);
+Tips.hide();
+});
+}
+bind();
+Tips.init();
+}
+//设置标签的背景色
+var resetTags = function(){
+if(!navigator.userAgent.match(/(iPhone|iPod|Android|ios|Opera Mini|BlackBerry|webOS)/i)){
+var tags = $(".tagcloud a");
+for(var i = 0; i < tags.length; i++){
+var num = Math.floor(Math.random()*7);
+tags.eq(i).addClass("color" + num);
+}
+$(".article-category a:nth-child(-n+2)").attr("class", "color0");
+}
+}
+var resetTitile = function () {
+<!-- 控制标题是否滚动 -->
+var totalwidth = $(window).width();
+var titles = document.getElementsByClassName("archive-item-title");
+for (var i = 0; i < titles.length; i++) {
+var title = titles[i];
+<!-- 设置标题最大显示长度 -->
+if (totalwidth >= 1800) {
+title.style.maxWidth = "600px";
+} else if (totalwidth >= 1550 && totalwidth < 1800) {
+title.style.maxWidth = "500px";
+} else if (totalwidth < 700) {
+title.style.maxWidth = "300px";
+title.style.marginLeft = "-10px";
+}
+<!--　添加跑马灯效果 -->
+var marquee = false;
+var realLength = 0;
+var str = title.innerText;
+for (var j = 0; j < str.length; j++) {
+charCode = str.charCodeAt(j);
+if (charCode >= 0 && charCode <= 128) {
+realLength += 1;
+} else {
+realLength += 2;
+}
+}
+var max = 40;
+if (totalwidth < 700) {
+max = 34;
+}
+if (realLength > max) {
+marquee = true;
+}
+if (marquee) {
+var mar = document.createElement("marquee");
+mar.setAttribute("behavior", "scroll");
+mar.onmouseover = function () {
+this.stop();
+}
+mar.onmouseout = function () {
+this.start();
+}
+var parent = title.parentNode;
+var _title = title.cloneNode(true);
+mar.appendChild(_title);
+parent.replaceChild(mar, title);
+}
+}
+//设置页面标题
+var str = document.title;
+if (str.indexOf("移动开发") != 0) {
+arr = str.split("|");
+document.title = arr[0] + "|" + arr[2];
+}
+}
+var addAvatar = function (avatarPath) {
+
+$("#id_avatar_a").append("<img src='/img/avatar.jpg' class='js-avatar' style='width: 100%;height: 100%;opacity: 1;' />");
+
+}
+var resetPageWidth = function () {
+//宽屏时设置页面宽度
+var totalwidth = $(window).width();
+if (totalwidth >= 1800) {
+$(".body-wrap").css("max-width", "85em");
+$(".body-wrap").css("width", "85em");
+} else if (totalwidth >= 1500 && totalwidth < 1800) {
+$(".body-wrap").css("max-width", "70em");
+$(".body-wrap").css("width", "70em");
+} else if (totalwidth <= 700) {
+<!-- 设置移动端页面样式 -->
+if (is_post() || is_archive() || is_category() || is_tag()) {
+$(".article").each(function () {
+$(this).css("margin-top", "0.625rem").css("margin-left", "-0.35rem").css("margin-right", "0.3rem").css("margin-bottom", "0.625rem");
+})
+} else {
+$(".article").each(function () {
+$(this).css("margin-top", "0.625rem").css("margin-left", "0.35rem").css("margin-right", "0.3rem").css("margin-bottom", "0.625rem");
+})
+}
+//在小屏时距边界左边有点大了，所以距离减小
+var curUrl = window.location.pathname;
+var tagUrl = "/tags/"
+var guestUrl = "/guestbook/";
+var aboutUrl = "/about/";
+var socialUrl = "/social/"
+if(curUrl == tagUrl || curUrl == guestUrl || curUrl == aboutUrl || curUrl == socialUrl){
+$(".article").each(function () {
+$(this).css("margin-top", "0.625rem").css("margin-left", "-0.35rem").css("margin-right", "0.3rem").css("margin-bottom", "0.625rem");
+})
+}
+//设置标题大小
+$(".article-title-big").each(function () {
+$(this).css("margin-left", "5px").css("font-size", "1.5rem");
+})
+$(".article-info-post").each(function () {
+$(this).css("margin-left", "5px");
+})
+}
+}
+//给标题加上序号
+var setTitleSerialNum = function () {
+if(is_post()){
+var existNumber = null;
+$("h2").each(function(){
+if($(this).attr("exist-number") != undefined) {
+existNumber = true;
+return false;
+}
+$(this).css("padding-top", "0.6em");
+$(this).css("margin-top", "1em");
+$(this).css("padding-bottom", "0.3em");
+$(this).css("border-top", "1px solid #ddd");
+var attr = $(this).attr("exist-number");
+if(null == attr || undefined == attr){
+$(this).attr("exist-number", true);
+}
+});
+//已经设置过序号，将直接返回
+if(existNumber){
+return;
+}
+$("h3").each(function(){//控制h3标题的间隔
+$(this).css("margin-top", "0.3em");
+$(this).css("margin-bottom", "0.2em");
+});
+$("h4").each(function(){//控制h4标题的间隔
+$(this).css("margin-top", "0.15em");
+$(this).css("margin-bottom", "0.15em");
+});
+var $article = $(".article-entry");
+var count = [0, 0, 0, 0, 0, 0];
+var mark = [0, 0, 0, 0, 0, 0];
+(function setMark() {
+var hTag = ["h1", "h2", "h3", "h4", "h5", "h6"];
+var index = 0;
+for (var i = 0; i < 6; ++i) {
+if ($article.children(hTag[i]).length > 0) {
+++index;
+mark[i] = index;
+}
+}
+})();
+$article.children(":header").each(function () {
+var t = $(this);
+var pos = 0;
+switch (t[0].tagName) {
+case "H1":
+pos = 0;
+break;
+case "H2":
+pos = 1;
+break;
+case "H3":
+pos = 2;
+break;
+case "H4":
+pos = 3;
+break;
+case "H5":
+pos = 4;
+break;
+case "H6":
+pos = 5;
+break;
+}
+var len = mark[pos];
+if (len < 6) {
+count[len] = 0;
+}
+count[len - 1]++;
+var listStr = count[0] + "";
+for (var i = 1; i < len; ++i) {
+listStr += "." + count[i];
+}
+listStr += "  ";
+t.html(listStr + t.html());
+});
+} else {
+//if (!navigator.userAgent.match(/(iPhone|iPod|Android|ios|Opera Mini|BlackBerry|webOS)/i)) {
+//  var heartspan = "<span class='htmleaf-links'><i class='heart' id='like3' rel='like'></i></span>";
+//  $("#footerdiv").append(heartspan);
+//底部红心动画
+//  $('body').on("click", '.heart', function () {
+//    var A = $(this).attr("id");
+//    var B = A.split("like");
+//    var messageID = B[1];
+//    var C = parseInt($("#likeCount" + messageID).html());
+//    $(this).css("background-position", "")
+//    var D = $(this).attr("rel");
+//    if (D === 'like') {
+//      $("#likeCount" + messageID).html(C + 1);
+//      $(this).addClass("heartAnimation").attr("rel", "unlike");
+//    }
+//    else {
+//      $("#likeCount" + messageID).html(C - 1);
+//      $(this).removeClass("heartAnimation").attr("rel", "like");
+//      $(this).css("background-position", "left");
+//    }
+//  });
+//}
+}
+}
+//代码高亮
+var setHightLigth = function () {
+<!-- prettify代码高亮脚本引入 http://jumpbyte.cn/2016/07/02/use-and-install-prettify/-->
+if (is_post()){
+jQuery.getScript("//cdn.bootcss.com/prettify/r298/prettify.min.js")
+.done(function() {
+/* 执行成功后的处理 */
+$('pre').addClass('prettyprint linenums').attr('style', 'white-space:pre;word-break: keep-all;overflow:auto;height:auto;width:auto;padding-top:5px;padding-bottom:5px;margin-bottom:10px;');
+<!-- 控制代码高度和滚动条 -->
+prettyPrint();
+})
+.fail(function() {
+/* 执行失败后的处理 */
+});
+}
+}
+var otherSettings = function (isChange) {
+var totalwidth = $(window).width();
+if (!navigator.userAgent.match(/(iPhone|iPod|Android|ios|Opera Mini|BlackBerry|webOS)/i)) {
+//flying
+if (totalwidth <= 900) {
+$(".body-wrap").css("margin-bottom", "116px");
+}
+if($("#id_keep_div").length <= 0){
+var flyingDiv = "<div id='id_keep_div' style='display:inline;'><span class='my-face' style='vertical-align:middle;'>沉迷码学</span><img src='/img/keep.png' style='vertical-align:middle;' /><img src='/img/keep.png' style='vertical-align:middle;' /><img src='/img/keep.png' style='vertical-align:middle;' /><img src='/img/keep.png' style='vertical-align:middle;' />";
+$(flyingDiv).insertBefore("#web_count_div");
+}
+//添加左边栏ngudream效果
+$("#ngudream_name").attr("class", "header-author cl-effect-2");
+//移动端就不需要加载这几个图片了
+//$("#qq_div").append("<img id='my_qq' src='/img/qq.png' style='cursor:pointer; margin-top:-8px;' />");
+//$("#wechat_div").append("<img id='my_wechat' src='/img/wechat.png' style='cursor:pointer; margin-left:12px;' />");
+//$("#bee_div").append("<img src='/img/bee.png' />");
+//不显示右下角的搜索按钮
+//$("#cb-close-btn").css("opacity", 0);
+//$("#cb-search-btn").css("opacity", 0);
+//点击弹出心形
+if(isChange){
+// var loveClick = function(e,t,a){function n(){c(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"),o(),r()}function r(){for(var e=0;e<d.length;e++)try{d[e].alpha<=0?(t.body.removeChild(d[e].el),d.splice(e,1)):(d[e].y--,d[e].scale+=.004,d[e].alpha-=.013,d[e].el.style.cssText="left:"+d[e].x+"px;top:"+d[e].y+"px;opacity:"+d[e].alpha+";transform:scale("+d[e].scale+","+d[e].scale+") rotate(45deg);background:"+d[e].color+";z-index:99999");}catch(e){}requestAnimationFrame(r)}function o(){var t="function"==typeof e.onclick&&e.onclick;e.onclick=function(e){t&&t(),i(e)}}function i(e){var a=t.createElement("div");a.className="heart",d.push({el:a,x:e.clientX-5,y:e.clientY-5,scale:1,alpha:1,color:s()}),t.body.appendChild(a)}function c(e){var a=t.createElement("style");a.type="text/css";try{a.appendChild(t.createTextNode(e))}catch(t){a.styleSheet.cssText=e}t.getElementsByTagName("head")[0].appendChild(a)}function s(){return"rgb("+~~(255*Math.random())+","+~~(255*Math.random())+","+~~(255*Math.random())+")"}var d=[];e.requestAnimationFrame=function(){return e.requestAnimationFrame||e.webkitRequestAnimationFrame||e.mozRequestAnimationFrame||e.oRequestAnimationFrame||e.msRequestAnimationFrame||function(e){setTimeout(e,1e3/60)}}(),n()};
+// loveClick(window, document);
+$.cachedScript('/js/love.js').done(function () {
+});
+}
+var curUrl = window.location.pathname;
+var tagUrl = "/tags/"
+var guestUrl = "/guestbook/";
+var aboutUrl = "/about/";
+var archiveUrl = "/archives/";
+var welfareUrl = "/404.html";
+if(curUrl == tagUrl || curUrl == guestUrl || curUrl == aboutUrl || curUrl == archiveUrl || curUrl == welfareUrl){
+try {
+$(".tips-inner").find("li")[4].remove();
+} catch (e) {
+}
+}
+if(is_category() || is_tag()) {
+try {
+$(".tips-inner").find("li")[4].remove();
+} catch (e) {
+}
+}
+// console.log("screen.height = " + screen.height + ", screen.width = " + screen.width);
+} else {
+if (is_post()) {
+<!-- 移动端不显示提示 -->
+$("#copyright_author").attr("class", "");
+$("#copyright_url").attr("class", "");
+$("#copyright_license").attr("class", "");
+}
+$("#id_wordcount_span").css("margin-left", "");
+$(".body-wrap").css("margin-bottom", "110px");//移动端页面底部距离大一点
+// if (totalwidth > 900) {//已合并到special.css
+//   $("<link>")
+//         .attr({
+//           rel: "stylesheet",
+//           type: "text/css",
+//           href: "/plugins/hint/hint.min.css"
+//         })
+//         .appendTo("head");
+//   $("<link>")
+//         .attr({
+//             rel: "stylesheet",
+//             type: "text/css",
+//             href: "/plugins/font/style3.css"
+//         })
+//         .appendTo("head");
+//   $("<link>")
+//         .attr({
+//             rel: "stylesheet",
+//             type: "text/css",
+//             href: "/plugins/heart/style.css"
+//         })
+//         .appendTo("head");
+//   }
+//左边栏缩小
+if (totalwidth > 900 && totalwidth < 1200) {
+$(".left-col").css("width", "250px");
+$(".mid-col").css("margin-left", "-50px");
+if (is_post()) {
+$("#toc").css("width", "180px");
+$("#tocButton").css("margin-left", "-50px");
+$("#post-nav-button").css("margin-left", "-50px");
+}
+}
+//监听横竖屏转
+window.addEventListener('orientationchange', function (event) {
+if (window.orientation == 180 || window.orientation == 0) {
+window.location.reload();//横屏
+//$("#cb-search-div").removeAttr("style");
+//$("#cb-search-div").css("float", "left").css("margin-left", "15px");
+} else {
+window.location.reload();//竖屏
+}
+});
+$("#cb-search-content").removeAttr("style");
+$("#cb-search-content").css("margin-left", "-115px").css("width", "70%").css("font-size", "1.2em").css("height", "30px")
+.css("margin-top", "80px").css("border-radius", "50px");
+$("#cb-close-div").css("margin-top", "50px")
+//移动端显示公益为腾讯404
+$("#publicwelfare").attr("href", "/publicwelfare/baby-back-home.html");
+}
+}
+var copyCode = function () {
+<!-- 代码的复制功能 -->
+var totalwidth = $(window).width();
+var clipboard = new Clipboard('.copyspan');
+var nodes = document.getElementsByTagName("pre");
+for (var i = 0; i < nodes.length; i++) {
+var code = nodes[i];
+if($(code).find(".copyspan").length <= 0){
+code.onmouseover = function () {//鼠标进入时再显示复制按钮
+$(this).find(".copyspan").show();
+}
+code.onmouseout = function () {
+$(this).find(".copyspan").hide();
+}
+<!-- 添加复制按钮 -->
+var span = document.createElement("span");
+span.className = "copyspan";
+span.style.width = "100%";
+span.style.textAlign = "right";
+var copy = document.createElement("i");
+copy.style.cursor = "pointer";
+<!--  设置鼠标手形 -->
+copy.style.float = "right";
+copy.style.marginRight = "10px"
+copy.className = "fa fa-clipboard";
+copy.setAttribute("title", "●'◡'●点我复制");
+span.setAttribute("data-clipboard-text", code.innerText);
+<!-- 复制的内容为code块 -->
+span.appendChild(copy);
+var height = code.offsetHeight;
+if (totalwidth > 700) {
+if (height > 100) {
+copy.style.marginTop = "5px"
+code.insertBefore(span, code.firstChild);
+}
+} else {
+if (height > 100) {
+//code.insertAfter(span, code.firstChild);
+insertAfter(span, code.firstChild);
+}
+}
+$(span).hide();
+}
+}
+<!-- 在节点targetEl后面播入一个新元素newEl -->
+function insertAfter(newEl, targetEl) {
+var parentEl = targetEl.parentNode;
+if (parentEl.lastChild == targetEl) {
+parentEl.appendChild(newEl);
+} else {
+parentEl.insertBefore(newEl, targetEl.nextSibling);
+}
+}
+}
+var copyRight = function () {
+var pageRightCopy = new Clipboard('.copy-path');
+if (false && is_post()) {
+//复制网页内容自动添加版权信息
+var copyright = document.getElementsByClassName("copyright");
+if (copyright.length > 0) {
+function addCopyRight() {
+var clipboard = new Clipboard('.copycontent');
+var body_element = document.body;
+var selection = window.getSelection();
+if (window.clipboardData) { // Internet Explorer
+var pagelink = "\r\n\r\n 原文出自「Alex Zhong @ az22c」转载请保留原文链接: " + document.location.href + "";
+var copytext = selection + pagelink;
+window.clipboardData.setData("Text", copytext);
+return false;
+} else {
+var pagelink = "\r\n 原文出自「Alex Zhong @ az22c」转载请保留原文链接: " + document.location.href + "";
+var copytext = selection + pagelink;
+var newdiv = document.createElement('div');
+newdiv.className = "copycontent";
+newdiv.setAttribute("data-clipboard-text", copytext);
+body_element.appendChild(newdiv);
+newdiv.click();
+//selection.selectAllChildren(newdiv);
+window.setTimeout(function () {
+body_element.removeChild(newdiv);
+}, 0);
+}
+clipboard.destroy();
+}
+document.oncopy = addCopyRight;
+}
+}
+}
+var baiduShare = function () {
+//处理百度分享
+var elem = document.getElementsByClassName("bdsharebuttonbox");
+if (elem.length > 0) {
+var elemDiv = elem[0];
+var elem_child = elemDiv.childNodes;//得到参数元素的所有子元素
+for (var i = 0; i < elem_child.length; i++) { //遍历子元素
+var childA = elem_child[i];
+if (childA.className == "fa fa-share-alt bds_more") {
+childA.parentNode.removeChild(childA);//删除更多
+continue;
+}
+if (childA.className != undefined) {
+var span = document.createElement("span");
+var _sel = childA.cloneNode(true);
+_sel.title = "";
+span.appendChild(_sel);
+span.setAttribute("class", "hint  hint--top");
+span.setAttribute("data-hint", childA.title);
+childA.parentNode.replaceChild(span, childA);
+}
+}
+}
+}
+var rightSearch = function () {
+//右下角搜索
+var time1 = 0;
+var show = false;
+var names = new Array(); //文章名字等
+var urls = new Array(); //文章地址
+$(document).keyup(function (e) {
+var time2 = new Date().getTime();
+if (e.keyCode == 17) {
+var gap = time2 - time1;
+time1 = time2;
+if (gap < 500) {
+if (show) {
+$(".cb-search-tool").css("display", "none");
+show = false;
+} else {
+$(".cb-search-tool").css("display", "block");
+show = true;
+$("#cb-search-content").val("");
+$("#cb-search-content").focus();
+}
+time1 = 0;
+}
+} else if(e.keyCode == 27){
+$(".cb-search-tool").css("display", "none");
+show = false;
+time1 = 0;
+}
+});
+$("#cb-search-content").keyup(function (e) {
+var time2 = new Date().getTime();
+if (e.keyCode == 17) {
+var gap = time2 - time1;
+time1 = time2;
+if (gap < 500) {
+if (show) {
+$(".cb-search-tool").css("display", "none");
+show = false;
+} else {
+$(".cb-search-tool").css("display", "block");
+show = true;
+$("#cb-search-content").val("");
+$("#cb-search-content").focus();
+}
+time1 = 0;
+}
+}
+});
+$("#cb-close-btn").click(function () {
+$(".cb-search-tool").css("display", "none");
+show = false;
+time1 = 0;
+});
+$("#cb-search-btn").click(function(){
+$(".cb-search-tool").css("display", "block");
+show = true;
+$("#cb-search-content").val("");
+$("#cb-search-content").focus();
+time1 = 0;
+});
+$.getJSON("/search/cb-search.json").done(function (data) {
+if (data.code == 0) {
+for (var index in data.data) {
+var item = data.data[index];
+names.push(item.title);
+urls.push(item.url);
+}
+$("#dropdown-menu").css("font-size", "1.2em");
+$("#cb-search-content").typeahead({
+source: names,
+afterSelect: function (item) {
+$(".cb-search-tool").css("display", "none");
+show = false;
+window.location.href = (urls[names.indexOf(item)]);
+return item;
+}
+});
+}
+}).error(function(data, b) { console.log("json解析错误，搜索功能暂不可用，请检查文章title，确保不含有换行等特殊符号"); });
+}
+//移动端添加搜索图标
+var mobileSearch = function(){
+if(navigator.userAgent.match(/(iPhone|iPod|Android|ios|Opera Mini|BlackBerry|webOS)/i)){
+$("#id_span_search_close").append("<img src='/search/img/cb-close.png' id='cb-close-btn'/>");
+$("#id_span_search_open").append("<img src='/search/img/cb-search.png' id='cb-search-btn'/>");
+}
+}
+//左边栏coding change动画
+var addTextAnimation = function (){
+var textAnimations = [
+"rw-words rw-words-1", "cd-headline rotate-1", "cd-headline clip", "cd-headline slide",
+"cd-headline zoom", "cd-headline letters scale", "cd-headline push", "cd-headline loading-bar"
+],
+textLen = textAnimations.length,
+textIndex = Math.ceil(Math.random() * textLen) - 1,
+textAnimationName = textAnimations[textIndex];
+if(textIndex != 0){
+$("#id_span_change").remove();
+$("#id_normal_text_anim").remove();
+var textAnimView = "<div id='id_span_change'><span>Coding Changes the</span><span class='cd-words-wrapper' style='margin-left:4px;'><b class='is-visible' style='font-weight:normal !important;color: #6b889d;'>World</b><b style='font-weight:normal !important;color: #6b739d;'>Never</b><b style='font-weight:normal !important;color: #7a6b9d;'>Give</b><b style='font-weight:normal !important;color: #7a6b9d;'>Up</b><b style='font-weight:normal !important;color: #7a6b9d;'>Dream</b></span></div>";
+$("#id_hgroup_name").after(textAnimView);
+var newClass = textAnimationName + " header-subtitle";
+$("#id_span_change").attr("class", newClass);
+}
+}
+var playTextAnimation = function () {
+//set animation timing
+var animationDelay = 2500,
+//loading bar effect
+barAnimationDelay = 3800,
+barWaiting = barAnimationDelay - 3000, //3000 is the duration of the transition on the loading bar - set in the scss/css file
+//letters effect
+lettersDelay = 50,
+//type effect
+typeLettersDelay = 150,
+selectionDuration = 500,
+typeAnimationDelay = selectionDuration + 800,
+//clip effect
+revealDuration = 600,
+revealAnimationDelay = 1500;
+initHeadline();
+function initHeadline() {
+//insert <i> element for each letter of a changing word
+singleLetters($('.cd-headline.letters').find('b'));
+//initialise headline animation
+animateHeadline($('.cd-headline'));
+}
+function singleLetters($words) {
+$words.each(function(){
+var word = $(this),
+letters = word.text().split(''),
+selected = word.hasClass('is-visible');
+for (i in letters) {
+if(word.parents('.rotate-2').length > 0) letters[i] = '<em>' + letters[i] + '</em>';
+letters[i] = (selected) ? '<i class="in">' + letters[i] + '</i>': '<i>' + letters[i] + '</i>';
+}
+var newLetters = letters.join('');
+word.html(newLetters);
+});
+}
+function animateHeadline($headlines) {
+var duration = animationDelay;
+$headlines.each(function(){
+var headline = $(this);
+if(headline.hasClass('loading-bar')) {
+duration = barAnimationDelay;
+setTimeout(function(){ headline.find('.cd-words-wrapper').addClass('is-loading') }, barWaiting);
+} else if (headline.hasClass('clip')){
+var spanWrapper = headline.find('.cd-words-wrapper'),
+newWidth = spanWrapper.width() + 10
+spanWrapper.css('width', newWidth);
+} else if (!headline.hasClass('type') ) {
+//assign to .cd-words-wrapper the width of its longest word
+var words = headline.find('.cd-words-wrapper b'),
+width = 0;
+words.each(function(){
+var wordWidth = $(this).width();
+if (wordWidth > width) width = wordWidth;
+});
+headline.find('.cd-words-wrapper').css('width', width);
+};
+//trigger animation
+setTimeout(function(){ hideWord( headline.find('.is-visible').eq(0) ) }, duration);
+});
+}
+function hideWord($word) {
+var nextWord = takeNext($word);
+if($word.parents('.cd-headline').hasClass('type')) {
+var parentSpan = $word.parent('.cd-words-wrapper');
+parentSpan.addClass('selected').removeClass('waiting');
+setTimeout(function(){
+parentSpan.removeClass('selected');
+$word.removeClass('is-visible').addClass('is-hidden').children('i').removeClass('in').addClass('out');
+}, selectionDuration);
+setTimeout(function(){ showWord(nextWord, typeLettersDelay) }, typeAnimationDelay);
+} else if($word.parents('.cd-headline').hasClass('letters')) {
+var bool = ($word.children('i').length >= nextWord.children('i').length) ? true : false;
+hideLetter($word.find('i').eq(0), $word, bool, lettersDelay);
+showLetter(nextWord.find('i').eq(0), nextWord, bool, lettersDelay);
+}  else if($word.parents('.cd-headline').hasClass('clip')) {
+$word.parents('.cd-words-wrapper').animate({ width : '2px' }, revealDuration, function(){
+switchWord($word, nextWord);
+showWord(nextWord);
+});
+} else if ($word.parents('.cd-headline').hasClass('loading-bar')){
+$word.parents('.cd-words-wrapper').removeClass('is-loading');
+switchWord($word, nextWord);
+setTimeout(function(){ hideWord(nextWord) }, barAnimationDelay);
+setTimeout(function(){ $word.parents('.cd-words-wrapper').addClass('is-loading') }, barWaiting);
+} else {
+switchWord($word, nextWord);
+setTimeout(function(){ hideWord(nextWord) }, animationDelay);
+}
+}
+function showWord($word, $duration) {
+if($word.parents('.cd-headline').hasClass('type')) {
+showLetter($word.find('i').eq(0), $word, false, $duration);
+$word.addClass('is-visible').removeClass('is-hidden');
+}  else if($word.parents('.cd-headline').hasClass('clip')) {
+$word.parents('.cd-words-wrapper').animate({ 'width' : $word.width() + 10 }, revealDuration, function(){
+setTimeout(function(){ hideWord($word) }, revealAnimationDelay);
+});
+}
+}
+function hideLetter($letter, $word, $bool, $duration) {
+$letter.removeClass('in').addClass('out');
+if(!$letter.is(':last-child')) {
+setTimeout(function(){ hideLetter($letter.next(), $word, $bool, $duration); }, $duration);
+} else if($bool) {
+setTimeout(function(){ hideWord(takeNext($word)) }, animationDelay);
+}
+if($letter.is(':last-child') && $('html').hasClass('no-csstransitions')) {
+var nextWord = takeNext($word);
+switchWord($word, nextWord);
+}
+}
+function showLetter($letter, $word, $bool, $duration) {
+$letter.addClass('in').removeClass('out');
+if(!$letter.is(':last-child')) {
+setTimeout(function(){ showLetter($letter.next(), $word, $bool, $duration); }, $duration);
+} else {
+if($word.parents('.cd-headline').hasClass('type')) { setTimeout(function(){ $word.parents('.cd-words-wrapper').addClass('waiting'); }, 200);}
+if(!$bool) { setTimeout(function(){ hideWord($word) }, animationDelay) }
+}
+}
+function takeNext($word) {
+return (!$word.is(':last-child')) ? $word.next() : $word.parent().children().eq(0);
+}
+function takePrev($word) {
+return (!$word.is(':first-child')) ? $word.prev() : $word.parent().children().last();
+}
+function switchWord($oldWord, $newWord) {
+$oldWord.removeClass('is-visible').addClass('is-hidden');
+$newWord.removeClass('is-hidden').addClass('is-visible');
+}
+}
+var textAnimationClick = function (avatarPath) {
+var totalHeight = screen.height;
+if (!is_post()) {
+if(totalHeight >= 700){//左边栏足够高才显示图片
+if($("#left_show_div").length <= 0){
+var curDate = new Date();
+var date = curDate.getDate();
+var time = Date.parse(new Date());
+var lastTime = Date.parse("2017-02-01");
+var day = parseInt((time -lastTime)/(1000*60*60*24));
+var path = '/img/daily_pic/' + (day % 83) + '.png';
+var avatarIndex = Math.ceil(Math.random()*30);
+var newAvatar = '/img/avatar/' + avatarIndex + '.png';
+//console.log(path);
+var year_div = "<div align=center id='left_show_div' ><img src=" + path + " id='2017_year' style='cursor:pointer;'/></div>";
+$("#left_col_div").append(year_div);
+if(totalHeight >= 1000){
+$("#left_col_div").css("overflow-y", "auto").css("overflow-x", "hidden");
+} else if(totalHeight >= 700){
+$("#left_col_div").css("overflow-y", "hidden").css("overflow-x", "hidden");
+var clickCount = 0;
+$("#id_span_change").css("cursor", "pointer").click(function(){
+if((clickCount % 2) == 0){
+$("#left_col_div").css("overflow-y", "auto").css("overflow-x", "hidden");
+} else {
+$("#left_col_div").css("overflow-y", "hidden").css("overflow-x", "hidden");
+}
+clickCount++;
+});
+var avatarOut = false;
+$("#id_avatar_a").mouseenter(function(){
+if(!avatarOut){
+avatarOut = true;
+$("#blog_avatar").attr("src", newAvatar).attr("class", "animated rotateInDownLeft").css("background", "#fafafa").css("border-radius","50px");
+}
+});
+$("#id_avatar_a").mouseleave(function(){
+if(avatarOut){
+avatarOut = false;
+$("#blog_avatar").attr("src", avatarPath).attr("class", "animated rotateInDownRight");
+}
+});
+}
+$("#2017_year").click(function() {
+//$(this).remove();
+$(this).css("opacity", 0);
+$(this).parent().append("<img src='/img/daily_pic/35.png' style='position:absolute; margin-left:-270px;cursor:pointer;' id='eyes_img'/>");
+$("#eyes_img").click(function() {
+$(this).remove();
+$("#2017_year").css("opacity", 1);
+});
+});
+}
+}
+}
+}
+//代码雨
+var curTimer = null;//记录上一页面的timer，使用instantclick后，打开下一页面时需要取消上一个定时器
+var colorList = ["#6da336", "#ff945c", "#66CC66", "#99CC99", "#CC6666", "#76becc", "#c99979", "#918597", "#4d4d4d"];
+var id = null;
+var colorBGList = ["rgba(109,163,54,0.05)", "rgba(255,148,92, 0.05)", "rgba(102,204,102,0.05)", "rgba(153,204,153,0.05)", "rgba(204,102,102,0.05)", "rgba(118,190,204,0.05)", "rgba(201,153,121,0.05)", "rgba(145,133,151,0.05)", "rgba(77,77,77,0.05)"];
+var colorLetterList = ["#ffffff", "#000000", "#000000", "#000080", "#000000", "#FFFF00", "#000000", "#0F0", "#0F0"];
+var codeRain = function () {
+// Random Color 边栏顶部随机颜色
+// clearInterval(curTimer);
+// $("#matrix").remove();
+// $("#id_code_rain_div").append("<canvas id='matrix' width='300' height='180'></canvas>");
+id = Math.ceil(Math.random()*(colorList.length-1));
+// PC
+$("#container .left-col .overlay").css({"background-color": colorList[id],"opacity": .5});
+// Mobile
+$("#container #mobile-nav .overlay").css({"background-color": colorList[id],"opacity": .7});
+if(!navigator.userAgent.match(/(iPhone|iPod|Android|ios|Opera Mini|BlackBerry|webOS)/i)){
+if(curTimer == null){
+// 代码雨
+if(matrix != undefined){
+var width = matrix.width;
+var height = matrix.height;
+var letters = Array(256).join(1).split('');
+var draw = function () {
+if(typeof(matrix) == "undefined"){
+clearInterval(curTimer);
+return;
+}
+matrix.getContext('2d').globalAlpha = 1.0;
+matrix.getContext('2d').fillStyle = colorBGList[id];
+matrix.getContext('2d').fillRect(0, 0, width, height);
+matrix.getContext('2d').fillStyle = colorLetterList[id];
+matrix.getContext('2d').font = "10pt Calibri";
+letters.map(function (y_pos, index) {
+text = String.fromCharCode(48 + Math.floor(Math.random()*73));//英文字符：65 + Math.random() * 33 中文：3e4 + Math.random() * 33 数字：Math.floor(Math.random()*10)
+x_pos = index * 10;
+matrix.getContext('2d').fillText(text, x_pos, y_pos);
+letters[index] = (y_pos > 180 + Math.random() * 1e4) ? 0 : y_pos + 10;
+});
+};
+}
+var timer = setInterval(draw, 60);
+curTimer = timer;
+window.onfocus = function() {//获取焦点时开始
+clearInterval(timer);
+timer = setInterval(draw, 60);//定时器
+}
+window.onblur = function() {//失去焦点时停止
+clearInterval(timer);
+}
+}
+}
+}
+//多说评论首页显示评论数
+var duoshuoQuery = {short_name:"null"};
+var duoshuoComments = function() {
+
+}
+//隐藏categories、tags页面下的标签
+var hideLabels =  function() {
+// Hide Labels
+$("#id_archives").css("opacity", "1.0");
+if(is_archive() || is_tag() || is_category()) {
+var url = window.location.pathname;
+if(!url.endWith("/tags/")){
+$("#footer").after("<img id='id_eye_btn' class='hide-labels fa fa-eye animated infinite pulse' style='margin-left:5px;margin-top:5px;width:38px;height:18px;'></img>");
+$("#id_eye_btn").attr("src", "/img/eye.png");
+$(".hide-labels").click(function() {
+$(".article-info").toggle(200);
+})
+}
+}
+}
+var resetPageOpacity = function() {
+var url = window.location.pathname;
+if((url.startWith("/about/") && url.endWith("/about/")) || (url.startWith("/guestbook/") && url.endWith("/guestbook/"))){
+$("#page-undefined").css("opacity", "1.0");
+}
+}
+</script>
+<!-- 添加 InstantClick 预加载 -->
+<!-- 这段代码的含义是每次页面重载时，通过直接的函数调用来实现MathJax、百度统计、Google Code Prettify、Google Analytics的重新运行 -->
+<script data-no-instant>
+    if(!navigator.userAgent.match(/(iPhone|iPod|Android|ios|Opera Mini|BlackBerry|webOS)/i)){
+      jQuery.getScript("//cdn.bootcss.com/instantclick/3.0.1/instantclick.min.js")
+        .done(function() {
+          InstantClick.on('change', function (isInitialLoad) {
+//console.log(isInitialLoad);
+            if (isInitialLoad === false) {
+afterChange(isInitialLoad);
+if (typeof MathJax !== 'undefined'){ // support MathJax
+MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+}
+if (typeof prettyPrint !== 'undefined'){ // support google code prettify
+prettyPrint();
+}
+if (typeof _hmt !== 'undefined'){  // support 百度统计
+_hmt.push(['_trackPageview', location.pathname + location.search]);
+}
+if (typeof ga !== 'undefined'){  // support google analytics
+ga('send', 'pageview', location.pathname + location.search);
+}
+            } else {
+afterChange(isInitialLoad);
+}
+          });
+          InstantClick.init();
+        })
+        .fail(function() {
+        });
+    } else {
+afterChange(true);
+    }
+</script>
+  </div>
+</body>
+</html>

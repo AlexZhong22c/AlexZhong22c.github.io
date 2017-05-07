@@ -7,7 +7,7 @@ tags: [全选,复选框,表格,插件]
 
 对应代码的github仓库的地址：https://github.com/AlexZhong22c/vue-checkbox-table
 
- [demo](https://alexzhong22c.github.io/vue-table-nav/vue-table-nav.html) (在线演示初次加载会有点慢，请稍等)
+ [demo](https://alexzhong22c.github.io/vue-checkbox-table/vue-checkbox-table.html) (在线演示初次加载会有点慢，请稍等)
 
 vue.js的出现，导致很多小插件的简单实现成为可能。
 
@@ -55,5 +55,9 @@ https://cn.vuejs.org/v2/guide/forms.html#checkbox
 但是官网并没有像这里这样做出一个带复选框的表格。
 
 重申一次，正是由于**vue的数据绑定**使用起来耦合度太强，全局checkbox不能用`:value`来绑定状态，要用`:checked`和一个**onclick函数**绑定状态，否则逻辑会混乱。
+
+如果你想找**带分页导航条的**demo，可以参考我的：
+
+https://github.com/AlexZhong22c/vue-table-nav
 
 > 如果各位看官喜欢的话留一个Star吧！
