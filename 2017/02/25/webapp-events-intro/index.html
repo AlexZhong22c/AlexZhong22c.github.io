@@ -86,14 +86,14 @@
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
 <meta property="og:description" content="本文修改自PPK的《移动Web手册》">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://cloud.az22c.top/roll-layer.png">
-<meta property="og:image" content="http://cloud.az22c.top/compare-3-events1.png">
-<meta property="og:image" content="http://cloud.az22c.top/compare-3-events2.png">
-<meta property="og:updated_time" content="2019-02-04T10:12:53.000Z">
+<meta property="og:image" content="https://cloud.az22c.top/roll-layer.png">
+<meta property="og:image" content="https://cloud.az22c.top/compare-3-events1.png">
+<meta property="og:image" content="https://cloud.az22c.top/compare-3-events2.png">
+<meta property="og:updated_time" content="2019-02-04T12:37:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="移动开发事件入门概述">
 <meta name="twitter:description" content="本文修改自PPK的《移动Web手册》">
-<meta name="twitter:image" content="http://cloud.az22c.top/roll-layer.png">
+<meta name="twitter:image" content="https://cloud.az22c.top/roll-layer.png">
 
 
     <link rel="alternate" href="/atom.xml" title="Web前端 | Alex Zhong" type="application/atom+xml" data-no-instant="">
@@ -608,7 +608,7 @@ touchcancel。有些代码为了安全起见，把它等同于touchend。综上�
 <p>这里的问题是键盘的可访问性。如何让用户通过键盘移动可拖动元素？你可以将一个区域的元素设置成可以 通过键盘聚焦，一旦某个元素得到焦点，就开始监听方向键。这在技术上并不困难，但是用户体验很差。这个问题基本上无法解决：拖放操作本身就是为鼠标和触摸 交互设计的，无法在键盘上得到好的体验。</p>
 <h3 id="滚动层"><a class="header-anchor" href="#滚动层"></a>滚动层</h3>
 <p>在2011年时，我需要一个可以在所有	设备上工作的水平滚动元素。那时候设备还没有原生支持，仍需要脚本，所以我写过一个。现在设备已经原生支持，那段脚本不再需要了。这点我们在CSS章节已经看到。不过这段脚本仍然是一个很有用的实例，所以我们假设仍然需要那段脚本。</p>
-<p><img src="http://cloud.az22c.top/roll-layer.png" alt="img"></p>
+<p><img src="https://cloud.az22c.top/roll-layer.png" alt="img"></p>
 <p>写这段脚本不是什么难事：在ontouchstart事件中计算滚动元素的当前位置，并初始化其他事 件处理函数；在ontouchmove事件中将元素移动相应像素的距离；在ontouchend中，运行一个函数来计算合理的减速，一旦被移动的元素停止 移动，这个函数结束。很简单吧，我花了大概两个小时。</p>
 <p>非触摸设备怎么办呢？为了让滚动层可以工作，我需要将触摸交互翻译成鼠标、键盘交互。键盘很简单，只需监听keydown事件，当用户按下左/右键时滚动元素。这点可能不是那么容易发现，但是现在这个脚本算是正式支持键盘操作了。</p>
 <p>鼠标设备怎么办？从技术上来讲，增加对mousedown、mousemove和mouseup事件的处理并不难，但是交互非常奇怪：用户必须一直按下鼠标按键才能滚动元素。这种交互和拖放一样，但是对于滚动层来说并不是那么直观。</p>
@@ -632,7 +632,7 @@ Kinect，它将身体动作转换成屏幕动作。这样你可以用你的手�
 <p>目前来看，前两个问题的答案是肯定的，第三个问题的答案比较复杂。但是，在将来，第一个问题的答案可能是否定的。再看看Kinect的例子：我们是发明全新的硬件事件，还是使用指针和鼠标事件呢？从技术上来讲，无论用户怎么移动，指针还是指针。</p>
 <h3 id="等价事件"><a class="header-anchor" href="#等价事件"></a>等价事件</h3>
 <p>目前每种交互模式都有自己的一套事件，但这并不意味着它们是完全无关且不同的。事实上，某些事件是等价的。下面的表格给出了这方面的情况。</p>
-<p><img src="http://cloud.az22c.top/compare-3-events1.png" alt="img"></p>
+<p><img src="https://cloud.az22c.top/compare-3-events1.png" alt="img"></p>
 <p>很显然，触摸动作序列：touchstart-touchmove-touchend和鼠标序 列：mousedown-mousemove-mouseup以及键盘序列：keydown-keypress-keyup很相似，这并不是巧合，因为这 三种交互模式都可以描述为start-move-stop。（所以我们不需要完全不同的事件，对不对？）</p>
 <p>但是，有时候两个操作模式很像，但第三个却不。比如在下拉菜单的例子里，鼠标和键盘很像，而触摸不同。在拖放实例中，鼠标和触摸几乎一致，但键盘非常不同。在滚动层的例子里，这三种操作模式完全不同。（所以我们还是需要不同的事件，对吧？）</p>
 <p>最后是mouseover和mouseout的问题。focus和blur是它们的键盘模式的等价事件，但是触摸模式没有这样的等价事件。就像我们在“CSS”一章看到的，在触摸屏设备中不存在“悬停”。</p>
@@ -651,7 +651,7 @@ Kinect，它将身体动作转换成屏幕动作。这样你可以用你的手�
 </blockquote>
 <p>我们发现，通常情况下鼠标事件和触摸事件非常相似，但是二者还是有一些本质区别的。有了这个认识，我们就可以更好地理解微软的指针事件，以及为什么会提出指针事件。</p>
 <p>微软认为没有必要分出鼠标、触摸两种事件。不管是鼠标指针、手指（触摸）还是触控笔（也叫定位笔），统称为指针，只要通过这些指针改变了些什么，就触发指针事件。所以，下面是微软版本的等价事件：</p>
-<p><img src="http://cloud.az22c.top/compare-3-events2.png" alt="img"></p>
+<p><img src="https://cloud.az22c.top/compare-3-events2.png" alt="img"></p>
 <p>现在我们有了两种事件分类方式：鼠标、触摸分离的苹果版本；鼠标、触摸整合的微软版本。到目前为止， 只有IE支持微软的版本。其他浏览器都支持苹果版本。又如我们在前面看到的，Mozilla和Google正在考虑实现指针事件 （PointerEvent）。所以未来情况可能还会发生变化。</p>
 <p>Google 之所以对指针事件感兴趣，是因为它的Chromebook Pixel笔记本和微软的Surface平板电脑一样，都有触摸屏和带触摸板的键盘。二者都支持鼠标和触摸操作。如果这两种事件能统一成一种，网站对它们的支持就会变得简单很多。</p>
 <p>微软的Surface是一个触屏平板电脑，你还可以外接一个带触摸板的键盘。在访问网站时你可以在鼠标和触摸之间切换。这种情况需要通过指针事件来处理。</p>
@@ -744,7 +744,7 @@ Kinect，它将身体动作转换成屏幕动作。这样你可以用你的手�
         <p><span>本文标题:</span><a href="/2017/02/25/webapp-events-intro/">移动开发事件入门概述</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2017-02-25, 20:10:23</p>
-        <!-- <p><span>最后更新:</span>2019-02-04, 18:12:53</p> -->
+        <!-- <p><span>最后更新:</span>2019-02-04, 20:37:12</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="移动开发事件入门概述" href="/2017/02/25/webapp-events-intro/">https://alexzhong22c.github.io/2017/02/25/webapp-events-intro/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://alexzhong22c.github.io/2017/02/25/webapp-events-intro/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

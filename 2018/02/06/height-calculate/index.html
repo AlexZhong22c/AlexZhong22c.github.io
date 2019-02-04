@@ -86,18 +86,18 @@
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
 <meta property="og:description" content="font-size设置的是什么?line-height设置的是什么?各种行高是怎么计算出来的?你真的知道吗?">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://cloud.az22c.top/font-line.jpg">
-<meta property="og:image" content="http://cloud.az22c.top/diff-font.jpg">
-<meta property="og:image" content="http://cloud.az22c.top/catamaran-font.jpg">
-<meta property="og:image" content="http://cloud.az22c.top/line-boxes.jpg">
-<meta property="og:image" content="http://cloud.az22c.top/font-line.jpg">
-<meta property="og:image" content="http://cloud.az22c.top/font-forge.jpg">
-<meta property="og:image" content="http://cloud.az22c.top/set-line-height-1.jpg">
-<meta property="og:updated_time" content="2019-02-04T10:12:53.000Z">
+<meta property="og:image" content="https://cloud.az22c.top/font-line.jpg">
+<meta property="og:image" content="https://cloud.az22c.top/diff-font.jpg">
+<meta property="og:image" content="https://cloud.az22c.top/catamaran-font.jpg">
+<meta property="og:image" content="https://cloud.az22c.top/line-boxes.jpg">
+<meta property="og:image" content="https://cloud.az22c.top/font-line.jpg">
+<meta property="og:image" content="https://cloud.az22c.top/font-forge.jpg">
+<meta property="og:image" content="https://cloud.az22c.top/set-line-height-1.jpg">
+<meta property="og:updated_time" content="2019-02-04T12:37:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入理解文字高度和行高的设置">
 <meta name="twitter:description" content="font-size设置的是什么?line-height设置的是什么?各种行高是怎么计算出来的?你真的知道吗?">
-<meta name="twitter:image" content="http://cloud.az22c.top/font-line.jpg">
+<meta name="twitter:image" content="https://cloud.az22c.top/font-line.jpg">
 
 
     <link rel="alternate" href="/atom.xml" title="Web前端 | Alex Zhong" type="application/atom+xml" data-no-instant="">
@@ -556,13 +556,13 @@
 <p>又或者当我们给一行文字设置background的时候，文字背景所占的区域可以近似的视为是这段文字的<code>content-area（内容区域）</code>。</p>
 <p>我们通常用content-area的高度代表<code>文字高度</code> ，这是字体设计领域的一个概念。</p>
 <p>你先别质疑这种思想！我们知道有些文字的样子喜欢往上突出，有些文字喜欢往下突，再者，行与行文字之间需要一定的空间，所以content-area在上下两个区域预留出空白的区域是很正常的，如图：</p>
-<p><img src="http://cloud.az22c.top/font-line.jpg" alt="font-line"></p>
+<p><img src="https://cloud.az22c.top/font-line.jpg" alt="font-line"></p>
 <p>先说结论：</p>
 <p><strong>font-size 相同时，font-family 不同，得到的<code>文字高度</code>也不同</strong>：</p>
-<p><img src="http://cloud.az22c.top/diff-font.jpg" alt="diff-fon"></p>
+<p><img src="https://cloud.az22c.top/diff-font.jpg" alt="diff-fon"></p>
 <p>上图表明，同样是font-size为100px，三款不同字体在浏览器画面上的高度是不同的。</p>
 <p>我们再来分析一下，在font-size设置为100px时，Catamaran字体的那164px是怎么构成的：</p>
-<p><img src="http://cloud.az22c.top/catamaran-font.jpg" alt="catamaran-font"></p>
+<p><img src="https://cloud.az22c.top/catamaran-font.jpg" alt="catamaran-font"></p>
 <p>我们假设画面由相对单位构成方便缩放拉伸，再假设现在1px对应画面上的10个相对单位。（这点你可以不用理会）</p>
 <p>那么我们所能设置的<code>font-size: 100px</code>其实设置的是上图左方1000个单位(em-square)这部分的高度而已； <strong>我们可以把em-square区域视为content-area的主体区域。</strong></p>
 <blockquote>
@@ -579,7 +579,7 @@
 <p>当 p 元素出现在屏幕上时，它可能包含了多行的内容，其内容高度由<code>每一行的高度</code>堆叠而成。这点很好理解。</p>
 <h3 id="line-box的默认高度"><a class="header-anchor" href="#line-box的默认高度"></a>line-box的默认高度</h3>
 <p>每一行可视为一个line-box。通常来讲，line-box的默认高度是由这一行的内容撑大的，这一行里面的元素谁的高度最大，line-box的高度就等于它，由它撑大：</p>
-<p><img src="http://cloud.az22c.top/line-boxes.jpg" alt="line-boxes"></p>
+<p><img src="https://cloud.az22c.top/line-boxes.jpg" alt="line-boxes"></p>
 <pre><code class="language-HTML">&lt;p&gt;
     Good design will be better.
     &lt;span class=&quot;a&quot;&gt;Ba&lt;/span&gt;
@@ -621,9 +621,9 @@
 <p>因为， <strong>基线乃其他线定义之根本也。</strong></p>
 <p>了解“基线”大有好处。</p>
 <p>回到刚才那幅图：</p>
-<p><img src="http://cloud.az22c.top/font-line.jpg" alt="font-line"></p>
+<p><img src="https://cloud.az22c.top/font-line.jpg" alt="font-line"></p>
 <p>这么多线，都是字体设计师为了比对位置用的。这几条线，可以视为是字体设计的度衡。任何一款字体都会给出以上各种线的位置参数，<strong>所有线的位置参数都是相对于基线的位置而确定的</strong> 。我们把某款字体放到 <a href="http://link.zhihu.com/?target=https%3A//fontforge.github.io/en-US/" target="_blank" rel="noopener">FontForge</a> 中，分析它的字体度量：</p>
-<p><img src="http://cloud.az22c.top/font-forge.jpg" alt="font-forge"></p>
+<p><img src="https://cloud.az22c.top/font-forge.jpg" alt="font-forge"></p>
 <blockquote>
 <p>首先说明的是HHead Ascent是针对macOS的计算值，Win Ascent是针对Windows系统的计算值，这点可以不用理会。</p>
 </blockquote>
@@ -654,7 +654,7 @@
 <h4 id="line-height设为数字-百分数的时候"><a class="header-anchor" href="#line-height设为数字-百分数的时候"></a>line-height设为数字/百分数的时候</h4>
 <p>line-height设为数字/百分数的时候，line-height就是拿 数字/百分数  去乘以em-square的高度。</p>
 <p>所以如果设置line-height:1或者line-height:100%肯定是有问题的啊——本来em-square基本上就比content-area要小，你还让line-height是em-square的高度的一倍？！行与行之间的文字绝对是要挤在一起了：</p>
-<p><img src="http://cloud.az22c.top/set-line-height-1.jpg" alt="set-line-height-1"></p>
+<p><img src="https://cloud.az22c.top/set-line-height-1.jpg" alt="set-line-height-1"></p>
 <p>那怎么设置呢？反正line-height最终的计算结果超过content-area就应该比较符合常理了。</p>
 <p>张鑫旭大神鼓励大家用数字来设置line-height。</p>
 <ul>
@@ -727,7 +727,7 @@
         <p><span>本文标题:</span><a href="/2018/02/06/height-calculate/">深入理解文字高度和行高的设置</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2018-02-06, 13:15:57</p>
-        <!-- <p><span>最后更新:</span>2019-02-04, 18:12:53</p> -->
+        <!-- <p><span>最后更新:</span>2019-02-04, 20:37:12</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="深入理解文字高度和行高的设置" href="/2018/02/06/height-calculate/">https://alexzhong22c.github.io/2018/02/06/height-calculate/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://alexzhong22c.github.io/2018/02/06/height-calculate/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
