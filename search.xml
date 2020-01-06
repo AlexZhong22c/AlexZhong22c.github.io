@@ -1123,9 +1123,9 @@ MY_ARRAY = ['B']
             
             <tag> 作用域 </tag>
             
-            <tag> 闭包 </tag>
-            
             <tag> ES6 </tag>
+            
+            <tag> 闭包 </tag>
             
             <tag> 任务队列 </tag>
             
@@ -3146,11 +3146,11 @@ var f1 = new Foo;
             
             <tag> 进阶 </tag>
             
-            <tag> 继承 </tag>
-            
             <tag> 原型 </tag>
             
             <tag> 构造器 </tag>
+            
+            <tag> 继承 </tag>
             
         </tags>
         
@@ -3669,14 +3669,14 @@ var obj = {
 </code></pre>
 <h2 id="new绑定"><a class="header-anchor" href="#new绑定"></a>new绑定</h2>
 <p>new绑定通常指的是构造器中的this。</p>
-<p>1.构造函数通常不使用return关键字，它们通常初始化新对象，当构造函数的函数体执行完毕时，它会显式返回。在这种情况下，构造函数调用表达式的计算结果就是这个新对象的值：</p>
+<p>1.构造函数通常不使用return关键字，它们通常初始化新对象，当构造函数的函数体执行完毕时，它会隐式返回。在这种情况下，构造函数调用表达式的计算结果就是这个新对象的值：</p>
 <pre><code class="language-JavaScript">function fn() {
   this.a = 2;
 }
 var test = new fn();
 console.log(test); // {a:2}
 </code></pre>
-<p>2.如果构造函数没有返回值或者返回为基本类型时，那么这时将忽略返回值，将默认值返回：</p>
+<p>2.如果构造函数显式地没有返回值 或者 显式地返回为基本类型时，那么这时将忽略返回值，将隐式默认值返回：</p>
 <pre><code class="language-JavaScript">function fn() {
   this.a = 2;
   return;
@@ -3697,13 +3697,15 @@ console.log(o.a); // 24
 </code></pre>
 <p><strong>[注意]尽管有时候构造函数看起来像一个方法调用，它依然会使用这个新对象作为this。也就是说，在表达式new o.m()中，this并不是o</strong>：</p>
 <pre><code class="language-JavaScript">var o = {
-  m: function() {
-    return this;
-  }
+    m: function() {
+        this.a = 'test a';    
+        return this;
+    }
 }
 var obj = new o.m();
 console.log(obj.constructor === o); // false
 console.log(obj.constructor === o.m); // true
+console.log(obj.a) // 'test a'
 </code></pre>
 <h2 id="严格模式的严谨修正"><a class="header-anchor" href="#严格模式的严谨修正"></a>严格模式的严谨修正</h2>
 <p>在非严格模式下，独立调用的函数的this指向window；而在严格模式下，独立调用的函数的this指向undefined：</p>
@@ -3743,9 +3745,9 @@ displayColor.call(null);//TypeError: Cannot read property 'color' of null
         
         <tags>
             
-            <tag> 进阶 </tag>
-            
             <tag> IIFE </tag>
+            
+            <tag> 进阶 </tag>
             
             <tag> this </tag>
             
@@ -5304,9 +5306,9 @@ p {
         
         <tags>
             
-            <tag> H5 </tag>
-            
             <tag> HTML </tag>
+            
+            <tag> H5 </tag>
             
             <tag> IFE </tag>
             
@@ -5827,9 +5829,9 @@ element.addEventListener('click', function() {
         
         <tags>
             
-            <tag> 进阶 </tag>
-            
             <tag> 事件 </tag>
+            
+            <tag> 进阶 </tag>
             
         </tags>
         
@@ -6798,6 +6800,7 @@ Kinect，它将身体动作转换成屏幕动作。这样你可以用你的手�
 <li>令我困惑的是填yml文件中的url项，后来发现用来填绑定的域名，域名要自己出钱买</li>
 <li>一开始遇到<code>Cannot read property 'on' of undefined</code>不会调，后来发现是yml文件填得不好，可能是不符合语法，导致错误。再比如yml文件中代码没有在适当的地方空空格。</li>
 <li>如果在网上打开js文件发现中文变乱码，在谷歌浏览器打开查看就可以了，这是最不消耗脑力的办法</li>
+<li>另外，推荐一款布局非常合理的hexo主题： <a href="https://github.com/shenliyang/hexo-theme-snippet" target="_blank" rel="noopener">snippet</a></li>
 </ul>
 ]]></content>
       

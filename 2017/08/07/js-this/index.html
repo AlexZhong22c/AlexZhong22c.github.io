@@ -79,14 +79,14 @@
 
 
 <meta name="description" content="此文适合用于进阶对this的理解，不适合用来入门。">
-<meta name="keywords" content="进阶,IIFE,this,闭包">
+<meta name="keywords" content="IIFE,进阶,this,闭包">
 <meta property="og:type" content="article">
 <meta property="og:title" content="结合this的4种绑定规则 深入理解this指向的判定">
 <meta property="og:url" content="https://alexzhong22c.github.io/2017/08/07/js-this/index.html">
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
 <meta property="og:description" content="此文适合用于进阶对this的理解，不适合用来入门。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-04T10:08:42.000Z">
+<meta property="og:updated_time" content="2020-01-06T03:43:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="结合this的4种绑定规则 深入理解this指向的判定">
 <meta name="twitter:description" content="此文适合用于进阶对this的理解，不适合用来入门。">
@@ -969,14 +969,14 @@ var obj = {
 </code></pre>
 <h2 id="new绑定"><a class="header-anchor" href="#new绑定"></a>new绑定</h2>
 <p>new绑定通常指的是构造器中的this。</p>
-<p>1.构造函数通常不使用return关键字，它们通常初始化新对象，当构造函数的函数体执行完毕时，它会显式返回。在这种情况下，构造函数调用表达式的计算结果就是这个新对象的值：</p>
+<p>1.构造函数通常不使用return关键字，它们通常初始化新对象，当构造函数的函数体执行完毕时，它会隐式返回。在这种情况下，构造函数调用表达式的计算结果就是这个新对象的值：</p>
 <pre><code class="language-JavaScript">function fn() {
   this.a = 2;
 }
 var test = new fn();
 console.log(test); // {a:2}
 </code></pre>
-<p>2.如果构造函数没有返回值或者返回为基本类型时，那么这时将忽略返回值，将默认值返回：</p>
+<p>2.如果构造函数显式地没有返回值 或者 显式地返回为基本类型时，那么这时将忽略返回值，将隐式默认值返回：</p>
 <pre><code class="language-JavaScript">function fn() {
   this.a = 2;
   return;
@@ -997,13 +997,15 @@ console.log(o.a); // 24
 </code></pre>
 <p><strong>[注意]尽管有时候构造函数看起来像一个方法调用，它依然会使用这个新对象作为this。也就是说，在表达式new o.m()中，this并不是o</strong>：</p>
 <pre><code class="language-JavaScript">var o = {
-  m: function() {
-    return this;
-  }
+    m: function() {
+        this.a = 'test a';    
+        return this;
+    }
 }
 var obj = new o.m();
 console.log(obj.constructor === o); // false
 console.log(obj.constructor === o.m); // true
+console.log(obj.a) // 'test a'
 </code></pre>
 <h2 id="严格模式的严谨修正"><a class="header-anchor" href="#严格模式的严谨修正"></a>严格模式的严谨修正</h2>
 <p>在非严格模式下，独立调用的函数的this指向window；而在严格模式下，独立调用的函数的this指向undefined：</p>
@@ -1041,7 +1043,7 @@ displayColor.call(null);//TypeError: Cannot read property 'color' of null
         <p><span>本文标题:</span><a href="/2017/08/07/js-this/">结合this的4种绑定规则 深入理解this指向的判定</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2017-08-07, 21:10:56</p>
-        <!-- <p><span>最后更新:</span>2019-02-04, 18:08:42</p> -->
+        <!-- <p><span>最后更新:</span>2020-01-06, 11:43:26</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="结合this的4种绑定规则 深入理解this指向的判定" href="/2017/08/07/js-this/">https://alexzhong22c.github.io/2017/08/07/js-this/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://alexzhong22c.github.io/2017/08/07/js-this/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -1226,13 +1228,13 @@ displayColor.call(null);//TypeError: Cannot read property 'color' of null
             <div class="footer-left" style="vertical-align:middle;margin-top:2px">
                 <img src="" style="vertical-align:middle; opacity:0" height="24">
                 <i class="fa fa-copyright" style="vertical-align:middle;"></i>
-                2017-2019 Alex Zhong
+                2017-2020 Alex Zhong
             </div>
 
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					
-						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：4,093</span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：4,111</span>
 					
 				</div>
             </div>
