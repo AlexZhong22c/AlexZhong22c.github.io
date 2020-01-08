@@ -87,7 +87,7 @@
 <meta property="og:description" content="一般地，javascript使用构造函数和原型对象来进行面向对象编程，它们的表现与其他面向对象编程语言中的“类”相似又不同。 在 上一篇文章 已经做过对 构造函数 和 原型对象 的简单介绍，下面为了对比它们，做一些内容细节上的补充：">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://cloud.az22c.top/js-constructorjs-constructor.png">
-<meta property="og:updated_time" content="2019-02-04T12:37:12.000Z">
+<meta property="og:updated_time" content="2020-01-08T15:02:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="构造函数和原型对象">
 <meta name="twitter:description" content="一般地，javascript使用构造函数和原型对象来进行面向对象编程，它们的表现与其他面向对象编程语言中的“类”相似又不同。 在 上一篇文章 已经做过对 构造函数 和 原型对象 的简单介绍，下面为了对比它们，做一些内容细节上的补充：">
@@ -790,7 +790,7 @@ console.log(person1 instanceof Person);//true
 console.log(person1.constructor === Person);//false，解释见下一个demo：
 console.log(person1.constructor === Object);//true
 </code></pre>
-<p>当一个函数被创建时，该原型对象的constructor属性自动创建，并指向该函数。当使用对象字面形式改写原型对象Person.prototype时，需要在改写原型对象时手动重置其constructor属性：</p>
+<p>当一个实例对象被创建时，该原型对象的constructor属性自动创建，并指向该函数。当使用对象字面形式改写原型对象Person.prototype时，需要在改写原型对象时手动重置其constructor属性：</p>
 <pre><code class="language-JavaScript">function Person(name){
     this.name = name;
 }
@@ -860,7 +860,7 @@ Foo.prototype = {}; // 此时重置原型对象
 console.log(Foo.prototype === f1.__proto__);//false
 console.log(Foo.prototype.constructor === Foo);//false
 </code></pre>
-<p>所以，代码顺序很重要。</p>
+<p>所以，对于改写<code>Foo.prototype</code>这种操作，代码顺序很重要。</p>
 
 		</div>
       
@@ -870,7 +870,7 @@ console.log(Foo.prototype.constructor === Foo);//false
         <p><span>本文标题:</span><a href="/2017/08/09/js-constructor/">构造函数和原型对象</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2017-08-09, 14:48:21</p>
-        <!-- <p><span>最后更新:</span>2019-02-04, 20:37:12</p> -->
+        <!-- <p><span>最后更新:</span>2020-01-08, 23:02:29</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="构造函数和原型对象" href="/2017/08/09/js-constructor/">https://alexzhong22c.github.io/2017/08/09/js-constructor/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://alexzhong22c.github.io/2017/08/09/js-constructor/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -1061,7 +1061,7 @@ console.log(Foo.prototype.constructor === Foo);//false
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					
-						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：2,417</span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：2,429</span>
 					
 				</div>
             </div>

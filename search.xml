@@ -2919,7 +2919,7 @@ console.log(person1 instanceof Person);//true
 console.log(person1.constructor === Person);//false，解释见下一个demo：
 console.log(person1.constructor === Object);//true
 </code></pre>
-<p>当一个函数被创建时，该原型对象的constructor属性自动创建，并指向该函数。当使用对象字面形式改写原型对象Person.prototype时，需要在改写原型对象时手动重置其constructor属性：</p>
+<p>当一个实例对象被创建时，该原型对象的constructor属性自动创建，并指向该函数。当使用对象字面形式改写原型对象Person.prototype时，需要在改写原型对象时手动重置其constructor属性：</p>
 <pre><code class="language-JavaScript">function Person(name){
     this.name = name;
 }
@@ -2989,7 +2989,7 @@ Foo.prototype = {}; // 此时重置原型对象
 console.log(Foo.prototype === f1.__proto__);//false
 console.log(Foo.prototype.constructor === Foo);//false
 </code></pre>
-<p>所以，代码顺序很重要。</p>
+<p>所以，对于改写<code>Foo.prototype</code>这种操作，代码顺序很重要。</p>
 ]]></content>
       
         <categories>
