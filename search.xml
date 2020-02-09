@@ -13,7 +13,7 @@
 <p>又或者当我们给一行文字设置background的时候，文字背景所占的区域可以近似的视为是这段文字的<code>content-area（内容区域）</code>。</p>
 <p>我们通常用content-area的高度代表<code>文字高度</code> ，这是字体设计领域的一个概念。</p>
 <p>你先别质疑这种思想！我们知道有些文字的样子喜欢往上突出，有些文字喜欢往下突，再者，行与行文字之间需要一定的空间，所以content-area在上下两个区域预留出空白的区域是很正常的，如图：</p>
-<p><img src="https://cloud.az22c.top/font-line.jpg" alt="font-line"></p>
+<p><img src="https://cloud.az22c.top/font-line.jpg-az22cgithub" alt="font-line"></p>
 <p>先说结论：</p>
 <p><strong>font-size 相同时，font-family 不同，得到的<code>文字高度</code>也不同</strong>：</p>
 <p><img src="https://cloud.az22c.top/diff-font.jpg" alt="diff-fon"></p>
@@ -5268,11 +5268,11 @@ p {
         
         <tags>
             
-            <tag> IFE </tag>
-            
             <tag> H5 </tag>
             
             <tag> HTML </tag>
+            
+            <tag> IFE </tag>
             
         </tags>
         
