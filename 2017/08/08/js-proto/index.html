@@ -86,16 +86,16 @@
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
 <meta property="og:description" content="理解对象和函数的prototype、proto和constructor等关系：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://cloud.az22c.top/js-protojs-proto-1.png">
-<meta property="og:image" content="https://cloud.az22c.top/js-protojs-proto-2.png">
-<meta property="og:image" content="https://cloud.az22c.top/js-protojs-proto-3.png">
-<meta property="og:image" content="https://cloud.az22c.top/js-protojs-proto-4.png">
-<meta property="og:image" content="https://cloud.az22c.top/js-protojs-proto-4.png">
-<meta property="og:updated_time" content="2019-02-04T12:37:12.000Z">
+<meta property="og:image" content="https://cloud.az22c.top/js-protojs-proto-1.png-az22cgithub">
+<meta property="og:image" content="https://cloud.az22c.top/js-protojs-proto-2.png-az22cgithub">
+<meta property="og:image" content="https://cloud.az22c.top/js-protojs-proto-3.png-az22cgithub">
+<meta property="og:image" content="https://cloud.az22c.top/js-protojs-proto-4.png-az22cgithub">
+<meta property="og:image" content="https://cloud.az22c.top/js-protojs-proto-4.png-az22cgithub">
+<meta property="og:updated_time" content="2020-02-09T11:58:32.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="理解prototype、proto和constructor等关系">
 <meta name="twitter:description" content="理解对象和函数的prototype、proto和constructor等关系：">
-<meta name="twitter:image" content="https://cloud.az22c.top/js-protojs-proto-1.png">
+<meta name="twitter:image" content="https://cloud.az22c.top/js-protojs-proto-1.png-az22cgithub">
 
 
     <link rel="alternate" href="/atom.xml" title="Web前端 | Alex Zhong" type="application/atom+xml" data-no-instant="">
@@ -556,7 +556,7 @@
 function Foo(){};
 var f1 = new Foo;
 </code></pre>
-<p><img src="https://cloud.az22c.top/js-protojs-proto-1.png" alt="js-proto-1"></p>
+<p><img src="https://cloud.az22c.top/js-protojs-proto-1.png-az22cgithub" alt="js-proto-1"></p>
 <p>如图，</p>
 <p><strong>[1]构造函数有一个prototype属性，指向实例对象的原型对象。</strong></p>
 <p><strong>[2]原型对象有一个constructor属性，指向该原型对象对应的构造函数。</strong></p>
@@ -603,7 +603,7 @@ console.log(f1.__proto__ === Foo.prototype);//true
 <h2 id="视foo-prototype为实例对象"><a class="header-anchor" href="#视foo-prototype为实例对象"></a>视Foo.prototype为实例对象</h2>
 <p>Foo.prototype是f1的原型对象，同时它也可以是实例对象。实际上，任何对象都可以看做是通过Object()构造函数的new操作实例化的对象。</p>
 <p><strong>所以，Foo.prototype作为实例对象时，它的构造函数是Object()，原型对象是Object.prototype。</strong></p>
-<p><img src="https://cloud.az22c.top/js-protojs-proto-2.png" alt="js-proto-2"></p>
+<p><img src="https://cloud.az22c.top/js-protojs-proto-2.png-az22cgithub" alt="js-proto-2"></p>
 <p>相应地，构造函数Object()的prototype属性指向原型对象Object.prototype；</p>
 <p>Object.prototype的constructor属性指向构造函数Object()</p>
 <p>实例对象Foo.prototype本身具有constructor属性，所以它会覆盖继承自原型对象Object.prototype的constructor属性：</p>
@@ -620,7 +620,7 @@ console.log(Foo.prototype.__proto__ === Object.prototype);//true
 </code></pre>
 <h2 id="视object-prototype为实例对象"><a class="header-anchor" href="#视object-prototype为实例对象"></a>视Object.prototype为实例对象</h2>
 <p>如果Object.prototype作为实例对象的话，其原型对象是什么？结果是null。</p>
-<p><img src="https://cloud.az22c.top/js-protojs-proto-3.png" alt="js-proto-3"></p>
+<p><img src="https://cloud.az22c.top/js-protojs-proto-3.png-az22cgithub" alt="js-proto-3"></p>
 <pre><code class="language-JavaScript">console.log(Object.prototype.__proto__ === null);//true
 </code></pre>
 <h2 id="函数foo和函数object也可以被视为实例对象"><a class="header-anchor" href="#函数foo和函数object也可以被视为实例对象"></a>函数Foo和函数Object也可以被视为实例对象</h2>
@@ -640,7 +640,7 @@ console.log(Foo.hasOwnProperty('constructor'));//false
 console.log(Object.constructor === Function);//true
 console.log(Object.hasOwnProperty('constructor'));//false
 </code></pre>
-<p><img src="https://cloud.az22c.top/js-protojs-proto-4.png" alt="js-proto-4"></p>
+<p><img src="https://cloud.az22c.top/js-protojs-proto-4.png-az22cgithub" alt="js-proto-4"></p>
 <h2 id="视function为实例对象"><a class="header-anchor" href="#视function为实例对象"></a>视Function为实例对象</h2>
 <p><strong>所有的函数都可以看成是构造函数Function()的new操作的实例化对象。</strong> 那么，Function可以看成是调用其自身的new操作的实例化的结果</p>
 <p>所以，如果Function作为实例对象，其构造函数是Function，其原型对象是Function.prototype</p>
@@ -662,7 +662,7 @@ console.log(Function.prototype === Function.prototype);//true
 var f1 = new Foo;
 </code></pre>
 <p>其涉及到的构造函数 实例对象 原型对象 以及它们之间的关系如图所示：</p>
-<p><img src="https://cloud.az22c.top/js-protojs-proto-4.png" alt="js-proto-4"></p>
+<p><img src="https://cloud.az22c.top/js-protojs-proto-4.png-az22cgithub" alt="js-proto-4"></p>
 <p>【1】函数(Function也是函数)是new Function的结果，所以函数可以作为实例对象，其构造函数是Function()，原型对象是Function.prototype</p>
 <p>【2】对象(函数也是对象)是new Object的结果，所以对象可以作为实例对象，其构造函数是Object()，原型对象是Object.prototype</p>
 <p>【3】Object.prototype的原型对象是null</p>
@@ -675,7 +675,7 @@ var f1 = new Foo;
         <p><span>本文标题:</span><a href="/2017/08/08/js-proto/">理解prototype、proto和constructor等关系</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2017-08-08, 22:14:49</p>
-        <!-- <p><span>最后更新:</span>2019-02-04, 20:37:12</p> -->
+        <!-- <p><span>最后更新:</span>2020-02-09, 19:58:32</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="理解prototype、proto和constructor等关系" href="/2017/08/08/js-proto/">https://alexzhong22c.github.io/2017/08/08/js-proto/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://alexzhong22c.github.io/2017/08/08/js-proto/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

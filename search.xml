@@ -16,10 +16,10 @@
 <p><img src="https://cloud.az22c.top/font-line.jpg-az22cgithub" alt="font-line"></p>
 <p>先说结论：</p>
 <p><strong>font-size 相同时，font-family 不同，得到的<code>文字高度</code>也不同</strong>：</p>
-<p><img src="https://cloud.az22c.top/diff-font.jpg" alt="diff-fon"></p>
+<p><img src="https://cloud.az22c.top/diff-font.jpg-az22cgithub" alt="diff-fon"></p>
 <p>上图表明，同样是font-size为100px，三款不同字体在浏览器画面上的高度是不同的。</p>
 <p>我们再来分析一下，在font-size设置为100px时，Catamaran字体的那164px是怎么构成的：</p>
-<p><img src="https://cloud.az22c.top/catamaran-font.jpg" alt="catamaran-font"></p>
+<p><img src="https://cloud.az22c.top/catamaran-font.jpg-az22cgithub" alt="catamaran-font"></p>
 <p>我们假设画面由相对单位构成方便缩放拉伸，再假设现在1px对应画面上的10个相对单位。（这点你可以不用理会）</p>
 <p>那么我们所能设置的<code>font-size: 100px</code>其实设置的是上图左方1000个单位(em-square)这部分的高度而已； <strong>我们可以把em-square区域视为content-area的主体区域。</strong></p>
 <blockquote>
@@ -36,7 +36,7 @@
 <p>当 p 元素出现在屏幕上时，它可能包含了多行的内容，其内容高度由<code>每一行的高度</code>堆叠而成。这点很好理解。</p>
 <h3 id="line-box的默认高度"><a class="header-anchor" href="#line-box的默认高度"></a>line-box的默认高度</h3>
 <p>每一行可视为一个line-box。通常来讲，line-box的默认高度是由这一行的内容撑大的，这一行里面的元素谁的高度最大，line-box的高度就等于它，由它撑大：</p>
-<p><img src="https://cloud.az22c.top/line-boxes.jpg" alt="line-boxes"></p>
+<p><img src="https://cloud.az22c.top/line-boxes.jpg-az22cgithub" alt="line-boxes"></p>
 <pre><code class="language-HTML">&lt;p&gt;
     Good design will be better.
     &lt;span class=&quot;a&quot;&gt;Ba&lt;/span&gt;
@@ -78,9 +78,9 @@
 <p>因为， <strong>基线乃其他线定义之根本也。</strong></p>
 <p>了解“基线”大有好处。</p>
 <p>回到刚才那幅图：</p>
-<p><img src="https://cloud.az22c.top/font-line.jpg" alt="font-line"></p>
+<p><img src="https://cloud.az22c.top/font-line.jpg-az22cgithub" alt="font-line"></p>
 <p>这么多线，都是字体设计师为了比对位置用的。这几条线，可以视为是字体设计的度衡。任何一款字体都会给出以上各种线的位置参数，<strong>所有线的位置参数都是相对于基线的位置而确定的</strong> 。我们把某款字体放到 <a href="http://link.zhihu.com/?target=https%3A//fontforge.github.io/en-US/" target="_blank" rel="noopener">FontForge</a> 中，分析它的字体度量：</p>
-<p><img src="https://cloud.az22c.top/font-forge.jpg" alt="font-forge"></p>
+<p><img src="https://cloud.az22c.top/font-forge.jpg-az22cgithub" alt="font-forge"></p>
 <blockquote>
 <p>首先说明的是HHead Ascent是针对macOS的计算值，Win Ascent是针对Windows系统的计算值，这点可以不用理会。</p>
 </blockquote>
@@ -111,7 +111,7 @@
 <h4 id="line-height设为数字-百分数的时候"><a class="header-anchor" href="#line-height设为数字-百分数的时候"></a>line-height设为数字/百分数的时候</h4>
 <p>line-height设为数字/百分数的时候，line-height就是拿 数字/百分数  去乘以em-square的高度。</p>
 <p>所以如果设置line-height:1或者line-height:100%肯定是有问题的啊——本来em-square基本上就比content-area要小，你还让line-height是em-square的高度的一倍？！行与行之间的文字绝对是要挤在一起了：</p>
-<p><img src="https://cloud.az22c.top/set-line-height-1.jpg" alt="set-line-height-1"></p>
+<p><img src="https://cloud.az22c.top/set-line-height-1.jpg-az22cgithub" alt="set-line-height-1"></p>
 <p>那怎么设置呢？反正line-height最终的计算结果超过content-area就应该比较符合常理了。</p>
 <p>张鑫旭大神鼓励大家用数字来设置line-height。</p>
 <ul>
@@ -233,7 +233,7 @@
 &lt;/style&gt;
 &lt;body&gt;
   &lt;div class=&quot;box&quot;&gt;
-    &lt;img src=&quot;https://cloud.az22c.top/logo.jpg?imageMogr2/thumbnail/x100&quot; alt=&quot;图片src要设置!!&quot;/&gt;
+    &lt;img src=&quot;example/logo.jpg?imageMogr2/thumbnail/x100&quot; alt=&quot;图片src要设置!!&quot;/&gt;
   &lt;/div&gt;
 &lt;/body&gt;
 </code></pre>
@@ -242,7 +242,7 @@
 <p>(备注：在英文字体设计中，通常以小写字母&quot;x&quot;的高度作为其他小写字母高度的设计的基础。因此x-height被用于表示一款字体中的小写字母&quot;x&quot;的高度。)</p>
 <p>(备注：文字处于的位置高度和line-height之间关系的计算非常麻烦，详见我另一篇文章<a href="https://alexzhong22c.github.io/2018/02/06/height-calculate/">深入理解文字高度和行高的设置</a>。只需记住绝大多数情况下是：文字&quot;x&quot;的中心高度(即基线往上1/2 x-height处) 比line-height的中线高度要低。有些人称这种现象为&quot;字符下沉&quot;)</p>
 </blockquote>
-<p><img src="https://cloud.az22c.top/x-height.png" alt="二分之一 x-height"></p>
+<p><img src="https://cloud.az22c.top/x-height.png-az22cgithub" alt="二分之一 x-height"></p>
 <p>也就是说，假如现在给img后面添加一个&quot;x&quot;作为文字，图片所处的高度不会变，图片的中线位置就穿过文字&quot;x&quot;的中心，这时，图片的中线的位置实际上是比容器行内的中线位置要低的。<strong>所以，此乃近似垂直居中。</strong></p>
 <p>另外，这种垂直居中方法还要IE8及以上才能兼容。</p>
 <p><strong>备注：</strong></p>
@@ -296,7 +296,7 @@
 &lt;/style&gt;
 &lt;body&gt;
   &lt;div class=&quot;box&quot;&gt;
-    &lt;img src=&quot;https://cloud.az22c.top/logo.jpg?imageMogr2/thumbnail/x100&quot; alt=&quot;图片src要设置!!&quot;/&gt;
+    &lt;img src=&quot;example/logo.jpg?imageMogr2/thumbnail/x100&quot; alt=&quot;图片src要设置!!&quot;/&gt;
     &lt;i&gt;&lt;/i&gt;
   &lt;/div&gt;
 &lt;/body&gt;
@@ -1139,7 +1139,7 @@ MY_ARRAY = ['B']
       <content type="html"><![CDATA[<p>暂存区是git的一个重要概念，经过了一段时间的项目实践，总结一下个人对暂存区的一些理解。</p>
 <p>当我们开始对git的一些知识进行梳理的时候，可以盗用以下这张图：</p>
 <a id="more"></a>
-<p><img src="https://cloud.az22c.top/add-commit-push.png" alt="add-commit-push.png"></p>
+<p><img src="https://cloud.az22c.top/add-commit-push.png-az22cgithub" alt="add-commit-push.png"></p>
 <ul>
 <li>working directory为本地的<strong>工作区</strong></li>
 <li>stage area为<strong>暂存区</strong>，亦称作stage或者index</li>
@@ -1171,7 +1171,7 @@ git push               ::::将 本地分支的变化 同步到远程分支
 </code></pre>
 <p>就能把把a.txt和c.txt两个文件的变动保存到<strong>暂存区</strong>了。继而进行其他后续操作。</p>
 <p>而一般情况下，就像游戏存档一样，我们会去选择保存所有的文件变动，而<code>git add .</code> 代表的就是这个意思。</p>
-<p><img src="https://cloud.az22c.top/github-desktop.png" alt="github-desktop"></p>
+<p><img src="https://cloud.az22c.top/github-desktop.png-az22cgithub" alt="github-desktop"></p>
 <p>用过GitHub Desktop的童鞋会发现它们是同样的道理的，只不过一个是git指令的形式，一个是图形化界面的形式，流程是一样的：</p>
 <ul>
 <li>挑选自己想记录提交的内容，形成一个commit</li>
@@ -1432,7 +1432,7 @@ border-bottom-left-radius: 15px;
 </code></pre>
 <hr>
 <p>所谓的&quot;圆角&quot;其实是这样获得的：</p>
-<p><img src="https://cloud.az22c.top/border-radius-sh.png" alt="border-radius"></p>
+<p><img src="https://cloud.az22c.top/border-radius-sh.png-az22cgithub" alt="border-radius"></p>
 <p>将一个圆内切于一个直角，再把圆外的部分去掉。我们设置的就是圆的半径。</p>
 <p>又或者可以：</p>
 <p>将一个椭圆内切于一个直角，再把椭圆外的部分去掉。我们设置的是椭圆的 水平半径 和 垂直半径。</p>
@@ -1525,11 +1525,11 @@ border-bottom-left-radius: 44px 88px;
         
         <tags>
             
+            <tag> 回顾 </tag>
+            
             <tag> radius </tag>
             
             <tag> 边框 </tag>
-            
-            <tag> 回顾 </tag>
             
         </tags>
         
@@ -2572,14 +2572,14 @@ Person.say(); // Person.say is not a function
 <p>等到obj经返回被赋给john之后，john.name就是“John”了。</p>
 <p>画出最终<code>var john = new Person(&quot;John&quot;);</code>这一句代码涉及到的对象和它们间的关系：</p>
 <p>( 执行完代码后，临时变量obj就被销毁 )</p>
-<p><img src="https://cloud.az22c.top/js-new-happen-1.png" alt="js-new-happen-1"></p>
+<p><img src="https://cloud.az22c.top/js-new-happen-1.png-az22cgithub" alt="js-new-happen-1"></p>
 <blockquote>
 <p>如果看不懂图，可以先看我以往文章的介绍： <a href="https://alexzhong22c.github.io/2017/08/08/js-proto/">理解prototype、proto和constructor等关系</a></p>
 </blockquote>
 <h2 id="控制台结果解析"><a class="header-anchor" href="#控制台结果解析"></a>控制台结果解析</h2>
 <p>分析完了 john 的产生过程，我们再分析一下控制台输出结果：</p>
 <p>这个例子的代码全部执行完，最终涉及到的对象和它们间的关系如图：</p>
-<p><img src="https://cloud.az22c.top/js-new-happen-2.png" alt="js-new-happen-2"></p>
+<p><img src="https://cloud.az22c.top/js-new-happen-2.png-az22cgithub" alt="js-new-happen-2"></p>
 <ul>
 <li><a href="http://john.name" target="_blank" rel="noopener">john.name</a>： 临时变量obj有name，obj经返回被赋给john，john的一些属性由此而来。</li>
 <li>john.hairColor：john实例对象 先查找自身的 hairColor，<strong>没有找到便会沿着原型链查找</strong>，在上述例子中，我们仅在 Person 对象上定义了 hairColor，并没有在其原型链上定义，因此找不到。</li>
@@ -2690,7 +2690,7 @@ console.log(person1.constructor === Person);//true
 console.log(person1.__proto__.constructor === Person);//true
 </code></pre>
 <p>以下是person1的内部属性，发现constructor是继承属性：</p>
-<p><img src="https://cloud.az22c.top/js-constructorjs-constructor.png" alt="js-constructor"></p>
+<p><img src="https://cloud.az22c.top/js-constructorjs-constructor.png-az22cgithub" alt="js-constructor"></p>
 <p><strong>虽然对象实例及其构造函数之间存在这样的关系，但是还是建议使用instanceof来检查对象类型。这是因为构造函数属性可以被覆盖，所以并不一定完全准确：</strong></p>
 <pre><code class="language-JavaScript">function Person(){
     //
@@ -2985,7 +2985,7 @@ console.log(Foo.prototype.constructor === Foo);//false
 function Foo(){};
 var f1 = new Foo;
 </code></pre>
-<p><img src="https://cloud.az22c.top/js-protojs-proto-1.png" alt="js-proto-1"></p>
+<p><img src="https://cloud.az22c.top/js-protojs-proto-1.png-az22cgithub" alt="js-proto-1"></p>
 <p>如图，</p>
 <p><strong>[1]构造函数有一个prototype属性，指向实例对象的原型对象。</strong></p>
 <p><strong>[2]原型对象有一个constructor属性，指向该原型对象对应的构造函数。</strong></p>
@@ -3032,7 +3032,7 @@ console.log(f1.__proto__ === Foo.prototype);//true
 <h2 id="视foo-prototype为实例对象"><a class="header-anchor" href="#视foo-prototype为实例对象"></a>视Foo.prototype为实例对象</h2>
 <p>Foo.prototype是f1的原型对象，同时它也可以是实例对象。实际上，任何对象都可以看做是通过Object()构造函数的new操作实例化的对象。</p>
 <p><strong>所以，Foo.prototype作为实例对象时，它的构造函数是Object()，原型对象是Object.prototype。</strong></p>
-<p><img src="https://cloud.az22c.top/js-protojs-proto-2.png" alt="js-proto-2"></p>
+<p><img src="https://cloud.az22c.top/js-protojs-proto-2.png-az22cgithub" alt="js-proto-2"></p>
 <p>相应地，构造函数Object()的prototype属性指向原型对象Object.prototype；</p>
 <p>Object.prototype的constructor属性指向构造函数Object()</p>
 <p>实例对象Foo.prototype本身具有constructor属性，所以它会覆盖继承自原型对象Object.prototype的constructor属性：</p>
@@ -3049,7 +3049,7 @@ console.log(Foo.prototype.__proto__ === Object.prototype);//true
 </code></pre>
 <h2 id="视object-prototype为实例对象"><a class="header-anchor" href="#视object-prototype为实例对象"></a>视Object.prototype为实例对象</h2>
 <p>如果Object.prototype作为实例对象的话，其原型对象是什么？结果是null。</p>
-<p><img src="https://cloud.az22c.top/js-protojs-proto-3.png" alt="js-proto-3"></p>
+<p><img src="https://cloud.az22c.top/js-protojs-proto-3.png-az22cgithub" alt="js-proto-3"></p>
 <pre><code class="language-JavaScript">console.log(Object.prototype.__proto__ === null);//true
 </code></pre>
 <h2 id="函数foo和函数object也可以被视为实例对象"><a class="header-anchor" href="#函数foo和函数object也可以被视为实例对象"></a>函数Foo和函数Object也可以被视为实例对象</h2>
@@ -3069,7 +3069,7 @@ console.log(Foo.hasOwnProperty('constructor'));//false
 console.log(Object.constructor === Function);//true
 console.log(Object.hasOwnProperty('constructor'));//false
 </code></pre>
-<p><img src="https://cloud.az22c.top/js-protojs-proto-4.png" alt="js-proto-4"></p>
+<p><img src="https://cloud.az22c.top/js-protojs-proto-4.png-az22cgithub" alt="js-proto-4"></p>
 <h2 id="视function为实例对象"><a class="header-anchor" href="#视function为实例对象"></a>视Function为实例对象</h2>
 <p><strong>所有的函数都可以看成是构造函数Function()的new操作的实例化对象。</strong> 那么，Function可以看成是调用其自身的new操作的实例化的结果</p>
 <p>所以，如果Function作为实例对象，其构造函数是Function，其原型对象是Function.prototype</p>
@@ -3091,7 +3091,7 @@ console.log(Function.prototype === Function.prototype);//true
 var f1 = new Foo;
 </code></pre>
 <p>其涉及到的构造函数 实例对象 原型对象 以及它们之间的关系如图所示：</p>
-<p><img src="https://cloud.az22c.top/js-protojs-proto-4.png" alt="js-proto-4"></p>
+<p><img src="https://cloud.az22c.top/js-protojs-proto-4.png-az22cgithub" alt="js-proto-4"></p>
 <p>【1】函数(Function也是函数)是new Function的结果，所以函数可以作为实例对象，其构造函数是Function()，原型对象是Function.prototype</p>
 <p>【2】对象(函数也是对象)是new Object的结果，所以对象可以作为实例对象，其构造函数是Object()，原型对象是Object.prototype</p>
 <p>【3】Object.prototype的原型对象是null</p>
@@ -4093,7 +4093,7 @@ d.toUTCString()
 <a id="more"></a>
 <hr>
 <p>这是一个带复选框(checkbox)的表格，只用纯vue不用其他框架实现<strong>checkbox父子联动</strong>：</p>
-<p><img src="https://cloud.az22c.top/show-vue-checkbox-table.png" alt=""></p>
+<p><img src="https://cloud.az22c.top/show-vue-checkbox-table.png-az22cgithub" alt=""></p>
 <h2 id="效果："><a class="header-anchor" href="#效果："></a>效果：</h2>
 <ul>
 <li>表头的checkbox视之为一个全局(global)的checkbox，点击它可以实现“全选”和“全不选”</li>
@@ -4168,9 +4168,9 @@ d.toUTCString()
 <li>使用mongoose操作MongoDB</li>
 </ul>
 <p>“计划列表”界面</p>
-<p><img src="https://cloud.az22c.top/time-tracker1.png" alt="演示图1"></p>
+<p><img src="https://cloud.az22c.top/time-tracker1.png-az22cgithub" alt="演示图1"></p>
 <p>创建任务：</p>
-<p><img src="https://cloud.az22c.top/time-tracker2.png" alt="演示图2"></p>
+<p><img src="https://cloud.az22c.top/time-tracker2.png-az22cgithub" alt="演示图2"></p>
 <h2 id="运行demo"><a class="header-anchor" href="#运行demo"></a>运行demo:</h2>
 <p>用<code>npm install</code>之后，总共需要打开两个命令行窗口，一个命令行运行：</p>
 <pre><code>node app.js // 会在8888端口开启一个后台
@@ -4335,7 +4335,7 @@ Vue.prototype.$ajax = axios
 <p>getters可以看做是store的计算属性。另外，我们最好遵循vuex的通讯流程：</p>
 <h4 id="vuex单向数据流"><a class="header-anchor" href="#vuex单向数据流"></a>vuex单向数据流</h4>
 <p>Vuex实际上是类<a href="https://link.juejin.im/?target=https%3A%2F%2Ffacebook.github.io%2Fflux%2F" target="_blank" rel="noopener">Flux</a>的数据管理架构。下面这张图很好的诠释了Vuex和组件之间的通讯关系。</p>
-<p><img src="https://cloud.az22c.top/vuex.png" alt="Vuex和组件之间的通讯关系"></p>
+<p><img src="https://cloud.az22c.top/vuex.png-az22cgithub" alt="Vuex和组件之间的通讯关系"></p>
 <p>这个图告诉我们不应该直接在vue Components去操作state中的数据，而是应该按照vue Components–&gt;actions–&gt;mutations–&gt;state这个过程来操作数据。</p>
 <blockquote>
 <p>组件永远都不应该直接改变 Vuex store 的状态。因为我们想要让状态的每次改变都很明确且可追踪，Vuex 状态的所有改变都必须在 store 的 mutation handler (变更句柄)中管理。</p>
@@ -4490,7 +4490,7 @@ methods: {
 <p>这是一个关于表格数据的分页导航，按照表格中的每个条目作为单元来展示数据。</p>
 <p><strong>这样的数据呈现方式可读性更强，设计更人性化。</strong></p>
 <p>当然它只适用于少量表格数据的直观呈现，如果数据太多，还是用传统的表格来呈现比较合适。demo的下方我还展示了原始的表格，方便各位看官做做对比。</p>
-<p><img src="https://cloud.az22c.top/show-vue-table-nav.png" alt=""></p>
+<p><img src="https://cloud.az22c.top/show-vue-table-nav.png-az22cgithub" alt=""></p>
 <h2 id="分页导航"><a class="header-anchor" href="#分页导航"></a>分页导航</h2>
 <ul>
 <li>可设置每页显示的条目数</li>
@@ -5268,11 +5268,11 @@ p {
         
         <tags>
             
+            <tag> IFE </tag>
+            
             <tag> H5 </tag>
             
             <tag> HTML </tag>
-            
-            <tag> IFE </tag>
             
         </tags>
         
@@ -6310,8 +6310,8 @@ touchcancel。有些代码为了安全起见，把它等同于touchend。综上�
 <p>将这个实现移植到基于触摸的交互非常简单：将mousedown替换为touchstart，mousemove替换为touchmove，mouseup替换为touchend就可以了。唯一的问题是如何确定事件的坐标。后面我们会讲到。</p>
 <p>这里的问题是键盘的可访问性。如何让用户通过键盘移动可拖动元素？你可以将一个区域的元素设置成可以 通过键盘聚焦，一旦某个元素得到焦点，就开始监听方向键。这在技术上并不困难，但是用户体验很差。这个问题基本上无法解决：拖放操作本身就是为鼠标和触摸 交互设计的，无法在键盘上得到好的体验。</p>
 <h3 id="滚动层"><a class="header-anchor" href="#滚动层"></a>滚动层</h3>
-<p>在2011年时，我需要一个可以在所有	设备上工作的水平滚动元素。那时候设备还没有原生支持，仍需要脚本，所以我写过一个。现在设备已经原生支持，那段脚本不再需要了。这点我们在CSS章节已经看到。不过这段脚本仍然是一个很有用的实例，所以我们假设仍然需要那段脚本。</p>
-<p><img src="https://cloud.az22c.top/roll-layer.png" alt="img"></p>
+<p>在2011年时，我需要一个可以在所有设备上工作的水平滚动元素。那时候设备还没有原生支持，仍需要脚本，所以我写过一个。现在设备已经原生支持，那段脚本不再需要了。这点我们在CSS章节已经看到。不过这段脚本仍然是一个很有用的实例，所以我们假设仍然需要那段脚本。</p>
+<p><img src="https://cloud.az22c.top/roll-layer.png-az22cgithub" alt="img"></p>
 <p>写这段脚本不是什么难事：在ontouchstart事件中计算滚动元素的当前位置，并初始化其他事 件处理函数；在ontouchmove事件中将元素移动相应像素的距离；在ontouchend中，运行一个函数来计算合理的减速，一旦被移动的元素停止 移动，这个函数结束。很简单吧，我花了大概两个小时。</p>
 <p>非触摸设备怎么办呢？为了让滚动层可以工作，我需要将触摸交互翻译成鼠标、键盘交互。键盘很简单，只需监听keydown事件，当用户按下左/右键时滚动元素。这点可能不是那么容易发现，但是现在这个脚本算是正式支持键盘操作了。</p>
 <p>鼠标设备怎么办？从技术上来讲，增加对mousedown、mousemove和mouseup事件的处理并不难，但是交互非常奇怪：用户必须一直按下鼠标按键才能滚动元素。这种交互和拖放一样，但是对于滚动层来说并不是那么直观。</p>
@@ -6335,7 +6335,7 @@ Kinect，它将身体动作转换成屏幕动作。这样你可以用你的手�
 <p>目前来看，前两个问题的答案是肯定的，第三个问题的答案比较复杂。但是，在将来，第一个问题的答案可能是否定的。再看看Kinect的例子：我们是发明全新的硬件事件，还是使用指针和鼠标事件呢？从技术上来讲，无论用户怎么移动，指针还是指针。</p>
 <h3 id="等价事件"><a class="header-anchor" href="#等价事件"></a>等价事件</h3>
 <p>目前每种交互模式都有自己的一套事件，但这并不意味着它们是完全无关且不同的。事实上，某些事件是等价的。下面的表格给出了这方面的情况。</p>
-<p><img src="https://cloud.az22c.top/compare-3-events1.png" alt="img"></p>
+<p><img src="https://cloud.az22c.top/compare-3-events1.png-az22cgithub" alt="img"></p>
 <p>很显然，触摸动作序列：touchstart-touchmove-touchend和鼠标序 列：mousedown-mousemove-mouseup以及键盘序列：keydown-keypress-keyup很相似，这并不是巧合，因为这 三种交互模式都可以描述为start-move-stop。（所以我们不需要完全不同的事件，对不对？）</p>
 <p>但是，有时候两个操作模式很像，但第三个却不。比如在下拉菜单的例子里，鼠标和键盘很像，而触摸不同。在拖放实例中，鼠标和触摸几乎一致，但键盘非常不同。在滚动层的例子里，这三种操作模式完全不同。（所以我们还是需要不同的事件，对吧？）</p>
 <p>最后是mouseover和mouseout的问题。focus和blur是它们的键盘模式的等价事件，但是触摸模式没有这样的等价事件。就像我们在“CSS”一章看到的，在触摸屏设备中不存在“悬停”。</p>
@@ -6354,7 +6354,7 @@ Kinect，它将身体动作转换成屏幕动作。这样你可以用你的手�
 </blockquote>
 <p>我们发现，通常情况下鼠标事件和触摸事件非常相似，但是二者还是有一些本质区别的。有了这个认识，我们就可以更好地理解微软的指针事件，以及为什么会提出指针事件。</p>
 <p>微软认为没有必要分出鼠标、触摸两种事件。不管是鼠标指针、手指（触摸）还是触控笔（也叫定位笔），统称为指针，只要通过这些指针改变了些什么，就触发指针事件。所以，下面是微软版本的等价事件：</p>
-<p><img src="https://cloud.az22c.top/compare-3-events2.png" alt="img"></p>
+<p><img src="https://cloud.az22c.top/compare-3-events2.png-az22cgithub" alt="img"></p>
 <p>现在我们有了两种事件分类方式：鼠标、触摸分离的苹果版本；鼠标、触摸整合的微软版本。到目前为止， 只有IE支持微软的版本。其他浏览器都支持苹果版本。又如我们在前面看到的，Mozilla和Google正在考虑实现指针事件 （PointerEvent）。所以未来情况可能还会发生变化。</p>
 <p>Google 之所以对指针事件感兴趣，是因为它的Chromebook Pixel笔记本和微软的Surface平板电脑一样，都有触摸屏和带触摸板的键盘。二者都支持鼠标和触摸操作。如果这两种事件能统一成一种，网站对它们的支持就会变得简单很多。</p>
 <p>微软的Surface是一个触屏平板电脑，你还可以外接一个带触摸板的键盘。在访问网站时你可以在鼠标和触摸之间切换。这种情况需要通过指针事件来处理。</p>
@@ -6883,6 +6883,7 @@ npm install hexo、npm install、npm install hexo-deployer-git
 <h3 id="内容参考"><a class="header-anchor" href="#内容参考"></a>内容参考</h3>
 <p>之前讲到的几个博文链接地址我都已经放上了，另外还有一篇原创的不错的文章，地址挂了，我把全文截图放在这里，可以右键另存为来看：</p>
 <p><img src="https://cloud.az22c.top/CrazyMilk-%20blog.png" alt=""></p>
+<p>-az22cgithub</p>
 ]]></content>
       
         <categories>
@@ -6991,7 +6992,7 @@ npm install hexo、npm install、npm install hexo-deployer-git
 </code></pre>
 <h3 id="caller的经典用法"><a class="header-anchor" href="#caller的经典用法"></a>caller的经典用法</h3>
 <p>注：<strong>该特性是非标准的，请尽量不要在生产环境中使用它！</strong></p>
-<p><img src="https://cloud.az22c.top/caller%E7%9A%84%E7%BB%8F%E5%85%B8%E7%94%A8%E6%B3%95.png" alt=""></p>
+<p><img src="https://cloud.az22c.top/caller%E7%9A%84%E7%BB%8F%E5%85%B8%E7%94%A8%E6%B3%95.png-az22cgithub" alt=""></p>
 <h2 id="匠心勿失"><a class="header-anchor" href="#匠心勿失"></a>匠心勿失</h2>
 <h3 id="html-css"><a class="header-anchor" href="#html-css"></a>HTML+CSS</h3>
 <ul>
@@ -7660,7 +7661,7 @@ func2(1,2);//3
 <p>Function 中前面的参数为后面函数体的形参，最后一个参数为函数体。可以看到传入的都是字符串，这样的创建函数对象的方法是不安全的。</p>
 <p>还有一点，Function 构造器的得到的函数对象，拿不到外层函数的变量，但是可以拿到全局变量。它的作用域与众不同，这也是很少使用的原因之一。</p>
 <h3 id="三种方法的对比"><a class="header-anchor" href="#三种方法的对比"></a>// 三种方法的对比:</h3>
-<p><img src="https://cloud.az22c.top/%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95%E5%AF%B9%E6%AF%94.png" alt=""></p>
+<p><img src="https://cloud.az22c.top/%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95%E5%AF%B9%E6%AF%94.png-az22cgithub" alt=""></p>
 <h2 id="变量-函数的声明前置"><a class="header-anchor" href="#变量-函数的声明前置"></a>变量 &amp; 函数的声明前置</h2>
 <p>举两个例子</p>
 <p>例1，函数声明：</p>
