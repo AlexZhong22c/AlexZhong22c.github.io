@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://alexzhong22c.github.io/2017/08/08/js-proto/</loc>
+    
+    <lastmod>2020-02-13T05:42:31.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://alexzhong22c.github.io/2017/03/04/about-margin/</loc>
+    
+    <lastmod>2020-02-11T08:58:34.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://alexzhong22c.github.io/2017/04/01/clearfix-n-bfc/</loc>
+    
+    <lastmod>2020-02-11T08:43:26.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://alexzhong22c.github.io/about/index.html</loc>
     
     <lastmod>2020-02-10T12:32:39.000Z</lastmod>
@@ -61,13 +82,6 @@
     <loc>https://alexzhong22c.github.io/2017/02/17/todo-app/</loc>
     
     <lastmod>2020-02-09T11:58:40.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://alexzhong22c.github.io/2017/08/08/js-proto/</loc>
-    
-    <lastmod>2020-02-09T11:58:32.000Z</lastmod>
     
   </url>
   
@@ -135,13 +149,6 @@
   </url>
   
   <url>
-    <loc>https://alexzhong22c.github.io/2017/04/01/clearfix-n-bfc/</loc>
-    
-    <lastmod>2019-02-04T10:08:42.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://alexzhong22c.github.io/2017/03/31/css-selectors-specificity/</loc>
     
     <lastmod>2019-02-04T10:08:42.000Z</lastmod>
@@ -184,7 +191,7 @@
   </url>
   
   <url>
-    <loc>https://alexzhong22c.github.io/2017/03/04/about-margin/</loc>
+    <loc>https://alexzhong22c.github.io/2017/03/28/h5-new-ele/</loc>
     
     <lastmod>2019-02-04T10:08:42.000Z</lastmod>
     
@@ -198,21 +205,14 @@
   </url>
   
   <url>
+    <loc>https://alexzhong22c.github.io/2017/03/27/ife-css-task01/</loc>
+    
+    <lastmod>2019-02-04T10:08:42.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://alexzhong22c.github.io/2017/04/01/ife-css-task02/</loc>
-    
-    <lastmod>2019-02-04T10:08:42.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://alexzhong22c.github.io/2017/03/28/h5-new-ele/</loc>
-    
-    <lastmod>2019-02-04T10:08:42.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://alexzhong22c.github.io/2017/05/07/js-date/</loc>
     
     <lastmod>2019-02-04T10:08:42.000Z</lastmod>
     
@@ -226,7 +226,14 @@
   </url>
   
   <url>
-    <loc>https://alexzhong22c.github.io/2017/03/27/ife-css-task01/</loc>
+    <loc>https://alexzhong22c.github.io/2017/03/10/iife-intro/</loc>
+    
+    <lastmod>2019-02-04T10:08:42.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://alexzhong22c.github.io/2017/05/07/js-date/</loc>
     
     <lastmod>2019-02-04T10:08:42.000Z</lastmod>
     
@@ -240,14 +247,7 @@
   </url>
   
   <url>
-    <loc>https://alexzhong22c.github.io/2017/03/10/iife-intro/</loc>
-    
-    <lastmod>2019-02-04T10:08:42.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://alexzhong22c.github.io/2017/09/03/js-obj-prop1/</loc>
+    <loc>https://alexzhong22c.github.io/2017/03/05/js-event2/</loc>
     
     <lastmod>2019-02-04T10:08:42.000Z</lastmod>
     
@@ -261,14 +261,7 @@
   </url>
   
   <url>
-    <loc>https://alexzhong22c.github.io/2017/03/05/js-event2/</loc>
-    
-    <lastmod>2019-02-04T10:08:42.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://alexzhong22c.github.io/2017/09/01/js-obj-prop3/</loc>
+    <loc>https://alexzhong22c.github.io/2017/09/03/js-obj-prop1/</loc>
     
     <lastmod>2019-02-04T10:08:42.000Z</lastmod>
     
@@ -276,6 +269,13 @@
   
   <url>
     <loc>https://alexzhong22c.github.io/2017/09/02/js-obj-prop2/</loc>
+    
+    <lastmod>2019-02-04T10:08:42.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://alexzhong22c.github.io/2017/09/01/js-obj-prop3/</loc>
     
     <lastmod>2019-02-04T10:08:42.000Z</lastmod>
     
@@ -296,14 +296,14 @@
   </url>
   
   <url>
-    <loc>https://alexzhong22c.github.io/2017/10/22/let-n-const/</loc>
+    <loc>https://alexzhong22c.github.io/2017/08/07/js-this2/</loc>
     
     <lastmod>2019-02-04T10:08:42.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://alexzhong22c.github.io/2017/08/07/js-this2/</loc>
+    <loc>https://alexzhong22c.github.io/2017/10/22/let-n-const/</loc>
     
     <lastmod>2019-02-04T10:08:42.000Z</lastmod>
     
