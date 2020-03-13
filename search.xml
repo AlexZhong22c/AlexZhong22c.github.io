@@ -1473,7 +1473,7 @@ border-bottom-left-radius: 44px 88px;
     border-radius: 50%;
 }
 </code></pre>
-<h3 id="椭圆：思路和-正圆一样-仅仅使得宽高不同"><a class="header-anchor" href="#椭圆：思路和-正圆一样-仅仅使得宽高不同"></a>椭圆：思路和 正圆一样，仅仅使得宽高不同</h3>
+<h3 id="椭圆：思路和-正圆-一样-仅仅使得宽高不同"><a class="header-anchor" href="#椭圆：思路和-正圆-一样-仅仅使得宽高不同"></a>椭圆：思路和 正圆 一样，仅仅使得宽高不同</h3>
 <pre><code>div {
     width: 120px;
     height: 80px;
