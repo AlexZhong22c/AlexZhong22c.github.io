@@ -1473,6 +1473,13 @@ border-bottom-left-radius: 44px 88px;
     border-radius: 50%;
 }
 </code></pre>
+<h3 id="椭圆：思路和-正圆一样-仅仅使得宽高不同"><a class="header-anchor" href="#椭圆：思路和-正圆一样-仅仅使得宽高不同"></a>椭圆：思路和 正圆一样，仅仅使得宽高不同</h3>
+<pre><code>div {
+    width: 120px;
+    height: 80px;
+    border-radius: 50%;
+}
+</code></pre>
 <h3 id="半圆"><a class="header-anchor" href="#半圆"></a>半圆</h3>
 <pre><code>div {
     width: 100px;
@@ -1485,14 +1492,6 @@ border-bottom-left-radius: 44px 88px;
     width: 50px;
     height: 50px;
     border-radius: 50px 0 0 0;
-}
-</code></pre>
-<h3 id="椭圆"><a class="header-anchor" href="#椭圆"></a>椭圆</h3>
-<p>元素宽高不同，且水平和垂直半径分别对应宽高：</p>
-<pre><code>div {
-    width: 120px;
-    height: 80px;
-    border-radius: 120px/80px;
 }
 </code></pre>
 <h2 id="补充说明："><a class="header-anchor" href="#补充说明："></a>// 补充说明：</h2>
