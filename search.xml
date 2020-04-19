@@ -7,8 +7,8 @@
       <title><![CDATA[面试题：改造代码，使之隔秒输出0 - 9]]></title>
       <url>https://alexzhong22c.github.io/2020/04/02/settimeout-0-to-9/</url>
       <content type="html"><![CDATA[<p>通过一道面试题，文末总结一下js【变量快照】和【缓存变量值】的手法。原题考察的是对js作用域和对setTimeout api的理解，在本文主要给出5种解法。</p>
-<br>
 <a id="more"></a>
+<br>
 <p><strong>题目的提出：</strong> “改造下面的代码，使之隔秒输出0 - 9，写出你能想到的所有解法：”</p>
 <pre><code class="language-js">// 题目代码：
 for (var i = 0; i &lt; 10; i++) {
@@ -260,6 +260,8 @@ for (var i = 0; i &lt; 10; i++) {
         
         
         <tags>
+            
+            <tag> 回顾 </tag>
             
             <tag> 作用域 </tag>
             
