@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://alexzhong22c.github.io/2020/04/02/settimeout-0-to-9/</loc>
+    
+    <lastmod>2020-04-19T08:51:42.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://alexzhong22c.github.io/2017/09/07/css-border1/</loc>
     
     <lastmod>2020-03-13T09:04:15.000Z</lastmod>
@@ -142,14 +149,14 @@
   </url>
   
   <url>
-    <loc>https://alexzhong22c.github.io/2017/03/31/css-selectors-specificity/</loc>
+    <loc>https://alexzhong22c.github.io/2017/02/11/equality-operators/</loc>
     
     <lastmod>2019-02-04T10:08:42.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://alexzhong22c.github.io/2017/02/11/equality-operators/</loc>
+    <loc>https://alexzhong22c.github.io/2017/03/31/css-selectors-specificity/</loc>
     
     <lastmod>2019-02-04T10:08:42.000Z</lastmod>
     
@@ -198,13 +205,6 @@
   </url>
   
   <url>
-    <loc>https://alexzhong22c.github.io/2017/03/27/ife-css-task01/</loc>
-    
-    <lastmod>2019-02-04T10:08:42.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://alexzhong22c.github.io/2017/04/01/ife-css-task02/</loc>
     
     <lastmod>2019-02-04T10:08:42.000Z</lastmod>
@@ -213,6 +213,13 @@
   
   <url>
     <loc>https://alexzhong22c.github.io/2017/09/17/ife-css-task03/</loc>
+    
+    <lastmod>2019-02-04T10:08:42.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://alexzhong22c.github.io/2017/03/27/ife-css-task01/</loc>
     
     <lastmod>2019-02-04T10:08:42.000Z</lastmod>
     
@@ -261,13 +268,6 @@
   </url>
   
   <url>
-    <loc>https://alexzhong22c.github.io/2017/09/02/js-obj-prop2/</loc>
-    
-    <lastmod>2019-02-04T10:08:42.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://alexzhong22c.github.io/2017/09/01/js-obj-prop3/</loc>
     
     <lastmod>2019-02-04T10:08:42.000Z</lastmod>
@@ -283,6 +283,13 @@
   
   <url>
     <loc>https://alexzhong22c.github.io/2017/07/01/js-pv-default/</loc>
+    
+    <lastmod>2019-02-04T10:08:42.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://alexzhong22c.github.io/2017/09/02/js-obj-prop2/</loc>
     
     <lastmod>2019-02-04T10:08:42.000Z</lastmod>
     
