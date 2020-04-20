@@ -1392,9 +1392,9 @@ MY_ARRAY = ['B']
             
             <tag> 作用域 </tag>
             
-            <tag> 闭包 </tag>
-            
             <tag> ES6 </tag>
+            
+            <tag> 闭包 </tag>
             
             <tag> 任务队列 </tag>
             
@@ -3376,11 +3376,11 @@ var f1 = new Foo;
             
             <tag> 进阶 </tag>
             
-            <tag> 继承 </tag>
-            
             <tag> 原型 </tag>
             
             <tag> 构造器 </tag>
+            
+            <tag> 继承 </tag>
             
         </tags>
         
@@ -3975,9 +3975,9 @@ displayColor.call(null);//TypeError: Cannot read property 'color' of null
         
         <tags>
             
-            <tag> 进阶 </tag>
-            
             <tag> IIFE </tag>
+            
+            <tag> 进阶 </tag>
             
             <tag> this </tag>
             
@@ -5654,11 +5654,11 @@ p {
         
         <tags>
             
+            <tag> HTML </tag>
+            
             <tag> H5 </tag>
             
             <tag> IFE </tag>
-            
-            <tag> HTML </tag>
             
         </tags>
         
