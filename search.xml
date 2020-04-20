@@ -3988,6 +3988,116 @@ displayColor.call(null);//TypeError: Cannot read property 'color' of null
     </entry>
     
     <entry>
+      <title><![CDATA[浏览器事件冒泡或者捕获相关]]></title>
+      <url>https://alexzhong22c.github.io/2017/07/02/js-event4/</url>
+      <content type="html"><![CDATA[<p>此文用于快速回顾，不适合用来入门。</p>
+<a id="more"></a>
+<h2 id="事件流-事件捕获或者冒泡相关"><a class="header-anchor" href="#事件流-事件捕获或者冒泡相关"></a>事件流（事件捕获或者冒泡相关）</h2>
+<p><a href="https://www.cnblogs.com/st-leslie/p/5907556.html" target="_blank" rel="noopener">建议看：博客园谢灿勇 js事件流</a></p>
+<p>每次用addEventListener这个api，你需要<strong>选择绑定事件在冒泡阶段还是捕获阶段</strong>。（通常设置为false即为冒泡） 而这个api就是基于事件流的原理。</p>
+<ul>
+<li>事件流的本质：比如在页面上点击一个元素，这是一个点击事件。事实上，被点击的元素及其所有祖先元素都是能感知到的，只不过是，如果你没有绑定事件，它们就不会对应地触发事件响应。</li>
+<li>事件流的过程：<strong>事件流</strong>被分为三个阶段捕获过程、<strong>目标过程</strong>、冒泡过程。表示事件流中“某元素的某个被触发的事件”是绑定在哪个阶段的属性是<code>eventPhase</code>。</li>
+<li>一个完整的JS事件流是从window开始，最后回到window的一个过程（有些浏览器是到body）
+<ul>
+<li>也就是从window开始，依次触发<strong>绑定在</strong>捕获过程的(有绑定的)事件响应，然后是目标过程的（不分冒泡还是捕获按注册顺序），再然后是依次触发<strong>绑定在</strong>冒泡过程的直到回到window</li>
+<li><strong>而目标阶段非常特别，目标阶段是按注册顺序决定的（也就是假如先绑定冒泡，则冒泡早于捕获得到响应）</strong>  <a href="https://www.cnblogs.com/alvinwei1024/p/4739344.html" target="_blank" rel="noopener">1</a> #面试题</li>
+</ul>
+</li>
+</ul>
+<h4 id="并不是所有事件都支持冒泡-局限性"><a class="header-anchor" href="#并不是所有事件都支持冒泡-局限性"></a>并不是所有事件都支持冒泡 #局限性</h4>
+<p>1、最适合使用事件冒泡/事件委托技术的事件包括click、mousedown、mouseup、keydown、keyup和keypress</p>
+<p>2、<strong>某些事件类型天生就不支持事件冒泡！不支持事件冒泡就更谈不上事件委托了。</strong></p>
+<ul>
+<li>blur: 在元素失去焦点时触发，该事件不支持冒泡</li>
+<li>focus: 在元素获得焦点时触发，该事件不支持冒泡</li>
+<li>mouseenter: 当鼠标移入元素时触发，该事件不支持冒泡</li>
+<li>mouseleave: 当鼠标移出元素时触发，该事件不支持冒泡</li>
+</ul>
+<p>3、mousemove、mouseover、mouseout 这样的事件，虽然有事件冒泡，但是只能不断通过位置去计算定位，对性能消耗高，因此也是不适合于事件委托的???<a href="https://juejin.im/post/58fd95bcac502e0063b197db" target="_blank" rel="noopener">https://juejin.im/post/58fd95bcac502e0063b197db</a></p>
+<blockquote>
+<p>mouseover的定义：当鼠标移入某元素时触发，移入和移出其子元素时也会触发。</p>
+</blockquote>
+<h2 id="如何应用：冒泡或者捕获事件-在事件绑定的时候"><a class="header-anchor" href="#如何应用：冒泡或者捕获事件-在事件绑定的时候"></a>如何应用：冒泡或者捕获事件  在事件绑定的时候</h2>
+<blockquote>
+<p>IE8及以下都不支持addEventListener，他们用attachEvent被称为IE事件处理程序；IE9及以后都支持addEventListener和attachEvent。</p>
+</blockquote>
+<blockquote>
+<p>用addEventListener，在实战的时候，往往需要配合判断target和阻止冒泡。注意：<strong>currentTarget属性返回事件正在执行的监听函数所绑定的节点，而target属性返回事件的实际目标节点。</strong></p>
+</blockquote>
+<p>所以对于现代浏览器，可以同时用addEventListener绑定事件在冒泡和捕获阶段。<strong>（通常设置为false即为冒泡）</strong></p>
+<h4 id="提取冷知识："><a class="header-anchor" href="#提取冷知识："></a>提取冷知识：</h4>
+<ul>
+<li>为了统一多种事件处理程序（有些它不支持捕获），一般来说都是利用冒泡比较顺手。
+<ul>
+<li>举例：DOM Level 0即onclick等等不支持捕获：比如，onclick只支持冒泡。（PS：基本全部浏览器都支持DOM Level 0也就是onclick这些api。）</li>
+</ul>
+</li>
+<li>绑定多个事件的效果是：onclick只能绑定一个事件，即<strong>同一个元素的</strong>后面的绑定会覆盖前面的绑定。addEventListener是先绑定先触发，<strong>老浏览器的attachEvent</strong>则相反。（IE9、10浏览器是按正序执行的，<strong>而IE8-浏览器则是按倒序执行的</strong>）</li>
+</ul>
+<h2 id="事件代理-你所需要知道的"><a class="header-anchor" href="#事件代理-你所需要知道的"></a>事件代理 你所需要知道的</h2>
+<h3 id="优点：-摘要"><a class="header-anchor" href="#优点：-摘要"></a>优点： #摘要</h3>
+<ul>
+<li>减少了事件的注册，节省内存。</li>
+<li>在新增/移除DOM时，节省了的事件绑定/解绑。</li>
+</ul>
+<p>使用事件代理主要有两个优势：</p>
+<ol>
+<li>减少事件绑定，提升性能。之前你需要绑定一堆子节点，而现在你只需要绑定一个父节点即可。减少了绑定事件监听函数的数量。</li>
+<li>动态变化的 DOM 结构，仍然可以监听。以前，当一个 DOM 动态创建之后，不会带有任何事件监听，除非你重新执行事件监听函数；而使用事件监听无须担忧这个问题。</li>
+</ol>
+<h3 id="缺点：-摘要"><a class="header-anchor" href="#缺点：-摘要"></a>缺点： #摘要</h3>
+<p>好像没有缺点，妥善的管理和合理运用能够规避问题。</p>
+<h3 id="实战技巧-合理运用"><a class="header-anchor" href="#实战技巧-合理运用"></a>实战技巧，合理运用</h3>
+<ul>
+<li>通常需要就近委托或者不需要委托：
+<ul>
+<li>如果层级过多，或者绑定在靠近底层的元素上，冒泡过程中，可能会被某层阻止掉。</li>
+<li>理论上委托会导致浏览器频繁调用处理函数，虽然很可能不需要处理。所以建议就近委托，比如在ul上代理li，而不是在document上代理li。</li>
+</ul>
+</li>
+<li>考虑因项目协作可能引发的冲突：
+<ul>
+<li>把所有事件都用代理就可能会出现事件误判。比如，在document中代理了所有button的click事件，另外的人在引用改js时，可能不知道，造成单击button触发了两个click事件。</li>
+</ul>
+</li>
+</ul>
+<h3 id="如何利用原生实现事件代理"><a class="header-anchor" href="#如何利用原生实现事件代理"></a>如何利用原生实现事件代理</h3>
+<p><a href="https://juejin.im/post/58fd95bcac502e0063b197db" target="_blank" rel="noopener">如果想学代码封装实现 事件代理 可以看这篇</a></p>
+<p>如果使用原生的方式实现事件代理，需要注意过滤非目标节点，可以通过 id、class 或者 tagname 等等，例如：</p>
+<pre><code class="language-js">element.addEventListener('click', function(event) {
+    // 判断是否是 a 节点
+    if ( event.target.tagName == 'A' ) {
+        // a 的一些交互操作
+    }
+}, false);
+</code></pre>
+<h2 id="vue的事件冒泡和事件代理-从vue专题复制而来"><a class="header-anchor" href="#vue的事件冒泡和事件代理-从vue专题复制而来"></a>vue的事件冒泡和事件代理 #从vue专题复制而来</h2>
+<p>还有，vue在组件间不冒泡，在同一个组件内的元素是可以冒泡的。如果以后能够成功实现组件间冒泡，那么就可以通过冒泡或事件代理来实现“跨组件通信”了。在vue里面，如果想阻止冒泡用的是<code>.stop</code>修饰符。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> JavaScript </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 回顾 </tag>
+            
+            <tag> 基础 </tag>
+            
+            <tag> 事件 </tag>
+            
+            <tag> 笔记副本 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[js四种事件处理程序]]></title>
       <url>https://alexzhong22c.github.io/2017/07/01/js-event3/</url>
       <content type="html"><![CDATA[<p>随着W3C不断推进DOM事件模型和IE浏览器事件模型的历史变化，为了方便理解，程序员们中逐渐形成 四种事件处理程序 的概念划分。</p>
