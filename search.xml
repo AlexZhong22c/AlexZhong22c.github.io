@@ -8,7 +8,7 @@
       <url>https://alexzhong22c.github.io/2020/04/02/settimeout-0-to-9/</url>
       <content type="html"><![CDATA[<p>通过一道面试题，文末总结一下js【变量快照】和【缓存变量值】的手法。原题考察的是对js作用域和对setTimeout api的理解，在本文主要给出5种解法。</p>
 <a id="more"></a>
-<br>
+<hr>
 <p><strong>题目的提出：</strong> “改造下面的代码，使之隔秒输出0 - 9，写出你能想到的所有解法：”</p>
 <pre><code class="language-js">// 题目代码：
 for (var i = 0; i &lt; 10; i++) {
@@ -3992,6 +3992,14 @@ displayColor.call(null);//TypeError: Cannot read property 'color' of null
       <url>https://alexzhong22c.github.io/2017/07/01/js-event3/</url>
       <content type="html"><![CDATA[<p>随着W3C不断推进DOM事件模型和IE浏览器事件模型的历史变化，为了方便理解，程序员们中逐渐形成 四种事件处理程序 的概念划分。</p>
 <a id="more"></a>
+<hr>
+<p>在 JavaScript 中，通常分为四种事件处理程序：</p>
+<ol>
+<li>HTML事件处理程序</li>
+<li>DOM0事件处理程序</li>
+<li>DOM2事件处理程序</li>
+<li>IE事件处理程序</li>
+</ol>
 <h2 id="简单比较"><a class="header-anchor" href="#简单比较"></a>简单比较</h2>
 <table>
 <thead>
@@ -7445,202 +7453,6 @@ a || b : 将a, b转换为Boolean类型, 再执行逻辑或, true返回a, false�
             <tag> 回顾 </tag>
             
             <tag> 操作符 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[js事件绑定基础回顾]]></title>
-      <url>https://alexzhong22c.github.io/2017/01/29/js-event/</url>
-      <content type="html"><![CDATA[<p>此文用于快速回顾，不适合用来入门。</p>
-<a id="more"></a>
-<h2 id="四种事件处理程序"><a class="header-anchor" href="#四种事件处理程序"></a>四种事件处理程序</h2>
-<p>在 JavaScript 中，通常分为四种事件处理程序：</p>
-<ol>
-<li>HTML事件处理程序</li>
-<li>DOM0事件处理程序</li>
-<li>DOM2事件处理程序</li>
-<li>IE事件处理程序</li>
-</ol>
-<p>内容详见于另一篇博文： <a href="https://alexzhong22c.github.io/2017/07/01/js-event3/">四种事件处理程序</a></p>
-<h2 id="事件触发过程"><a class="header-anchor" href="#事件触发过程"></a>事件触发过程</h2>
-<ol>
-<li>
-<p>捕获阶段（Capture Phase）</p>
-</li>
-<li>
-<p>目标阶段（Target Phase）</p>
-</li>
-<li>
-<p>冒泡阶段（Bubbling Phase）</p>
-</li>
-</ol>
-<h2 id="使用事件代理-event-delegate-提升性能"><a class="header-anchor" href="#使用事件代理-event-delegate-提升性能"></a>使用事件代理（Event Delegate）提升性能</h2>
-<p>使用事件代理主要有两个优势：</p>
-<ol>
-<li>减少事件绑定，提升性能。之前你需要绑定一堆子节点，而现在你只需要绑定一个父节点即可。减少了绑定事件监听函数的数量。</li>
-<li>动态变化的 DOM 结构，仍然可以监听。以前，当一个 DOM 动态创建之后，不会带有任何事件监听，除非你重新执行事件监听函数；而使用事件监听无须担忧这个问题。</li>
-</ol>
-<p>如果使用原生的方式实现事件代理，需要注意过滤非目标节点，可以通过 id、class 或者 tagname 等等，例如：</p>
-<pre><code>element.addEventListener('click', function(event) {
-    // 判断是否是 a 节点
-    if ( event.target.tagName == 'A' ) {
-        // a 的一些交互操作
-    }
-}, false);
-</code></pre>
-<h2 id="停止事件冒泡-stoppropagation"><a class="header-anchor" href="#停止事件冒泡-stoppropagation"></a>停止事件冒泡（stopPropagation）</h2>
-<pre><code>element.addEventListener('click', function(event) {
-    event.stopPropagation();
-}, false);
-
-</code></pre>
-<h2 id="事件的-event-对象"><a class="header-anchor" href="#事件的-event-对象"></a>事件的 Event 对象</h2>
-<p>事件对象包括很多有用的信息，比如事件触发时，鼠标在屏幕上的坐标、被触发的 DOM 详细信息、以及上图最下面继承过来的停止冒泡方法（stopPropagation）。下面介绍一下比较常用的几个属性和方法：</p>
-<h3 id="type-string"><a class="header-anchor" href="#type-string"></a><code>type</code>(string)</h3>
-<p>事件的名称，比如 “click”。</p>
-<h3 id="target-node"><a class="header-anchor" href="#target-node"></a><code>target</code>(node)</h3>
-<p>事件要触发的目标节点。</p>
-<h3 id="bubbles-boolean"><a class="header-anchor" href="#bubbles-boolean"></a><code>bubbles</code> (boolean)</h3>
-<p>表明该事件是否是在冒泡阶段触发的。</p>
-<h3 id="preventdefault-function"><a class="header-anchor" href="#preventdefault-function"></a><code>preventDefault</code> (function)</h3>
-<p>这是一个可以讨论的内容，详见另一篇博文： <a href="https://alexzhong22c.github.io/2017/08/31/js-pv-default/">js取消默认事件行为</a></p>
-<h3 id="stoppropagation-function"><a class="header-anchor" href="#stoppropagation-function"></a><code>stopPropagation</code> (function)</h3>
-<p>停止冒泡，上面有提到，不再赘述。</p>
-<h3 id="stopimmediatepropagation-function"><a class="header-anchor" href="#stopimmediatepropagation-function"></a><code>stopImmediatePropagation</code> (function)</h3>
-<p>与 <code>stopPropagation</code> 类似，就是阻止触发其他监听函数。但是与 <code>stopPropagation</code> 不同的是，它更加 “强力”，阻止除了目标之外的事件触发，甚至阻止针对同一个目标节点的相同事件。</p>
-<h2 id="jquery-中的事件"><a class="header-anchor" href="#jquery-中的事件"></a>jQuery 中的事件</h2>
-<p>如果你在写文章或者 Demo，为了简单，你当然可以用上面的事件监听函数，以及那些事件对象提供的方法等。*<em>但在实际中，有一些方法和属性是有兼容性问题的，所以我们会使用 jQuery 来消除兼容性问题。 *</em></p>
-<h3 id="绑定事件和事件代理"><a class="header-anchor" href="#绑定事件和事件代理"></a>绑定事件和事件代理</h3>
-<pre><code>$( &quot;#dataTable tbody tr&quot; ).on( &quot;click&quot;, function() {
-  console.log( $( this ).text() );
-});
-
-</code></pre>
-<h3 id="处理过兼容性的事件对象-event-object"><a class="header-anchor" href="#处理过兼容性的事件对象-event-object"></a>处理过兼容性的事件对象（Event Object）</h3>
-<p>事件对象有些方法等也有兼容性差异，jQuery 将其封装处理，并提供跟标准一直的命名。</p>
-<p>如果你想在 jQuery 事件回调函数中访问原来的事件对象，需要使用 <code>event.originalEvent</code>，它指向原生的事件对象。</p>
-<h3 id="触发事件-trigger-方法"><a class="header-anchor" href="#触发事件-trigger-方法"></a>触发事件 <code>trigger</code> 方法</h3>
-<p>点击某个绑定了 <code>click</code> 事件的节点，自然会触发该节点的 <code>click</code> 事件，从而执行对应回调函数。</p>
-<p><code>trigger</code> 方法可以模拟触发事件，我们单击另一个节点 elementB，可以使用：</p>
-<pre><code>$(elementB).on('click', function(){
-    $(elementA).trigger( &quot;click&quot; );
-});
-
-</code></pre>
-<p>来触发 elementA 节点的单击监听回调函数。详情请看文档 <a href="http://api.jquery.com/trigger/" target="_blank" rel="noopener">.trigger()</a>。</p>
-<h2 id="原生js事件绑定兼容"><a class="header-anchor" href="#原生js事件绑定兼容"></a>原生js事件绑定兼容</h2>
-<p>Dean Edward 所写的 addEvent() 函数：（这里没有涉及多个事件处理函数，如果需要绑定多个事件处理函数，就需要用判断和用到原生的addEventListener和attachEvent）</p>
-<pre><code>function addEvent(element, type, handler) {
-    if (!handler.$$guid) handler.$$guid = addEvent.guid++;
-    if (!element.events) element.events = {};
-        var handlers = element.events[type];
-    if (!handlers) {
-        handlers = element.events[type] = {};
-        if (element[&quot;on&quot; + type]) {
-            handlers[0] = element[&quot;on&quot; + type];
-        }
-    }
-    handlers[handler.$$guid] = handler;
-    element[&quot;on&quot; + type] = handleEvent;
-}
-
-addEvent.guid = 1;
-    
-function removeEvent(element, type, handler) {
-    if (element.events &amp;&amp; element.events[type]) {
-        delete element.events[type][handler.$$guid];
-    }
-}
-function handleEvent(event) {
-    var returnValue = true;
-    event = event || fixEvent(window.event);
-    var handlers = this.events[event.type];
-    for (var i in handlers) {
-        this.$$handleEvent = handlers[i];
-        if (this.$$handleEvent(event) === false) {
-            returnValue = false;
-        }
-    }
-    return returnValue;
-};
-    
-function fixEvent(event) {
-    event.preventDefault = fixEvent.preventDefault;
-    event.stopPropagation = fixEvent.stopPropagation;
-    return event;
-};
-fixEvent.preventDefault = function() {
-    this.returnValue = false;
-};
-fixEvent.stopPropagation = function() {
-    this.cancelBubble = true;
-};
-</code></pre>
-<p>eslint版：</p>
-<pre><code>function addEvent (element, type, handler) {
-  if (!handler.$$guid) handler.$$guid = addEvent.guid++
-  if (!element.events) element.events = {}
-  let handlers = element.events[type]
-  if (!handlers) {
-    handlers = element.events[type] = {}
-    if (element['on' + type]) {
-      handlers[0] = element['on' + type]
-    }
-  }
-  handlers[handler.$$guid] = handler
-  element['on' + type] = handleEvent
-}
-addEvent.guid = 1
-
-function removeEvent (element, type, handler) {
-  if (element.events &amp;&amp; element.events[type]) {
-    delete element.events[type][handler.$$guid]
-  }
-}
-
-function handleEvent (event) {
-  var returnValue = true
-  event = event || fixEvent(window.event)
-  var handlers = this.events[event.type]
-  for (var i in handlers) {
-    this.$$handleEvent = handlers[i]
-    if (this.$$handleEvent(event) === false) {
-      returnValue = false
-    }
-  }
-  return returnValue
-}
-
-function fixEvent (event) {
-  event.preventDefault = fixEvent.preventDefault
-  event.stopPropagation = fixEvent.stopPropagation
-  return event
-}
-fixEvent.preventDefault = function () {
-  this.returnValue = false
-}
-fixEvent.stopPropagation = function () {
-  this.cancelBubble = true
-}
-</code></pre>
-]]></content>
-      
-        <categories>
-            
-            <category> JavaScript </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 回顾 </tag>
-            
-            <tag> 基础 </tag>
-            
-            <tag> 事件 </tag>
             
         </tags>
         
