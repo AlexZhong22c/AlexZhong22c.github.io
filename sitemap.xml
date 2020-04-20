@@ -2,331 +2,331 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://alexzhong22c.github.io/2020/04/02/settimeout-0-to-9/</loc>
-    
-    <lastmod>2020-04-20T13:16:03.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://alexzhong22c.github.io/2017/07/02/js-event4/</loc>
-    
-    <lastmod>2020-04-20T10:30:33.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://alexzhong22c.github.io/2017/07/01/js-event3/</loc>
-    
-    <lastmod>2020-04-20T03:14:41.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://alexzhong22c.github.io/2017/09/07/css-border1/</loc>
     
-    <lastmod>2020-03-13T09:04:15.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://alexzhong22c.github.io/2017/08/08/js-proto/</loc>
-    
-    <lastmod>2020-02-13T05:42:31.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://alexzhong22c.github.io/2017/03/04/about-margin/</loc>
-    
-    <lastmod>2020-02-11T08:58:34.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://alexzhong22c.github.io/2017/04/01/clearfix-n-bfc/</loc>
-    
-    <lastmod>2020-02-11T08:43:26.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://alexzhong22c.github.io/about/index.html</loc>
-    
-    <lastmod>2020-02-10T12:32:39.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://alexzhong22c.github.io/2018/02/05/vertical-align-middle/</loc>
-    
-    <lastmod>2020-02-09T12:10:41.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://alexzhong22c.github.io/2017/04/25/vue-time-tracker/</loc>
-    
-    <lastmod>2020-02-09T12:07:13.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://alexzhong22c.github.io/2018/02/06/height-calculate/</loc>
-    
-    <lastmod>2020-02-09T12:01:36.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://alexzhong22c.github.io/2017/02/25/webapp-events-intro/</loc>
-    
-    <lastmod>2020-02-09T12:00:53.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://alexzhong22c.github.io/2017/04/15/vue-table-nav/</loc>
-    
-    <lastmod>2020-02-09T11:59:53.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://alexzhong22c.github.io/2017/05/07/vue-checkbox-table/</loc>
-    
-    <lastmod>2020-02-09T11:59:50.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://alexzhong22c.github.io/2017/02/17/todo-app/</loc>
-    
-    <lastmod>2020-02-09T11:58:40.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://alexzhong22c.github.io/2017/08/12/js-new-happen/</loc>
-    
-    <lastmod>2020-02-09T11:58:07.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://alexzhong22c.github.io/2017/01/13/js-function/</loc>
-    
-    <lastmod>2020-02-09T11:57:55.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://alexzhong22c.github.io/2017/08/09/js-constructor/</loc>
-    
-    <lastmod>2020-02-09T11:57:49.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://alexzhong22c.github.io/2017/10/12/git-stage/</loc>
-    
-    <lastmod>2020-02-09T11:57:05.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://alexzhong22c.github.io/2017/08/12/js-inherit/</loc>
-    
-    <lastmod>2020-01-10T02:32:36.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://alexzhong22c.github.io/2017/02/22/my-hexo-theme/</loc>
-    
-    <lastmod>2020-01-06T03:43:57.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://alexzhong22c.github.io/2017/08/07/js-this/</loc>
-    
-    <lastmod>2020-01-06T03:43:26.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://alexzhong22c.github.io/2018/02/05/centralize-one-ele/</loc>
-    
-    <lastmod>2019-02-04T10:08:42.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://alexzhong22c.github.io/2017/02/11/equality-operators/</loc>
-    
-    <lastmod>2019-02-04T10:08:42.000Z</lastmod>
+    <lastmod>2020-04-20T13:48:14.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://alexzhong22c.github.io/2017/03/31/css-selectors-specificity/</loc>
     
-    <lastmod>2019-02-04T10:08:42.000Z</lastmod>
+    <lastmod>2020-04-20T13:48:14.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://alexzhong22c.github.io/2017/03/04/float-n-absolute/</loc>
     
-    <lastmod>2019-02-04T10:08:42.000Z</lastmod>
+    <lastmod>2020-04-20T13:48:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://alexzhong22c.github.io/2017/02/11/equality-operators/</loc>
+    
+    <lastmod>2020-04-20T13:48:14.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://alexzhong22c.github.io/2017/01/25/font-face/</loc>
     
-    <lastmod>2019-02-04T10:08:42.000Z</lastmod>
+    <lastmod>2020-04-20T13:48:14.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://alexzhong22c.github.io/2017/03/09/for-loop/</loc>
+    <loc>https://alexzhong22c.github.io/2017/10/12/git-stage/</loc>
     
-    <lastmod>2019-02-04T10:08:42.000Z</lastmod>
+    <lastmod>2020-04-20T13:48:14.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://alexzhong22c.github.io/2017/03/02/gulp-usage/</loc>
     
-    <lastmod>2019-02-04T10:08:42.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://alexzhong22c.github.io/2017/03/28/h5-new-ele/</loc>
-    
-    <lastmod>2019-02-04T10:08:42.000Z</lastmod>
+    <lastmod>2020-04-20T13:48:14.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://alexzhong22c.github.io/2017/02/27/icon-usage/</loc>
     
-    <lastmod>2019-02-04T10:08:42.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://alexzhong22c.github.io/2017/04/01/ife-css-task02/</loc>
-    
-    <lastmod>2019-02-04T10:08:42.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://alexzhong22c.github.io/2017/09/17/ife-css-task03/</loc>
-    
-    <lastmod>2019-02-04T10:08:42.000Z</lastmod>
+    <lastmod>2020-04-20T13:48:14.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://alexzhong22c.github.io/2017/03/27/ife-css-task01/</loc>
     
-    <lastmod>2019-02-04T10:08:42.000Z</lastmod>
+    <lastmod>2020-04-20T13:48:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://alexzhong22c.github.io/2017/04/01/ife-css-task02/</loc>
+    
+    <lastmod>2020-04-20T13:48:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://alexzhong22c.github.io/2017/09/17/ife-css-task03/</loc>
+    
+    <lastmod>2020-04-20T13:48:14.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://alexzhong22c.github.io/2017/03/10/iife-intro/</loc>
     
-    <lastmod>2019-02-04T10:08:42.000Z</lastmod>
+    <lastmod>2020-04-20T13:48:14.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://alexzhong22c.github.io/2017/05/07/js-date/</loc>
     
-    <lastmod>2019-02-04T10:08:42.000Z</lastmod>
+    <lastmod>2020-04-20T13:48:14.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://alexzhong22c.github.io/2017/03/05/js-event2/</loc>
     
-    <lastmod>2019-02-04T10:08:42.000Z</lastmod>
+    <lastmod>2020-04-20T13:48:14.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://alexzhong22c.github.io/2017/09/03/js-obj-prop1/</loc>
+    <loc>https://alexzhong22c.github.io/2017/07/01/js-event3/</loc>
     
-    <lastmod>2019-02-04T10:08:42.000Z</lastmod>
+    <lastmod>2020-04-20T13:48:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://alexzhong22c.github.io/2017/07/02/js-event4/</loc>
+    
+    <lastmod>2020-04-20T13:48:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://alexzhong22c.github.io/2017/08/12/js-new-happen/</loc>
+    
+    <lastmod>2020-04-20T13:48:14.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://alexzhong22c.github.io/2017/09/01/js-obj-prop3/</loc>
     
-    <lastmod>2019-02-04T10:08:42.000Z</lastmod>
+    <lastmod>2020-04-20T13:48:14.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://alexzhong22c.github.io/2017/02/11/js-operators/</loc>
     
-    <lastmod>2019-02-04T10:08:42.000Z</lastmod>
+    <lastmod>2020-04-20T13:48:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://alexzhong22c.github.io/2017/08/08/js-proto/</loc>
+    
+    <lastmod>2020-04-20T13:48:14.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://alexzhong22c.github.io/2017/07/01/js-pv-default/</loc>
     
-    <lastmod>2019-02-04T10:08:42.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://alexzhong22c.github.io/2017/09/02/js-obj-prop2/</loc>
-    
-    <lastmod>2019-02-04T10:08:42.000Z</lastmod>
+    <lastmod>2020-04-20T13:48:14.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://alexzhong22c.github.io/2017/08/07/js-this2/</loc>
     
-    <lastmod>2019-02-04T10:08:42.000Z</lastmod>
+    <lastmod>2020-04-20T13:48:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://alexzhong22c.github.io/2017/02/22/my-hexo-theme/</loc>
+    
+    <lastmod>2020-04-20T13:48:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://alexzhong22c.github.io/2018/02/05/vertical-align-middle/</loc>
+    
+    <lastmod>2020-04-20T13:48:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://alexzhong22c.github.io/2017/05/07/vue-checkbox-table/</loc>
+    
+    <lastmod>2020-04-20T13:48:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://alexzhong22c.github.io/2017/04/15/vue-table-nav/</loc>
+    
+    <lastmod>2020-04-20T13:48:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://alexzhong22c.github.io/2018/02/05/centralize-one-ele/</loc>
+    
+    <lastmod>2020-04-20T13:48:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://alexzhong22c.github.io/2017/03/04/about-margin/</loc>
+    
+    <lastmod>2020-04-20T13:48:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://alexzhong22c.github.io/2017/04/01/clearfix-n-bfc/</loc>
+    
+    <lastmod>2020-04-20T13:48:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://alexzhong22c.github.io/2017/03/09/for-loop/</loc>
+    
+    <lastmod>2020-04-20T13:48:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://alexzhong22c.github.io/2017/03/28/h5-new-ele/</loc>
+    
+    <lastmod>2020-04-20T13:48:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://alexzhong22c.github.io/2018/02/06/height-calculate/</loc>
+    
+    <lastmod>2020-04-20T13:48:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://alexzhong22c.github.io/2017/08/09/js-constructor/</loc>
+    
+    <lastmod>2020-04-20T13:48:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://alexzhong22c.github.io/2017/01/13/js-function/</loc>
+    
+    <lastmod>2020-04-20T13:48:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://alexzhong22c.github.io/2017/08/12/js-inherit/</loc>
+    
+    <lastmod>2020-04-20T13:48:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://alexzhong22c.github.io/2017/09/03/js-obj-prop1/</loc>
+    
+    <lastmod>2020-04-20T13:48:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://alexzhong22c.github.io/2017/09/02/js-obj-prop2/</loc>
+    
+    <lastmod>2020-04-20T13:48:14.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://alexzhong22c.github.io/2017/10/22/let-n-const/</loc>
     
-    <lastmod>2019-02-04T10:08:42.000Z</lastmod>
+    <lastmod>2020-04-20T13:48:14.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://alexzhong22c.github.io/2018/01/15/react-state/</loc>
     
-    <lastmod>2019-02-04T10:08:42.000Z</lastmod>
+    <lastmod>2020-04-20T13:48:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://alexzhong22c.github.io/2020/04/02/settimeout-0-to-9/</loc>
+    
+    <lastmod>2020-04-20T13:48:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://alexzhong22c.github.io/2017/02/17/todo-app/</loc>
+    
+    <lastmod>2020-04-20T13:48:14.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://alexzhong22c.github.io/2017/02/24/webapp-intro/</loc>
     
-    <lastmod>2019-02-04T10:08:42.000Z</lastmod>
+    <lastmod>2020-04-20T13:48:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://alexzhong22c.github.io/2017/08/07/js-this/</loc>
+    
+    <lastmod>2020-04-20T13:48:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://alexzhong22c.github.io/2017/04/25/vue-time-tracker/</loc>
+    
+    <lastmod>2020-04-20T13:48:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://alexzhong22c.github.io/2017/02/25/webapp-events-intro/</loc>
+    
+    <lastmod>2020-04-20T13:48:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://alexzhong22c.github.io/about/index.html</loc>
+    
+    <lastmod>2020-04-20T13:48:14.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://alexzhong22c.github.io/tags/index.html</loc>
     
-    <lastmod>2019-02-04T10:08:42.000Z</lastmod>
+    <lastmod>2020-04-20T13:48:14.000Z</lastmod>
     
   </url>
   
