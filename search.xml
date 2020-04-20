@@ -126,8 +126,8 @@ for(var i= 0; i &lt; 5; i++){
 }
 // 而如果基于此，给log再套多一层自执行，就又有闭包了，你懂的。
 </code></pre>
-<h2 id="方法三：利用其它方式构建出局部作用域：即-try-catch特殊的作用域机制"><a class="header-anchor" href="#方法三：利用其它方式构建出局部作用域：即-try-catch特殊的作用域机制"></a>方法三：利用其它方式构建出<strong>局部作用域</strong>：即，try catch特殊的作用域机制</h2>
-<p>js一般来说只有全局作用域和函数作用域，而这个catch大括号包裹的部分，作用域链的表现类似于函数作用域。非常特别。</p>
+<h2 id="方法三：try-catch特殊的作用域机制：-即利用其它方式构建出局部作用域"><a class="header-anchor" href="#方法三：try-catch特殊的作用域机制：-即利用其它方式构建出局部作用域"></a>方法三：try catch特殊的作用域机制： 即利用其它方式构建出<strong>局部作用域</strong></h2>
+<p>对于js，一般来说只有全局作用域和函数作用域。而这个catch大括号包裹的部分，作用域链的表现类似于函数作用域。非常特别。</p>
 <pre><code class="language-js">for (var i = 0; i &lt; 10; i++) {
   try {
     throw new Error(i);
@@ -140,7 +140,7 @@ for(var i= 0; i &lt; 5; i++){
   }
 }
 </code></pre>
-<h2 id="方法4：bind返回新函数-利用的是柯里化的缓存效果-没有闭包产生"><a class="header-anchor" href="#方法4：bind返回新函数-利用的是柯里化的缓存效果-没有闭包产生"></a>方法4：bind返回新函数，利用的是柯里化的缓存效果，没有闭包产生</h2>
+<h2 id="方法4：bind返回新函数：利用的是柯里化的缓存效果-没有闭包产生"><a class="header-anchor" href="#方法4：bind返回新函数：利用的是柯里化的缓存效果-没有闭包产生"></a>方法4：bind返回新函数：利用的是柯里化的缓存效果，没有闭包产生</h2>
 <pre><code class="language-js">for (var i = 0; i &lt; 10; i++) {
   setTimeout(console.log.bind(Object.create(null), i), i * 1000)
   // also or: 
@@ -154,9 +154,8 @@ for(var i= 0; i &lt; 5; i++){
   }.bind(null, i), i * 1000);
 }
 </code></pre>
-<h4 id="侧面反映是柯里化缓存的功劳："><a class="header-anchor" href="#侧面反映是柯里化缓存的功劳："></a>侧面反映是柯里化缓存的功劳：</h4>
-<pre><code class="language-js">// 写一个原理类似的代码：
-function hey(a,b,c) {
+<h4 id="来个demo模拟简化后的代码-反映：的确是柯里化缓存的功劳："><a class="header-anchor" href="#来个demo模拟简化后的代码-反映：的确是柯里化缓存的功劳："></a>来个demo模拟简化后的代码，反映：的确是柯里化缓存的功劳：</h4>
+<pre><code class="language-js">function hey(a,b,c) {
   console.log(this)
   console.log(a,b,c)
   debugger;
