@@ -101,6 +101,9 @@ td {
 a img {
   border: none;
 }
+* {
+  touch-action: pan-y;
+}
 ol {
   list-style: decimal;
   padding-left: 20px;
@@ -528,7 +531,7 @@ a {
     padding: 10px;
     padding-left: 0;
     border-radius: 2.8%;
-    background: #f8f8fd;
+    background: rgba(255,255,255,0.85);
     font-size: 1em;
     line-height: 1.25em;
   }
@@ -4378,7 +4381,7 @@ aside.comment-bar:active {
 #viewer-box .viewer-box-l {
   background: rgba(20,20,20,0.9);
   width: 80%;
-  height: auto;
+  height: 100vh;
   -webkit-box-flex: 0;
   -moz-box-flex: 0;
   -ms-box-flex: 0;
