@@ -3197,9 +3197,9 @@ console.log( baz.a ); // 3
         
         <tags>
             
-            <tag> 进阶 </tag>
-            
             <tag> new </tag>
+            
+            <tag> 进阶 </tag>
             
             <tag> this </tag>
             
