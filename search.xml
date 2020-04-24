@@ -4,14 +4,6 @@
   
     
     <entry>
-      <title></title>
-      <url>https://alexzhong22c.github.io/2020/04/20/js-event2/</url>
-      <content type="html"></content>
-      
-        
-    </entry>
-    
-    <entry>
       <title><![CDATA[深入理解文字高度和行高的设置]]></title>
       <url>https://alexzhong22c.github.io/2018/02/06/height-calculate/</url>
       <content type="html"><![CDATA[<p>font-size设置的是什么?line-height设置的是什么?各种行高是怎么计算出来的?你真的知道吗?</p>
@@ -1131,9 +1123,9 @@ MY_ARRAY = ['B']
             
             <tag> 作用域 </tag>
             
-            <tag> ES6 </tag>
-            
             <tag> 闭包 </tag>
+            
+            <tag> ES6 </tag>
             
             <tag> 任务队列 </tag>
             
@@ -3115,11 +3107,11 @@ var f1 = new Foo;
             
             <tag> 进阶 </tag>
             
+            <tag> 继承 </tag>
+            
             <tag> 原型 </tag>
             
             <tag> 构造器 </tag>
-            
-            <tag> 继承 </tag>
             
         </tags>
         
@@ -3197,9 +3189,9 @@ console.log( baz.a ); // 3
         
         <tags>
             
-            <tag> new </tag>
-            
             <tag> 进阶 </tag>
+            
+            <tag> new </tag>
             
             <tag> this </tag>
             
@@ -3714,9 +3706,9 @@ displayColor.call(null);//TypeError: Cannot read property 'color' of null
         
         <tags>
             
-            <tag> IIFE </tag>
-            
             <tag> 进阶 </tag>
+            
+            <tag> IIFE </tag>
             
             <tag> this </tag>
             
@@ -4252,7 +4244,7 @@ d.toUTCString()
 <a id="more"></a>
 <hr>
 <p>这是一个带复选框(checkbox)的表格，只用纯vue不用其他框架实现<strong>checkbox父子联动</strong>：</p>
-<p><img src="https://cloud.az22c.top/show-vue-checkbox-table.png-az22cgithub" alt=""></p>
+<p><img src="https://cloud.az22c.top/show-vue-checkbox-table.png-az22cgithub" alt></p>
 <h2 id="效果："><a class="header-anchor" href="#效果："></a>效果：</h2>
 <ul>
 <li>表头的checkbox视之为一个全局(global)的checkbox，点击它可以实现“全选”和“全不选”</li>
@@ -4649,7 +4641,7 @@ methods: {
 <p>这是一个关于表格数据的分页导航，按照表格中的每个条目作为单元来展示数据。</p>
 <p><strong>这样的数据呈现方式可读性更强，设计更人性化。</strong></p>
 <p>当然它只适用于少量表格数据的直观呈现，如果数据太多，还是用传统的表格来呈现比较合适。demo的下方我还展示了原始的表格，方便各位看官做做对比。</p>
-<p><img src="https://cloud.az22c.top/show-vue-table-nav.png-az22cgithub" alt=""></p>
+<p><img src="https://cloud.az22c.top/show-vue-table-nav.png-az22cgithub" alt></p>
 <h2 id="分页导航"><a class="header-anchor" href="#分页导航"></a>分页导航</h2>
 <ul>
 <li>可设置每页显示的条目数</li>
@@ -5402,7 +5394,7 @@ p {
 <ul>
 <li><code>&lt;input type=&quot;button&quot; /&gt;</code>这就是一个按钮。如果你不写javascript 的话，按下去什么也不会发生。</li>
 <li><code>&lt;input type=&quot;submit&quot; /&gt;</code> 这样的按钮用户点击之后会自动提交 form，除非你写了javascript 阻止它。</li>
-<li><code>&lt;button&gt;</code>这个按钮放在 form 中也会点击自动提交，比前两个的优点是按钮的内容不光可以有文字，还可以有图片等多媒体内容。（当然，前两个用图片背景也可以做到）。它的缺点是不同的浏览器得到的 value 值不同；可能还有其他的浏览器兼容问题（<a href="">葛亮</a>）。</li>
+<li><code>&lt;button&gt;</code>这个按钮放在 form 中也会点击自动提交，比前两个的优点是按钮的内容不光可以有文字，还可以有图片等多媒体内容。（当然，前两个用图片背景也可以做到）。它的缺点是不同的浏览器得到的 value 值不同；可能还有其他的浏览器兼容问题（<a href>葛亮</a>）。</li>
 <li>其他标签，例如 a, img, span, div，然后用图片把它伪装成一个按钮。</li>
 </ul>
 <p>type=&quot;button&quot;和type=&quot;submit&quot;各写一个，绑个alert或者dom操作。可以发现：button如果没别的，就会一动不动；submit如果没别的，就会刷新页面（应该是一闪然后保持原页面）；sb绑了dom，就是js的效果一闪，然后保持原页面。可以写js事件来绑定button，js是客户端的。但submit的实质作用是提交给服务端的，不是写个js阻止就能完事。</p>
@@ -5427,9 +5419,9 @@ p {
         
         <tags>
             
-            <tag> HTML </tag>
-            
             <tag> H5 </tag>
+            
+            <tag> HTML </tag>
             
             <tag> IFE </tag>
             
@@ -6909,7 +6901,7 @@ Kinect，它将身体动作转换成屏幕动作。这样你可以用你的手�
 </code></pre>
 <h3 id="caller的经典用法"><a class="header-anchor" href="#caller的经典用法"></a>caller的经典用法</h3>
 <p>注：<strong>该特性是非标准的，请尽量不要在生产环境中使用它！</strong></p>
-<p><img src="https://cloud.az22c.top/caller%E7%9A%84%E7%BB%8F%E5%85%B8%E7%94%A8%E6%B3%95.png-az22cgithub" alt=""></p>
+<p><img src="https://cloud.az22c.top/caller%E7%9A%84%E7%BB%8F%E5%85%B8%E7%94%A8%E6%B3%95.png-az22cgithub" alt></p>
 <h2 id="匠心勿失"><a class="header-anchor" href="#匠心勿失"></a>匠心勿失</h2>
 <h3 id="html-css"><a class="header-anchor" href="#html-css"></a>HTML+CSS</h3>
 <ul>
@@ -7382,7 +7374,7 @@ func2(1,2);//3
 <p>Function 中前面的参数为后面函数体的形参，最后一个参数为函数体。可以看到传入的都是字符串，这样的创建函数对象的方法是不安全的。</p>
 <p>还有一点，Function 构造器的得到的函数对象，拿不到外层函数的变量，但是可以拿到全局变量。它的作用域与众不同，这也是很少使用的原因之一。</p>
 <h3 id="三种方法的对比"><a class="header-anchor" href="#三种方法的对比"></a>// 三种方法的对比:</h3>
-<p><img src="https://cloud.az22c.top/%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95%E5%AF%B9%E6%AF%94.png-az22cgithub" alt=""></p>
+<p><img src="https://cloud.az22c.top/%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95%E5%AF%B9%E6%AF%94.png-az22cgithub" alt></p>
 <h2 id="变量-函数的声明前置"><a class="header-anchor" href="#变量-函数的声明前置"></a>变量 &amp; 函数的声明前置</h2>
 <p>举两个例子</p>
 <p>例1，函数声明：</p>
