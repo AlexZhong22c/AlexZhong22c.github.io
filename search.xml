@@ -4,6 +4,14 @@
   
     
     <entry>
+      <title></title>
+      <url>https://alexzhong22c.github.io/2020/04/20/js-event2/</url>
+      <content type="html"></content>
+      
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[深入理解文字高度和行高的设置]]></title>
       <url>https://alexzhong22c.github.io/2018/02/06/height-calculate/</url>
       <content type="html"><![CDATA[<p>font-size设置的是什么?line-height设置的是什么?各种行高是怎么计算出来的?你真的知道吗?</p>
@@ -3756,7 +3764,35 @@ displayColor.call(null);//TypeError: Cannot read property 'color' of null
 <blockquote>
 <p>用addEventListener，在实战的时候，往往需要配合判断target和阻止冒泡。注意：<strong>currentTarget属性返回事件正在执行的监听函数所绑定的节点，而target属性返回事件的实际目标节点。</strong></p>
 </blockquote>
-<p>所以对于现代浏览器，可以同时用addEventListener绑定事件在冒泡和捕获阶段。<strong>（通常设置为false即为冒泡）</strong></p>
+<p>所以对于现代浏览器，可以同时用addEventListener绑定事件在冒泡和捕获阶段。<strong>（第三个参数通常设置为false即为冒泡）</strong></p>
+<p>我们知道，如果要封装兼容IE事件处理程序attachEvent和addEventListener：因为attachEvent没有第三个参数，也就是说attachEvent只支持监听冒泡，所以为了统一，在使用addEventListener的时候第三参数传递 false。</p>
+<pre><code class="language-js">function stopPropagation(e) {
+  var e = e || window.event;
+  if(window.event) {       //这是IE浏览器
+      e.cancelBubble = true;//阻止冒泡事件
+  }else if(e &amp;&amp; e.stopPropagation) {     //这是其他浏览器
+      e.stopPropagation();//阻止冒泡事件
+  }
+}
+</code></pre>
+<h3 id="事件处理程序的event对象-ie兼容"><a class="header-anchor" href="#事件处理程序的event对象-ie兼容"></a>事件处理程序的Event对象 IE兼容</h3>
+<p>首先作为基础，要稍微了解一下<a href="https://alexzhong22c.github.io/2017/07/01/js-event3/">浏览器js的四种事件处理程序</a>。</p>
+<p><a href="http://yujiangshui.com/javascript-event/#%E4%BA%8B%E4%BB%B6%E8%BF%9B%E9%98%B6%E8%AF%9D%E9%A2%98" target="_blank" rel="noopener">摘自：于江水</a></p>
+<p>IE 中往回调函数中传递的事件对象与标准有一些差异，你需要使用 <code>window.event</code> 来获取事件对象。所以你通常会写出下面代码来获取事件对象：</p>
+<pre><code class="language-js">event = event || window.event
+</code></pre>
+<p>此外还有一些事件属性有差别，比如比较常用的 <code>event.target</code> 属性，IE 中没有，而是使用 <code>event.srcElement</code> 来代替。如果你的回调函数需要处理触发事件的节点，那么需要写：</p>
+<pre><code class="language-js">target = event.srcElement || event.target;
+</code></pre>
+<p>常见的就是这点，更细节的不再多说。在概念学习中，我们没必要为不标准的东西支付学习成本；在实际应用中，类库已经帮我们封装好这些兼容性问题。可喜的是 IE 浏览器现在也开始不断向标准进步。</p>
+<p><strong>最后总结一下就是：</strong></p>
+<pre><code class="language-js">// 兼容性处理
+var event = e || window.event;
+// 获取到目标阶段指向的元素
+var target = event.target || event.srcElement;
+// 获取当前触发的事件处理函数所绑定的元素
+var currentTarget = event.currentTarget;
+</code></pre>
 <h4 id="提取冷知识："><a class="header-anchor" href="#提取冷知识："></a>提取冷知识：</h4>
 <ul>
 <li>为了统一多种事件处理程序（有些它不支持捕获），一般来说都是利用冒泡比较顺手。
@@ -3936,7 +3972,10 @@ element.addEventListener('click', fun, false);
 element.removeEventListener('click', fun, false);
 </code></pre>
 <h2 id="ie事件处理程序"><a class="header-anchor" href="#ie事件处理程序"></a>IE事件处理程序</h2>
-<pre><code>var btn = document.getElementById(&quot;myBtn&quot;);
+<blockquote>
+<p>IE 浏览器就是特立独行，它对于事件的操作与标准有一些差异。不过 IE 浏览器现在也开始慢慢努力改造，让浏览器变得更加标准。</p>
+</blockquote>
+<pre><code class="language-js">var btn = document.getElementById(&quot;myBtn&quot;);
 btn.attachEvent(&quot;onclick&quot;, function(){ 
   alert(&quot;Clicked&quot;);
 });
@@ -3946,6 +3985,9 @@ btn.attachEvent(&quot;onclick&quot;, function(){
 <p>区别在于，第二个参数传入的是<code>onclick</code>而并非<code>click</code>，且IE只支持在冒泡阶段进行程序处理，所以没有第三个参数布尔值的选择。
 它的作用域为全局作用域，即<code>this</code>指向<code>window</code>。
 此外，如果为同一个元素添加了两个事件处理程序，addEventListener会以添加的顺序依次执行事件处理，而attachEvent则相反。</p>
+<blockquote>
+<p>如果要封装兼容attachEvent和addEventListener：因为attachEvent没有第三个参数，也就是说attachEvent只支持监听冒泡，所以为了统一，在使用addEventListener的时候第三参数传递 false。</p>
+</blockquote>
 <h3 id="ie移除事件监听"><a class="header-anchor" href="#ie移除事件监听"></a>IE移除事件监听</h3>
 <p>detachEvent()，用法与DOM2级的removeEventListener类似</p>
 <h2 id="总结"><a class="header-anchor" href="#总结"></a>总结</h2>
@@ -5789,128 +5831,6 @@ if (!Array.prototype.forEach) {
         <tags>
             
             <tag> 回顾 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[事件进阶话题]]></title>
-      <url>https://alexzhong22c.github.io/2017/03/05/js-event2/</url>
-      <content type="html"><![CDATA[<p>此文内容深度其实不大，个人还需要进一步学习。</p>
-<a id="more"></a>
-<h2 id="常用事件和技巧"><a class="header-anchor" href="#常用事件和技巧"></a>常用事件和技巧</h2>
-<p>用户的操作有很多种，所以有很多事件。为了开发方便，浏览器又提供了一些事件，所以有很多很多的事件。这里只介绍几种常用的事件和使用技巧。</p>
-<h3 id="load"><a class="header-anchor" href="#load"></a>load</h3>
-<p><code>load</code> 事件在资源加载完成时触发。这个资源可以是图片、CSS 文件、JS 文件、视频、document 和 window 等等。</p>
-<p>比较常用的就是监听 window 的 <code>load</code> 事件，当页面内所有资源全部加载完成之后就会触发。比如用 JS 对图片以及其他资源处理，我们在 <code>load</code> 事件中触发，可以保证 JS 不会在资源未加载完成就开始处理资源导致报错。</p>
-<p>同样的，也可以监听图片等其他资源加载情况。</p>
-<h3 id="beforeunload"><a class="header-anchor" href="#beforeunload"></a>beforeunload</h3>
-<p>当浏览者在页面上的输入框输入一些内容时，未保存、误操作关掉网页可能会导致输入信息丢失。</p>
-<p>当浏览者输入信息但未保存时关掉网页，我们就可以开始监听这个事件，例如：</p>
-<pre><code>window.addEventListener(&quot;beforeunload&quot;, function( event ) {
-    event.returnValue = &quot;放弃当前未保存内容而关闭页面？&quot;;
-});
-</code></pre>
-<p>这时候试图关闭网页的时候，会弹窗阻止操作，点击确认之后才会关闭。当然，如果没有必要，就不要监听，不要以为使用它可以为你留住浏览者。</p>
-<h3 id="resize"><a class="header-anchor" href="#resize"></a>resize</h3>
-<p>当节点尺寸发生变化时，触发这个事件。通常用在 window 上，这样可以监听浏览器窗口的变化。通常用在复杂布局和响应式上。</p>
-<p>常见的视差滚动效果网站以及同类比较复杂的布局网站，往往使用 JavaScript 来计算尺寸、位置。如果用户调整浏览器大小，尺寸、位置不随着改变则会出现错位情况。在 window 上监听该事件，触发时调用计算尺寸、位置的函数，可以根据浏览器的大小来重新计算。</p>
-<p>但需要注意一点，当浏览器发生任意变化都会触发 <code>resize</code> 事件，哪怕是缩小 1px 的浏览器宽度，这样调整浏览器时会触发大量的 <code>resize</code> 事件，你的回调函数就会被大量的执行，导致变卡、崩溃等。</p>
-<p>你可以使用函数 throttle 或者 debounce 技巧来进行优化，throttle 方法大体思路就是在某一段时间内无论多次调用，只执行一次函数，到达时间就执行；debounce 方法大体思路就是在某一段时间内等待是否还会重复调用，如果不会再调用，就执行函数，如果还有重复调用，则不执行继续等待。关于它们更详细的信息，我后面会介绍一下发表在我的博客上，这里不再赘述。</p>
-<h3 id="error"><a class="header-anchor" href="#error"></a>error</h3>
-<p>当我们加载资源失败或者加载成功但是只加载一部分而无法使用时，就会触发 <code>error</code> 事件，我们可以通过监听该事件来提示一个友好的报错或者进行其他处理。比如 JS 资源加载失败，则提示尝试刷新；图片资源加载失败，在图片下面提示图片加载失败等。该事件不会冒泡。因为子节点加载失败，并不意味着父节点加载失败，所以你的处理函数必须精确绑定到目标节点。</p>
-<p>需要注意的是，对于该事件，你可以使用 <code>addEventListener</code> 等进行监听，但是有时候会出现失效情况（看<a href="http://jsbin.com/esimAWA/2/quiet" target="_blank" rel="noopener">这个例子</a>），这是因为 <code>error</code> 事件都触发过了，你的 JS 监听处理代码还没有加载进来执行。为了避免这种情况，用内联法更好一些：</p>
-<pre><code>&lt;img src=&quot;not-found.jpg&quot; onerror=&quot;doSomething&quot; /&gt;
-</code></pre>
-<p>如果还有其他常用事件，欢迎留言补充。</p>
-<h2 id="事件回调函数的作用域问题"><a class="header-anchor" href="#事件回调函数的作用域问题"></a>事件回调函数的作用域问题</h2>
-<p>与事件绑定在一起的回调函数作用域会有问题，我们来看个例子：</p>
-<pre><code class="language-html">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;meta charset=utf-8 /&gt;
-  &lt;title&gt;Events in JavaScript: Removing event listeners&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-  &lt;button id=&quot;element&quot;&gt;Click Me&lt;/button&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-<p>JavaScript代码：</p>
-<pre><code class="language-javascript">var element = document.getElementById('element');
-
-var user = {
- firstname: 'Bob',
- greeting: function(){
-   alert('My name is ' + this.firstname);
- }
-};
-
-// Attach user.greeting as a callback
-element.addEventListener('click', user.greeting);
-</code></pre>
-<p>回调函数调用的 <code>user.greeting</code> 函数作用域应该是在 <code>user</code> 下的，本期望输出 <code>My name is Bob</code> 结果却输出了 <code>My name is undefined</code>。这是因为事件绑定函数时，该函数会以当前元素为作用域执行。为了证明这一点，我们可以为当前 <code>element</code> 添加属性：</p>
-<pre><code>element.firstname = 'jiangshui';
-</code></pre>
-<p>再次点击，可以正确弹出 <code>My name is jiangshui</code>。那么我们来解决一下这个问题：</p>
-<h3 id="使用匿名函数-办法一"><a class="header-anchor" href="#使用匿名函数-办法一"></a>使用匿名函数——办法一</h3>
-<p>将JavaScript代码修改为：</p>
-<pre><code>var element = document.getElementById('element');
-
-var user = {
- firstname: 'Bob',
- greeting: function(){
-   alert('My name is ' + this.firstname);
- }
-};
-
-// Call the method with the correct
-// context inside an anonymouse function
-element.addEventListener('click', function() {
-  user.greeting();
-});
-</code></pre>
-<p>包裹之后，虽然匿名函数的作用域被指向事件触发元素，但执行的内容就像直接调用一样，不会影响其作用域。</p>
-<h3 id="使用-bind-方法"><a class="header-anchor" href="#使用-bind-方法"></a>使用 bind 方法</h3>
-<p>使用匿名函数是有缺陷的，每次调用都包裹进匿名函数里面，增加了冗余代码等，此外如果想使用<code>removeEventListener</code> 解除绑定，还需要再创建一个函数引用。<code>Function</code> 类型提供了 <code>bind</code> 方法，可以为函数绑定作用域，无论函数在哪里调用，都不会改变它的作用域。通过如下语句绑定作用域：</p>
-<pre><code>user.greeting = user.greeting.bind(user);
-</code></pre>
-<p>这样我们就可以直接使用：</p>
-<pre><code>element.addEventListener('click', user.greeting);
-</code></pre>
-<h2 id="ie-浏览器的差异和兼容性问题"><a class="header-anchor" href="#ie-浏览器的差异和兼容性问题"></a>IE 浏览器的差异和兼容性问题</h2>
-<p>IE 浏览器就是特立独行，它对于事件的操作与标准有一些差异。不过 IE 浏览器现在也开始慢慢努力改造，让浏览器变得更加标准。</p>
-<h3 id="ie-下绑定事件"><a class="header-anchor" href="#ie-下绑定事件"></a>IE 下绑定事件</h3>
-<p>在 IE 下面绑定一个事件监听，在 IE9- 无法使用标准的 <code>addEventListener</code> 函数，而是使用自家的 <code>attachEvent</code>，具体用法：</p>
-<pre><code>element.attachEvent(&lt;event-name&gt;, &lt;callback&gt;);
-</code></pre>
-<p>其中 `` 参数需要注意，它需要为事件名称添加 <code>on</code> 前缀，比如有个事件叫 <code>click</code>，标准事件监听函数监听 <code>click</code>，IE 这里需要监听 <code>onclick</code>。</p>
-<p>另一个，它没有第三个参数，也就是说它只支持监听在冒泡阶段触发的事件，所以为了统一，在使用标准事件监听函数的时候，第三参数传递 false。</p>
-<p>当然，这个方法在 IE9 已经被抛弃，在 IE11 已经被移除了，IE 也在慢慢变好。</p>
-<h3 id="ie-中-event-对象需要注意的地方"><a class="header-anchor" href="#ie-中-event-对象需要注意的地方"></a>IE 中 Event 对象需要注意的地方</h3>
-<p>IE 中往回调函数中传递的事件对象与标准也有一些差异，你需要使用 <code>window.event</code> 来获取事件对象。所以你通常会写出下面代码来获取事件对象：</p>
-<pre><code>event = event || window.event
-</code></pre>
-<p>此外还有一些事件属性有差别，比如比较常用的 <code>event.target</code> 属性，IE 中没有，而是使用 <code>event.srcElement</code> 来代替。如果你的回调函数需要处理触发事件的节点，那么需要写：</p>
-<pre><code>node = event.srcElement || event.target;
-</code></pre>
-<p>常见的就是这点，更细节的不再多说。在概念学习中，我们没必要为不标准的东西支付学习成本；在实际应用中，类库已经帮我们封装好这些兼容性问题。可喜的是 IE 浏览器现在也开始不断向标准进步。</p>
-<p>摘自：<a href="http://yujiangshui.com/javascript-event/#%E4%BA%8B%E4%BB%B6%E8%BF%9B%E9%98%B6%E8%AF%9D%E9%A2%98" target="_blank" rel="noopener">于江水</a></p>
-]]></content>
-      
-        <categories>
-            
-            <category> JavaScript </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 进阶 </tag>
-            
-            <tag> 事件 </tag>
             
         </tags>
         

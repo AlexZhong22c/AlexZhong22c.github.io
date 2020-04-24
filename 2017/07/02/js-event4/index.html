@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
 <meta property="og:description" content="此文用于快速回顾，不适合用来入门。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-04-20T13:48:14.000Z">
+<meta property="og:updated_time" content="2020-04-24T13:22:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浏览器事件冒泡或者捕获相关">
 <meta name="twitter:description" content="此文用于快速回顾，不适合用来入门。">
@@ -505,7 +505,7 @@
 
 	<br>
 	<p style="height:7px;">
-	</p><p style="height:20px;font-family:KaiTi,LiSu,'宋体',sans-serif;color:#DBDBDB;font-size:12px;">预计阅读5分钟</p>
+	</p><p style="height:20px;font-family:KaiTi,LiSu,'宋体',sans-serif;color:#DBDBDB;font-size:12px;">预计阅读7分钟</p>
 
     </div>
   
@@ -576,7 +576,35 @@
 <blockquote>
 <p>用addEventListener，在实战的时候，往往需要配合判断target和阻止冒泡。注意：<strong>currentTarget属性返回事件正在执行的监听函数所绑定的节点，而target属性返回事件的实际目标节点。</strong></p>
 </blockquote>
-<p>所以对于现代浏览器，可以同时用addEventListener绑定事件在冒泡和捕获阶段。<strong>（通常设置为false即为冒泡）</strong></p>
+<p>所以对于现代浏览器，可以同时用addEventListener绑定事件在冒泡和捕获阶段。<strong>（第三个参数通常设置为false即为冒泡）</strong></p>
+<p>我们知道，如果要封装兼容IE事件处理程序attachEvent和addEventListener：因为attachEvent没有第三个参数，也就是说attachEvent只支持监听冒泡，所以为了统一，在使用addEventListener的时候第三参数传递 false。</p>
+<pre><code class="language-js">function stopPropagation(e) {
+  var e = e || window.event;
+  if(window.event) {       //这是IE浏览器
+      e.cancelBubble = true;//阻止冒泡事件
+  }else if(e &amp;&amp; e.stopPropagation) {     //这是其他浏览器
+      e.stopPropagation();//阻止冒泡事件
+  }
+}
+</code></pre>
+<h3 id="事件处理程序的event对象-ie兼容"><a class="header-anchor" href="#事件处理程序的event对象-ie兼容"></a>事件处理程序的Event对象 IE兼容</h3>
+<p>首先作为基础，要稍微了解一下<a href="https://alexzhong22c.github.io/2017/07/01/js-event3/">浏览器js的四种事件处理程序</a>。</p>
+<p><a href="http://yujiangshui.com/javascript-event/#%E4%BA%8B%E4%BB%B6%E8%BF%9B%E9%98%B6%E8%AF%9D%E9%A2%98" target="_blank" rel="noopener">摘自：于江水</a></p>
+<p>IE 中往回调函数中传递的事件对象与标准有一些差异，你需要使用 <code>window.event</code> 来获取事件对象。所以你通常会写出下面代码来获取事件对象：</p>
+<pre><code class="language-js">event = event || window.event
+</code></pre>
+<p>此外还有一些事件属性有差别，比如比较常用的 <code>event.target</code> 属性，IE 中没有，而是使用 <code>event.srcElement</code> 来代替。如果你的回调函数需要处理触发事件的节点，那么需要写：</p>
+<pre><code class="language-js">target = event.srcElement || event.target;
+</code></pre>
+<p>常见的就是这点，更细节的不再多说。在概念学习中，我们没必要为不标准的东西支付学习成本；在实际应用中，类库已经帮我们封装好这些兼容性问题。可喜的是 IE 浏览器现在也开始不断向标准进步。</p>
+<p><strong>最后总结一下就是：</strong></p>
+<pre><code class="language-js">// 兼容性处理
+var event = e || window.event;
+// 获取到目标阶段指向的元素
+var target = event.target || event.srcElement;
+// 获取当前触发的事件处理函数所绑定的元素
+var currentTarget = event.currentTarget;
+</code></pre>
 <h4 id="提取冷知识："><a class="header-anchor" href="#提取冷知识："></a>提取冷知识：</h4>
 <ul>
 <li>为了统一多种事件处理程序（有些它不支持捕获），一般来说都是利用冒泡比较顺手。
@@ -634,7 +662,7 @@
         <p><span>本文标题:</span><a href="/2017/07/02/js-event4/">浏览器事件冒泡或者捕获相关</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2017-07-02, 16:30:27</p>
-        <!-- <p><span>最后更新:</span>2020-04-20, 21:48:14</p> -->
+        <!-- <p><span>最后更新:</span>2020-04-24, 21:22:50</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="浏览器事件冒泡或者捕获相关" href="/2017/07/02/js-event4/">https://alexzhong22c.github.io/2017/07/02/js-event4/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://alexzhong22c.github.io/2017/07/02/js-event4/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -670,7 +698,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#事件流-事件捕获或者冒泡相关"><span class="toc-text">事件流（事件捕获或者冒泡相关）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#并不是所有事件都支持冒泡-局限性"><span class="toc-text">并不是所有事件都支持冒泡 #局限性</span></a></li></ol></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#如何应用：冒泡或者捕获事件-在事件绑定的时候"><span class="toc-text">如何应用：冒泡或者捕获事件  在事件绑定的时候</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#提取冷知识："><span class="toc-text">提取冷知识：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件代理-你所需要知道的"><span class="toc-text">事件代理 你所需要知道的</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#优点："><span class="toc-text">优点：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#缺点："><span class="toc-text">缺点：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实战技巧-合理运用"><span class="toc-text">实战技巧，合理运用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何利用原生实现事件代理"><span class="toc-text">如何利用原生实现事件代理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vue的事件冒泡和事件代理-从vue专题复制而来"><span class="toc-text">vue的事件冒泡和事件代理 #从vue专题复制而来</span></a></li>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#事件流-事件捕获或者冒泡相关"><span class="toc-text">事件流（事件捕获或者冒泡相关）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#并不是所有事件都支持冒泡-局限性"><span class="toc-text">并不是所有事件都支持冒泡 #局限性</span></a></li></ol></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#如何应用：冒泡或者捕获事件-在事件绑定的时候"><span class="toc-text">如何应用：冒泡或者捕获事件  在事件绑定的时候</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#事件处理程序的event对象-ie兼容"><span class="toc-text">事件处理程序的Event对象 IE兼容</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#提取冷知识："><span class="toc-text">提取冷知识：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件代理-你所需要知道的"><span class="toc-text">事件代理 你所需要知道的</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#优点："><span class="toc-text">优点：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#缺点："><span class="toc-text">缺点：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实战技巧-合理运用"><span class="toc-text">实战技巧，合理运用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何利用原生实现事件代理"><span class="toc-text">如何利用原生实现事件代理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vue的事件冒泡和事件代理-从vue专题复制而来"><span class="toc-text">vue的事件冒泡和事件代理 #从vue专题复制而来</span></a></li>
         
     </div>
     <style>
@@ -714,7 +742,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/02/06/height-calculate/">深入理解文字高度和行高的设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/05/vertical-align-middle/">vertical-align:middle近似居中和完美居中</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/05/centralize-one-ele/">总结：使单一对象水平/垂直居中</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/15/react-state/">深入理解State和setState()</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/22/let-n-const/">let和const旧话新编</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/12/git-stage/">git暂存区知识梳理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/17/ife-css-task03/">三栏式布局--IFE2017-CSS-task03笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/07/css-border1/">border-radius属性</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/03/js-obj-prop1/">对象属性的操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/02/js-obj-prop2/">对象属性描述符</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/01/js-obj-prop3/">对象属性之对象状态</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/12/js-inherit/">实现继承的3种方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/12/js-new-happen/">new创建对象的过程发生了什么</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/09/js-constructor/">构造函数和原型对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/08/js-proto/">理解prototype、proto和constructor等关系</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/07/js-this2/">this绑定的优先级</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/07/js-this/">结合this的4种绑定规则 深入理解this指向的判定</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/02/js-event4/">浏览器事件冒泡或者捕获相关</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/01/js-event3/">js四种事件处理程序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/01/js-pv-default/">js取消默认事件行为</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/07/js-date/">JavaScript Date对象回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/07/vue-checkbox-table/">纯vue实现checkbox父子联动</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/25/vue-time-tracker/">经典vue单页路由入门全家桶</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/15/vue-table-nav/">按条目展示表格数据小插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/clearfix-n-bfc/">闭合浮动和BFC和阻止上下外边距的合并</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/ife-css-task02/">IFE2017-CSS-task02笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/31/css-selectors-specificity/">CSS选择器优先级</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/28/h5-new-ele/">H5新标签和被H5拥抱的老元素们</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/27/ife-css-task01/">IFE2017-CSS-task01笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/10/iife-intro/">IIFE回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/09/for-loop/">js的for循环回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/05/js-event2/">事件进阶话题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/float-n-absolute/">float和绝对定位比较</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/about-margin/">和margin有关的知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/gulp-usage/">gulp的入门和一些简单使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/27/icon-usage/">桌面端和移动端图标的引入</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/25/webapp-events-intro/">移动开发事件入门概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/24/webapp-intro/">移动开发入门概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/my-hexo-theme/">yelee主题改bug总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/17/todo-app/">ToDo小应用完工总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/equality-operators/">相等操作符回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/js-operators/">操作符回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/25/font-face/">font-face--CSS3</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/13/js-function/">js函数基础回顾</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/04/20/js-event2/">js-event2</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/06/height-calculate/">深入理解文字高度和行高的设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/05/vertical-align-middle/">vertical-align:middle近似居中和完美居中</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/05/centralize-one-ele/">总结：使单一对象水平/垂直居中</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/15/react-state/">深入理解State和setState()</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/22/let-n-const/">let和const旧话新编</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/12/git-stage/">git暂存区知识梳理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/17/ife-css-task03/">三栏式布局--IFE2017-CSS-task03笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/07/css-border1/">border-radius属性</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/03/js-obj-prop1/">对象属性的操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/02/js-obj-prop2/">对象属性描述符</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/01/js-obj-prop3/">对象属性之对象状态</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/12/js-inherit/">实现继承的3种方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/12/js-new-happen/">new创建对象的过程发生了什么</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/09/js-constructor/">构造函数和原型对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/08/js-proto/">理解prototype、proto和constructor等关系</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/07/js-this2/">this绑定的优先级</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/07/js-this/">结合this的4种绑定规则 深入理解this指向的判定</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/02/js-event4/">浏览器事件冒泡或者捕获相关</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/01/js-event3/">js四种事件处理程序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/01/js-pv-default/">js取消默认事件行为</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/07/js-date/">JavaScript Date对象回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/07/vue-checkbox-table/">纯vue实现checkbox父子联动</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/25/vue-time-tracker/">经典vue单页路由入门全家桶</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/15/vue-table-nav/">按条目展示表格数据小插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/clearfix-n-bfc/">闭合浮动和BFC和阻止上下外边距的合并</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/ife-css-task02/">IFE2017-CSS-task02笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/31/css-selectors-specificity/">CSS选择器优先级</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/28/h5-new-ele/">H5新标签和被H5拥抱的老元素们</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/27/ife-css-task01/">IFE2017-CSS-task01笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/10/iife-intro/">IIFE回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/09/for-loop/">js的for循环回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/float-n-absolute/">float和绝对定位比较</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/about-margin/">和margin有关的知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/gulp-usage/">gulp的入门和一些简单使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/27/icon-usage/">桌面端和移动端图标的引入</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/25/webapp-events-intro/">移动开发事件入门概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/24/webapp-intro/">移动开发入门概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/my-hexo-theme/">yelee主题改bug总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/17/todo-app/">ToDo小应用完工总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/equality-operators/">相等操作符回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/js-operators/">操作符回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/25/font-face/">font-face--CSS3</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/13/js-function/">js函数基础回顾</a></li></ul>
 
 
 
@@ -737,7 +765,7 @@
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					
-						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,493</span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,916</span>
 					
 				</div>
             </div>
