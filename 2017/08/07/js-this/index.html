@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
 <meta property="og:description" content="此文适合用于进阶对this的理解，不适合用来入门。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-04-29T10:59:12.000Z">
+<meta property="og:updated_time" content="2020-04-29T13:02:41.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="结合this的4种绑定规则 深入理解this指向的判定">
 <meta name="twitter:description" content="此文适合用于进阶对this的理解，不适合用来入门。">
@@ -505,7 +505,7 @@
 
 	<br />
 	<p style="height:7px;"/>
-	<p style="height:20px;font-family:KaiTi,LiSu,'宋体',sans-serif;color:#DBDBDB;font-size:12px;">预计阅读17分钟</p>
+	<p style="height:20px;font-family:KaiTi,LiSu,'宋体',sans-serif;color:#DBDBDB;font-size:12px;">预计阅读16分钟</p>
 
     </div>
   
@@ -558,9 +558,13 @@
 </blockquote>
 <p>书中提出了“执行流”这种虚拟的概念，来比较死板地判断this的指向，判断效果还是挺不错的。</p>
 <h2 id="默认绑定"><a class="header-anchor" href="#默认绑定"></a>默认绑定</h2>
-<p>全局环境中，this默认绑定全局对象；而在浏览器下，全局对象就是 window。</p>
+<blockquote>
+<p>非严格模式下，全局执行上下文this默认指向window；而严格模式下，全局执行上下文this默认为undefined。</p>
+<p>本小节是以“非严格模式”作为前提讲解的了；严格模式同理。</p>
+</blockquote>
+<p>全局执行上下文中，this默认绑定全局对象；而在浏览器下，全局对象就是 window。</p>
 <p>即简而言之：</p>
-<p>结论1：全局环境中，this默认绑定到window。</p>
+<p>结论1：全局执行上下文中，this默认绑定到window。</p>
 <pre><code class="language-JavaScript">// demo 1-1：
 console.log(this === window); // true
 console.log(this.document === document); // true
@@ -591,7 +595,7 @@ function aname() {
 aname(); // 声明之后要立即执行
 </code></pre>
 <h2 id="隐式绑定"><a class="header-anchor" href="#隐式绑定"></a>隐式绑定</h2>
-<p>一般地，被对象直接量所包含的函数调用时，也称为方法调用，this隐式绑定到该对象直接量：</p>
+<p>一般地，如果是对象的方法调用，对于这次函数的执行，this隐式绑定到该对象上：</p>
 <pre><code class="language-JavaScript">// demo 2-1：
 var a = 0;
 var obj = {
@@ -635,7 +639,7 @@ obj1.foo(); // foo是this关键字所在的函数，执行流到此，之后执�
 obj1.obj2.foo();// foo是this关键字所在的函数，执行流到此，之后执行流会进入该函数的声明内；结果为2(访问到了obj1.obj2.a)
 </code></pre>
 <h2 id="判定this的指向"><a class="header-anchor" href="#判定this的指向"></a>// 判定this的指向</h2>
-<p>我们已经对 this的4种绑定规则 的前两种进行了介绍，但是如果demo变得再复杂一点点，this的指向就比较难以判定了。</p>
+<p>我们已经对 this的4种绑定规则 的前2种进行了介绍，但是如果demo变得再复杂一点点，this的指向就比较难以判定了。</p>
 <p>请在已有上文知识的基础上，思考下面的函数返回结果是如何得出的：</p>
 <pre><code class="language-JavaScript">// exer 1-1 ：代码可以对比demo 2-1 的代码
 var a = 0;
@@ -707,7 +711,7 @@ obj.foo(); // 实际上，foo还不是this关键字所在的函数，test才是;
 // 结果：obj.foo()返回0
 </code></pre>
 <h4 id="一-先去找出this关键字所在的函数声明或函数表达式"><a class="header-anchor" href="#一-先去找出this关键字所在的函数声明或函数表达式"></a>一、先去找出this关键字所在的函数声明或函数表达式</h4>
-<p>即，this关键字在哪个函数的声明内??或者在哪个函数的表达式内??this往上一级的那个函数便是了</p>
+<p>即，this关键字在哪个函数的声明内?!或者在哪个函数的表达式内?! this往上一级的那个函数便是了</p>
 <blockquote>
 <p>我们发现要找的这个函数是test，this关键字在test的函数声明内。（而不是foo，foo只是test的上级函数）</p>
 </blockquote>
@@ -719,13 +723,13 @@ obj.foo(); // 实际上，foo还不是this关键字所在的函数，test才是;
 <blockquote>
 <p>观察 test() 这个调用表达式的形态</p>
 </blockquote>
-<p>如果形态像独立调用 fn()，那么this指向window：</p>
-<p>如，demo 1-2 和 exer 1-2</p>
+<p>如果形态像“独立调用”<code>fn()</code>，那么this指向window：</p>
+<p>如，demo 1-2 和 exer 1-2 。</p>
 <p>如果表达式形态可以说是IIFE，那么也可以视为函数的独立调用，this指向window：</p>
-<p>如，demo 1-3 和 exer 1-3</p>
-<p>如果形态像obj.fn()，那么this指向obj：</p>
+<p>如，demo 1-3 和 exer 1-3 。</p>
+<p>如果形态像<code>obj.fn()</code>，那么this指向obj：</p>
 <p>如，exer 2-1中的<code>obj.foo()</code>。然后另外，容易误导人的是像exer 1-2 中的<code>obj.foo()</code>这句，我们说了在exer 1-2中，foo不是我们想要的，所以应该不必理会这句，而应该去找test函数被调用的那句表达式。</p>
-<p>如果形态像obja.objb.fn()，那么那么this指向objb：</p>
+<p>如果形态像<code>obja.objb.fn()</code>，那么那么this指向objb：</p>
 <p>如，demo2-3 中的<code>obj1.obj2.foo()</code>，this指向obj2</p>
 <hr>
 <p><strong>以上的 判定this的指向 的方法是在任何情况下通用的，</strong> 我们拿闭包来练练手，顺便讲一下闭包：</p>
@@ -752,14 +756,15 @@ obj.foo()(); // test是this关键字所在的函数，执行流到此，之后�
 var a = 0;
 test(); // test是this关键字所在的函数，执行流到此，之后执行流会进入该函数的声明内
 </code></pre>
-<p>即函数的独立调用，那么this指向window</p>
+<p>即函数的“独立调用”，那么this指向window</p>
 <h4 id="补充闭包常见demo"><a class="header-anchor" href="#补充闭包常见demo"></a>补充闭包常见demo</h4>
-<p>因此，这也是一个老生常谈，由于闭包的this默认绑定到window对象，但又常常需要访问嵌套函数的this，所以常常在嵌套函数中使用<code>var that = this</code>，然后在闭包中使用that替代this，使用作用域查找的方法来找到嵌套函数的this值 ：</p>
+<p>因此，这也是一个老生常谈，（类似上面的例子），由于闭包的this<strong>常常</strong>默认绑定到window对象。如果在这种情况下，需要访问外层嵌套函数的this，常见的做法是使用<code>var that = this</code>，然后在闭包中使用that替代this，使用作用域查找的方式来找到外层嵌套函数的this值 ：</p>
 <pre><code class="language-javascript">var a = 0;
 function foo(){
     var that = this;
+    this.sth = 'hello'
     function test(){
-        console.log(that.a);
+        console.log(that.a, that.sth);
     }
     return test;
 };
@@ -767,7 +772,7 @@ var obj = {
     a : 2,
     foo:foo
 }
-obj.foo()();//2
+obj.foo()();//2 hello
 </code></pre>
 <h2 id="隐式丢失"><a class="header-anchor" href="#隐式丢失"></a>隐式丢失</h2>
 <p>隐式丢失是指被隐式绑定的函数丢失绑定对象，从而默认绑定到window的现象。这是一种程序员常见的逻辑上出错的情况。</p>
@@ -885,7 +890,7 @@ p.foo(); // 4
 // 这没有隐式丢失，但结果依然可以按照我们的理解方法来理解
 </code></pre>
 <h3 id="其他情况"><a class="header-anchor" href="#其他情况"></a>其他情况</h3>
-<p>在javascript引擎内部，obj和obj.foo储存在两个内存地址，简称为M1和M2。只有obj.foo()这样形式的表达式调用时，是从M1调用M2，因此this指向obj。但是，下面三种情况，都是直接取出M2进行运算，然后就在全局环境执行运算结果（还是M2），因此this指向全局环境</p>
+<p>在javascript引擎内部，obj和obj.foo储存在两个内存地址，在这里我们简称为M1和M2。只有obj.foo()这样形式的表达式调用时，是从M1调用M2，因此this指向obj。但是，下面三种情况，都是直接取出M2进行运算，然后就在全局执行上下文执行运算结果（还是M2），因此this指向全局对象</p>
 <pre><code class="language-JavaScript">var a = 0;
 var obj = {
     a : 2,
@@ -903,7 +908,7 @@ function foo() {
 </code></pre>
 <p>也可以像上面 间接引用的情况 理解为： IIFE和obj.foo都是this关键字所在的函数，执行流到此，之后执行流会进入IIFE的函数表达式内；考虑到IIFE的表达式，结果为0依然可以被理解</p>
 <h2 id="显示绑定"><a class="header-anchor" href="#显示绑定"></a>显示绑定</h2>
-<p>通过call()、apply()、bind()方法把对象绑定到this上，叫做显式绑定；而对于被调用的函数来说，叫做间接调用</p>
+<p>通过<code>call()、apply()、bind()</code>或者es6的<code>map()、forEach()、filter()、some()、every()</code>方法把对象绑定到this上，叫做显式绑定；而对于被调用的函数来说，叫做间接调用</p>
 <pre><code class="language-JavaScript">var a = 0;
 function foo(){
     console.log(this.a);
@@ -936,29 +941,8 @@ obj100.foo.call(obj1);//1
 obj100.foo.call(obj2);//2
 obj100.foo() // 100，普通的显式绑定无法解决隐式丢失问题
 </code></pre>
-<h3 id="硬绑定"><a class="header-anchor" href="#硬绑定"></a>硬绑定</h3>
-<p>​    <code>foo.call(obj);</code>的上级就有一个匿名函数，所以外部的代码每次都只能改到匿名函数的this，而改不到foo函数声明内的this。体现出一种硬绑定foo的效果，foo的this指向obj不受外部代码的干扰：</p>
-<pre><code class="language-JavaScript">var a = 0;
-function foo(){
-    console.log(this.a);
-}
-var obj = {
-    a:2
-};
-var obj2 = {
-    a:4
-};
-var bar= function(){
-    console.log(this) // 原本是window，这个this才会被外界代码干扰
-    foo.call(obj); // 这句表达式才是硬绑定的核心
-}
-//在bar函数内部手动调用foo.call(obj)。因此，无论之后如何调用函数bar，它总会手动在obj上调用foo
-bar();//2，只能干扰bar函数表达式内的this，不能干扰到foo的函数声明内的this
-setTimeout(bar,100);//2，隐式丢失只能干扰bar函数表达式内的this，不能干扰到foo的函数声明内的this
-bar.call(window);//2，只能干扰bar函数表达式内的this，不能干扰到foo的函数声明内的this
-</code></pre>
-<h3 id="js原生显示绑定api"><a class="header-anchor" href="#js原生显示绑定api"></a>js原生显示绑定API</h3>
-<p>javascript中新增了许多内置函数，具有显式绑定的功能，如数组的5个<a href="http://www.cnblogs.com/xiaohuochai/p/5682621.html#anchor10" target="_blank" rel="noopener">迭代方法</a>：map()、forEach()、filter()、some()、every()</p>
+<h3 id="es6显示绑定api"><a class="header-anchor" href="#es6显示绑定api"></a>es6显示绑定API</h3>
+<p>es6中新增了许多内置函数，具有显式绑定的功能，如数组的5个<a href="http://www.cnblogs.com/xiaohuochai/p/5682621.html#anchor10" target="_blank" rel="noopener">迭代方法</a>：<code>map()、forEach()、filter()、some()、every()</code></p>
 <pre><code class="language-JavaScript">var id = 'window';
 function foo(el){
     console.log(el,this.id);
@@ -997,7 +981,7 @@ console.log(test); // {a:2}
 o = new C2();
 console.log(o.a); // 24
 </code></pre>
-<p><strong>[注意]尽管有时候构造函数看起来像一个方法调用，它依然会使用这个新对象作为this。也就是说，在表达式new o.m()中，this并不是o</strong>：</p>
+<p><strong>[注意]尽管有时候构造函数看起来像一个方法调用，它依然会使用这个新对象作为this。也就是说，例如在表达式new o.m()中，this并不是指向o</strong>：</p>
 <pre><code class="language-JavaScript">var o = {
     m: function() {
         this.a = 'test a';    
@@ -1022,7 +1006,7 @@ function fn(){
 }
 fn();
 </code></pre>
-<p>在非严格模式下，使用函数的call()或apply()方法时，null或undefined值会被转换为全局对象；而在严格模式下，函数的this值始终是指定的值：</p>
+<p>在非严格模式下，使用函数的call()或apply()方法时，第一个参数若使用null或undefined，值会被转换为全局对象；而在严格模式下，函数的this值始终是表达式中所指定的值：</p>
 <pre><code class="language-JavaScript">var color = 'red';
 function displayColor(){
     console.log(this.color);
@@ -1045,7 +1029,7 @@ displayColor.call(null);//TypeError: Cannot read property 'color' of null
         <p><span>本文标题:</span><a href="/2017/08/07/js-this/">结合this的4种绑定规则 深入理解this指向的判定</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2017-08-07, 21:10:56</p>
-        <!-- <p><span>最后更新:</span>2020-04-29, 18:59:12</p> -->
+        <!-- <p><span>最后更新:</span>2020-04-29, 21:02:41</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="结合this的4种绑定规则 深入理解this指向的判定" href="/2017/08/07/js-this/">https://alexzhong22c.github.io/2017/08/07/js-this/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://alexzhong22c.github.io/2017/08/07/js-this/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -1081,7 +1065,7 @@ displayColor.call(null);//TypeError: Cannot read property 'color' of null
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#概述"><span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#默认绑定"><span class="toc-text">默认绑定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隐式绑定"><span class="toc-text">隐式绑定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#判定this的指向"><span class="toc-text">// 判定this的指向</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一-先去找出this关键字所在的函数声明或函数表达式"><span class="toc-text">一、先去找出this关键字所在的函数声明或函数表达式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二-找出该函数被调用时的表达式"><span class="toc-text">二、找出该函数被调用时的表达式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三-观察该调用表达式的形态-确定this的指向"><span class="toc-text">三、观察该调用表达式的形态，确定this的指向</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#闭包"><span class="toc-text">闭包</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#补充闭包常见demo"><span class="toc-text">补充闭包常见demo</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隐式丢失"><span class="toc-text">隐式丢失</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#函数别名的情况"><span class="toc-text">函数别名的情况</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参数传递的情况"><span class="toc-text">参数传递的情况</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内置函数的情况"><span class="toc-text">内置函数的情况</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#间接引用的情况"><span class="toc-text">间接引用的情况</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他情况"><span class="toc-text">其他情况</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#显示绑定"><span class="toc-text">显示绑定</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#硬绑定"><span class="toc-text">硬绑定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#js原生显示绑定api"><span class="toc-text">js原生显示绑定API</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#new绑定"><span class="toc-text">new绑定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#严格模式的严谨修正"><span class="toc-text">严格模式的严谨修正</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#概述"><span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#默认绑定"><span class="toc-text">默认绑定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隐式绑定"><span class="toc-text">隐式绑定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#判定this的指向"><span class="toc-text">// 判定this的指向</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一-先去找出this关键字所在的函数声明或函数表达式"><span class="toc-text">一、先去找出this关键字所在的函数声明或函数表达式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二-找出该函数被调用时的表达式"><span class="toc-text">二、找出该函数被调用时的表达式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三-观察该调用表达式的形态-确定this的指向"><span class="toc-text">三、观察该调用表达式的形态，确定this的指向</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#闭包"><span class="toc-text">闭包</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#补充闭包常见demo"><span class="toc-text">补充闭包常见demo</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隐式丢失"><span class="toc-text">隐式丢失</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#函数别名的情况"><span class="toc-text">函数别名的情况</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参数传递的情况"><span class="toc-text">参数传递的情况</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内置函数的情况"><span class="toc-text">内置函数的情况</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#间接引用的情况"><span class="toc-text">间接引用的情况</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他情况"><span class="toc-text">其他情况</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#显示绑定"><span class="toc-text">显示绑定</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#es6显示绑定api"><span class="toc-text">es6显示绑定API</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#new绑定"><span class="toc-text">new绑定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#严格模式的严谨修正"><span class="toc-text">严格模式的严谨修正</span></a></li></ol>
         
     </div>
     <style>
@@ -1148,7 +1132,7 @@ displayColor.call(null);//TypeError: Cannot read property 'color' of null
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					
-						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：4,147</span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：4,005</span>
 					
 				</div>
             </div>
