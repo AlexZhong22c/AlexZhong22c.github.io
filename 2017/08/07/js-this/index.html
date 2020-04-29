@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
 <meta property="og:description" content="此文适合用于进阶对this的理解，不适合用来入门。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-04-20T13:48:14.000Z">
+<meta property="og:updated_time" content="2020-04-29T10:59:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="结合this的4种绑定规则 深入理解this指向的判定">
 <meta name="twitter:description" content="此文适合用于进阶对this的理解，不适合用来入门。">
@@ -551,10 +551,12 @@
 <p>4.new绑定</p>
 <p>这种划分是按照JavaScript的运行机理划分的，这有助于我们判定复杂的this的指向。</p>
 <blockquote>
-<p>值得补充的是，</p>
-<p>如果想要完全理解this的指向，可以完全不用理会 作用域和执行上下文等等概念，因为this和作用域等东西是两个互相独立开来的不同体系。而我们之所以讨论到变量提升，是为了综合这两个体系的知识来提高我们的判别能力。</p>
-<p>如果想要完全理解this的指向，就一定要明白编译和执行的具体过程，另外要知道“执行流”这种工作方式。</p>
+<p>值得补充的是：</p>
+<p>我们可以粗浅地理解为：进入函数的“执行上下文”会发生三件事情：1 确定this指向 2 创建活动对象并完成“变量提升” 3 确定作用域链 。</p>
+<p>可见，如果想要完全理解this的指向，可以完全不用理会“作用域”的概念，它们是不同的体系。</p>
+<p>“变量提升”也是不同于this的问题体系，联系在一起讲好像不会增加理解的难度，所以后文会涉及到“变量提升”。</p>
 </blockquote>
+<p>书中提出了“执行流”这种虚拟的概念，来比较死板地判断this的指向，判断效果还是挺不错的。</p>
 <h2 id="默认绑定"><a class="header-anchor" href="#默认绑定"></a>默认绑定</h2>
 <p>全局环境中，this默认绑定全局对象；而在浏览器下，全局对象就是 window。</p>
 <p>即简而言之：</p>
@@ -1043,7 +1045,7 @@ displayColor.call(null);//TypeError: Cannot read property 'color' of null
         <p><span>本文标题:</span><a href="/2017/08/07/js-this/">结合this的4种绑定规则 深入理解this指向的判定</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2017-08-07, 21:10:56</p>
-        <!-- <p><span>最后更新:</span>2020-04-20, 21:48:14</p> -->
+        <!-- <p><span>最后更新:</span>2020-04-29, 18:59:12</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="结合this的4种绑定规则 深入理解this指向的判定" href="/2017/08/07/js-this/">https://alexzhong22c.github.io/2017/08/07/js-this/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://alexzhong22c.github.io/2017/08/07/js-this/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -1146,7 +1148,7 @@ displayColor.call(null);//TypeError: Cannot read property 'color' of null
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					
-						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：4,111</span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：4,147</span>
 					
 				</div>
             </div>

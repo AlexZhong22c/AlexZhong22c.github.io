@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://alexzhong22c.github.io/2017/08/07/js-this/</loc>
+    
+    <lastmod>2020-04-29T10:59:12.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://alexzhong22c.github.io/2017/07/01/js-event3/</loc>
     
     <lastmod>2020-04-24T13:31:23.000Z</lastmod>
@@ -213,13 +220,6 @@
   
   <url>
     <loc>https://alexzhong22c.github.io/2017/07/01/js-pv-default/</loc>
-    
-    <lastmod>2020-04-20T13:48:14.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://alexzhong22c.github.io/2017/08/07/js-this/</loc>
     
     <lastmod>2020-04-20T13:48:14.000Z</lastmod>
     
