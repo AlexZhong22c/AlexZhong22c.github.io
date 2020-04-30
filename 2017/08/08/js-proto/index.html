@@ -78,24 +78,24 @@
 
 
 
-<meta name="description" content="理解对象和函数的prototype、proto和constructor等关系：">
+<meta name="description" content="理解对象和函数的prototype、__proto__和constructor等关系：">
 <meta name="keywords" content="进阶,继承,原型,构造器">
 <meta property="og:type" content="article">
-<meta property="og:title" content="理解prototype、proto和constructor等关系">
+<meta property="og:title" content="理解prototype、__proto__和constructor等关系">
 <meta property="og:url" content="https://alexzhong22c.github.io/2017/08/08/js-proto/index.html">
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
-<meta property="og:description" content="理解对象和函数的prototype、proto和constructor等关系：">
+<meta property="og:description" content="理解对象和函数的prototype、__proto__和constructor等关系：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://cloud.az22c.top/js-protojs-proto-1.png-az22cgithub">
-<meta property="og:image" content="https://cloud.az22c.top/js-protojs-proto-2.png-az22cgithub">
-<meta property="og:image" content="https://cloud.az22c.top/js-protojs-proto-3.png-az22cgithub">
-<meta property="og:image" content="https://cloud.az22c.top/js-protojs-proto-4.png-az22cgithub">
-<meta property="og:image" content="https://cloud.az22c.top/js-protojs-proto-4.png-az22cgithub">
-<meta property="og:updated_time" content="2020-04-20T13:48:14.000Z">
+<meta property="og:image" content="https://cloud.az22c.top/js-prototype-1.png-az22cgithub">
+<meta property="og:image" content="https://cloud.az22c.top/js-prototype-2.png-az22cgithub">
+<meta property="og:image" content="https://cloud.az22c.top/js-prototype-3.png-az22cgithub">
+<meta property="og:image" content="https://cloud.az22c.top/js-prototype-4.png-az22cgithub">
+<meta property="og:image" content="https://cloud.az22c.top/js-prototype-4.png-az22cgithub">
+<meta property="og:updated_time" content="2020-04-30T09:20:50.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="理解prototype、proto和constructor等关系">
-<meta name="twitter:description" content="理解对象和函数的prototype、proto和constructor等关系：">
-<meta name="twitter:image" content="https://cloud.az22c.top/js-protojs-proto-1.png-az22cgithub">
+<meta name="twitter:title" content="理解prototype、__proto__和constructor等关系">
+<meta name="twitter:description" content="理解对象和函数的prototype、__proto__和constructor等关系：">
+<meta name="twitter:image" content="https://cloud.az22c.top/js-prototype-1.png-az22cgithub">
 
 
     <link rel="alternate" href="/atom.xml" title="Web前端 | Alex Zhong" type="application/atom+xml" data-no-instant>
@@ -129,7 +129,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>理解prototype、proto和constructor等关系 | Web前端 | Alex Zhong</title>
+<title>理解prototype、__proto__和constructor等关系 | Web前端 | Alex Zhong</title>
 
 
 
@@ -511,7 +511,7 @@
 
 	<br />
 	<p style="height:7px;"/>
-	<p style="height:20px;font-family:KaiTi,LiSu,'宋体',sans-serif;color:#DBDBDB;font-size:12px;">预计阅读5分钟</p>
+	<p style="height:20px;font-family:KaiTi,LiSu,'宋体',sans-serif;color:#DBDBDB;font-size:12px;">预计阅读6分钟</p>
 
     </div>
   
@@ -522,7 +522,7 @@
         
   
     <h1 class="article-title-big" itemprop="name">
-      理解prototype、proto和constructor等关系
+      理解prototype、__proto__和constructor等关系
     </h1>
   
 
@@ -547,21 +547,24 @@
     
           <div id="article-content" class="article-entry" itemprop="articleBody">
 			  
-			<p>理解对象和函数的prototype、proto和constructor等关系：</p>
+			<p>理解对象和函数的prototype、__proto__和constructor等关系：</p>
 <a id="more"></a>
 <p>在JavaScript中，函数也是对象。</p>
 <h2 id="概述"><a class="header-anchor" href="#概述"></a>概述</h2>
 <p>先给出 构造函数 实例对象 原型对象 三者的关系：</p>
 <pre><code class="language-JavaScript">//  概述demo：
-function Foo(){};
+function Foo() {};
 var f1 = new Foo;
 </code></pre>
-<p><img src="https://cloud.az22c.top/js-protojs-proto-1.png-az22cgithub" alt="js-proto-1"></p>
+<p><img src="https://cloud.az22c.top/js-prototype-1.png-az22cgithub" alt="js-prototype-1"></p>
 <p>如图，</p>
 <p><strong>[1]构造函数有一个prototype属性，指向实例对象的原型对象。</strong></p>
 <p><strong>[2]原型对象有一个constructor属性，指向该原型对象对应的构造函数。</strong></p>
 <p><strong>[3]由于实例对象可以继承原型对象的属性，所以实例对象也拥有constructor属性，同样指向原型对象对应的构造函数。</strong></p>
-<p><strong>[4]实例对象有一个proto属性，指向该实例对象对应的原型对象。</strong></p>
+<p><strong>[4]实例对象有一个__proto__属性，指向该实例对象对应的原型对象。</strong></p>
+<blockquote>
+<p>由于constructor属性是可以继承而来。如果是继承的，我们在图中用虚线来表示。后面所有图同理。</p>
+</blockquote>
 <h3 id="构造函数"><a class="header-anchor" href="#构造函数"></a>构造函数</h3>
 <p>用来初始化新创建的对象的函数是构造函数。在上面例子中，Foo()函数是构造函数。</p>
 <h3 id="实例对象"><a class="header-anchor" href="#实例对象"></a>实例对象</h3>
@@ -594,8 +597,8 @@ console.log(Foo.prototype.constructor === Foo);//true
 var f1 = new Foo;
 console.log(f1.constructor === Foo);//true
 </code></pre>
-<h3 id="proto"><a class="header-anchor" href="#proto"></a>proto</h3>
-<p><strong>[4]实例对象有一个proto属性，指向该实例对象对应的原型对象。</strong> 实例对象f1通过<code>__proto__属性</code>也指向原型对象Foo.prototype。</p>
+<h3 id="proto"><a class="header-anchor" href="#proto"></a><strong>proto</strong></h3>
+<p><strong>[4]实例对象有一个__proto__属性，指向该实例对象对应的原型对象。</strong> 实例对象f1通过<code>__proto__属性</code>也指向原型对象Foo.prototype。</p>
 <pre><code class="language-JavaScript">function Foo(){};
 var f1 = new Foo;
 console.log(f1.__proto__ === Foo.prototype);//true
@@ -603,7 +606,7 @@ console.log(f1.__proto__ === Foo.prototype);//true
 <h2 id="视foo-prototype为实例对象"><a class="header-anchor" href="#视foo-prototype为实例对象"></a>视Foo.prototype为实例对象</h2>
 <p>Foo.prototype是f1的原型对象，同时它也可以是实例对象。实际上，任何对象都可以看做是通过Object()构造函数的new操作实例化的对象。</p>
 <p><strong>所以，Foo.prototype作为实例对象时，它的构造函数是Object()，原型对象是Object.prototype。</strong></p>
-<p><img src="https://cloud.az22c.top/js-protojs-proto-2.png-az22cgithub" alt="js-proto-2"></p>
+<p><img src="https://cloud.az22c.top/js-prototype-2.png-az22cgithub" alt="js-prototype-2"></p>
 <p>相应地，构造函数Object()的prototype属性指向原型对象Object.prototype；</p>
 <p>Object.prototype的constructor属性指向构造函数Object()</p>
 <p>实例对象Foo.prototype本身具有constructor属性，所以它会覆盖继承自原型对象Object.prototype的constructor属性：</p>
@@ -613,14 +616,14 @@ console.log(Foo.prototype.constructor === Foo);//true
 console.log(Object.prototype.constructor === Object);//true
 console.log(Foo.prototype.hasOwnProperty('constructor'));//true
 </code></pre>
-<p>实例对象Foo.prototype的proto属性同样指向原型对象Object.prototype：</p>
+<p>实例对象Foo.prototype的__proto__属性同样指向原型对象Object.prototype：</p>
 <pre><code class="language-JavaScript">function Foo(){};
 var f1 = new Foo;
 console.log(Foo.prototype.__proto__ === Object.prototype);//true
 </code></pre>
 <h2 id="视object-prototype为实例对象"><a class="header-anchor" href="#视object-prototype为实例对象"></a>视Object.prototype为实例对象</h2>
 <p>如果Object.prototype作为实例对象的话，其原型对象是什么？结果是null。</p>
-<p><img src="https://cloud.az22c.top/js-protojs-proto-3.png-az22cgithub" alt="js-proto-3"></p>
+<p><img src="https://cloud.az22c.top/js-prototype-3.png-az22cgithub" alt="js-prototype-3"></p>
 <pre><code class="language-JavaScript">console.log(Object.prototype.__proto__ === null);//true
 </code></pre>
 <h2 id="函数foo和函数object也可以被视为实例对象"><a class="header-anchor" href="#函数foo和函数object也可以被视为实例对象"></a>函数Foo和函数Object也可以被视为实例对象</h2>
@@ -640,11 +643,14 @@ console.log(Foo.hasOwnProperty('constructor'));//false
 console.log(Object.constructor === Function);//true
 console.log(Object.hasOwnProperty('constructor'));//false
 </code></pre>
-<p><img src="https://cloud.az22c.top/js-protojs-proto-4.png-az22cgithub" alt="js-proto-4"></p>
+<blockquote>
+<p>“构造函数Foo的constructor”和“构造函数Object的constructor”都是继承而来的，所以都在图中用虚线来表示。</p>
+</blockquote>
+<p><img src="https://cloud.az22c.top/js-prototype-4.png-az22cgithub" alt="js-prototype-4"></p>
 <h2 id="视function为实例对象"><a class="header-anchor" href="#视function为实例对象"></a>视Function为实例对象</h2>
 <p><strong>所有的函数都可以看成是构造函数Function()的new操作的实例化对象。</strong> 那么，Function可以看成是调用其自身的new操作的实例化的结果</p>
 <p>所以，如果Function作为实例对象，其构造函数是Function，其原型对象是Function.prototype</p>
-<pre><code>console.log(Function.__proto__ === Function.prototype);//true
+<pre><code class="language-js">console.log(Function.__proto__ === Function.prototype);//true
 console.log(Function.prototype.constructor === Function);//true
 console.log(Function.prototype === Function.prototype);//true
 </code></pre>
@@ -662,7 +668,7 @@ console.log(Function.prototype === Function.prototype);//true
 var f1 = new Foo;
 </code></pre>
 <p>其涉及到的构造函数 实例对象 原型对象 以及它们之间的关系如图所示：</p>
-<p><img src="https://cloud.az22c.top/js-protojs-proto-4.png-az22cgithub" alt="js-proto-4"></p>
+<p><img src="https://cloud.az22c.top/js-prototype-4.png-az22cgithub" alt="js-prototype-4"></p>
 <p>【1】函数(Function也是函数)是new Function的结果，所以函数可以作为实例对象，其构造函数是Function()，原型对象是Function.prototype</p>
 <p>【2】对象(函数也是对象)是new Object的结果，所以对象可以作为实例对象，其构造函数是Object()，原型对象是Object.prototype</p>
 <p>【3】Object.prototype的原型对象是null</p>
@@ -672,12 +678,12 @@ var f1 = new Foo;
   
      <!-- 版权署名授权 -->
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/08/08/js-proto/">理解prototype、proto和constructor等关系</a></p>
+        <p><span>本文标题:</span><a href="/2017/08/08/js-proto/">理解prototype、__proto__和constructor等关系</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2017-08-08, 22:14:49</p>
-        <!-- <p><span>最后更新:</span>2020-04-20, 21:48:14</p> -->
+        <!-- <p><span>最后更新:</span>2020-04-30, 17:20:50</p> -->
         <p>
-            <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="理解prototype、proto和constructor等关系" href="/2017/08/08/js-proto/">https://alexzhong22c.github.io/2017/08/08/js-proto/</a>
+            <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="理解prototype、__proto__和constructor等关系" href="/2017/08/08/js-proto/">https://alexzhong22c.github.io/2017/08/08/js-proto/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://alexzhong22c.github.io/2017/08/08/js-proto/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
         </p>
         <p style="color: #696969;">
@@ -755,7 +761,7 @@ var f1 = new Foo;
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/02/06/height-calculate/">深入理解文字高度和行高的设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/05/vertical-align-middle/">vertical-align:middle近似居中和完美居中</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/05/centralize-one-ele/">总结：使单一对象水平/垂直居中</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/15/react-state/">深入理解State和setState()</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/22/let-n-const/">let和const旧话新编</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/12/git-stage/">git暂存区知识梳理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/17/ife-css-task03/">三栏式布局--IFE2017-CSS-task03笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/07/css-border1/">border-radius属性</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/03/js-obj-prop1/">对象属性的操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/02/js-obj-prop2/">对象属性描述符</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/01/js-obj-prop3/">对象属性之对象状态</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/12/js-inherit/">实现继承的3种方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/12/js-new-happen/">new创建对象的过程发生了什么</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/09/js-constructor/">构造函数和原型对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/08/js-proto/">理解prototype、proto和constructor等关系</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/07/js-this2/">this绑定的优先级</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/07/js-this/">结合this的4种绑定规则 深入理解this指向的判定</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/02/js-event4/">浏览器事件冒泡或者捕获相关</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/01/js-event3/">js四种事件处理程序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/01/js-pv-default/">js取消默认事件行为</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/07/js-date/">JavaScript Date对象回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/07/vue-checkbox-table/">纯vue实现checkbox父子联动</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/25/vue-time-tracker/">经典vue单页路由入门全家桶</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/15/vue-table-nav/">按条目展示表格数据小插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/clearfix-n-bfc/">闭合浮动和BFC和阻止上下外边距的合并</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/ife-css-task02/">IFE2017-CSS-task02笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/31/css-selectors-specificity/">CSS选择器优先级</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/28/h5-new-ele/">H5新标签和被H5拥抱的老元素们</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/27/ife-css-task01/">IFE2017-CSS-task01笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/10/iife-intro/">IIFE回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/09/for-loop/">js的for循环回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/float-n-absolute/">float和绝对定位比较</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/about-margin/">和margin有关的知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/gulp-usage/">gulp的入门和一些简单使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/27/icon-usage/">桌面端和移动端图标的引入</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/25/webapp-events-intro/">移动开发事件入门概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/24/webapp-intro/">移动开发入门概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/my-hexo-theme/">yelee主题改bug总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/17/todo-app/">ToDo小应用完工总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/equality-operators/">相等操作符回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/js-operators/">操作符回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/25/font-face/">font-face--CSS3</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/13/js-function/">js函数基础回顾</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/02/06/height-calculate/">深入理解文字高度和行高的设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/05/vertical-align-middle/">vertical-align:middle近似居中和完美居中</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/05/centralize-one-ele/">总结：使单一对象水平/垂直居中</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/15/react-state/">深入理解State和setState()</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/22/let-n-const/">let和const旧话新编</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/12/git-stage/">git暂存区知识梳理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/17/ife-css-task03/">三栏式布局--IFE2017-CSS-task03笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/07/css-border1/">border-radius属性</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/03/js-obj-prop1/">对象属性的操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/02/js-obj-prop2/">对象属性描述符</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/01/js-obj-prop3/">对象属性之对象状态</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/12/js-inherit/">实现继承的3种方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/12/js-new-happen/">new创建对象的过程发生了什么</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/09/js-constructor/">构造函数和原型对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/08/js-proto/">理解prototype、__proto__和constructor等关系</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/07/js-this2/">this绑定的优先级</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/07/js-this/">结合this的4种绑定规则 深入理解this指向的判定</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/02/js-event4/">浏览器事件冒泡或者捕获相关</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/01/js-event3/">js四种事件处理程序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/01/js-pv-default/">js取消默认事件行为</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/07/js-date/">JavaScript Date对象回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/07/vue-checkbox-table/">纯vue实现checkbox父子联动</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/25/vue-time-tracker/">经典vue单页路由入门全家桶</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/15/vue-table-nav/">按条目展示表格数据小插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/clearfix-n-bfc/">闭合浮动和BFC和阻止上下外边距的合并</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/ife-css-task02/">IFE2017-CSS-task02笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/31/css-selectors-specificity/">CSS选择器优先级</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/28/h5-new-ele/">H5新标签和被H5拥抱的老元素们</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/27/ife-css-task01/">IFE2017-CSS-task01笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/10/iife-intro/">IIFE回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/09/for-loop/">js的for循环回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/float-n-absolute/">float和绝对定位比较</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/about-margin/">和margin有关的知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/gulp-usage/">gulp的入门和一些简单使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/27/icon-usage/">桌面端和移动端图标的引入</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/25/webapp-events-intro/">移动开发事件入门概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/24/webapp-intro/">移动开发入门概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/my-hexo-theme/">yelee主题改bug总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/17/todo-app/">ToDo小应用完工总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/equality-operators/">相等操作符回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/js-operators/">操作符回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/25/font-face/">font-face--CSS3</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/13/js-function/">js函数基础回顾</a></li></ul>
 
 
 
@@ -778,7 +784,7 @@ var f1 = new Foo;
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					
-						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,296</span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,364</span>
 					
 				</div>
             </div>
