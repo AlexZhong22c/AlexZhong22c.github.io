@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://alexzhong22c.github.io/2017/08/12/js-new-happen/</loc>
+    
+    <lastmod>2020-04-30T09:41:17.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://alexzhong22c.github.io/2017/08/08/js-proto/</loc>
     
     <lastmod>2020-04-30T09:20:50.000Z</lastmod>
@@ -178,13 +185,6 @@
   
   <url>
     <loc>https://alexzhong22c.github.io/2017/08/12/js-inherit/</loc>
-    
-    <lastmod>2020-04-20T13:48:14.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://alexzhong22c.github.io/2017/08/12/js-new-happen/</loc>
     
     <lastmod>2020-04-20T13:48:14.000Z</lastmod>
     

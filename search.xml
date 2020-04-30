@@ -2559,37 +2559,40 @@ Person.say(); // Person.say is not a function
 <p>Person本身是一个普通函数，但当通过new来创建对象时，Person就是构造函数了。</p>
 <p>JS引擎执行这句代码时，在内部做了很多工作，用伪代码模拟其工作流程如下：</p>
 <pre><code class="language-javascript">new Person(&quot;John&quot;) = {
-    var obj = {};
-	obj.__proto__ = Person.prototype; // 此时便建立了obj对象的原型链：
+  var obj = {};
+	obj.__proto__ = Person.prototype;
+	// 此时便建立了obj对象的原型链：
 	// obj-&gt;Person.prototype-&gt;Object.prototype-&gt;null
+
 	var result = Person.call(obj,&quot;John&quot;); // 相当于obj.Person(&quot;John&quot;)
-	return typeof result === 'object' ? result : obj; // 如果无返回值或者返回一个非对象值，则将obj返回作为新对象
+
+	// 如果无返回值或者返回一个非对象值，则将obj返回作为新对象：
+	return typeof result === 'object' ? result || obj : obj;
 }
 </code></pre>
 <p>可以看到，这里的obj经返回后会被赋给john变量：</p>
 <p>obj.name是在<code>Person.call(obj,&quot;John&quot;)</code>这句话执行之后就有了“John”这个值；</p>
 <p>等到obj经返回被赋给john之后，john.name就是“John”了。</p>
 <p>画出最终<code>var john = new Person(&quot;John&quot;);</code>这一句代码涉及到的对象和它们间的关系：</p>
-<p>( 执行完代码后，临时变量obj就被销毁 )</p>
-<p><img src="https://cloud.az22c.top/js-new-happen-1.png-az22cgithub" alt="js-new-happen-1"></p>
+<p><img src="https://cloud.az22c.top/js-new-process-1.png-az22cgithub" alt="js-new-process-1"></p>
 <blockquote>
 <p>如果看不懂图，可以先看我以往文章的介绍： <a href="https://alexzhong22c.github.io/2017/08/08/js-proto/">理解prototype、proto和constructor等关系</a></p>
 </blockquote>
 <h2 id="控制台结果解析"><a class="header-anchor" href="#控制台结果解析"></a>控制台结果解析</h2>
 <p>分析完了 john 的产生过程，我们再分析一下控制台输出结果：</p>
 <p>这个例子的代码全部执行完，最终涉及到的对象和它们间的关系如图：</p>
-<p><img src="https://cloud.az22c.top/js-new-happen-2.png-az22cgithub" alt="js-new-happen-2"></p>
+<p><img src="https://cloud.az22c.top/js-new-process-2.png-az22cgithub" alt="js-new-process-2"></p>
 <ul>
 <li><a href="http://john.name" target="_blank" rel="noopener">john.name</a>： 临时变量obj有name，obj经返回被赋给john，john的一些属性由此而来。</li>
 <li>john.hairColor：john实例对象 先查找自身的 hairColor，<strong>没有找到便会沿着原型链查找</strong>，在上述例子中，我们仅在 Person 对象上定义了 hairColor，并没有在其原型链上定义，因此找不到。</li>
 <li>john.height：john实例对象 先查找自身的 height，<strong>没有找到便会沿着原型链查找</strong>，原型链上也没有，因此找不到。</li>
 <li>john.say：john会先查找自身的 say 方法，没有找到便会沿着原型链查找，在上述例子中，我们在 Person.prototype上定义了say，因此在原型链上找到了say 方法。</li>
 </ul>
-<p>另外，在 say 方法中还访问 <a href="http://this.name" target="_blank" rel="noopener">this.name</a>，这里的 this 指的是其调用者。如果john调用say，john就是调用者，因此输出john.name的值。</p>
+<p>另外，在 say 方法中还访问<code>this.name</code>，这里的 this 指的是其调用者。如果john调用say，john就是调用者，因此输出john.name的值。</p>
 <hr>
 <p>对于Person来说，它本身也是一个对象，因此它在访问属性和方法时也遵守上述查找规则，所以：</p>
 <ul>
-<li><a href="http://Person.name" target="_blank" rel="noopener">Person.name</a> —&gt; Person   <strong>// 这是特殊情况</strong></li>
+<li><code>Person.name</code> —&gt; Person   <strong>// 这是特殊情况</strong></li>
 <li>Person.hairColor —&gt; “black”</li>
 <li>Person.say() —&gt; Person.say is not a function</li>
 </ul>
@@ -2601,16 +2604,10 @@ Person.say(); // Person.say is not a function
 <p>[1] 导致john继承了Person.prototype：</p>
 <p>令john的<code>__proto__属性</code>指向Person.prototype，确立了这条原型链， 导致 john 能通过原型链继承Person.prototype 中的部分属性，可以简单地视john和Person.prototype是继承关系。</p>
 <p>[2] john是 Person构造函数 的实例：</p>
-<pre><code class="language-javascript">john instanceof Person; //true
+<pre><code class="language-javascript">// instanceof 运算符用于检测构造函数的 prototype 属性是否出现在某个实例对象的原型链上：
+john instanceof Person; //true
 </code></pre>
-<p>经过创建实例对象后，实例对象拥有自己的属性和方法，这个过程中构造函数发挥了作用。</p>
-<p>[3]我们再来了解一下 instanceof 的内部原理，以应证我们的图是正确的：</p>
-<pre><code class="language-JavaScript">var L = A.__proto__;
-var R = B.prototype;
-if(L === R)
-    return true;
-</code></pre>
-<p>Person对象还有一个prototype属性指向Person.prototype。</p>
+<p>这个过程中Person构造函数被调用并发挥了作用。其结果是，经过new创建实例对象后，实例对象可以拥有自己的属性和方法。</p>
 ]]></content>
       
         <categories>
