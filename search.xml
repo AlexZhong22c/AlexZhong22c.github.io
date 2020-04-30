@@ -2265,7 +2265,7 @@ console.log(Object.getOwnPropertyDescriptor(o,'a'));
       <content type="html"><![CDATA[<p>对关于继承的内容做一番整理。</p>
 <a id="more"></a>
 <h2 id="原型链"><a class="header-anchor" href="#原型链"></a>原型链</h2>
-<p>javascript使用原型链作为实现继承的主要方法，实现的本质是重写<a href="https://alexzhong22c.github.io/2017/08/09/js-constructor/">原型对象</a>，代之以一个新类型的实例：</p>
+<p>javascript使用原型链作为实现继承的主要方法，实现的本质是重写原型对象，代之以一个新类型的实例：</p>
 <pre><code class="language-javascript">function Super(){ // 注释【1】
     this.value = true;
 }
@@ -2628,170 +2628,14 @@ john instanceof Person; //true
     </entry>
     
     <entry>
-      <title><![CDATA[构造函数和原型对象]]></title>
-      <url>https://alexzhong22c.github.io/2017/08/09/js-constructor/</url>
-      <content type="html"><![CDATA[<p>一般地，javascript使用构造函数和原型对象来进行面向对象编程，它们的表现与其他面向对象编程语言中的“类”相似又不同。</p>
-<p>在 <a href="https://alexzhong22c.github.io/2017/08/08/js-proto/">上一篇文章</a> 已经做过对 构造函数 和 原型对象 的简单介绍，下面为了对比它们，做一些内容细节上的补充：</p>
+      <title><![CDATA[原型对象 实战使用]]></title>
+      <url>https://alexzhong22c.github.io/2017/08/09/js-prototype-practice/</url>
+      <content type="html"><![CDATA[<p>一般地，javascript使用构造函数和原型对象来进行面向对象编程，它们的表现与其他面向对象编程语言中的“类”相似而又不同。</p>
+<p>在 <a href="https://alexzhong22c.github.io/2017/08/08/js-proto/">上一篇文章</a> 已经做过对 构造函数 和 原型对象 的简单介绍。在这篇文章主要介绍使用实战，你可不要小看“实战”，坑点还是挺多的。</p>
 <a id="more"></a>
-<h2 id="构造函数的基本特点"><a class="header-anchor" href="#构造函数的基本特点"></a>构造函数的基本特点</h2>
-<h3 id="new操作符"><a class="header-anchor" href="#new操作符"></a>new操作符</h3>
-<p>构造函数是用new创建对象时调用的函数，与普通函数唯一的区别是构造函数名应该首字母大写。</p>
-<pre><code class="language-JavaScript">function Person(){
-    this.age = 30;
-}
-var person1 = new Person();
-console.log(person1.age);//30
-</code></pre>
-<p>如果忘记使用new操作符，则this将会指向全局对象window：</p>
-<pre><code class="language-JavaScript">function Person(){
-    this.age = 30;
-}
-var person1 = Person();
-console.log(window.age);//30
-console.log(person1.age);//Uncaught TypeError: Cannot read property 'age' of undefined
-</code></pre>
-<h3 id="构造函数的参数"><a class="header-anchor" href="#构造函数的参数"></a>构造函数的参数</h3>
-<p>根据需要，构造函数可以接受参数：</p>
-<pre><code class="language-JavaScript">function Person(age){
-    this.age = age;
-}
-var person1 = new Person(30);
-console.log(person1.age);//30
-</code></pre>
-<p>如果没有参数，可以省略括号：</p>
-<pre><code class="language-JavaScript">function Person(){
-    this.age = 30;
-}
-//等价于var person1 = new Person() ：
-var person1 = new Person;
-console.log(person1.age);//30
-</code></pre>
-<h3 id="鉴别对象的类型的方法："><a class="header-anchor" href="#鉴别对象的类型的方法："></a>鉴别对象的类型的方法：</h3>
-<h4 id="instanceof"><a class="header-anchor" href="#instanceof"></a>instanceof</h4>
-<p>instanceof操作符可以用来鉴别对象的类型：</p>
-<pre><code class="language-JavaScript">function Person(){
-    //
-}
-var person1 = new Person;
-console.log(person1 instanceof Person);//true
-</code></pre>
-<h4 id="constructor"><a class="header-anchor" href="#constructor"></a>constructor</h4>
-<p><a href="https://alexzhong22c.github.io/2017/08/08/js-proto/">上一篇文章</a> 已经介绍过了constructor属性的指向。</p>
-<p>每个对象在创建时都自动拥有一个构造函数属性constructor，其中包含了一个指向其构造函数的引用。而这个constructor属性实际上继承自原型对象，而constructor也是原型对象唯一的自有属性：</p>
-<pre><code class="language-JavaScript">function Person(){
-    //
-}
-var person1 = new Person;
-console.log(person1.constructor === Person);//true    
-console.log(person1.__proto__.constructor === Person);//true
-</code></pre>
-<p>以下是person1的内部属性，发现constructor是继承属性：</p>
-<p><img src="https://cloud.az22c.top/js-constructorjs-constructor.png-az22cgithub" alt="js-constructor"></p>
-<p><strong>虽然对象实例及其构造函数之间存在这样的关系，但是还是建议使用instanceof来检查对象类型。这是因为构造函数属性可以被覆盖，所以并不一定完全准确：</strong></p>
-<pre><code class="language-JavaScript">function Person(){
-    //
-}
-var person1 = new Person;
-Person.prototype.constructor = 123;
-console.log(person1.constructor);//123
-console.log(person1.__proto__.constructor);//123
-</code></pre>
-<h3 id="构造函数的返回值"><a class="header-anchor" href="#构造函数的返回值"></a>构造函数的返回值</h3>
-<p>普通函数中的return语句用来返回函数调用后的返回值，而new构造函数的返回值有点特殊：</p>
-<p>1.如果构造函数使用return语句但没有指定返回值，或者返回一个原始值</p>
-<p>那么这时将忽略返回值，同时使用这个新对象作为调用结果：</p>
-<pre><code class="language-JavaScript">function fn(){
-    this.a = 2;
-    return;
-}
-var test = new fn();
-console.log(test);//{a:2}
-</code></pre>
-<p>2.如果构造函数显式地使用return语句返回一个对象</p>
-<p>那么调用表达式的值就是这个对象：</p>
-<pre><code class="language-JavaScript">var obj = {a:1};
-function fn(){
-    this.a = 2;
-    return obj;
-}
-var test = new fn();
-console.log(test);//{a:1}
-</code></pre>
-<h4 id="常见应用："><a class="header-anchor" href="#常见应用："></a>常见应用：</h4>
-<p>所以，针对丢失new的构造函数的解决办法是：在构造函数内部使用instanceof判断是否使用new命令，如果发现没有使用，则直接使用return语句返回一个实例对象：</p>
-<pre><code class="language-JavaScript">function Person(){
-    if(!(this instanceof Person)){
-        return new Person();
-    }
-    this.age = 30;
-}
-var person1 = Person();
-console.log(person1.age);//30
-var person2 = new Person();
-console.log(person2.age);//30
-</code></pre>
-<h3 id="构造函数的问题"><a class="header-anchor" href="#构造函数的问题"></a>构造函数的问题</h3>
-<p>使用构造函数的好处在于<strong>所有用同一个构造函数创建的对象都具有同样的属性和方法</strong>：</p>
-<pre><code class="language-JavaScript">function Person(name){
-    this.name = name;
-    this.sayName = function(){
-        console.log(this.name);
-    }
-}
-var person1 = new Person('bai');
-var person2 = new Person('hu');
-person1.sayName();//'bai'
-</code></pre>
-<p>构造函数允许给对象配置同样的属性，但是构造函数并没有消除代码冗余。</p>
-<p><strong>使用构造函数的主要问题是每个方法都要在每个实例上重新创建一遍。</strong> 在上面的例子中，每一个对象都有自己的sayName()方法。这意味着如果有100个对象实例，就有100个函数做相同的事情，只是使用的数据不同：</p>
-<pre><code class="language-JavaScript">function Person(name){
-    this.name = name;
-    this.sayName = function(){
-        console.log(this.name);
-    }
-}
-var person1 = new Person('bai');
-var person2 = new Person('hu');
-console.log(person1.sayName === person2.sayName);//false
-</code></pre>
-<p>可以通过把函数定义转换到构造函数外部来解决问题：</p>
-<pre><code class="language-JavaScript">function Person(name){
-    this.name = name;
-    this.sayName = sayName;
-}
-function sayName(){
-    console.log(this.name);
-}
-var person1 = new Person('bai');
-var person2 = new Person('hu');
-console.log(person1.sayName === person2.sayName);//true
-</code></pre>
-<p>但是，在全局作用域中定义的函数实际上只能被某个对象调用，这让全局作用域有点名不副实。而且，如果对象需要定义很多方法，就要定义很多全局函数，严重污染全局空间，这个自定义的引用类型没有封装性可言了。</p>
-<p>如果所有的对象实例共享同一个方法会更有效率，这就需要用到下面所说的原型对象。</p>
-<h2 id="原型对象"><a class="header-anchor" href="#原型对象"></a>原型对象</h2>
-<h3 id="介绍prototype-proto和constructor等关系"><a class="header-anchor" href="#介绍prototype-proto和constructor等关系"></a>介绍prototype、proto和constructor等关系</h3>
-<p>请参考我的上一篇文章： <a href="https://alexzhong22c.github.io/2017/08/08/js-proto/">理解prototype、proto和constructor等关系</a></p>
-<h3 id="是否为实例对象-原型对象关系"><a class="header-anchor" href="#是否为实例对象-原型对象关系"></a>是否为实例对象–原型对象关系</h3>
-<h4 id="isprototypeof"><a class="header-anchor" href="#isprototypeof"></a>isPrototypeOf()</h4>
-<p>一般地，可以通过isPrototypeOf()方法来确定对象之间是否是实例对象和原型对象的关系：</p>
-<pre><code class="language-JavaScript">function Foo(){};
-var f1 = new Foo;
-console.log(f1.__proto__ === Foo.prototype);//true
-console.log(Foo.prototype.isPrototypeOf(f1));//true
-</code></pre>
-<h4 id="object-getprototypeof"><a class="header-anchor" href="#object-getprototypeof"></a>Object.getPrototypeOf()</h4>
-<p>ES5新增了Object.getPrototypeOf()方法，该方法返回实例对象对应的原型对象：</p>
-<pre><code class="language-JavaScript">function Foo(){};
-var f1 = new Foo;
-console.log(Object.getPrototypeOf(f1) === Foo.prototype);//true
-</code></pre>
-<p>实际上，Object.getPrototypeOf()方法和<code>__proto__属性</code>是一回事，都指向原型对象：</p>
-<pre><code class="language-JavaScript">function Foo(){};
-var f1 = new Foo;
-console.log(Object.getPrototypeOf(f1) === f1.__proto__ );//true
-</code></pre>
-<h3 id="属性的查找"><a class="header-anchor" href="#属性的查找"></a>属性的查找</h3>
-<p>当读取一个对象的属性时，javascript引擎首先在该对象的自有属性中查找属性名字。如果找到则返回。如果自有属性不包含该名字，则javascript会搜索proto中的对象。如果找到则返回。如果找不到，则返回undefined</p>
+<h2 id="原型对象-属性的查找"><a class="header-anchor" href="#原型对象-属性的查找"></a>原型对象 属性的查找</h2>
+<p>对象属性查找，经常会查找到原型对象上：</p>
+<p>当读取一个对象的属性时，javascript引擎首先在该对象的自有属性中查找属性名字。如果找到则返回。如果自有属性不包含该名字，则javascript会沿着<code>__proto__</code>从原型对象上找。如果找到则返回。如果一直往上都找不到，则返回undefined</p>
 <pre><code class="language-JavaScript">var o = {};
 console.log(o.toString());//'[object Object]'
 
@@ -2803,7 +2647,7 @@ console.log(o.toString());//'o'
 delete o.toString;
 console.log(o.toString());//'[objet Object]'
 </code></pre>
-<h4 id="in"><a class="header-anchor" href="#in"></a>in</h4>
+<h3 id="in"><a class="header-anchor" href="#in"></a>in</h3>
 <p>in操作符可以判断属性在不在该对象上，但无法区别自有还是继承属性：</p>
 <pre><code class="language-JavaScript">function Test(){};
 var obj = new Test;
@@ -2813,7 +2657,7 @@ console.log('a' in obj);//true
 console.log('b' in obj);//true
 console.log('b' in Test.prototype);//false
 </code></pre>
-<h4 id="hasownproperty"><a class="header-anchor" href="#hasownproperty"></a>hasOwnProperty()</h4>
+<h3 id="hasownproperty"><a class="header-anchor" href="#hasownproperty"></a>hasOwnProperty()</h3>
 <p>通过hasOwnProperty()方法可以确定该属性是自有属性还是继承属性：</p>
 <pre><code class="language-JavaScript">var o = {a:1};
 var obj = Object.create(o);
@@ -2826,8 +2670,8 @@ console.log(obj.hasOwnProperty('b'));//true
     return name in object &amp;&amp; !object.hasOwnProperty(name);
 }
 </code></pre>
-<h3 id="属性的添加"><a class="header-anchor" href="#属性的添加"></a>属性的添加</h3>
-<p><strong>原型对象的共享机制使得它们成为一次性为所有对象定义方法的理想手段。</strong> 因为一个方法对所有的对象实例做相同的事，没理由每个实例都要有一份自己的方法：</p>
+<h2 id="原型对象-属性的添加"><a class="header-anchor" href="#原型对象-属性的添加"></a>原型对象 属性的添加</h2>
+<h3 id="点运算添加属性"><a class="header-anchor" href="#点运算添加属性"></a>点运算添加属性</h3>
 <pre><code class="language-JavaScript">function Person(name){
     this.name = name;
 }
@@ -2839,24 +2683,7 @@ var person2 = new Person('hu');
 
 person1.sayName();//'bai'
 </code></pre>
-<p>可以在原型对象上存储其他类型的数据，但在存储引用值时需要注意。正所谓有利就有弊，因为这些引用值会被多个实例共享，一个实例能够改变另一个实例的值：</p>
-<pre><code class="language-JavaScript">function Person(name){
-    this.name = name;
-}
-Person.prototype.sayName = function(){
-    console.log(this.name);
-}
-Person.prototype.favoraties = [];
-
-var person1 = new Person('bai');
-var person2 = new Person('hu');
-
-person1.favoraties.push('pizza');
-person2.favoraties.push('quinoa');
-console.log(person1.favoraties);//[&quot;pizza&quot;, &quot;quinoa&quot;]
-console.log(person2.favoraties);//[&quot;pizza&quot;, &quot;quinoa&quot;]
-</code></pre>
-<h4 id="用对象字面形式添加属性"><a class="header-anchor" href="#用对象字面形式添加属性"></a>用对象字面形式添加属性</h4>
+<h3 id="用对象字面形式添加属性-警惕constructor属性的丢失"><a class="header-anchor" href="#用对象字面形式添加属性-警惕constructor属性的丢失"></a>用对象字面形式添加属性 #警惕constructor属性的丢失</h3>
 <p>虽然可以在原型对象上一一添加属性，但是直接用一个对象字面形式替换原型对象更简洁：</p>
 <pre><code class="language-JavaScript">function Person(name){
     this.name = name;
@@ -2897,6 +2724,7 @@ console.log(person1 instanceof Person);//true
 console.log(person1.constructor === Person);//true
 console.log(person1.constructor === Object);//false
 </code></pre>
+<h4 id="defineproperty-设置constructor不可遍历"><a class="header-anchor" href="#defineproperty-设置constructor不可遍历"></a>defineProperty，设置constructor不可遍历</h4>
 <p>由于默认情况下，原生的constructor属性是不可枚举的，更妥善的解决方法是使用Object.defineProperty()方法，改变其属性描述符中的枚举性enumerable：</p>
 <pre><code class="language-JavaScript">function Person(name){
     this.name = name;
@@ -2918,7 +2746,10 @@ console.log(person1 instanceof Person);//true
 console.log(person1.constructor === Person);//true
 console.log(person1.constructor === Object);//false
 </code></pre>
-<h2 id="总结"><a class="header-anchor" href="#总结"></a>总结</h2>
+<h2 id="构造函数-原型对象和实例对象之间的-关系-和-其指向判断"><a class="header-anchor" href="#构造函数-原型对象和实例对象之间的-关系-和-其指向判断"></a>构造函数、原型对象和实例对象之间的 关系 和 其指向判断</h2>
+<blockquote>
+<p>如果没有了解基础知识，可参考我的上一篇文章： <a href="https://alexzhong22c.github.io/2017/08/08/js-proto/">理解prototype、proto和constructor等关系</a></p>
+</blockquote>
 <p>构造函数、原型对象和实例对象之间的关系是<strong>实例对象和构造函数之间没有直接联系。</strong></p>
 <pre><code class="language-JavaScript">function Foo(){};
 var f1 = new Foo;
@@ -2935,9 +2766,9 @@ var f1 = new Foo;
 </code></pre>
 <hr>
 <p>如果非要扯实例对象和构造函数的关系，那只能是下面这句代码，实例对象是构造函数的new操作的结果：</p>
-<pre><code class="language-JavaScript">var f1 = new Foo;
+<pre><code class="language-JavaScript">var f1 = new Foo();
 </code></pre>
-<p>这句代码执行以后，如果重置原型对象，则会打破它们三者间的关系：</p>
+<p>**这句代码执行以后，**如果重置原型对象，则会打破它们三者间的关系：</p>
 <pre><code class="language-JavaScript">function Foo(){};
 var f1 = new Foo;
 console.log(Foo.prototype === f1.__proto__);//true
@@ -2947,7 +2778,8 @@ Foo.prototype = {}; // 此时重置原型对象
 console.log(Foo.prototype === f1.__proto__);//false
 console.log(Foo.prototype.constructor === Foo);//false
 </code></pre>
-<p>所以，对于改写<code>Foo.prototype</code>这种操作，代码顺序很重要。</p>
+<p>所以，对于**改写<code>Foo.prototype</code>**这种操作，代码顺序很重要。它所遵循的规律还是脱离不了操作js对象的基本规律。</p>
+<p>一是谨慎重置原型对象，二是要警惕constructor属性的丢失。（恰巧constructor是原型对象的唯一自有属性，所以2个问题是可以同时预防的）</p>
 ]]></content>
       
         <categories>
