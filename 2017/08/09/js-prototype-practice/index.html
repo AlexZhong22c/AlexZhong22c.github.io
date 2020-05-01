@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
 <meta property="og:description" content="一般地，javascript使用构造函数和原型对象来进行面向对象编程，它们的表现与其他面向对象编程语言中的“类”相似而又不同。 在 上一篇文章 已经做过对 构造函数 和 原型对象 的简单介绍。在这篇文章主要介绍使用实战，你可不要小看“实战”，坑点还是挺多的。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-04-30T14:54:08.000Z">
+<meta property="og:updated_time" content="2020-04-30T15:00:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="原型对象 实战使用">
 <meta name="twitter:description" content="一般地，javascript使用构造函数和原型对象来进行面向对象编程，它们的表现与其他面向对象编程语言中的“类”相似而又不同。 在 上一篇文章 已经做过对 构造函数 和 原型对象 的简单介绍。在这篇文章主要介绍使用实战，你可不要小看“实战”，坑点还是挺多的。">
@@ -679,7 +679,7 @@ var f1 = new Foo;
 <p>如果非要扯实例对象和构造函数的关系，那只能是下面这句代码，实例对象是构造函数的new操作的结果：</p>
 <pre><code class="language-JavaScript">var f1 = new Foo();
 </code></pre>
-<p>**这句代码执行以后，**如果重置原型对象，则会打破它们三者间的关系：</p>
+<p><strong>这句代码执行以后，</strong> 如果重置原型对象，则会打破它们三者间的关系：</p>
 <pre><code class="language-JavaScript">function Foo(){};
 var f1 = new Foo;
 console.log(Foo.prototype === f1.__proto__);//true
@@ -689,7 +689,7 @@ Foo.prototype = {}; // 此时重置原型对象
 console.log(Foo.prototype === f1.__proto__);//false
 console.log(Foo.prototype.constructor === Foo);//false
 </code></pre>
-<p>所以，对于**改写<code>Foo.prototype</code>**这种操作，代码顺序很重要。它所遵循的规律还是脱离不了操作js对象的基本规律。</p>
+<p>所以，对于 <strong>改写<code>Foo.prototype</code></strong> 这种操作，代码顺序很重要。它所遵循的规律还是脱离不了操作js对象的基本规律。</p>
 <p>一是谨慎重置原型对象，二是要警惕constructor属性的丢失。（恰巧constructor是原型对象的唯一自有属性，所以2个问题是可以同时预防的）</p>
 
 		</div>
@@ -700,7 +700,7 @@ console.log(Foo.prototype.constructor === Foo);//false
         <p><span>本文标题:</span><a href="/2017/08/09/js-prototype-practice/">原型对象 实战使用</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2017-08-09, 14:48:21</p>
-        <!-- <p><span>最后更新:</span>2020-04-30, 22:54:08</p> -->
+        <!-- <p><span>最后更新:</span>2020-04-30, 23:00:29</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="原型对象 实战使用" href="/2017/08/09/js-prototype-practice/">https://alexzhong22c.github.io/2017/08/09/js-prototype-practice/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://alexzhong22c.github.io/2017/08/09/js-prototype-practice/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

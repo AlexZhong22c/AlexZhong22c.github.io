@@ -2768,7 +2768,7 @@ var f1 = new Foo;
 <p>如果非要扯实例对象和构造函数的关系，那只能是下面这句代码，实例对象是构造函数的new操作的结果：</p>
 <pre><code class="language-JavaScript">var f1 = new Foo();
 </code></pre>
-<p>**这句代码执行以后，**如果重置原型对象，则会打破它们三者间的关系：</p>
+<p><strong>这句代码执行以后，</strong> 如果重置原型对象，则会打破它们三者间的关系：</p>
 <pre><code class="language-JavaScript">function Foo(){};
 var f1 = new Foo;
 console.log(Foo.prototype === f1.__proto__);//true
@@ -2778,7 +2778,7 @@ Foo.prototype = {}; // 此时重置原型对象
 console.log(Foo.prototype === f1.__proto__);//false
 console.log(Foo.prototype.constructor === Foo);//false
 </code></pre>
-<p>所以，对于**改写<code>Foo.prototype</code>**这种操作，代码顺序很重要。它所遵循的规律还是脱离不了操作js对象的基本规律。</p>
+<p>所以，对于 <strong>改写<code>Foo.prototype</code></strong> 这种操作，代码顺序很重要。它所遵循的规律还是脱离不了操作js对象的基本规律。</p>
 <p>一是谨慎重置原型对象，二是要警惕constructor属性的丢失。（恰巧constructor是原型对象的唯一自有属性，所以2个问题是可以同时预防的）</p>
 ]]></content>
       
