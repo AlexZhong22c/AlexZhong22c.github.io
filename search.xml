@@ -726,9 +726,131 @@ display: flex; /* Chrome 29+, Firefox 22+, IE 11+, Opera 12.1/17/18, Android 4.4
     </entry>
     
     <entry>
+      <title><![CDATA[到底什么是函数式编程 精简总结]]></title>
+      <url>https://alexzhong22c.github.io/2018/01/16/js-functional-intro/</url>
+      <content type="html"><![CDATA[<p>此文用于快速回顾，不适合用来入门。</p>
+<a id="more"></a>
+<hr>
+<p>到底什么是函数式编程？我将用一段话来总结：</p>
+<ul>
+<li>没有副作用（函数的纯度）
+<ul>
+<li>柯里化是延伸出来的</li>
+<li>延伸问题是副作用的管理</li>
+</ul>
+</li>
+<li>范畴论和函子
+<ul>
+<li>函数是一等公民，高阶函数等概念</li>
+<li>函数的组合</li>
+</ul>
+</li>
+<li>声明式代码</li>
+<li>不可变量和不可变对象</li>
+</ul>
+<p>函数式编程，和面向对象编程一样都是用来 <strong>降低系统复杂度的</strong> ，在js里面，可以说是作为一种设计思路和其他的互相补充。</p>
+<blockquote>
+<p>就这样一段话完成了全文，有点空荡荡的。后面还补充一个简单的问题，来帮助思考的：</p>
+</blockquote>
+<h2 id="问题：基于函子思想改写-实现一个可reject的map"><a class="header-anchor" href="#问题：基于函子思想改写-实现一个可reject的map"></a>问题：基于函子思想改写，实现一个可reject的map</h2>
+<pre><code class="language-js">// 要实现的调用效果：
+const result = new MMM(1)
+  .map((item, reject) =&gt; {
+    return item + 2;
+  })
+  .map((item, reject) =&gt; {
+    // reject(); // 注释开关我，重新运行
+    return item + 3;
+  })
+  .map((item, reject) =&gt; {
+    return item + 4;
+  })
+  .join();
+console.log(result) // 期望10
+</code></pre>
+<p>如果在任一个map中调用了reject，后续的map就全被跳过不必执行，同时链式调用的结果直接fallback到一个“候补值”。（为了简便，这个fallback值定义在js文件的作用域中，也就是后文源码的<code>VIEW_INVALID</code>这个值）</p>
+<h4 id="对比promise的调用代码："><a class="header-anchor" href="#对比promise的调用代码："></a>对比promise的调用代码：</h4>
+<p>显然这段代码结构有点像Promise的语法，但比promise简漏的是：</p>
+<ol>
+<li>它不能处理异步</li>
+<li>它一样可以reject，但是还没有catch的机制</li>
+<li>没有办法引入函数外的副作用</li>
+<li>没有Monad自动拆箱的机制</li>
+</ol>
+<p>而从这种代码改写，直到进化到promise需要怎么改写代码呢？是很有意思的问题，这里暂时就不讨论了。</p>
+<h4 id="利用原型对象-代码实现："><a class="header-anchor" href="#利用原型对象-代码实现："></a>利用原型对象 代码实现：</h4>
+<p>回到正题，一开始的实现代码是这样，<strong>还是停留在利用js原型链上的属性的范畴</strong> ：</p>
+<pre><code class="language-js">const VIEW_INVALID = 'VIEW_INVALID';
+const MMM = function(value, isInvalid) {
+  this.isInvalid = isInvalid || false;
+  this.value = value;
+}
+// MMM.prototype.of = function(value) {
+//   return new MMM(value);
+// }
+MMM.prototype.map = function(func) {
+  if (!this.isInvalid) {
+    const result = func(this.value, () =&gt; {
+      this.isInvalid = true;
+      this.value = VIEW_INVALID;
+    });
+    this.value = !this.isInvalid ? result : this.value;
+    return new MMM(this.value, this.isInvalid);
+  } else if (this.isInvalid) {
+    return new MMM(this.value, this.isInvalid);
+  }
+}
+MMM.prototype.join = function() {
+  return this.value;
+}
+</code></pre>
+<h4 id="函子化改写的实现："><a class="header-anchor" href="#函子化改写的实现："></a>函子化改写的实现：</h4>
+<p>经研究，按照either函子的思想，源码可改写为：</p>
+<pre><code class="language-js">const VIEW_INVALID = 'VIEW_INVALID';
+// const MMM = function(value, isInvalid) { /**/ } // 代码没变，同上回
+// MMM.prototype.of = function (/**/) { /**/ } // 代码没变，同上回
+MMM.prototype.mapEither = function(func, fForInvalid) {
+  fForInvalid = fForInvalid || function(x) {return x};
+  func = func || function(x) {return x};
+  const todoFN = !this.isInvalid ? func : fForInvalid;
+  return new MMM(todoFN(this.value), this.isInvalid);
+}
+MMM.prototype.map = function(func) {
+  const result = func(this.value, () =&gt; {
+    this.isInvalid = true;
+    this.value = VIEW_INVALID;
+  });
+  return this.mapEither(() =&gt; {
+    return this.mapEither(() =&gt; result).join()
+  })
+}
+</code></pre>
+<p>代码还可以怎么改写？这种改写之后带来什么优势？其实是比较开放性的问题。</p>
+<p>之后如果对函数式编程有更深入的理解，我再把这个坑填上吧。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> JavaScript </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 回顾 </tag>
+            
+            <tag> 函数式编程 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[深入理解State和setState()]]></title>
       <url>https://alexzhong22c.github.io/2018/01/15/react-state/</url>
-      <content type="html"><![CDATA[<p>本文主要探讨React的State的设计哲学，以及总结一下setState的用法。</p>
+      <content type="html"><![CDATA[<p>致歉，本文内容可能已经过时。</p>
+<p>本文主要探讨React的State的设计哲学，以及总结一下setState的用法。</p>
 <a id="more"></a>
 <h2 id="一种对state的定义："><a class="header-anchor" href="#一种对state的定义："></a>一种对State的定义：</h2>
 <p>State可被视为一个React组件中的一个集合，这个集合的内容是该组件UI中<code>可变状态的数据</code>。</p>
@@ -913,7 +1035,7 @@ this.setState(preState =&gt; ({
       
         <categories>
             
-            <category> REACT </category>
+            <category> React </category>
             
         </categories>
         
@@ -1234,14 +1356,14 @@ git push               ::::将 本地分支的变化 同步到远程分支
       
         <categories>
             
-            <category> essay </category>
+            <category> 随笔 </category>
             
         </categories>
         
         
         <tags>
             
-            <tag> essay </tag>
+            <tag> 随笔 </tag>
             
             <tag> git </tag>
             
@@ -2516,9 +2638,11 @@ instance2.sayName();//&quot;hu&quot;
         
         <tags>
             
-            <tag> 继承 </tag>
+            <tag> 面向对象 </tag>
             
-            <tag> 寄生式 </tag>
+            <tag> 原型系统 </tag>
+            
+            <tag> 原理 </tag>
             
         </tags>
         
@@ -2621,7 +2745,9 @@ john instanceof Person; //true
             
             <tag> 基础 </tag>
             
-            <tag> new </tag>
+            <tag> 面向对象 </tag>
+            
+            <tag> 原型系统 </tag>
             
         </tags>
         
@@ -2793,9 +2919,9 @@ console.log(Foo.prototype.constructor === Foo);//false
             
             <tag> 进阶 </tag>
             
-            <tag> 继承 </tag>
+            <tag> 面向对象 </tag>
             
-            <tag> 属性 </tag>
+            <tag> 原型系统 </tag>
             
         </tags>
         
@@ -2942,11 +3068,9 @@ var f1 = new Foo;
             
             <tag> 进阶 </tag>
             
-            <tag> 继承 </tag>
+            <tag> 面向对象 </tag>
             
-            <tag> 原型 </tag>
-            
-            <tag> 构造器 </tag>
+            <tag> 原型系统 </tag>
             
         </tags>
         
@@ -3026,9 +3150,9 @@ console.log( baz.a ); // 3
             
             <tag> 进阶 </tag>
             
-            <tag> new </tag>
-            
             <tag> this </tag>
+            
+            <tag> new </tag>
             
         </tags>
         
@@ -3658,7 +3782,7 @@ var currentTarget = event.currentTarget;
       
         <categories>
             
-            <category> JavaScript </category>
+            <category> 浏览器 </category>
             
         </categories>
         
@@ -3810,7 +3934,7 @@ btn.attachEvent(&quot;onclick&quot;, function(){
       
         <categories>
             
-            <category> JavaScript </category>
+            <category> 浏览器 </category>
             
         </categories>
         
@@ -3942,7 +4066,7 @@ test.onclick= function(e){
       
         <categories>
             
-            <category> JavaScript </category>
+            <category> 浏览器 </category>
             
         </categories>
         
@@ -4432,7 +4556,7 @@ methods: {
       
         <categories>
             
-            <category> VUE </category>
+            <category> Vue </category>
             
         </categories>
         
@@ -6299,7 +6423,7 @@ Kinect，它将身体动作转换成屏幕动作。这样你可以用你的手�
         
         <tags>
             
-            <tag> essay </tag>
+            <tag> 随笔 </tag>
             
             <tag> 触摸事件 </tag>
             
@@ -6497,7 +6621,7 @@ Kinect，它将身体动作转换成屏幕动作。这样你可以用你的手�
         
         <tags>
             
-            <tag> essay </tag>
+            <tag> 随笔 </tag>
             
             <tag> H5 </tag>
             
