@@ -4,6 +4,275 @@
   
     
     <entry>
+      <title><![CDATA[面试题：改造代码，使之隔秒输出0 - 9]]></title>
+      <url>https://alexzhong22c.github.io/2020/04/02/settimeout-0-to-9/</url>
+      <content type="html"><![CDATA[<p>通过一道面试题，文末总结一下js【变量快照】和【缓存变量值】的手法。原题考察的是对js作用域和对setTimeout api的理解，在本文主要给出5种解法。</p>
+<a id="more"></a>
+<hr>
+<p><strong>题目的提出：</strong> “改造下面的代码，使之隔秒输出0 - 9，写出你能想到的所有解法：”</p>
+<pre><code class="language-js">// 题目代码：
+for (var i = 0; i &lt; 10; i++) {
+  setTimeout(() =&gt; {
+    console.log(i);
+    // debugger;
+  }, i * 1000)
+}
+</code></pre>
+<p>考察的是对作用域和对setTimeout api的理解。</p>
+<p><strong>首先不急着答题，若想更好地理解，我们思考一下代码未改动前打印结果和原理。</strong></p>
+<h4 id="首先解释原代码的打印结果：-没有形成闭包"><a class="header-anchor" href="#首先解释原代码的打印结果：-没有形成闭包"></a>// 首先解释原代码的打印结果：【没有形成闭包】</h4>
+<p>打印全都是10。<strong>没有形成闭包。</strong></p>
+<p>因为计数变量 i 它还是属于全局作用域：</p>
+<pre><code class="language-js">for (var i = 0; i &lt; 10; i++) {
+  // 故意不写代码，让打印测试结果更加清楚
+}
+console.log(window.i) // 10
+console.log(i) // 10，明显没有闭包，i是全局变量啊，因为是全局变量所以驻留在内存中
+setTimeout(() =&gt; {
+  console.log(i) // 10
+}, 2000)
+</code></pre>
+<p>证明：setTimeout引用计数变量i，也没有产生闭包（计数变量还是没有达到闭包的要有“外层函数”的条件）：</p>
+<pre><code class="language-js">for(var i = 0; i &lt; 10; i++) {
+  setTimeout(function() {
+      console.log(i);
+      debugger; // 在这里断点，查看是否有闭包
+  }, i * 1000);
+}
+</code></pre>
+<p><strong>回到本文的正题，这个面试题的解法有哪些呢？</strong></p>
+<h2 id="方法一：let-const块级作用域-于for循环"><a class="header-anchor" href="#方法一：let-const块级作用域-于for循环"></a>方法一：let / const块级作用域 于for循环</h2>
+<p>原理：利用 <code>let</code> 变量的特性 — 在每一次 <code>for</code> 循环的过程中，<code>let</code> 声明的变量会在当前的块级作用域里面（<code>for</code> 循环的 body 体，也即两个花括号之间的内容区域）创建一个词法环境（Lexical Environment），该环境里面包括了当前 <code>for</code> 循环过程中的 <code>i</code>，（也就是类似函数作用域的效果）<a href="https://javascript.info/closure#for-while" target="_blank" rel="noopener">具体链接</a></p>
+<p>另外，记得曾在知乎上看到，方应杭也是这么说的。PS：chrome控制台断点debug能看到block作用域。</p>
+<pre><code class="language-js">for (let i = 0; i &lt; 10; i++) {
+  setTimeout(() =&gt; {
+    console.log(i);
+  }, i * 1000)
+}
+// 等价于：
+for (var i = 0; i &lt; 10; i++) {
+  let _i = i;// 所以即便在本次循环中篡改_i也不会影响到i
+  setTimeout(() =&gt; {
+    console.log(_i);
+    // console.log(++_i);
+  }, i * 1000)
+}
+</code></pre>
+<p>写法2：let tmp局部变量，需要是块级作用域。一定要let，而var tmp是不行的。</p>
+<pre><code class="language-js">for (var i = 0; i &lt; 10; i++) {
+  let tmp = i;
+  setTimeout(() =&gt; {
+    console.log(tmp);
+  }, i * 1000)
+}
+</code></pre>
+<h2 id="方法二：-外层函数-传入自由变量-settimeout构建闭包"><a class="header-anchor" href="#方法二：-外层函数-传入自由变量-settimeout构建闭包"></a>方法二：“外层函数”传入自由变量+setTimeout构建闭包</h2>
+<p>原理： <strong>这里主要是setTimeout帮助构建闭包。</strong> 函数局部作用域在这里也是构建闭包的条件之一。另外，不会因为单纯有IIFE就会有闭包。</p>
+<pre><code class="language-js">// 这个还真的是闭包，不信在chrome debug断点一下：应该是setTimeout回调函数引用了自执行函数的自由变量，导致该自由变量没被回收。
+// 不信的话，可以去掉setTimeout，闭包就没了。
+for (var i = 0; i &lt; 10; i++) {
+  (i =&gt; {
+    setTimeout(() =&gt; {
+      console.log(i);
+    }, i * 1000)
+  })(i)
+}
+</code></pre>
+<p>另外一种方式：（后面会补充说到，如果setTimeout的第一个参数是js语句，该语句会被同步执行）</p>
+<pre><code class="language-js">for(var i = 0; i &lt; 10; i++) {
+  setTimeout(
+    (function(i) {
+      return function() {
+          console.log(i)
+      }
+    })(i)
+  , i * 1000)
+}
+// 这样也是同理的：！！！！！！！！！！！
+for (var i = 0; i &lt; 10; i++) {
+  const cbGenerator = (i) =&gt; {
+    return function() {
+      console.log(i)
+    }
+  }
+  setTimeout(cbGenerator(i), i * 1000);
+}
+</code></pre>
+<h4 id="证明：不会因为单纯有iife就会有闭包"><a class="header-anchor" href="#证明：不会因为单纯有iife就会有闭包"></a>证明：不会因为单纯有IIFE就会有闭包。</h4>
+<p><strong>IIFE 其实并不属于闭包的范畴：</strong> 参考链接如下：</p>
+<ul>
+<li><a href="https://stackoverflow.com/questions/41228824/difference-between-closures-and-iifes-in-javascript" target="_blank" rel="noopener">difference-between-closures-and-iifes-in-javascript</a></li>
+<li><a href="https://bit.ly/2NXNT56" target="_blank" rel="noopener">IIFE 是闭包?</a></li>
+</ul>
+<p><strong>记住，记住，这样是连打印结果都不符合题目要求的：</strong></p>
+<pre><code class="language-js">// 没用：连打印结果都不符合题目要求
+for (var i = 0; i &lt; 10; i++) {
+  setTimeout(function () {
+    (i =&gt; {
+      console.log(i);
+    })(i)
+  }, i * 1000)
+}
+</code></pre>
+<p>另外，比如这个，因为没有setTimeout，<strong>不符题目要求</strong>。另外，也因为没有setTimeout，即便有<strong>函数按值传递</strong>的变量快照的效果，也没有形成闭包：</p>
+<pre><code class="language-js">// 没有形成闭包：
+// 这也对照证明了setTimeout是有帮助构建闭包的作用的！！！！！！！！！
+for(var i= 0; i &lt; 5; i++){
+  console.log('add timeout: ', i);
+  (function(index){
+      console.log('imitate timeouting: ', index);
+      debugger;
+  })(i)
+}
+// 而如果基于此，给log再套多一层自执行，就又有闭包了，你懂的。
+</code></pre>
+<h2 id="方法三：try-catch特殊的作用域机制：-即利用其它方式构建出局部作用域"><a class="header-anchor" href="#方法三：try-catch特殊的作用域机制：-即利用其它方式构建出局部作用域"></a>方法三：try catch特殊的作用域机制： 即利用其它方式构建出<strong>局部作用域</strong></h2>
+<p>对于js，一般来说只有全局作用域和函数作用域。而这个catch大括号包裹的部分，作用域链的表现类似于函数作用域。非常特别。</p>
+<pre><code class="language-js">for (var i = 0; i &lt; 10; i++) {
+  try {
+    throw new Error(i);
+  } catch ({
+    message: i // 为了重命名解构出i变量
+  }) {
+    setTimeout(() =&gt; {
+      console.log(i);
+    }, i * 1000)
+  }
+}
+</code></pre>
+<h2 id="方法4：bind返回新函数：利用的是柯里化的缓存效果-没有闭包产生"><a class="header-anchor" href="#方法4：bind返回新函数：利用的是柯里化的缓存效果-没有闭包产生"></a>方法4：bind返回新函数：利用的是柯里化的缓存效果，没有闭包产生</h2>
+<pre><code class="language-js">for (var i = 0; i &lt; 10; i++) {
+  setTimeout(console.log.bind(Object.create(null), i), i * 1000)
+  // also or: 
+  // setTimeout(console.log.bind(console, i), i * 1000)
+}
+</code></pre>
+<p>或者：(配合函数按值传递)</p>
+<pre><code class="language-js">for (var i = 1; i &lt;= 5; i++) {
+  setTimeout(function timer(i) {
+    console.log(i);
+  }.bind(null, i), i * 1000);
+}
+</code></pre>
+<h4 id="来个demo模拟简化后的代码-反映：的确是柯里化缓存的功劳："><a class="header-anchor" href="#来个demo模拟简化后的代码-反映：的确是柯里化缓存的功劳："></a>来个demo模拟简化后的代码，反映：的确是柯里化缓存的功劳：</h4>
+<pre><code class="language-js">function hey(a,b,c) {
+  console.log(this)
+  console.log(a,b,c)
+  debugger;
+}
+
+const foo = hey.bind({}, 1)
+foo() // 1 undefined undefined
+</code></pre>
+<h2 id="方法五：利用-settimeout-函数的第三个参数-ie9之前不兼容该api"><a class="header-anchor" href="#方法五：利用-settimeout-函数的第三个参数-ie9之前不兼容该api"></a>方法五：利用 <code>setTimeout</code> 函数的第三个参数【IE9之前不兼容该api】</h2>
+<p>复习一下setTimeout api的语法：<code>setTimeout(function, milliseconds, param1, param2, ...)</code></p>
+<p>第三个参数，会作为回调函数的第一个参数传入。第四第五个参数位同理，以此类推。</p>
+<p>神奇的是，它的规律是：缓存这些参数，等到回调触发的时候使用。</p>
+<p>代码1：</p>
+<pre><code class="language-js">for (var i = 0; i &lt; 10; i++) {
+  setTimeout(i =&gt; {
+    console.log(i);
+  }, i * 1000, i)
+}
+</code></pre>
+<p>代码2：</p>
+<pre><code class="language-js">// 注意这段代码的setTimeout的第一个参数并不是完整js语句，不是同步执行的：
+for (var i = 0; i &lt; 10; i++) {
+  setTimeout(console.log, i * 1000, i)
+}
+</code></pre>
+<h2 id="拓展知识一：语句作为settimeout第一个参数位-无法隔秒打印-不符合本题要求"><a class="header-anchor" href="#拓展知识一：语句作为settimeout第一个参数位-无法隔秒打印-不符合本题要求"></a>// 拓展知识一：语句作为setTimeout第一个参数位 #无法隔秒打印。不符合本题要求</h2>
+<p>如果想要更好地理解setTimeout api，那么你需要看看这个章节。</p>
+<p><a href="https://segmentfault.com/q/1010000009490850" target="_blank" rel="noopener">链接：提问的确是这个提问，但是没有人回答得好</a></p>
+<p><del>原理：很多其它的方案只是把 <code>console.log(i)</code> 放到一个函数里面，因为 <code>setTimeout</code> 函数的第一个参数只接受函数以及字符串，如果是 <strong><code>js</code> 语句</strong>的话，<code>js</code> 引擎应该会自动在该语句外面包裹一层函数</del></p>
+<p>setTimeout毕竟不是js规范里面的api，其实是属于浏览器或者node环境的范畴。所以我也没找到对应的文档的说明。经过测试，大体上就是：如果第一个参数位是js语句，就会同步执行。</p>
+<p><strong>无法隔秒打印：</strong> 虽然能打印0 ~ 9，但是因为是第一个参数如果是语句就同步执行的。第二个参数的延迟时间就发挥不了作用了。因为都是同步执行完，就谈不上闭包了。</p>
+<pre><code class="language-js">// 注意，这个就没法做到每隔一秒打印了，都是同步执行完的。
+// 这样chrome控制台没有显示任何闭包：因为，i引用到的是计数变量，也就是这里的全局变量。
+for (var i = 0; i &lt; 10; i++) {
+  setTimeout(console.log(i), i * 1000)
+}
+// or:
+for (var i = 0; i &lt; 10; i++) {
+  setTimeout((() =&gt; {
+    console.log(i);
+  })(), i * 1000)
+}
+</code></pre>
+<p>同理：区别只不过是i作为函数的局部变量，（即便用了setTimeout，）因为没有异步执行，没有产生闭包。</p>
+<pre><code class="language-js">for (var i = 0; i &lt; 10; i++) {
+  setTimeout((i =&gt; { // 同步代码复制了一份局部变量
+    console.log(i);
+  })(i), i * 1000)
+}
+// 换种写法：call/apply 按值传参：
+for (var i = 0; i &lt; 10; i++) {
+  setTimeout((i =&gt; {
+    console.log(i);
+  }).call(Object.create(null), i), i * 1000)
+}
+// 换种写法同理：
+for (var i = 0; i &lt; 10; i++) {
+  setTimeout((i =&gt; {
+    console.log(i);
+  }).apply(Object.create(null), [i]), i * 1000)
+}
+// 换种写法同理：apply类数组
+for (var i = 0; i &lt; 10; i++) {
+  setTimeout((i =&gt; {
+    console.log(i);
+  }).apply(Object.create(null), { length: 1, '0': i }), i * 1000)
+}
+</code></pre>
+<h2 id="总结并拓展：另一种实现-非引用数据类型的-变量快照的方式"><a class="header-anchor" href="#总结并拓展：另一种实现-非引用数据类型的-变量快照的方式"></a>总结并拓展：另一种实现(非引用数据类型的)变量快照的方式</h2>
+<p>我们可以总结一下上述所有【变量快照】或者【缓存变量值】的手法：（手法和每一个解题回答一一对应）</p>
+<ul>
+<li><code>let</code> / <code>const</code>+<code>for</code>循环：增加块级作用域 【变量快照】</li>
+<li>加中间函数，闭包维持之：增加并维持函数作用域 【变量快照】</li>
+<li>try catch作用域：特殊的作用域机制 【变量快照】</li>
+<li>柯里化/bind使用 【缓存变量值】</li>
+<li>setTimeout第3个参数 【缓存变量值】</li>
+</ul>
+<p>说白了以上就是：要么增设并维持<strong>作用域</strong>，因此实现【变量快照】，要么就是【缓存变量值】。</p>
+<p>而另外一种实现【变量快照】的方式是：<strong>借助能解析执行字符串的api，把变量值编进代码里面：</strong>（记得吗，eval作用域又是一种特殊的<strong>作用域</strong>）</p>
+<p>代码 1：</p>
+<pre><code class="language-js">for (var i = 0; i &lt; 10; i++) {
+  setTimeout(eval('console.log(i)'), i * 1000)
+}
+</code></pre>
+<p>代码 2，同样的效果：</p>
+<pre><code class="language-js">for (var i = 0; i &lt; 10; i++) {
+  setTimeout(new Function('i', 'console.log(i)')(i), i * 1000)
+}
+// or:
+for (var i = 0; i &lt; 10; i++) {
+  setTimeout(new Function('console.log(i)')(), i * 1000)
+}
+</code></pre>
+]]></content>
+      
+        <categories>
+            
+            <category> JavaScript </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 回顾 </tag>
+            
+            <tag> 作用域 </tag>
+            
+            <tag> 闭包 </tag>
+            
+            <tag> 面试题 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[深入理解文字高度和行高的设置]]></title>
       <url>https://alexzhong22c.github.io/2018/02/06/height-calculate/</url>
       <content type="html"><![CDATA[<p>font-size设置的是什么?line-height设置的是什么?各种行高是怎么计算出来的?你真的知道吗?</p>
@@ -841,214 +1110,6 @@ MMM.prototype.map = function(func) {
             <tag> 回顾 </tag>
             
             <tag> 函数式编程 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[深入理解State和setState()]]></title>
-      <url>https://alexzhong22c.github.io/2018/01/15/react-state/</url>
-      <content type="html"><![CDATA[<p>致歉，本文内容可能已经过时。</p>
-<p>本文主要探讨React的State的设计哲学，以及总结一下setState的用法。</p>
-<a id="more"></a>
-<h2 id="一种对state的定义："><a class="header-anchor" href="#一种对state的定义："></a>一种对State的定义：</h2>
-<p>State可被视为一个React组件中的一个集合，这个集合的内容是该组件UI中<code>可变状态的数据</code>。</p>
-<p>所谓<code>可变状态的数据</code>，就是在当前组件中可以被修改（或被更新）的数据。</p>
-<blockquote>
-<p>如果我们要在一个组件中定义一个变量，如何确定适合不适合让这个变量作为一个State呢？</p>
-</blockquote>
-<h2 id="组件对state的要求："><a class="header-anchor" href="#组件对state的要求："></a>组件对State的要求：</h2>
-<ul>
-<li>State必须是能代表一个组件UI呈现的完整状态集：组件UI的任何改变，都可以从State的变化中反映出来。</li>
-<li>State必须是代表一个组件UI呈现的最小状态集：State中的所有状态都是用于反映组件UI的变化，没有任何多余的状态，也不需要通过其他状态计算而来的中间状态。</li>
-</ul>
-<p><strong>可见，第一个要求为“完整”，第二个要求为“最小”。</strong></p>
-<h2 id="变量能否作为state的判据："><a class="header-anchor" href="#变量能否作为state的判据："></a>变量能否作为State的判据：</h2>
-<p>组件中用到的一个变量应不应该作为一个组件的State，可以通过下面的4条依据进行判断：</p>
-<p>1.这个变量是否是通过Props从父组件中获取？如果是，那么它不适合以State来表示。</p>
-<p>2.这个变量是否在组件的整个生命周期中都保持不变？如果是，那么它不适合以State来表示。</p>
-<p>3.这个变量是否可以通过其他状态（State）或者属性(Props)计算得到？如果是，那么它不适合以State来表示。</p>
-<p>4.这个变量是否在render方法中作为一个用于渲染的数据？如果<code>不是</code>，那么它不适合以State来表示。这种情况下，这个变量更适合定义为组件的一个普通属性，例如在组件中用到的定时器，就应该直接定义为<code>this.timer</code>，而不是<code>this.state.timer</code>。</p>
-<p>5.另外要考虑这个状态需不需要<code>状态提升</code>到父组件中。</p>
-<h2 id="state与props的区别："><a class="header-anchor" href="#state与props的区别："></a>State与Props的区别：</h2>
-<p>State在当前组件中是可变的，满足组件UI变化的需求；</p>
-<p>Props对于子组件来说是只读的。</p>
-<h2 id="如何正确修改state？"><a class="header-anchor" href="#如何正确修改state？"></a>如何正确修改State？</h2>
-<h3 id="不要直接给state赋值"><a class="header-anchor" href="#不要直接给state赋值"></a>不要直接给state赋值</h3>
-<pre><code class="language-JavaScript">// 错误，这样组件不可能会重新渲染，结果会不符合我们的目的：
-this.state.comment = 'Hello';
-</code></pre>
-<p>只有在组件的构造函数中初始化State的时候才允许这样直接赋值；其他绝大多数时候，应该使用<code>setState()</code> ，在本文的最后，我们会详细介绍<code>setState()</code>的用法：</p>
-<pre><code class="language-JavaScript">// 正确：
-this.setState({comment: 'Hello'});
-</code></pre>
-<h3 id="state的更新可能是异步的"><a class="header-anchor" href="#state的更新可能是异步的"></a>State的更新可能是异步的</h3>
-<p><strong>React可以将多个<code>setState()</code>调用合并成一个调用来提高性能。同时，Props的更新机制也是同理。这就是“异步更新”。</strong></p>
-<p><strong>因为<code>this.props</code>和<code>this.state</code>可能是异步更新的，你不应该依靠它们的值来计算下一个状态。</strong></p>
-<h4 id="弥补这个缺陷："><a class="header-anchor" href="#弥补这个缺陷："></a>弥补这个缺陷：</h4>
-<p>我们不能直接通过<code>this.state</code>和<code>this.props</code>获得State和Props的最新状态，但是在<code>this.setState</code>的时候，State和Props的最新状态可以通过一个回调函数来获得：</p>
-<pre><code class="language-JavaScript">// 正确：
-this.setState((preState, props) =&gt; ({
-  counter: preState.quantity + 1 + props.xxxx; 
-}))
-</code></pre>
-<p>上述回调函数的第一个参数preState可捕获到<strong>最新的上一个State</strong>；第二个参数props可捕获到<strong>最新的Props</strong>。</p>
-<h3 id="state的更新是一个浅合并的过程"><a class="header-anchor" href="#state的更新是一个浅合并的过程"></a>State的更新是一个浅合并的过程</h3>
-<p>当调用setState修改组件状态时，只需要传入发生改变的State，而不必组件完整的State，因为组件State的更新是一个浅合并（Shallow Merge）的过程。例如，一个组件<code>初始化时</code>的状态为：</p>
-<pre><code class="language-JavaScript">this.state = {
-  title : 'React',
-  content : 'React is an wonderful JS library!'
-}
-</code></pre>
-<p>如果你只需要修改<code>title</code>，你应该：</p>
-<pre><code class="language-JavaScript">this.setState({title: 'Reactjs'});
-</code></pre>
-<p>React会合并新的title到原来的组件状态中，同时保留原有的状态content，合并后的State结果为：</p>
-<pre><code class="language-JavaScript">{
-  title : 'Reactjs',
-  content : 'React is an wonderful JS library!'
-}
-</code></pre>
-<h3 id="state与immutable"><a class="header-anchor" href="#state与immutable"></a>State与Immutable</h3>
-<p>React官方建议把State当作是不可变对象，也就是说，<strong>当你有修改<code>this.state</code>的值的冲动的时候，你应该做的是：重新创建一个新值来赋给<code>this.state</code>。</strong></p>
-<p>按照这种思想具体怎么操作呢？我们再来细分一下：</p>
-<h4 id="通常情况下的赋值："><a class="header-anchor" href="#通常情况下的赋值："></a>通常情况下的赋值：</h4>
-<p>适用的类型有：数字，字符串，布尔值，null， undefined。见例子即可：</p>
-<pre><code class="language-JavaScript">this.setState({
-  count: 1,
-  title: 'Redux',
-  success: true
-})
-</code></pre>
-<h4 id="状态的值的类型是数组"><a class="header-anchor" href="#状态的值的类型是数组"></a>状态的值的类型是数组</h4>
-<p>如有一个数组类型的状态books，当向books中增加一本书时，使用数组的concat方法或ES6的数组扩展语法（spread syntax）：</p>
-<pre><code class="language-JavaScript">// 方法一：将state先赋值给另外的变量，然后使用concat创建新数组
-var books = this.state.books; 
-this.setState({
-  books: books.concat(['React Guide']);
-})
-
-// 方法二：使用preState、concat创建新数组
-this.setState(preState =&gt; ({
-  books: preState.books.concat(['React Guide']);
-}))
-
-// 方法三：ES6数组扩展 spread syntax
-this.setState(preState =&gt; ({
-  books: [...preState.books, 'React Guide'];
-}))
-</code></pre>
-<p>当从books中截取部分元素作为新状态时，使用数组的slice方法：（利用splice返回的数组也是同理）</p>
-<pre><code class="language-JavaScript">// 方法一：将state先赋值给另外的变量，然后使用slice创建新数组
-var books = this.state.books; 
-this.setState({
-  books: books.slice(1,3);
-})
-
-// 方法二：使用preState、slice创建新数组
-this.setState(preState =&gt; ({
-  books: preState.books.slice(1,3);
-}))
-</code></pre>
-<p>当从books中过滤部分元素后，作为新状态时，使用数组的filter方法：</p>
-<pre><code class="language-JavaScript">// 方法一：将state先赋值给另外的变量，然后使用filter创建新数组
-var books = this.state.books; 
-this.setState({
-  books: books.filter(item =&gt; {
-    return item != 'React'; 
-  });
-})
-
-// 方法二：使用preState、filter创建新数组
-this.setState(preState =&gt; ({
-  books: preState.books.filter(item =&gt; {
-    return item != 'React'; 
-  });
-}))
-</code></pre>
-<p>注意不要使用push、pop、shift、unshift等方法修改数组类型的状态，因为这些方法都是在原数组的基础上修改，而concat、slice、splice、filter能返回一个新的数组。</p>
-<h4 id="状态的值的类型是普通对象-不包含字符串-数组"><a class="header-anchor" href="#状态的值的类型是普通对象-不包含字符串-数组"></a>状态的值的类型是普通对象（不包含字符串、数组）</h4>
-<p>使用ES6 的Object.assgin方法</p>
-<pre><code class="language-JavaScript">// 方法一：将state先赋值给另外的变量，然后使用Object.assign创建新对象
-var owner = this.state.owner;
-this.setState({
-  owner: Object.assign({}, owner, {name: 'Jason'});
-})
-
-// 方法二：使用preState、Object.assign创建新对象
-this.setState(preState =&gt; ({
-  owner: Object.assign({}, preState.owner, {name: 'Jason'});
-}))
-</code></pre>
-<p>使用<a href="https://github.com/tc39/proposal-object-rest-spread" target="_blank" rel="noopener">对象扩展语法</a>（object spread properties）：</p>
-<pre><code class="language-JavaScript">// 方法一：将state先赋值给另外的变量，然后使用对象扩展语法创建新对象
-var owner = this.state.owner;
-this.setState({
-  owner: {...owner, name: 'Jason'};
-})
-
-// 方法二：使用preState、对象扩展语法创建新对象
-this.setState(preState =&gt; ({
-  owner: {...preState.owner, name: 'Jason'};
-}))
-
-</code></pre>
-<h4 id="为什么推荐组件的状态是不可变对象呢？"><a class="header-anchor" href="#为什么推荐组件的状态是不可变对象呢？"></a>为什么推荐组件的状态是不可变对象呢？</h4>
-<p>一方面是因为不可变对象方便管理和调试，了解更多可<a href="https://redux.js.org/docs/faq/ImmutableData.html#benefits-of-immutability" target="_blank" rel="noopener">参考这里</a>；另一方面是出于性能考虑，当对象组件状态都是不可变对象时，我们在组件的shouldComponentUpdate方法中，仅需要比较状态的引用就可以判断状态是否真的改变，从而避免不必要的render调用。当我们使用React 提供的PureComponent时，更是要保证组件状态是不可变对象，否则在组件的shouldComponentUpdate方法中，状态比较就可能出现错误，因为PureComponent执行的是浅比较（比较对象的引用）。</p>
-<h2 id="setstate的各种写法："><a class="header-anchor" href="#setstate的各种写法："></a>setState的各种写法：</h2>
-<blockquote>
-<p>在本文上一章《如何正确修改State》中，我们了解了各种规则，顺带对setState有了初步的认识。接下来我们深挖一下setState的各种写法，以及它们之间的区别。</p>
-</blockquote>
-<p>上文我们说过，<strong>State的更新可能是异步的</strong>：</p>
-<p>setState将组件中的state变化塞入一个队列里面，并且告诉该组件及其子组件需要用更新后的状态来重新渲染。这是在event handlers函数中或者是server responses函数中更新UI的最常用的方式。</p>
-<p>我们应当将setState视为一次<code>请求</code>而不是一次立即执行更新组件的命令。因为为了更好的性能，React可能会收集几次setState的请求，然后再一次性更新State。又或者React可能会推迟更新State。</p>
-<p>所以如果<strong>调用setState之后，再使用this.state.xxx获取State的值，</strong> React不会保证能立刻拿到更新后的结果。</p>
-<p>如果你的一些脚本一定需要在State更新之后再执行，你可以将代码写在componentDidUpdate里面，或者利用setState的回调（<code>setState(updater, callback)</code>）。</p>
-<h3 id="顺便关心一下setstate与页面重新渲染之间的关系："><a class="header-anchor" href="#顺便关心一下setstate与页面重新渲染之间的关系："></a>顺便关心一下setState与<strong>页面重新渲染</strong>之间的关系：</h3>
-<p>我的总结如下：</p>
-<ul>
-<li>setState总是会触发页面的重新渲染。</li>
-<li>在调用setState时，如果在shouldComponentUpdate返回false，则不会触发重新渲染。</li>
-<li>在调用setState时，更新<strong>可变对象的状态</strong>(可变对象mutable objects与不可变对象immutable objects是相对的)，也不会触发重新渲染。</li>
-</ul>
-<p>它们的原则是：只有当新状态不同于之前状态时才会触发重新渲染，这是为了减少不必要的渲染。</p>
-<h3 id="setstate的两种写法："><a class="header-anchor" href="#setstate的两种写法："></a>setState的两种写法：</h3>
-<p>setState的写法可以分为两类：</p>
-<ol>
-<li><code>setState(updater[, callback])</code>：第一个参数是一个updater函数；第二个参数是个回调函数（可选）</li>
-<li><code>setState(stateChange[, callback])</code>：第一个参数是一个对象；第二个参数同上（可选）</li>
-</ol>
-<p>第二个参数都一样，是一个可选的回调函数，其将会在setState执行完成同时组件被重渲之后再执行。<strong>通常，对于这类逻辑，我们推荐使用componentDidUpdate来处理。</strong></p>
-<h4 id="第一个参数是updater函数；第二个参数回调函数比较少用-省略"><a class="header-anchor" href="#第一个参数是updater函数；第二个参数回调函数比较少用-省略"></a>第一个参数是updater函数；第二个参数回调函数比较少用，省略</h4>
-<p>例子如下：</p>
-<pre><code class="language-JavaScript">this.setState((prevState, props) =&gt; {
-  return {counter: prevState.counter + props.step};
-});
-</code></pre>
-<p>如上文所说，preState和props都能拿到最新的数据，不再多讲。<strong>updater函数的返回结果通常是一个对象！</strong></p>
-<h4 id="第一个参数是对象；第二个参数回调函数比较少用-省略"><a class="header-anchor" href="#第一个参数是对象；第二个参数回调函数比较少用-省略"></a>第一个参数是对象；第二个参数回调函数比较少用，省略</h4>
-<p>例子如下：</p>
-<pre><code class="language-JavaScript">this.setState({quantity: 2})
-</code></pre>
-]]></content>
-      
-        <categories>
-            
-            <category> React </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 进阶 </tag>
-            
-            <tag> state </tag>
-            
-            <tag> 异步 </tag>
-            
-            <tag> immutable </tag>
             
         </tags>
         
