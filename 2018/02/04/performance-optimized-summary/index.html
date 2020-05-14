@@ -78,18 +78,18 @@
 
 
 
-<meta name="description" content="明白单一对象的水平/垂直居中的写法和原理，有助于我们构造更加复杂的居中布局。 我们按照居中的“里面的内容”来分类，展开全文：">
-<meta name="keywords" content="进阶,vertical-align,居中">
+<meta name="description" content="此文用于快速回顾，不适合用来入门。如果想做一个系统性的归纳总结、以便查询，可以参考以下概述。">
+<meta name="keywords" content="回顾,笔记副本,性能优化,面试题">
 <meta property="og:type" content="article">
-<meta property="og:title" content="总结：使单一对象水平&#x2F;垂直居中">
-<meta property="og:url" content="https://alexzhong22c.github.io/2018/02/05/centralize-one-ele/index.html">
+<meta property="og:title" content="Web前端性能优化概述">
+<meta property="og:url" content="https://alexzhong22c.github.io/2018/02/04/performance-optimized-summary/index.html">
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
-<meta property="og:description" content="明白单一对象的水平/垂直居中的写法和原理，有助于我们构造更加复杂的居中布局。 我们按照居中的“里面的内容”来分类，展开全文：">
+<meta property="og:description" content="此文用于快速回顾，不适合用来入门。如果想做一个系统性的归纳总结、以便查询，可以参考以下概述。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-04-20T13:48:14.000Z">
+<meta property="og:updated_time" content="2020-05-14T10:24:07.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="总结：使单一对象水平&#x2F;垂直居中">
-<meta name="twitter:description" content="明白单一对象的水平/垂直居中的写法和原理，有助于我们构造更加复杂的居中布局。 我们按照居中的“里面的内容”来分类，展开全文：">
+<meta name="twitter:title" content="Web前端性能优化概述">
+<meta name="twitter:description" content="此文用于快速回顾，不适合用来入门。如果想做一个系统性的归纳总结、以便查询，可以参考以下概述。">
 
 
     <link rel="alternate" href="/atom.xml" title="Web前端 | Alex Zhong" type="application/atom+xml" data-no-instant>
@@ -123,7 +123,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>总结：使单一对象水平/垂直居中 | Web前端 | Alex Zhong</title>
+<title>Web前端性能优化概述 | Web前端 | Alex Zhong</title>
 
 
 
@@ -384,7 +384,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/App/">App</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BFC/">BFC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS3/">CSS3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS选择器/">CSS选择器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/H5/">H5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IFE/">IFE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IIFE/">IIFE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/">bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/caller/">caller</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/">express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/float/">float</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/font-face/">font-face</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/font-size/">font-size</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/line-height/">line-height</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/link标签/">link标签</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/list-style/">list-style</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/margin/">margin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meta标签/">meta标签</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/new/">new</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/radius/">radius</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/theme/">theme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/this/">this</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vertical-align/">vertical-align</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuex/">vuex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yelee/">yelee</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件/">事件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/交互/">交互</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/任务队列/">任务队列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/优先级/">优先级</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/优化/">优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/伪元素/">伪元素</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/作用域/">作用域</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/全选/">全选</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/函数属性/">函数属性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/函数式编程/">函数式编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/单例/">单例</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原型系统/">原型系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原理/">原理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/双飞翼布局/">双飞翼布局</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回顾/">回顾</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图标/">图标</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/圣杯布局/">圣杯布局</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/基础/">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/复选框/">复选框</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字体/">字体</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/对象属性/">对象属性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/居中/">居中</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工程/">工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异步/">异步</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/指令/">指令</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/指针事件/">指针事件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/插件/">插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/操作符/">操作符</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文字/">文字</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间/">时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/权重/">权重</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/条目/">条目</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/清除浮动/">清除浮动</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/特殊/">特殊</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记副本/">笔记副本</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/绝对定位/">绝对定位</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/表格/">表格</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/触摸事件/">触摸事件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/边框/">边框</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/进阶/">进阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/闭包/">闭包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/阻止上下外边距合并/">阻止上下外边距合并</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面向对象/">面向对象</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试题/">面试题</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/App/">App</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BFC/">BFC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS3/">CSS3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS选择器/">CSS选择器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/H5/">H5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IFE/">IFE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IIFE/">IIFE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/">bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/caller/">caller</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/">express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/float/">float</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/font-face/">font-face</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/font-size/">font-size</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/line-height/">line-height</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/link标签/">link标签</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/list-style/">list-style</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/margin/">margin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meta标签/">meta标签</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/new/">new</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/radius/">radius</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/theme/">theme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/this/">this</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vertical-align/">vertical-align</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuex/">vuex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yelee/">yelee</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件/">事件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/交互/">交互</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/任务队列/">任务队列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/优先级/">优先级</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/优化/">优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/伪元素/">伪元素</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/作用域/">作用域</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/全选/">全选</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/函数属性/">函数属性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/函数式编程/">函数式编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/单例/">单例</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原型系统/">原型系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原理/">原理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/双飞翼布局/">双飞翼布局</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回顾/">回顾</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图标/">图标</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/圣杯布局/">圣杯布局</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/基础/">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/复选框/">复选框</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字体/">字体</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/对象属性/">对象属性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/居中/">居中</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工程/">工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异步/">异步</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能优化/">性能优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/指令/">指令</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/指针事件/">指针事件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/插件/">插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/操作符/">操作符</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文字/">文字</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间/">时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/权重/">权重</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/条目/">条目</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/清除浮动/">清除浮动</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/特殊/">特殊</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记副本/">笔记副本</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/绝对定位/">绝对定位</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/表格/">表格</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/触摸事件/">触摸事件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/边框/">边框</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/进阶/">进阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/闭包/">闭包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/阻止上下外边距合并/">阻止上下外边距合并</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面向对象/">面向对象</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试题/">面试题</a></li></ul>
                     </div>
                 </section>
                 
@@ -493,11 +493,11 @@
     <link class="menu-list" tags="标签" friends="友情链接" about="个人签名"/>
 </nav>
 
-      <div class="body-wrap"><article id="post-centralize-one-ele" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-performance-optimized-summary" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/02/05/centralize-one-ele/" class="article-date">
-      <time datetime="2018-02-05T02:14:25.000Z" itemprop="datePublished">2018-02-05</time>
+      <a href="/2018/02/04/performance-optimized-summary/" class="article-date">
+      <time datetime="2018-02-04T08:30:27.000Z" itemprop="datePublished">2018-02-04</time>
 </a>
 
 
@@ -505,7 +505,7 @@
 
 	<br />
 	<p style="height:7px;"/>
-	<p style="height:20px;font-family:KaiTi,LiSu,'宋体',sans-serif;color:#DBDBDB;font-size:12px;">预计阅读7分钟</p>
+	<p style="height:20px;font-family:KaiTi,LiSu,'宋体',sans-serif;color:#DBDBDB;font-size:12px;">预计阅读4分钟</p>
 
     </div>
   
@@ -516,7 +516,7 @@
         
   
     <h1 class="article-title-big" itemprop="name">
-      总结：使单一对象水平/垂直居中
+      Web前端性能优化概述
     </h1>
   
 
@@ -525,13 +525,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/CSS/">CSS</a>
+    <a class="article-category-link" href="/categories/浏览器/">浏览器</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vertical-align/">vertical-align</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/居中/">居中</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/进阶/">进阶</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/回顾/">回顾</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能优化/">性能优化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/笔记副本/">笔记副本</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面试题/">面试题</a></li></ul>
     </div>
 
 
@@ -541,314 +541,148 @@
     
           <div id="article-content" class="article-entry" itemprop="articleBody">
 			  
-			<p>明白单一对象的水平/垂直居中的写法和原理，有助于我们构造更加复杂的居中布局。</p>
-<p>我们按照居中的“里面的内容”来分类，展开全文：</p>
+			<p>此文用于快速回顾，不适合用来入门。如果想做一个系统性的归纳总结、以便查询，可以参考以下概述。</p>
 <a id="more"></a>
-<h2 id="里面的内容-为单行行内元素的时候-以单行文字为例"><a class="header-anchor" href="#里面的内容-为单行行内元素的时候-以单行文字为例"></a>“里面的内容”为单行行内元素的时候(以单行文字为例)</h2>
-<p>由于设置<code>text-align:center</code>之后，行内的元素就会水平居中，比较简单。所以这里侧重讲垂直居中。</p>
-<h3 id="a法：令line-height和height相等-垂直居中"><a class="header-anchor" href="#a法：令line-height和height相等-垂直居中"></a>A法：令line-height和height相等–垂直居中</h3>
-<pre><code class="language-CSS">.parent {
-  height: 300px;
-  line-height: 300px;
-}
-</code></pre>
-<p>事实上，不需要对于height属性的设置也是可以的。</p>
-<h4 id="缺点："><a class="header-anchor" href="#缺点："></a>缺点：</h4>
-<p>只能居中一行文字：如果不想在页面缩放的时候让文字跑出元素的范围外，建议在后面加上<code>overflow: hidden</code> 。</p>
-<h3 id="b法：使用display-table-cell和vertical-align-middle-垂直居中"><a class="header-anchor" href="#b法：使用display-table-cell和vertical-align-middle-垂直居中"></a>B法：使用display:table-cell和vertical-align:middle–垂直居中</h3>
-<pre><code class="language-html">&lt;style&gt;
-.parent {
-  width: 300px;
-  height: 250px;
-  background: green;
-
-  display: table-cell;
-  vertical-align: middle;
-}
-&lt;/style&gt;
-&lt;body&gt;
-&lt;div class=&quot;parent&quot;&gt;这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字&lt;/div&gt;
-&lt;/body&gt;
-</code></pre>
-<h4 id="优点："><a class="header-anchor" href="#优点："></a>优点：</h4>
+<h2 id="性能优化的指导思想："><a class="header-anchor" href="#性能优化的指导思想："></a>性能优化的指导思想：</h2>
 <ul>
-<li>height和line-height可以自由定义，这方便内容从单行文字发展为多行文字</li>
-<li>在浏览器缩放的时候表现优异</li>
+<li>先从辅助工具入手，先从性能瓶颈入手
+<ul>
+<li>现在的辅助工具强大到会提示你如何进行优化，你可以参考着来一项一项做就行了</li>
+<li>很多性能优化的手段是相互矛盾的，所以要抓住瓶颈和重点，舍弃掉收效不明显的手段</li>
+<li>性能优化是一项庞大的工作量，出于对工期的考虑，建议抓住瓶颈和重点</li>
 </ul>
-<h4 id="缺点：-v2"><a class="header-anchor" href="#缺点：-v2"></a>缺点：</h4>
+</li>
+<li>不要过早优化
 <ul>
-<li>设置.parent为<code>float:left</code>或者<code>positon:absolute</code>或者<code>position:fixed</code> 时居中会失效。如需兼顾他们，此时需要外面套多一层元素。（因为<code>vertical-align</code>只适用于inline/inline-block元素或者table-cell元素，详见 <a href="https://alexzhong22c.github.io/2018/02/05/vertical-align-middle/">深入理解vertical-align:middle</a>）</li>
-<li>IE7及以下都不支持</li>
+<li>很多性能优化的手段是相互矛盾的，在编写新功能阶段过早优化可能会造成返工和工作时间的浪费</li>
+<li>返工的过程又可能引入bug</li>
 </ul>
-<h4 id="备注："><a class="header-anchor" href="#备注："></a>备注：</h4>
+</li>
+<li>不要为了优化而优化：在迭代中，等到测试人员或者用户对性能不满意，才去优化
 <ul>
-<li>特点是在IE8及以上浏览器的时候，<code>.grandparent</code> 的高度其实是可以自动适应的。</li>
-<li>兼容更老的IE的写法：
-<ul>
-<li>HTML结构需要多套两层div：<code>.grandparent</code>和<code>.child</code></li>
-<li>宽度、高度和背景等属性需要转移到<code>.grandparent</code> 这一级</li>
-<li>文字内容需要转移到<code>.child</code> 这一级</li>
+<li>如果你的网站性能，优化到能令用户满意，就不用追求极致的性能</li>
+<li>性能优化难有终点和尽头，尤其是多人协作项目，如果追求极致优化通常会引入隐性的问题和bug</li>
 </ul>
 </li>
 </ul>
-<pre><code class="language-HTML">&lt;style&gt;
-.grandparent {
-  width: 300px;
-  /*自动高度：*/
-  /*height: 250px;*/
-  background: green;
-
-  display: table;
-  *position:relative;
-  overflow:hidden;
-}
-.parent {
-  display: table-cell;
-  vertical-align: middle;
-
-  *position:absolute;
-  *top:50%;
-}
-.child {
-  *position:relative;
-  *top:-50%;
-}
-.someone {
-  height: 400px;
-  background: yellow;
-}
-&lt;/style&gt;
-&lt;body&gt;
-&lt;div class=&quot;grandparent&quot;&gt;
-  &lt;div class=&quot;someone&quot;&gt;用来增大高度用来增大高度用来增大高度，可以被删掉&lt;/div&gt;
-  &lt;div class=&quot;parent&quot;&gt;
-    &lt;div class=&quot;child&quot;&gt;这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字&lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;/body&gt;
-</code></pre>
-<h3 id="c法：使用display-inline-block和vertical-align-middle-垂直居中"><a class="header-anchor" href="#c法：使用display-inline-block和vertical-align-middle-垂直居中"></a>C法：使用display: inline-block和vertical-align:middle–垂直居中</h3>
-<p>这里只给出近似垂直居中的例子，如果想设置为完美垂直居中的位置或者了解更多，详见<a href="https://alexzhong22c.github.io/2018/02/05/vertical-align-middle/">深入理解vertical-align:middle</a> ：</p>
-<pre><code class="language-HTML">&lt;style&gt;
-.parent {
-  line-height: 300px;
-  text-align: center;
-  background: green;
-}
-.text {
-  display: inline-block;
-  vertical-align: middle;
-  
-  line-height: normal;
-  text-align: left;
-  max-width: 100%;
-}
-&lt;/style&gt;
-&lt;body&gt;
-&lt;p class=&quot;parent&quot;&gt;
-&lt;span class=&quot;text&quot;&gt;一行文字&lt;br&gt;一行文字&lt;br&gt;一行文字&lt;/span&gt;&lt;!-- 兼容IE7,这里要换行或空格 --&gt;
-&lt;/p&gt;
-&lt;/body&gt;
-</code></pre>
-<h3 id="d法：flex布局-垂直居中"><a class="header-anchor" href="#d法：flex布局-垂直居中"></a>D法：flex布局–垂直居中</h3>
-<pre><code class="language-HTML">&lt;style&gt;
-.parent {
-  width: 300px;
-  height: 250px;
-  background: green;
-
-  display: -webkit-flex;
-  display: -ms-flex;/* IE 10 */
-  display: flex;
-  align-items: center;
-}
-&lt;/style&gt;
-&lt;body&gt;
-  &lt;div class=&quot;parent&quot;&gt;这是文字这是文字&lt;/div&gt;
-&lt;/body&gt;
-</code></pre>
-<h4 id="优点：-v2"><a class="header-anchor" href="#优点：-v2"></a>优点：</h4>
+<h2 id="性能优化概述"><a class="header-anchor" href="#性能优化概述"></a>性能优化概述</h2>
+<p>刚刚提到“先从辅助工具入手，先从性能瓶颈入手”，这才是工作中性能优化的思路。</p>
+<p>而如果是面试找思路回答这个问题，或者想做一个系统性的归纳总结、以便查询，可以参考以下概述：</p>
+<p>(下面列表的5个根节点其实就是5个大的方向)</p>
 <ul>
-<li><code>.parent</code>元素不用定高</li>
-<li>代码简单</li>
-</ul>
-<h4 id="缺点：-v3"><a class="header-anchor" href="#缺点：-v3"></a>缺点：</h4>
+<li>资源预加载
 <ul>
-<li>IE要10才支持</li>
-<li>其实文字是可以自动换行的，这样就是多行文字了，但是需要IE11</li>
+<li>w3c Resource Hints：dns预解析、TCP预连接、页面预渲染。有一些标签属性已经可以很好的做到这些，如 dns-prefetch &amp; preconnect &amp; prefetch &amp; prerender(慎用) &amp; preload。</li>
+<li>其他preload的方案或者xxx-loadable库</li>
 </ul>
-<h4 id="备注：-v2"><a class="header-anchor" href="#备注：-v2"></a>备注：</h4>
+</li>
+<li>减小传输文件体积
 <ul>
-<li>兼容IE10的写法为：<code>display: -ms-flex;</code>； 而且要求<code>-ms-flex-preferred-size</code>（即第三个参数）带单位，所以必须写成<code>0px</code>或<code>0%</code>或<code>auto</code>。</li>
-<li>如果要兼容旧浏览器就惨了，这货换了好多次名字：</li>
-</ul>
-<pre><code>display: -webkit-box; /* Chrome 4+, Safari 3.1, iOS Safari 3.2+ */
-display: -moz-box; /* Firefox 17- */
-display: -webkit-flex; /* Chrome 21+, Safari 6.1+, iOS Safari 7+, Opera 15/16 */
-display: -moz-flex; /* Firefox 18+ */
-display: -ms-flexbox; /* IE 10 */
-display: flex; /* Chrome 29+, Firefox 22+, IE 11+, Opera 12.1/17/18, Android 4.4+ */
-</code></pre>
-<h2 id="里面的内容-为多行行内元素的时候-以多行文字为例"><a class="header-anchor" href="#里面的内容-为多行行内元素的时候-以多行文字为例"></a>“里面的内容”为多行行内元素的时候(以多行文字为例)</h2>
-<p><strong>参考上文B法</strong></p>
-<p><strong>参考上文C法</strong></p>
-<p><strong>参考上文D法</strong></p>
-<h2 id="里面的内容-为大小不固定的图片的时候"><a class="header-anchor" href="#里面的内容-为大小不固定的图片的时候"></a>“里面的内容”为大小不固定的图片的时候</h2>
-<p><strong>参考上文B法</strong></p>
-<p><strong>参考上文C法</strong></p>
-<p><strong>参考上文D法</strong></p>
-<h2 id="里面的内容-为定宽高的块级元素的时候"><a class="header-anchor" href="#里面的内容-为定宽高的块级元素的时候"></a>“里面的内容”为定宽高的块级元素的时候</h2>
-<h3 id="定宽-margin-auto-水平居中"><a class="header-anchor" href="#定宽-margin-auto-水平居中"></a>定宽+margin auto–水平居中</h3>
-<pre><code class="language-HTML">&lt;style&gt;
-.child {
-    width: 300px;
-    background: green;
-
-    margin: 0 auto;
-}
-&lt;/style&gt;
-&lt;body&gt;
-&lt;div class=&quot;child&quot;&gt;这是文字这是文字这是文字这是文字这是文字这是文字&lt;/div&gt;
-&lt;/body&gt;
-</code></pre>
-<h4 id="备注：-v3"><a class="header-anchor" href="#备注：-v3"></a>备注：</h4>
-<p>首先，元素定宽是必须的。然后，大家都知道，只要margin-left和margin-right都为auto就行了。</p>
-<h4 id="优点：-v3"><a class="header-anchor" href="#优点：-v3"></a>优点：</h4>
-<p>IE7及以上都是可以的</p>
-<h3 id="定宽高-绝对定位-负margin-水平垂直居中"><a class="header-anchor" href="#定宽高-绝对定位-负margin-水平垂直居中"></a>定宽高+绝对定位+负margin–水平垂直居中</h3>
-<pre><code class="language-HTML">&lt;style&gt;
-.child {
-    width: 300px;
-    height: 250px;
-    background: green;
-
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-left: -150px;
-    margin-top: -125px;
-}
-&lt;/style&gt;
-&lt;body&gt;
-&lt;div class=&quot;child&quot;&gt;这是文字这是文字这是文字这是文字这是文字这是文字&lt;/div&gt;
-&lt;/body&gt;
-</code></pre>
-<h4 id="优点：-v4"><a class="header-anchor" href="#优点：-v4"></a>优点：</h4>
+<li>gzip(后文有介绍)</li>
+<li>webpack打包策略 BundleAnalyzerPlugin 或者执行vue ui来分析
 <ul>
-<li>兼容性好</li>
+<li>抽离公共模块</li>
 </ul>
-<h4 id="缺点：-v4"><a class="header-anchor" href="#缺点：-v4"></a>缺点：</h4>
+</li>
+<li>按需引入模块
 <ul>
-<li>要定宽高</li>
+<li>利用webpack按需引入</li>
 </ul>
-<h4 id="备注：-v4"><a class="header-anchor" href="#备注：-v4"></a>备注：</h4>
-<p>将<code>position: absolute;</code>改成<code>position: fixed;</code>也是可以的，相信大家都懂什么意思。但是在老版本IE下会不支持fixed，在网上抄一下怎么兼容就行了。</p>
-<h2 id="里面的内容-为不定宽高的块级元素的时候"><a class="header-anchor" href="#里面的内容-为不定宽高的块级元素的时候"></a>“里面的内容”为不定宽高的块级元素的时候</h2>
-<h3 id="绝对定位-margin-auto-水平垂直居中"><a class="header-anchor" href="#绝对定位-margin-auto-水平垂直居中"></a>绝对定位+margin:auto–水平垂直居中</h3>
-<pre><code class="language-HTML">&lt;style&gt;
-.child {
-  /*宽高可以不写：*/
-  width: 300px;
-  height: 250px;
-  background: green;
-
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-
-  margin: auto;
-}
-&lt;/style&gt;
-&lt;body&gt;
-&lt;div class=&quot;child&quot;&gt;这是文字这是文字这是文字&lt;/div&gt;
-&lt;/body&gt;
-</code></pre>
-<h4 id="优点：-v5"><a class="header-anchor" href="#优点：-v5"></a>优点：</h4>
-<p>符合人的直觉思维习惯</p>
-<h4 id="缺点：-v5"><a class="header-anchor" href="#缺点：-v5"></a>缺点：</h4>
-<p>需要IE8及以上</p>
-<h4 id="备注：-v5"><a class="header-anchor" href="#备注：-v5"></a>备注：</h4>
+</li>
+<li>取代Cookies + Cookie free (减小http包体积)</li>
+<li>js、css打包压缩</li>
+<li>减少字体体积</li>
+<li>压缩html</li>
+<li>图片格式和压缩
 <ul>
-<li>定位改成用fixed也是可以的</li>
-<li>其原理参考：</li>
-</ul>
-<p><a href="http://www.zhangxinxu.com/wordpress/2013/11/margin-auto-absolute-%E7%BB%9D%E5%AF%B9%E5%AE%9A%E4%BD%8D-%E6%B0%B4%E5%B9%B3%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD/" target="_blank" rel="noopener">margin-auto-absolute-绝对定位-水平垂直居中-张鑫旭</a></p>
-<p><a href="https://www.zhihu.com/question/21644198" target="_blank" rel="noopener">为什么margin:auto可以让块级元素水平居中</a></p>
-<h3 id="绝对定位-translate-水平垂直居中"><a class="header-anchor" href="#绝对定位-translate-水平垂直居中"></a>绝对定位+translate–水平垂直居中</h3>
-<pre><code class="language-CSS">&lt;style&gt;
-.parent {
-    width: 300px;
-    height: 300px;
-    background: green;
-
-    position: relative;
-}
-.child {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-}
-&lt;/style&gt;
-&lt;body&gt;
-&lt;div class=&quot;parent&quot;&gt;
-&lt;div class=&quot;child&quot;&gt;这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字&lt;/div&gt;
-&lt;/div&gt;
-&lt;/body&gt;
-</code></pre>
-<h4 id="优点"><a class="header-anchor" href="#优点"></a>优点:</h4>
-<p>父子元素的width和height都可以自己定</p>
-<h4 id="缺点：-v6"><a class="header-anchor" href="#缺点：-v6"></a>缺点：</h4>
-<p>IE8及以下不兼容</p>
-<h4 id="备注：-v6"><a class="header-anchor" href="#备注：-v6"></a>备注：</h4>
+<li>图片压缩</li>
+<li>雪碧图(更新起来麻烦，以前才流行)：减少http请求次数。webpack-spritesmith</li>
+<li>图片格式选择
 <ul>
-<li>绝对定位也可以改写为相对定位：</li>
-</ul>
-<pre><code class="language-CSS">.parent {
-  	/*子元素相对定位，父元素定高*/
-    width: 300px;
-    height: 250px;
-    background: green;
-}
-.child {
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-}
-</code></pre>
+<li>色彩丰富的小图用png（支持透明）</li>
+<li>大图(背景图、轮播图)要用jpg：体积小，不支持透明</li>
+<li>webp 但兼容性不是那么好，需要调研一下
 <ul>
-<li>transform的兼容性写法：</li>
+<li>微信基本用的是webp</li>
 </ul>
-<pre><code class="language-CSS">transform:translateY(-50%);
--ms-transform:translateY(-50%); 	/* IE 9 */
--moz-transform:translateY(-50%); 	/* Firefox */
--webkit-transform:translateY(-50%); /* Safari 和 Chrome */
--o-transform:translateY(-50%); 	/* Opera */
-</code></pre>
-<p>对于<code>transform</code>而言：</p>
-<p>Internet Explorer 10、Firefox、Opera 支持 transform 属性。</p>
-<p>Internet Explorer 9 支持替代的 -ms-transform 属性（仅适用于 2D 转换）。</p>
-<p>Safari 和 Chrome 支持替代的 -webkit-transform 属性（3D 和 2D 转换）。</p>
-<p>Opera 只支持 2D 转换。</p>
-<h3 id="flex布局-水平垂直居中"><a class="header-anchor" href="#flex布局-水平垂直居中"></a>flex布局–水平垂直居中</h3>
-<p>flex布局在这里有点大才小用了。关键在于了解flex布局的特点。因为写法较多，参考网上的。</p>
-<h3 id="转换成行内块级元素"><a class="header-anchor" href="#转换成行内块级元素"></a>转换成行内块级元素</h3>
-<p>此次我们居中的目标是一个<code>块级元素的</code>块块，而非之前的<code>行内元素</code>。</p>
-<p>我们需要加上<code>display: inline-block;</code>使它变成行内块级元素，然后就可以参考行内元素的居中来弄了。</p>
+</li>
+<li>svg：矢量图体积小，因为是标签需额外的计算：比如icon-font</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>减少文件传输数量和次数
+<ul>
+<li>利用文件打包来控制个数和大小和按使用频率分包，这就和webpack有关了</li>
+<li>http缓存，合理设置客户端缓存时间、利用好强缓存协商缓存</li>
+<li>数据缓存
+<ul>
+<li>(cookie localstroage， sessionStroage等本地存储)</li>
+<li>如果高并发的话改用redis存图片</li>
+</ul>
+</li>
+<li>页面懒加载和图片懒加载</li>
+<li>避免空的src和href</li>
+<li>http keep-alive</li>
+</ul>
+</li>
+<li>减少途经的服务器数量和路径长度
+<ul>
+<li>cdn
+<ul>
+<li>cdn域名分片规避浏览器对一个域名的并发数限制</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>少执行代码 和 缩短代码执行时间
+<ul>
+<li>--------- 【 浏览器层面： 】 ---------</li>
+<li>处理阻塞css、js，异步加载组件或css、js</li>
+<li>减少DOM显示数
+<ul>
+<li>(一个长度10000的商品列表，怎么显示)(移动设备内存存储数据过多dom也会崩掉)</li>
+<li>虚拟列表
+<ul>
+<li>(其实就保留三屏的列表，自制组件库scoll组件也面临这个性能问题)</li>
+<li>vue-virtual-scroller和react-virtualized等等</li>
+</ul>
+</li>
+<li>无限滚动懒加载列表</li>
+</ul>
+</li>
+<li>减少dom操作的次数</li>
+<li>减少重排重绘  (和避免强制重排强制重绘)</li>
+<li>慎重选择高性能消耗的css样式</li>
+<li>web workers分担执行任务</li>
+<li>--------- 【 代码逻辑层面： 】 ---------</li>
+<li>骨架屏：vue-skeleton-webpack-plugin</li>
+<li>防抖节流</li>
+<li>算法优化
+<ul>
+<li>排序的优化</li>
+<li>动态规划等等</li>
+</ul>
+</li>
+<li>基于框架运行机制的优化：vue react：组件重新渲染机制等等</li>
+</ul>
+</li>
+</ul>
 
 		</div>
       
   
      <!-- 版权署名授权 -->
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/02/05/centralize-one-ele/">总结：使单一对象水平/垂直居中</a></p>
+        <p><span>本文标题:</span><a href="/2018/02/04/performance-optimized-summary/">Web前端性能优化概述</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
-        <p style="color: #696969;"><span>发布时间:</span>2018-02-05, 10:14:25</p>
-        <!-- <p><span>最后更新:</span>2020-04-20, 21:48:14</p> -->
+        <p style="color: #696969;"><span>发布时间:</span>2018-02-04, 16:30:27</p>
+        <!-- <p><span>最后更新:</span>2020-05-14, 18:24:07</p> -->
         <p>
-            <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="总结：使单一对象水平/垂直居中" href="/2018/02/05/centralize-one-ele/">https://alexzhong22c.github.io/2018/02/05/centralize-one-ele/</a>
-            <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://alexzhong22c.github.io/2018/02/05/centralize-one-ele/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="Web前端性能优化概述" href="/2018/02/04/performance-optimized-summary/">https://alexzhong22c.github.io/2018/02/04/performance-optimized-summary/</a>
+            <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://alexzhong22c.github.io/2018/02/04/performance-optimized-summary/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
         </p>
         <p style="color: #696969;">
             <span>许可协议:</span><i class="fa fa-creative-commons"></i><a id="copyright_license" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target = "_blank" class="hint  hint--bottom" data-hint="中国大陆 (CC BY-NC-SA 3.0 CN)">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
@@ -860,15 +694,15 @@ display: flex; /* Chrome 29+, Firefox 22+, IE 11+, Opera 12.1/17/18, Android 4.4
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2018/02/05/vertical-align-middle/">
-                    vertical-align:middle近似居中和完美居中
+                <a href="/2018/02/05/js-functional-intro/">
+                    到底什么是函数式编程 精简总结
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2018/01/16/js-functional-intro/">
-                    到底什么是函数式编程 精简总结
+                <a href="/2017/10/12/git-stage/">
+                    git暂存区知识梳理
                 </a>
             </div>
         
@@ -881,7 +715,7 @@ display: flex; /* Chrome 29+, Firefox 22+, IE 11+, Opera 12.1/17/18, Android 4.4
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#里面的内容-为单行行内元素的时候-以单行文字为例"><span class="toc-text">“里面的内容”为单行行内元素的时候(以单行文字为例)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#a法：令line-height和height相等-垂直居中"><span class="toc-text">A法：令line-height和height相等–垂直居中</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#缺点："><span class="toc-text">缺点：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#b法：使用display-table-cell和vertical-align-middle-垂直居中"><span class="toc-text">B法：使用display:table-cell和vertical-align:middle–垂直居中</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#优点："><span class="toc-text">优点：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#缺点：-v2"><span class="toc-text">缺点：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#备注："><span class="toc-text">备注：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#c法：使用display-inline-block和vertical-align-middle-垂直居中"><span class="toc-text">C法：使用display: inline-block和vertical-align:middle–垂直居中</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#d法：flex布局-垂直居中"><span class="toc-text">D法：flex布局–垂直居中</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#优点：-v2"><span class="toc-text">优点：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#缺点：-v3"><span class="toc-text">缺点：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#备注：-v2"><span class="toc-text">备注：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#里面的内容-为多行行内元素的时候-以多行文字为例"><span class="toc-text">“里面的内容”为多行行内元素的时候(以多行文字为例)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#里面的内容-为大小不固定的图片的时候"><span class="toc-text">“里面的内容”为大小不固定的图片的时候</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#里面的内容-为定宽高的块级元素的时候"><span class="toc-text">“里面的内容”为定宽高的块级元素的时候</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定宽-margin-auto-水平居中"><span class="toc-text">定宽+margin auto–水平居中</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#备注：-v3"><span class="toc-text">备注：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#优点：-v3"><span class="toc-text">优点：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定宽高-绝对定位-负margin-水平垂直居中"><span class="toc-text">定宽高+绝对定位+负margin–水平垂直居中</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#优点：-v4"><span class="toc-text">优点：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#缺点：-v4"><span class="toc-text">缺点：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#备注：-v4"><span class="toc-text">备注：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#里面的内容-为不定宽高的块级元素的时候"><span class="toc-text">“里面的内容”为不定宽高的块级元素的时候</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#绝对定位-margin-auto-水平垂直居中"><span class="toc-text">绝对定位+margin:auto–水平垂直居中</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#优点：-v5"><span class="toc-text">优点：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#缺点：-v5"><span class="toc-text">缺点：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#备注：-v5"><span class="toc-text">备注：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#绝对定位-translate-水平垂直居中"><span class="toc-text">绝对定位+translate–水平垂直居中</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#优点"><span class="toc-text">优点:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#缺点：-v6"><span class="toc-text">缺点：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#备注：-v6"><span class="toc-text">备注：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flex布局-水平垂直居中"><span class="toc-text">flex布局–水平垂直居中</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#转换成行内块级元素"><span class="toc-text">转换成行内块级元素</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#性能优化的指导思想："><span class="toc-text">性能优化的指导思想：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#性能优化概述"><span class="toc-text">性能优化概述</span></a></li></ol>
         
     </div>
     <style>
@@ -911,7 +745,7 @@ display: flex; /* Chrome 29+, Firefox 22+, IE 11+, Opera 12.1/17/18, Android 4.4
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/02/05/vertical-align-middle/" title="上一篇: vertical-align:middle近似居中和完美居中">
+            <a href="/2018/02/05/js-functional-intro/" title="上一篇: 到底什么是函数式编程 精简总结">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -919,13 +753,13 @@ display: flex; /* Chrome 29+, Firefox 22+, IE 11+, Opera 12.1/17/18, Android 4.4
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2018/01/16/js-functional-intro/" title="下一篇: 到底什么是函数式编程 精简总结">
+            <a href="/2017/10/12/git-stage/" title="下一篇: git暂存区知识梳理">
                 <i class="fa fa-angle-right"></i>
             </a>
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/04/02/settimeout-0-to-9/">面试题：改造代码，使之隔秒输出0 - 9</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/06/height-calculate/">深入理解文字高度和行高的设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/05/vertical-align-middle/">vertical-align:middle近似居中和完美居中</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/05/centralize-one-ele/">总结：使单一对象水平/垂直居中</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/16/js-functional-intro/">到底什么是函数式编程 精简总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/22/let-n-const/">let和const旧话新编</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/12/git-stage/">git暂存区知识梳理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/17/ife-css-task03/">三栏式布局--IFE2017-CSS-task03笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/07/css-border1/">border-radius属性</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/03/js-obj-prop1/">对象属性的操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/02/js-obj-prop2/">对象属性描述符</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/01/js-obj-prop3/">对象属性之对象状态</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/12/js-inherit/">实现继承的3种方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/12/js-new-happen/">new创建对象的过程发生了什么</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/09/js-prototype-practice/">原型对象 实战使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/08/js-proto/">理解prototype、__proto__和constructor等关系</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/07/js-this2/">this绑定的优先级</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/07/js-this/">结合this的4种绑定规则 深入理解this指向的判定</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/02/js-event4/">浏览器事件冒泡或者捕获相关</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/01/js-event3/">js四种事件处理程序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/01/js-pv-default/">js取消默认事件行为</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/07/js-date/">JavaScript Date对象回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/07/vue-checkbox-table/">纯vue实现checkbox父子联动</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/25/vue-time-tracker/">经典vue单页路由入门全家桶</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/15/vue-table-nav/">按条目展示表格数据小插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/clearfix-n-bfc/">闭合浮动和BFC和阻止上下外边距的合并</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/ife-css-task02/">IFE2017-CSS-task02笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/31/css-selectors-specificity/">CSS选择器优先级</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/28/h5-new-ele/">H5新标签和被H5拥抱的老元素们</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/27/ife-css-task01/">IFE2017-CSS-task01笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/10/iife-intro/">IIFE回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/09/for-loop/">js的for循环回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/float-n-absolute/">float和绝对定位比较</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/about-margin/">和margin有关的知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/gulp-usage/">gulp的入门和一些简单使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/27/icon-usage/">桌面端和移动端图标的引入</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/25/webapp-events-intro/">移动开发事件入门概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/24/webapp-intro/">移动开发入门概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/my-hexo-theme/">yelee主题改bug总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/17/todo-app/">ToDo小应用完工总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/equality-operators/">相等操作符回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/js-operators/">操作符回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/25/font-face/">font-face--CSS3</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/13/js-function/">js函数基础回顾</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/04/02/settimeout-0-to-9/">面试题：改造代码，使之隔秒输出0 - 9</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/06/height-calculate/">深入理解文字高度和行高的设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/05/vertical-align-middle/">vertical-align:middle近似居中和完美居中</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/05/centralize-one-ele/">总结：使单一对象水平/垂直居中</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/05/js-functional-intro/">到底什么是函数式编程 精简总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/04/performance-optimized-summary/">Web前端性能优化概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/12/git-stage/">git暂存区知识梳理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/17/ife-css-task03/">三栏式布局--IFE2017-CSS-task03笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/07/css-border1/">border-radius属性</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/03/js-obj-prop1/">对象属性的操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/02/js-obj-prop2/">对象属性描述符</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/01/js-obj-prop3/">对象属性之对象状态</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/12/js-inherit/">实现继承的3种方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/12/js-new-happen/">new创建对象的过程发生了什么</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/09/js-prototype-practice/">原型对象 实战使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/08/js-proto/">理解prototype、__proto__和constructor等关系</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/07/js-this2/">this绑定的优先级</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/07/js-this/">结合this的4种绑定规则 深入理解this指向的判定</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/02/js-event4/">浏览器事件冒泡或者捕获相关</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/01/js-event3/">js四种事件处理程序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/01/js-pv-default/">js取消默认事件行为</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/08/let-n-const/">let和const旧话新编</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/07/js-date/">JavaScript Date对象回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/07/vue-checkbox-table/">纯vue实现checkbox父子联动</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/25/vue-time-tracker/">经典vue单页路由入门全家桶</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/15/vue-table-nav/">按条目展示表格数据小插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/clearfix-n-bfc/">闭合浮动和BFC和阻止上下外边距的合并</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/ife-css-task02/">IFE2017-CSS-task02笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/31/css-selectors-specificity/">CSS选择器优先级</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/28/h5-new-ele/">H5新标签和被H5拥抱的老元素们</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/27/ife-css-task01/">IFE2017-CSS-task01笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/10/iife-intro/">IIFE回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/09/for-loop/">js的for循环回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/float-n-absolute/">float和绝对定位比较</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/about-margin/">和margin有关的知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/gulp-usage/">gulp的入门和一些简单使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/27/icon-usage/">桌面端和移动端图标的引入</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/25/webapp-events-intro/">移动开发事件入门概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/24/webapp-intro/">移动开发入门概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/my-hexo-theme/">yelee主题改bug总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/17/todo-app/">ToDo小应用完工总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/equality-operators/">相等操作符回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/js-operators/">操作符回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/25/font-face/">font-face--CSS3</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/13/js-function/">js函数基础回顾</a></li></ul>
 
 
 
@@ -948,7 +782,7 @@ display: flex; /* Chrome 29+, Firefox 22+, IE 11+, Opera 12.1/17/18, Android 4.4
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					
-						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,694</span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,040</span>
 					
 				</div>
             </div>

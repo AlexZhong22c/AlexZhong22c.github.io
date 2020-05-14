@@ -78,26 +78,18 @@
 
 
 
-<meta name="description" content="font-size设置的是什么?line-height设置的是什么?各种行高是怎么计算出来的?你真的知道吗?">
-<meta name="keywords" content="进阶,居中,line-height,font-size">
+<meta name="description" content="本文的结构是：首先看完了前文就能快速把代码从ES5的变量声明改到ES6，后续部分是作为拓展和详细的介绍：">
+<meta name="keywords" content="作用域,ES6,闭包,任务队列">
 <meta property="og:type" content="article">
-<meta property="og:title" content="深入理解文字高度和行高的设置">
-<meta property="og:url" content="https://alexzhong22c.github.io/2018/02/06/height-calculate/index.html">
+<meta property="og:title" content="let和const旧话新编">
+<meta property="og:url" content="https://alexzhong22c.github.io/2017/05/08/let-n-const/index.html">
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
-<meta property="og:description" content="font-size设置的是什么?line-height设置的是什么?各种行高是怎么计算出来的?你真的知道吗?">
+<meta property="og:description" content="本文的结构是：首先看完了前文就能快速把代码从ES5的变量声明改到ES6，后续部分是作为拓展和详细的介绍：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://cloud.az22c.top/font-line.jpg-az22cgithub">
-<meta property="og:image" content="https://cloud.az22c.top/diff-font.jpg-az22cgithub">
-<meta property="og:image" content="https://cloud.az22c.top/catamaran-font.jpg-az22cgithub">
-<meta property="og:image" content="https://cloud.az22c.top/line-boxes.jpg-az22cgithub">
-<meta property="og:image" content="https://cloud.az22c.top/font-line.jpg-az22cgithub">
-<meta property="og:image" content="https://cloud.az22c.top/font-forge.jpg-az22cgithub">
-<meta property="og:image" content="https://cloud.az22c.top/set-line-height-1.jpg-az22cgithub">
-<meta property="og:updated_time" content="2020-04-20T13:48:14.000Z">
+<meta property="og:updated_time" content="2020-05-14T09:28:02.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="深入理解文字高度和行高的设置">
-<meta name="twitter:description" content="font-size设置的是什么?line-height设置的是什么?各种行高是怎么计算出来的?你真的知道吗?">
-<meta name="twitter:image" content="https://cloud.az22c.top/font-line.jpg-az22cgithub">
+<meta name="twitter:title" content="let和const旧话新编">
+<meta name="twitter:description" content="本文的结构是：首先看完了前文就能快速把代码从ES5的变量声明改到ES6，后续部分是作为拓展和详细的介绍：">
 
 
     <link rel="alternate" href="/atom.xml" title="Web前端 | Alex Zhong" type="application/atom+xml" data-no-instant>
@@ -131,7 +123,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>深入理解文字高度和行高的设置 | Web前端 | Alex Zhong</title>
+<title>let和const旧话新编 | Web前端 | Alex Zhong</title>
 
 
 
@@ -392,7 +384,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/App/">App</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BFC/">BFC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS3/">CSS3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS选择器/">CSS选择器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/H5/">H5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IFE/">IFE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IIFE/">IIFE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/">bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/caller/">caller</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/">express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/float/">float</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/font-face/">font-face</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/font-size/">font-size</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/line-height/">line-height</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/link标签/">link标签</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/list-style/">list-style</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/margin/">margin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meta标签/">meta标签</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/new/">new</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/radius/">radius</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/theme/">theme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/this/">this</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vertical-align/">vertical-align</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuex/">vuex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yelee/">yelee</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件/">事件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/交互/">交互</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/任务队列/">任务队列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/优先级/">优先级</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/优化/">优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/伪元素/">伪元素</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/作用域/">作用域</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/全选/">全选</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/函数属性/">函数属性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/函数式编程/">函数式编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/单例/">单例</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原型系统/">原型系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原理/">原理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/双飞翼布局/">双飞翼布局</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回顾/">回顾</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图标/">图标</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/圣杯布局/">圣杯布局</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/基础/">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/复选框/">复选框</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字体/">字体</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/对象属性/">对象属性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/居中/">居中</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工程/">工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异步/">异步</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/指令/">指令</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/指针事件/">指针事件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/插件/">插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/操作符/">操作符</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文字/">文字</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间/">时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/权重/">权重</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/条目/">条目</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/清除浮动/">清除浮动</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/特殊/">特殊</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记副本/">笔记副本</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/绝对定位/">绝对定位</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/表格/">表格</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/触摸事件/">触摸事件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/边框/">边框</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/进阶/">进阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/闭包/">闭包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/阻止上下外边距合并/">阻止上下外边距合并</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面向对象/">面向对象</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试题/">面试题</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/App/">App</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BFC/">BFC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS3/">CSS3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS选择器/">CSS选择器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/H5/">H5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IFE/">IFE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IIFE/">IIFE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/">bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/caller/">caller</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/">express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/float/">float</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/font-face/">font-face</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/font-size/">font-size</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/line-height/">line-height</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/link标签/">link标签</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/list-style/">list-style</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/margin/">margin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meta标签/">meta标签</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/new/">new</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/radius/">radius</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/theme/">theme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/this/">this</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vertical-align/">vertical-align</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuex/">vuex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yelee/">yelee</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件/">事件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/交互/">交互</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/任务队列/">任务队列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/优先级/">优先级</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/优化/">优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/伪元素/">伪元素</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/作用域/">作用域</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/全选/">全选</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/函数属性/">函数属性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/函数式编程/">函数式编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/单例/">单例</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原型系统/">原型系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原理/">原理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/双飞翼布局/">双飞翼布局</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回顾/">回顾</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图标/">图标</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/圣杯布局/">圣杯布局</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/基础/">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/复选框/">复选框</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字体/">字体</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/对象属性/">对象属性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/居中/">居中</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工程/">工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异步/">异步</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能优化/">性能优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/指令/">指令</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/指针事件/">指针事件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/插件/">插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/操作符/">操作符</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文字/">文字</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间/">时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/权重/">权重</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/条目/">条目</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/清除浮动/">清除浮动</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/特殊/">特殊</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记副本/">笔记副本</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/绝对定位/">绝对定位</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/表格/">表格</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/触摸事件/">触摸事件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/边框/">边框</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/进阶/">进阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/闭包/">闭包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/阻止上下外边距合并/">阻止上下外边距合并</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面向对象/">面向对象</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试题/">面试题</a></li></ul>
                     </div>
                 </section>
                 
@@ -501,11 +493,11 @@
     <link class="menu-list" tags="标签" friends="友情链接" about="个人签名"/>
 </nav>
 
-      <div class="body-wrap"><article id="post-height-calculate" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-let-n-const" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/02/06/height-calculate/" class="article-date">
-      <time datetime="2018-02-06T05:15:57.000Z" itemprop="datePublished">2018-02-06</time>
+      <a href="/2017/05/08/let-n-const/" class="article-date">
+      <time datetime="2017-05-08T15:15:57.000Z" itemprop="datePublished">2017-05-08</time>
 </a>
 
 
@@ -513,7 +505,7 @@
 
 	<br />
 	<p style="height:7px;"/>
-	<p style="height:20px;font-family:KaiTi,LiSu,'宋体',sans-serif;color:#DBDBDB;font-size:12px;">预计阅读11分钟</p>
+	<p style="height:20px;font-family:KaiTi,LiSu,'宋体',sans-serif;color:#DBDBDB;font-size:12px;">预计阅读10分钟</p>
 
     </div>
   
@@ -524,7 +516,7 @@
         
   
     <h1 class="article-title-big" itemprop="name">
-      深入理解文字高度和行高的设置
+      let和const旧话新编
     </h1>
   
 
@@ -533,13 +525,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/CSS/">CSS</a>
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/font-size/">font-size</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/line-height/">line-height</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/居中/">居中</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/进阶/">进阶</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES6/">ES6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/任务队列/">任务队列</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/作用域/">作用域</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/闭包/">闭包</a></li></ul>
     </div>
 
 
@@ -549,188 +541,194 @@
     
           <div id="article-content" class="article-entry" itemprop="articleBody">
 			  
-			<p>font-size设置的是什么?line-height设置的是什么?各种行高是怎么计算出来的?你真的知道吗?</p>
+			<p>本文的结构是：首先看完了前文就能快速把代码从ES5的变量声明改到ES6，后续部分是作为拓展和详细的介绍：</p>
 <a id="more"></a>
-<h2 id="从font-size讲起-说文字高度："><a class="header-anchor" href="#从font-size讲起-说文字高度："></a>从font-size讲起，说文字高度：</h2>
-<p>当你按住鼠标左键选中一段文字的时候，这段文字背后会有一个颜色变化的区域，这个区域可以近似的视为是这段文字的<code>content-area（内容区域）</code>。</p>
-<p>又或者当我们给一行文字设置background的时候，文字背景所占的区域可以近似的视为是这段文字的<code>content-area（内容区域）</code>。</p>
-<p>我们通常用content-area的高度代表<code>文字高度</code> ，这是字体设计领域的一个概念。</p>
-<p>你先别质疑这种思想！我们知道有些文字的样子喜欢往上突出，有些文字喜欢往下突，再者，行与行文字之间需要一定的空间，所以content-area在上下两个区域预留出空白的区域是很正常的，如图：</p>
-<p><img src="https://cloud.az22c.top/font-line.jpg-az22cgithub" alt="font-line"></p>
-<p>先说结论：</p>
-<p><strong>font-size 相同时，font-family 不同，得到的<code>文字高度</code>也不同</strong>：</p>
-<p><img src="https://cloud.az22c.top/diff-font.jpg-az22cgithub" alt="diff-fon"></p>
-<p>上图表明，同样是font-size为100px，三款不同字体在浏览器画面上的高度是不同的。</p>
-<p>我们再来分析一下，在font-size设置为100px时，Catamaran字体的那164px是怎么构成的：</p>
-<p><img src="https://cloud.az22c.top/catamaran-font.jpg-az22cgithub" alt="catamaran-font"></p>
-<p>我们假设画面由相对单位构成方便缩放拉伸，再假设现在1px对应画面上的10个相对单位。（这点你可以不用理会）</p>
-<p>那么我们所能设置的<code>font-size: 100px</code>其实设置的是上图左方1000个单位(em-square)这部分的高度而已； <strong>我们可以把em-square区域视为content-area的主体区域。</strong></p>
-<blockquote>
-<p>(em-square这个概念的产生是有历史原因的，但是这点我们不用理会。)</p>
-<p>em-square之内，图中&quot;B&quot;上方预留的小区域，大概是考虑到有些字母模仿手写体会有起笔效果，需要一定的位置；&quot;a&quot;下方预留的区域是为了写类似g这样的字母的时候，下方需要一定的区域。</p>
-<p>em-square之外，上方和下方都预留了一定空白区域，这样可以防止行与行间文字挤在一起。</p>
-<p>事实上对于所有font-family而言，规则都是这样的，对于中文字体而言也是如此。</p>
-</blockquote>
-<p>我们可以得到第二个结论：</p>
-<p><strong>font-size不能直接控制文字的高度(content-area的高度)，它控制的是文字主体部分的高度(em-square的高度)。</strong> 而content-area和em-square之间的比例，完全是由字体设计师决定，作为程序员是无法统一的。</p>
-<p>所以再经过调查， <strong>没有属性能<code>直接</code>控制文字的高度，我们只能这样通过font-size<code>间接</code> 控制文字的高度。</strong></p>
-<h2 id="计算一个p元素的内容高度"><a class="header-anchor" href="#计算一个p元素的内容高度"></a>计算一个p元素的<code>内容高度</code></h2>
-<p>(我们既然说是<code>内容高度</code>，就直接把margin、border厚度、padding排除在外了。)</p>
-<p>当 p 元素出现在屏幕上时，它可能包含了多行的内容，其内容高度由<code>每一行的高度</code>堆叠而成。这点很好理解。</p>
-<h3 id="line-box的默认高度"><a class="header-anchor" href="#line-box的默认高度"></a>line-box的默认高度</h3>
-<p>每一行可视为一个line-box。通常来讲，line-box的默认高度是由这一行的内容撑大的，这一行里面的元素谁的高度最大，line-box的高度就等于它，由它撑大：</p>
-<p><img src="https://cloud.az22c.top/line-boxes.jpg-az22cgithub" alt="line-boxes"></p>
-<pre><code class="language-HTML">&lt;p&gt;
-    Good design will be better.
-    &lt;span class=&quot;a&quot;&gt;Ba&lt;/span&gt;
-    &lt;span class=&quot;b&quot;&gt;Ba&lt;/span&gt;
-    &lt;span class=&quot;c&quot;&gt;Ba&lt;/span&gt;
-    We get to make a consequence.
-&lt;/p&gt;
-</code></pre>
-<p>如图，我们给class=“a”、class=“b”、class=&quot;c&quot;设置了不同的font-family或者font-size，导致这些文字的高度各不相同。每一个line-box代表每一行的区域。一个line-box的默认高度由这行内的最大高度决定。</p>
-<blockquote>
-<p>补充：还记得吗?对于文字而言，文字高度就是它的content-area的高度。</p>
-</blockquote>
-<h2 id="line-height的作用"><a class="header-anchor" href="#line-height的作用"></a>line-height的作用</h2>
-<p><strong>当我们没有设置line-height的时候，一个line-box的默认高度由这行内的最大高度决定。</strong></p>
-<p>所以通常情况下，line-box的高度 &gt;= content-area的高度 &gt; em-square的高度</p>
 <hr>
-<p><strong>当我们设置了line-height的时候，line-box的高度就是由line-height所设定的。</strong>  因此此时我们可以把line-box的高度设置得比content-area甚至em-square小，导致文字看上去挤在一起。</p>
-<blockquote>
-<p>一行内的内容，除了文字外；通常就是<code>行内块级元素</code>了，通常可以分为三类：</p>
-<ul>
-<li>img元素、input元素、svg元素等</li>
-<li><code>display:inline-block</code>、<code>display:inline-table</code>、<code>display:inline-flex</code> 的元素</li>
-<li>处于某种特殊格式化上下文的内联元素：例如 flexbox 元素中的子元素都处于 <a href="http://link.zhihu.com/?target=https%3A//www.w3.org/TR/css-flexbox-1/%23flex-items" target="_blank" rel="noopener">flex formatting context（弹性格式化上下文）</a>中，这些子元素的 display 值都是「blockified」</li>
-</ul>
-<p>这些<code>行内块级元素</code>，其所占的高度通常由height，margin，border，padding盒子模型的高度来决定。</p>
-<p>如果你将其 height 设置为 auto 的话，那么其高度的取值就是 line-height，其 content-area 的取值也是 line-height。</p>
-</blockquote>
-<h2 id="line-height是怎么计算的"><a class="header-anchor" href="#line-height是怎么计算的"></a>line-height是怎么计算的</h2>
-<p>官方对<code>line-height</code>的定义是：</p>
-<blockquote>
-<p>两行文字基线(baseline)之间的距离。</p>
-</blockquote>
-<h3 id="额外谈谈-基线"><a class="header-anchor" href="#额外谈谈-基线"></a>额外谈谈&quot;基线&quot;</h3>
-<p>为什么是基线呢？</p>
-<p>line-height可不可以定义为是两行文字的“中线”之间的距离呢？</p>
-<p>可不可以定义为是两行文字的“底线”之间的距离呢？</p>
-<p>张鑫旭认为都是都可以的。</p>
-<p>那么为什么选基线作为定义的依据？</p>
-<p>因为， <strong>基线乃其他线定义之根本也。</strong></p>
-<p>了解“基线”大有好处。</p>
-<p>回到刚才那幅图：</p>
-<p><img src="https://cloud.az22c.top/font-line.jpg-az22cgithub" alt="font-line"></p>
-<p>这么多线，都是字体设计师为了比对位置用的。这几条线，可以视为是字体设计的度衡。任何一款字体都会给出以上各种线的位置参数，<strong>所有线的位置参数都是相对于基线的位置而确定的</strong> 。我们把某款字体放到 <a href="http://link.zhihu.com/?target=https%3A//fontforge.github.io/en-US/" target="_blank" rel="noopener">FontForge</a> 中，分析它的字体度量：</p>
-<p><img src="https://cloud.az22c.top/font-forge.jpg-az22cgithub" alt="font-forge"></p>
-<blockquote>
-<p>首先说明的是HHead Ascent是针对macOS的计算值，Win Ascent是针对Windows系统的计算值，这点可以不用理会。</p>
-</blockquote>
-<p>设计一款字体的时候从基线开始定位。</p>
-<p>我们看到，Em Size设置为1000，就是<code>基线到基线以上1000个单位的那片区域</code>都是em-square的区域。</p>
-<p>Ascent设置为770，就是Ascender线距离基线770个单位。</p>
-<p>Descent设置为230，就是Descender线距离基线230个单位。</p>
-<p>Capital Height是680，也是相对于基线的。是大写字母顶部位置的线距离基线多少。</p>
-<p>X Height是485，也是相对于基线而言的。是小写字母顶部位置的线距离基线多少。</p>
-<p><code>Ascender线到Descender线之间的高度</code> 加上Line Gap就是content-area的总高度。（笔者注：这点可能有误）</p>
+<p>（虽然现在ES8都出来了，但是依然是一直用var的工程也不少啊）</p>
+<p>ES6提出了两个新的声明变量的命令：<code>let</code>和<code>const</code> 。说大白话就是：除了极为极为少数的情况，var可以完全被它们俩替换掉。</p>
+<p>用let替代var时，你需要注意到它们的不同点有三个：</p>
+<p><strong>1.块级作用域：</strong></p>
+<pre><code>for (var i = 0; i &lt; 10; i++) {}
+console.log(i);   // 10
+
+for (let j = 0; j &lt; 10; j++) {}
+console.log(j);   // ReferenceError: j is not defined
+</code></pre>
+<p>在 console.log(i) 的时候，仍在函数作用域内，所以那时 i 还没有被销毁。</p>
+<p>在 console.log(j) 的时候，已经在各个块级作用域外了，所以那时 j 已经都被销毁了。</p>
+<p><strong>2.变量提升：</strong>  var会变量提升，但let不会：</p>
+<pre><code>console.log(bar); // undefined
+var bar = 1;
+
+console.log(baz); // ReferenceError: baz is not defined
+let baz = 1;
+</code></pre>
+<p><strong>3.let定义的变量 不准在同一个作用域中被重复定义</strong> （，幸运的是，浏览器会很清晰地报错以提醒你这条规则）：</p>
+<pre><code>var count = 30;
+let count = 40; //Uncaught SyntaxError: Identifier 'count' has already been declared
+</code></pre>
 <hr>
-<p>所以说，我们选基线来定义line-height：line-height是两行文字基线(baseline)之间的距离。</p>
-<p>但是这个定义说了等于没说，因为它不能告诉我们怎么设置line-height啊！</p>
-<p>还是我们早之前做的定义比较棒！！<strong>当我们设置了line-height的时候，line-box的高度就是由line-height所设定的。</strong></p>
-<h3 id="line-height的计算-画重点"><a class="header-anchor" href="#line-height的计算-画重点"></a>line-height的计算（画重点！）</h3>
-<p>line-height的计算要<strong>根据这行文字的font-size多少</strong> ，即是根据em-square的高度计算。本文说的&quot;计算&quot;就是这个意思。</p>
-<p>w3c说，line-height可以设置的值有5种：</p>
+<p>const同样有以上的三条规则，即：</p>
+<p>1.块级作用域</p>
+<p>2.const不再能变量提升</p>
+<p>3.const定义的变量是不能被重复定义的</p>
+<p>另外，更适合用const而不是let的地方是：声明一个常量，尤其是全局常量的时候。</p>
+<blockquote>
+<p>另外，const声明的变量<strong>只可以在声明时赋值</strong>，它被设计的本意就是不可随意修改，修改变量会报错，这是最大的特点。</p>
+</blockquote>
+<hr>
+<h2 id="以下为详细内容："><a class="header-anchor" href="#以下为详细内容："></a>以下为详细内容：</h2>
+<h3 id="let"><a class="header-anchor" href="#let"></a>let</h3>
+<p>let的规则其实可以帮助你捕捉可能造成bug的地方，写出更健壮的代码。除了<code>NaN</code>错误以外，每一个异常都能在当前行抛出。</p>
+<blockquote>
+<p>比如，如果你只是在代码中将<code>var</code>全局搜索替换为<code>let</code>，一些依赖<code>var</code>声明的独特特性（可能你不是故意这样写）的代码可能无法正常运行。再根据异常提示来修改你的代码，会使你的代码更加健壮。</p>
+</blockquote>
+<h4 id="let的块级作用域"><a class="header-anchor" href="#let的块级作用域"></a>let的块级作用域</h4>
+<p><code>let</code>与<code>var</code>一样，也可以用来声明变量，但let有着更好的作用域规则：</p>
+<p><strong>let声明的变量拥有块级作用域。</strong> 也就是说用<code>let</code>声明的变量的作用域只是<strong>外层块</strong>，而不是整个外层函数。</p>
+<p>【注意该话题下的细节】：</p>
 <ul>
-<li>normal</li>
-<li>数字</li>
-<li>多少px(都写死了，不必计算)</li>
-<li>百分数(多少%)</li>
-<li>inherit(对于该元素而言，不必计算)</li>
+<li><strong>let声明的全局变量不是全局对象的属性。</strong> 这就意味着，你<strong>不可以</strong>通过<code>window.变量名</code>的方式访问这些变量。它们只存在于一个不可见的块的作用域中，这个块理论上是Web页面中运行的所有JS代码的<strong>外层块</strong>。</li>
+<li><strong>形如for (let i…)的循环在每次迭代时都为 i 创建新的绑定。</strong></li>
 </ul>
-<h4 id="line-height-normal的时候"><a class="header-anchor" href="#line-height-normal的时候"></a>line-height:normal的时候</h4>
-<p>我们来看看 Arial 字体，它的 em-square 是 2048，ascender 是 1854，descender 是 434，line gap 是 67。那么当 font-size: 100px 时：</p>
-<p>line-height:normal为 100/2048*(67+1854+434) 约为 115px</p>
-<h4 id="line-height设为数字-百分数的时候"><a class="header-anchor" href="#line-height设为数字-百分数的时候"></a>line-height设为数字/百分数的时候</h4>
-<p>line-height设为数字/百分数的时候，line-height就是拿 数字/百分数  去乘以em-square的高度。</p>
-<p>所以如果设置line-height:1或者line-height:100%肯定是有问题的啊——本来em-square基本上就比content-area要小，你还让line-height是em-square的高度的一倍？！行与行之间的文字绝对是要挤在一起了：</p>
-<p><img src="https://cloud.az22c.top/set-line-height-1.jpg-az22cgithub" alt="set-line-height-1"></p>
-<p>那怎么设置呢？反正line-height最终的计算结果超过content-area就应该比较符合常理了。</p>
-<p>张鑫旭大神鼓励大家用数字来设置line-height。</p>
+<h5 id="例如：-如果你看不懂解释-只要记住例子的结果就行了"><a class="header-anchor" href="#例如：-如果你看不懂解释-只要记住例子的结果就行了"></a>// 例如：（如果你看不懂解释，只要记住例子的结果就行了）</h5>
+<p>可以先看一个<strong>循环内变量过度共享</strong>的例子：</p>
+<pre><code>var messages = [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;];
+for (var i = 0; i &lt; messages.length; i++) {
+	setTimeout(function () {
+		console.log(messages[i]);
+	}, i * 500);
+}
+// 控制台输出三次 &quot;undefined&quot;
+</code></pre>
+<p>控制台的输出结果可能会不同于你的预期，输出了三次“undefined”。</p>
+<h5 id="解释该例："><a class="header-anchor" href="#解释该例："></a>// 解释该例：</h5>
+<p>在 var声明的变量是函数作用域的 的规则下，一共循环了三次，其实用到的都是同一个子函数，这个子函数对应的闭包<strong>最终</strong>保留了循环三次之后变量 i 的值，即为3。</p>
+<p>换而言之，由 <a href="http://www.ruanyifeng.com/blog/2014/10/event-loop.html" target="_blank" rel="noopener">任务队列</a> 的知识我们可知：</p>
+<p>当循环结束执行时，i 的值为3（因为<code>messages.length</code>的值为3），此时回调尚未被触发。</p>
+<p>然后，所以当第一个timeout执行时，此时i的值已为3，所以打印出来的是<code>messages[3]</code>的值即为“undefined”。</p>
+<p>之后同理，第二个、第三个timeout执行时，都是打印<code>messages[3]</code>，也就是“undefined”。</p>
+<h5 id="而如果我们在该例中使用的是let："><a class="header-anchor" href="#而如果我们在该例中使用的是let："></a>// 而如果我们在该例中使用的是let：</h5>
+<pre><code>var messages = [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;];
+for (let i = 0; i &lt; messages.length; i++) {
+	setTimeout(function () {
+		console.log(messages[i]);
+	}, i * 500);
+}
+// 控制台输出 &quot;A&quot; &quot;B&quot; &quot;C&quot;，符合我们的预期
+</code></pre>
+<p><code>for (let i...)</code>循环执行三次，<strong>每次循环都会产生新的块级作用域，</strong> 并且 为 每次循环里面的函数 保持了一个闭包，那么每个闭包将捕捉当时循环变量的不同值作为副本，而不是所有闭包都捕捉循环变量的同一个值。</p>
+<blockquote>
+<p>因为let是块级作用域规则，</p>
+<p>而每一次循环都是进入新的块级作用域，都会创建一个新的变量 i，并将其初始化为 i 的当前值，所以每一次循环中创建的各个函数都能有属于它们自己的 i 的副本（值分别为 0 1 2）。</p>
+<p>由于这些timeout函数都需要被推入 <a href="http://www.ruanyifeng.com/blog/2014/10/event-loop.html" target="_blank" rel="noopener">任务队列</a> ，稍后再执行，所以最终为它们每一个都保留了一个闭包。</p>
 <ul>
-<li>如果是博客类型的网站，line-height设置为1.5到1.6，行与行之间比较宽，适合舒适地阅读。</li>
-<li>如果是研发正规的产品，推荐大家使用<code>20px匹配法</code> ，方便计算。</li>
+<li>第一个timeout函数对应的闭包中保留了一个值为0的 i 的副本，它执行时输出messages[0]</li>
+<li>第二个timeout函数对应的闭包中保留了一个值为1的 i 的副本，它执行时输出messages[1]</li>
+<li>第三个timeout函数对应的闭包中保留了一个值为2的 i 的副本，它执行时输出messages[2]</li>
 </ul>
-<h4 id="20px匹配法"><a class="header-anchor" href="#20px匹配法"></a>20px匹配法</h4>
-<p>为什么呢？</p>
-<p>首先我们一般来说会设置font-size在14px到16px之间，然后content-area的高度也不会比这个高太多的吧。所以我们想着让line-height设置为20px应该够用了。而且20px方便计算。像这样：</p>
-<pre><code class="language-CSS">body { font-size: 14px; line-height:??? }
-</code></pre>
-<p>只要把???结果计算出来就行啦！</p>
-<p>20除以14等于1.42857后面还有小数位。</p>
-<p>如果你写line-height:1.42857，虽然它乘以14非常接近20，但是没有超过20，chrome会把它设置为19px。</p>
-<p>所以我们一般设line-height为1.4286，稍微大那么一点点，chrome把它们乘起来，然后再约等于，就是20px了。</p>
-<p>结果写法就像这样：</p>
-<pre><code class="language-CSS">body { font-size: 14px; line-height: 1.4286; }
-</code></pre>
-<p>或者是这样：</p>
-<pre><code class="language-CSS">body { font-size: 14px/1.4286 'microsoft yahei'; }
-</code></pre>
-<h4 id="补充：line-height-1-5和line-height-150-的区别？"><a class="header-anchor" href="#补充：line-height-1-5和line-height-150-的区别？"></a>补充：line-height: 1.5和line-height: 150%的区别？</h4>
-<p>这是一个在网上被人讲烂了的知识点了，line-height设置为数字和百分数时之间的区别：</p>
+<p>（所谓的俗称的“加载”，其实就是 执行流 执行到该函数的声明。）</p>
+<p>结合这个例子，我们对闭包的理解为：如果一个子函数需要在 其父函数的作用域 之外被执行，那么<strong>在这个子函数被加载时，</strong> 会先去分析子函数用到了父函数的哪些变量和指针，并且在内存中形成一个闭包保存<strong>这个时刻的</strong>这些父函数的变量和指针的值，以供 对应的子函数在执行的时候 使用。</p>
 <ul>
-<li><code>line-height:1.5</code>： 所以可继承元素根据font-size重新计算行高</li>
-<li><code>line-height:150%</code>： 当前元素根据font-size计算行高，继承给下面的元素</li>
-<li><code>line-height: 1.5em</code> ：当前元素根据font-size计算行高，继承给下面的元素(与百分比效果相同)</li>
-</ul>
-<p>例如：</p>
-<pre><code class="language-HTML">&lt;style&gt;
-.parent { font-size: 30px; }
-.child { font-size: 60px; }
-.p1 { line-height: 1.5; }
-.p2 { line-height: 150%; }
-&lt;/style&gt;
-&lt;body&gt;
-&lt;div&gt;
-&lt;p class=&quot;parent p1&quot;&gt;文字&lt;span class=&quot;child&quot;&gt;算出子级line-height为90px&lt;/span&gt;文字&lt;/p&gt;&lt;hr&gt;
-&lt;p class=&quot;parent p2&quot;&gt;文字&lt;span class=&quot;child&quot;&gt;算出子级line-height为15px&lt;/span&gt;文字&lt;/p&gt;
-&lt;/div&gt;
-&lt;/body&gt;
-</code></pre>
-<p>可见，对于百分比这种，如果父子元素设置的font-size差别比较大，或者line-height设置不合理，会计算出不太理想的行高。</p>
-<p>所以在CSS reset body元素的时候，<strong>业界普遍使用数字</strong>来设置line-height，具体怎么设置我们刚刚在上文也讲好了。</p>
-<h2 id="后记："><a class="header-anchor" href="#后记："></a>后记：</h2>
-<h3 id="全文总结"><a class="header-anchor" href="#全文总结"></a>全文总结</h3>
+<li>可见，子函数是先会被“加载”，然后再会被“执行”。而闭包是在子函数被“加载”的时候形成的。
 <ul>
-<li>首先<code>文字高度</code>和font-size只有间接的关系</li>
-<li>然后，line-height的计算是根据font-size的</li>
-<li>当我们没有设置line-height的时候，一个line-box的默认高度由这行内的最大高度决定。</li>
-<li>当我们设置了line-height的时候，line-box的高度就是由line-height所设定的。</li>
+<li>比如，在上例中，setTimeout一次的时候，子函数会被加载一次。（由于在三次循环各不同的块级作用域中，<code>function () { console.log(messages[i]); }</code>总共被加载了三次，所以可视为三个子函数。）</li>
+<li>再比如，如果有一个子函数被父函数return的时候，子函数会被加载一次。</li>
 </ul>
-<h3 id="预告：文字在一行中的位置的计算"><a class="header-anchor" href="#预告：文字在一行中的位置的计算"></a>预告：文字在一行中的位置的计算?</h3>
-<p>有没有发现？根据我们上面的理论，如果想要确定一段文字在一行(line-box模型)中的位置太难了！是不是垂直居中？文字位置偏上还是偏下？要经过一系列计算才能得出结论。</p>
-<p>进而，我们联想到，平时我们想让行内元素垂直居中的办法：设置<code>vertical-align:middle</code>，<strong>这种居中方法是错的吗？</strong></p>
-<p>嗯，是错的，这只能使得行内元素近似垂直居中。</p>
-<p>如果想要行内的文字或者图片完美居中，就要研究清楚line-height和vertical:middle的原理了。</p>
-<p>你可以系统地看一看张鑫旭在慕课网上的视频教程。如果急着想看结论，直接翻到他每个视频的最后一章就可以了。</p>
-<p>或者你可以直接翻看我下一篇文章 <a href="https://alexzhong22c.github.io/2018/02/05/vertical-align-middle/">深入理解vertical-align:middle</a> 的结论。</p>
-<h2 id="参考："><a class="header-anchor" href="#参考："></a>参考：</h2>
-<p><a href="http://iamvdo.me/en/blog/css-font-metrics-line-height-and-vertical-align" target="_blank" rel="noopener">css-font-metrics-line-height-and-vertical-align</a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/25808995?group_id=825729887779307520" target="_blank" rel="noopener">译文，部分内容有误</a></p>
-<p><a href="https://www.imooc.com/video/7920" target="_blank" rel="noopener">CSS深入理解之line-height</a></p>
+</li>
+<li>可见，闭包和子函数是一一对应的，一个闭包对应着一个子函数。</li>
+<li>PS：“子函数在 其父函数的作用域 之外被执行”这种说法等价于：“子函数在 父函数的执行环境被销毁后 被执行”。</li>
+</ul>
+</blockquote>
+<p>所以在上例中，直接可以将<code>var</code>替换为<code>let</code>修复bug。</p>
+<p>这种解决办法，适用于现有的三种循环方式：<code>for-of</code>、<code>for-in</code>、以及传统的用分号分隔的类C循环。</p>
+<p><strong>刚才的例子有点扯远了，涉及到的知识太多，反正只要记住let有块级作用域，就基本上没问题了。</strong></p>
+<h4 id="let不再变量提升"><a class="header-anchor" href="#let不再变量提升"></a>let不再变量提升</h4>
+<p><strong>let声明的变量直到执行流到达该变量被定义的代码行时才会被装载，所以在到达之前使用该变量会触发错误</strong> 。举个例子：</p>
+<pre><code>  function foo() {
+  	console.log(&quot;当前值: &quot; + x);  // 引用错误（ReferenceError）
+  	...
+  	let x = &quot;hello&quot;;
+  }
+  foo()
+</code></pre>
+<p>不可访问的这段时间里，变量 x 一直处于作用域中，但是尚未装载，它位于 临时死区（Temporal Dead Zone，简称TDZ）中。</p>
+<p>换句话说就是：let和const声明的变量不会被提升到作用域顶部，如果在声明之前访问这些变量，就会引发错误。因而从作用域顶部到声明变量语句之前的这个区域，被称为“临时死区”。</p>
+<p>PS：但是，在let或const声明的作用域之外使用该变量就不会<strong>报错</strong>：</p>
+<pre><code>console.log(typeof value);
+if(true){
+    let value = &quot;blue&quot;;
+}
+</code></pre>
+<h4 id="let不可以重复定义"><a class="header-anchor" href="#let不可以重复定义"></a>let不可以重复定义</h4>
+<p>let定义的变量 不准在同一个作用域中被重复定义。</p>
+<p>此时，重定义会抛出一个语法错误（SyntaxError）。</p>
+<pre><code>var count = 30;
+let count = 40; //Uncaught SyntaxError: Identifier 'count' has already been declared
+</code></pre>
+<p>这一条规则也可以帮助你检测琐碎的小问题。当你全局搜索<code>var</code>替换为<code>let</code>时可能会发现<code>let</code>重定义语法错误。</p>
+<ul>
+<li>如果你的多个脚本中都声明了相同的全局变量，你最好继续用<code>var</code>声明这些变量。因为如果你换用了<code>let</code>，后加载的脚本都会执行失败并抛出错误；或者你可以考虑使用ES6内建的模块机制。</li>
+</ul>
+<h3 id="const"><a class="header-anchor" href="#const"></a>const</h3>
+<blockquote>
+<p>const声明的变量只可以在声明时赋值，它被设计的本意就是不可随意修改，这是最大的特点。</p>
+</blockquote>
+<p><code>const</code>声明的变量与<code>let</code>声明的变量类似，它们的不同之处在于：</p>
+<p>1.<code>const</code>声明的变量不可随意修改，否则会导致SyntaxError（语法错误）：</p>
+<pre><code>const MY_PI = 3.14159; // 正确
+
+MY_PI = 5000; // 语法错误（SyntaxError）
+MY_PI++; // 虽然换了一种方式，但仍然会导致语法错误
+</code></pre>
+<p>2.<strong>用 const 声明变量后必须要赋值，否则也抛出语法错误。</strong></p>
+<pre><code>const MY_NEW_PI;  // 依然是语法错误
+</code></pre>
+<h4 id="注意1："><a class="header-anchor" href="#注意1："></a>// 注意1：</h4>
+<p>const声明不允许修改绑定，但允许修改值。</p>
+<p>即：对象属性不在const的保护范围之内：</p>
+<pre><code>// 常量可以定义成对象
+const MY_OBJECT = {&quot;key&quot;: &quot;value&quot;};
+
+// 重写对象会失败
+MY_OBJECT = {&quot;OTHER_KEY&quot;: &quot;value&quot;};
+
+// 但对象属性并不在保护的范围内，下面这个声明会成功执行
+MY_OBJECT.key = &quot;otherValue&quot;;
+
+// 也可以用来定义数组
+const MY_ARRAY = [];
+// 可以向数组填充数据
+MY_ARRAY.push('A'); // [&quot;A&quot;]
+// 但是，将一个新数组赋给变量会引发错误
+MY_ARRAY = ['B']
+</code></pre>
+<h4 id="注意2："><a class="header-anchor" href="#注意2："></a>// 注意2：</h4>
+<p>因为const声明的变量不能改变，所以普通的for循环不能用const声明循环变量。</p>
+<p>而由于for-in循环中每次迭代不会修改已有绑定，而是创建一个新绑定，所以在for-in循环中可以使用const：</p>
+<pre><code>for(const key in obj){
+       console.log(key);
+}
+</code></pre>
+<h2 id="能用let和const的环境"><a class="header-anchor" href="#能用let和const的环境"></a>能用let和const的环境</h2>
+<p>如果要在web上使用<code>let</code>和<code>const</code>特性，你需要使用一个诸如<a href="http://babeljs.io/" target="_blank" rel="noopener">Babel</a>、<a href="https://github.com/google/traceur-compiler#what-is-traceur" target="_blank" rel="noopener">Traceur</a>或<a href="http://www.typescriptlang.org/" target="_blank" rel="noopener">TypeScript</a>的ES6转译器。（Babel和Traceur暂不支持临时死区特性。）</p>
+<p>io.js支持<code>let</code>和<code>const</code>，但是只在严格模式下编码可以使用。Node.js同样支持，但是需要启用<code>--harmony</code>选项。</p>
+<blockquote>
+<p>本人对“临时死区”的理解有限，但是想深入理解的话再单独研究它就可以了。</p>
+</blockquote>
 
 		</div>
       
   
      <!-- 版权署名授权 -->
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/02/06/height-calculate/">深入理解文字高度和行高的设置</a></p>
+        <p><span>本文标题:</span><a href="/2017/05/08/let-n-const/">let和const旧话新编</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
-        <p style="color: #696969;"><span>发布时间:</span>2018-02-06, 13:15:57</p>
-        <!-- <p><span>最后更新:</span>2020-04-20, 21:48:14</p> -->
+        <p style="color: #696969;"><span>发布时间:</span>2017-05-08, 23:15:57</p>
+        <!-- <p><span>最后更新:</span>2020-05-14, 17:28:02</p> -->
         <p>
-            <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="深入理解文字高度和行高的设置" href="/2018/02/06/height-calculate/">https://alexzhong22c.github.io/2018/02/06/height-calculate/</a>
-            <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://alexzhong22c.github.io/2018/02/06/height-calculate/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="let和const旧话新编" href="/2017/05/08/let-n-const/">https://alexzhong22c.github.io/2017/05/08/let-n-const/</a>
+            <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://alexzhong22c.github.io/2017/05/08/let-n-const/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
         </p>
         <p style="color: #696969;">
             <span>许可协议:</span><i class="fa fa-creative-commons"></i><a id="copyright_license" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target = "_blank" class="hint  hint--bottom" data-hint="中国大陆 (CC BY-NC-SA 3.0 CN)">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
@@ -742,15 +740,15 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2020/04/02/settimeout-0-to-9/">
-                    面试题：改造代码，使之隔秒输出0 - 9
+                <a href="/2017/07/01/js-pv-default/">
+                    js取消默认事件行为
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2018/02/05/vertical-align-middle/">
-                    vertical-align:middle近似居中和完美居中
+                <a href="/2017/05/07/js-date/">
+                    JavaScript Date对象回顾
                 </a>
             </div>
         
@@ -763,7 +761,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#从font-size讲起-说文字高度："><span class="toc-text">从font-size讲起，说文字高度：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#计算一个p元素的内容高度"><span class="toc-text">计算一个p元素的内容高度</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#line-box的默认高度"><span class="toc-text">line-box的默认高度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#line-height的作用"><span class="toc-text">line-height的作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#line-height是怎么计算的"><span class="toc-text">line-height是怎么计算的</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#额外谈谈-基线"><span class="toc-text">额外谈谈&quot;基线&quot;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#line-height的计算-画重点"><span class="toc-text">line-height的计算（画重点！）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#line-height-normal的时候"><span class="toc-text">line-height:normal的时候</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#line-height设为数字-百分数的时候"><span class="toc-text">line-height设为数字/百分数的时候</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#20px匹配法"><span class="toc-text">20px匹配法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#补充：line-height-1-5和line-height-150-的区别？"><span class="toc-text">补充：line-height: 1.5和line-height: 150%的区别？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#后记："><span class="toc-text">后记：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#全文总结"><span class="toc-text">全文总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#预告：文字在一行中的位置的计算"><span class="toc-text">预告：文字在一行中的位置的计算?</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考："><span class="toc-text">参考：</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#以下为详细内容："><span class="toc-text">以下为详细内容：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#let"><span class="toc-text">let</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#let的块级作用域"><span class="toc-text">let的块级作用域</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#例如：-如果你看不懂解释-只要记住例子的结果就行了"><span class="toc-text">// 例如：（如果你看不懂解释，只要记住例子的结果就行了）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#解释该例："><span class="toc-text">// 解释该例：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#而如果我们在该例中使用的是let："><span class="toc-text">// 而如果我们在该例中使用的是let：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#let不再变量提升"><span class="toc-text">let不再变量提升</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#let不可以重复定义"><span class="toc-text">let不可以重复定义</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#const"><span class="toc-text">const</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#注意1："><span class="toc-text">// 注意1：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#注意2："><span class="toc-text">// 注意2：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#能用let和const的环境"><span class="toc-text">能用let和const的环境</span></a></li></ol>
         
     </div>
     <style>
@@ -793,7 +791,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2020/04/02/settimeout-0-to-9/" title="上一篇: 面试题：改造代码，使之隔秒输出0 - 9">
+            <a href="/2017/07/01/js-pv-default/" title="上一篇: js取消默认事件行为">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -801,13 +799,13 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2018/02/05/vertical-align-middle/" title="下一篇: vertical-align:middle近似居中和完美居中">
+            <a href="/2017/05/07/js-date/" title="下一篇: JavaScript Date对象回顾">
                 <i class="fa fa-angle-right"></i>
             </a>
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/04/02/settimeout-0-to-9/">面试题：改造代码，使之隔秒输出0 - 9</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/06/height-calculate/">深入理解文字高度和行高的设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/05/vertical-align-middle/">vertical-align:middle近似居中和完美居中</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/05/centralize-one-ele/">总结：使单一对象水平/垂直居中</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/16/js-functional-intro/">到底什么是函数式编程 精简总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/22/let-n-const/">let和const旧话新编</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/12/git-stage/">git暂存区知识梳理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/17/ife-css-task03/">三栏式布局--IFE2017-CSS-task03笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/07/css-border1/">border-radius属性</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/03/js-obj-prop1/">对象属性的操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/02/js-obj-prop2/">对象属性描述符</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/01/js-obj-prop3/">对象属性之对象状态</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/12/js-inherit/">实现继承的3种方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/12/js-new-happen/">new创建对象的过程发生了什么</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/09/js-prototype-practice/">原型对象 实战使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/08/js-proto/">理解prototype、__proto__和constructor等关系</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/07/js-this2/">this绑定的优先级</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/07/js-this/">结合this的4种绑定规则 深入理解this指向的判定</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/02/js-event4/">浏览器事件冒泡或者捕获相关</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/01/js-event3/">js四种事件处理程序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/01/js-pv-default/">js取消默认事件行为</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/07/js-date/">JavaScript Date对象回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/07/vue-checkbox-table/">纯vue实现checkbox父子联动</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/25/vue-time-tracker/">经典vue单页路由入门全家桶</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/15/vue-table-nav/">按条目展示表格数据小插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/clearfix-n-bfc/">闭合浮动和BFC和阻止上下外边距的合并</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/ife-css-task02/">IFE2017-CSS-task02笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/31/css-selectors-specificity/">CSS选择器优先级</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/28/h5-new-ele/">H5新标签和被H5拥抱的老元素们</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/27/ife-css-task01/">IFE2017-CSS-task01笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/10/iife-intro/">IIFE回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/09/for-loop/">js的for循环回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/float-n-absolute/">float和绝对定位比较</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/about-margin/">和margin有关的知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/gulp-usage/">gulp的入门和一些简单使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/27/icon-usage/">桌面端和移动端图标的引入</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/25/webapp-events-intro/">移动开发事件入门概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/24/webapp-intro/">移动开发入门概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/my-hexo-theme/">yelee主题改bug总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/17/todo-app/">ToDo小应用完工总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/equality-operators/">相等操作符回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/js-operators/">操作符回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/25/font-face/">font-face--CSS3</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/13/js-function/">js函数基础回顾</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/04/02/settimeout-0-to-9/">面试题：改造代码，使之隔秒输出0 - 9</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/06/height-calculate/">深入理解文字高度和行高的设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/05/vertical-align-middle/">vertical-align:middle近似居中和完美居中</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/05/centralize-one-ele/">总结：使单一对象水平/垂直居中</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/05/js-functional-intro/">到底什么是函数式编程 精简总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/04/performance-optimized-summary/">Web前端性能优化概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/12/git-stage/">git暂存区知识梳理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/17/ife-css-task03/">三栏式布局--IFE2017-CSS-task03笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/07/css-border1/">border-radius属性</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/03/js-obj-prop1/">对象属性的操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/02/js-obj-prop2/">对象属性描述符</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/01/js-obj-prop3/">对象属性之对象状态</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/12/js-inherit/">实现继承的3种方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/12/js-new-happen/">new创建对象的过程发生了什么</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/09/js-prototype-practice/">原型对象 实战使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/08/js-proto/">理解prototype、__proto__和constructor等关系</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/07/js-this2/">this绑定的优先级</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/07/js-this/">结合this的4种绑定规则 深入理解this指向的判定</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/02/js-event4/">浏览器事件冒泡或者捕获相关</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/01/js-event3/">js四种事件处理程序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/01/js-pv-default/">js取消默认事件行为</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/08/let-n-const/">let和const旧话新编</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/07/js-date/">JavaScript Date对象回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/07/vue-checkbox-table/">纯vue实现checkbox父子联动</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/25/vue-time-tracker/">经典vue单页路由入门全家桶</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/15/vue-table-nav/">按条目展示表格数据小插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/clearfix-n-bfc/">闭合浮动和BFC和阻止上下外边距的合并</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/ife-css-task02/">IFE2017-CSS-task02笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/31/css-selectors-specificity/">CSS选择器优先级</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/28/h5-new-ele/">H5新标签和被H5拥抱的老元素们</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/27/ife-css-task01/">IFE2017-CSS-task01笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/10/iife-intro/">IIFE回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/09/for-loop/">js的for循环回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/float-n-absolute/">float和绝对定位比较</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/about-margin/">和margin有关的知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/gulp-usage/">gulp的入门和一些简单使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/27/icon-usage/">桌面端和移动端图标的引入</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/25/webapp-events-intro/">移动开发事件入门概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/24/webapp-intro/">移动开发入门概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/my-hexo-theme/">yelee主题改bug总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/17/todo-app/">ToDo小应用完工总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/equality-operators/">相等操作符回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/js-operators/">操作符回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/25/font-face/">font-face--CSS3</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/13/js-function/">js函数基础回顾</a></li></ul>
 
 
 
@@ -830,7 +828,7 @@
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					
-						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：2,979</span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：2,674</span>
 					
 				</div>
             </div>
