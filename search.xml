@@ -266,9 +266,9 @@ for (var i = 0; i &lt; 10; i++) {
             
             <tag> 笔记副本 </tag>
             
-            <tag> 面试题 </tag>
-            
             <tag> 闭包 </tag>
+            
+            <tag> 面试题 </tag>
             
         </tags>
         
@@ -1154,16 +1154,17 @@ MMM.prototype.map = function(func) {
 <ul>
 <li>资源预加载
 <ul>
-<li>w3c Resource Hints：dns预解析、TCP预连接、页面预渲染。有一些标签属性已经可以很好的做到这些，如 dns-prefetch &amp; preconnect &amp; prefetch &amp; prerender(慎用) &amp; preload。</li>
-<li>其他preload的方案或者xxx-loadable库</li>
+<li>w3c Resource Hints：dns预解析、TCP预连接、资源预加载。有一些标签属性已经可以很好的做到这些，如 dns-prefetch &amp; preconnect &amp; preload &amp; prefetch &amp; prerender(慎用)。</li>
+<li>其他preload的方案或者xxx-loadable库，比如已经快过时的<code>react-loadable</code>库可以在懒加载时预加载。</li>
 </ul>
 </li>
-<li>减小传输文件体积
+<li>减小网络传输文件体积
 <ul>
-<li>gzip(后文有介绍)</li>
+<li>gzip</li>
 <li>webpack打包策略 BundleAnalyzerPlugin 或者执行vue ui来分析
 <ul>
 <li>抽离公共模块</li>
+<li>专门把类库放到cdn上，然后引用，这样就不用打包这部分了 【不一定有效，毕竟库都是按需引入的】</li>
 </ul>
 </li>
 <li>按需引入模块
@@ -1177,9 +1178,8 @@ MMM.prototype.map = function(func) {
 <li>压缩html</li>
 <li>图片格式和压缩
 <ul>
-<li>图片压缩</li>
 <li>雪碧图(更新起来麻烦，以前才流行)：减少http请求次数。webpack-spritesmith</li>
-<li>图片格式选择
+<li>(图片格式选择：)
 <ul>
 <li>色彩丰富的小图用png（支持透明）</li>
 <li>大图(背景图、轮播图)要用jpg：体积小，不支持透明</li>
@@ -1188,16 +1188,15 @@ MMM.prototype.map = function(func) {
 <li>微信基本用的是webp</li>
 </ul>
 </li>
-<li>svg：矢量图体积小，因为是标签需额外的计算：比如icon-font</li>
+<li>svg：矢量图体积小，因为是标签需额外的计算，只不过不用网络请求：比如icon-font</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 </li>
-<li>减少文件传输数量和次数
+<li>减少网络传输数量和次数
 <ul>
-<li>利用文件打包来控制个数和大小和按使用频率分包，这就和webpack有关了</li>
 <li>http缓存，合理设置客户端缓存时间、利用好强缓存协商缓存</li>
 <li>数据缓存
 <ul>
@@ -1205,24 +1204,51 @@ MMM.prototype.map = function(func) {
 <li>如果高并发的话改用redis存图片</li>
 </ul>
 </li>
-<li>页面懒加载和图片懒加载</li>
-<li>避免空的src和href</li>
-<li>http keep-alive</li>
+<li>页面懒加载和图片懒加载
+<ul>
+<li>vue-lazyload</li>
+<li>图片异步懒加载</li>
 </ul>
 </li>
-<li>减少途经的服务器数量和路径长度
+<li>避免空的src和href</li>
+<li>http keep-alive(也称为“长连接”)</li>
+<li>利用文件打包来控制个数和大小和按使用频率分包
+<ul>
+<li>比如dllPlugin  【大后期】
+<ul>
+<li>一般是大后期才用得到，收益是<strong>减小打包时间</strong>和精细化<strong>按使用频率分包</strong>提高对缓存的利用</li>
+<li>而一开始建项目可以用它来处理vue和react这种代码变动频率较低的大包</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>减少途经的服务器数量和网络路径长度
 <ul>
 <li>cdn
 <ul>
-<li>cdn域名分片规避浏览器对一个域名的并发数限制</li>
+<li><strong>cdn域名分片规避浏览器对一个域名的并发数限制</strong></li>
 </ul>
 </li>
 </ul>
 </li>
 <li>少执行代码 和 缩短代码执行时间
 <ul>
-<li>--------- 【 浏览器层面： 】 ---------</li>
-<li>处理阻塞css、js，异步加载组件或css、js</li>
+<li>--------- 【 浏览器宏观层面： 】 ---------</li>
+<li>处理阻塞css、js，异步加载组件或css、js
+<ul>
+<li>(css)critical和其webpack插件</li>
+</ul>
+</li>
+<li>首屏临时显示各种的loading提示 或者懒加载
+<ul>
+<li>无限滚动懒加载列表</li>
+<li>骨架屏：vue-skeleton-webpack-plugin</li>
+<li>首屏简单loading动画</li>
+<li>NProgress 顶部加载进度条</li>
+</ul>
+</li>
 <li>减少DOM显示数
 <ul>
 <li>(一个长度10000的商品列表，怎么显示)(移动设备内存存储数据过多dom也会崩掉)</li>
@@ -1232,19 +1258,26 @@ MMM.prototype.map = function(func) {
 <li>vue-virtual-scroller和react-virtualized等等</li>
 </ul>
 </li>
-<li>无限滚动懒加载列表</li>
 </ul>
 </li>
 <li>减少dom操作的次数</li>
-<li>减少重排重绘  (和避免强制重排强制重绘)</li>
-<li>慎重选择高性能消耗的css样式</li>
-<li>web workers分担执行任务</li>
+<li>减少重排重绘 <strong>(和避免强制重排强制重绘)</strong></li>
+<li>web workers分担主线程的“任务”</li>
+<li>提高css选择器的效率</li>
+<li>慎重选择高性能消耗的css样式
+<ul>
+<li>box-shadows</li>
+<li>border-radius</li>
+<li>transparency</li>
+<li>transforms</li>
+<li>CSS filters（性能杀手）</li>
+</ul>
+</li>
 <li>--------- 【 代码逻辑层面： 】 ---------</li>
-<li>骨架屏：vue-skeleton-webpack-plugin</li>
 <li>防抖节流</li>
 <li>算法优化
 <ul>
-<li>排序的优化</li>
+<li>排序算法的优化</li>
 <li>动态规划等等</li>
 </ul>
 </li>
@@ -1267,9 +1300,9 @@ MMM.prototype.map = function(func) {
             
             <tag> 笔记副本 </tag>
             
-            <tag> 性能优化 </tag>
-            
             <tag> 面试题 </tag>
+            
+            <tag> 性能优化 </tag>
             
         </tags>
         
@@ -2937,11 +2970,11 @@ console.log(Foo.prototype.constructor === Foo);//false
         
         <tags>
             
+            <tag> 进阶 </tag>
+            
             <tag> 面向对象 </tag>
             
             <tag> 原型系统 </tag>
-            
-            <tag> 进阶 </tag>
             
         </tags>
         
@@ -3086,11 +3119,11 @@ var f1 = new Foo;
         
         <tags>
             
+            <tag> 进阶 </tag>
+            
             <tag> 面向对象 </tag>
             
             <tag> 原型系统 </tag>
-            
-            <tag> 进阶 </tag>
             
         </tags>
         
@@ -3671,9 +3704,9 @@ displayColor.call(null);//TypeError: Cannot read property 'color' of null
         
         <tags>
             
-            <tag> IIFE </tag>
-            
             <tag> 进阶 </tag>
+            
+            <tag> IIFE </tag>
             
             <tag> this </tag>
             
@@ -4294,9 +4327,9 @@ MY_ARRAY = ['B']
             
             <tag> 作用域 </tag>
             
-            <tag> ES6 </tag>
-            
             <tag> 闭包 </tag>
+            
+            <tag> ES6 </tag>
             
             <tag> 任务队列 </tag>
             
@@ -4784,13 +4817,13 @@ methods: {
         
         <tags>
             
+            <tag> 异步 </tag>
+            
             <tag> express </tag>
             
             <tag> MongoDB </tag>
             
             <tag> vuex </tag>
-            
-            <tag> 异步 </tag>
             
         </tags>
         
@@ -5585,9 +5618,9 @@ p {
         
         <tags>
             
-            <tag> HTML </tag>
-            
             <tag> H5 </tag>
+            
+            <tag> HTML </tag>
             
             <tag> IFE </tag>
             
