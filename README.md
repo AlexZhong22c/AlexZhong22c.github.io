@@ -1,1 +1,1 @@
-近日了维护一下[博客](https://alexzhong22c.github.io/)的站点
+近日维护了一下[博客](https://alexzhong22c.github.io/)的站点
