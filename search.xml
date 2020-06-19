@@ -1460,8 +1460,7 @@ MMM.prototype.map = function(func) {
 <li>防抖节流</li>
 <li>算法优化
 <ul>
-<li>排序算法的优化</li>
-<li>动态规划等等</li>
+<li>排序算法的优化等等</li>
 </ul>
 </li>
 <li>基于框架运行机制的优化：vue react：组件重新渲染机制等等</li>

@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://alexzhong22c.github.io/2018/02/04/performance-optimized-summary/</loc>
+    
+    <lastmod>2020-06-18T15:23:55.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://alexzhong22c.github.io/2020/05/22/cross-origin-cross-tab/</loc>
     
     <lastmod>2020-06-14T04:41:40.000Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>https://alexzhong22c.github.io/2020/05/22/cross-origin-cross-site/</loc>
     
     <lastmod>2020-06-14T04:40:20.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://alexzhong22c.github.io/2018/02/04/performance-optimized-summary/</loc>
-    
-    <lastmod>2020-06-11T04:28:50.000Z</lastmod>
     
   </url>
   
