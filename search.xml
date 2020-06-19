@@ -5362,7 +5362,7 @@ div#demo a{color: red;} /*特殊性值：0,1,0,2*/
 <li>由上文可得：外联样式优先级并不一定低于内联样式</li>
 </ul>
 <blockquote>
-<p>外联样式指的是，样式放在.css文件里，然后html调用该文件</p>
+<p>外联样式指的是，样式放在.css文件里，然后html引用该文件</p>
 <p>内联样式指的是，样式放在head标签的style标签里面</p>
 <p>行内样式指的是，写在具体元素的style属性里面的样式</p>
 </blockquote>
@@ -5428,14 +5428,22 @@ p {
 <p>使用<code>!important</code>不是一个好习惯，因为它改变了你样式表本来的级联规则，从而难以调试。</p>
 <h3 id="一些不成文规则"><a class="header-anchor" href="#一些不成文规则"></a>一些不成文规则</h3>
 <ul>
-<li><strong>不要</strong>在全站范围的css中使用<code>!important</code>.</li>
-<li><strong>只在</strong>需要覆盖全站范围的css或是外部css（例如引用的ExtJs或是YUI）的时候才在指定的页面上使用<code>!important</code>。</li>
-<li><strong>不要</strong>在你的插件中使用<code>!important</code>。</li>
 <li><strong>永远</strong>都要优先考虑使用样式规则的优先级来解决问题而不是<code>!important</code>。</li>
+<li>作为第三方样式层面，尽量不用<code>!important</code>
+<ul>
+<li><strong>不要</strong>在你的插件中使用<code>!important</code>。</li>
+</ul>
+</li>
+<li>作为业务层面，可以给一些全局的原子类用<code>!important</code>
+<ul>
+<li><strong>尽可能不要</strong>在全站范围的css中使用<code>!important</code>.</li>
+<li><strong>只在</strong>需要<strong>覆盖</strong>“全站范围的css或是外部css（例如引用的ExtJs或是YUI）”的时候才在指定的页面上使用<code>!important</code>。</li>
+</ul>
+</li>
 </ul>
 <p><strong>取而代之，你可以:</strong></p>
 <p>更好的利用CSS的级联属性</p>
-<p>更多的使用适合的选择器。比如在你需要选定的对象元素前加上更多的元素，使选择的范围缩小，你的选择器就变得更有针对性，从而提高优先级。</p>
+<p>更多的使用适合的选择器。比如在你需要选定的对象元素前加上更多的元素，使选择的范围缩小，你的选择器就变得更有针对性，从而提高优先级。(但是也可能增加了解析css选择器的负担，导致性能变差)</p>
 <h3 id="什么时候应该使用："><a class="header-anchor" href="#什么时候应该使用："></a>什么时候应该使用：</h3>
 <p>你的网站上有一个设定了全站样式的CSS文件，同时你（或是你同事）写了一些效果很差的行内样式（行内样式的优先级是最高的）。</p>
 <p>在这种情况下，你就可以在你全局的CSS文件中写一些<code>!important</code>的样式来覆盖掉那些直接写在元素上的行内样式。</p>
