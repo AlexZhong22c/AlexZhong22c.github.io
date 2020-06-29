@@ -86,10 +86,12 @@
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
 <meta property="og:description" content="对关于继承的内容做一番整理。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-05-03T04:28:40.000Z">
+<meta property="og:image" content="https://cloud.az22c.top/js-inherit-sum.png-az22cgithub">
+<meta property="og:updated_time" content="2020-06-29T09:18:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="实现继承的3种方式">
 <meta name="twitter:description" content="对关于继承的内容做一番整理。">
+<meta name="twitter:image" content="https://cloud.az22c.top/js-inherit-sum.png-az22cgithub">
 
 
     <link rel="alternate" href="/atom.xml" title="Web前端 | Alex Zhong" type="application/atom+xml" data-no-instant>
@@ -545,7 +547,7 @@
 <a id="more"></a>
 <h2 id="原型链"><a class="header-anchor" href="#原型链"></a>原型链</h2>
 <p>javascript使用原型链作为实现继承的主要方法，实现的本质是重写原型对象，代之以一个新类型的实例：</p>
-<pre><code class="language-javascript">function Super(){ // 注释【1】
+<pre><code class="language-javascript">function Super(){
     this.value = true;
 }
 Super.prototype.getValue = function(){
@@ -559,7 +561,7 @@ Sub.prototype.constructor = Sub;
 var instance = new Sub();
 console.log(instance.getValue());//true
 </code></pre>
-<p>【1】原型链最主要的问题在于包含引用类型值的原型属性会被所有实例共享，而这也正是为什么要在构造函数中，而不是在原型对象中定义属性的原因。</p>
+<p>原型链最主要的问题在于包含引用类型值的原型属性会被所有实例共享，而这也正是为什么要在构造函数中，而不是在原型对象中定义属性的原因。</p>
 <p>在通过原型来实现继承时，原型实际上会变成另一个类型的实例。于是，原先的实例属性也就顺理成章地变成了现在的原型属性了：</p>
 <pre><code class="language-javascript">function Super(){
     this.colors = ['red','blue','green'];
@@ -574,9 +576,8 @@ var instance2 = new Sub();
 console.log(instance2.colors);//'red,blue,green,black'
 </code></pre>
 <h3 id="原型式继承"><a class="header-anchor" href="#原型式继承"></a>原型式继承</h3>
-<p>原型式继承借助原型可以基于已有的对象创建新对象，同时还不必因此创建自定义类型Sub。</p>
-<p><del>从本质上讲，相当于object()对传入其中的对象执行了一次浅复制</del> 父子对象2者从表现上看好像是浅拷贝，但是属性位于哪个对象上，这点明显和浅拷贝不同：</p>
-<pre><code class="language-javascript">function object(o){
+<p>我们先来介绍<code>Object.create</code>：<code>Object.create</code>前后，2者从表现上看好像是“浅拷贝”，但是属性位于哪个对象上，这点明显和“浅拷贝”不同。</p>
+<pre><code class="language-javascript">function mycreate(o){ // Object.create的实现原理
     function F(){};
     F.prototype = o;
     return new F();
@@ -585,7 +586,7 @@ console.log(instance2.colors);//'red,blue,green,black'
 var superObj = { // 基于已有的对象创建新对象
     colors: ['red','blue','green']
 };
-var subObj1 = object(superObj);
+var subObj1 = mycreate(superObj); // 等价于：subObj1 = Object.create(superObj)
 subObj1.colors.push(&quot;black&quot;);
 
 var subObj2 = object(superObj);
@@ -594,20 +595,20 @@ subObj2.colors.push(&quot;white&quot;);
 console.log(superObj.colors);//[&quot;red&quot;, &quot;blue&quot;, &quot;green&quot;, &quot;black&quot;, &quot;white&quot;]
 console.log(subObj1.colors);//[&quot;red&quot;, &quot;blue&quot;, &quot;green&quot;, &quot;black&quot;, &quot;white&quot;]
 </code></pre>
-<p>实际上，Object.create()方法规范化了原型式继承：(Object.create的实现即刚才自定义的object方法)</p>
-<pre><code class="language-javascript">var superObj = {
-    colors: ['red','blue','green']
-};
-var subObj1 = Object.create(superObj);
-subObj1.colors.push(&quot;black&quot;);
+<p>前面只是使用<code>Object.create</code>实现「实例对象“浅拷贝”实例对象」；我们也可以应用到「原型对象“浅拷贝”原型对象」以实现“类”之间的继承，而这就是“原型式继承”：</p>
+<pre><code class="language-js">function Parent() {}
+function Child() {}
 
-var subObj2 = object(superObj);
-subObj2.colors.push(&quot;white&quot;);
+Child.prototype = Object.create(Parent.protoptype);
+child.prototype.constructor = Child; // 要补上的
 
-console.log(superObj.colors);//[&quot;red&quot;, &quot;blue&quot;, &quot;green&quot;, &quot;black&quot;, &quot;white&quot;]
-console.log(subObj1.colors);//[&quot;red&quot;, &quot;blue&quot;, &quot;green&quot;, &quot;black&quot;, &quot;white&quot;]
+var child = new Child();
 </code></pre>
-<p>[注意]原型式继承只是将原型链继承的一些程序性步骤包裹在函数里而已。原型链继承 所存在的问题它都有。</p>
+<p>实际上，<code>Object.create()</code>方法规范化了原型式继承：</p>
+<ul>
+<li><code>Child.prototype = Object.create(Parent.protoptype)</code>：没有调用<code>new Parent</code>，可以不继承父类的实例上的属性(包括Parent构造函数将赋予的属性)</li>
+<li>[注意] 原型式继承只是将原型链继承的一些程序性步骤包裹在函数里而已。原型链继承 所存在的问题它都有。</li>
+</ul>
 <h2 id="寄生式继承"><a class="header-anchor" href="#寄生式继承"></a>寄生式继承</h2>
 <p>寄生式继承创建一个仅用于封装继承过程的函数，该函数在内部以某种方式来增强对象，最后返回对象：</p>
 <pre><code class="language-javascript">function parasite(original){
@@ -630,7 +631,8 @@ console.log(subObj1.colors);//[&quot;red&quot;, &quot;blue&quot;, &quot;green&qu
 </code></pre>
 <p>[注意]寄生式继承实际上只是原型式继承的再包装，与原型式继承有着同样的问题，且由于不能做到函数复用而降低了效率</p>
 <h2 id="借用构造函数"><a class="header-anchor" href="#借用构造函数"></a>借用构造函数</h2>
-<p>借用构造函数(constructor stealing)的技术(有时候也叫做伪类继承或经典继承)。基本思想相当简单，即在子类型构造函数的内部调用超类型构造函数，通过使用apply()和call()方法在新创建的对象上执行构造函数：</p>
+<p>借用构造函数(constructor stealing)的技术(有时候也叫做伪类继承或经典继承)。</p>
+<p>基本思想相当简单，即在子类型构造函数的内部调用超类型构造函数，通过使用apply()和call()方法在新创建的对象上执行构造函数：</p>
 <pre><code class="language-javascript">function Super(){
     this.colors = ['red','blue','green'];
 }
@@ -782,8 +784,8 @@ var instance2 = new Sub(&quot;hu&quot;,27);
 console.log(instance2.colors);//['red','blue','green']
 instance2.sayName();//&quot;hu&quot;
 </code></pre>
-<h2 id="最后"><a class="header-anchor" href="#最后"></a>最后</h2>
-<p>每种模式都有自己的优点，而多个模式结合在一起就可能造成一些属性的重置，这是最需要注意的地方。</p>
+<h2 id="总结"><a class="header-anchor" href="#总结"></a>总结</h2>
+<p><img src="https://cloud.az22c.top/js-inherit-sum.png-az22cgithub" alt="js-inherit-sum"></p>
 
 		</div>
       
@@ -793,7 +795,7 @@ instance2.sayName();//&quot;hu&quot;
         <p><span>本文标题:</span><a href="/2017/08/12/js-inherit/">实现继承的3种方式</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2017-08-12, 20:22:30</p>
-        <!-- <p><span>最后更新:</span>2020-05-03, 12:28:40</p> -->
+        <!-- <p><span>最后更新:</span>2020-06-29, 17:18:07</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="实现继承的3种方式" href="/2017/08/12/js-inherit/">https://alexzhong22c.github.io/2017/08/12/js-inherit/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://alexzhong22c.github.io/2017/08/12/js-inherit/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -829,7 +831,7 @@ instance2.sayName();//&quot;hu&quot;
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#原型链"><span class="toc-text">原型链</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#原型式继承"><span class="toc-text">原型式继承</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#寄生式继承"><span class="toc-text">寄生式继承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#借用构造函数"><span class="toc-text">借用构造函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#组合继承"><span class="toc-text">组合继承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#寄生组合式继承"><span class="toc-text">寄生组合式继承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最后"><span class="toc-text">最后</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#原型链"><span class="toc-text">原型链</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#原型式继承"><span class="toc-text">原型式继承</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#寄生式继承"><span class="toc-text">寄生式继承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#借用构造函数"><span class="toc-text">借用构造函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#组合继承"><span class="toc-text">组合继承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#寄生组合式继承"><span class="toc-text">寄生组合式继承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
         
     </div>
     <style>
@@ -896,7 +898,7 @@ instance2.sayName();//&quot;hu&quot;
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					
-						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,942</span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,918</span>
 					
 				</div>
             </div>
