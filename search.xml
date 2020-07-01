@@ -2862,7 +2862,7 @@ console.log(instance2.colors);//['red','blue','green']
 instance2.sayName();//&quot;hu&quot;
 </code></pre>
 <h2 id="总结"><a class="header-anchor" href="#总结"></a>总结</h2>
-<p><img src="https://cloud.az22c.top/js-inherit-sum.png-az22cgithub" alt="js-inherit-sum"></p>
+<p><img src="https://cloud.az22c.top/js-inherit-sumary.png-az22cgithub" alt="js-inherit-sumary"></p>
 ]]></content>
       
         <categories>
@@ -3272,6 +3272,10 @@ console.log(Object.hasOwnProperty('constructor'));//false
 <pre><code class="language-js">console.log(Function.__proto__ === Function.prototype);//true
 console.log(Function.prototype.constructor === Function);//true
 console.log(Function.prototype === Function.prototype);//true
+</code></pre>
+<p>还有一个隐藏关系是<code>Function.constructor === Function</code>结果为true。证明<code>Function</code>的<code>constructor</code>是从<code>Function.prototype</code>上“继承”过来：</p>
+<pre><code class="language-js">Object.getOwnPropertyNames(Function) // 没有打印出constructor
+Object.getOwnPropertyNames(Function.prototype) // 有打印出constructor
 </code></pre>
 <h2 id="视function-prototype为实例对象"><a class="header-anchor" href="#视function-prototype为实例对象"></a>视Function.prototype为实例对象</h2>
 <p>和前面一样，<strong>所有的对象都可以看成是Object()构造函数的new操作的实例化结果。</strong></p>
