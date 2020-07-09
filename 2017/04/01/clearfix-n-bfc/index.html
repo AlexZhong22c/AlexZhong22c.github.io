@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
 <meta property="og:description" content="本文部分内容参考 那些年我们一起清除过的浮动 ，但是 一丝冰凉 的这篇文章有很多地方我都不认同，取其精华去其糟粕，所以本文并没有包含那些我所不认同的内容。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-04-20T13:48:14.000Z">
+<meta property="og:updated_time" content="2020-07-09T08:43:11.570Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="闭合浮动和BFC和阻止上下外边距的合并">
 <meta name="twitter:description" content="本文部分内容参考 那些年我们一起清除过的浮动 ，但是 一丝冰凉 的这篇文章有很多地方我都不认同，取其精华去其糟粕，所以本文并没有包含那些我所不认同的内容。">
@@ -551,14 +551,23 @@
 <p>两者的区别 <a href="http://www.iyunlu.com/demo/enclosing-float-and-clearing-float/index.html" target="_blank" rel="noopener">请看Demo</a></p>
 <p>闭合浮动主要用来解决<strong>因为子元素浮动导致父元素高度塌陷</strong>的问题。</p>
 <h2 id="闭合浮动的一些老方法："><a class="header-anchor" href="#闭合浮动的一些老方法："></a>闭合浮动的一些老方法：</h2>
-<ol>
-<li>在子元素们的最后追加一个<code>style=&quot;clear:both&quot;</code>的空标签，这个不好</li>
-<li>在子元素们的最后追加一个br标签，使用br标签的<code>clear=&quot;all | left | right | none&quot;</code> 属性，因为一般不建议在HTML中使用br，这个也不好</li>
-<li>通过<strong>设置父元素</strong>overflow值设置为hidden；在IE6中还需要触发 hasLayout ，例如 zoom：1；因为最终还是有补不了的bug被大家弃用</li>
-<li>通过<strong>设置父元素</strong>overflow值设置为auto，同样也有bug</li>
-<li>父元素也设置浮动，缺点是<strong>使得与父元素相邻的元素的布局会受到影响</strong>，不可能一直浮动到body，不推荐使用</li>
-<li>父元素设置display:table，盒模型属性已经改变，由此造成的一系列问题，得不偿失，不推荐使用。文章最后还会再介绍到给<strong>父元素的伪元素设置display:table</strong>。</li>
-</ol>
+<ul>
+<li>利用局部的“最后的元素”的“清除浮动”
+<ul>
+<li>【1】在子元素们的最后追加一个<code>style=&quot;clear:both&quot;</code>的空标签，这个不好</li>
+<li>【2】在子元素们的最后追加一个br标签，使用br标签的<code>clear=&quot;all | left | right | none&quot;</code> 属性，因为一般不建议在HTML中使用br，这个也不好</li>
+</ul>
+</li>
+<li>bfc 作为布局上下文
+<ul>
+<li>【3】通过<strong>设置父元素</strong>overflow值设置为hidden；在IE6中还需要触发 hasLayout ，例如 zoom：1；因为最终还是有补不了的bug被大家弃用</li>
+<li>【4】通过<strong>设置父元素</strong>overflow值设置为auto，同样也有bug</li>
+<li>【5】父元素也设置浮动，缺点是<strong>使得与父元素相邻的元素的布局会受到影响</strong>，不可能一直浮动到body，不推荐使用</li>
+<li>【6】父元素设置display:table，盒模型属性已经改变，由此造成的一系列问题，得不偿失，不推荐使用。文章最后还会再介绍到给<strong>父元素的伪元素设置display:table</strong>。</li>
+</ul>
+</li>
+<li>利用伪元素after作为“最后的元素”的“清除浮动”  【如下文】</li>
+</ul>
 <h3 id="7-使用：after伪元素"><a class="header-anchor" href="#7-使用：after伪元素"></a>7. 使用<code>：after</code>伪元素</h3>
 <blockquote>
 <p>需要注意的是 :after是伪元素，不是伪类（另外，某些CSS手册里面称之为“伪对象”，不太对）。</p>
@@ -691,7 +700,7 @@ content:&quot;.&quot;; display:block; height:0; visibility:hidden; clear:both; }
         <p><span>本文标题:</span><a href="/2017/04/01/clearfix-n-bfc/">闭合浮动和BFC和阻止上下外边距的合并</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2017-04-01, 22:24:37</p>
-        <!-- <p><span>最后更新:</span>2020-04-20, 21:48:14</p> -->
+        <!-- <p><span>最后更新:</span>2020-07-09, 16:43:11</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="闭合浮动和BFC和阻止上下外边距的合并" href="/2017/04/01/clearfix-n-bfc/">https://alexzhong22c.github.io/2017/04/01/clearfix-n-bfc/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://alexzhong22c.github.io/2017/04/01/clearfix-n-bfc/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -794,7 +803,7 @@ content:&quot;.&quot;; display:block; height:0; visibility:hidden; clear:both; }
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					
-						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：2,777</span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：2,821</span>
 					
 				</div>
             </div>

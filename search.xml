@@ -1187,20 +1187,20 @@ display: flex; /* Chrome 29+, Firefox 22+, IE 11+, Opera 12.1/17/18, Android 4.4
 <a id="more"></a>
 <p><strong>特点：</strong></p>
 <ul>
-<li>没有副作用（函数的纯度）
-<ul>
-<li>柯里化是延伸出来的</li>
-<li>延伸问题是副作用的管理</li>
-</ul>
-</li>
 <li>范畴论和函子
 <ul>
 <li>函数是一等公民，高阶函数等概念</li>
 <li>函数的组合</li>
 </ul>
 </li>
-<li>声明式代码</li>
+<li>没有副作用（函数的纯度）
+<ul>
+<li>柯里化是延伸出来的</li>
+<li>延伸问题是副作用的管理</li>
+</ul>
+</li>
 <li>不可变量和不可变对象</li>
+<li>声明式代码</li>
 </ul>
 <p><strong>作用：</strong></p>
 <p>函数式编程，和面向对象编程一样都是用来 <strong>降低系统复杂度的</strong> ，在js里面，可以说是作为一种设计思路和其他的互相补充。</p>
@@ -1223,7 +1223,7 @@ const result = new MMM(1)
   .join();
 console.log(result) // 期望10
 </code></pre>
-<p>如果在任一个map中调用了reject，后续的map就全被跳过不必执行，同时链式调用的结果直接fallback到一个“候补值”。（为了简便，这个fallback值定义在js文件的作用域中，也就是后文源码的<code>VIEW_INVALID</code>这个值）</p>
+<p>如果在任一个map中调用了reject，后续的map就全被跳过不必执行，同时链式调用的结果直接fallback到一个“候补值”。（为了简便，这个“fallback值”定义在js文件的作用域中，也就是后文源码的<code>VIEW_INVALID</code>这个值）</p>
 <h4 id="对比promise的调用代码："><a class="header-anchor" href="#对比promise的调用代码："></a>对比promise的调用代码：</h4>
 <p>显然这段代码结构有点像Promise的语法，但比promise简漏的是：</p>
 <ol>
@@ -1234,7 +1234,7 @@ console.log(result) // 期望10
 </ol>
 <p>而从这种代码改写，直到进化到promise需要怎么改写代码呢？是很有意思的问题，这里暂时就不讨论了。</p>
 <h4 id="利用原型对象-代码实现："><a class="header-anchor" href="#利用原型对象-代码实现："></a>利用原型对象 代码实现：</h4>
-<p>回到正题，一开始的实现代码是这样，<strong>还是停留在利用js原型链上的属性的范畴</strong> ：</p>
+<p>回到正题，一开始的实现代码是这样，<strong>还是停留在“利用js原型链上的属性”的范畴</strong> ：</p>
 <pre><code class="language-js">const VIEW_INVALID = 'VIEW_INVALID';
 const MMM = function(value, isInvalid) {
   this.isInvalid = isInvalid || false;
@@ -1264,9 +1264,12 @@ MMM.prototype.join = function() {
 <pre><code class="language-js">const VIEW_INVALID = 'VIEW_INVALID';
 // const MMM = function(value, isInvalid) { /**/ } // 代码没变，同上回
 // MMM.prototype.of = function (/**/) { /**/ } // 代码没变，同上回
+
+// 根据容器内的flag值，选择应用哪个函数：
 MMM.prototype.mapEither = function(func, fForInvalid) {
   fForInvalid = fForInvalid || function(x) {return x};
   func = func || function(x) {return x};
+
   const todoFN = !this.isInvalid ? func : fForInvalid;
   return new MMM(todoFN(this.value), this.isInvalid);
 }
@@ -1275,9 +1278,7 @@ MMM.prototype.map = function(func) {
     this.isInvalid = true;
     this.value = VIEW_INVALID;
   });
-  return this.mapEither(() =&gt; {
-    return this.mapEither(() =&gt; result).join()
-  })
+  return this.mapEither(() =&gt; result)
 }
 </code></pre>
 <p>代码还可以怎么改写？这种改写之后带来什么优势？其实是比较开放性的问题。</p>
@@ -3127,10 +3128,11 @@ var f1 = new Foo;
 <pre><code class="language-JavaScript">console.log(f1.constructor === Foo);//true
 </code></pre>
 <hr>
-<p>如果非要扯实例对象和构造函数的关系，那只能是下面这句代码，实例对象是构造函数的new操作的结果：</p>
-<pre><code class="language-JavaScript">var f1 = new Foo();
+<p>如果非要扯实例对象和构造函数的关系，那只能是下面这句代码：</p>
+<pre><code class="language-JavaScript">// new操作的过程中，会调用构造函数来塑造返回的实例对象
+var f1 = new Foo();
 </code></pre>
-<p><strong>这句代码执行以后，</strong> 如果重置原型对象，则会打破它们三者间的关系：</p>
+<p><strong>当这句代码执行以后，</strong> 如果重置原型对象，则会打破它们三者间的关系：</p>
 <pre><code class="language-JavaScript">function Foo(){};
 var f1 = new Foo;
 console.log(Foo.prototype === f1.__proto__);//true
@@ -3273,7 +3275,8 @@ console.log(Object.hasOwnProperty('constructor'));//false
 console.log(Function.prototype.constructor === Function);//true
 console.log(Function.prototype === Function.prototype);//true
 </code></pre>
-<p>还有一个隐藏关系是<code>Function.constructor === Function</code>结果为true。证明<code>Function</code>的<code>constructor</code>是从<code>Function.prototype</code>上“继承”过来：</p>
+<p>还有一个隐藏关系是<code>Function.constructor === Function</code>结果为true。</p>
+<p>证明<code>Function</code>的<code>constructor</code>是从<code>Function.prototype</code>上“继承”过来：</p>
 <pre><code class="language-js">Object.getOwnPropertyNames(Function) // 没有打印出constructor
 Object.getOwnPropertyNames(Function.prototype) // 有打印出constructor
 </code></pre>
@@ -5083,14 +5086,23 @@ methods: {
 <p>两者的区别 <a href="http://www.iyunlu.com/demo/enclosing-float-and-clearing-float/index.html" target="_blank" rel="noopener">请看Demo</a></p>
 <p>闭合浮动主要用来解决<strong>因为子元素浮动导致父元素高度塌陷</strong>的问题。</p>
 <h2 id="闭合浮动的一些老方法："><a class="header-anchor" href="#闭合浮动的一些老方法："></a>闭合浮动的一些老方法：</h2>
-<ol>
-<li>在子元素们的最后追加一个<code>style=&quot;clear:both&quot;</code>的空标签，这个不好</li>
-<li>在子元素们的最后追加一个br标签，使用br标签的<code>clear=&quot;all | left | right | none&quot;</code> 属性，因为一般不建议在HTML中使用br，这个也不好</li>
-<li>通过<strong>设置父元素</strong>overflow值设置为hidden；在IE6中还需要触发 hasLayout ，例如 zoom：1；因为最终还是有补不了的bug被大家弃用</li>
-<li>通过<strong>设置父元素</strong>overflow值设置为auto，同样也有bug</li>
-<li>父元素也设置浮动，缺点是<strong>使得与父元素相邻的元素的布局会受到影响</strong>，不可能一直浮动到body，不推荐使用</li>
-<li>父元素设置display:table，盒模型属性已经改变，由此造成的一系列问题，得不偿失，不推荐使用。文章最后还会再介绍到给<strong>父元素的伪元素设置display:table</strong>。</li>
-</ol>
+<ul>
+<li>利用局部的“最后的元素”的“清除浮动”
+<ul>
+<li>【1】在子元素们的最后追加一个<code>style=&quot;clear:both&quot;</code>的空标签，这个不好</li>
+<li>【2】在子元素们的最后追加一个br标签，使用br标签的<code>clear=&quot;all | left | right | none&quot;</code> 属性，因为一般不建议在HTML中使用br，这个也不好</li>
+</ul>
+</li>
+<li>bfc 作为布局上下文
+<ul>
+<li>【3】通过<strong>设置父元素</strong>overflow值设置为hidden；在IE6中还需要触发 hasLayout ，例如 zoom：1；因为最终还是有补不了的bug被大家弃用</li>
+<li>【4】通过<strong>设置父元素</strong>overflow值设置为auto，同样也有bug</li>
+<li>【5】父元素也设置浮动，缺点是<strong>使得与父元素相邻的元素的布局会受到影响</strong>，不可能一直浮动到body，不推荐使用</li>
+<li>【6】父元素设置display:table，盒模型属性已经改变，由此造成的一系列问题，得不偿失，不推荐使用。文章最后还会再介绍到给<strong>父元素的伪元素设置display:table</strong>。</li>
+</ul>
+</li>
+<li>利用伪元素after作为“最后的元素”的“清除浮动”  【如下文】</li>
+</ul>
 <h3 id="7-使用：after伪元素"><a class="header-anchor" href="#7-使用：after伪元素"></a>7. 使用<code>：after</code>伪元素</h3>
 <blockquote>
 <p>需要注意的是 :after是伪元素，不是伪类（另外，某些CSS手册里面称之为“伪对象”，不太对）。</p>
