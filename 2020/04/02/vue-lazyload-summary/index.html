@@ -78,16 +78,18 @@
 
 
 
-<meta name="description" content="Alex Zhong&apos;s blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Web前端 | Alex Zhong">
-<meta property="og:url" content="https://alexzhong22c.github.io/tags/hexo/index.html">
+<meta name="description" content="Vue-lazyload 这个话题，可谓“前人之述备矣”。这里主要写写一些我认为比较重要的点，能够快速回顾这个“第三方组件”的原理和使用方法。">
+<meta name="keywords" content="笔记副本,回顾">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue-lazyload 原理和使用 个人总结">
+<meta property="og:url" content="https://alexzhong22c.github.io/2020/04/02/vue-lazyload-summary/index.html">
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
-<meta property="og:description" content="Alex Zhong&apos;s blog">
+<meta property="og:description" content="Vue-lazyload 这个话题，可谓“前人之述备矣”。这里主要写写一些我认为比较重要的点，能够快速回顾这个“第三方组件”的原理和使用方法。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-08-25T11:30:40.477Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Web前端 | Alex Zhong">
-<meta name="twitter:description" content="Alex Zhong&apos;s blog">
+<meta name="twitter:title" content="Vue-lazyload 原理和使用 个人总结">
+<meta name="twitter:description" content="Vue-lazyload 这个话题，可谓“前人之述备矣”。这里主要写写一些我认为比较重要的点，能够快速回顾这个“第三方组件”的原理和使用方法。">
 
 
     <link rel="alternate" href="/atom.xml" title="Web前端 | Alex Zhong" type="application/atom+xml" data-no-instant>
@@ -121,7 +123,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Tag: hexo | Web前端 | Alex Zhong</title>
+<title>Vue-lazyload 原理和使用 个人总结 | Web前端 | Alex Zhong</title>
 
 
 
@@ -133,9 +135,9 @@
         fancybox: false,
         animate: false,
         isHome: false,
-        isPost: false,
+        isPost: true,
         isArchive: false,
-        isTag: true,
+        isTag: false,
         isCategory: false,
         fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
         scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
@@ -491,63 +493,239 @@
     <link class="menu-list" tags="标签" friends="友情链接" about="个人签名"/>
 </nav>
 
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-vue-lazyload-summary" class="article article-type-post" itemscope itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section id="id_archives" class="archives-wrap article">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2017/02/22/my-hexo-theme/" class="archive-article-date">
-      <time datetime="2017-02-22T15:06:34.000Z" itemprop="datePublished">02-22</time>
+    <div class="article-meta">
+      <a href="/2020/04/02/vue-lazyload-summary/" class="article-date">
+      <time datetime="2020-04-02T04:00:44.000Z" itemprop="datePublished">2020-04-02</time>
 </a>
 
 
 
 
-        </div>
-         
+	<br />
+	<p style="height:7px;"/>
+	<p style="height:20px;font-family:KaiTi,LiSu,'宋体',sans-serif;color:#DBDBDB;font-size:12px;">预计阅读4分钟</p>
+
+    </div>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/02/22/my-hexo-theme/">yelee主题改bug总结</a>
+
+   <!-- 文章主内容 -->
+  
+      <header id="id_header_post" class="article-header">
+        
+  
+    <h1 class="article-title-big" itemprop="name">
+      Vue-lazyload 原理和使用 个人总结
     </h1>
   
 
-        <div class="article-info info-on-archive"> 
-          
+      </header>
+      
+      <div class="article-info article-info-post">
+        
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/hexo/">hexo</a>
+    <a class="article-category-link" href="/categories/Vue/">Vue</a>
     </div>
 
 
-          
+        
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/theme/">theme</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/yelee/">yelee</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/回顾/">回顾</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/笔记副本/">笔记副本</a></li></ul>
     </div>
 
 
-        </div>
         <div class="clearfix"></div>
-    </header>
-  </div>
+      </div>
+      
+    
+          <div id="article-content" class="article-entry" itemprop="articleBody">
+			  
+			<p>Vue-lazyload 这个话题，可谓“前人之述备矣”。这里主要写写一些我认为比较重要的点，能够快速回顾这个“第三方组件”的原理和使用方法。</p>
+<a id="more"></a>
+<hr>
+<p>Vue-lazyload 是主要由程序员界网红 hilongjw 打造的一款用于图片或Vue组件懒加载的组件。</p>
+<p>它用于性能优化并且对于懒加载的一些基本的需求都有解决方案。所以选择该领域作为开源的方向，可谓非常明智，(虽说现在的issue数量还是挺多的)，另可以作为开源项目的一个范本。</p>
+<p>也就是：</p>
+<ul>
+<li>用于图片或Vue组件懒加载优化</li>
+<li>适用于没有做分页的长列表、适用于超过两三屏的内容</li>
+<li>懒加载的一些基本的需求都有解决方案</li>
+</ul>
+<h2 id="vue-lazyload-在使用方面"><a class="header-anchor" href="#vue-lazyload-在使用方面"></a>Vue-lazyload 在使用方面</h2>
+<p><strong>组件状态：</strong></p>
+<ul>
+<li>（pending --&gt; success  略）</li>
+<li>pending --&gt; loading</li>
+<li>pending --&gt; error</li>
+<li>(兼容原生html，用到data-src，data-error，data-loading)</li>
+<li>相关的api：可以设置遇error重新请求的次数。loading的图片，error的图片。对应的回调能获取该img元素。</li>
+<li>样式钩子：内容没加载好之前，是需要显示loading的：loading的时候，会给img元素加上lazy=&quot;loading&quot;的属性，就用这个属性钩子来作为css的钩子就行了</li>
+</ul>
+<p>--------------------------------    【我是分割线】   ----------------------------------</p>
+<p><strong>组件类型：</strong></p>
+<ul>
+<li><code>lazyImage</code> vs <code>lazyComponent</code>   最终转化为这2种自定义组件
+<ul>
+<li>主要是懒加载图片，偶尔懒加载组件</li>
+<li>lazyComponent该组件由库方提供，你只需要传入default slot（里面会调用this.$slots.default）就行了，这样可以<strong>随便传组件进去</strong>。</li>
+</ul>
+</li>
+<li><code>v-lazy</code> vs <code>v-lazy-container(v-lazy.container)</code>     + <code>vue-lazy:background-image</code>
+<ul>
+<li>v-lazy-container:更精确指定<strong>被监听滚动</strong>的容器，<strong>若未定义则为最近一个overflow值为auto或scroll的父元素，这个规则很实用</strong></li>
+</ul>
+</li>
+</ul>
+<p>这样总结，是不是比网上的很多文章的脉络清晰多了？一下就能定位到自己想要的实现效果，根据思路一下就能理解它的很多api。</p>
+<h3 id="vue-lazyload-好用的地方："><a class="header-anchor" href="#vue-lazyload-好用的地方："></a>Vue-lazyload 好用的地方：</h3>
+<p>1、filter：比如我七牛url想要后面追加参数，可以用这个。在某种程度上和vue filter比较接近。文档原文：「filter: img未加载之前,解析到 src 的时候注册的回调函数.可以在加载图片之前,对src进行修改.注册在filter下的所有的函数都会执行。」</p>
+<p>2、监听事件，可以监听的事件有很多种类型<code>['scroll', 'wheel', ..., 'animationend', 'touchmove']</code>等等，主要是监听页面的。然后按对应的模式(mode)去检查是否满足触发加载的条件。在监听方面，比较重要且有特色的一个属性是<code>preLoad</code>：「preLoad:类型Number,默认1.3. 表示lazyload的元素距离页面底部距离的百分比.计算值为(preload - 1).」</p>
+<h3 id="vue-lazyload-注意的地方-坑-："><a class="header-anchor" href="#vue-lazyload-注意的地方-坑-："></a>Vue-lazyload 注意的地方(坑)：</h3>
+<ul>
+<li>首先有很多老 issue 没有解决</li>
+<li>缺点是error之后，没有办法让用户点击一下手动启动重新加载一次？？？？？？</li>
+<li>如果组件是在布局的最后才比较适合用“vue-lazyload组件模式”，不然切换生硬、重排比较多</li>
+<li>图片相对路径怎么用：
+<ul>
+<li>【解决办法之一】你可以将本地图片放在web-dev-server 管理的静态目录里,就可以访问了，比如 vue-cli 模板里的 dist/ (也就是所谓的publicPath)。这样的缺点是本地调试的时候可能会引用路径错误。</li>
+<li>还有 <a href="https://www.jianshu.com/p/d6f8bf71eb11" target="_blank" rel="noopener">container图片路径的使用规则又不一样</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="vue-lazyload的实现原理"><a class="header-anchor" href="#vue-lazyload的实现原理"></a>Vue-lazyload的实现原理</h2>
+<p>监听sroll等等事件，可以选择 2 种模式(mode)的其一：</p>
+<blockquote>
+<p>一个是先保存引用作为订阅，之后再批量触发查询；另一个是观察者模式</p>
+</blockquote>
+<ul>
+<li>event模式
+<ul>
+<li>给<strong>目标容器</strong>添加监听scroll等等事件</li>
+<li>遍历listenerQueue，每个linster的checkInView方法判断其可见性
+<ul>
+<li>原理：getBoundingClientRect(源码中的listener.checkInView函数用的就是它，判断是否已在preload位置)
+<ul>
+<li><a href="https://juejin.im/post/5c76843af265da2ddd4a6dd0" target="_blank" rel="noopener">getBoundingClientRect的注意事项</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>一个很典型的毛病就是频繁查询可能触发强制重排或者强制重绘</li>
+</ul>
+</li>
+<li>observer模式： observer模式主要是想提高性能
+<ul>
+<li>初始的重置工作：该&quot;模式&quot;下的函数给<strong>目标容器</strong>解除监听<strong>目标对象</strong>scroll等等事件绑定</li>
+<li>只针对和该api的“根元素”(默认就是viewport了)和<strong>目标对象</strong>做dom处理就够了
+<ul>
+<li>原理：Intersection Observer api (跟raq在event loop体系中触发的时机差不多)
+<ul>
+<li>(通过observerOptions提供的数据来判断是否已在preload位置，一般情况下不会设置root的指向，那么其默认值就是视口)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+		</div>
+      
+  
+     <!-- 版权署名授权 -->
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2020/04/02/vue-lazyload-summary/">Vue-lazyload 原理和使用 个人总结</a></p>
+        <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
+        <p style="color: #696969;"><span>发布时间:</span>2020-04-02, 12:00:44</p>
+        <!-- <p><span>最后更新:</span>2020-08-25, 19:30:40</p> -->
+        <p>
+            <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="Vue-lazyload 原理和使用 个人总结" href="/2020/04/02/vue-lazyload-summary/">https://alexzhong22c.github.io/2020/04/02/vue-lazyload-summary/</a>
+            <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://alexzhong22c.github.io/2020/04/02/vue-lazyload-summary/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+        </p>
+        <p style="color: #696969;">
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i><a id="copyright_license" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target = "_blank" class="hint  hint--bottom" data-hint="中国大陆 (CC BY-NC-SA 3.0 CN)">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2020/04/02/settimeout-0-to-9/">
+                    面试题：改造代码，使之隔秒输出0 - 9
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2019/02/06/height-calculate/">
+                    深入理解文字高度和行高的设置
+                </a>
+            </div>
+        
+    </nav>
+
+
+  
 </article>
-  
-  
-    </div></section>
-  
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#vue-lazyload-在使用方面"><span class="toc-text">Vue-lazyload 在使用方面</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#vue-lazyload-好用的地方："><span class="toc-text">Vue-lazyload 好用的地方：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vue-lazyload-注意的地方-坑-："><span class="toc-text">Vue-lazyload 注意的地方(坑)：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vue-lazyload的实现原理"><span class="toc-text">Vue-lazyload的实现原理</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-2 i,
+        .toc-level-2 ol {
+            display: none !important;
+        }
+    </style>
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+
+
 
     
 
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2020/04/02/settimeout-0-to-9/" title="上一篇: 面试题：改造代码，使之隔秒输出0 - 9">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2019/02/06/height-calculate/" title="下一篇: 深入理解文字高度和行高的设置">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/05/22/cross-origin-cross-tab/">02-跨域通信和跨tab通信</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/22/cross-origin-cross-site/">01-跨域和跨站的基本概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/02/settimeout-0-to-9/">面试题：改造代码，使之隔秒输出0 - 9</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/02/vue-lazyload-summary/">Vue-lazyload 原理和使用 个人总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/06/height-calculate/">深入理解文字高度和行高的设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/05/vertical-align-middle/">vertical-align:middle近似居中和完美居中</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/05/centralize-one-ele/">总结：使单一对象水平/垂直居中</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/05/js-functional-intro/">到底什么是函数式编程 精简总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/04/performance-optimized-summary/">Web前端性能优化概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/12/git-stage/">git暂存区知识梳理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/17/ife-css-task03/">三栏式布局--IFE2017-CSS-task03笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/07/css-border1/">border-radius属性</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/03/js-obj-prop1/">对象属性的操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/02/js-obj-prop2/">对象属性描述符</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/01/js-obj-prop3/">对象属性之对象状态</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/12/js-inherit/">es5实现继承的6种方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/12/js-new-happen/">new创建对象的过程发生了什么</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/09/js-prototype-practice/">原型对象 实战使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/08/js-proto/">理解prototype、__proto__和constructor等关系</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/07/js-this2/">this绑定的优先级</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/07/js-this/">结合this的4种绑定规则 深入理解this指向的判定</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/02/js-event4/">浏览器事件冒泡或者捕获相关</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/01/js-event3/">js四种事件处理程序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/01/js-pv-default/">js取消默认事件行为</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/08/let-n-const/">let和const旧话新编</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/07/js-date/">JavaScript Date对象回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/07/vue-checkbox-table/">纯vue实现checkbox父子联动</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/25/vue-time-tracker/">经典vue单页路由入门全家桶</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/15/vue-table-nav/">按条目展示表格数据小插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/clearfix-n-bfc/">闭合浮动和BFC和阻止上下外边距的合并</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/ife-css-task02/">IFE2017-CSS-task02笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/31/css-selectors-specificity/">CSS选择器优先级</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/28/h5-new-ele/">H5新标签和被H5拥抱的老元素们</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/27/ife-css-task01/">IFE2017-CSS-task01笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/10/iife-intro/">IIFE回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/09/for-loop/">js的for循环回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/float-n-absolute/">float和绝对定位比较</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/about-margin/">和margin有关的知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/gulp-usage/">gulp的入门和一些简单使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/27/icon-usage/">桌面端和移动端图标的引入</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/25/webapp-events-intro/">移动开发事件入门概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/24/webapp-intro/">移动开发入门概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/my-hexo-theme/">yelee主题改bug总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/17/todo-app/">ToDo小应用完工总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/equality-operators/">相等操作符回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/js-operators/">操作符回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/25/font-face/">font-face--CSS3</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/13/js-function/">js函数基础回顾</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
 
 </div>
       <footer id="footer">
@@ -563,7 +741,7 @@
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					
-						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">总字数：84.3k</span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,183</span>
 					
 				</div>
             </div>
