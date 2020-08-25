@@ -2,9 +2,44 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://alexzhong22c.github.io/2018/02/04/performance-optimized-summary/</loc>
+    
+    <lastmod>2020-08-25T02:08:03.934Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://alexzhong22c.github.io/2020/08/08/vue-analysis-01first-run/</loc>
+    
+    <lastmod>2020-08-09T02:21:29.356Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://alexzhong22c.github.io/2019/02/06/height-calculate/</loc>
+    
+    <lastmod>2020-07-09T11:25:51.361Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://alexzhong22c.github.io/2019/02/05/vertical-align-middle/</loc>
+    
+    <lastmod>2020-07-09T11:25:50.415Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://alexzhong22c.github.io/2019/02/05/centralize-one-ele/</loc>
+    
+    <lastmod>2020-07-09T11:09:12.602Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://alexzhong22c.github.io/2017/04/01/clearfix-n-bfc/</loc>
     
-    <lastmod>2020-07-09T08:43:11.570Z</lastmod>
+    <lastmod>2020-07-09T08:52:06.873Z</lastmod>
     
   </url>
   
@@ -44,13 +79,6 @@
   </url>
   
   <url>
-    <loc>https://alexzhong22c.github.io/2018/02/04/performance-optimized-summary/</loc>
-    
-    <lastmod>2020-06-23T10:16:26.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://alexzhong22c.github.io/2017/03/31/css-selectors-specificity/</loc>
     
     <lastmod>2020-06-19T05:06:56.000Z</lastmod>
@@ -75,27 +103,6 @@
     <loc>https://alexzhong22c.github.io/2020/04/02/settimeout-0-to-9/</loc>
     
     <lastmod>2020-05-14T09:35:30.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://alexzhong22c.github.io/2019/02/05/vertical-align-middle/</loc>
-    
-    <lastmod>2020-05-14T09:32:31.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://alexzhong22c.github.io/2019/02/06/height-calculate/</loc>
-    
-    <lastmod>2020-05-14T09:32:11.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://alexzhong22c.github.io/2019/02/05/centralize-one-ele/</loc>
-    
-    <lastmod>2020-05-14T09:32:04.000Z</lastmod>
     
   </url>
   
