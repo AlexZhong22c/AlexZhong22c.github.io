@@ -497,6 +497,57 @@ for (var i = 0; i &lt; 10; i++) {
 </li>
 </ul>
 <p>这样总结，是不是比网上的很多文章的脉络清晰多了？一下就能定位到自己想要的实现效果，根据思路一下就能理解它的很多api。</p>
+<h3 id="vue-lazyload-好用的地方："><a class="header-anchor" href="#vue-lazyload-好用的地方："></a>Vue-lazyload 好用的地方：</h3>
+<p>1、filter：比如我七牛url想要后面追加参数，可以用这个。在某种程度上和vue filter比较接近。文档原文：「filter: img未加载之前,解析到 src 的时候注册的回调函数.可以在加载图片之前,对src进行修改.注册在filter下的所有的函数都会执行。」</p>
+<p>2、监听事件，可以监听的事件有很多种类型<code>['scroll', 'wheel', ..., 'animationend', 'touchmove']</code>等等，主要是监听页面的。然后按对应的模式(mode)去检查是否满足触发加载的条件。在监听方面，比较重要且有特色的一个属性是<code>preLoad</code>：「preLoad:类型Number,默认1.3. 表示lazyload的元素距离页面底部距离的百分比.计算值为(preload - 1).」</p>
+<h3 id="vue-lazyload-注意的地方-坑-："><a class="header-anchor" href="#vue-lazyload-注意的地方-坑-："></a>Vue-lazyload 注意的地方(坑)：</h3>
+<ul>
+<li>首先有很多老 issue 没有解决</li>
+<li>缺点是error之后，没有办法让用户点击一下手动启动重新加载一次？？？？？？</li>
+<li>如果组件是在布局的最后才比较适合用“vue-lazyload组件模式”，不然切换生硬、重排比较多</li>
+<li>图片相对路径怎么用：
+<ul>
+<li>【解决办法之一】你可以将本地图片放在web-dev-server 管理的静态目录里,就可以访问了，比如 vue-cli 模板里的 dist/ (也就是所谓的publicPath)。这样的缺点是本地调试的时候可能会引用路径错误。</li>
+<li>还有 <a href="https://www.jianshu.com/p/d6f8bf71eb11" target="_blank" rel="noopener">container图片路径的使用规则又不一样</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="vue-lazyload的实现原理"><a class="header-anchor" href="#vue-lazyload的实现原理"></a>Vue-lazyload的实现原理</h2>
+<p>监听sroll等等事件，可以选择 2 种模式(mode)的其一：</p>
+<blockquote>
+<p>一个是先保存引用作为订阅，之后再批量触发查询；另一个是观察者模式</p>
+</blockquote>
+<ul>
+<li>event模式
+<ul>
+<li>给<strong>目标容器</strong>添加监听scroll等等事件</li>
+<li>遍历listenerQueue，每个linster的checkInView方法判断其可见性
+<ul>
+<li>原理：getBoundingClientRect(源码中的listener.checkInView函数用的就是它，判断是否已在preload位置)
+<ul>
+<li><a href="https://juejin.im/post/5c76843af265da2ddd4a6dd0" target="_blank" rel="noopener">getBoundingClientRect的注意事项</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>一个很典型的毛病就是频繁查询可能触发强制重排或者强制重绘</li>
+</ul>
+</li>
+<li>observer模式： observer模式主要是想提高性能
+<ul>
+<li>初始的重置工作：该&quot;模式&quot;下的函数给<strong>目标容器</strong>解除监听<strong>目标对象</strong>scroll等等事件绑定</li>
+<li>只针对和该api的“根元素”(默认就是视口viewport了)和<strong>目标对象</strong>做dom处理就够了
+<ul>
+<li>原理：Intersection Observer api (跟raq在event loop体系中触发的时机差不多)
+<ul>
+<li>(通过observerOptions提供的数据来判断是否已在preload位置，一般情况下不会设置root的指向，那么其默认值就是视口)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 ]]></content>
       
         <categories>
