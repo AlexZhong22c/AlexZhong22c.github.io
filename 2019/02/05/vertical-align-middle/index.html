@@ -82,12 +82,12 @@
 <meta name="keywords" content="进阶,vertical-align,居中">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vertical-align:middle近似居中和完美居中">
-<meta property="og:url" content="https://alexzhong22c.github.io/2019/02/05/vertical-align-middle/index.html">
+<meta property="og:url" content="https://blog.az22c.top/2019/02/05/vertical-align-middle/index.html">
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
 <meta property="og:description" content="很多人想要垂直居中的时候，第一时间就想到了vertical-align:middle，用完之后，疑惑它怎么会无效呢? ——原来vertical-align 是有适用范围的限制的。 因为水平垂直居中直接就包括了垂直居中，本文直接给出水平垂直居中的例子，并说明其中垂直居中的原理。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://cloud.az22c.top/x-height.png-az22cgithub">
-<meta property="og:updated_time" content="2020-08-25T13:52:25.209Z">
+<meta property="og:updated_time" content="2020-08-26T11:10:24.876Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vertical-align:middle近似居中和完美居中">
 <meta name="twitter:description" content="很多人想要垂直居中的时候，第一时间就想到了vertical-align:middle，用完之后，疑惑它怎么会无效呢? ——原来vertical-align 是有适用范围的限制的。 因为水平垂直居中直接就包括了垂直居中，本文直接给出水平垂直居中的例子，并说明其中垂直居中的原理。">
@@ -582,7 +582,7 @@
 <p>而实际上这仍不是完美的垂直居中。因为我们知道，通过设置<code>vertical-align: middle;</code>，图片的中线的位置被确定为<code>从行内基线往上1/2 x-height 的位置</code> 。</p>
 <blockquote>
 <p>(备注：在英文字体设计中，通常以小写字母&quot;x&quot;的高度作为其他小写字母高度的设计的基础。因此x-height被用于表示一款字体中的小写字母&quot;x&quot;的高度。)</p>
-<p>(备注：文字处于的位置高度和line-height之间关系的计算非常麻烦，详见我另一篇文章<a href="https://alexzhong22c.github.io/2019/02/06/height-calculate/">深入理解文字高度和行高的设置</a>。只需记住绝大多数情况下是：文字&quot;x&quot;的中心高度(即基线往上1/2 x-height处) 比line-height的中线高度要低。有些人称这种现象为&quot;字符下沉&quot;)</p>
+<p>(备注：文字处于的位置高度和line-height之间关系的计算非常麻烦，详见我另一篇文章<a href="https://blog.az22c.top/2019/02/06/height-calculate/">深入理解文字高度和行高的设置</a>。只需记住绝大多数情况下是：文字&quot;x&quot;的中心高度(即基线往上1/2 x-height处) 比line-height的中线高度要低。有些人称这种现象为&quot;字符下沉&quot;)</p>
 </blockquote>
 <p><img src="https://cloud.az22c.top/x-height.png-az22cgithub" alt="二分之一 x-height"></p>
 <p>也就是说，假如现在给img后面添加一个&quot;x&quot;作为文字，图片所处的高度不会变，图片的中线位置就穿过文字&quot;x&quot;的中心，这时，图片的中线的位置实际上是比容器行内的中线位置要低的。<strong>所以，此乃近似垂直居中。</strong></p>
@@ -612,7 +612,7 @@
   vertical-align: middle;
 }
 </code></pre>
-<p>如果读过<a href="https://alexzhong22c.github.io/2019/02/06/height-calculate/">深入理解文字高度和行高的设置</a> 这篇文章的原理分析，我们会发现，如果设置字号为0，基线、x-height线等等线都合为一体（因为它们之间的距离为0嘛）。所以1/2 x-height 的位置也变成在行内最中间的那里，图片就完美居中了。</p>
+<p>如果读过<a href="https://blog.az22c.top/2019/02/06/height-calculate/">深入理解文字高度和行高的设置</a> 这篇文章的原理分析，我们会发现，如果设置字号为0，基线、x-height线等等线都合为一体（因为它们之间的距离为0嘛）。所以1/2 x-height 的位置也变成在行内最中间的那里，图片就完美居中了。</p>
 <h3 id="完美居中-添加辅助元素"><a class="header-anchor" href="#完美居中-添加辅助元素"></a>完美居中–添加辅助元素</h3>
 <p>完美居中：在&quot;近似居中&quot;的基础上，添加一个辅助元素使得其变成完美居中：</p>
 <p>首先HTML结构中插入一个 i 元素；</p>
@@ -720,8 +720,8 @@ i {
 </code></pre>
 <h2 id="后记："><a class="header-anchor" href="#后记："></a>后记：</h2>
 <p>关于line-height的一些补充：</p>
-<p>首先<code>文字高度</code>和font-size只有间接的关系，详见 <a href="https://alexzhong22c.github.io/2019/02/06/height-calculate/#%E4%BB%8Efont-size%E8%AE%B2%E8%B5%B7-%E8%AF%B4%E6%96%87%E5%AD%97%E9%AB%98%E5%BA%A6%EF%BC%9A">深入理解文字高度和行高的设置</a> 中第一章的内容。</p>
-<p>然后，line-height的计算是根据font-size的，详见 <a href="https://alexzhong22c.github.io/2019/02/06/height-calculate/#line-height%E7%9A%84%E8%AE%A1%E7%AE%97-%E7%94%BB%E9%87%8D%E7%82%B9">深入理解文字高度和行高的设置</a> 。</p>
+<p>首先<code>文字高度</code>和font-size只有间接的关系，详见 <a href="https://blog.az22c.top/2019/02/06/height-calculate/#%E4%BB%8Efont-size%E8%AE%B2%E8%B5%B7-%E8%AF%B4%E6%96%87%E5%AD%97%E9%AB%98%E5%BA%A6%EF%BC%9A">深入理解文字高度和行高的设置</a> 中第一章的内容。</p>
+<p>然后，line-height的计算是根据font-size的，详见 <a href="https://blog.az22c.top/2019/02/06/height-calculate/#line-height%E7%9A%84%E8%AE%A1%E7%AE%97-%E7%94%BB%E9%87%8D%E7%82%B9">深入理解文字高度和行高的设置</a> 。</p>
 <p>然后，对于一个inline或者inline-block元素：</p>
 <p>设置vertical-align为百分比的时候，是根据父元素的line-height来计算的。（补充，这个设置值也是为数不多的可以设置为负数的属性设置。）</p>
 <p>设置vertical-align为其他值的时候，很多都和父元素的line-height有关系。</p>
@@ -736,10 +736,10 @@ i {
         <p><span>本文标题:</span><a href="/2019/02/05/vertical-align-middle/">vertical-align:middle近似居中和完美居中</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2019-02-05, 12:59:19</p>
-        <!-- <p><span>最后更新:</span>2020-08-25, 21:52:25</p> -->
+        <!-- <p><span>最后更新:</span>2020-08-26, 19:10:24</p> -->
         <p>
-            <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="vertical-align:middle近似居中和完美居中" href="/2019/02/05/vertical-align-middle/">https://alexzhong22c.github.io/2019/02/05/vertical-align-middle/</a>
-            <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://alexzhong22c.github.io/2019/02/05/vertical-align-middle/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="vertical-align:middle近似居中和完美居中" href="/2019/02/05/vertical-align-middle/">https://blog.az22c.top/2019/02/05/vertical-align-middle/</a>
+            <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://blog.az22c.top/2019/02/05/vertical-align-middle/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
         </p>
         <p style="color: #696969;">
             <span>许可协议:</span><i class="fa fa-creative-commons"></i><a id="copyright_license" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target = "_blank" class="hint  hint--bottom" data-hint="中国大陆 (CC BY-NC-SA 3.0 CN)">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
