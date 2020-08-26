@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://alexzhong22c.github.io/2018/02/04/performance-optimized-summary/</loc>
+    
+    <lastmod>2020-08-26T03:03:58.305Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://alexzhong22c.github.io/2020/04/02/vue-lazyload-summary/</loc>
+    
+    <lastmod>2020-08-25T17:51:40.062Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://alexzhong22c.github.io/2017/02/24/webapp-intro/</loc>
     
     <lastmod>2020-08-25T17:03:02.529Z</lastmod>
@@ -51,23 +65,9 @@
   </url>
   
   <url>
-    <loc>https://alexzhong22c.github.io/2020/04/02/vue-lazyload-summary/</loc>
-    
-    <lastmod>2020-08-25T13:52:25.210Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://alexzhong22c.github.io/2019/02/05/vertical-align-middle/</loc>
     
     <lastmod>2020-08-25T13:52:25.209Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://alexzhong22c.github.io/2018/02/04/performance-optimized-summary/</loc>
-    
-    <lastmod>2020-08-25T13:52:25.208Z</lastmod>
     
   </url>
   

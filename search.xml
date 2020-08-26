@@ -512,7 +512,7 @@ for (var i = 0; i &lt; 10; i++) {
 </ul>
 </li>
 </ul>
-<h2 id="vue-lazyload的实现原理"><a class="header-anchor" href="#vue-lazyload的实现原理"></a>Vue-lazyload的实现原理</h2>
+<h2 id="vue-lazyload-的实现原理"><a class="header-anchor" href="#vue-lazyload-的实现原理"></a>Vue-lazyload 的实现原理</h2>
 <p>监听sroll等等事件，可以选择 2 种模式(mode)的其一：</p>
 <blockquote>
 <p>一个是先保存引用作为订阅，之后再批量触发查询；另一个是观察者模式</p>
@@ -1473,8 +1473,10 @@ MMM.prototype.map = function(func) {
 <li>图片格式和压缩
 <ul>
 <li>雪碧图(更新起来麻烦，以前才流行)：减少http请求次数。webpack-spritesmith</li>
+<li>picture标签和srcset</li>
 <li>(图片格式选择：)
 <ul>
+<li>CSS代替图片(减少dom)：image-background和border-image等</li>
 <li>色彩丰富的小图用png（支持透明）</li>
 <li>大图(背景图、轮播图)要用jpg：体积小，不支持透明</li>
 <li>webp 但兼容性不是那么好，需要调研一下
@@ -1483,6 +1485,7 @@ MMM.prototype.map = function(func) {
 </ul>
 </li>
 <li>svg：矢量图体积小，因为是标签需额外的计算，只不过不用网络请求：比如icon-font</li>
+<li>base64：在webpack打包的时候file-loader自动把小图转成base64</li>
 </ul>
 </li>
 </ul>
