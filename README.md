@@ -12,6 +12,8 @@
   - <p>因为前人总结得实在是太齐全了！这里只是做到基本列举齐全，然后做一些小小的补充。</p>
 - [01-跨域和跨站的基本概念](https://blog.az22c.top/2020/05/22/cross-origin-cross-site/)&nbsp;&nbsp;|&nbsp;&nbsp;2020-05-22&nbsp;&nbsp;|&nbsp;&nbsp;标签：[跨域](https://blog.az22c.top/tags/跨域/) [跨站](https://blog.az22c.top/tags/跨站/) [Cookie](https://blog.az22c.top/tags/Cookie/) [面试题](https://blog.az22c.top/tags/面试题/) [笔记副本](https://blog.az22c.top/tags/笔记副本/)
   - <p>介绍一下跨域和跨站的基本概念、以及简要解释第三方cookie的原理。</p>
+- [网页一帧有多长 是如何判定的](https://blog.az22c.top/2020/04/03/how-long-a-frame-is/)&nbsp;&nbsp;|&nbsp;&nbsp;2020-04-03&nbsp;&nbsp;|&nbsp;&nbsp;标签：[回顾](https://blog.az22c.top/tags/回顾/) [帧](https://blog.az22c.top/tags/帧/) [笔记副本](https://blog.az22c.top/tags/笔记副本/) [进阶](https://blog.az22c.top/tags/进阶/)
+  - <p>摘要：垂直同步信号是什么？有啥用？网页会掉帧是什么原因？16ms的特殊意义？网页一帧有多长是怎么判定的？</p>
 - [Web前端性能优化概述](https://blog.az22c.top/2018/02/04/performance-optimized-summary/)&nbsp;&nbsp;|&nbsp;&nbsp;2018-02-04&nbsp;&nbsp;|&nbsp;&nbsp;标签：[面试题](https://blog.az22c.top/tags/面试题/) [笔记副本](https://blog.az22c.top/tags/笔记副本/) [回顾](https://blog.az22c.top/tags/回顾/) [性能优化](https://blog.az22c.top/tags/性能优化/)
   - <p>此文用于快速回顾，不适合用来入门。如果想做一个系统性的归纳总结、以便查询，可以参考以下概述。</p>
 - [浏览器事件冒泡或者捕获相关](https://blog.az22c.top/2017/07/02/js-event4/)&nbsp;&nbsp;|&nbsp;&nbsp;2017-07-02&nbsp;&nbsp;|&nbsp;&nbsp;标签：[笔记副本](https://blog.az22c.top/tags/笔记副本/) [回顾](https://blog.az22c.top/tags/回顾/) [基础](https://blog.az22c.top/tags/基础/) [事件](https://blog.az22c.top/tags/事件/)
