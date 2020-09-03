@@ -78,18 +78,18 @@
 
 
 
-<meta name="description" content="对应代码的github仓库的地址：https://github.com/AlexZhong22c/IFE-CSS-learning">
-<meta name="keywords" content="IFE,圣杯布局,双飞翼布局">
+<meta name="description" content="摘要：垂直同步信号是什么？有啥用？网页会掉帧是什么原因？16ms的特殊意义？网页一帧有多长是怎么判定的？">
+<meta name="keywords" content="笔记副本,回顾,进阶,帧">
 <meta property="og:type" content="article">
-<meta property="og:title" content="三栏式布局--IFE2017-CSS-task03笔记">
-<meta property="og:url" content="https://blog.az22c.top/2017/09/17/ife-css-task03/index.html">
+<meta property="og:title" content="网页一帧有多长 是如何判定的">
+<meta property="og:url" content="https://blog.az22c.top/2020/04/03/how-long-a-frame-is/index.html">
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
-<meta property="og:description" content="对应代码的github仓库的地址：https://github.com/AlexZhong22c/IFE-CSS-learning">
+<meta property="og:description" content="摘要：垂直同步信号是什么？有啥用？网页会掉帧是什么原因？16ms的特殊意义？网页一帧有多长是怎么判定的？">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-08-26T14:00:24.036Z">
+<meta property="og:updated_time" content="2020-09-03T10:28:59.762Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="三栏式布局--IFE2017-CSS-task03笔记">
-<meta name="twitter:description" content="对应代码的github仓库的地址：https://github.com/AlexZhong22c/IFE-CSS-learning">
+<meta name="twitter:title" content="网页一帧有多长 是如何判定的">
+<meta name="twitter:description" content="摘要：垂直同步信号是什么？有啥用？网页会掉帧是什么原因？16ms的特殊意义？网页一帧有多长是怎么判定的？">
 
 
     <link rel="alternate" href="/atom.xml" title="Web前端 | Alex Zhong" type="application/atom+xml" data-no-instant>
@@ -123,7 +123,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>三栏式布局--IFE2017-CSS-task03笔记 | Web前端 | Alex Zhong</title>
+<title>网页一帧有多长 是如何判定的 | Web前端 | Alex Zhong</title>
 
 
 
@@ -493,11 +493,11 @@
     <link class="menu-list" tags="标签" friends="友情链接" about="个人签名"/>
 </nav>
 
-      <div class="body-wrap"><article id="post-ife-css-task03" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-how-long-a-frame-is" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/09/17/ife-css-task03/" class="article-date">
-      <time datetime="2017-09-17T12:12:25.000Z" itemprop="datePublished">2017-09-17</time>
+      <a href="/2020/04/03/how-long-a-frame-is/" class="article-date">
+      <time datetime="2020-04-03T12:31:40.000Z" itemprop="datePublished">2020-04-03</time>
 </a>
 
 
@@ -505,7 +505,7 @@
 
 	<br />
 	<p style="height:7px;"/>
-	<p style="height:20px;font-family:KaiTi,LiSu,'宋体',sans-serif;color:#DBDBDB;font-size:12px;">预计阅读4分钟</p>
+	<p style="height:20px;font-family:KaiTi,LiSu,'宋体',sans-serif;color:#DBDBDB;font-size:12px;">预计阅读5分钟</p>
 
     </div>
   
@@ -516,7 +516,7 @@
         
   
     <h1 class="article-title-big" itemprop="name">
-      三栏式布局--IFE2017-CSS-task03笔记
+      网页一帧有多长 是如何判定的
     </h1>
   
 
@@ -525,13 +525,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/CSS/">CSS</a>
+    <a class="article-category-link" href="/categories/浏览器/">浏览器</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IFE/">IFE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/双飞翼布局/">双飞翼布局</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/圣杯布局/">圣杯布局</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/回顾/">回顾</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/帧/">帧</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/笔记副本/">笔记副本</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/进阶/">进阶</a></li></ul>
     </div>
 
 
@@ -541,125 +541,79 @@
     
           <div id="article-content" class="article-entry" itemprop="articleBody">
 			  
-			<p>对应代码的github仓库的地址：<a href="https://github.com/AlexZhong22c/IFE-CSS-learning" target="_blank" rel="noopener">https://github.com/AlexZhong22c/IFE-CSS-learning</a></p>
+			<p>摘要：垂直同步信号是什么？有啥用？网页会掉帧是什么原因？16ms的特殊意义？网页一帧有多长是怎么判定的？</p>
 <a id="more"></a>
+<h2 id="什么是垂直同步信号："><a class="header-anchor" href="#什么是垂直同步信号："></a>什么是垂直同步信号：</h2>
+<p>我们知道，屏幕是由成千上万个像素点组成的大矩阵，而这个矩阵以极快的速度“从左往右，从上往下”刷新“扫描”每个像素点的值。而人眼感觉不到这种超快的“闪烁”，比如电脑刷新屏幕的物理频率大概是60Hz。当屏幕扫描完一横排像素就会产生“水平同步信号”，当屏幕扫描完所有横排即一屏的像素，就会产生“垂直同步信号”。<strong>也就是“垂直同步信号”反映的是屏幕刷新的频率。</strong></p>
+<p>(我们知道“帧”不仅仅可以描述反映屏幕刷新的频率，也可以描述反映网页动画变化的频率，描述的对象如有省略，由文章的上下文来判断，这里先提前说明一下。)</p>
+<h2 id="垂直同步信号的意义："><a class="header-anchor" href="#垂直同步信号的意义："></a>垂直同步信号的意义：</h2>
 <blockquote>
-<p>task03任务要求：</p>
-<ul>
-<li>调节浏览器宽度，固定宽度和自适应宽度的效果始终符合预期。</li>
-<li>改变中间一栏的内容长度，以确保在中间一栏较高和右边一栏较高时，父元素的高度始终为子元素中最高的高度。</li>
-</ul>
-<p>这个任务中，懒于去上网找图片素材，直接引用了别人复仇者联盟的图片素材。</p>
+<p>垂直同步信号：如果GPU渲染频率比屏幕刷新频率高的话，会有两帧画面在一起出现。所以利用垂直同步信号压制GPU渲染的频率，以免浪费性能。因此如果有些游戏要求频率高，又开启了垂直同步，但是屏幕硬件的刷新频率低拖慢了被压制的GPU渲染频率，也会有掉帧的现象。(GPU渲染频率慢就会有掉帧的效果。) <a href="https://www.infoq.cn/article/javascript-high-performance-animation-and-page-rendering/" target="_blank" rel="noopener">via</a></p>
 </blockquote>
-<p>我们先总览本文内各种实现的思路：</p>
-<ol>
-<li>按照普通顺序编写HTML系
-<ol>
-<li>运用margin</li>
-<li>用BFC</li>
-</ol>
+<p>我们知道玩电子游戏通常可以选择“是否垂直同步信号”，它的意思是是否等该帧显示完再显示下一帧，这个选项需要我们发挥一点推理能力来理解。这里直接给出结论：</p>
+<ul>
+<li>如果关闭“垂直同步信号”的问题：浪费GPU性能+两帧画面一起出现</li>
+<li>如果打开“垂直同步信号”以压制GPU频率：如果(机器的)屏幕刷新频率太慢，会导致掉帧。</li>
+</ul>
+<p>而如果把网页页面渲染比作游戏，其实就是开启了“垂直同步信号”的这种情况，即网页要靠“垂直同步信号”压制压低GPU频率，网页渲染也就天生地具备“掉帧”的风险。</p>
+<h2 id="网页16ms界限的意义："><a class="header-anchor" href="#网页16ms界限的意义："></a>网页16ms界限的意义：</h2>
+<p>16ms也就是60Hz的时间间隔。因为网页渲染的机制引用了“垂直同步信号”压制压低GPU频率，所以可 <strong>从屏幕刷新的理念中沿用，</strong> 并确立一个16ms界限。</p>
+<p>假设网页渲染的每帧比16ms短是没有意义的(也就是浪费CPU性能并且超出屏幕当前的能力)。但是网页渲染每帧可以比16ms长。</p>
+<p><strong>屏幕刷新频率 vs 人眼的接收频率：</strong> 人眼每秒刷新20次，也就是以20Hz来接收光信号。但是机器一般要每秒刷新更多的次数，才能使得动画流畅。但是假设快如每秒60次，再往上，更快(对于一般的场景要求)已经察觉不到差别了。</p>
+<p>在这里，我先把 <strong>结论</strong> 上了：(后文再解释浏览器具体是怎么利用“垂直同步信号”压制压低GPU频率，也就是网页刷新是怎么实现的)</p>
+<p>对于网页上的多数情况：</p>
+<ul>
+<li>网页帧的频率(小于并且逼近60Hz)  ===  UI input回调(scoll resize mouseover等)触发的频率  ===  raq的触发频率
+<ul>
+<li>(requestAnimationFrame只知道这已是网页新的一帧，但是它不知道一帧需要多长的时间(也就是有可能一帧比16ms长)。)</li>
+</ul>
 </li>
-<li>先加载main栏的HTML系 <strong>（重点）</strong>
-<ol>
-<li>双飞翼布局</li>
-<li>圣杯布局</li>
-</ol>
+<li>CPU的潜力  &gt;  屏幕刷新频率(60Hz)  &gt;=  网页帧的频率(小于并且逼近60Hz)  &gt;  用户click操作频率</li>
+<li>event loop的频率  通常&gt;  屏幕刷新频率(60Hz)  &gt;=  网页帧的频率(小于并且逼近60Hz)  &gt;  用户click操作频率
+<ul>
+<li>在防抖节流的章节，我们通常设置80ms作为间隔，也就是12Hz的样子，当然防抖节流具体得看场景。</li>
+</ul>
 </li>
-</ol>
-<h2 id="按普通顺序编写html系"><a class="header-anchor" href="#按普通顺序编写html系"></a>按普通顺序编写HTML系</h2>
-<p>一般来说我们 <strong>按照普通顺序编写HTML</strong> ：此时先写子栏的代码，再写main栏的代码。</p>
-<p>此时，如果想要形成三栏的布局，思路可再细分为二：</p>
-<h3 id="要么运用margin形成三栏的布局"><a class="header-anchor" href="#要么运用margin形成三栏的布局"></a>要么运用margin形成三栏的布局</h3>
-<p><a href="https://ife-css-learning.az22c.vercel.app/task03%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/%E6%8C%89%E6%99%AE%E9%80%9A%E9%A1%BA%E5%BA%8F%E7%BC%96%E5%86%99/1%E6%99%AE%E9%80%9A%E6%96%B9%E6%B3%95-%E7%94%A8margin%E5%88%86%E5%BC%80.html" target="_blank" rel="noopener">demo</a></p>
-<h3 id="要么用bfc形成三栏的布局"><a class="header-anchor" href="#要么用bfc形成三栏的布局"></a>要么用BFC形成三栏的布局</h3>
-<p><a href="https://ife-css-learning.az22c.vercel.app/task03%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/%E6%8C%89%E6%99%AE%E9%80%9A%E9%A1%BA%E5%BA%8F%E7%BC%96%E5%86%99/2%E4%BD%BF%E7%94%A8BFC%E6%96%B9%E6%B3%95.html" target="_blank" rel="noopener">demo</a> –  <a href="https://github.com/AlexZhong22c/IFE-CSS-learning/blob/master/task03%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/%E6%8C%89%E6%99%AE%E9%80%9A%E9%A1%BA%E5%BA%8F%E7%BC%96%E5%86%99/2%E4%BD%BF%E7%94%A8BFC%E6%96%B9%E6%B3%95.html" target="_blank" rel="noopener">源码</a></p>
+</ul>
+<h2 id="详细解释推导网页的-帧有多长时间-是怎么判定和实现的："><a class="header-anchor" href="#详细解释推导网页的-帧有多长时间-是怎么判定和实现的："></a>详细解释推导网页的“帧有多长时间”是怎么判定和实现的：</h2>
+<ul>
+<li>开始执行新的关键渲染路径task的条件
+<ul>
+<li>在每一个event loop末尾检查【1】是否需要更新页面【2】垂直同步信号是否到达</li>
+</ul>
+</li>
+<li>在关键渲染路径最后的“由调度线程把计算出来的渲染数据提交给CPU完成渲染”这一步骤，标志着一帧的结束，也是新的一帧的开始。<strong>一帧有多长就是这样决定的</strong>。</li>
+<li>(补充说明：一个task，即便是负责执行关键渲染路径的task，其执行时长跨度可以远低于16ms，也可以远多于16ms)</li>
+<li>(补充说明：很多文章声称“垂直同步信号决定了网页一帧的开始”，这个观点是错误的，我就被该观点坑了很久)</li>
+</ul>
 <blockquote>
-<p>注：这两个demo中的<code>clearfix</code>类是用来闭合浮动的。以满足“父元素的高度始终为子元素中最高的高度”这个要求。</p>
-<p>下文的各种方法也是需要闭合浮动的，为了方便演示我省略不写。</p>
+<p>在那些特殊情况比如主线程就写了一个sleep多少秒函数的情况下，去讨论页面一帧能持续多久没有意义，变数太大了。</p>
+<p>要讨论就讨论当你使用raq想做一个流畅动画时，页面的一帧能持续多久。</p>
 </blockquote>
-<h2 id="先加载main栏的html系"><a class="header-anchor" href="#先加载main栏的html系"></a>先加载main栏的HTML系</h2>
-<p>我们希望页面中间的main栏的内容最先被浏览器加载呈现，这样页面就更加主次合理，所以前端圈里面出现了这么种思路。</p>
-<p><strong>原理：</strong></p>
+<p>可见，若想要推算出网页的“一帧有多长”， <strong>是非常不直观的。</strong> 另可由以上条件可以尝试推演出各不同情况下“一帧有多长”的结果。</p>
+<p>如果程序员需要利用requestAnimationFrame来实现动画，通常需要尽力简化每个event loop的任务队列并且压缩每个task的时长。</p>
+<p>由经验可以总结出来，<strong>“一帧的时间”通常会大于并且尽量逼近16ms</strong>。因为频率是时间的倒数，所以得出从频率角度看的结论：<strong>“一帧的频率”通常小于并且逼近60Hz</strong>。</p>
 <ul>
-<li>定义main-content宽度为100%（如果在IE6里不定义100%，会有点小问题，亲们自己可以一试）</li>
-<li>main 左浮动，宽度为100%</li>
-<li>sub 左浮动，宽度190，左外边距为-100%（此处是关键：浮动情况下，负的外边距会导致DIV上移，而使用-100%可以确使它移动到最左侧。)</li>
-<li>extra 左浮动，宽度230，左外边距为-230px（道理同上，注意的是，负的左外边距值一定要大于或等于该DIV的宽度，才能靠到上一行去）</li>
-</ul>
-<p>当只使用负左外边距的方法时，能够实现<strong>先加载main栏</strong>，但是main栏的内容会被挡住：</p>
-<p><a href="https://ife-css-learning.az22c.vercel.app/task03%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/%E5%85%88%E5%8A%A0%E8%BD%BDmain%E6%A0%8F/1main%E7%9A%84%E5%86%85%E5%AE%B9%E8%A2%AB%E6%8C%A1%E4%BD%8F.html" target="_blank" rel="noopener">demo</a> –  <a href="https://github.com/AlexZhong22c/IFE-CSS-learning/blob/master/task03%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/%E5%85%88%E5%8A%A0%E8%BD%BDmain%E6%A0%8F/1main%E7%9A%84%E5%86%85%E5%AE%B9%E8%A2%AB%E6%8C%A1%E4%BD%8F.html" target="_blank" rel="noopener">源码</a></p>
-<blockquote>
-<p>因此，解决 main栏的内容被挡住 的思路可再细分为二：</p>
-<p>1.<strong>双飞翼布局</strong></p>
-<p>2. <strong>圣杯布局</strong></p>
-<p>而在本文的最后，会介绍其他的方式来实现 三栏等高的 先加载main栏的 三栏式布局。</p>
-</blockquote>
-<h3 id="双飞翼布局"><a class="header-anchor" href="#双飞翼布局"></a>双飞翼布局</h3>
-<p>淘宝的双飞翼布局：在原来的基础上多套了一层div，并且增设margin。<a href="https://ife-css-learning.az22c.vercel.app/task03%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/%E5%85%88%E5%8A%A0%E8%BD%BDmain%E6%A0%8F/2-1%E5%8F%8C%E9%A3%9E%E7%BF%BC%E5%B8%83%E5%B1%80.html" target="_blank" rel="noopener">2-1淘宝双飞翼布局demo</a> –  <a href="https://github.com/AlexZhong22c/IFE-CSS-learning/blob/master/task03%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/%E5%85%88%E5%8A%A0%E8%BD%BDmain%E6%A0%8F/2-1%E5%8F%8C%E9%A3%9E%E7%BF%BC%E5%B8%83%E5%B1%80.html" target="_blank" rel="noopener">源码</a></p>
-<h4 id="好处："><a class="header-anchor" href="#好处："></a>好处：</h4>
+<li>补充chome devtool控制台performance timeline的相关事实：
 <ul>
-<li>可以实现主要的内容先加载的优化</li>
-<li>兼容目前所有的主流浏览器，包括IE6在内</li>
+<li>实灰线是等时间间隔线。但是这个“等时间间隔”随着你的缩放也会拉长或者缩短，这是一个不直观的隐藏规律</li>
+<li>粗虚线就是网页的帧之间的分割线</li>
 </ul>
-<h4 id="缺点："><a class="header-anchor" href="#缺点："></a>缺点：</h4>
-<ul>
-<li>位置不灵活，同时css对位置的控制很强</li>
+</li>
 </ul>
-<h3 id="圣杯布局"><a class="header-anchor" href="#圣杯布局"></a>圣杯布局</h3>
-<p>圣杯布局的特点是它使用了padding和相对定位，当然它也使用了负左外边距。<a href="https://ife-css-learning.az22c.vercel.app/task03%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/%E5%85%88%E5%8A%A0%E8%BD%BDmain%E6%A0%8F/2-2%E5%9C%A3%E6%9D%AF%E5%B8%83%E5%B1%80.html" target="_blank" rel="noopener">2-2圣杯布局demo</a> –  <a href="https://github.com/AlexZhong22c/IFE-CSS-learning/blob/master/task03%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/%E5%85%88%E5%8A%A0%E8%BD%BDmain%E6%A0%8F/2-2%E5%9C%A3%E6%9D%AF%E5%B8%83%E5%B1%80.html" target="_blank" rel="noopener">源码</a></p>
-<h4 id="好处：-v2"><a class="header-anchor" href="#好处：-v2"></a>好处：</h4>
-<ul>
-<li>可以实现主要的内容先加载的优化</li>
-<li>位置比较灵活：毕竟它是用 相对定位 实现的</li>
-<li>main部分是自适应宽度的，很容易在定宽布局和流体布局中切换。</li>
-<li>任何一栏都可以是最高栏，不会出问题。</li>
-<li>只需要针对ie6来hack：<code>zoom:1</code> ，兼容目前所有的主流浏览器，包括IE5.5</li>
-</ul>
-<h4 id="缺点：-v2"><a class="header-anchor" href="#缺点：-v2"></a>缺点：</h4>
-<ul>
-<li>当浏览器宽度过窄时，子栏可能会消失，extra栏的内容可能会跑到主栏里面。</li>
-</ul>
-<p><a href="https://ife-css-learning.az22c.vercel.app/task03%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/%E5%85%88%E5%8A%A0%E8%BD%BDmain%E6%A0%8F/2-2-X%E8%AF%81%E6%98%8E%E5%9C%A3%E6%9D%AF%E5%B8%83%E5%B1%80%E5%86%85%E9%83%A8%E7%81%B5%E6%B4%BB.html" target="_blank" rel="noopener">证明圣杯布局内部灵活的demo</a> – <a href="https://github.com/AlexZhong22c/IFE-CSS-learning/blob/master/task03%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/%E5%85%88%E5%8A%A0%E8%BD%BDmain%E6%A0%8F/2-2-X%E8%AF%81%E6%98%8E%E5%9C%A3%E6%9D%AF%E5%B8%83%E5%B1%80%E5%86%85%E9%83%A8%E7%81%B5%E6%B4%BB.html" target="_blank" rel="noopener">证明圣杯布局内部灵活的源码</a></p>
-<h2 id="实现三栏等高的其他方法"><a class="header-anchor" href="#实现三栏等高的其他方法"></a>// 实现三栏等高的其他方法</h2>
-<h3 id="用左右border作为两栏背景色-background-clip"><a class="header-anchor" href="#用左右border作为两栏背景色-background-clip"></a>用左右border作为两栏背景色+background-clip</h3>
-<p>.main元素的左右border区域作为两侧栏所在区域背景，实现伪等高效果；设置.main的padding实现栏间间隔。</p>
-<p>可设置main的background色，然后用<code>background-clip: content-box;</code>控制背景范围。</p>
-<pre><code>.main {
-    box-sizing: border-box;
-    width: 100%;
-    border-left: 190px solid #faa;/*作为左栏背景色*/
-    border-right: 230px solid #aaf;/*作为右栏背景色*/
-    padding: 0 10px;
-    height: 400px; /*某一高度*/
-
-	/*main栏背景：*/
-    background: #afa;
-    background-clip: content-box;
-}
-</code></pre>
-<p>两侧栏元素再通过负margin调整到.main元素的border区域上。</p>
-<p>缺点: 兼容性不好，用到了CSS3的属性，应该至少要ie9</p>
-<h3 id="绝对定位"><a class="header-anchor" href="#绝对定位"></a>绝对定位</h3>
-<p>设置子元素的top:0;bottom:0;使得所有子元素的高度都和父元素的高度相同，实现等高效果</p>
-<h3 id="flex布局"><a class="header-anchor" href="#flex布局"></a>flex布局</h3>
-<p>flex中的伸缩项目默认都拉伸为父元素的高度，可实现等高效果。通过改变伸缩项目的order，可以实现元素顺序调换的效果</p>
-<p>缺点: 兼容性不好</p>
-<hr>
-<p>参考：</p>
-<p><a href="https://zhuanlan.zhihu.com/p/25070186?refer=learncoding" target="_blank" rel="noopener">详解 CSS 七种三栏布局技巧</a></p>
 
 		</div>
       
   
      <!-- 版权署名授权 -->
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/09/17/ife-css-task03/">三栏式布局--IFE2017-CSS-task03笔记</a></p>
+        <p><span>本文标题:</span><a href="/2020/04/03/how-long-a-frame-is/">网页一帧有多长 是如何判定的</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
-        <p style="color: #696969;"><span>发布时间:</span>2017-09-17, 20:12:25</p>
-        <!-- <p><span>最后更新:</span>2020-08-26, 22:00:24</p> -->
+        <p style="color: #696969;"><span>发布时间:</span>2020-04-03, 20:31:40</p>
+        <!-- <p><span>最后更新:</span>2020-09-03, 18:28:59</p> -->
         <p>
-            <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="三栏式布局--IFE2017-CSS-task03笔记" href="/2017/09/17/ife-css-task03/">https://blog.az22c.top/2017/09/17/ife-css-task03/</a>
-            <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://blog.az22c.top/2017/09/17/ife-css-task03/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="网页一帧有多长 是如何判定的" href="/2020/04/03/how-long-a-frame-is/">https://blog.az22c.top/2020/04/03/how-long-a-frame-is/</a>
+            <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://blog.az22c.top/2020/04/03/how-long-a-frame-is/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
         </p>
         <p style="color: #696969;">
             <span>许可协议:</span><i class="fa fa-creative-commons"></i><a id="copyright_license" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target = "_blank" class="hint  hint--bottom" data-hint="中国大陆 (CC BY-NC-SA 3.0 CN)">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
@@ -671,15 +625,15 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2017/10/12/git-stage/">
-                    git暂存区知识梳理
+                <a href="/2020/05/22/cross-origin-cross-site/">
+                    01-跨域和跨站的基本概念
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2017/09/07/css-border1/">
-                    border-radius属性
+                <a href="/2020/04/02/settimeout-0-to-9/">
+                    面试题：改造代码，使之隔秒输出0 - 9
                 </a>
             </div>
         
@@ -692,7 +646,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#按普通顺序编写html系"><span class="toc-text">按普通顺序编写HTML系</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#要么运用margin形成三栏的布局"><span class="toc-text">要么运用margin形成三栏的布局</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#要么用bfc形成三栏的布局"><span class="toc-text">要么用BFC形成三栏的布局</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#先加载main栏的html系"><span class="toc-text">先加载main栏的HTML系</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#双飞翼布局"><span class="toc-text">双飞翼布局</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#好处："><span class="toc-text">好处：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#缺点："><span class="toc-text">缺点：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#圣杯布局"><span class="toc-text">圣杯布局</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#好处：-v2"><span class="toc-text">好处：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#缺点：-v2"><span class="toc-text">缺点：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现三栏等高的其他方法"><span class="toc-text">// 实现三栏等高的其他方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#用左右border作为两栏背景色-background-clip"><span class="toc-text">用左右border作为两栏背景色+background-clip</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#绝对定位"><span class="toc-text">绝对定位</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flex布局"><span class="toc-text">flex布局</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是垂直同步信号："><span class="toc-text">什么是垂直同步信号：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#垂直同步信号的意义："><span class="toc-text">垂直同步信号的意义：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网页16ms界限的意义："><span class="toc-text">网页16ms界限的意义：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#详细解释推导网页的-帧有多长时间-是怎么判定和实现的："><span class="toc-text">详细解释推导网页的“帧有多长时间”是怎么判定和实现的：</span></a></li></ol>
         
     </div>
     <style>
@@ -700,8 +654,8 @@
         .left-col .switch-area {
             display: none;
         }
-        .toc-level-3 i,
-        .toc-level-3 ol {
+        .toc-level-2 i,
+        .toc-level-2 ol {
             display: none !important;
         }
     </style>
@@ -722,7 +676,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/10/12/git-stage/" title="上一篇: git暂存区知识梳理">
+            <a href="/2020/05/22/cross-origin-cross-site/" title="上一篇: 01-跨域和跨站的基本概念">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -730,7 +684,7 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2017/09/07/css-border1/" title="下一篇: border-radius属性">
+            <a href="/2020/04/02/settimeout-0-to-9/" title="下一篇: 面试题：改造代码，使之隔秒输出0 - 9">
                 <i class="fa fa-angle-right"></i>
             </a>
         
@@ -759,7 +713,7 @@
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					
-						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,210</span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,564</span>
 					
 				</div>
             </div>
