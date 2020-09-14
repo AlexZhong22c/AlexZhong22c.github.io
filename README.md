@@ -66,7 +66,7 @@
 - [对象属性之对象状态](https://blog.az22c.top/2017/09/01/js-obj-prop3/)&nbsp;&nbsp;|&nbsp;&nbsp;2017-09-01&nbsp;&nbsp;|&nbsp;&nbsp;标签：[回顾](https://blog.az22c.top/tags/回顾/) [对象属性](https://blog.az22c.top/tags/对象属性/)
   - <p>我们知道，属性描述符只能用来控制对象中一个属性的状态。而如果要控制对象的状态，就要用到下面的6种方法：</p>
 - [es5实现继承的6种方式](https://blog.az22c.top/2017/08/12/js-inherit/)&nbsp;&nbsp;|&nbsp;&nbsp;2017-08-12&nbsp;&nbsp;|&nbsp;&nbsp;标签：[面向对象](https://blog.az22c.top/tags/面向对象/) [原型系统](https://blog.az22c.top/tags/原型系统/) [原理](https://blog.az22c.top/tags/原理/)
-  - <p>对关于继承的内容做一番整理。</p>
+  - <p>对关于继承的内容做一番整理。是早期编写的文章，直接看到最后的结论即可。后面可以优化一下行文的思路。</p>
 - [new创建对象的过程发生了什么](https://blog.az22c.top/2017/08/12/js-new-happen/)&nbsp;&nbsp;|&nbsp;&nbsp;2017-08-12&nbsp;&nbsp;|&nbsp;&nbsp;标签：[基础](https://blog.az22c.top/tags/基础/) [面向对象](https://blog.az22c.top/tags/面向对象/) [原型系统](https://blog.az22c.top/tags/原型系统/)
   - <p>用面向对象语言们通用的观点来看：new 是用来实例化一个类，从而在内存中分配一个实例对象。</p>
 - [原型对象 实战使用](https://blog.az22c.top/2017/08/09/js-prototype-practice/)&nbsp;&nbsp;|&nbsp;&nbsp;2017-08-09&nbsp;&nbsp;|&nbsp;&nbsp;标签：[面向对象](https://blog.az22c.top/tags/面向对象/) [原型系统](https://blog.az22c.top/tags/原型系统/) [进阶](https://blog.az22c.top/tags/进阶/)
