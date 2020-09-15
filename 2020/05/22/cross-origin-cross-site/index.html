@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
 <meta property="og:description" content="介绍一下跨域和跨站的基本概念、以及简要解释第三方cookie的原理。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-08-25T13:52:25.194Z">
+<meta property="og:updated_time" content="2020-09-07T08:34:00.510Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="01-跨域和跨站的基本概念">
 <meta name="twitter:description" content="介绍一下跨域和跨站的基本概念、以及简要解释第三方cookie的原理。">
@@ -505,7 +505,7 @@
 
 	<br />
 	<p style="height:7px;"/>
-	<p style="height:20px;font-family:KaiTi,LiSu,'宋体',sans-serif;color:#DBDBDB;font-size:12px;">预计阅读2分钟</p>
+	<p style="height:20px;font-family:KaiTi,LiSu,'宋体',sans-serif;color:#DBDBDB;font-size:12px;">预计阅读5分钟</p>
 
     </div>
   
@@ -546,19 +546,76 @@
 <h2 id="一级域名-二级域名-三级域名"><a class="header-anchor" href="#一级域名-二级域名-三级域名"></a>一级域名 二级域名  三级域名</h2>
 <p>一般来说就是比如<code>www.baidu.com</code>： <code>.com</code>是一级域名； <code>baidu</code>是二级域名； <code>www</code>是三级域名。其后同理。</p>
 <h2 id="跨域和跨站的区别"><a class="header-anchor" href="#跨域和跨站的区别"></a>跨域和跨站的区别</h2>
-<p>首先要理解的一点就是跨站和跨域是不同的。同站(same-site)/跨站(cross-site)」和第一方(first-party)/第三方(third-party)是等价的。但是与浏览器同源策略（SOP）中的「同源(same-origin)/跨域(cross-origin)」是完全不同的概念。</p>
+<ul>
+<li>首先要理解的一点就是跨站和跨域是不同的。
+<ul>
+<li>同站(same-site)/跨站(cross-site)」和第一方(first-party)/第三方(third-party)是等价的。</li>
+<li>但是与浏览器同源策略（SOP）中的「同源(same-origin)/跨域(cross-origin)」是完全不同的概念。</li>
+</ul>
+</li>
+</ul>
 <p>同源策略的同源，是指两个 URL 的“协议+主机名+端口”3者都一致。例如，<code>https://www.taobao.com/pages/...</code>，它的协议是 https，主机名是<code>www.taobao.com</code>，端口是 443，另一个url的这3者与之都一致才能叫“同源”。</p>
 <p>同源策略作为浏览器的安全基石，其“同源”判断是比较严格的，而相对而言，Cookie中的“同站”判断就比较宽松：只要两个 URL 的 eTLD+1 相同即可，不需要考虑协议和端口。其中，eTLD 表示<strong>有效顶级域名</strong>，注册于 Mozilla 维护的公共后缀列表（Public Suffix List）中，例如，.com、.co、.uk、.github.io 等。而 eTLD+1 则表示，有效顶级域名+二级域名，例如taobao.com等。</p>
 <p>举几个例子，www.taobao.com和www.baidu.com是跨站，www.a.taobao.com和www.b.taobao.com是同站，a.github.io和b.github.io是跨站(<strong>注意是跨站</strong>)。</p>
-<h2 id="cookie跨站-和-samesite属性"><a class="header-anchor" href="#cookie跨站-和-samesite属性"></a>cookie跨站 和 sameSite属性</h2>
+<h2 id="关于cookie跨站：withcredentials-和-samesite-属性"><a class="header-anchor" href="#关于cookie跨站：withcredentials-和-samesite-属性"></a>关于cookie跨站：withCredentials 和 sameSite 属性</h2>
 <blockquote>
-<p>引用一下他处：浏览器同源指的是<strong>协议，域名，端口都相同</strong>；Cookie中的“同源”只关注域名，忽略协议和端口，也就是Cookie可以跨二级域名来访问，也可以称为“同站”。</p>
-<p>浏览器本身是允许cookie同站通信的；而所谓的“跨站”，比如cookie跨站实现第三方cookie，实际上就是想利用浏览器更加“开放”的那些规则来突破“同站”。</p>
+<p>【引用一下他处】什么是“同站”：浏览器同源指的是<strong>协议，域名，端口都相同</strong>；Cookie中的“同源”只关注域名，忽略协议和端口，也就是Cookie可以跨二级域名来访问，即也可以称为“同站”。</p>
+<p>什么是“跨站”：浏览器本身是允许cookie同站通信的；而所谓的“跨站”，比如cookie跨站实现第三方cookie，实际上就是想利用浏览器更加“开放”的那些规则来突破“同站”的限制。</p>
 </blockquote>
-<p>浏览器sameSite属性的提出背景：可以<strong>默认</strong>让 Cookie 在<strong>跨站</strong>请求时不会被发送，从而可以阻止跨站请求伪造攻击（CSRF）。在chrome 80中提出，导致之前上线的跨站的Cookie用不了。(其实就是针对和打击第三方Cookie)</p>
-<p>sameSite新属性引发的问题，及其解决：解决方案就是手动设置 SameSite 为 none。</p>
+<ul>
+<li>samesite和withCredentials的对比 【个人思考】
+<ul>
+<li>withCredentials 和 sameSite属性都是针对cookie跨站的，所以与生俱来就都和CSRF安全相关。</li>
+<li><strong>但是针对同样这件事，2者的态度是对立的</strong>：一个希望允许，一个则希望限制</li>
+<li>withCredentials可针对xhr；而samesite可针对xhr，也可包括a img iframe等等标签的引用http所相关的cookie。</li>
+<li>(withCredentials在很早CORS的时候提出；sameSite在chrome 80中提出，算比较晚了)</li>
+</ul>
+</li>
+<li>---------  分割线  -------------</li>
+<li>withCredentials： 服务端+客户端xhr机制
+<ul>
+<li>作用：如果需要跨域(包括“跨站”)AJAX发送Cookie     (不仅会<strong>发送</strong>Cookie，还可以去设置远程主机域名下的Cookie)</li>
+<li>基于CORS：为了让这个属性生效，<strong>服务器</strong>必须显式返回<code>Access-Control-Allow-Credentials</code>这个头信息
+<ul>
+<li>备注：<code>Access-Control-Allow-Origin</code>就不能设为星号，要对应上你所允许放行的请求。同时，Cookie依然遵“同站”政策，只有用服务器域名设置的Cookie才会上传，其他域名的Cookie并不会上传</li>
+</ul>
+</li>
+<li>客户端的开启：<code>xhr.withCredentials = true;</code>
+<ul>
+<li>(反过来看，若未开启时的效果：<code>withCredentials</code>属性是一个布尔值，默认为<code>false</code>。即向“对于<code>example.com</code>是跨域的”请求时，不会发送<code>example.com</code>设置在本机上的Cookie（如果有的话）。)</li>
+</ul>
+</li>
+<li>(edge case：如果省略<code>withCredentials</code>设置，有的浏览器还是会一起发送Cookie。这时，可以显式关闭<code>withCredentials</code>。)</li>
+</ul>
+</li>
+<li>---------  分割线  -------------</li>
+<li>浏览器sameSite属性：该属性可分别限制整个页面中的每个http的cookie跨站情况  (即其意图和CSRF相关)
+<ul>
+<li>其<strong>默认值</strong>让 Cookie 在<strong>跨站</strong>请求时不会被发送，从而可以阻止跨站请求伪造攻击（即CSRF）</li>
+<li>出现后所带来的坑：在chrome 80中提出，导致之前上线的跨站的Cookie用不了。(其实就是针对和打击第三方Cookie)
+<ul>
+<li>(而避免CSRF的方式本来就有很多，所以我目前不太认同这种sameSite理念的提出)</li>
+</ul>
+</li>
+<li><strong>旧网站</strong>临时解决sameSite默认值所带来的坑：手动设置 SameSite 为 none。</li>
+</ul>
+</li>
+</ul>
+<p>注意，在开了withCredentials的环境下，此时客户端<strong>你的脚本</strong> 还是遵守“cookie同站”政策，无法 从<code>document.cookie</code>或者HTTP回应的头信息之中，<strong>读取</strong>这些Cookie。能不能<strong>发送</strong>和<strong>读取</strong>是不同的。所以读取能力是区分同源或同站的关键。</p>
 <h2 id="第三方cookie的实现-本质上就是cookie跨站"><a class="header-anchor" href="#第三方cookie的实现-本质上就是cookie跨站"></a>第三方Cookie的实现(本质上就是cookie跨站)</h2>
-<p>其实就是请求一张图片的请求响应也可以设置Cookie，本身是完全可以“跨域”和“跨站”的。但是现在各浏览器的趋势是禁止第三方Cookie。</p>
+<ul>
+<li>实现
+<ul>
+<li>多数是比如请求<code>ad.com</code>的一张图片，这样在响应这个图片请求的时候就能设置<code>ad.com</code>的cookie
+<ul>
+<li>(请求图片，本身是完全可以“跨域”和“跨站”的)</li>
+</ul>
+</li>
+<li>有些广告商会封装成一个js，你只要在你的网站引用这个js就帮你实现对应逻辑</li>
+<li>但是现在各浏览器的趋势是禁止第三方Cookie。比如浏览器cookie的samesite这个配置，就是限制的态度。</li>
+</ul>
+</li>
+</ul>
 
 		</div>
       
@@ -568,7 +625,7 @@
         <p><span>本文标题:</span><a href="/2020/05/22/cross-origin-cross-site/">01-跨域和跨站的基本概念</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2020-05-22, 17:39:44</p>
-        <!-- <p><span>最后更新:</span>2020-08-25, 21:52:25</p> -->
+        <!-- <p><span>最后更新:</span>2020-09-07, 16:34:00</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="01-跨域和跨站的基本概念" href="/2020/05/22/cross-origin-cross-site/">https://blog.az22c.top/2020/05/22/cross-origin-cross-site/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://blog.az22c.top/2020/05/22/cross-origin-cross-site/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -604,7 +661,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一级域名-二级域名-三级域名"><span class="toc-text">一级域名 二级域名  三级域名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#跨域和跨站的区别"><span class="toc-text">跨域和跨站的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cookie跨站-和-samesite属性"><span class="toc-text">cookie跨站 和 sameSite属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第三方cookie的实现-本质上就是cookie跨站"><span class="toc-text">第三方Cookie的实现(本质上就是cookie跨站)</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一级域名-二级域名-三级域名"><span class="toc-text">一级域名 二级域名  三级域名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#跨域和跨站的区别"><span class="toc-text">跨域和跨站的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关于cookie跨站：withcredentials-和-samesite-属性"><span class="toc-text">关于cookie跨站：withCredentials 和 sameSite 属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第三方cookie的实现-本质上就是cookie跨站"><span class="toc-text">第三方Cookie的实现(本质上就是cookie跨站)</span></a></li></ol>
         
     </div>
     <style>
@@ -648,7 +705,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/05/22/cross-origin-cross-tab/">02-跨域通信和跨tab通信</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/22/cross-origin-cross-site/">01-跨域和跨站的基本概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/03/how-long-a-frame-is/">网页一帧有多长 是如何判定的</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/02/settimeout-0-to-9/">面试题：改造代码，使之隔秒输出0 - 9</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/02/vue-lazyload-summary/">Vue-lazyload 原理和使用 个人总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/06/height-calculate/">深入理解文字高度和行高的设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/05/vertical-align-middle/">vertical-align:middle近似居中和完美居中</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/05/centralize-one-ele/">总结：使单一对象水平/垂直居中</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/05/js-functional-intro/">到底什么是函数式编程 精简总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/04/performance-optimized-summary/">Web前端性能优化概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/12/git-stage/">git暂存区知识梳理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/17/ife-css-task03/">三栏式布局--IFE2017-CSS-task03笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/07/css-border1/">border-radius属性</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/03/js-obj-prop1/">对象属性的操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/02/js-obj-prop2/">对象属性描述符</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/01/js-obj-prop3/">对象属性之对象状态</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/12/js-inherit/">es5实现继承的6种方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/12/js-new-happen/">new创建对象的过程发生了什么</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/09/js-prototype-practice/">原型对象 实战使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/08/js-proto/">理解prototype、__proto__和constructor等关系</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/07/js-this2/">this绑定的优先级</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/07/js-this/">结合this的4种绑定规则 深入理解this指向的判定</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/02/js-event4/">浏览器事件冒泡或者捕获相关</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/01/js-event3/">js四种事件处理程序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/01/js-pv-default/">js取消默认事件行为</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/08/let-n-const/">let和const旧话新编</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/07/js-date/">JavaScript Date对象回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/07/vue-checkbox-table/">纯vue实现checkbox父子联动</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/25/vue-time-tracker/">经典vue单页路由入门全家桶</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/15/vue-table-nav/">按条目展示表格数据小插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/clearfix-n-bfc/">闭合浮动和BFC和阻止上下外边距的合并</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/ife-css-task02/">IFE2017-CSS-task02笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/31/css-selectors-specificity/">CSS选择器优先级</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/28/h5-new-ele/">H5新标签和被H5拥抱的老元素们</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/27/ife-css-task01/">IFE2017-CSS-task01笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/10/iife-intro/">IIFE回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/09/for-loop/">js的for循环回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/float-n-absolute/">float和绝对定位比较</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/about-margin/">和margin有关的知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/gulp-usage/">gulp的入门和一些简单使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/27/icon-usage/">桌面端和移动端图标的引入</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/25/webapp-events-intro/">移动开发事件入门概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/24/webapp-intro/">移动开发入门概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/my-hexo-theme/">yelee主题改bug总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/17/todo-app/">ToDo小应用完工总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/equality-operators/">相等操作符回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/js-operators/">操作符回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/25/font-face/">font-face--CSS3</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/13/js-function/">js函数基础回顾</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/05/22/cross-origin-cross-tab/">02-跨域通信和跨tab通信</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/22/cross-origin-cross-site/">01-跨域和跨站的基本概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/03/how-long-a-frame-is/">网页一帧有多长 是如何判定的</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/02/settimeout-0-to-9/">面试题：改造代码，使之隔秒输出0 - 9</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/02/vue-lazyload-summary/">Vue-lazyload 原理和使用 个人总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/06/height-calculate/">深入理解文字高度和行高的设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/05/vertical-align-middle/">vertical-align:middle近似居中和完美居中</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/05/centralize-one-ele/">总结：使单一对象水平/垂直居中</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/05/js-functional-intro/">到底什么是函数式编程 精简总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/04/performance-optimized-summary/">Web前端性能优化概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/12/git-stage/">git暂存区知识梳理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/17/ife-css-task03/">三栏式布局--IFE2017-CSS-task03笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/07/css-border1/">border-radius属性</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/03/js-obj-prop1/">对象属性的操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/02/js-obj-prop2/">对象属性描述符</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/01/js-obj-prop3/">对象属性之对象状态</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/12/js-inherit/">es5实现继承的6种方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/12/js-new-happen/">new创建对象的过程发生了什么</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/09/js-prototype-practice/">原型对象 实战使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/08/js-proto/">理解prototype、__proto__和constructor等关系</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/07/js-this2/">this绑定的优先级</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/07/js-this/">结合this的4种绑定规则 深入理解this指向的判定</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/02/js-event4/">浏览器事件冒泡或者捕获相关</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/01/js-event3/">js四种事件处理程序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/01/js-pv-default/">js取消默认事件行为</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/08/let-n-const/">let和const旧话新编</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/07/js-date/">JavaScript Date对象回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/07/vue-checkbox-table/">纯vue实现checkbox父子联动</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/25/vue-time-tracker/">经典vue单页路由入门全家桶</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/15/vue-table-nav/">按条目展示表格数据小插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/clearfix-n-bfc/">闭合浮动和BFC和阻止上下外边距的合并</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/ife-css-task02/">IFE2017-CSS-task02笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/31/css-selectors-specificity/">CSS选择器优先级</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/28/h5-new-ele/">H5新标签和被H5拥抱的老元素们</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/27/ife-css-task01/">IFE2017-CSS-task01笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/10/iife-intro/">IIFE回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/float-n-absolute/">float和绝对定位比较</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/about-margin/">和margin有关的知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/gulp-usage/">gulp的入门和一些简单使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/27/icon-usage/">桌面端和移动端图标的引入</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/25/webapp-events-intro/">移动开发事件入门概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/24/webapp-intro/">移动开发入门概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/my-hexo-theme/">yelee主题改bug总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/17/todo-app/">ToDo小应用完工总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/equality-operators/">相等操作符回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/js-operators/">操作符回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/25/font-face/">font-face--CSS3</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/13/js-function/">js函数基础回顾</a></li></ul>
 
 
 
@@ -671,7 +728,7 @@
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					
-						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：669</span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,250</span>
 					
 				</div>
             </div>

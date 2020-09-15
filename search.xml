@@ -98,7 +98,7 @@
 </li>
 <li>IndexedDB也是基于浏览器数据存储，区别是其实现通信需要轮询</li>
 <li>SharedWorker 共享工作线程（只能同源，兼容性差）</li>
-<li>Service Worker (没有详细研究过)</li>
+<li>Service Worker(加postMessage) (没有详细研究过)</li>
 </ul>
 <p>能跨域的思路：</p>
 <ul>
@@ -148,19 +148,76 @@
 <h2 id="一级域名-二级域名-三级域名"><a class="header-anchor" href="#一级域名-二级域名-三级域名"></a>一级域名 二级域名  三级域名</h2>
 <p>一般来说就是比如<code>www.baidu.com</code>： <code>.com</code>是一级域名； <code>baidu</code>是二级域名； <code>www</code>是三级域名。其后同理。</p>
 <h2 id="跨域和跨站的区别"><a class="header-anchor" href="#跨域和跨站的区别"></a>跨域和跨站的区别</h2>
-<p>首先要理解的一点就是跨站和跨域是不同的。同站(same-site)/跨站(cross-site)」和第一方(first-party)/第三方(third-party)是等价的。但是与浏览器同源策略（SOP）中的「同源(same-origin)/跨域(cross-origin)」是完全不同的概念。</p>
+<ul>
+<li>首先要理解的一点就是跨站和跨域是不同的。
+<ul>
+<li>同站(same-site)/跨站(cross-site)」和第一方(first-party)/第三方(third-party)是等价的。</li>
+<li>但是与浏览器同源策略（SOP）中的「同源(same-origin)/跨域(cross-origin)」是完全不同的概念。</li>
+</ul>
+</li>
+</ul>
 <p>同源策略的同源，是指两个 URL 的“协议+主机名+端口”3者都一致。例如，<code>https://www.taobao.com/pages/...</code>，它的协议是 https，主机名是<code>www.taobao.com</code>，端口是 443，另一个url的这3者与之都一致才能叫“同源”。</p>
 <p>同源策略作为浏览器的安全基石，其“同源”判断是比较严格的，而相对而言，Cookie中的“同站”判断就比较宽松：只要两个 URL 的 eTLD+1 相同即可，不需要考虑协议和端口。其中，eTLD 表示<strong>有效顶级域名</strong>，注册于 Mozilla 维护的公共后缀列表（Public Suffix List）中，例如，.com、.co、.uk、.github.io 等。而 eTLD+1 则表示，有效顶级域名+二级域名，例如taobao.com等。</p>
 <p>举几个例子，www.taobao.com和www.baidu.com是跨站，www.a.taobao.com和www.b.taobao.com是同站，a.github.io和b.github.io是跨站(<strong>注意是跨站</strong>)。</p>
-<h2 id="cookie跨站-和-samesite属性"><a class="header-anchor" href="#cookie跨站-和-samesite属性"></a>cookie跨站 和 sameSite属性</h2>
+<h2 id="关于cookie跨站：withcredentials-和-samesite-属性"><a class="header-anchor" href="#关于cookie跨站：withcredentials-和-samesite-属性"></a>关于cookie跨站：withCredentials 和 sameSite 属性</h2>
 <blockquote>
-<p>引用一下他处：浏览器同源指的是<strong>协议，域名，端口都相同</strong>；Cookie中的“同源”只关注域名，忽略协议和端口，也就是Cookie可以跨二级域名来访问，也可以称为“同站”。</p>
-<p>浏览器本身是允许cookie同站通信的；而所谓的“跨站”，比如cookie跨站实现第三方cookie，实际上就是想利用浏览器更加“开放”的那些规则来突破“同站”。</p>
+<p>【引用一下他处】什么是“同站”：浏览器同源指的是<strong>协议，域名，端口都相同</strong>；Cookie中的“同源”只关注域名，忽略协议和端口，也就是Cookie可以跨二级域名来访问，即也可以称为“同站”。</p>
+<p>什么是“跨站”：浏览器本身是允许cookie同站通信的；而所谓的“跨站”，比如cookie跨站实现第三方cookie，实际上就是想利用浏览器更加“开放”的那些规则来突破“同站”的限制。</p>
 </blockquote>
-<p>浏览器sameSite属性的提出背景：可以<strong>默认</strong>让 Cookie 在<strong>跨站</strong>请求时不会被发送，从而可以阻止跨站请求伪造攻击（CSRF）。在chrome 80中提出，导致之前上线的跨站的Cookie用不了。(其实就是针对和打击第三方Cookie)</p>
-<p>sameSite新属性引发的问题，及其解决：解决方案就是手动设置 SameSite 为 none。</p>
+<ul>
+<li>samesite和withCredentials的对比 【个人思考】
+<ul>
+<li>withCredentials 和 sameSite属性都是针对cookie跨站的，所以与生俱来就都和CSRF安全相关。</li>
+<li><strong>但是针对同样这件事，2者的态度是对立的</strong>：一个希望允许，一个则希望限制</li>
+<li>withCredentials可针对xhr；而samesite可针对xhr，也可包括a img iframe等等标签的引用http所相关的cookie。</li>
+<li>(withCredentials在很早CORS的时候提出；sameSite在chrome 80中提出，算比较晚了)</li>
+</ul>
+</li>
+<li>---------  分割线  -------------</li>
+<li>withCredentials： 服务端+客户端xhr机制
+<ul>
+<li>作用：如果需要跨域(包括“跨站”)AJAX发送Cookie     (不仅会<strong>发送</strong>Cookie，还可以去设置远程主机域名下的Cookie)</li>
+<li>基于CORS：为了让这个属性生效，<strong>服务器</strong>必须显式返回<code>Access-Control-Allow-Credentials</code>这个头信息
+<ul>
+<li>备注：<code>Access-Control-Allow-Origin</code>就不能设为星号，要对应上你所允许放行的请求。同时，Cookie依然遵“同站”政策，只有用服务器域名设置的Cookie才会上传，其他域名的Cookie并不会上传</li>
+</ul>
+</li>
+<li>客户端的开启：<code>xhr.withCredentials = true;</code>
+<ul>
+<li>(反过来看，若未开启时的效果：<code>withCredentials</code>属性是一个布尔值，默认为<code>false</code>。即向“对于<code>example.com</code>是跨域的”请求时，不会发送<code>example.com</code>设置在本机上的Cookie（如果有的话）。)</li>
+</ul>
+</li>
+<li>(edge case：如果省略<code>withCredentials</code>设置，有的浏览器还是会一起发送Cookie。这时，可以显式关闭<code>withCredentials</code>。)</li>
+</ul>
+</li>
+<li>---------  分割线  -------------</li>
+<li>浏览器sameSite属性：该属性可分别限制整个页面中的每个http的cookie跨站情况  (即其意图和CSRF相关)
+<ul>
+<li>其<strong>默认值</strong>让 Cookie 在<strong>跨站</strong>请求时不会被发送，从而可以阻止跨站请求伪造攻击（即CSRF）</li>
+<li>出现后所带来的坑：在chrome 80中提出，导致之前上线的跨站的Cookie用不了。(其实就是针对和打击第三方Cookie)
+<ul>
+<li>(而避免CSRF的方式本来就有很多，所以我目前不太认同这种sameSite理念的提出)</li>
+</ul>
+</li>
+<li><strong>旧网站</strong>临时解决sameSite默认值所带来的坑：手动设置 SameSite 为 none。</li>
+</ul>
+</li>
+</ul>
+<p>注意，在开了withCredentials的环境下，此时客户端<strong>你的脚本</strong> 还是遵守“cookie同站”政策，无法 从<code>document.cookie</code>或者HTTP回应的头信息之中，<strong>读取</strong>这些Cookie。能不能<strong>发送</strong>和<strong>读取</strong>是不同的。所以读取能力是区分同源或同站的关键。</p>
 <h2 id="第三方cookie的实现-本质上就是cookie跨站"><a class="header-anchor" href="#第三方cookie的实现-本质上就是cookie跨站"></a>第三方Cookie的实现(本质上就是cookie跨站)</h2>
-<p>其实就是请求一张图片的请求响应也可以设置Cookie，本身是完全可以“跨域”和“跨站”的。但是现在各浏览器的趋势是禁止第三方Cookie。</p>
+<ul>
+<li>实现
+<ul>
+<li>多数是比如请求<code>ad.com</code>的一张图片，这样在响应这个图片请求的时候就能设置<code>ad.com</code>的cookie
+<ul>
+<li>(请求图片，本身是完全可以“跨域”和“跨站”的)</li>
+</ul>
+</li>
+<li>有些广告商会封装成一个js，你只要在你的网站引用这个js就帮你实现对应逻辑</li>
+<li>但是现在各浏览器的趋势是禁止第三方Cookie。比如浏览器cookie的samesite这个配置，就是限制的态度。</li>
+</ul>
+</li>
+</ul>
 ]]></content>
       
         <categories>
@@ -193,30 +250,30 @@
 <a id="more"></a>
 <h2 id="什么是垂直同步信号："><a class="header-anchor" href="#什么是垂直同步信号："></a>什么是垂直同步信号：</h2>
 <p>我们知道，屏幕是由成千上万个像素点组成的大矩阵，而这个矩阵以极快的速度“从左往右，从上往下”刷新“扫描”每个像素点的值。而人眼感觉不到这种超快的“闪烁”，比如电脑刷新屏幕的物理频率大概是60Hz。当屏幕扫描完一横排像素就会产生“水平同步信号”，当屏幕扫描完所有横排即一屏的像素，就会产生“垂直同步信号”。<strong>也就是“垂直同步信号”反映的是屏幕刷新的频率。</strong></p>
-<p>(我们知道“帧”不仅仅可以描述反映屏幕刷新的频率，也可以描述反映网页动画变化的频率，描述的对象如有省略，由文章的上下文来判断，这里先提前说明一下。)</p>
+<p>(我们知道“帧”不仅仅可以描述反映屏幕刷新的频率，也可以描述反映网页渲染变化的频率，描述的对象如有省略，由文章的上下文来判断，这里先提前说明一下。)</p>
 <h2 id="垂直同步信号的意义："><a class="header-anchor" href="#垂直同步信号的意义："></a>垂直同步信号的意义：</h2>
 <blockquote>
 <p>垂直同步信号：如果GPU渲染频率比屏幕刷新频率高的话，会有两帧画面在一起出现。所以利用垂直同步信号压制GPU渲染的频率，以免浪费性能。因此如果有些游戏要求频率高，又开启了垂直同步，但是屏幕硬件的刷新频率低拖慢了被压制的GPU渲染频率，也会有掉帧的现象。(GPU渲染频率慢就会有掉帧的效果。) <a href="https://www.infoq.cn/article/javascript-high-performance-animation-and-page-rendering/" target="_blank" rel="noopener">via</a></p>
 </blockquote>
-<p>我们知道玩电子游戏通常可以选择“是否垂直同步信号”，它的意思是是否等该帧显示完再显示下一帧，这个选项需要我们发挥一点推理能力来理解。这里直接给出结论：</p>
+<p>我们知道玩电子游戏通常可以选择“是否开启垂直同步信号”，它的意思是是否等该帧显示完再显示下一帧，这个选项需要我们发挥一点推理能力来理解。这里直接给出结论：</p>
 <ul>
 <li>如果关闭“垂直同步信号”的问题：浪费GPU性能+两帧画面一起出现</li>
 <li>如果打开“垂直同步信号”以压制GPU频率：如果(机器的)屏幕刷新频率太慢，会导致掉帧。</li>
 </ul>
-<p>而如果把网页页面渲染比作游戏，其实就是开启了“垂直同步信号”的这种情况，即网页要靠“垂直同步信号”压制压低GPU频率，网页渲染也就天生地具备“掉帧”的风险。</p>
+<p>而如果把网页页面渲染比作游戏界面，其实正是开启了“垂直同步信号”的这种情况，即网页要靠“垂直同步信号”压制压低GPU频率，网页渲染也就天生地具备了“掉帧”的风险。</p>
 <h2 id="网页16ms界限的意义："><a class="header-anchor" href="#网页16ms界限的意义："></a>网页16ms界限的意义：</h2>
 <p>16ms也就是60Hz的时间间隔。因为网页渲染的机制引用了“垂直同步信号”压制压低GPU频率，所以可 <strong>从屏幕刷新的理念中沿用，</strong> 并确立一个16ms界限。</p>
-<p>假设网页渲染的每帧比16ms短是没有意义的(也就是浪费CPU性能并且超出屏幕当前的能力)。但是网页渲染每帧可以比16ms长。</p>
+<p>假设网页渲染的每帧比16ms短是没有意义的(也就是浪费GPU性能并且超出屏幕当前的能力)。但是网页渲染每帧可以比16ms长。</p>
 <p><strong>屏幕刷新频率 vs 人眼的接收频率：</strong> 人眼每秒刷新20次，也就是以20Hz来接收光信号。但是机器一般要每秒刷新更多的次数，才能使得动画流畅。但是假设快如每秒60次，再往上，更快(对于一般的场景要求)已经察觉不到差别了。</p>
 <p>在这里，我先把 <strong>结论</strong> 上了：(后文再解释浏览器具体是怎么利用“垂直同步信号”压制压低GPU频率，也就是网页刷新是怎么实现的)</p>
-<p>对于网页上的多数情况：</p>
+<p>对于在网页上的多数情况：</p>
 <ul>
 <li>网页帧的频率(小于并且逼近60Hz)  ===  UI input回调(scoll resize mouseover等)触发的频率  ===  raq的触发频率
 <ul>
 <li>(requestAnimationFrame只知道这已是网页新的一帧，但是它不知道一帧需要多长的时间(也就是有可能一帧比16ms长)。)</li>
 </ul>
 </li>
-<li>CPU的潜力  &gt;  屏幕刷新频率(60Hz)  &gt;=  网页帧的频率(小于并且逼近60Hz)  &gt;  用户click操作频率</li>
+<li>GPU的潜力  &gt;  屏幕刷新频率(60Hz)  &gt;=  网页帧的频率(小于并且逼近60Hz)  &gt;  用户click操作频率</li>
 <li>event loop的频率  通常&gt;  屏幕刷新频率(60Hz)  &gt;=  网页帧的频率(小于并且逼近60Hz)  &gt;  用户click操作频率
 <ul>
 <li>在防抖节流的章节，我们通常设置80ms作为间隔，也就是12Hz的样子，当然防抖节流具体得看场景。</li>
@@ -225,13 +282,9 @@
 </ul>
 <h2 id="详细解释推导网页的-帧有多长时间-是怎么判定和实现的："><a class="header-anchor" href="#详细解释推导网页的-帧有多长时间-是怎么判定和实现的："></a>详细解释推导网页的“帧有多长时间”是怎么判定和实现的：</h2>
 <ul>
-<li>开始执行新的关键渲染路径task的条件
-<ul>
-<li>在每一个event loop末尾检查【1】是否需要更新页面【2】垂直同步信号是否到达</li>
-</ul>
-</li>
-<li>在关键渲染路径最后的“由调度线程把计算出来的渲染数据提交给CPU完成渲染”这一步骤，标志着一帧的结束，也是新的一帧的开始。<strong>一帧有多长就是这样决定的</strong>。</li>
-<li>(补充说明：一个task，即便是负责执行关键渲染路径的task，其执行时长跨度可以远低于16ms，也可以远多于16ms)</li>
+<li>开始执行新的关键渲染路径task的条件：在每一个event loop末尾检查【1】是否需要更新页面【2】垂直同步信号是否到达</li>
+<li>在关键渲染路径最后的“由调度线程把计算出来的渲染数据提交给GPU完成渲染”这一步骤，标志着一帧的结束，也是新的一帧的开始。<strong>一帧有多长就是这样决定的</strong>。</li>
+<li>(补充说明：一个task，即便是负责执行关键渲染路径的task，其执行时长跨度可能远低于16ms，也可能远多于16ms)</li>
 <li>(补充说明：很多文章声称“垂直同步信号决定了网页一帧的开始”，这个观点是错误的，我就被该观点坑了很久)</li>
 </ul>
 <blockquote>
@@ -244,7 +297,7 @@
 <ul>
 <li>补充chome devtool控制台performance timeline的相关事实：
 <ul>
-<li>实灰线是等时间间隔线。但是这个“等时间间隔”随着你的缩放也会拉长或者缩短，这是一个不直观的隐藏规律</li>
+<li>实灰线是等时间间隔线。但是这个“等时间间隔”随着你的缩放也会拉长或者缩短，注意一下就行了</li>
 <li>粗虚线就是网页的帧之间的分割线</li>
 </ul>
 </li>
@@ -1611,7 +1664,9 @@ MMM.prototype.map = function(func) {
 <ul>
 <li>cdn
 <ul>
-<li><strong>cdn域名分片规避浏览器对一个域名的并发数限制</strong></li>
+<li>域名分片：即域名发散。规避浏览器对一个域名的并发数限制</li>
+<li>域名收敛：http2多路复用，多个http间复用tcp</li>
+<li>动静分离：index.html部署在自己服务器，静态资源借助cdn。同时可以实现静态资源cookie-free</li>
 </ul>
 </li>
 </ul>
@@ -2820,7 +2875,7 @@ console.log(Object.getOwnPropertyDescriptor(o,'a'));
     <entry>
       <title><![CDATA[es5实现继承的6种方式]]></title>
       <url>https://blog.az22c.top/2017/08/12/js-inherit/</url>
-      <content type="html"><![CDATA[<p>对关于继承的内容做一番整理。</p>
+      <content type="html"><![CDATA[<p>对关于继承的内容做一番整理。是早期编写的文章，直接看到最后的结论即可。后面可以优化一下行文的思路。</p>
 <a id="more"></a>
 <h2 id="原型链"><a class="header-anchor" href="#原型链"></a>原型链</h2>
 <p>javascript使用原型链作为实现继承的主要方法，实现的本质是重写原型对象，代之以一个新类型的实例：</p>
@@ -3970,7 +4025,14 @@ function foo() {
 </code></pre>
 <p>也可以像上面 间接引用的情况 理解为： IIFE和obj.foo都是this关键字所在的函数，执行流到此，之后执行流会进入IIFE的函数表达式内；考虑到IIFE的表达式，结果为0依然可以被理解</p>
 <h2 id="显示绑定"><a class="header-anchor" href="#显示绑定"></a>显示绑定</h2>
-<p>通过<code>call()、apply()、bind()</code>或者es6的<code>map()、forEach()、filter()、some()、every()</code>方法把对象绑定到this上，叫做显式绑定；而对于被调用的函数来说，叫做间接调用</p>
+<ul>
+<li>显示绑定
+<ul>
+<li>通过<code>call()、apply()、bind()</code></li>
+<li>es6的<code>map()、forEach()、filter()、some()、every()</code>方法：专门提供1参数来设置this。( 其原理还是基于es5这几个api )</li>
+</ul>
+</li>
+</ul>
 <pre><code class="language-JavaScript">var a = 0;
 function foo(){
     console.log(this.a);
@@ -4115,7 +4177,7 @@ displayColor.call(null);//TypeError: Cannot read property 'color' of null
 <p>每次用addEventListener这个api，你需要<strong>选择绑定事件在冒泡阶段还是捕获阶段</strong>。（通常设置为false即为冒泡） 而这个api就是基于事件流的原理。</p>
 <ul>
 <li>事件流的本质：比如在页面上点击一个元素，这是一个点击事件。事实上，被点击的元素及其所有祖先元素都是能感知到的，只不过是，如果你没有绑定事件，它们就不会对应地触发事件响应。</li>
-<li>事件流的过程：<strong>事件流</strong>被分为三个阶段捕获过程、<strong>目标过程</strong>、冒泡过程。表示事件流中“某元素的某个被触发的事件”是绑定在哪个阶段的属性是<code>eventPhase</code>。</li>
+<li>事件流的过程：<strong>事件流</strong>被分为三个阶段捕获过程、<strong>目标过程</strong>、冒泡过程。event对象的属性中，表示事件流中“某元素的某个被触发的事件”是绑定在哪个阶段的属性是<code>eventPhase</code>。</li>
 <li>一个完整的JS事件流是从window开始，最后回到window的一个过程（有些浏览器是到body）
 <ul>
 <li>也就是从window开始，依次触发<strong>绑定在</strong>捕获过程的(有绑定的)事件响应，然后是目标过程的（不分冒泡还是捕获按注册顺序），再然后是依次触发<strong>绑定在</strong>冒泡过程的直到回到window</li>
@@ -4218,8 +4280,15 @@ var currentTarget = event.currentTarget;
     }
 }, false);
 </code></pre>
-<h2 id="vue的事件冒泡和事件代理-从vue专题复制而来"><a class="header-anchor" href="#vue的事件冒泡和事件代理-从vue专题复制而来"></a>vue的事件冒泡和事件代理 #从vue专题复制而来</h2>
-<p>还有，vue在组件间不冒泡，在同一个组件内的元素是可以冒泡的。如果以后能够成功实现组件间冒泡，那么就可以通过冒泡或事件代理来实现“跨组件通信”了。在vue里面，如果想阻止冒泡用的是<code>.stop</code>修饰符。</p>
+<h2 id="vue的事件冒泡和事件代理"><a class="header-anchor" href="#vue的事件冒泡和事件代理"></a>vue的事件冒泡和事件代理</h2>
+<ul>
+<li>vue在组件间不冒泡，在同一个组件内的事件是可以冒泡的。
+<ul>
+<li>(如果，以后能够成功实现组件间冒泡，那么就可以通过冒泡或事件代理来实现“跨组件通信”了)</li>
+</ul>
+</li>
+<li>在vue里面，如果想阻止冒泡用的是<code>.stop</code>修饰符。</li>
+</ul>
 ]]></content>
       
         <categories>
@@ -4826,7 +4895,7 @@ d.toUTCString()
       <title><![CDATA[纯vue实现checkbox父子联动]]></title>
       <url>https://blog.az22c.top/2017/05/07/vue-checkbox-table/</url>
       <content type="html"><![CDATA[<p>对应代码的github仓库的地址：<a href="https://github.com/AlexZhong22c/vue-checkbox-table" target="_blank" rel="noopener">https://github.com/AlexZhong22c/vue-checkbox-table</a></p>
-<p><a href="https://alexzhong22c.github.io/vue-checkbox-table/vue-checkbox-table.html">demo</a> (在线演示初次加载会有点慢，请稍等)</p>
+<p><a href="https://alexzhong22c.github.io/vue-checkbox-table/vue-checkbox-table.html" target="_blank" rel="noopener">demo</a> (在线演示初次加载会有点慢，请稍等)</p>
 <p>vue.js的出现，导致很多小插件的简单实现成为可能。</p>
 <p>但是，正是由于<strong>vue的数据绑定</strong>使用起来耦合度太强，导致一些比较常规的插件的实现方式要稍微有所不同。</p>
 <a id="more"></a>
@@ -5222,7 +5291,7 @@ methods: {
       <title><![CDATA[按条目展示表格数据小插件]]></title>
       <url>https://blog.az22c.top/2017/04/15/vue-table-nav/</url>
       <content type="html"><![CDATA[<p>对应代码的github仓库的地址：<a href="https://github.com/AlexZhong22c/vue-table-nav" target="_blank" rel="noopener">https://github.com/AlexZhong22c/vue-table-nav</a></p>
-<p><a href="https://alexzhong22c.github.io/vue-table-nav/vue-table-nav.html">demo</a> (在线演示初次加载会有点慢，请稍等)</p>
+<p><a href="https://alexzhong22c.github.io/vue-table-nav/vue-table-nav.html" target="_blank" rel="noopener">demo</a> (在线演示初次加载会有点慢，请稍等)</p>
 <a id="more"></a>
 <hr>
 <p>vue.js的出现，导致很多小插件的简单实现成为可能。</p>
@@ -6147,288 +6216,6 @@ myModule.doOtherThing();
             <tag> 作用域 </tag>
             
             <tag> 单例 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[js的for循环回顾]]></title>
-      <url>https://blog.az22c.top/2017/03/09/for-loop/</url>
-      <content type="html"><![CDATA[<p>非常经典，还分析了老的几个浏览器：<a href="http://www.zhangxinxu.com/wordpress/2013/04/es5%E6%96%B0%E5%A2%9E%E6%95%B0%E7%BB%84%E6%96%B9%E6%B3%95/" target="_blank" rel="noopener">es5新增数组方法和兼容性问题</a></p>
-<p>ES5 中分别有三种 for 循环：</p>
-<ul>
-<li>简单的for循环</li>
-<li>for in</li>
-<li>for each</li>
-</ul>
-<p>ES6 新增了for of</p>
-<p>因为for循环和Array关系非常密切，所以先谈谈Array。</p>
-<a id="more"></a>
-<h2 id="array的本质"><a class="header-anchor" href="#array的本质"></a>Array的本质</h2>
-<p>Javascript 中的 Array 并不像大部分其他语言的数组。</p>
-<ul>
-<li>Javascript 中的 Array 在内存上并不连续</li>
-<li>Array 的索引并不是指偏移量</li>
-<li>Array 的索引也不是 Number 类型，而是 String 类型的
-<ul>
-<li>我们可以正确使用如 arr[0] 的写法的原因是语言可以自动将 Number 类型的 0 转换成 String 类型的 “0”</li>
-</ul>
-</li>
-</ul>
-<p>有趣的是，每个 Array 对象都有一个 length 的属性，导致其表现地更像其他语言的数组。但为什么在遍历 Array 对象的时候没有输出 length 这一条属性呢？那是因为 for-in 只能遍历“可枚举的属性”， length 属于不可枚举属性，实际上， Array 对象还有许多其他不可枚举的属性。</p>
-<h2 id="简单-for-循环"><a class="header-anchor" href="#简单-for-循环"></a>简单 for 循环</h2>
-<p>最常见的写法是：</p>
-<pre><code>const arr = [1, 2, 3];
-for(let i = 0;i &lt; arr.length; i++) {
-  console.log(arr[i]);
-}
-</code></pre>
-<p>当数组长度在循环过程中不会改变时，我们最好将数组长度用变量存储起来，这样会获得更好的效率：</p>
-<pre><code>const arr = [1, 2, 3];
-for(let i = 0,len=arr.length; i &lt; len; i++) {
-  console.log(arr[i]);
-}
-</code></pre>
-<h2 id="for-in"><a class="header-anchor" href="#for-in"></a>for in</h2>
-<p>for-in 一般情况下只用于遍历稀疏数组，这样的好处大大的：</p>
-<pre><code>let key;
-const arr = [];
-arr[0] = &quot;a&quot;;
-arr[100] = &quot;b&quot;;
-arr[10000] = &quot;c&quot;;
-for(key in arr) {
-    if(arr.hasOwnProperty(key)  &amp;&amp;    
-        /^0$|^[1-9]\d*$/.test(key) &amp;&amp;    
-        key &lt;= 4294967294               
-        ) {
-        console.log(arr[key]);
-    }
-}
-</code></pre>
-<p>for-in 只会遍历存在的实体，上面的例子中， for-in 遍历了3次（遍历属性分别为”0″、 “100″、 “10000″的元素，普通 for 循环则会遍历 10001 次）。</p>
-<p>为了避免重复劳动，我们可以包装一下上面的代码：</p>
-<pre><code>function arrayHasOwnIndex(array, prop) {
-    return array.hasOwnProperty(prop) &amp;&amp;
-        /^0$|^[1-9]\d*$/.test(prop) &amp;&amp;
-        prop &lt;= 4294967294; // 2^32 - 2
-}
-</code></pre>
-<p>使用示例如下：</p>
-<pre><code>for (let key in arr) {
-    if (arrayHasOwnIndex(arr, key)) {
-        console.log(arr[key]);
-    }
-}
-</code></pre>
-<h3 id="为什么上面代码要加那么多条件判断"><a class="header-anchor" href="#为什么上面代码要加那么多条件判断"></a>为什么上面代码要加那么多条件判断</h3>
-<p>for-in 循环遍历的是对象的属性，而不是数组的索引。因此， for-in 遍历的对象便不局限于数组，还可以遍历对象。</p>
-<pre><code>const person = {
-    fname: &quot;san&quot;,
-    lname: &quot;zhang&quot;,
-    age: 99
-};
-let info;
-for(info in person) {
-    console.log(&quot;person[&quot; + info + &quot;] = &quot; + person[info]);
-}
-</code></pre>
-<p>结果如下：</p>
-<pre><code>person[fname] = san
-person[lname] = zhang
-person[age] = 99
-</code></pre>
-<p>需要注意的是， for-in 遍历属性的顺序并不确定，即输出的结果顺序与属性在对象中的顺序无关，也与属性的字母顺序无关，与其他任何顺序也无关。</p>
-<p>因为期望的是对象，所以<strong>不应该用for in来循环遍历数组</strong>：如果采用prototype扩展原生的Array，这些属性也会被for in遍历出来，这样就有可能出乎程序员的意料：</p>
-<pre><code>// Somewhere deep in your JavaScript library...
-Array.prototype.foo = 1;
-
-// Now you have no idea what the below code will do.
-var a = [1, 2, 3, 4, 5];
-for (var x in a){
-  // Now foo is a part of EVERY array and 
-  // will show up here as a value of 'x'.
-  console.log(x);
-}
-
-/**
- * 输出:
- * 0
- * 1
- * 2
- * 3
- * 4
- * foo
- */
-</code></pre>
-<h3 id="注意"><a class="header-anchor" href="#注意"></a>注意</h3>
-<p>MDN：<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/for...in" target="_blank" rel="noopener">for…in–MDN</a>：</p>
-<blockquote>
-<p><code>for...in</code> 循环以任意序迭代一个对象的属性。</p>
-<p>如果一个属性在一次迭代中被修改，在稍后被访问，其在循环中的值是其在稍后时间的值。正常。</p>
-<p>一个在被访问之前已经被删除的属性将不会在之后被访问。正常。</p>
-<p>在迭代进行时被添加到对象的属性，可能在之后的迭代被访问，也可能被忽略。不正常。</p>
-<p><strong>通常，在迭代过程中最好不要在对象上进行添加属性的值、修改或者删除属性的操作，除非是对当前正在被访问的属性。</strong></p>
-<p>因为一个被添加的属性在迭代过程中可能会不被访问到。如果不是当前正在被访问的元素：一个修改后的属性可能会在修改前或者修改后被访问 并且 一个被删除的属性可能会在它被删除之前被访问。</p>
-</blockquote>
-<p>通俗来讲就是：要改的话就只能改当前循环访问到的属性，而其他<strong>没有被访问的</strong>或者<strong>还未被当前循环访问到的</strong>属性就不能改。</p>
-<h3 id="for-in-性能"><a class="header-anchor" href="#for-in-性能"></a>for in 性能</h3>
-<p>正如上面所说，每次迭代操作会同时搜索实例或者原型属性， for-in 循环的每次迭代都会产生更多开销，因此要比其他循环类型慢，一般速度为其他类型循环的 1/7。因此，除非明确需要迭代一个属性数量未知的对象，否则应避免使用 for-in 循环。如果需要遍历一个数量有限的已知属性列表，使用其他循环会更快，比如下面的例子：</p>
-<pre><code>const obj = {
-    &quot;prop1&quot;: &quot;value1&quot;,
-    &quot;prop2&quot;: &quot;value2&quot;
-};
-
-const props = [&quot;prop1&quot;, &quot;prop2&quot;];
-for(let i = 0; i &lt; props.length; i++) {
-    console.log(obj[props[i]]);
-}
-</code></pre>
-<p>上面代码中，将对象的属性都存入一个数组中，相对于 <code>for-in</code> 查找每一个属性，该代码只关注<strong>给定的</strong>属性，节省了循环的开销和时间。</p>
-<h2 id="foreach"><a class="header-anchor" href="#foreach"></a>forEach</h2>
-<p>forEach只支持IE9及以上。forEach把数组对象的引索当做是number类型。本文章的最后有它的polyfill。</p>
-<p><code>forEach</code> 可以当做是<code>for(let i = 0; i &lt; len; i++)</code>的简写，但是不能完成 <code>i + n</code> 这种循环，同时也不支持 <code>continue</code>和 <code>break</code>，只能通过 <code>return</code> 来控制循环。另外，使用<code>forEach</code>的话，是不能退出循环本身的。</p>
-<p>forEach 方法为数组中含有有效值的每一项执行一次 callback 函数，那些已删除（使用 delete 方法等情况）或者从未赋值的项将被跳过（不包括那些值为 undefined 或 null 的项）。 callback 函数会被依次传入三个参数：</p>
-<ul>
-<li>数组当前项的值；</li>
-<li>数组当前项的索引；</li>
-<li>数组对象本身；</li>
-</ul>
-<p>需要注意的是，forEach 遍历的范围在第一次调用 callback 前就会确定。调用forEach 后添加到数组中的项不会被 callback 访问到。如果已经存在的值被改变，则传递给 callback 的值是 forEach 遍历到他们那一刻的值。已删除的项不会被遍历到。</p>
-<pre><code>const arr = [];
-arr[0] = &quot;a&quot;;
-arr[3] = &quot;b&quot;;
-arr[10] = &quot;c&quot;;
-arr.name = &quot;Hello world&quot;;
-arr.forEach((data, index, array) =&gt; {
-    console.log(data, index, array);
-});
-</code></pre>
-<p>运行结果：</p>
-<pre><code>a 0 [&quot;a&quot;, 3: &quot;b&quot;, 10: &quot;c&quot;, name: &quot;Hello world&quot;]
-b 3 [&quot;a&quot;, 3: &quot;b&quot;, 10: &quot;c&quot;, name: &quot;Hello world&quot;]
-c 10 [&quot;a&quot;, 3: &quot;b&quot;, 10: &quot;c&quot;, name: &quot;Hello world&quot;]
-</code></pre>
-<p>这里的 index 是 Number 类型，并且也不会像 for-in 一样遍历原型链上的属性。</p>
-<p>所以，使用 forEach 时，我们不需要专门地声明 index 和遍历的元素，因为这些都作为回调函数的参数。</p>
-<p>另外，forEach 将会遍历数组中的所有元素，但是 ES5 定义了一些其他有用的方法，下面是一部分：</p>
-<ul>
-<li>every: 循环在第一次 return false 后返回</li>
-<li>some: 循环在第一次 return true 后返回</li>
-<li>filter: 返回一个新的数组，该数组内的元素满足回调函数</li>
-<li>map: 将原数组中的元素处理后再返回</li>
-<li>reduce: 对数组中的元素依次处理，将上次处理结果作为下次处理的输入，最后得到最终结果。</li>
-</ul>
-<h3 id="foreach的性能"><a class="header-anchor" href="#foreach的性能"></a>forEach的性能</h3>
-<p>大家可以看 jsPerf ，在不同浏览器下测试的结果都是 forEach 的速度不如 for。如果大家把测试代码放在控制台的话，可能会得到不一样的结果，主要原因是控制台的执行环境与真实的代码执行环境有所区别。</p>
-<h2 id="for-of"><a class="header-anchor" href="#for-of"></a>for of</h2>
-<pre><code>const arr = ['a', 'b', 'c'];
-for(let data of arr) {
-    console.log(data);
-}
-</code></pre>
-<p>运行结果是：</p>
-<pre><code>a
-b
-c
-</code></pre>
-<h3 id="为什么要引进-for-of？"><a class="header-anchor" href="#为什么要引进-for-of？"></a>为什么要引进 for-of？</h3>
-<p>要回答这个问题，我们先来看看ES6之前的 3 种 for 循环有什么缺陷：</p>
-<ul>
-<li>forEach 不能 break 和 return；</li>
-<li>for-in 缺点更加明显，它不仅遍历数组中的元素，还会遍历自定义的属性，甚至原型链上的属性都被访问到。而且，遍历数组元素的顺序可能是随机的。</li>
-</ul>
-<p>所以，鉴于以上种种缺陷，我们需要改进原先的 for 循环。但 ES6 不会破坏你已经写好的 JS 代码。目前，成千上万的 Web 网站依赖 for-in 循环，其中一些网站甚至将其用于数组遍历。如果想通过修正 for-in 循环增加数组遍历支持会让这一切变得更加混乱，因此，标准委员会在 ES6 中增加了一种新的循环语法来解决目前的问题，即 for-of 。</p>
-<p>那 for-of 到底可以干什么呢？</p>
-<ul>
-<li>跟 forEach 相比，可以正确响应 break, continue, return。</li>
-<li>for-of 循环不仅支持数组，还支持大多数类数组对象，例如 DOM nodelist 对象。</li>
-<li>for-of 循环也支持字符串遍历，它将字符串视为一系列 Unicode 字符来进行遍历。</li>
-<li>for-of 也支持 Map 和 Set （两者均为 ES6 中新增的类型）对象遍历。</li>
-</ul>
-<p>总结一下，for-of 循环有以下几个特征：</p>
-<ul>
-<li>这是最简洁、最直接的遍历数组元素的语法。</li>
-<li>这个方法避开了 for-in 循环的所有缺陷。</li>
-<li>与 forEach 不同的是，它可以正确响应 break、continue 和 return 语句。</li>
-<li>其不仅可以遍历数组，还可以遍历类数组对象和其他可迭代对象。</li>
-</ul>
-<p>但需要注意的是，for-of循环不支持普通对象，但如果你想迭代一个对象的属性，你可以用</p>
-<p>for-in 循环（这也是它的本职工作）。</p>
-<p>最后要说的是，ES6 引进的另一个方式也能实现遍历数组的值，那就是 Iterator。上个例子：</p>
-<pre><code>const arr = ['a', 'b', 'c'];
-const iter = arr[Symbol.iterator]();
-
-iter.next() // { value: 'a', done: false }
-iter.next() // { value: 'b', done: false }
-iter.next() // { value: 'c', done: false }
-iter.next() // { value: undefined, done: true }
-</code></pre>
-<p>Iterator 要另外再介绍。</p>
-<h2 id="补充foreach的polyfill"><a class="header-anchor" href="#补充foreach的polyfill"></a>补充forEach的polyfill</h2>
-<pre><code>// Production steps of ECMA-262, Edition 5, 15.4.4.18
-// Reference: http://es5.github.io/#x15.4.4.18
-if (!Array.prototype.forEach) {
-  Array.prototype.forEach = function(callback, thisArg) {
-    var T, k;
-    if (this == null) {
-      throw new TypeError(' this is null or not defined');
-    }
-    // 1. Let O be the result of calling toObject() passing the
-    // |this| value as the argument.
-    var O = Object(this);
-    // 2. Let lenValue be the result of calling the Get() internal
-    // method of O with the argument &quot;length&quot;.
-    // 3. Let len be toUint32(lenValue).
-    var len = O.length &gt;&gt;&gt; 0;
-    // 4. If isCallable(callback) is false, throw a TypeError exception. 
-    // See: http://es5.github.com/#x9.11
-    if (typeof callback !== &quot;function&quot;) {
-      throw new TypeError(callback + ' is not a function');
-    }
-    // 5. If thisArg was supplied, let T be thisArg; else let
-    // T be undefined.
-    if (arguments.length &gt; 1) {
-      T = thisArg;
-    }
-    // 6. Let k be 0
-    k = 0;
-    // 7. Repeat, while k &lt; len
-    while (k &lt; len) {
-      var kValue;
-      // a. Let Pk be ToString(k).
-      //    This is implicit for LHS operands of the in operator
-      // b. Let kPresent be the result of calling the HasProperty
-      //    internal method of O with argument Pk.
-      //    This step can be combined with c
-      // c. If kPresent is true, then
-      if (k in O) {
-        // i. Let kValue be the result of calling the Get internal
-        // method of O with argument Pk.
-        kValue = O[k];
-        // ii. Call the Call internal method of callback with T as
-        // the this value and argument list containing kValue, k, and O.
-        callback.call(T, kValue, k, O);
-      }
-      // d. Increase k by 1.
-      k++;
-    }
-    // 8. return undefined
-  };
-}
-</code></pre>
-]]></content>
-      
-        <categories>
-            
-            <category> JavaScript </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 回顾 </tag>
             
         </tags>
         

@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
 <meta property="og:description" content="摘要：垂直同步信号是什么？有啥用？网页会掉帧是什么原因？16ms的特殊意义？网页一帧有多长是怎么判定的？">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-09-03T10:28:59.762Z">
+<meta property="og:updated_time" content="2020-09-03T14:07:10.197Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网页一帧有多长 是如何判定的">
 <meta name="twitter:description" content="摘要：垂直同步信号是什么？有啥用？网页会掉帧是什么原因？16ms的特殊意义？网页一帧有多长是怎么判定的？">
@@ -545,30 +545,30 @@
 <a id="more"></a>
 <h2 id="什么是垂直同步信号："><a class="header-anchor" href="#什么是垂直同步信号："></a>什么是垂直同步信号：</h2>
 <p>我们知道，屏幕是由成千上万个像素点组成的大矩阵，而这个矩阵以极快的速度“从左往右，从上往下”刷新“扫描”每个像素点的值。而人眼感觉不到这种超快的“闪烁”，比如电脑刷新屏幕的物理频率大概是60Hz。当屏幕扫描完一横排像素就会产生“水平同步信号”，当屏幕扫描完所有横排即一屏的像素，就会产生“垂直同步信号”。<strong>也就是“垂直同步信号”反映的是屏幕刷新的频率。</strong></p>
-<p>(我们知道“帧”不仅仅可以描述反映屏幕刷新的频率，也可以描述反映网页动画变化的频率，描述的对象如有省略，由文章的上下文来判断，这里先提前说明一下。)</p>
+<p>(我们知道“帧”不仅仅可以描述反映屏幕刷新的频率，也可以描述反映网页渲染变化的频率，描述的对象如有省略，由文章的上下文来判断，这里先提前说明一下。)</p>
 <h2 id="垂直同步信号的意义："><a class="header-anchor" href="#垂直同步信号的意义："></a>垂直同步信号的意义：</h2>
 <blockquote>
 <p>垂直同步信号：如果GPU渲染频率比屏幕刷新频率高的话，会有两帧画面在一起出现。所以利用垂直同步信号压制GPU渲染的频率，以免浪费性能。因此如果有些游戏要求频率高，又开启了垂直同步，但是屏幕硬件的刷新频率低拖慢了被压制的GPU渲染频率，也会有掉帧的现象。(GPU渲染频率慢就会有掉帧的效果。) <a href="https://www.infoq.cn/article/javascript-high-performance-animation-and-page-rendering/" target="_blank" rel="noopener">via</a></p>
 </blockquote>
-<p>我们知道玩电子游戏通常可以选择“是否垂直同步信号”，它的意思是是否等该帧显示完再显示下一帧，这个选项需要我们发挥一点推理能力来理解。这里直接给出结论：</p>
+<p>我们知道玩电子游戏通常可以选择“是否开启垂直同步信号”，它的意思是是否等该帧显示完再显示下一帧，这个选项需要我们发挥一点推理能力来理解。这里直接给出结论：</p>
 <ul>
 <li>如果关闭“垂直同步信号”的问题：浪费GPU性能+两帧画面一起出现</li>
 <li>如果打开“垂直同步信号”以压制GPU频率：如果(机器的)屏幕刷新频率太慢，会导致掉帧。</li>
 </ul>
-<p>而如果把网页页面渲染比作游戏，其实就是开启了“垂直同步信号”的这种情况，即网页要靠“垂直同步信号”压制压低GPU频率，网页渲染也就天生地具备“掉帧”的风险。</p>
+<p>而如果把网页页面渲染比作游戏界面，其实正是开启了“垂直同步信号”的这种情况，即网页要靠“垂直同步信号”压制压低GPU频率，网页渲染也就天生地具备了“掉帧”的风险。</p>
 <h2 id="网页16ms界限的意义："><a class="header-anchor" href="#网页16ms界限的意义："></a>网页16ms界限的意义：</h2>
 <p>16ms也就是60Hz的时间间隔。因为网页渲染的机制引用了“垂直同步信号”压制压低GPU频率，所以可 <strong>从屏幕刷新的理念中沿用，</strong> 并确立一个16ms界限。</p>
-<p>假设网页渲染的每帧比16ms短是没有意义的(也就是浪费CPU性能并且超出屏幕当前的能力)。但是网页渲染每帧可以比16ms长。</p>
+<p>假设网页渲染的每帧比16ms短是没有意义的(也就是浪费GPU性能并且超出屏幕当前的能力)。但是网页渲染每帧可以比16ms长。</p>
 <p><strong>屏幕刷新频率 vs 人眼的接收频率：</strong> 人眼每秒刷新20次，也就是以20Hz来接收光信号。但是机器一般要每秒刷新更多的次数，才能使得动画流畅。但是假设快如每秒60次，再往上，更快(对于一般的场景要求)已经察觉不到差别了。</p>
 <p>在这里，我先把 <strong>结论</strong> 上了：(后文再解释浏览器具体是怎么利用“垂直同步信号”压制压低GPU频率，也就是网页刷新是怎么实现的)</p>
-<p>对于网页上的多数情况：</p>
+<p>对于在网页上的多数情况：</p>
 <ul>
 <li>网页帧的频率(小于并且逼近60Hz)  ===  UI input回调(scoll resize mouseover等)触发的频率  ===  raq的触发频率
 <ul>
 <li>(requestAnimationFrame只知道这已是网页新的一帧，但是它不知道一帧需要多长的时间(也就是有可能一帧比16ms长)。)</li>
 </ul>
 </li>
-<li>CPU的潜力  &gt;  屏幕刷新频率(60Hz)  &gt;=  网页帧的频率(小于并且逼近60Hz)  &gt;  用户click操作频率</li>
+<li>GPU的潜力  &gt;  屏幕刷新频率(60Hz)  &gt;=  网页帧的频率(小于并且逼近60Hz)  &gt;  用户click操作频率</li>
 <li>event loop的频率  通常&gt;  屏幕刷新频率(60Hz)  &gt;=  网页帧的频率(小于并且逼近60Hz)  &gt;  用户click操作频率
 <ul>
 <li>在防抖节流的章节，我们通常设置80ms作为间隔，也就是12Hz的样子，当然防抖节流具体得看场景。</li>
@@ -577,13 +577,9 @@
 </ul>
 <h2 id="详细解释推导网页的-帧有多长时间-是怎么判定和实现的："><a class="header-anchor" href="#详细解释推导网页的-帧有多长时间-是怎么判定和实现的："></a>详细解释推导网页的“帧有多长时间”是怎么判定和实现的：</h2>
 <ul>
-<li>开始执行新的关键渲染路径task的条件
-<ul>
-<li>在每一个event loop末尾检查【1】是否需要更新页面【2】垂直同步信号是否到达</li>
-</ul>
-</li>
-<li>在关键渲染路径最后的“由调度线程把计算出来的渲染数据提交给CPU完成渲染”这一步骤，标志着一帧的结束，也是新的一帧的开始。<strong>一帧有多长就是这样决定的</strong>。</li>
-<li>(补充说明：一个task，即便是负责执行关键渲染路径的task，其执行时长跨度可以远低于16ms，也可以远多于16ms)</li>
+<li>开始执行新的关键渲染路径task的条件：在每一个event loop末尾检查【1】是否需要更新页面【2】垂直同步信号是否到达</li>
+<li>在关键渲染路径最后的“由调度线程把计算出来的渲染数据提交给GPU完成渲染”这一步骤，标志着一帧的结束，也是新的一帧的开始。<strong>一帧有多长就是这样决定的</strong>。</li>
+<li>(补充说明：一个task，即便是负责执行关键渲染路径的task，其执行时长跨度可能远低于16ms，也可能远多于16ms)</li>
 <li>(补充说明：很多文章声称“垂直同步信号决定了网页一帧的开始”，这个观点是错误的，我就被该观点坑了很久)</li>
 </ul>
 <blockquote>
@@ -596,7 +592,7 @@
 <ul>
 <li>补充chome devtool控制台performance timeline的相关事实：
 <ul>
-<li>实灰线是等时间间隔线。但是这个“等时间间隔”随着你的缩放也会拉长或者缩短，这是一个不直观的隐藏规律</li>
+<li>实灰线是等时间间隔线。但是这个“等时间间隔”随着你的缩放也会拉长或者缩短，注意一下就行了</li>
 <li>粗虚线就是网页的帧之间的分割线</li>
 </ul>
 </li>
@@ -610,7 +606,7 @@
         <p><span>本文标题:</span><a href="/2020/04/03/how-long-a-frame-is/">网页一帧有多长 是如何判定的</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2020-04-03, 20:31:40</p>
-        <!-- <p><span>最后更新:</span>2020-09-03, 18:28:59</p> -->
+        <!-- <p><span>最后更新:</span>2020-09-03, 22:07:10</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="网页一帧有多长 是如何判定的" href="/2020/04/03/how-long-a-frame-is/">https://blog.az22c.top/2020/04/03/how-long-a-frame-is/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://blog.az22c.top/2020/04/03/how-long-a-frame-is/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -690,7 +686,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/05/22/cross-origin-cross-tab/">02-跨域通信和跨tab通信</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/22/cross-origin-cross-site/">01-跨域和跨站的基本概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/03/how-long-a-frame-is/">网页一帧有多长 是如何判定的</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/02/settimeout-0-to-9/">面试题：改造代码，使之隔秒输出0 - 9</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/02/vue-lazyload-summary/">Vue-lazyload 原理和使用 个人总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/06/height-calculate/">深入理解文字高度和行高的设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/05/vertical-align-middle/">vertical-align:middle近似居中和完美居中</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/05/centralize-one-ele/">总结：使单一对象水平/垂直居中</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/05/js-functional-intro/">到底什么是函数式编程 精简总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/04/performance-optimized-summary/">Web前端性能优化概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/12/git-stage/">git暂存区知识梳理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/17/ife-css-task03/">三栏式布局--IFE2017-CSS-task03笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/07/css-border1/">border-radius属性</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/03/js-obj-prop1/">对象属性的操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/02/js-obj-prop2/">对象属性描述符</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/01/js-obj-prop3/">对象属性之对象状态</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/12/js-inherit/">es5实现继承的6种方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/12/js-new-happen/">new创建对象的过程发生了什么</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/09/js-prototype-practice/">原型对象 实战使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/08/js-proto/">理解prototype、__proto__和constructor等关系</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/07/js-this2/">this绑定的优先级</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/07/js-this/">结合this的4种绑定规则 深入理解this指向的判定</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/02/js-event4/">浏览器事件冒泡或者捕获相关</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/01/js-event3/">js四种事件处理程序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/01/js-pv-default/">js取消默认事件行为</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/08/let-n-const/">let和const旧话新编</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/07/js-date/">JavaScript Date对象回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/07/vue-checkbox-table/">纯vue实现checkbox父子联动</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/25/vue-time-tracker/">经典vue单页路由入门全家桶</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/15/vue-table-nav/">按条目展示表格数据小插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/clearfix-n-bfc/">闭合浮动和BFC和阻止上下外边距的合并</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/ife-css-task02/">IFE2017-CSS-task02笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/31/css-selectors-specificity/">CSS选择器优先级</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/28/h5-new-ele/">H5新标签和被H5拥抱的老元素们</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/27/ife-css-task01/">IFE2017-CSS-task01笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/10/iife-intro/">IIFE回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/09/for-loop/">js的for循环回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/float-n-absolute/">float和绝对定位比较</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/about-margin/">和margin有关的知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/gulp-usage/">gulp的入门和一些简单使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/27/icon-usage/">桌面端和移动端图标的引入</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/25/webapp-events-intro/">移动开发事件入门概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/24/webapp-intro/">移动开发入门概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/my-hexo-theme/">yelee主题改bug总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/17/todo-app/">ToDo小应用完工总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/equality-operators/">相等操作符回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/js-operators/">操作符回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/25/font-face/">font-face--CSS3</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/13/js-function/">js函数基础回顾</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/05/22/cross-origin-cross-tab/">02-跨域通信和跨tab通信</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/22/cross-origin-cross-site/">01-跨域和跨站的基本概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/03/how-long-a-frame-is/">网页一帧有多长 是如何判定的</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/02/settimeout-0-to-9/">面试题：改造代码，使之隔秒输出0 - 9</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/02/vue-lazyload-summary/">Vue-lazyload 原理和使用 个人总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/06/height-calculate/">深入理解文字高度和行高的设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/05/vertical-align-middle/">vertical-align:middle近似居中和完美居中</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/05/centralize-one-ele/">总结：使单一对象水平/垂直居中</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/05/js-functional-intro/">到底什么是函数式编程 精简总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/04/performance-optimized-summary/">Web前端性能优化概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/12/git-stage/">git暂存区知识梳理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/17/ife-css-task03/">三栏式布局--IFE2017-CSS-task03笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/07/css-border1/">border-radius属性</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/03/js-obj-prop1/">对象属性的操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/02/js-obj-prop2/">对象属性描述符</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/01/js-obj-prop3/">对象属性之对象状态</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/12/js-inherit/">es5实现继承的6种方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/12/js-new-happen/">new创建对象的过程发生了什么</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/09/js-prototype-practice/">原型对象 实战使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/08/js-proto/">理解prototype、__proto__和constructor等关系</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/07/js-this2/">this绑定的优先级</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/07/js-this/">结合this的4种绑定规则 深入理解this指向的判定</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/02/js-event4/">浏览器事件冒泡或者捕获相关</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/01/js-event3/">js四种事件处理程序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/01/js-pv-default/">js取消默认事件行为</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/08/let-n-const/">let和const旧话新编</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/07/js-date/">JavaScript Date对象回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/07/vue-checkbox-table/">纯vue实现checkbox父子联动</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/25/vue-time-tracker/">经典vue单页路由入门全家桶</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/15/vue-table-nav/">按条目展示表格数据小插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/clearfix-n-bfc/">闭合浮动和BFC和阻止上下外边距的合并</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/ife-css-task02/">IFE2017-CSS-task02笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/31/css-selectors-specificity/">CSS选择器优先级</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/28/h5-new-ele/">H5新标签和被H5拥抱的老元素们</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/27/ife-css-task01/">IFE2017-CSS-task01笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/10/iife-intro/">IIFE回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/float-n-absolute/">float和绝对定位比较</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/about-margin/">和margin有关的知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/gulp-usage/">gulp的入门和一些简单使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/27/icon-usage/">桌面端和移动端图标的引入</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/25/webapp-events-intro/">移动开发事件入门概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/24/webapp-intro/">移动开发入门概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/my-hexo-theme/">yelee主题改bug总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/17/todo-app/">ToDo小应用完工总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/equality-operators/">相等操作符回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/js-operators/">操作符回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/25/font-face/">font-face--CSS3</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/13/js-function/">js函数基础回顾</a></li></ul>
 
 
 
@@ -713,7 +709,7 @@
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					
-						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,564</span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,565</span>
 					
 				</div>
             </div>
