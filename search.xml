@@ -4,6 +4,1879 @@
   
     
     <entry>
+      <title><![CDATA[Vue2源码【9】收获总结]]></title>
+      <url>https://blog.az22c.top/2020/09/01/vue2-src-code-summary/</url>
+      <content type="html"><![CDATA[<p>Vue2源码系列终于要完结了。最后总结一下阅读过程中的一些收获，主要分为4个方面：</p>
+<p>“架构设计方面”、“目录和模块设计”、“编程具体模块的实现”、“怎么看源码”</p>
+<a id="more"></a>
+<h2 id="架构设计方面"><a class="header-anchor" href="#架构设计方面"></a>架构设计方面</h2>
+<h3 id="目录和模块设计"><a class="header-anchor" href="#目录和模块设计"></a>目录和模块设计</h3>
+<p>浏览器端的 Vue.js 和服务端的 Vue.js 所共享的模块抽象成一个单独的目录。这大概就是“动静分离”吧，本文后面还有讲到。</p>
+<ul>
+<li>路径别名：这里找了一个文件专门来放置全局的路径别名。一般都是和<code>path.resolve</code>模块结合使用。</li>
+<li>core模块+分层结构：其实vue就是在core模块完成了初始化，然后导出到不同的模块进行一层一层对vue的修饰和包装。这种项目结构看源码会浪费很多时间抓不到重点。所以大致列举一下在不同的文件增加了什么属性就行了。
+<ul>
+<li>一般只看index的文件就可以了，其他的无非是该层内的修饰和资源配置。</li>
+</ul>
+</li>
+</ul>
+<h2 id="编程具体模块的实现"><a class="header-anchor" href="#编程具体模块的实现"></a>编程具体模块的实现</h2>
+<blockquote>
+<p>src/core/instance/index.js</p>
+</blockquote>
+<p><strong>【1】构造函数为什么不直接用class：</strong></p>
+<p>在这里，我们终于看到了 Vue 的庐山真面目，它实际上就是一个用 Function 实现的类，我们只能通过 <code>new Vue</code> 去实例化它。</p>
+<p>有些同学看到这不禁想问，为何 Vue 不用 ES6 的 Class 去实现呢？我们往后看这里有很多 <code>xxxMixin</code> 的函数调用，并把 <code>Vue</code> 当参数传入，它们的功能都是给 Vue 的 prototype 上扩展一些方法（这里具体的细节会在之后的文章介绍，这里不展开），Vue 按功能把这些扩展分散到多个模块中去实现，而不是在一个模块里实现所有，这种方式是用 Class 难以实现的。这么做的好处是非常方便代码的维护和管理，这种编程技巧也非常值得我们去学习。<strong>这样是容易把代码拆分到不同的文件中。</strong></p>
+<p>一方面需要拓展原型上的方法，另一方面，后面利用<code>initGlobalAPI</code>来拓展这个函数的静态属性或者静态方法。</p>
+<p><strong>【2】清晰的初始化大函数划分</strong>：</p>
+<p>在initMixin里面，我们能看到这种清晰的结构：</p>
+<pre><code class="language-js">initLifecycle(vm);
+initEvents(vm);
+initRender(vm);
+callHook(vm, 'beforeCreate');
+initInjections(vm); // resolve injections before data/props
+initState(vm);
+initProvide(vm); // resolve provide after data/props
+callHook(vm, 'created');
+</code></pre>
+<p>实际上还是需要这些大函数相互之间没有数据上的关联或者耦合，否则这个逻辑很难debug。</p>
+<p><strong>【3】JSON化</strong></p>
+<pre><code class="language-js">// scripts/config.js
+const builds = {
+  // ...一个大JSON
+}
+function genConfig() {}
+const getAllBuilds = () =&gt; Object.keys(builds).map(genConfig)
+</code></pre>
+<p>为什么有这样的设计呢？就是一开始先定义好了<code>builds</code>的格式就是JSON的，其他的代码围绕它做配置。</p>
+<p>这里<code>genConfig</code>其实就是把<code>builds</code>处理成Rollup能接受的JSON参数的格式。</p>
+<p><strong>【4】装饰者模式</strong></p>
+<pre><code class="language-js">const mount = Vue.prototype.$mount // 暂存keeper，来自src/platforms/web/runtime/index.js
+Vue.prototype.$mount = function () {
+  // 各种判断
+  return mount.call(this, el, hydrating)
+}
+</code></pre>
+<p><strong>【5】函数参数的重载：</strong></p>
+<pre><code class="language-js">function createElement (context, tag, data, children, normalizationType) {
+  if (Array.isArray(data) || isPrimitive(data)) {
+    normalizationType = children
+    children = data
+    data = undefined
+  }
+</code></pre>
+<p>这里参数根据data的情况，把所有“对参数位的捕获”往后挪。</p>
+<p><strong>【6】一个简单好用的once函数</strong></p>
+<pre><code class="language-JavaScript">// Ensure a function is called only once.
+export function once (fn: Function): Function {
+  let called = false
+  return function () {
+    if (!called) {
+      called = true
+      fn.apply(this, arguments)
+    }
+  }
+}
+</code></pre>
+<p><strong>【7】createPatchFunction 的柯里化实现“动静分离” #一些启发</strong> 从我的文章摘抄过来</p>
+<p>我们可以思考一下为何 Vue 源码绕了这么一大圈，把相关代码分散到各个目录：</p>
+<p>前面也介绍过，<code>patch</code> 是平台相关的，在 Web 和 Weex 环境，它们把虚拟 DOM 映射到 “平台 DOM” 的方法是不同的，并且对 “DOM” 包括的属性模块创建和更新也不尽相同。**因此每个平台都有各自的 <code>nodeOps</code> 和 <code>modules</code>，**它们的代码需要托管在 <code>src/platforms</code> 这个大目录下。</p>
+<p>而不同平台的 <code>patch</code> 的主要逻辑部分是相同的，所以这部分公共的部分托管在 <code>core</code> 这个大目录下。</p>
+<p>综上所述：<strong>差异化部分</strong>只需要通过参数来区别，这里利用闭包实现函数柯里化，通过 <code>createPatchFunction</code> 把差异化参数提前传入固化。好处是：</p>
+<p>1先在外部<strong>判断</strong>需要什么类型的patch，然后选择把一些依赖通过参数传递进去。而不是在patch函数内部实现一大堆<strong>判断逻辑</strong></p>
+<p>2不用每次调用 <code>patch</code> 的时候都传入 <code>nodeOps</code> 和 <code>modules</code>。</p>
+<h2 id="怎么看源码"><a class="header-anchor" href="#怎么看源码"></a>怎么看源码</h2>
+<blockquote>
+<p>找到学习路线，别人已经分好的模块。还有别人先探知过程中会执行那些函数，都是脏活累活。</p>
+</blockquote>
+<p>vue npm包dist几个没有压缩的文件还有src文件，可能是为了方便调试的，这几个文件内容差别不大。</p>
+<p>npm包怎么被一个项目所引用，知识要具备。然后打一个debugger，断点会有调用栈call stack信息的，点击是能够翻阅怎么调用进来的。</p>
+<p>区分阶段：比如搜到 <code>createCompiler</code>，然后打断点打印 <code>code.render</code>，这是表示解析ast之后的字符串。ast生成过程可以先不管细节。src/instance/render-helpers/index.js可以看到压缩前后的函数名对应关系。</p>
+<h4 id="看辅助函数-而且该辅助函数if-else逻辑比较多-的技巧"><a class="header-anchor" href="#看辅助函数-而且该辅助函数if-else逻辑比较多-的技巧"></a>看辅助函数(而且该辅助函数if else逻辑比较多)的技巧</h4>
+<p>翻开test目录，看该辅助还是的“单元测试”</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Vue </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 源码 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Vue2源码【8-6】指令]]></title>
+      <url>https://blog.az22c.top/2020/09/01/vue2-src-code-66-directive/</url>
+      <content type="html"><![CDATA[<p>“指令”这部分源码，也容易看得晕头转向，这部分代码贯穿了整个核心流程，是没有独立出来的。而常见的指令v-bind、v-on、v-model、v-if v-show等等都是通过这套机制来实现的。</p>
+<p>这篇文章干货不多，主要是再对前面已经讲过原理的各种指令的实现有一个宏观的认识。</p>
+<a id="more"></a>
+<h2 id="updatedirectives的核心是-update函数-知道标题该结论就行了"><a class="header-anchor" href="#updatedirectives的核心是-update函数-知道标题该结论就行了"></a>updateDirectives的核心是<code>_update</code>函数 #知道标题该结论就行了</h2>
+<p>Vue.directive  ==&gt;   Vue.options.directives</p>
+<p>在 patch 过程中，会调用 createElm ==&gt; invokeCreateHooks 在调用cbs.create的时候，调用预设的updateDirectives</p>
+<p>在 updateDirectives 方法中，如果虚拟DOM的 data.directives 属性存在，会调用内部方法 _update 。该方法比较很重要，自定义指令提供的钩子都在该函数中进行处理，下面分步详细解读该函数。</p>
+<p><strong>指令的这几个生命周期钩子，调用时机全都在这个<code>_update</code>函数中。</strong> 生命周期就不多说，官方文档已经描述了其实现效果，照着实现就行了。</p>
+<ul>
+<li><code>v-bind 普通属性 + class + style</code> #都是老老实实增删改 #由钩子函数带动</li>
+<li>v-on： 之前关于事件系统的文章已经有说明了</li>
+<li>v-model：也很简单，能扣的细节，已经在之前的文章中讲过了</li>
+<li>v-if v-show：如下</li>
+</ul>
+<h2 id="v-if-v-show"><a class="header-anchor" href="#v-if-v-show"></a>v-if v-show</h2>
+<blockquote>
+<p>v-if 是“真正”的条件渲染，因为它会确保在切换过程中条件块内的事件监听器和子组件适当地被销毁和重建；v-show 就简单得多：不管初始条件是什么，元素总是会被渲染，并且只是简单地基于 CSS 进行切换。</p>
+</blockquote>
+<ul>
+<li>带有 v-if 指令的模板会编译成根据数据源真假值来调用具体辅助方法的渲染函数，v-if 会根据数据源真假值来决定<strong>是否渲染该节点</strong>。</li>
+<li>v-show 指令根据表达式之真假值，切换元素的 display CSS 属性。当条件变化时该指令触发过渡效果。
+<ul>
+<li>在调用处理指令的钩子函数 updateDirectives 时，v-show 指令有所不同，<strong>相当于 v-show 内部实现了自定义指令的 bind、update、unbind 三个阶段的钩子函数。</strong></li>
+</ul>
+</li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> Vue </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 源码 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Vue2源码【8-5】keep-alive]]></title>
+      <url>https://blog.az22c.top/2020/09/01/vue2-src-code-65-keep-alive/</url>
+      <content type="html"><![CDATA[<p>keep-alive是vue的内置组件，如果是用户想要自己实现一个类似keep-alive的组件是不可能的，因为需要vue的主干逻辑配合该组件的实现。</p>
+<p>keep-alive的作用是缓存的是子组件的vnode，而其本身的render返回的也是vnode。</p>
+<a id="more"></a>
+<ul>
+<li>keep-alive表现出来的特点：
+<ul>
+<li><strong>它的作用就是缓存vnode！！！！！！！！！！！！！！！！！</strong></li>
+<li><strong>只处理第一个子节点</strong>
+<ul>
+<li><code>&lt;keep-alive&gt;</code> 是用在其一个直属的子组件“被切换”的情形。</li>
+</ul>
+</li>
+<li>易知其原理有一部分是基于slot等的原理</li>
+<li>( 是抽象组件 )</li>
+<li>api
+<ul>
+<li><code>this.cache</code> 和 <code>this.keys</code>：去缓存已经创建过的 <code>vnode</code></li>
+<li>props
+<ul>
+<li>include 和 exclude</li>
+<li>还定义了 max，它表示缓存的大小。因为我们是缓存的 vnode 对象，它也会持有 DOM，当我们缓存很多的时候，会比较占用内存，所以该配置允许我们指定缓存大小。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>从用法可以看出，其原理无非就是对vnode数组的一些处理。这就不需要死记硬背其工作流程了。</p>
+<p>【1】实际上，考虑了 MVVM“重新渲染”的过程中，需要重新执行keep-alive的逻辑。所以keep-alive有必要实现render函数，已实现更加复杂的函数逻辑。</p>
+<ul>
+<li><code>&lt;keep-alive&gt;</code> 作为组件配置options直接实现了 <code>render</code> 函数
+<ul>
+<li>而不是我们常规的template模板描述视图的方式</li>
+<li>执行 <code>&lt;keep-alive&gt;</code> 组件渲染的时候，就会执行到这个 <code>render</code> 函数。</li>
+</ul>
+</li>
+</ul>
+<p>【2】另外一个特点就是依赖slot等等的机制来获取：这里面首次渲染和缓存渲染的逻辑是不一样的：</p>
+<h3 id="slot的首次渲染"><a class="header-anchor" href="#slot的首次渲染"></a>slot的首次渲染</h3>
+<p>对我们的例子，初始化渲染 <code>A</code> 组件以及第一次点击 <code>switch</code> 渲染 <code>B</code> 组件，都是首次渲染。</p>
+<p>除了在 <code>&lt;keep-alive&gt;</code> 中建立缓存，和普通组件渲染没什么区别。</p>
+<h3 id="slot的缓存渲染"><a class="header-anchor" href="#slot的缓存渲染"></a>slot的缓存渲染</h3>
+<p>当我们从 <code>B</code> 组件再次点击 <code>switch</code> 切换到 <code>A</code> 组件，就会命中缓存渲染：</p>
+<ul>
+<li>(keep-alive这个组件作为父组件)patch 走 patchVnode
+<ul>
+<li><code>prepatch</code> 的钩子函数核心是 updateChildComponent
+<ul>
+<li>需要对自己的 <code>children</code>，也就是这些 <code>slots</code> 做重新解析，
+<ul>
+<li>并触发 <code>&lt;keep-alive&gt;</code> 组件实例 <code>$forceUpdate</code> 逻辑，也就是重新执行 <code>&lt;keep-alive&gt;</code> 的 <code>render</code> 方法</li>
+<li>这个时候如果它包裹的第一个组件 <code>vnode</code> 命中缓存，则直接返回缓存中的 <code>vnode.componentInstance</code></li>
+<li>( 在我们的例子中就是缓存的 <code>A</code> 组件 )</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>接着又会执行 <code>patch</code> 过程，再次执行到 <code>createComponent</code> 方法
+<ul>
+<li>（这个时候 <code>isReactivated</code> 为 true，并且在执行 <code>init</code> 钩子函数的时候不会再执行组件的 <code>mount</code> 过程了。这也就是被 <code>&lt;keep-alive&gt;</code> 包裹的组件在有缓存的时候就不会在执行组件的 <code>created</code>、<code>mounted</code> 等钩子函数的原因了）</li>
+<li>在 <code>isReactivated</code> 为 true 的情况下会执行 <code>reactivateComponent</code> 方法
+<ul>
+<li>最后通过执行 <code>insert(parentElm, vnode.elm, refElm)</code> 就把缓存的 DOM 对象直接插入到目标元素中，完成渲染。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="生命周期"><a class="header-anchor" href="#生命周期"></a>生命周期</h2>
+<p>上面过程大概解释了keep-alive运作过程中哪些生命周期钩子是否触发：</p>
+<p>在 <code>patch</code> 过程中对于已缓存的组件不会执行 <code>mounted</code>，所以不会有一般的组件的生命周期函数但是又提供了 <code>activated</code> 和 <code>deactivated</code> 钩子函数。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Vue </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 源码 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Vue2源码【8-4】slot和slotScope]]></title>
+      <url>https://blog.az22c.top/2020/09/01/vue2-src-code-64-slot/</url>
+      <content type="html"><![CDATA[<p>对于同一个组件实例，其 vnode 其实包括其“占位符节点”和“真实节点”，它们是父子节点关系。基于这点知识，再去理解slot等机制并不难。</p>
+<p>然后再解释了一下为什么slot和slotScope之流为什么不是响应式的。已经再介绍一下vue3正式登场的v-slot。</p>
+<a id="more"></a>
+<h2 id="slot的原理-2-6又稍微改了一下"><a class="header-anchor" href="#slot的原理-2-6又稍微改了一下"></a>slot的原理 #2.6又稍微改了一下</h2>
+<p><strong>总结：slot插槽(即传给子组件的props.children)的vnode的生成，已在父组件创建和渲染阶段完成。</strong></p>
+<p>可以打印中间过程的代码生成结果，来 <strong>验证</strong> 这个看法：</p>
+<p>父组件及其slot代码示例：<code>/* 父组件略 */&lt;h1 slot=&quot;header&quot;&gt;anything&lt;/h1&gt;/* 父组件略 */</code></p>
+<pre><code class="language-JavaScript">// 父组件，经编译阶段最终生成的代码：
+// _s可不管 _v：createTextVNode
+// with(this) { return
+_c('div', [_c('app-layout', [_c('h1', {
+  attrs: {
+    &quot;slot&quot;: &quot;header&quot;
+  },
+  slot: &quot;header&quot;
+}, [_v(_s(title))]), _c('p', [_v(_s(msg))]), _c('p', {
+  attrs: {
+    &quot;slot&quot;: &quot;footer&quot;
+  },
+  slot: &quot;footer&quot;
+}, [_v(_s(desc))])])], 1)
+</code></pre>
+<p>子组件代码示例：<code>&lt;slot name=&quot;header&quot;&gt;默认内容&lt;/slot&gt;</code></p>
+<pre><code class="language-JavaScript">// 子组件，经编译阶段最终生成的代码：
+// 【重要】 _t是renderSlot
+// with(this) { return
+_c('div', {
+  staticClass: &quot;container&quot;
+}, [ _c('header', [_t(&quot;header&quot;)], 2),
+    _c('main', [_t(&quot;default&quot;, [_v(&quot;默认内容&quot;)])], 2),
+    _c('footer', [_t(&quot;footer&quot;)], 2)])
+</code></pre>
+<h2 id="slotscope的原理-2-6又稍微改了一下"><a class="header-anchor" href="#slotscope的原理-2-6又稍微改了一下"></a>slotScope的原理 #2.6又稍微改了一下</h2>
+<p><strong>总结：把 scopeSlot插槽 作为一个函数保留下来。scopeSlot插槽(即传给子组件占位符的props.children)的vnode的生成，要延迟到子组件的创建阶段</strong></p>
+<p>也是打印中间过程生成代码：</p>
+<p>父组件：</p>
+<pre><code class="language-JavaScript">// with(this) { return
+_c('div',
+  [_c('child', {
+    scopedSlots: _u([{
+      key: &quot;default&quot;,
+      fn: function(props) {
+        return [
+          _c('p', [_v(&quot;Hello from parent&quot;)]),
+          _c('p', [_v(_s(props.text + props.msg))])
+        ]}}])})],1)
+</code></pre>
+<p>子组件，例如：<code>&lt;slot name=&quot;header&quot; text=&quot;hello&quot; :msg=&quot;msg&quot;&gt;默认内容&lt;/slot&gt;</code></p>
+<pre><code class="language-JavaScript">// 【重要】 _t是renderSlot。
+// 这里代码简单了很多：
+_c('div',
+    {staticClass:&quot;child&quot;},
+    [_t(&quot;default&quot;,null,
+      {text:&quot;Hello &quot;,msg:msg}
+    )],
+</code></pre>
+<h2 id="插槽的数据更新-v2-6之前-：-通常在响应式系统-组件更新-的流程中-非响应式"><a class="header-anchor" href="#插槽的数据更新-v2-6之前-：-通常在响应式系统-组件更新-的流程中-非响应式"></a>插槽的数据更新(v2.6之前)： 通常在响应式系统“组件更新”的流程中 #非响应式</h2>
+<blockquote>
+<p>vm.$slots：请注意插槽<strong>不是</strong>响应性的。</p>
+</blockquote>
+<p>首先，先前依靠的是父组件渲染watcher的依赖收集和派发更新。</p>
+<p>比如对于slot场景下的父组件：</p>
+<ul>
+<li>所依赖的data发生变化</li>
+<li>(渲染watcher的)派发更新,也就是调用 updateComponent 回调函数</li>
+<li><code>__patch__</code>在浏览器环境中就是patch。这里因为是“新旧节点是相似节点”，判断走的是patchVnode</li>
+<li>patchVnode
+<ul>
+<li>i.prePatch ==&gt; updateChildComponent  更新子组件，也<strong>就是更新一下子组件占位符vnode所传入的slot部分</strong>，然后经判断触发子组件forceUpdate！！！也就是调用子组件“渲染watcher.update()”。且更新的子组件的vm.$slots</li>
+<li>(后面逻辑已不相关)</li>
+</ul>
+</li>
+</ul>
+<p>原理：</p>
+<pre><code class="language-JavaScript">// updateChildComponent 中的代码：
+  // Any static slot children from the parent may have changed during parent's update. Dynamic scoped slots may also have changed.
+  //  In such cases, a forced update is necessary to ensure correctness.
+  var needsForceUpdate = !!(
+    // renderChildren指的就是 子组件的slot
+    renderChildren ||               // has new static slots
+    vm.$options._renderChildren ||  // has old static slots
+    hasDynamicScopedSlot
+  );
+</code></pre>
+<p>我们知道，一般来说都是子组件(即渲染vnode)的vnode先生成好了。但，在这些情况，无论slot(以已有slot vnode的形式)或者是scopeSlot(以函数的形式)，若有更新则会产生flag，在占位符节点的updateChildren阶段(通过计算needsForceUpdate)发现了flag，就会执行<code>vm.$forceUpdate</code>(更新的子组件的vnode)。</p>
+<blockquote>
+<p>官网：vm.$forceUpdate() ：迫使 Vue 实例重新渲染。注意它仅仅影响实例本身和插入插槽内容的子组件，而不是所有子组件。</p>
+</blockquote>
+<h6 id="slot和其他响应式更新子组件的方式对比-所以为什么说插槽不是响应式"><a class="header-anchor" href="#slot和其他响应式更新子组件的方式对比-所以为什么说插槽不是响应式"></a>slot和其他响应式更新子组件的方式对比 #所以为什么说插槽不是响应式</h6>
+<blockquote>
+<p>首先一个背景是，react是自顶向下的进行递归更新的，而vue是组件的局部订阅，也就是一般来说，vue父组件渲染watcher相关的更新不会触发子组件的更新。</p>
+</blockquote>
+<p>而props是响应式的，也就是子组件可以订阅了props的更新。slot这里明显和props的这种方式不一样。</p>
+<h2 id="响应式外-特殊情况的处理：也是手动-vm-forceupdate"><a class="header-anchor" href="#响应式外-特殊情况的处理：也是手动-vm-forceupdate"></a>(响应式外)特殊情况的处理：也是手动 vm.$forceUpdate</h2>
+<p>比如这个slot用v-if控制，这样针对子渲染watcher的响应式就不管用了。这个时候，子组件patch阶段updateChildComponent会判定<code>hasDynamicScopedSlot</code>为true，去执行vm.$forceUpdate()。</p>
+<h2 id="v-slot-v2-6之后"><a class="header-anchor" href="#v-slot-v2-6之后"></a>v-slot v2.6之后</h2>
+<p>在编译阶段的变化：调整语法做了点优化，加上语法糖用起来会比较爽一点。</p>
+<p>在运行时阶段的变化： <strong>重要</strong></p>
+<ul>
+<li><code>slot</code> 和 <code>slot-scope</code> 在组件内部被统一整合成了 <code>函数</code></li>
+<li><strong>他们的渲染作用域都是 <code>子组件</code>  (forceUpdate将要作用于的组件实例更加准确)</strong></li>
+<li>并且都能通过 <code>this.$scopedSlots</code>去访问</li>
+</ul>
+<h3 id="数据更新时-v-slot的逻辑：-forceupdate将要作用于的组件实例更加准确"><a class="header-anchor" href="#数据更新时-v-slot的逻辑：-forceupdate将要作用于的组件实例更加准确"></a>数据更新时，v-slot的逻辑： forceUpdate将要作用于的组件实例更加准确</h3>
+<p>子组件数据更新的情况，没啥好说的。</p>
+<ul>
+<li>父组件数据更新的情况：
+<ul>
+<li>因为之前首次构建的时候，执行 <code>_t</code>即<code>renderSlot</code> 函数时，全局的组件渲染上下文是 <code>子组件</code>，那么依赖收集自然也就是收集到 <code>子组件</code>的依赖了。所以在 <code>msgInParent</code> 更新后，其实是直接去触发子组件的重新渲染的</li>
+<li>对比 2.5 的版本，这是一个优化：缩短了响应式的逻辑链条。</li>
+</ul>
+</li>
+</ul>
+<h2 id="总结v-slot的特点"><a class="header-anchor" href="#总结v-slot的特点"></a>总结v-slot的特点</h2>
+<ul>
+<li>记一下插槽名也是可以动态的 这个事实</li>
+<li>解构插槽 Prop
+<ul>
+<li>作用域插槽的内部工作原理是将你的插槽内容包括在一个传入单个参数的函数里</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> Vue </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 源码 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Vue2源码【8-2】v-model]]></title>
+      <url>https://blog.az22c.top/2020/09/01/vue2-src-code-62-v-model/</url>
+      <content type="html"><![CDATA[<p>v-model相关的源码，其实极其复杂。这里主要用文本来概括流程，并且挖掘一些特别的点。</p>
+<p>可以划分为“v-model 在控件的实现”和“v-model 在自定义组件的实现”两部分。</p>
+<a id="more"></a>
+<h2 id="双向绑定：还是要依赖-数据劫持-来实现"><a class="header-anchor" href="#双向绑定：还是要依赖-数据劫持-来实现"></a>双向绑定：还是要依赖 数据劫持 来实现</h2>
+<p><strong>原理：</strong> 拦截监听数据变化，更新到input控件上 + 监听input控件的键入事件，同步到数据上。</p>
+<ul>
+<li><a href="https://www.zhihu.com/question/271270489" target="_blank" rel="noopener">现代前端框架(例如Vue)为什么选择『数据劫持』实现数据双向绑定?</a> <strong>【这个问题不懂也没关系】</strong>
+<ul>
+<li><strong>能实现双向绑定的方式有很多，</strong>
+<ul>
+<li>比如ng就是脏值检测，</li>
+<li>而vue还是数据劫持。</li>
+<li>KnockoutJS基于<strong>观察者模式</strong>，</li>
+<li>Ember基于<strong>数据模型</strong>。</li>
+<li><a href="https://www.zhihu.com/question/44724640" target="_blank" rel="noopener">详细代码见知乎 《如何监测js中变量的变化/如何实现MVVM库的数据绑定》  可不看</a></li>
+<li><img src="https://user-gold-cdn.xitu.io/2018/5/1/1631801840069098" alt="寻找蓝海96总结的能实现双向绑定的方法 --脑图 必看"></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="先来总结一下v-model的特点"><a class="header-anchor" href="#先来总结一下v-model的特点"></a>先来总结一下v-model的特点</h2>
+<blockquote>
+<p>在 Vue3之后，v-model这个模块的语法更加灵活而且便捷，基本上只是增加了上层封装而已。</p>
+</blockquote>
+<ul>
+<li>v-model的本质就是语法糖，但是运行时也做了一些微小的优化</li>
+<li>v-model即可以支持原生表单元素，也可以支持自定义组件。</li>
+<li>对于自定义组件的v-model，我们是可以配置子组件接收的 <code>prop</code> 名称，以及派发的事件名称。</li>
+</ul>
+<h2 id="v-model-在控件的实现"><a class="header-anchor" href="#v-model-在控件的实现"></a>v-model 在控件的实现</h2>
+<p>这个流程其实就是很复杂的数据存取。总之，解析语法糖，转译之后的效果：</p>
+<pre><code class="language-JavaScript">&lt;input
+  v-bind:value=&quot;message&quot;
+  v-on:input=&quot;message=$event.target.value&quot;&gt;
+</code></pre>
+<p>这个转译代码的流程，有时候会添加<code>composing</code>相关的代码到结果中：</p>
+<h6 id="v-model还是和单纯-value-input-有区别-比如中文打字到一半还没按空格-v-model不会获取到-而后者会做-预输入延迟更新-即延迟触发input"><a class="header-anchor" href="#v-model还是和单纯-value-input-有区别-比如中文打字到一半还没按空格-v-model不会获取到-而后者会做-预输入延迟更新-即延迟触发input"></a>v-model还是和单纯“value + @input”有区别，比如中文打字到一半还没按空格，v-model不会获取到，而后者会做“预输入延迟更新”，即延迟触发input</h6>
+<p>总结：onCompositionStart + onCompositionEnd + 自定义e.target.composing来控制是否手动触发input事件</p>
+<ul>
+<li>【-----------中文打字到一半还没按空格--------------------】
+<ul>
+<li>onCompositionStart触发，令e.target.composing = true</li>
+<li>【正常打入中文】</li>
+<li>onCompositionEnd触发，发现true才往下走，先重置掉e.target.composing，然后手动触发一个假input事件并dispatchEvent(e)</li>
+<li>若没有“因为e.target.composing的flag而return终止”，然后引发 message = $event.target.value</li>
+<li><strong>【官网】</strong> 对于需要使用输入法 (如中文、日文、韩文等) 的语言，你会发现 <code>v-model</code> 不会在输入法组合文字过程中得到更新。如果你也想处理这个过程，请使用 <code>input</code> 事件。</li>
+</ul>
+</li>
+</ul>
+<h2 id="v-model-在自定义组件的实现"><a class="header-anchor" href="#v-model-在自定义组件的实现"></a>v-model 在自定义组件的实现</h2>
+<p>又是一些无趣的逻辑处理。在这里就不贴流程了。v-model 在自定义组件的特点是“所在的子组件还能指定哪个属性和哪个事件”：</p>
+<pre><code class="language-JavaScript">{
+  model: {
+    prop: 'msg',
+    event: 'change'
+  }
+}
+</code></pre>
+<p>无非就是执行到 transformmodel的时候：     (也就是在 createComponent的时候)</p>
+<pre><code class="language-JavaScript">function transformModel (options, data) {
+  var prop = (options.model &amp;&amp; options.model.prop) || 'value';
+  var event = (options.model &amp;&amp; options.model.event) || 'input'
+  // ......
+}
+</code></pre>
+]]></content>
+      
+        <categories>
+            
+            <category> Vue </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 源码 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Vue2源码【8-1】event]]></title>
+      <url>https://blog.az22c.top/2020/09/01/vue2-src-code-61-event/</url>
+      <content type="html"><![CDATA[<p>event即事件系统，这部分源码让人看得头皮发麻。但是理解之后发现这部分的逻辑是很重要的，在这里试着用几句话概括流程。</p>
+<p>事件系统分为“DOM 事件”和“自定义事件”，分别为两套处理流程，先有个大概的印象即可。</p>
+<a id="more"></a>
+<p>首先会有编译的过程，按照惯例其源码就略过了。</p>
+<pre><code class="language-js">// 父组件生成的 `data` 串为：
+{
+  on: {&quot;select&quot;: selectHandler}, // 针对组件的自定义事件
+  nativeOn: {&quot;click&quot;: function($event) { // 原生事件
+      $event.preventDefault();
+      return clickHandler($event)
+    }
+  }
+}
+// 子组件生成的 `data` 串为：
+{
+  on: {&quot;click&quot;: function($event) { // 因为渲染节点根节点是原生dom，所以这个也是原生事件
+      clickHandler($event)
+    }
+  }
+}
+</code></pre>
+<p>所谓父组件，其实就是“占位符节点”。而子组件，就是该组件<code>.vue</code>文件中所声明的组件。</p>
+<h2 id="dom-事件"><a class="header-anchor" href="#dom-事件"></a>DOM 事件</h2>
+<p>**DOM 事件(也就是相对而言的原生事件绑定)：在 patch过程中的创建阶段和更新阶段执行 updateDOMListeners 注册 DOM 事件。**代码例子如：</p>
+<ul>
+<li>'&lt;child @select=“selectHandler” @click.native.prevent=“clickHandler”&gt;`</li>
+<li><code>&lt;button @click=&quot;clickHandler($event)&quot;&gt;' + 'click me' + '&lt;/button&gt;</code>  in child component</li>
+</ul>
+<p><strong>无论是对于占位符节点和 渲染节点，它们其实事件都是绑定到同一个真实的dom上。因为渲染节点的逻辑先执行，所以它的会先绑定。</strong> 在例子中也就是<code>&lt;button&gt;</code>的<code>@click</code> + <code>&lt;child&gt;</code>的<code>@click.native</code></p>
+<p>这个机制的代码流程的处理真的太恶心了，就不贴出来了。大概用文字总结一下，在debug的时候大概知道是属于哪里的问题。</p>
+<ul>
+<li><strong>在 patch过程中的创建阶段和更新阶段执行 updateDOMListeners 注册 DOM 事件。</strong>
+<ul>
+<li>遍历 <code>on</code> 去添加事件监听，遍历 <code>oldOn</code> 去移除事件监听</li>
+<li>event = normalizeEvent(name)：根据我们的的事件名的一些特殊标识（之前在 <code>addHandler</code> 的时候添加上的）区分出这个事件是否有 <code>once</code>、<code>capture</code>、<code>passive</code> 等修饰符。</li>
+<li>按照计算结果更新所绑定的回调。这里vue有一个巧妙的机制，能够减小绑定机制的性能消耗，并且防止内存溢出。</li>
+</ul>
+</li>
+</ul>
+<h3 id="vue优化js-dom事件绑定的机制"><a class="header-anchor" href="#vue优化js-dom事件绑定的机制"></a>vue优化js DOM事件绑定的机制</h3>
+<ul>
+<li>**事件回调在第一次只添加一次，之后仅仅去修改它的回调函数的引用指向。其实就是invoke函数创建好了，知道它每次用到invoke.fns，如果更新则更新invoke.fns就好了
+<ul>
+<li>【对于第一次执行】执行 <code>cur = on[name] = createFnInvoker(cur)</code> 方法去创建一个回调函数，然后在执行 <code>add(event.name, cur, event.once, event.capture, event.passive, event.params)</code> 完成一次事件绑定</li>
+<li>createFnInvoker：返回一个函数，它持有一个fns属性，并且它本身的逻辑就是遍历执行这些函数</li>
+<li>【对于第一次之后执行】：只需要更改 <code>old.fns = cur</code> 把之前绑定的 <code>involer.fns</code>  赋值为这一回新的回调函数即可，并且 通过 <code>on[name] = old</code> 保留引用关系</li>
+<li>根据相关预设移除事件回调：<code>updateListeners</code> 函数的最后遍历 <code>oldOn</code> 拿到事件名称，判断如果满足 <code>isUndef(on[name])</code>，则执行 <code>remove(event.name, oldOn[name], event.capture)</code> <strong>去移除旧vnode相关的事件回调。</strong></li>
+<li>(createFnInvoker源码那里有clone一下invoker.fns的，因为invoker.fns它们不是马上执行，后面还会篡改invoker.fns属性再用于设置回调函数，所以先转移到另外一个变量来持有)</li>
+</ul>
+</li>
+</ul>
+<p>源码就不贴了，这段逻辑可以简化为示例代码：</p>
+<pre><code class="language-JavaScript">  // on: {'click': invoker持有fns, 'mouseover': invoker持有fns }
+  for (name in on) {
+    if ('初始化组件的事件') {
+    cur = on[name] = /* 新创建的invoke并持有fns。 createFnInvoker 在这里执行 */
+      domAddEventListener(event.name, cur, event.capture, event.passive, event.params); // [name]作为绑定到dom上的事件回调，是会调用到 它上面的fns的。
+    } else if (cur !== old) { // else if 更新组件的事件
+      old.fns = cur;
+      on[name] = old; // 不重新addEventListener到DOM上，通过这2行更新fns来更新要执行的回调
+    }
+  }
+</code></pre>
+<h3 id="withmacrotask技法"><a class="header-anchor" href="#withmacrotask技法"></a>withMacroTask技法</h3>
+<p>这个技法其实在vue源码中出现了多次。类似的还有withCommit之类的，都是高阶函数。</p>
+<p>既然是事件回调的处理，肯定有封装对原生api的调用。<code>add</code> 和 <code>remove</code> 的逻辑很简单，就是实际上调用原生 <code>addEventListener</code> 和 <code>removeEventListener</code>，并根据参数传递一些配置，注意这里的 <code>hanlder</code> 会用 <code>withMacroTask(hanlder)</code> 包裹一下，它的定义在 <code>src/core/util/next-tick.js</code> 中：</p>
+<pre><code class="language-js">export function withMacroTask (fn) {
+  return fn._withTask || (fn._withTask = function () {
+    useMacroTask = true // 这个变量在对应nextTick相关的闭包里面
+    const res = fn.apply(null, arguments)
+    useMacroTask = false
+    return res
+  })
+}
+</code></pre>
+<p>实际上就是强制：如果在 DOM 事件的回调函数执行期间如果修改了数据，那么这些数据更改<strong>推入的队列</strong>会被当做 <code>macroTask</code> 在 <code>nextTick</code> 后执行。</p>
+<p>注意原生dom事件本来就是属于宏任务。</p>
+<h2 id="自定义事件"><a class="header-anchor" href="#自定义事件"></a>自定义事件</h2>
+<p>“DOM 事件” vs “自定义事件”。一开就明白了对立的关系。</p>
+<p>自定义事件的具体工作流程好像没挖出什么东西，所以就不贴流程逻辑了。</p>
+<pre><code class="language-js">function add (event, fn, once) {
+  if (once) {
+    target.$once(event, fn) // 即Vue.prototype.$once
+  } else {
+    target.$on(event, fn) // 即Vue.prototype.$on
+  }
+}
+
+function remove (event, fn) {
+  target.$off(event, fn) // 即Vue.prototype.$off
+}
+</code></pre>
+<blockquote>
+<p>到了vue3，vue的事件中心这部分代码被从vue核心模块中抽出。</p>
+</blockquote>
+<p><strong>自定义事件实际上是利用 Vue 定义的事件中心</strong>，简单分析一下它的实现： Vue.prototype.$on/$once/$off/$emit</p>
+<p>熟悉发布订阅设计模式的朋友，看函数签名，大概就知道其内部是怎么实现的了。对于一个<code>vm</code>，用<code>vm._events</code>存储即可。</p>
+<ul>
+<li>举一反三：<strong>父子组件 emit on通信的原理：本质还是利用了事件中心发布订阅</strong> 例子说明
+<ul>
+<li><code>vm.$emit</code> 是给当前的 <code>vm</code> 上派发的实例
+<ul>
+<li>之所以我们常用它做父子组件通讯，是因为它的回调函数的定义是在父组件中</li>
+<li>对于我们这个例子而言，当子组件的 <code>button</code> 被点击了，它通过 <code>this.$emit('select')</code> 派发事件，</li>
+</ul>
+</li>
+<li>那么子组件的实例就监听到了这个 <code>select</code> 事件，并执行它的回调函数——定义在父组件中的 <code>selectHandler</code> 方法，这样就相当于完成了一次父子组件的通讯。</li>
+</ul>
+</li>
+</ul>
+<h2 id="总结"><a class="header-anchor" href="#总结"></a>总结</h2>
+<ul>
+<li>Vue 支持 2 种事件类型，原生 DOM 事件和自定义事件，它们主要的区别<strong>在于添加和删除事件的方式不一样</strong></li>
+<li><strong>自定义事件的派发是往当前组件实例上派发，但是可以利用在父组件环境定义回调函数来实现父子组件的通讯。</strong></li>
+<li>另外要注意一点，只有组件节点才可以添加自定义事件，并且添加原生 DOM 事件需要使用 <code>native</code> 修饰符；而普通元素使用 <code>.native</code> 修饰符是没有作用的，也只能添加原生 DOM 事件。</li>
+<li>跟 react 事件系统还是有挺多不一样的地方，比如 react会有事件池的概念，回收利用event对象。</li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> Vue </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 源码 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Vue2源码【7】数据劫持使用Proxy的优势]]></title>
+      <url>https://blog.az22c.top/2020/09/01/vue2-src-code-5-proxy/</url>
+      <content type="html"><![CDATA[<p>Proxy，与其说是代理，还不如说代理是基于<strong>拦截</strong>的，<strong>在功能定位上，和defineProperty是不一样的</strong>。只是恰好Proxy覆盖了defineProperty的getter和setter两个api。</p>
+<a id="more"></a>
+<h3 id="导论-要看看"><a class="header-anchor" href="#导论-要看看"></a>导论 #要看看</h3>
+<blockquote>
+<p>没想到vue双向绑定也依靠数据劫持：引用前文：能实现双向绑定的方式有很多，比如ng就是脏值检测，而vue还是数据劫持。KnockoutJS基于观察者模式的双向绑定，Ember基于数据模型的双向绑定。</p>
+</blockquote>
+<ul>
+<li>所谓数据劫持，指的是在访问或者修改对象的某个属性时，通过一段代码拦截这个行为，进行额外的操作或者修改返回结果。
+<ul>
+<li>比较典型的是 <code>Object.defineProperty()</code></li>
+<li>ES6 中新增的 <code>Proxy</code> 对象。</li>
+<li>【可忽略】另外还有已经被废弃的 <code>Object.observe()</code>，废弃的原因正是 <code>Proxy</code> 的出现，因此这里我们就不继续讨论这个已经被浏览器删除的方法了。<a href="https://juejin.im/post/5e6cdf25e51d4526f16e6294#heading-18" target="_blank" rel="noopener">用Proxy实现Object.obserse的效果</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="proxy和reflect-在数据劫持方面的知识-作为基础"><a class="header-anchor" href="#proxy和reflect-在数据劫持方面的知识-作为基础"></a>Proxy和Reflect  在数据劫持方面的知识 #作为基础</h3>
+<ul>
+<li>(首先，Reflect的API和Proxy的是对应的，这不是偶然，在js里面，Reflect就是Proxy的一个小跟班)</li>
+<li>Reflect  ：和其他语言中的Reflect“被提出的意义”有点不同
+<ul>
+<li>提出原因： Reflect 的主要作用就是当你拦截重写这些方法的时候，让你能够<strong>很方便</strong>调用原方法<code>Reflect.xxxx(...arguments)</code>。js 语言内置的 Reflect 对象上的函数是<strong>为 Proxy 准备</strong>的，Proxy 的 handler 的各种 trap 分别对应 Reflect 上的同名方法。（这也是为什么与 Proxy 无关的反射相关特性将不会放到 Reflect 对象上。）  <a href="https://www.zhihu.com/question/276403215" target="_blank" rel="noopener">来自知乎hex大佬</a></li>
+<li>特点1： 把对象方法和对象解耦。把对象操作都变成了函数式。</li>
+<li>特点2： 填补Object API的<strong>不合理设计</strong>。以前抛出异常的操作，变成返回false。</li>
+</ul>
+</li>
+</ul>
+<h3 id="评价vue2数据劫持这种方式-主要-vs-reflect：-更健全更强大的拦截"><a class="header-anchor" href="#评价vue2数据劫持这种方式-主要-vs-reflect：-更健全更强大的拦截"></a>评价vue2数据劫持这种方式 主要 vs reflect：  更健全更强大的拦截</h3>
+<ul>
+<li>Proxy，与其说是代理，还不如说代理是基于<strong>拦截</strong>的，<strong>在功能定位上，和defineProperty是不一样的</strong>。只是恰好Proxy覆盖了defineProperty的getter和setter两个api。
+<ul>
+<li>我们可以这样认为，Proxy提供比较健全的<strong>拦截</strong>机制</li>
+<li>问：Proxy 也是需要递归遍历的吧，它只能代理一层对象？    答:需要。但是不需要一开始就递归遍历，啥时候触发了深层对象的getter，啥时候对它进行一次 observed 即可。   <a href="https://juejin.im/post/5da29a87518825094e37301c" target="_blank" rel="noopener">via</a></li>
+</ul>
+</li>
+</ul>
+<p>**Object.defineProperty的缺点：**劫持机制不太完整：</p>
+<ul>
+<li>1 拦截数组的变化不太方便
+<ul>
+<li>拦截直接修改数组元素：因为性能而在vue中放弃实现 <a href="https://juejin.im/post/5da29a87518825094e37301c" target="_blank" rel="noopener">只是性能问题</a></li>
+<li>defineProperty无法监听push等数组方法：hack方法就是“数组变异”：本质还是，还是需要重写这些方法</li>
+</ul>
+</li>
+<li>2 (get和set)劫持的是 对象的属性， 而不是整个对象。如果属性是对象类型，还需要递归去观测，会很消耗性能。</li>
+</ul>
+<p>以上缺点，Proxy都没有。</p>
+<p><strong>Proxy的缺陷：</strong></p>
+<p>1 浏览器支持不足，IE全军覆没。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Vue </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 源码 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Vue2源码【6】数据代理]]></title>
+      <url>https://blog.az22c.top/2020/09/01/vue2-src-code-4-data-proxy/</url>
+      <content type="html"><![CDATA[<p>经过对概念的区分，我认为：数据代理，其原理是数据劫持。数据代理的原理是最简单的。</p>
+<a id="more"></a>
+<h2 id="数据代理-其原理是数据劫持"><a class="header-anchor" href="#数据代理-其原理是数据劫持"></a>数据代理，其原理是数据劫持</h2>
+<p><strong>实现效果</strong>：让 <code>this['某属性']</code> 代理 <code>this._data['某属性']</code></p>
+<p><strong>原理：</strong> 数据劫持。可以选择去使用 <code>Object.defineProperty</code> api。</p>
+<p>我们可以在Vue的构造函数中执行一个 <a href="https://github.com/vuejs/vue/blob/dev/src/core/instance/state.js" target="_blank" rel="noopener"><code>_proxy</code> 函数</a>。</p>
+<pre><code class="language-JavaScript">_proxy.call(this, options.data);/*构造函数中*/
+
+function _proxy (data) {
+    const that = this;
+    Object.keys(data).forEach(key =&gt; {
+        Object.defineProperty(that, key, {
+            configurable: true,
+            enumerable: true,
+            get: function proxyGetter () {
+                return that._data[key];
+            },
+            set: function proxySetter (val) {
+                that._data[key] = val;
+            }
+        })
+    });
+}
+</code></pre>
+]]></content>
+      
+        <categories>
+            
+            <category> Vue </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 源码 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Vue2源码【5】异步更新和nextTick的原理]]></title>
+      <url>https://blog.az22c.top/2020/09/01/vue2-src-code-3-next-tick/</url>
+      <content type="html"><![CDATA[<p>nextTick这个api，并不是直接就帮你发起微任务的，只不过是把你传进来的回调加入到微任务的回调数组中，即作为一部分。</p>
+<a id="more"></a>
+<h2 id="异步更新的原理"><a class="header-anchor" href="#异步更新的原理"></a>异步更新的原理</h2>
+<p>(经历响应式原理的派发更新)在每个watcher的update函数里面，主要就是 <code>queueWatcher(this)</code>。在同一个nextTick里面，对这些watcher去掉重复多余的。然后走<code>nextTick(flushSchedulerQueue)</code>。也就是尽量作为微任务的一部分去执行 flushSchedulerQueue。</p>
+<ul>
+<li>flushSchedulerQueue
+<ul>
+<li>一开始基于id来排序，是为了父的在子的前面处理；也为了让用户设置的 watcher 排在 render watcher的前面</li>
+<li>【核心】然后循环遍历，挨个执行 watcher.before (这里有执行 beforeUpdate钩子函数)    和 watcher.run
+<ul>
+<li>watcher.run会走一个 <code>getAndInvoke(回调的逻辑)</code>。
+<ul>
+<li>对于 渲染watcher，这个回调参数为空，其实走的是 <code>watcher.get() === updateComponent回调函数</code>，也就是patch；</li>
+<li>对于用户设置的wacther回调，才有这个回调。</li>
+<li><strong>也就是用户设置的watch回调，和 updateComponent 回调的地位是差不多的。</strong></li>
+</ul>
+</li>
+<li>(在 watcher.run的过程，有可能会再执行更新 <code>queueWatcher(this)</code>)(也就是还是更新「改变数据」这个流程的watcher的数组，比如有时候是插队) 【面试的时候不用答出来】</li>
+</ul>
+</li>
+<li>调用updated等生命周期钩子</li>
+<li>【重置数据】</li>
+</ul>
+</li>
+</ul>
+<p>总结：</p>
+<p>派发更新就是当数据发生改变后，通知所有订阅了这个数据变化的 watcher 执行 update。
+对于渲染watcher，派发更新的工作是把所有要执行 run方法 的 watcher 推入到队列中，在 nextTick函数执行的时候执行 flushSchedulerQueue，简而言之就是各个渲染watcher的回调。</p>
+<h2 id="nexttick的原理"><a class="header-anchor" href="#nexttick的原理"></a>nextTick的原理</h2>
+<p>定义在src/core/util/next-tick.js中。</p>
+<pre><code class="language-JavaScript">function nextTick (cb?: Function, ctx?: Object) {
+  let _resolve
+  callbacks.push(() =&gt; {
+    if (cb) { // 并且try catch
+        cb.call(ctx)
+    } else if (_resolve) { _resolve(ctx) } // 这个是处理 Promise的情况的
+  })
+  if (!pending) {
+    pending = true
+    if (useMacroTask) { macroTimerFunc() } else { microTimerFunc() }
+  }
+  // $flow-disable-line
+  if (!cb &amp;&amp; typeof Promise !== 'undefined') { return new Promise(resolve =&gt; { _resolve = resolve })
+  }
+}
+</code></pre>
+<p><strong>nextTick这个api，并不是直接就帮你发起微任务的，只不过是把你传进来的回调加入到微任务的回调数组中，即作为一部分。</strong>  当不再 pending 的时候发起一个异步回调去执行 flushCallbacks。</p>
+<p>而 flushCallbacks 就是把 callbacks 数组逐个执行。</p>
+<ul>
+<li>如果是传入回调函数，都放入 callbacks，这个很好理解</li>
+<li>如果不是回调函数，就是首先返回一个Promise，然后Promise将在 flushCallbacks 执行的之后都 resolve，这样就会走 Promise.then。</li>
+</ul>
+<p>效果：也就是可以通过 this.$nextTick(callback) 或者 this.$nextTick.then 拿到最新的data。</p>
+<h6 id="反例-但是一定要注意这种反例：-重要"><a class="header-anchor" href="#反例-但是一定要注意这种反例：-重要"></a>【反例】但是一定要注意这种反例： #重要</h6>
+<pre><code class="language-JavaScript">methods {
+  change() {
+    this.$nextTick(() =&gt; { // api+这个回调发起1个nextTick(/**/)
+      console.log(this.$refs.msg.innerText) // 【1】间接获取 this.msg， 
+    })
+    this.msg = 'new Value' // 本身就是响应式的 【2】
+    // 响应式的派发更新也能发起1个nextTick(/**/)
+  }
+}
+</code></pre>
+<p>首先【1】和【2】都会加入某个异步任务的待执行队列，但是因为【1】先加入队列，所以先执行，所以当时获取的&quot;this.msg&quot;还是旧值，而不是 new Value。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Vue </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 源码 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[【4-6】响应式原理 之 哪些api是响应式的，哪些不是响应式的]]></title>
+      <url>https://blog.az22c.top/2020/09/01/vue2-src-code-24-whether-responsive/</url>
+      <content type="html"><![CDATA[<p>《哪些api是响应式的，哪些不是响应式的》：</p>
+<p>总结一下 Vue 体系内，哪些api是响应式的，哪些不是响应式的。对于个别原理，如provide inject做出一些详细解释。</p>
+<a id="more"></a>
+<h2 id="响应式-vs-非响应式"><a class="header-anchor" href="#响应式-vs-非响应式"></a>响应式 vs 非响应式</h2>
+<blockquote>
+<p>不是响应式的，有些的原理就是利用forceUpdate绕过响应式来实现重新渲染</p>
+</blockquote>
+<ul>
+<li>哪些是响应式的：
+<ul>
+<li>definedReactive + 渲染watcher、computed watcher、用户watcher</li>
+<li>data</li>
+<li>props</li>
+<li>vuex的state(本质上是data)</li>
+</ul>
+</li>
+<li>哪些不是响应式的
+<ul>
+<li><strong><code>vm.$children</code>需要注意：并不保证顺序，也不是响应式的</strong></li>
+<li>官网说了插槽不是响应式的
+<ul>
+<li>插槽的更新原理基于forceUpdate</li>
+<li>keep-alive的更新原理基于插槽</li>
+</ul>
+</li>
+<li>provide inject 【后有介绍】</li>
+<li>经过研究，认为 指令 不是响应式的，尤其自定义指令不是响应式的  【具体看指令的源码解析。不涉及任何响应式的代码】</li>
+<li><code>$refs</code> 只会在组件渲染完成之后生效，并且它们不是响应式的。
+<ul>
+<li>(因为 ref 本身是作为渲染结果被创建的，在初始渲染的时候你不能访问它们 – 它们还不存在)</li>
+<li>用法：这仅作为一个用于直接操作子组件的“逃生舱”</li>
+<li>因为不是响应式的，避免误用：你应该避免在模板或计算属性中访问 <code>$refs</code>。</li>
+</ul>
+</li>
+<li>冻结对象：data加上<code>Object.freeze()</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="vuex是响应式的"><a class="header-anchor" href="#vuex是响应式的"></a>vuex是响应式的</h2>
+<blockquote>
+<p>vuex的state是响应式的：响应式主要是针对state，作为new Vue的data是有被 defineReactive 数据劫持的，再加上可被watcher监测</p>
+</blockquote>
+<h2 id="provide-inject-非响应式：-是否响应式-主要由其他机制决定"><a class="header-anchor" href="#provide-inject-非响应式：-是否响应式-主要由其他机制决定"></a>provide inject 非响应式：#是否响应式，主要由其他机制决定</h2>
+<ul>
+<li>通过$parent向上查找(持有该key-value的且)最近的祖先节点的数据。</li>
+<li><code>toggleObserving(false)</code> + definedReactive &quot;inject属性&quot;设置1次就完事了
+<ul>
+<li><code>toggleObserving(false)</code>作用于defineReactive，即<strong>对于深层嵌套的属性不做重复的defineReactive处理</strong>。
+<ul>
+<li>如果在父组件中作为data，已经被defineReactive过了：那就是响应式的</li>
+<li>如果祖先组件所提供的 provide项 本身非响应式的，那么这里也就非响应式的</li>
+</ul>
+</li>
+<li>之所以在子孙组件defineReactive某inject属性，大概是为了能在 该inject属性变化 或者 该inject属性的引用变化 时，当前子组件的视图能相应地更新。响应式的效果还是由提供的组件那边来实现</li>
+</ul>
+</li>
+</ul>
+<h3 id="provide-inject-vs-vuex-即为什么它不适合做中心化规模化的数据存储"><a class="header-anchor" href="#provide-inject-vs-vuex-即为什么它不适合做中心化规模化的数据存储"></a>provide inject vs vuex，即为什么它不适合做中心化规模化的数据存储</h3>
+<blockquote>
+<p>【官网】使用provide inject来创建一个中心化规模化的数据跟使用 <code>$root</code>做这件事都是不够好的。</p>
+</blockquote>
+<ul>
+<li>provide inject不能追溯变量改变，代码可维护性问题</li>
+<li>provide inject的定位更专注于插件/自定义组件内部的各组件间的通信，更偏向于一次性地传递数据或者方法</li>
+<li>(默认让视图不响应其数据变化)</li>
+</ul>
+<h3 id="provide-inject想弄成响应式的怎么办"><a class="header-anchor" href="#provide-inject想弄成响应式的怎么办"></a>provide inject想弄成响应式的怎么办</h3>
+<ul>
+<li>下面一级的字段在父组件中作为data，已经被defineReactive过了，也是可以的</li>
+<li>computed监听它，然后可再渲染watcher监听它</li>
+</ul>
+<h3 id="下面一级的字段在父组件中作为data-已经被definereactive过了-例子"><a class="header-anchor" href="#下面一级的字段在父组件中作为data-已经被definereactive过了-例子"></a>下面一级的字段在父组件中作为data，已经被defineReactive过了  例子</h3>
+<pre><code class="language-JavaScript">// 祖先组件：
+provide() {
+  return { foo: this.bar }
+}
+data() {
+  return {
+    bar: { a: 'a of bar' }
+  }
+}
+// 子孙组件
+// 视图上使用this.foo.a即可
+inject:['foo']
+</code></pre>
+<h3 id="provide-inject的值可以作为子孙组件的props或者data的初始值：-暂时不研究"><a class="header-anchor" href="#provide-inject的值可以作为子孙组件的props或者data的初始值：-暂时不研究"></a>provide inject的值可以作为子孙组件的props或者data的初始值： #暂时不研究</h3>
+<p>使用一个注入的值作为一个 property 的默认值：</p>
+<pre><code class="language-JavaScript">const Child = {
+  inject: ['foo'],
+  props: {
+    bar: { default () { return this.foo } }
+  }
+}
+</code></pre>
+<pre><code class="language-JavaScript">// 可能相关：
+initInjections(vm) // resolve injections before data/props
+initState(vm)
+initProvide(vm) // resolve provide after data/props
+</code></pre>
+<h2 id="冻结对象object-freeze-非响应式"><a class="header-anchor" href="#冻结对象object-freeze-非响应式"></a>冻结对象<code>Object.freeze()</code> 非响应式</h2>
+<blockquote>
+<p><a href="https://github.com/vuejs/vue/issues/10110" target="_blank" rel="noopener">https://github.com/vuejs/vue/issues/10110</a></p>
+<p><a href="https://github.com/vuejs/vue/issues/2637" target="_blank" rel="noopener">https://github.com/vuejs/vue/issues/2637</a></p>
+</blockquote>
+<p>有时候应为性能问题，我们需要声明非响应式。</p>
+<p>办法就是给data加上<code>Object.freeze()</code>，或者在created之后再加到data上面。</p>
+<blockquote>
+<p>但是要注意，freeze这招冻结不了子属性的引用的。之所以这样做，这个主要是为了减少vue无用的数据observe，尤其是一个data对象有很多字段并且不需要被监听和检查。</p>
+</blockquote>
+]]></content>
+      
+        <categories>
+            
+            <category> Vue </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 源码 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[【4-5】响应式原理 之 props 是响应式的证明]]></title>
+      <url>https://blog.az22c.top/2020/09/01/vue2-src-code-23-props/</url>
+      <content type="html"><![CDATA[<p>《props 是响应式的证明》：</p>
+<p>这一篇主要从源码的执行层面，解释为何 props 是响应式的。</p>
+<a id="more"></a>
+<p>本质仍是<code>defineReactive(props, key, value)</code>，配合上在访问props时候如果有<code>Dep.target</code>的指向，那么就满足响应式的条件。</p>
+<ul>
+<li>为什么说props是响应式的：
+<ul>
+<li>从props相关源码里我们发现有两处地方作了响应式相关的处理。
+<ul>
+<li>第一处是在调用<code>validateProp</code>来校验并获取<code>prop</code>的值时，针对默认值提供的数据进行的响应式处理。</li>
+<li>第二处是在获取到<code>prop</code>的值后，将<code>prop</code>属性定义为响应式属性。</li>
+<li>学习了响应式原理的<code>Observer</code>之后我们知道，经过<code>observe</code>处理后的响应式对象，仅在其子孙属性改变之后才能通知订阅者。而经过<code>defineReactive(props, key, value)</code>处理后，<code>prop</code>值自身改变时，也能通知订阅者。<strong>这二者一结合，就能保证，无论是<code>prop</code>自身改变，还是其子孙元素改变，都能通知到订阅者。</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>具体的相关代码和运作机制如下：</p>
+<ul>
+<li>(props之所以支持那么多的书写格式，是因为初始化的时候会执行normalizeProps，即在经历规范化之后，格式结果都是统一一致的，方便后面的流程处理)</li>
+<li>基于响应式这个话题，在initState 中重点看 Props 和 data的部分。
+<ul>
+<li><strong>( data 和 props 都会弄成响应式的)</strong></li>
+<li><code>initProps</code> 主要做 3 件事情：校验、响应式和数据代理(this.xxx访问)。
+<ul>
+<li>defineReactive</li>
+</ul>
+</li>
+<li>initData 略</li>
+</ul>
+</li>
+<li>----------数据变化阶段(尤其是父组件传入的props变化)： ----------
+<ul>
+<li>反正父组件保证把变化更新到子组件的<code>vm._props</code>
+<ul>
+<li>记录性质【详细过程可不看】
+<ul>
+<li>父组件<code>patch</code>过程执行<code>patchVnode</code>。<code>patchVnode</code> 通常是一个递归过程，当它遇到组件 <code>vnode</code> 的时候，会执行组件更新过程的 <code>prepatch</code> 钩子函数</li>
+<li>即执行到<code>updateChildComponent</code>更新，即<code>props[key] = validateProp(key, propOptions, propsData, vm)</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>只要是视图模板访问过props的属性以及下级的那些字段，都是响应式的，这个按照一般情况的理解就行了</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> Vue </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 源码 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[【4-4】【附录】响应式原理 之 数据劫持之computed和watch的具体源码]]></title>
+      <url>https://blog.az22c.top/2020/09/01/vue2-src-code-222-computed-n-watch/</url>
+      <content type="html"><![CDATA[<p>《数据劫持之computed和watch的具体源码》：</p>
+<p>这一篇是【附录】，比较细地记录computed和watch具体的执行过程。其实还是有利于理解依赖收集和派发更新具体是什么时候发生了，能和 mvvm “首次构建” 和 “重新渲染” 的流程结合起来看。</p>
+<p>说是附录，其实如果掌握了其中一些核心的时间点，对于对vue的源码理解是有帮助的。</p>
+<a id="more"></a>
+<blockquote>
+<p>初始化阶段initState ==&gt; initComputed / initWatch</p>
+</blockquote>
+<ul>
+<li>initWatch
+<ul>
+<li>==&gt; createWatcher ==&gt; <code>vm.$watch</code>两层封装，兼容各种传入 格式，上了typescript之后可能不同了</li>
+<li>【本质】<code>vm.$watch(expOrFn, handler, options)</code></li>
+<li>【本质的本质】 <code>new Watcher(vm, expOrFn, cb, { user: true })</code>
+<ul>
+<li>this.getter = parsePath(expOrFn)</li>
+</ul>
+</li>
+<li>可选immediate</li>
+<li>返回一个unwatcherFn  ==&gt; watcher.teardown</li>
+</ul>
+</li>
+<li>更多复杂的如deep watcher 和sync watcher的解释，可以基于此自行理解</li>
+</ul>
+<p>-----------  初始化阶段 -------------------------</p>
+<ul>
+<li>initComputed 【计算属性有被重构优化过，具体流程没认真看】
+<ul>
+<li>new Watcher()， <strong>用户定义的函数作为getter</strong>
+<ul>
+<li>(isRenderWatcher为false，配置构造函数的options为<code>computed:true</code>)</li>
+<li>(注意vm已经挂载了计算属性了：在执行Vue.extend的时候已经 <code>defineComputed$1</code> 在该组件对象的原型对象上。这个主要是想利用原型链机制共享数据，减少重复创建，多组件实例间共享)</li>
+<li>(watcher getter和 computed的getter一致，前者是为了以后求值用的)</li>
+<li>vm._watchers.push(this);</li>
+<li><strong>并没有this.get()， 而是 new Dep()</strong></li>
+</ul>
+</li>
+<li><code>defineComputed</code>
+<ul>
+<li>Object.defineProperty getter  【回头执行，又 createComputedGetter 返回】</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>-----------------  在渲染等时机，创建vnode需要获取 该计算属性  -----------------</li>
+<li>获取 该计算属性的时候，就会触发它的getter。 在 <code>createComputedGetter</code>中定义的
+<ul>
+<li><code>watcher.depend(); return watcher.evaluate()</code>
+<ul>
+<li>watcher.depend()，把渲染watcher放到this.dep.subs中。依赖收集 ：相当于渲染 <code>watcher</code> 等等订阅了这个 <code>computed watcher</code> 的变化</li>
+<li>watcher.evaluate === 根据dirty来调用<code>this.get()</code>，并返回该计算属性值         (判断 <code>this.dirty</code>，如果为 <code>true</code> 则通过 <code>this.get()</code> 求值，然后把 <code>this.dirty</code> 设置为 false)
+<ul>
+<li>执行用户定义的getter，该computed里面所依赖的data(比如此例中的this.useless) 的getter也会触发
+<ul>
+<li>依赖收集，把该computed的watcher加入到对应 data的依赖订阅数组里面</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>(当computed所依赖的data变化的时候，才会重新计算)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>----------(首次构建，页面渲染出来了)----------</li>
+<li>----------当computed所依赖的data数据变化，比如click事件回调处理中，让所依赖的data如<code>this.useless++</code>-------------</li>
+<li>拿用户定义的computed函数重新生成一个computed，并且重新订阅所依赖的data。另外，如果computed计算结果前后不一样，就也派发更新视图更新updateComponent回调执行。此后渲染watcher也会重新依赖收集该computed。
+<ul>
+<li>调用<code>dep.notify</code>。也就是调用所有“订阅该计算属性的”的 <code>subs[i].update()</code>
+<ul>
+<li>其中就包括通知依赖这个data的 computed的渲染watcher做update</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> Vue </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 源码 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[【4-3】响应式原理 之 数据劫持之observe的细节]]></title>
+      <url>https://blog.az22c.top/2020/09/01/vue2-src-code-221-deepin-observe/</url>
+      <content type="html"><![CDATA[<p>《数据劫持之observe的细节》：</p>
+<p>之前一个章节讲数据劫持，主要是讲 defineReactive，以支持理解整个宏观的流程。</p>
+<p>这里特别讲 observe 和其所调用的 Observer构造函数，就是想探讨一下<strong>细节和各种特殊情况</strong>的。</p>
+<a id="more"></a>
+<ul>
+<li>大概总结一些这个章节：
+<ul>
+<li>数组是响应式的：通过重写数组的原型对象上的数组方法(所以同时还有一些没有用响应式覆盖的地方)
+<ul>
+<li>在数组中<strong>通过数组索引对项进行修改时，是不会触发更新的</strong></li>
+</ul>
+</li>
+<li>包括数组，还有一些响应式没有覆盖到的地方怎么处理？   – 通过Vue.$set(包括类似的Vue.$del)和“数组变异”来补足。<strong>他们都是内部手动做了依赖更新的派发。</strong></li>
+</ul>
+</li>
+</ul>
+<p>observe函数，尝试调用<code>ob = new Observer(obj)</code>，如果发现已经调用过了则直接返回<code>ob</code>。<code>__ob__</code>属性保存的就是 observer实例。</p>
+<p><code>new Observer(obj)</code>主要接收一系列数据劫持所属的根对象，还有作为入口兼容一些特殊情况。其中每一个属性交由 defineReactive 来具体实现数据劫持，所以 <code>defineReactive(obj, key, val)</code> 的函数参数签名会有key。</p>
+<h2 id="observe-详解"><a class="header-anchor" href="#observe-详解"></a>observe 详解</h2>
+<ul>
+<li>如果data不是 object 类型则无效果</li>
+<li>从<code>__ob__</code>属性复用返回 observer</li>
+<li>ob = new Observer(value)</li>
+</ul>
+<h2 id="new-observer"><a class="header-anchor" href="#new-observer"></a>new Observer</h2>
+<ul>
+<li><code>this.dep = new Dep()</code></li>
+<li><code>def(value, '__ob__', observer)</code>
+<ul>
+<li>def 函数是对 Object.defineProperty 进行一定的封装</li>
+</ul>
+</li>
+<li>如果value是数组，尝试“通过改变原型对象”<strong>重写数组方法</strong>，不行就“遍历要重写的属性”来<strong>重写数组方法</strong>； 然后每个数组元素也递归observe</li>
+<li>如果value是普通对象则用walk实例方法，即遍历并observe每一对key value
+<ul>
+<li>若先前已 <code>Object.defineProperty</code> 一次，则在walk的时候就遍历不到它</li>
+</ul>
+</li>
+<li>defineReactive上一章已经说了，就是defineProperty getter和setter，实现响应式原理
+<ul>
+<li>getter
+<ul>
+<li>childOb.dep.depend()   针对child更新依赖收集</li>
+<li>dependArray(value)  兼容针对value是数组依赖收集</li>
+</ul>
+</li>
+<li>setter
+<ul>
+<li>【重要】新设置的值是 newVal，也observe(newVal)  ：<code>childOb = !shallow &amp;&amp; observe(newVal)</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="剩下的observer文件的一些闭包变量和方法-了解一下即可"><a class="header-anchor" href="#剩下的observer文件的一些闭包变量和方法-了解一下即可"></a>剩下的observer文件的一些闭包变量和方法 #了解一下即可</h2>
+<p>还有文件内的3个函数(在该文件都没有调用过)，直接把源码的函数注释抄下来：</p>
+<ul>
+<li><code>set</code>：Adds the new property and triggers change notification if the property doesn’t already exist. 应该就是对应Vue.set</li>
+<li><code>del</code>：Delete a property and trigger change if necessary. 应该就是对应Vue.delete</li>
+<li><code>function toggleObserving (value) { shouldObserve = value }</code></li>
+</ul>
+<h2 id="响应式所没有覆盖到的地方-包括数组-面试会问"><a class="header-anchor" href="#响应式所没有覆盖到的地方-包括数组-面试会问"></a>响应式所没有覆盖到的地方 #包括数组 #面试会问</h2>
+<ul>
+<li>没有事先声明的data属性，不是响应式的，因为没有被数据劫持。</li>
+<li>其他的没覆盖到的地方：通过Vue.$set(包括类似的Vue.$del)和“数组变异”来补足。<strong>他们都是内部手动做了依赖更新的派发。</strong></li>
+</ul>
+<h3 id="数组变异的原理-：重写操作数组的方法"><a class="header-anchor" href="#数组变异的原理-：重写操作数组的方法"></a>数组变异的原理 ：重写操作数组的方法</h3>
+<pre><code class="language-JavaScript">export class Observer {
+  constructor (value) {
+    // 【一些初始化】
+    if (Array.isArray(value)) {
+      const augment = hasProto // 对于多数浏览器 hasProto为true
+        ? protoAugment // 单纯设置__proto__属性
+        : copyAugment // 复制数组的元素
+      augment(value, arrayMethods, arrayKeys) // arrayMethods
+      this.observeArray(value)
+    } else {
+      // ....
+    }
+  }
+</code></pre>
+<p>拦截并且重写了数组的方法，做了些增强，并且会调用 <code>ob.dep.notify</code>。也是notify手动通知。(之所以能通知到，也是因为先前 defineReactive 的时候，对child做了一次依赖收集<code>childOb.dep.depend</code>。)</p>
+<h3 id="vue-set"><a class="header-anchor" href="#vue-set"></a>Vue.$set</h3>
+<p>Vue.$set：（因为defineProperty是不支持<code>=</code>的，所以必须暴露$set来包装）</p>
+<p>【1】针对数组， 更新数组的length并且用splice来插入。
+【2】针对object，也是手动“依赖收集”和“派发更新”</p>
+<pre><code class="language-JavaScript">function set (target: Array&lt;any&gt; | Object, key, val) {
+  // 校验
+  if (Array.isArray(target) &amp;&amp; isValidArrayIndex(key)) {
+    target.length = Math.max(target.length, key)
+    target.splice(key, 1, val)
+    return val
+  }
+  // 不用干什么：
+  if (key in target &amp;&amp; !(key in Object.prototype)) {
+    target[key] = val
+    return val
+  }
+  const ob = (target: any).__ob__
+  if (target._isVue || (ob &amp;&amp; ob.vmCount)) { // 有vmCount就是root $data
+    // 这种情况警告
+    return val
+  }
+  if (!ob) { target[key] = val; return val } // 普通对象
+  defineReactive(ob.value, key, val) // 里面调用childOb.dep.depend ，做一个渲染watcher的依赖收集
+  ob.dep.notify() // 触发重新渲染
+  return val
+}
+</code></pre>
+<h6 id="思考数组为啥不同-可略"><a class="header-anchor" href="#思考数组为啥不同-可略"></a>思考数组为啥不同 #可略</h6>
+<p>对于数组类型观测，会调用 <code>observeArray</code> 方法：</p>
+<pre><code class="language-js">observeArray(data) {
+  data.forEach(item =&gt; {
+    observe(item)
+  })
+}
+</code></pre>
+<p>与对象不同，它执行 <code>observe</code> 对数组内的对象类型进行观测，并没有对数组的每一项进行 <code>Object.defineProperty</code> 的定义，也就是说数组内的项是没有 <code>dep</code> 的。</p>
+<p>所以，我们<strong>通过数组索引对项进行修改时，是不会触发更新的</strong>【看代码演示】。但可以通过 <code>this.$set</code> 来修改触发更新。那么问题来了，为什么 <code>Vue</code> 要这样设计？</p>
+<p>结合实际场景：</p>
+<ul>
+<li>【1】数组中通常会存放多项数据，比如列表数据。这样观测起来会消耗性能。</li>
+<li>【2】一般修改数组元素很少会直接通过索引将整个元素替换掉。例如：</li>
+</ul>
+<pre><code class="language-js">export default {
+    data() {
+        return {
+            list: [
+                {id: 1, name: 'Jack'},
+                {id: 2, name: 'Mike'}
+            ]
+        }
+    },
+    created() {
+        // 如果想要修改 name 的值，一般是这样使用
+        this.list[0].name = 'JOJO'
+        // 而不是以下这样
+        // this.list[0] = {id:1, name: 'JOJO'}
+        // 当然你可以这样更新
+        // this.$set(this.list, '0', {id:1, name: 'JOJO'})
+    }
+}
+</code></pre>
+]]></content>
+      
+        <categories>
+            
+            <category> Vue </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 源码 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[【4-2】响应式原理 之 数据劫持]]></title>
+      <url>https://blog.az22c.top/2020/09/01/vue2-src-code-220-data-hijack/</url>
+      <content type="html"><![CDATA[<p><strong>响应式原理 = 数据劫持 + 观察者模式</strong>。另，我们知道可以用数据劫持实现数据代理。即：响应式原理不是全包含了数据劫持。</p>
+<a id="more"></a>
+<ul>
+<li>先把几个关键的逻辑搞通，就很容明白后面的内容：
+<ul>
+<li><strong>响应式原理 = 数据劫持 + 观察者模式</strong></li>
+<li>observe函数：处理各种情况，核心还是defineReactive
+<ul>
+<li>defineReactive 做了什么工作？    – 除了执行本分的gettter和setter的工作之余，主要就是触发依赖收集派发更新
+<ul>
+<li>是怎么联系到<code>Dep.target</code>的？    –  dep.depend()</li>
+<li><code>Dep.target</code>若不存在，就谈不上响应式，访问data的操作本身就很多，不可能每个都搞响应式</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>通常都是在获取目标的值的时候，目标同时会依赖收集。</strong></li>
+<li>vue里面主要有3种watcher，结合若有<code>Dep.target</code>则构成响应式原理。也就是三种watcher的响应式原理都是：数据劫持+响应式原理</li>
+</ul>
+</li>
+</ul>
+<p>observe函数，尝试调用<code>ob = new Observer(obj)</code>，如果发现已经调用过了则直接返回<code>ob</code>。</p>
+<p><code>new Observer(obj)</code>主要接收一系列数据劫持所属的根对象，还有作为入口兼容一些特殊情况。其中每一个属性交由 defineReactive 来具体实现数据劫持，所以 <code>defineReactive(obj, key, val)</code> 的函数参数签名会有key。<strong>另外单独开辟一章节来讲observer函数的细节和如何处理特殊情况，在本章节主要讲 defineReactive，以支持理解整个宏观的流程。</strong></p>
+<h2 id="definereactive"><a class="header-anchor" href="#definereactive"></a>defineReactive ()</h2>
+<blockquote>
+<p><code>Dep.target</code>：因为访问 this.data的事务有很多，所以<code>Dep.target</code>的作用在于<strong>标志是由哪一个 watcher 发起的访问data</strong>，这时候才有必要“依赖收集”。</p>
+</blockquote>
+<p>先看看 defineReactive 做了什么工作：</p>
+<ul>
+<li>对应每一对key value都有闭包dep对象</li>
+<li>getter，若存在<code>Dep.target</code>(即某Watcher实例)，则额外去“依赖收集”</li>
+<li>setter，首先拿到value，多数情况会触发getter。比对新旧value，如果跟一样则不用任何操作。否则新旧value不同则更新该value，并且额外去“派发更新”</li>
+</ul>
+<pre><code class="language-JavaScript">// #摘取自vue #基本能用：
+export function defineReactive (
+  obj, key, val, customSetter?: ?Function, shallow?: boolean
+) {
+  const dep = new Dep() // 对应每一个key都有闭包dep对象
+
+  const property = Object.getOwnPropertyDescriptor(obj, key)
+  if (property &amp;&amp; property.configurable === false) {
+    return
+  }
+
+  // 如果之前该对象已经预设了getter/setter则将其缓存，新定义的getter/setter中会将其执行
+  const getter = property &amp;&amp; property.get
+  const setter = property &amp;&amp; property.set
+  if ((!getter || setter) &amp;&amp; arguments.length === 2) { val = obj[key] }
+
+  let childOb = !shallow &amp;&amp; observe(val)
+  Object.defineProperty(obj, key, {
+    enumerable: true,
+    configurable: true,
+    get: function reactiveGetter () {
+      const value = getter ? getter.call(obj) : val // 如果原本对象拥有getter方法则执行，不论如何拿到value
+      if (Dep.target) {
+        dep.depend()
+        if (childOb) {
+          childOb.dep.depend()
+          if (Array.isArray(value)) {
+            dependArray(value)
+          }
+        }
+      }
+      return value
+    },
+    set: function reactiveSetter (newVal) {
+      const value = getter ? getter.call(obj) : val // 如果原本对象拥有getter方法则执行，不论如何拿到value
+      /* eslint-disable no-self-compare */
+      if (newVal === value || (newVal !== newVal &amp;&amp; value !== value)) {
+        return // 如果跟原来值一样则不用任何操作
+      }
+
+      // #7981: for accessor properties without setter
+      if (getter &amp;&amp; !setter) return
+      if (setter) {
+        setter.call(obj, newVal)
+      } else {
+        val = newVal
+      }
+      childOb = !shallow &amp;&amp; observe(newVal)
+      dep.notify()
+    }
+  })
+}
+</code></pre>
+<h2 id="从高维度来看流程"><a class="header-anchor" href="#从高维度来看流程"></a>从高维度来看流程</h2>
+<p>Watcher就3种使用方式： (尤其是在判断区分expOrFn转成watcher.getter的时候注意一下)</p>
+<ul>
+<li>侦听器 watcher：<code>this.$watch('include', cb) ==&gt; new Watcher(vm, 'include', cb, options)</code></li>
+<li>计算属性 watcher：<code>new Watcher(vm, computed[key] || noop, noop, options)</code></li>
+<li>渲染 watcher：<code>new Watcher(vm, updateComponent || noop, noop, options)</code></li>
+</ul>
+<p>最简单的还是侦听器 watcher。而渲染 watcher 的流程，还包含了对计算属性的 获取。</p>
+<blockquote>
+<p><strong>应用场景的出发点是不同的：</strong> 计算属性适合用在模板渲染中，某个值是依赖了其它的响应式data甚至是计算属性计算而来；而侦听属性适用于观测某个值的变化去完成一段复杂的业务逻辑。</p>
+<p>它们3者的原理都是 数据劫持+响应式原理</p>
+</blockquote>
+<p><strong>侦听器 watcher</strong>：用户更新数据，data的setter触发，“派发更新”，触发用户设置的回调即可。   (它还支持deep、sync、immediate等配置)</p>
+<p><strong>计算属性 watcher</strong>：</p>
+<ul>
+<li><strong>首次获取该计算属性的时候，触发该计算属性的getter，“依赖收集”比如渲染watcher订阅了这个计算属性，</strong></li>
+<li>另需要触发所依赖数据的 getter，更新了一次“依赖收集”比如该计算属性订阅某些data的变化。</li>
+<li>数据更新的时候，触发所依赖data的setter，导致拿“用户定义的computed函数”重新生成一个computed值，并且重新订阅所依赖的data。</li>
+<li>另外，如果computed计算结果前后不一样，就也派发更新视图更新updateComponent回调执行。此后渲染watcher也会重新依赖收集该computed。</li>
+</ul>
+<p><strong>渲染 watcher</strong>：</p>
+<p>传入的 <code>expOrFn</code> 是 <code>updateComponent = () =&gt; { vm._update(vm._render(), hydrating) }</code>。</p>
+<p>首次构建，需要构建vnode触发数据的getter，有时候也需要获取computed，再最后才传给<code>vm._update</code>去patch。在这个过程其中，渲染watcher更新了一次“依赖收集”。</p>
+<p>数据更新的时候，由setter派发更新，触发watcher.update，也就是在未来触发 watcher.run。其中触发 watcher.get，对于渲染 watcher而言，也就是触发<code>updateComponent</code>。<code>updateComponent</code>，这里又要<code>vm._render()</code>生成vnode，所以又访问vm上的数据，所以触发数据的getter(为下一次重新渲染视图更新“依赖收集”)，再最后才传给<code>vm._update</code>去patch。</p>
+<blockquote>
+<p>也就是已考虑到了v-if false导致离线一大堆视图的情景。</p>
+</blockquote>
+]]></content>
+      
+        <categories>
+            
+            <category> Vue </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 源码 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[【4-1】响应式原理 之 观察者模式]]></title>
+      <url>https://blog.az22c.top/2020/09/01/vue2-src-code-21-observe-mode/</url>
+      <content type="html"><![CDATA[<p>Vue2的响应式原理，网上的资料太多了。这篇主要是把脉络梳理清楚，并且明确一些核心的概念是怎么实现的。比如依赖收集和派发更新具体指的是什么，还有一些细节处理，才造就了 Vue的合理运作。</p>
+<p>总之，<strong>响应式原理 = 数据劫持 + 观察者模式</strong></p>
+<a id="more"></a>
+<h2 id="dep：维护观察者队列"><a class="header-anchor" href="#dep：维护观察者队列"></a>Dep：维护观察者队列</h2>
+<p>其实Dep类职责很简单：</p>
+<ul>
+<li>【1】维护dep.subs这个wathcer数组，即订阅者的数组
+<ul>
+<li>dep.addSub 和 dep.removeSub 作为针对数组 dep.subs 的工具方法，不会作为一个事务的起始。</li>
+</ul>
+</li>
+<li>【2】dep.notify：遍历执行watcher.update</li>
+<li>额外：用 id 标识 dep实例，方便优化这个过程。</li>
+</ul>
+<blockquote>
+<p><code>Dep.target</code>：因为访问 this.data的事务有很多，所以<code>Dep.target</code>的作用在于<strong>标志是由哪一个 watcher 发起的访问data</strong>，这时候才有必要“依赖收集”。</p>
+</blockquote>
+<ul>
+<li>Dep文件闭包作用域内，“全局唯一的 Dep.target” 是怎么维护的：
+<ul>
+<li>Dep.target 和 targetStack都是闭包变量。而pushTarget函数和popTarget函数都是用于同时更新该2者。
+<ul>
+<li>也就是在 watcher.get 执行 watcher.getter的前后，会push和pop，致使Dep.target指向的是当前执行watcher.getter的watcher。</li>
+<li>而targetStack的作用：维护一个栈结构，并且方便恢复上一个 Dep.target。(因为可能会递归child走相同流程，或者渲染watcher依赖计算属性watcher等等)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>至此，对于 src/core/observer/dep.js 的所有模块都介绍完了，足以看懂源码。</p>
+<pre><code class="language-JavaScript">// #摘取自vue #基本能用：
+let uid = 0;
+export default class Dep {
+  // Dep就3属性：
+  static target: ?Watcher;
+  id: number;
+  subs: Array&lt;Watcher&gt;;
+
+  constructor () {
+    this.id = uid++
+    this.subs = []
+  }
+  addSub (sub) {
+    this.subs.push(sub)
+  }
+  removeSub (sub) {
+    remove(this.subs, sub)
+  }
+  depend () {
+    if (Dep.target) {
+      Dep.target.addDep(this)
+    }
+  }
+  notify () {
+    const subs = this.subs.slice()
+    for (let i = 0, l = subs.length; i &lt; l; i++) {
+      subs[i].update()
+    }
+  }
+}
+// Dep.target 是全局唯一的观察者，因为在任何时候只有一个观察者被处理。
+Dep.target = null
+const targetStack = []
+
+export function pushTarget (_target: ?Watcher) {
+  if (Dep.target) targetStack.push(Dep.target)
+  Dep.target = _target
+}
+
+export function popTarget () {
+  targetStack.pop()
+  Dep.target = targetStack[targetStack.length - 1]
+}
+</code></pre>
+<h2 id="watcher：观察者"><a class="header-anchor" href="#watcher：观察者"></a>Watcher：观察者</h2>
+<p>作为观察者，职责就是【1】初始化的时候载入相关数据或者方法 【2】加入观察者队列 【3】等通知执行： watcher.update被通知调用，在未来执行 watcher.run。额外还有优化dep实例中的watcher队列。</p>
+<h3 id="初始化-和-watcher-get"><a class="header-anchor" href="#初始化-和-watcher-get"></a>初始化 和 watcher.get</h3>
+<p>就3种使用方式： (尤其是在判断区分expOrFn转成watcher.getter的时候注意一下)</p>
+<ul>
+<li>渲染 watcher：<code>new Watcher(vm, updateComponent || noop, noop, options)</code></li>
+<li>计算属性 watcher：<code>new Watcher(vm, computed[key] || noop, noop, options)</code></li>
+<li>侦听器 watcher：<code>this.$watch('include', cb) ==&gt; new Watcher(vm, 'include', cb, options)</code></li>
+</ul>
+<h3 id="剩下的实例方法"><a class="header-anchor" href="#剩下的实例方法"></a>剩下的实例方法</h3>
+<p>由 Watcher 的职责决定，其多数的实例方法都不会作为一个“事务”的起始。</p>
+<p>watcher.addDep 和 watcher.update都是等dep实例来调用的。搞得这么复杂就是为了解耦。</p>
+<ul>
+<li>
+<p>【解释 dep.depend 和 watcher.addDep】：dep.depend ==&gt; Dep.target.addDep(this)。核心逻辑是<code>dep.addSub(this/*即该watcher*/)</code>，这就是依赖收集。【记住这里绕了一圈，即还要绕去watcher那边搞点优化】</p>
+</li>
+<li>
+<p>【解释 dep.notify 和 watcher.update】：dep.notify ==&gt; subs[i].update()。核心逻辑就是 在未来执行 watcher.run()，也就是调用一开始存在 watcher的cb和watcher.get</p>
+</li>
+<li>
+<p>优化dep实例中的watcher队列</p>
+<ul>
+<li><strong>从源码角度看：</strong> 就是watcher中，<code>[deps, depIds] vs [newDeps, newDepIds]</code> 和 <code>watcher.cleanupDeps()</code> 等等</li>
+<li>【1】以防止视图上已经不需要的watcher被触发
+<ul>
+<li>【在watcher.get()的末尾触发】watcher.cleanupDeps()：防止视图上已经不需要的watcher被触发：对比 newDeps，把deps中已经不需要的watcher从“dep实例的subs”中移除</li>
+<li>(比如有一个 data msg，一开始v-if = true，能响应式，后来v-if = false，那么就没有必要响应式(收集依赖)这个 msg字段了，也就是没必要去订阅这个msg的变化)</li>
+</ul>
+</li>
+<li>【2】在 watcher.addDep的时候，防止重复添加本 watcher 进dep实例中的队列</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-JavaScript">// #摘取自vue #基本能用：
+export default class Watcher {
+  constructor (
+    vm: Component, // 组件实例对象
+    expOrFn: string | Function, // 要观察的表达式，函数，或者字符串，只要能触发取值操作
+    cb: Function, // 被观察者发生变化后的回调
+    options?: ?Object, // 参数
+    isRenderWatcher?: boolean // 是否是渲染函数的观察者
+  ) {
+    {
+      /* 和 vm 互相保存对方引用： */
+      this.vm = vm // Watcher有一个 vm 属性，表明它是属于哪个组件的
+      if (isRenderWatcher) {
+        vm._watcher = this
+      }
+      vm._watchers.push(this) // 给组件实例的_watchers属性添加观察者实例
+    }
+
+    // 根据 options 更新 this.deep this.user this.lazy this.sync
+    // this.sync = !!options.sync // 同步执行
+
+    // 优化 watcher 队列相关：
+    this.deps = []
+    this.newDeps = []
+    this.depIds = new Set()
+    this.newDepIds = new Set()
+
+    // 【略去兼容各种情况】设置 getter，最终this.getter系一个函数。
+    this.getter = expOrFn
+    // 【略去选择性调用】this.get()：
+    this.value = this.get()
+  }
+  get () { // 触发取值操作：调用 watcher.getter，同时更新 Dep.target
+    pushTarget(this) // 给 Dep.target 赋值
+    
+    const vm = this.vm
+    // 执行getter，即执行观察者表达式
+    let value = this.getter.call(vm, vm) // 略掉try catch的逻辑
+
+    // if (this.deep) { traverse(value) }// 如果要深度监测，再对 value 执行操作
+
+    popTarget()
+    this.cleanupDeps() // 防止视图上已经不需要的watcher被触发
+    return value
+  }
+  addDep (dep: Dep) {
+    const id = dep.id
+    if (!this.newDepIds.has(id)) { // 避免重复添加
+      this.newDepIds.add(id)
+      this.newDeps.push(dep)
+      if (!this.depIds.has(id)) {
+        dep.addSub(this) // 【核心逻辑】dep 添加订阅者
+      }
+    }
+  }
+  update () {
+    if (this.sync) {
+      this.run() // 若同步直接运行
+    } else { // 否则加入异步队列等待执行，也是执行 watch.run
+      queueWatcher(this)
+    }
+  }
+}
+</code></pre>
+<h2 id="依赖收集-和-派发更新"><a class="header-anchor" href="#依赖收集-和-派发更新"></a>依赖收集 和 派发更新</h2>
+<p>前面一直没有讲“依赖收集”和“派发更新”，因为这是人造的概念，若在其间加上只不过是增加理解负担。</p>
+<p>在理解观察者模式后，其实“发布订阅模式”也是很类似的，只不过“发布订阅模式”更加强大一点，后者改由增设“调度中心”来收集订阅的回调函数，这样解耦使得发布方也能订阅。</p>
+<p>而“依赖收集”和“派发更新”主要用于描述观察者模式：</p>
+<ul>
+<li><code>dep.depend()</code>即<code>dep.addSub(watcher)</code>即为“依赖收集”；</li>
+<li><code>dep.notify()</code>，即把订阅的回调全都执行一遍，即为“派发更新”</li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> Vue </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 源码 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Vue2源码【3】patch的原理]]></title>
+      <url>https://blog.az22c.top/2020/09/01/vue2-src-code-12-patch/</url>
+      <content type="html"><![CDATA[<p><strong>从最高视角看：</strong> 已知patch阶段也是 vm.$mount 下的逻辑，但从patch这里开始，首次构建阶段和“数据变化驱动视图改变update阶段”的逻辑才开始明显出现区别。所以单独拿出一个章节来讲patch。</p>
+<p><strong>从源码层面看：</strong> 可搜索<code>return function patch (oldVnode, vnode, hydrating, removeOnly)</code>，找到patch函数的源码。而 patch 函数，实际是由 createPatchFunction 这个工厂函数所返回的：createPatchFunction利用闭包，为 patch 缓存了一些对应运行环境的接口。因此 createPatchFunction 的具体实现先可以不用看，后面也会讲到。</p>
+<a id="more"></a>
+<p>首先，<strong><code>__patch__</code>其实就是<code>patch</code>函数</strong>，记住结论，其证明见于后文。对于浏览器环境，<code>__patch__</code>的作用就是<strong>对比新旧vnode更新vm.$el，并完成真实dom更新</strong>。而其职责，选择性由 createElm(若组件则为createComponent) + patchVnode + “销毁函数” 来完成。</p>
+<h2 id="patch的宏观实现：是如何选择走-createelm-若组件则为createcomponent-还是-patchvnode-还是-销毁函数-的？"><a class="header-anchor" href="#patch的宏观实现：是如何选择走-createelm-若组件则为createcomponent-还是-patchvnode-还是-销毁函数-的？"></a>patch的宏观实现：是如何选择走 createElm(若组件则为createComponent) 还是 patchVnode 还是“销毁函数” 的？</h2>
+<p>已知条件是 oldVnode 和 vnode，所以有：</p>
+<ul>
+<li>【1】如果新节点不存在, 旧节点也不存在, 则patch无需任何操作；</li>
+<li>【2】如果新节点不存在,但旧节点存在, 说明需要删除旧节点, 调用一个销毁钩子</li>
+<li>【3】旧节点不存在，需要创建一个新节点，用到 createElm</li>
+<li>【4】新旧节点都存在
+<ul>
+<li>【4-1】新旧节点是相似节点, 对新旧节点做详细的对比操作，比如检查children的不同，也就是 patchVnode</li>
+<li>【4-2】新旧节点不是相似节点。一增一删，合计为替换。其中用到 createElm</li>
+</ul>
+</li>
+</ul>
+<p>所以 patch 的功能，就是对比新旧vnode来计算。<strong>选择性</strong>由 createElm(若组件则为createComponent) + patchVnode + “销毁函数” 来完成。注意一下如果vnode是组件类型，craeteElm 会完全切换为 createComponent，后面有解释。</p>
+<ul>
+<li>createElm 的逻辑：通过虚拟节点创建真实的 DOM (通过递归子节点)并插入到它的父节点中 @非组件类型</li>
+<li><code>vnode.elm = /*判断得出*/nodeOps.createElement(tag, vnode)</code> @非组件类型
+<ul>
+<li>此时会创建“占位符”节点</li>
+<li>占位符：比如<code>&lt;HelloWorld&gt;</code>出现在父模板上就是一个HelloWorld的占位符，它里面的实现HelloWorld.vue里面的模板才是“渲染vnode”。</li>
+</ul>
+</li>
+<li>总之无论是对应真实元素的vnode还是组件类型的vnode，他们通过插入顺序是一致的，所以整个 <code>vnode</code> 树节点的插入顺序是先子后父。非常巧妙。</li>
+</ul>
+<p>以上其实就把patch的大致工作流程梳理清楚，不交代清楚没法往下讲啊。下面可以讲讲这其中一些厉害的编写代码的技法：</p>
+<h2 id="patch其中的一些编写代码的技巧：-其实都可以当做是附录内容了"><a class="header-anchor" href="#patch其中的一些编写代码的技巧：-其实都可以当做是附录内容了"></a>patch其中的一些编写代码的技巧：(其实都可以当做是附录内容了)</h2>
+<h3 id="patch-其实就是patch-可不看证明过程"><a class="header-anchor" href="#patch-其实就是patch-可不看证明过程"></a><code>__patch__</code>其实就是<code>patch</code> #可不看证明过程</h3>
+<pre><code class="language-js">// 调用时机和函数签名：
+    if (!prevVnode) {
+      // 首次render
+      vm.$el = vm.__patch__(vm.$el, vnode, hydrating, false /* removeOnly */)
+    } else {
+      // 生命周期的updates
+      vm.$el = vm.__patch__(prevVnode, vnode)
+    }
+</code></pre>
+<p>函数签名：<code>vm.$el = vm.__patch__(vm.$el, vnode, hydrating, false /* removeOnly */)</code>，<strong>(即patch的)作用：根据vnode更新vm.$el，并完成真实dom更新</strong></p>
+<p><code>Vue.prototype.__patch__ = inBrowser ? patch : noop</code>  ：因为在服务端渲染中，没有真实的浏览器 DOM 环境，所以不需要把 VNode 最终转换成 DOM，因此是一个空函数，而在浏览器端渲染中，它指向了 <code>patch</code> 方法，这个方法又是由 createPatchFunction 函数 创建的：</p>
+<p><code>const patch = createPatchFunction({ nodeOps, modules })</code></p>
+<p><code>createPatchFunction</code>这个像是高阶函数，返回一个名为patch的函数，也就是利用闭包的特性，先把一部分参数或者配置，载入到patch中。</p>
+<h3 id="记录-patch-函数的工厂函数-createpatchfunction-的一些信息-不太重要"><a class="header-anchor" href="#记录-patch-函数的工厂函数-createpatchfunction-的一些信息-不太重要"></a>记录 patch 函数的工厂函数 createPatchFunction 的一些信息 #不太重要</h3>
+<blockquote>
+<p>直接看src/core/vdom/patch.js的 createPatchFunction 这个大函数。它这里就是反复import。</p>
+</blockquote>
+<p>【1】<code>const patch = createPatchFunction({ nodeOps, modules })</code>返回一个名为patch的函数</p>
+<ul>
+<li>nodeOps是一个对象，上面的那些方法，都是对web平台dom操作的简单封装和增强。 (src/core/vdom/patch)</li>
+<li>modules：定义了一些模块的钩子函数的实现
+<ul>
+<li>attrs</li>
+<li>klass</li>
+<li>events</li>
+<li>domProps</li>
+<li>style</li>
+<li>transition</li>
+</ul>
+</li>
+</ul>
+<p>【2】定义了一大堆辅助函数。</p>
+<h3 id="createpatchfunction-的柯里化实现-动静分离-一些启发"><a class="header-anchor" href="#createpatchfunction-的柯里化实现-动静分离-一些启发"></a>createPatchFunction 的柯里化实现“动静分离” #一些启发</h3>
+<blockquote>
+<p><a href="https://juejin.im/post/6844904142469595143" target="_blank" rel="noopener">【注入函数参数的方式】比如这个腾讯的用nuxt，前后端都能用axios；但在服务端渲染的时候，调用的是 Nuxt 的 asyncData 方法进行请求；而在客户端的时候，是直接请求后台 API</a></p>
+</blockquote>
+<p>我们可以思考一下为何 Vue 源码绕了这么一大圈，把相关代码分散到各个目录：</p>
+<p>前面也介绍过，<code>patch</code> 是平台相关的，在 Web 和 Weex 环境，它们把虚拟 DOM 映射到 “平台 DOM” 的方法是不同的，并且对 “DOM” 包括的属性模块创建和更新也不尽相同。**因此每个平台都有各自的 <code>nodeOps</code> 和 <code>modules</code>，**它们的代码需要托管在 <code>src/platforms</code> 这个大目录下。</p>
+<p>而不同平台的 <code>patch</code> 的主要逻辑部分是相同的，所以这部分公共的部分托管在 <code>core</code> 这个大目录下。</p>
+<p>综上所述：<strong>差异化部分</strong>只需要通过参数来区别，这里利用闭包实现函数柯里化，通过 <code>createPatchFunction</code> 把差异化参数提前传入固化。好处是：</p>
+<p>1、先在外部<strong>判断</strong>需要什么类型的patch，然后选择把一些依赖通过参数传递进去。而不是在patch函数内部实现一大堆<strong>判断逻辑</strong></p>
+<p>2、不用每次调用 <code>patch</code> 的时候都传入 <code>nodeOps</code> 和 <code>modules</code>。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Vue </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 源码 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Vue2源码【2】Vue MVVM 的工作流程]]></title>
+      <url>https://blog.az22c.top/2020/09/01/vue2-src-code-11-mvvm/</url>
+      <content type="html"><![CDATA[<p>整个 Vue 的运作其实始于 <code>import Vue from 'vue'</code> 执行的那一刻，一开始只是执行一些准备工作，然后到 <code>new Vue</code> 才开始执行核心的流程，也就是开始构建 MVVM。</p>
+<p>在上一篇博客有讲到， MVVM 其实就可以划分为2个阶段，“首次构建”+“重新渲染”。之所以会有“重新渲染”，是因为利用了响应式原理，当数据变化时需要重新渲染，还有强制重新渲染也是类似的。</p>
+<a id="more"></a>
+<p>运行时的首次构建会走这个逻辑：</p>
+<p><code>new Vue ==&gt; init ==&gt; $mount ==&gt; compile(如果是带编译的版本会走这步；而如果你直接写render函数则会忽略这步) ==&gt; render(得到vnode) ==&gt; patch(根据vnode操作DOM)</code></p>
+<p>下面这个过程，经过我多番勘正，应该是正确的。即便看不懂也没关系，之后我会拎出几个点来说一下。</p>
+<p>我们以最简单的案例为例：【尚无使用组件、显式写render函数】 来分析首次构建的流程，其他情况只是稍有区别：</p>
+<ul>
+<li>import Vue 的时候发生 【预定义】
+<ul>
+<li>initMixin函数：预先定义<code>Vue.prototype._init</code>。【<code>_init</code>和vm实例一对一】</li>
+<li>其他函数的执行，主要是用于预定义vm等</li>
+</ul>
+</li>
+<li>------------ 在new Vue的时候执行： (src/core/instance/init.js) -----------</li>
+<li>_init () 【在刚刚创建vm时，各模块给vm预设一些属性或者功能】
+<ul>
+<li>合并配置：merge options 赋值给vm.$options</li>
+<li>initLifecycle</li>
+<li>initEvents 事件中心</li>
+<li>initRender： vm.$createElement就是它定义的</li>
+<li>initState 初始化 data、props、computed、watcher 等等
+<ul>
+<li>initData
+<ul>
+<li>getData简单调用 <code>用户data函数.call(vm, vm)</code>。data的结果赋值给vm._data</li>
+<li>然后就是用数据劫持，让this[‘某属性’]代理vm._data[‘某属性’]</li>
+<li>然后observe data，也就是《响应式的原理 之 观察者模式》</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>调用vm.$mount：利用观察者设计模式：Watcher 在首次构建和数据变化的时候调用<code>vm._update(vm._render())</code>
+<ul>
+<li><code>vm._render()</code>：得到vnode
+<ul>
+<li><code>vm._render</code>其中比较关键节点的是 $createElement 和 createComponent 函数，分别针对不同的类型</li>
+</ul>
+</li>
+<li><code>vm._update(vm._render())</code>：根据vnode更新vm.$el，并完成真实dom更新。其中比较关键的函数是 <code>vm.__patch__</code></li>
+</ul>
+</li>
+</ul>
+<h6 id="src-core-instance-init-js"><a class="header-anchor" href="#src-core-instance-init-js"></a>src/core/instance/init.js</h6>
+<p>import Vue的时候就会执行下面代码。而<code>_init</code>是在执行new Vue的时候执行的。</p>
+<pre><code class="language-js">function Vue (options) {
+  this._init(options)
+}
+
+initMixin(Vue)
+stateMixin(Vue)
+eventsMixin(Vue)
+lifecycleMixin(Vue)
+renderMixin(Vue)
+
+export default Vue
+</code></pre>
+<h2 id="vm-mount"><a class="header-anchor" href="#vm-mount"></a>vm.$mount</h2>
+<p>vm.$mount 的执行，是构建整个 MVVM 的核心。</p>
+<pre><code class="language-js">// 实现形式：自己包装自己
+const mount = Vue.prototype.$mount // 【子组件的挂载】被包装vm.$mount，约等于 mountComponent 函数，来自src/platforms/web/runtime/index.js
+Vue.prototype.$mount = function () {
+  // 【铺垫变量，略】option.render/option.template等等 ==&gt; template变量 ==&gt; compileToFunctions函数(得出vm.$options.render和vm.$options.staticRenderFns
+  return mount.call(this, el, hydrating)
+}
+</code></pre>
+<p><strong>综上所述，<code>vm.$mount</code> 约等于 调用 <code>mountComponent</code> 函数  约等于Watcher结合updateComponent回调 + 调用 beforeMount 和 mounted 钩子 。</strong>
+<strong>而 updateComponent 回调 的核心就是 <code>vm._update(vm._render())</code>(外层函数即 <code>vm.__patch__</code>)</strong> 也就是一个观察者模式，会首次调用1次回调，(不考虑优化)然后观察每当“数据改变需要驱动视图更新”又会调用1次回调，即在初始化和update阶段调用<code>vm._update(vm._render())</code>。</p>
+<ul>
+<li><code>updateComponent = () =&gt; { vm._update(vm._render())}</code> 回调，用于订阅观察者模式，在稍后发布事件时调用。
+<ul>
+<li>【核心】<code>vm._update(vm._render())</code>。其中，<code>vm._render 约等于 vm.$options.render+vm.$createElement回调</code>  【生成vnode】</li>
+<li><code>vm._update</code> 用于执行一次真实的DOM更新。主要通过<code>vm.__patch__</code> 【根据传进来的vnode更新vm.$el，并且完成真实dom更新】</li>
+</ul>
+</li>
+</ul>
+<p>updateComponent负责逻辑，而<code>new Watcher</code>负责控制执行它的时机：</p>
+<ul>
+<li>【略】(callHook 调用beforeMount还有 mounted生命周期钩子。之后mark那些函数都是性能埋点)</li>
+<li><code>new Watcher(vm, updateComponent, noop, {</code>  一个服务于“渲染”的观察者模式 决定了什么时候调用updateComponent回调
+<ul>
+<li><code>Watcher</code> 的效果：<strong>一个是初始化的时候会执行回调函数，另一个是当 vm 实例中的监测的数据发生变化的时候执行回调函数</strong>  后者就是一个“响应式原理”</li>
+<li>只要是能用上的组件，都会执行其<code>vm.$mount</code>，那么就会执行<code>new Watcher</code>，这就是为什么“视图组件实例基本上都配备有渲染watcher”</li>
+</ul>
+</li>
+</ul>
+<p>几个要点：</p>
+<h3 id="vdom-vnode"><a class="header-anchor" href="#vdom-vnode"></a>vdom / vnode</h3>
+<p>其实 VNode 是对真实 DOM 的一种抽象描述，它的核心定义无非就几个关键属性，标签名、数据、子节点、键值等，其它属性都是用来扩展 VNode 的灵活性以及实现一些特殊 feature 的。由于 VNode 只是用来映射到真实 DOM 的渲染，不需要包含操作 DOM 的方法，因此它是非常轻量和简单的。</p>
+<h3 id="vm-createelement"><a class="header-anchor" href="#vm-createelement"></a>vm.$createElement</h3>
+<p><strong>一句话总结：vm.$createElement：返回vnode，其间规范化children，其间处理了一堆它责任范围内的edge case。其核心是createElement也就是_createElement。</strong>_createElement，也就是<code>children</code> 的规范化以及 VNode 的创建。</p>
+<h3 id="createelement-之-createcomponent"><a class="header-anchor" href="#createelement-之-createcomponent"></a>$createElement 之 createComponent</h3>
+<p>一句话总结，也是返回vnode：【1】构造子类构造函数  【2】安装组件钩子函数  【3】实例化 <code>vnode</code></p>
+<p>在 <code>$createElement</code> 的时候，如果发现是组件类型，就直接跑 createComponent 的逻辑，以取代 <code>$createElement</code> 其本身。</p>
+<blockquote>
+<p><strong>和普通元素节点的 <code>vnode</code> 不同，组件的 <code>vnode</code> 是没有 <code>children</code> 的。</strong></p>
+</blockquote>
+<p>可以看到，<code>createComponent</code> 的逻辑也会有一些复杂，但是分析源码比较推荐的是只分析核心流程，分支流程可以之后针对性的看，所以这里针对组件渲染这个 case 主要就 3 个关键步骤：</p>
+<ul>
+<li>【1】构造子类构造函数</li>
+<li>【2】安装组件钩子函数</li>
+<li>【3】实例化 <code>vnode</code></li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> Vue </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 源码 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Vue2源码【1】Vue 的整体架构]]></title>
+      <url>https://blog.az22c.top/2020/09/01/vue2-src-code-00-data-drive/</url>
+      <content type="html"><![CDATA[<p>本系列文章，主要是梳理一下 Vue 2.x 源码的一些脉络和总结一些值得学习的点。并不是像同话题下的文章带读者从0到1读懂源码。</p>
+<p>如题首先讲讲 Vue 的整体架构。</p>
+<a id="more"></a>
+<p>Vue的核心就是数据驱动，而响应式等等机制只不过是其中的组成部分。</p>
+<p><strong>数据驱动的动机：</strong> 只关心数据的修改，让代码的逻辑更加清晰。Vue 根据数据的变动，代为去操作dom。</p>
+<ul>
+<li>整个vue整体架构就是想实现“数据驱动”：
+<ul>
+<li>而响应式原理只是其中的一个重要模块。</li>
+<li>另外mvvm根据vnode更新视图也可以算是“数据驱动”的一部分
+<ul>
+<li>比如首次构建+“异步更新”</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>基于此，我们再从一个更大的视角来看 Vue 的架构设计：</p>
+<ul>
+<li>数据驱动
+<ul>
+<li>mvvm
+<ul>
+<li>首次构建阶段</li>
+<li>异步更新</li>
+</ul>
+</li>
+<li>响应式原理：数据劫持+观察者模式</li>
+<li>data以外的响应式原理
+<ul>
+<li>比如props是响应式的</li>
+<li>另见我另外一篇博客，详细讲解各种</li>
+</ul>
+</li>
+<li>双向绑定</li>
+<li>数据代理(原理极其简单)：数据劫持</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> Vue </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 源码 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[02-跨域通信和跨tab通信]]></title>
       <url>https://blog.az22c.top/2020/05/22/cross-origin-cross-tab/</url>
       <content type="html"><![CDATA[<p>上一篇文章介绍了什么是“跨域”和“跨站”。可知，“同站”通信也是“跨域”的一种途径。</p>
@@ -1560,9 +3433,13 @@ MMM.prototype.map = function(func) {
 <a id="more"></a>
 <h2 id="性能优化的指导思想："><a class="header-anchor" href="#性能优化的指导思想："></a>性能优化的指导思想：</h2>
 <ul>
-<li>先从辅助工具入手 并且 先从性能瓶颈入手
+<li>先从辅助工具入手
 <ul>
 <li>现在的辅助工具强大到会提示你如何进行优化，你可以参考着来一项一项做就行了</li>
+</ul>
+</li>
+<li>先从性能瓶颈入手
+<ul>
 <li>很多性能优化的手段是相互矛盾的，所以要抓住瓶颈和重点，舍弃掉收效不明显的手段</li>
 <li>性能优化是一项庞大的工作量，出于对工期的考虑，建议抓住瓶颈和重点</li>
 </ul>
@@ -1594,7 +3471,7 @@ MMM.prototype.map = function(func) {
 <li>减小网络传输文件体积
 <ul>
 <li>gzip</li>
-<li>webpack打包策略 BundleAnalyzerPlugin 或者执行vue ui来分析
+<li>( webpack打包策略 BundleAnalyzerPlugin 或者执行vue ui来分析 )
 <ul>
 <li>抽离公共模块</li>
 <li>专门把js库放到cdn上，然后引用，这样就不用打包这部分了 【不一定有效，毕竟通常库都是按需引入的】</li>
@@ -1666,7 +3543,8 @@ MMM.prototype.map = function(func) {
 <ul>
 <li>域名分片：即域名发散。规避浏览器对一个域名的并发数限制</li>
 <li>域名收敛：http2多路复用，多个http间复用tcp</li>
-<li>动静分离：index.html部署在自己服务器，静态资源借助cdn。同时可以实现静态资源cookie-free</li>
+<li>动静分离：index.html部署在自己服务器，静态资源借助cdn。</li>
+<li>cookie-free：在动静分离的基础上，同时可以实现静态资源cookie-free</li>
 </ul>
 </li>
 </ul>
@@ -3409,11 +5287,11 @@ console.log(Foo.prototype.constructor === Foo);//false
         
         <tags>
             
+            <tag> 进阶 </tag>
+            
             <tag> 面向对象 </tag>
             
             <tag> 原型系统 </tag>
-            
-            <tag> 进阶 </tag>
             
         </tags>
         
@@ -3563,11 +5441,11 @@ var f1 = new Foo;
         
         <tags>
             
+            <tag> 进阶 </tag>
+            
             <tag> 面向对象 </tag>
             
             <tag> 原型系统 </tag>
-            
-            <tag> 进阶 </tag>
             
         </tags>
         
@@ -4155,9 +6033,9 @@ displayColor.call(null);//TypeError: Cannot read property 'color' of null
         
         <tags>
             
-            <tag> IIFE </tag>
-            
             <tag> 进阶 </tag>
+            
+            <tag> IIFE </tag>
             
             <tag> this </tag>
             
