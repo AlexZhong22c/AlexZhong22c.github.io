@@ -1,4 +1,4 @@
-[个人技术博客2017~2020](https://blog.az22c.top) 总计接近50篇
+[个人技术博客2017~2020](https://blog.az22c.top) 总计大约66篇
 
 由于历史原因，分类不是很合理，但是划分得还是挺清晰的。
 
@@ -113,11 +113,63 @@
 
 ## ｜05 Vue 
 
+- [Vue2源码【9】收获总结](https://blog.az22c.top/2020/09/01/vue2-src-code-summary/)&nbsp;&nbsp;|&nbsp;&nbsp;2020-09-01&nbsp;&nbsp;|&nbsp;&nbsp;标签：[笔记副本](https://blog.az22c.top/tags/笔记副本/) [源码](https://blog.az22c.top/tags/源码/)
+  - <p>Vue2源码系列终于要完结了。最后总结一下阅读过程中的一些收获，主要分为4个方面：</p>
+  - <p>“架构设计方面”、“目录和模块设计”、“编程具体模块的实现”、“怎么看源码”</p>
+- [Vue2源码【8-6】指令](https://blog.az22c.top/2020/09/01/vue2-src-code-66-directive/)&nbsp;&nbsp;|&nbsp;&nbsp;2020-09-01&nbsp;&nbsp;|&nbsp;&nbsp;标签：[笔记副本](https://blog.az22c.top/tags/笔记副本/) [源码](https://blog.az22c.top/tags/源码/)
+  - <p>“指令”这部分源码，也容易看得晕头转向，这部分代码贯穿了整个核心流程，是没有独立出来的。而常见的指令v-bind、v-on、v-model、v-if v-show等等都是通过这套机制来实现的。</p>
+  - <p>这篇文章干货不多，主要是再对前面已经讲过原理的各种指令的实现有一个宏观的认识。</p>
+- [Vue2源码【8-5】keep-alive](https://blog.az22c.top/2020/09/01/vue2-src-code-65-keep-alive/)&nbsp;&nbsp;|&nbsp;&nbsp;2020-09-01&nbsp;&nbsp;|&nbsp;&nbsp;标签：[笔记副本](https://blog.az22c.top/tags/笔记副本/) [源码](https://blog.az22c.top/tags/源码/)
+  - <p>keep-alive是vue的内置组件，如果是用户想要自己实现一个类似keep-alive的组件是不可能的，因为需要vue的主干逻辑配合该组件的实现。</p>
+  - <p>keep-alive的作用是缓存的是子组件的vnode，而其本身的render返回的也是vnode。</p>
+- [Vue2源码【8-4】slot和slotScope](https://blog.az22c.top/2020/09/01/vue2-src-code-64-slot/)&nbsp;&nbsp;|&nbsp;&nbsp;2020-09-01&nbsp;&nbsp;|&nbsp;&nbsp;标签：[笔记副本](https://blog.az22c.top/tags/笔记副本/) [源码](https://blog.az22c.top/tags/源码/)
+  - <p>对于同一个组件实例，其 vnode 其实包括其“占位符节点”和“真实节点”，它们是父子节点关系。基于这点知识，再去理解slot等机制并不难。</p>
+  - <p>然后再解释了一下为什么slot和slotScope之流为什么不是响应式的。已经再介绍一下vue3正式登场的v-slot。</p>
+- [Vue2源码【8-2】v-model](https://blog.az22c.top/2020/09/01/vue2-src-code-62-v-model/)&nbsp;&nbsp;|&nbsp;&nbsp;2020-09-01&nbsp;&nbsp;|&nbsp;&nbsp;标签：[笔记副本](https://blog.az22c.top/tags/笔记副本/) [源码](https://blog.az22c.top/tags/源码/)
+  - <p>v-model相关的源码，其实极其复杂。这里主要用文本来概括流程，并且挖掘一些特别的点。</p>
+  - <p>可以划分为“v-model 在控件的实现”和“v-model 在自定义组件的实现”两部分。</p>
+- [Vue2源码【8-1】event](https://blog.az22c.top/2020/09/01/vue2-src-code-61-event/)&nbsp;&nbsp;|&nbsp;&nbsp;2020-09-01&nbsp;&nbsp;|&nbsp;&nbsp;标签：[笔记副本](https://blog.az22c.top/tags/笔记副本/) [源码](https://blog.az22c.top/tags/源码/)
+  - <p>event即事件系统，这部分源码让人看得头皮发麻。但是理解之后发现这部分的逻辑是很重要的，在这里试着用几句话概括流程。</p>
+  - <p>事件系统分为“DOM 事件”和“自定义事件”，分别为两套处理流程，先有个大概的印象即可。</p>
+- [Vue2源码【7】数据劫持使用Proxy的优势](https://blog.az22c.top/2020/09/01/vue2-src-code-5-proxy/)&nbsp;&nbsp;|&nbsp;&nbsp;2020-09-01&nbsp;&nbsp;|&nbsp;&nbsp;标签：[笔记副本](https://blog.az22c.top/tags/笔记副本/) [源码](https://blog.az22c.top/tags/源码/)
+  - <p>Proxy，与其说是代理，还不如说代理是基于<strong>拦截</strong>的，<strong>在功能定位上，和defineProperty是不一样的</strong>。只是恰好Proxy覆盖了defineProperty的getter和setter两个api。</p>
+- [Vue2源码【6】数据代理](https://blog.az22c.top/2020/09/01/vue2-src-code-4-data-proxy/)&nbsp;&nbsp;|&nbsp;&nbsp;2020-09-01&nbsp;&nbsp;|&nbsp;&nbsp;标签：[笔记副本](https://blog.az22c.top/tags/笔记副本/) [源码](https://blog.az22c.top/tags/源码/)
+  - <p>经过对概念的区分，我认为：数据代理，其原理是数据劫持。数据代理的原理是最简单的。</p>
+- [Vue2源码【5】异步更新和nextTick的原理](https://blog.az22c.top/2020/09/01/vue2-src-code-3-next-tick/)&nbsp;&nbsp;|&nbsp;&nbsp;2020-09-01&nbsp;&nbsp;|&nbsp;&nbsp;标签：[笔记副本](https://blog.az22c.top/tags/笔记副本/) [源码](https://blog.az22c.top/tags/源码/)
+  - <p>nextTick这个api，并不是直接就帮你发起微任务的，只不过是把你传进来的回调加入到微任务的回调数组中，即作为一部分。</p>
+- [【4-6】响应式原理 之 哪些api是响应式的，哪些不是响应式的](https://blog.az22c.top/2020/09/01/vue2-src-code-24-whether-responsive/)&nbsp;&nbsp;|&nbsp;&nbsp;2020-09-01&nbsp;&nbsp;|&nbsp;&nbsp;标签：[笔记副本](https://blog.az22c.top/tags/笔记副本/) [源码](https://blog.az22c.top/tags/源码/)
+  - <p>《哪些api是响应式的，哪些不是响应式的》：</p>
+  - <p>总结一下 Vue 体系内，哪些api是响应式的，哪些不是响应式的。对于个别原理，如provide inject做出一些详细解释。</p>
+- [【4-5】响应式原理 之 props 是响应式的证明](https://blog.az22c.top/2020/09/01/vue2-src-code-23-props/)&nbsp;&nbsp;|&nbsp;&nbsp;2020-09-01&nbsp;&nbsp;|&nbsp;&nbsp;标签：[笔记副本](https://blog.az22c.top/tags/笔记副本/) [源码](https://blog.az22c.top/tags/源码/)
+  - <p>《props 是响应式的证明》：</p>
+  - <p>这一篇主要从源码的执行层面，解释为何 props 是响应式的。</p>
+- [【4-4】【附录】响应式原理 之 数据劫持之computed和watch的具体源码](https://blog.az22c.top/2020/09/01/vue2-src-code-222-computed-n-watch/)&nbsp;&nbsp;|&nbsp;&nbsp;2020-09-01&nbsp;&nbsp;|&nbsp;&nbsp;标签：[笔记副本](https://blog.az22c.top/tags/笔记副本/) [源码](https://blog.az22c.top/tags/源码/)
+  - <p>《数据劫持之computed和watch的具体源码》：</p>
+  - <p>这一篇是【附录】，比较细地记录computed和watch具体的执行过程。其实还是有利于理解依赖收集和派发更新具体是什么时候发生了，能和 mvvm “首次构建” 和 “重新渲染” 的流程结合起来看。</p>
+  - <p>说是附录，其实如果掌握了其中一些核心的时间点，对于对vue的源码理解是有帮助的。</p>
+- [【4-3】响应式原理 之 数据劫持之observe的细节](https://blog.az22c.top/2020/09/01/vue2-src-code-221-deepin-observe/)&nbsp;&nbsp;|&nbsp;&nbsp;2020-09-01&nbsp;&nbsp;|&nbsp;&nbsp;标签：[笔记副本](https://blog.az22c.top/tags/笔记副本/) [源码](https://blog.az22c.top/tags/源码/)
+  - <p>《数据劫持之observe的细节》：</p>
+  - <p>之前一个章节讲数据劫持，主要是讲 defineReactive，以支持理解整个宏观的流程。</p>
+  - <p>这里特别讲 observe 和其所调用的 Observer构造函数，就是想探讨一下<strong>细节和各种特殊情况</strong>的。</p>
+- [【4-2】响应式原理 之 数据劫持](https://blog.az22c.top/2020/09/01/vue2-src-code-220-data-hijack/)&nbsp;&nbsp;|&nbsp;&nbsp;2020-09-01&nbsp;&nbsp;|&nbsp;&nbsp;标签：[笔记副本](https://blog.az22c.top/tags/笔记副本/) [源码](https://blog.az22c.top/tags/源码/)
+  - <p><strong>响应式原理 = 数据劫持 + 观察者模式</strong>。另，我们知道可以用数据劫持实现数据代理。即：响应式原理不是全包含了数据劫持。</p>
+- [【4-1】响应式原理 之 观察者模式](https://blog.az22c.top/2020/09/01/vue2-src-code-21-observe-mode/)&nbsp;&nbsp;|&nbsp;&nbsp;2020-09-01&nbsp;&nbsp;|&nbsp;&nbsp;标签：[笔记副本](https://blog.az22c.top/tags/笔记副本/) [源码](https://blog.az22c.top/tags/源码/)
+  - <p>Vue2的响应式原理，网上的资料太多了。这篇主要是把脉络梳理清楚，并且明确一些核心的概念是怎么实现的。比如依赖收集和派发更新具体指的是什么，还有一些细节处理，才造就了 Vue的合理运作。</p>
+  - <p>总之，<strong>响应式原理 = 数据劫持 + 观察者模式</strong></p>
+- [Vue2源码【3】patch的原理](https://blog.az22c.top/2020/09/01/vue2-src-code-12-patch/)&nbsp;&nbsp;|&nbsp;&nbsp;2020-09-01&nbsp;&nbsp;|&nbsp;&nbsp;标签：[笔记副本](https://blog.az22c.top/tags/笔记副本/) [源码](https://blog.az22c.top/tags/源码/)
+  - <p><strong>从最高视角看：</strong> 已知patch阶段也是 vm.$mount 下的逻辑，但从patch这里开始，首次构建阶段和“数据变化驱动视图改变update阶段”的逻辑才开始明显出现区别。所以单独拿出一个章节来讲patch。</p>
+  - <p><strong>从源码层面看：</strong> 可搜索<code>return function patch (oldVnode, vnode, hydrating, removeOnly)</code>，找到patch函数的源码。而 patch 函数，实际是由 createPatchFunction 这个工厂函数所返回的：createPatchFunction利用闭包，为 patch 缓存了一些对应运行环境的接口。因此 createPatchFunction 的具体实现先可以不用看，后面也会讲到。</p>
+- [Vue2源码【2】Vue MVVM 的工作流程](https://blog.az22c.top/2020/09/01/vue2-src-code-11-mvvm/)&nbsp;&nbsp;|&nbsp;&nbsp;2020-09-01&nbsp;&nbsp;|&nbsp;&nbsp;标签：[笔记副本](https://blog.az22c.top/tags/笔记副本/) [源码](https://blog.az22c.top/tags/源码/)
+  - <p>整个 Vue 的运作其实始于 <code>import Vue from 'vue'</code> 执行的那一刻，一开始只是执行一些准备工作，然后到 <code>new Vue</code> 才开始执行核心的流程，也就是开始构建 MVVM。</p>
+  - <p>在上一篇博客有讲到， MVVM 其实就可以划分为2个阶段，“首次构建”+“重新渲染”。之所以会有“重新渲染”，是因为利用了响应式原理，当数据变化时需要重新渲染，还有强制重新渲染也是类似的。</p>
+- [Vue2源码【1】Vue 的整体架构](https://blog.az22c.top/2020/09/01/vue2-src-code-00-data-drive/)&nbsp;&nbsp;|&nbsp;&nbsp;2020-09-01&nbsp;&nbsp;|&nbsp;&nbsp;标签：[笔记副本](https://blog.az22c.top/tags/笔记副本/) [源码](https://blog.az22c.top/tags/源码/)
+  - <p>本系列文章，主要是梳理一下 Vue 2.x 源码的一些脉络和总结一些值得学习的点。并不是像同话题下的文章带读者从0到1读懂源码。</p>
+  - <p>如题首先讲讲 Vue 的整体架构。</p>
 - [Vue-lazyload 原理和使用 个人总结](https://blog.az22c.top/2020/04/02/vue-lazyload-summary/)&nbsp;&nbsp;|&nbsp;&nbsp;2020-04-02&nbsp;&nbsp;|&nbsp;&nbsp;标签：[笔记副本](https://blog.az22c.top/tags/笔记副本/) [回顾](https://blog.az22c.top/tags/回顾/)
   - <p>Vue-lazyload 这个话题，可谓“前人之述备矣”。这里主要写写一些我认为比较重要的点，能够快速回顾这个“第三方组件”的原理和使用方法。</p>
 - [纯vue实现checkbox父子联动](https://blog.az22c.top/2017/05/07/vue-checkbox-table/)&nbsp;&nbsp;|&nbsp;&nbsp;2017-05-07&nbsp;&nbsp;|&nbsp;&nbsp;标签：[全选](https://blog.az22c.top/tags/全选/) [复选框](https://blog.az22c.top/tags/复选框/) [表格](https://blog.az22c.top/tags/表格/) [插件](https://blog.az22c.top/tags/插件/)
   - <p>对应代码的github仓库的地址：<a href="https://github.com/AlexZhong22c/vue-checkbox-table" target="_blank" rel="noopener">https://github.com/AlexZhong22c/vue-checkbox-table</a></p>
-  - <p><a href="https://alexzhong22c.github.io/vue-checkbox-table/vue-checkbox-table.html">demo</a> (在线演示初次加载会有点慢，请稍等)</p>
+  - <p><a href="https://alexzhong22c.github.io/vue-checkbox-table/vue-checkbox-table.html" target="_blank" rel="noopener">demo</a> (在线演示初次加载会有点慢，请稍等)</p>
   - <p>vue.js的出现，导致很多小插件的简单实现成为可能。</p>
   - <p>但是，正是由于<strong>vue的数据绑定</strong>使用起来耦合度太强，导致一些比较常规的插件的实现方式要稍微有所不同。</p>
 - [经典vue单页路由入门全家桶](https://blog.az22c.top/2017/04/25/vue-time-tracker/)&nbsp;&nbsp;|&nbsp;&nbsp;2017-04-25&nbsp;&nbsp;|&nbsp;&nbsp;标签：[express](https://blog.az22c.top/tags/express/) [MongoDB](https://blog.az22c.top/tags/MongoDB/) [vuex](https://blog.az22c.top/tags/vuex/) [异步](https://blog.az22c.top/tags/异步/)
@@ -126,7 +178,7 @@
   - <p>对应代码的github仓库的地址：<a href="https://github.com/AlexZhong22c/vue-time-tracker" target="_blank" rel="noopener">https://github.com/AlexZhong22c/vue-time-tracker</a></p>
 - [按条目展示表格数据小插件](https://blog.az22c.top/2017/04/15/vue-table-nav/)&nbsp;&nbsp;|&nbsp;&nbsp;2017-04-15&nbsp;&nbsp;|&nbsp;&nbsp;标签：[表格](https://blog.az22c.top/tags/表格/) [插件](https://blog.az22c.top/tags/插件/) [条目](https://blog.az22c.top/tags/条目/)
   - <p>对应代码的github仓库的地址：<a href="https://github.com/AlexZhong22c/vue-table-nav" target="_blank" rel="noopener">https://github.com/AlexZhong22c/vue-table-nav</a></p>
-  - <p><a href="https://alexzhong22c.github.io/vue-table-nav/vue-table-nav.html">demo</a> (在线演示初次加载会有点慢，请稍等)</p>
+  - <p><a href="https://alexzhong22c.github.io/vue-table-nav/vue-table-nav.html" target="_blank" rel="noopener">demo</a> (在线演示初次加载会有点慢，请稍等)</p>
 
 ## ｜06 项目总结 
 
