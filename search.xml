@@ -5,7 +5,7 @@
     
     <entry>
       <title><![CDATA[Vue2源码【9】收获总结]]></title>
-      <url>https://blog.az22c.top/2020/09/01/vue2-src-code-summary/</url>
+      <url>https://blog.az22c.top/2020/09/04/vue2-src-code-summary/</url>
       <content type="html"><![CDATA[<p>Vue2源码系列终于要完结了。最后总结一下阅读过程中的一些收获，主要分为4个方面：</p>
 <p>“架构设计方面”、“目录和模块设计”、“编程具体模块的实现”、“怎么看源码”</p>
 <a id="more"></a>
@@ -105,6 +105,8 @@ export function once (fn: Function): Function {
         
         <tags>
             
+            <tag> 笔记副本 </tag>
+            
             <tag> 源码 </tag>
             
         </tags>
@@ -113,7 +115,7 @@ export function once (fn: Function): Function {
     
     <entry>
       <title><![CDATA[Vue2源码【8-6】指令]]></title>
-      <url>https://blog.az22c.top/2020/09/01/vue2-src-code-66-directive/</url>
+      <url>https://blog.az22c.top/2020/09/04/vue2-src-code-66-directive/</url>
       <content type="html"><![CDATA[<p>“指令”这部分源码，也容易看得晕头转向，这部分代码贯穿了整个核心流程，是没有独立出来的。而常见的指令v-bind、v-on、v-model、v-if v-show等等都是通过这套机制来实现的。</p>
 <p>这篇文章干货不多，主要是再对前面已经讲过原理的各种指令的实现有一个宏观的认识。</p>
 <a id="more"></a>
@@ -151,6 +153,8 @@ export function once (fn: Function): Function {
         
         <tags>
             
+            <tag> 笔记副本 </tag>
+            
             <tag> 源码 </tag>
             
         </tags>
@@ -159,7 +163,7 @@ export function once (fn: Function): Function {
     
     <entry>
       <title><![CDATA[Vue2源码【8-5】keep-alive]]></title>
-      <url>https://blog.az22c.top/2020/09/01/vue2-src-code-65-keep-alive/</url>
+      <url>https://blog.az22c.top/2020/09/04/vue2-src-code-65-keep-alive/</url>
       <content type="html"><![CDATA[<p>keep-alive是vue的内置组件，如果是用户想要自己实现一个类似keep-alive的组件是不可能的，因为需要vue的主干逻辑配合该组件的实现。</p>
 <p>keep-alive的作用是缓存的是子组件的vnode，而其本身的render返回的也是vnode。</p>
 <a id="more"></a>
@@ -245,6 +249,8 @@ export function once (fn: Function): Function {
         
         <tags>
             
+            <tag> 笔记副本 </tag>
+            
             <tag> 源码 </tag>
             
         </tags>
@@ -253,7 +259,7 @@ export function once (fn: Function): Function {
     
     <entry>
       <title><![CDATA[Vue2源码【8-4】slot和slotScope]]></title>
-      <url>https://blog.az22c.top/2020/09/01/vue2-src-code-64-slot/</url>
+      <url>https://blog.az22c.top/2020/09/04/vue2-src-code-64-slot/</url>
       <content type="html"><![CDATA[<p>对于同一个组件实例，其 vnode 其实包括其“占位符节点”和“真实节点”，它们是父子节点关系。基于这点知识，再去理解slot等机制并不难。</p>
 <p>然后再解释了一下为什么slot和slotScope之流为什么不是响应式的。已经再介绍一下vue3正式登场的v-slot。</p>
 <a id="more"></a>
@@ -387,6 +393,8 @@ _c('div',
         
         <tags>
             
+            <tag> 笔记副本 </tag>
+            
             <tag> 源码 </tag>
             
         </tags>
@@ -395,7 +403,7 @@ _c('div',
     
     <entry>
       <title><![CDATA[Vue2源码【8-2】v-model]]></title>
-      <url>https://blog.az22c.top/2020/09/01/vue2-src-code-62-v-model/</url>
+      <url>https://blog.az22c.top/2020/09/04/vue2-src-code-62-v-model/</url>
       <content type="html"><![CDATA[<p>v-model相关的源码，其实极其复杂。这里主要用文本来概括流程，并且挖掘一些特别的点。</p>
 <p>可以划分为“v-model 在控件的实现”和“v-model 在自定义组件的实现”两部分。</p>
 <a id="more"></a>
@@ -473,6 +481,8 @@ _c('div',
         
         <tags>
             
+            <tag> 笔记副本 </tag>
+            
             <tag> 源码 </tag>
             
         </tags>
@@ -481,7 +491,7 @@ _c('div',
     
     <entry>
       <title><![CDATA[Vue2源码【8-1】event]]></title>
-      <url>https://blog.az22c.top/2020/09/01/vue2-src-code-61-event/</url>
+      <url>https://blog.az22c.top/2020/09/04/vue2-src-code-61-event/</url>
       <content type="html"><![CDATA[<p>event即事件系统，这部分源码让人看得头皮发麻。但是理解之后发现这部分的逻辑是很重要的，在这里试着用几句话概括流程。</p>
 <p>事件系统分为“DOM 事件”和“自定义事件”，分别为两套处理流程，先有个大概的印象即可。</p>
 <a id="more"></a>
@@ -523,7 +533,7 @@ _c('div',
 </ul>
 <h3 id="vue优化js-dom事件绑定的机制"><a class="header-anchor" href="#vue优化js-dom事件绑定的机制"></a>vue优化js DOM事件绑定的机制</h3>
 <ul>
-<li>**事件回调在第一次只添加一次，之后仅仅去修改它的回调函数的引用指向。其实就是invoke函数创建好了，知道它每次用到invoke.fns，如果更新则更新invoke.fns就好了
+<li><strong>事件回调在第一次只添加一次，之后仅仅去修改它的回调函数的引用指向。其实就是invoke函数创建好了，知道它每次用到invoke.fns，如果更新则更新invoke.fns就好了</strong>
 <ul>
 <li>【对于第一次执行】执行 <code>cur = on[name] = createFnInvoker(cur)</code> 方法去创建一个回调函数，然后在执行 <code>add(event.name, cur, event.once, event.capture, event.passive, event.params)</code> 完成一次事件绑定</li>
 <li>createFnInvoker：返回一个函数，它持有一个fns属性，并且它本身的逻辑就是遍历执行这些函数</li>
@@ -610,6 +620,8 @@ function remove (event, fn) {
         
         <tags>
             
+            <tag> 笔记副本 </tag>
+            
             <tag> 源码 </tag>
             
         </tags>
@@ -618,7 +630,7 @@ function remove (event, fn) {
     
     <entry>
       <title><![CDATA[Vue2源码【7】数据劫持使用Proxy的优势]]></title>
-      <url>https://blog.az22c.top/2020/09/01/vue2-src-code-5-proxy/</url>
+      <url>https://blog.az22c.top/2020/09/04/vue2-src-code-5-proxy/</url>
       <content type="html"><![CDATA[<p>Proxy，与其说是代理，还不如说代理是基于<strong>拦截</strong>的，<strong>在功能定位上，和defineProperty是不一样的</strong>。只是恰好Proxy覆盖了defineProperty的getter和setter两个api。</p>
 <a id="more"></a>
 <h3 id="导论-要看看"><a class="header-anchor" href="#导论-要看看"></a>导论 #要看看</h3>
@@ -678,6 +690,8 @@ function remove (event, fn) {
         
         <tags>
             
+            <tag> 笔记副本 </tag>
+            
             <tag> 源码 </tag>
             
         </tags>
@@ -686,7 +700,7 @@ function remove (event, fn) {
     
     <entry>
       <title><![CDATA[Vue2源码【6】数据代理]]></title>
-      <url>https://blog.az22c.top/2020/09/01/vue2-src-code-4-data-proxy/</url>
+      <url>https://blog.az22c.top/2020/09/04/vue2-src-code-4-data-proxy/</url>
       <content type="html"><![CDATA[<p>经过对概念的区分，我认为：数据代理，其原理是数据劫持。数据代理的原理是最简单的。</p>
 <a id="more"></a>
 <h2 id="数据代理-其原理是数据劫持"><a class="header-anchor" href="#数据代理-其原理是数据劫持"></a>数据代理，其原理是数据劫持</h2>
@@ -722,6 +736,8 @@ function _proxy (data) {
         
         <tags>
             
+            <tag> 笔记副本 </tag>
+            
             <tag> 源码 </tag>
             
         </tags>
@@ -730,7 +746,7 @@ function _proxy (data) {
     
     <entry>
       <title><![CDATA[Vue2源码【5】异步更新和nextTick的原理]]></title>
-      <url>https://blog.az22c.top/2020/09/01/vue2-src-code-3-next-tick/</url>
+      <url>https://blog.az22c.top/2020/09/04/vue2-src-code-3-next-tick/</url>
       <content type="html"><![CDATA[<p>nextTick这个api，并不是直接就帮你发起微任务的，只不过是把你传进来的回调加入到微任务的回调数组中，即作为一部分。</p>
 <a id="more"></a>
 <h2 id="异步更新的原理"><a class="header-anchor" href="#异步更新的原理"></a>异步更新的原理</h2>
@@ -807,6 +823,8 @@ function _proxy (data) {
         
         <tags>
             
+            <tag> 笔记副本 </tag>
+            
             <tag> 源码 </tag>
             
         </tags>
@@ -815,7 +833,7 @@ function _proxy (data) {
     
     <entry>
       <title><![CDATA[【4-6】响应式原理 之 哪些api是响应式的，哪些不是响应式的]]></title>
-      <url>https://blog.az22c.top/2020/09/01/vue2-src-code-24-whether-responsive/</url>
+      <url>https://blog.az22c.top/2020/09/04/vue2-src-code-24-whether-responsive/</url>
       <content type="html"><![CDATA[<p>《哪些api是响应式的，哪些不是响应式的》：</p>
 <p>总结一下 Vue 体系内，哪些api是响应式的，哪些不是响应式的。对于个别原理，如provide inject做出一些详细解释。</p>
 <a id="more"></a>
@@ -830,6 +848,7 @@ function _proxy (data) {
 <li>data</li>
 <li>props</li>
 <li>vuex的state(本质上是data)</li>
+<li>vue-router注入的 this.$route：使用mixin在created时机之前调用defineReactive</li>
 </ul>
 </li>
 <li>哪些不是响应式的
@@ -936,6 +955,8 @@ initProvide(vm) // resolve provide after data/props
         
         <tags>
             
+            <tag> 笔记副本 </tag>
+            
             <tag> 源码 </tag>
             
         </tags>
@@ -944,7 +965,7 @@ initProvide(vm) // resolve provide after data/props
     
     <entry>
       <title><![CDATA[【4-5】响应式原理 之 props 是响应式的证明]]></title>
-      <url>https://blog.az22c.top/2020/09/01/vue2-src-code-23-props/</url>
+      <url>https://blog.az22c.top/2020/09/04/vue2-src-code-23-props/</url>
       <content type="html"><![CDATA[<p>《props 是响应式的证明》：</p>
 <p>这一篇主要从源码的执行层面，解释为何 props 是响应式的。</p>
 <a id="more"></a>
@@ -1003,6 +1024,8 @@ initProvide(vm) // resolve provide after data/props
         
         <tags>
             
+            <tag> 笔记副本 </tag>
+            
             <tag> 源码 </tag>
             
         </tags>
@@ -1011,7 +1034,7 @@ initProvide(vm) // resolve provide after data/props
     
     <entry>
       <title><![CDATA[【4-4】【附录】响应式原理 之 数据劫持之computed和watch的具体源码]]></title>
-      <url>https://blog.az22c.top/2020/09/01/vue2-src-code-222-computed-n-watch/</url>
+      <url>https://blog.az22c.top/2020/09/04/vue2-src-code-222-computed-n-watch/</url>
       <content type="html"><![CDATA[<p>《数据劫持之computed和watch的具体源码》：</p>
 <p>这一篇是【附录】，比较细地记录computed和watch具体的执行过程。其实还是有利于理解依赖收集和派发更新具体是什么时候发生了，能和 mvvm “首次构建” 和 “重新渲染” 的流程结合起来看。</p>
 <p>说是附录，其实如果掌握了其中一些核心的时间点，对于对vue的源码理解是有帮助的。</p>
@@ -1098,6 +1121,8 @@ initProvide(vm) // resolve provide after data/props
         
         <tags>
             
+            <tag> 笔记副本 </tag>
+            
             <tag> 源码 </tag>
             
         </tags>
@@ -1106,7 +1131,7 @@ initProvide(vm) // resolve provide after data/props
     
     <entry>
       <title><![CDATA[【4-3】响应式原理 之 数据劫持之observe的细节]]></title>
-      <url>https://blog.az22c.top/2020/09/01/vue2-src-code-221-deepin-observe/</url>
+      <url>https://blog.az22c.top/2020/09/04/vue2-src-code-221-deepin-observe/</url>
       <content type="html"><![CDATA[<p>《数据劫持之observe的细节》：</p>
 <p>之前一个章节讲数据劫持，主要是讲 defineReactive，以支持理解整个宏观的流程。</p>
 <p>这里特别讲 observe 和其所调用的 Observer构造函数，就是想探讨一下<strong>细节和各种特殊情况</strong>的。</p>
@@ -1261,6 +1286,8 @@ initProvide(vm) // resolve provide after data/props
         
         <tags>
             
+            <tag> 笔记副本 </tag>
+            
             <tag> 源码 </tag>
             
         </tags>
@@ -1269,7 +1296,7 @@ initProvide(vm) // resolve provide after data/props
     
     <entry>
       <title><![CDATA[【4-2】响应式原理 之 数据劫持]]></title>
-      <url>https://blog.az22c.top/2020/09/01/vue2-src-code-220-data-hijack/</url>
+      <url>https://blog.az22c.top/2020/09/04/vue2-src-code-220-data-hijack/</url>
       <content type="html"><![CDATA[<p><strong>响应式原理 = 数据劫持 + 观察者模式</strong>。另，我们知道可以用数据劫持实现数据代理。即：响应式原理不是全包含了数据劫持。</p>
 <a id="more"></a>
 <ul>
@@ -1377,6 +1404,7 @@ export function defineReactive (
 <li>另外，如果computed计算结果前后不一样，就也派发更新视图更新updateComponent回调执行。此后渲染watcher也会重新依赖收集该computed。</li>
 </ul>
 <p><strong>渲染 watcher</strong>：</p>
+<p>因为vue在调用每个vm.$mount都会执行<code>new Watcher</code>，意味着每个视图组件实例都有渲染 watcher。</p>
 <p>传入的 <code>expOrFn</code> 是 <code>updateComponent = () =&gt; { vm._update(vm._render(), hydrating) }</code>。</p>
 <p>首次构建，需要构建vnode触发数据的getter，有时候也需要获取computed，再最后才传给<code>vm._update</code>去patch。在这个过程其中，渲染watcher更新了一次“依赖收集”。</p>
 <p>数据更新的时候，由setter派发更新，触发watcher.update，也就是在未来触发 watcher.run。其中触发 watcher.get，对于渲染 watcher而言，也就是触发<code>updateComponent</code>。<code>updateComponent</code>，这里又要<code>vm._render()</code>生成vnode，所以又访问vm上的数据，所以触发数据的getter(为下一次重新渲染视图更新“依赖收集”)，再最后才传给<code>vm._update</code>去patch。</p>
@@ -1394,6 +1422,8 @@ export function defineReactive (
         
         <tags>
             
+            <tag> 笔记副本 </tag>
+            
             <tag> 源码 </tag>
             
         </tags>
@@ -1402,7 +1432,7 @@ export function defineReactive (
     
     <entry>
       <title><![CDATA[【4-1】响应式原理 之 观察者模式]]></title>
-      <url>https://blog.az22c.top/2020/09/01/vue2-src-code-21-observe-mode/</url>
+      <url>https://blog.az22c.top/2020/09/04/vue2-src-code-21-observe-mode/</url>
       <content type="html"><![CDATA[<p>Vue2的响应式原理，网上的资料太多了。这篇主要是把脉络梳理清楚，并且明确一些核心的概念是怎么实现的。比如依赖收集和派发更新具体指的是什么，还有一些细节处理，才造就了 Vue的合理运作。</p>
 <p>总之，<strong>响应式原理 = 数据劫持 + 观察者模式</strong></p>
 <a id="more"></a>
@@ -1593,6 +1623,8 @@ export default class Watcher {
         
         <tags>
             
+            <tag> 笔记副本 </tag>
+            
             <tag> 源码 </tag>
             
         </tags>
@@ -1601,7 +1633,7 @@ export default class Watcher {
     
     <entry>
       <title><![CDATA[Vue2源码【3】patch的原理]]></title>
-      <url>https://blog.az22c.top/2020/09/01/vue2-src-code-12-patch/</url>
+      <url>https://blog.az22c.top/2020/09/04/vue2-src-code-12-patch/</url>
       <content type="html"><![CDATA[<p><strong>从最高视角看：</strong> 已知patch阶段也是 vm.$mount 下的逻辑，但从patch这里开始，首次构建阶段和“数据变化驱动视图改变update阶段”的逻辑才开始明显出现区别。所以单独拿出一个章节来讲patch。</p>
 <p><strong>从源码层面看：</strong> 可搜索<code>return function patch (oldVnode, vnode, hydrating, removeOnly)</code>，找到patch函数的源码。而 patch 函数，实际是由 createPatchFunction 这个工厂函数所返回的：createPatchFunction利用闭包，为 patch 缓存了一些对应运行环境的接口。因此 createPatchFunction 的具体实现先可以不用看，后面也会讲到。</p>
 <a id="more"></a>
@@ -1686,6 +1718,8 @@ export default class Watcher {
         
         <tags>
             
+            <tag> 笔记副本 </tag>
+            
             <tag> 源码 </tag>
             
         </tags>
@@ -1694,7 +1728,7 @@ export default class Watcher {
     
     <entry>
       <title><![CDATA[Vue2源码【2】Vue MVVM 的工作流程]]></title>
-      <url>https://blog.az22c.top/2020/09/01/vue2-src-code-11-mvvm/</url>
+      <url>https://blog.az22c.top/2020/09/04/vue2-src-code-11-mvvm/</url>
       <content type="html"><![CDATA[<p>整个 Vue 的运作其实始于 <code>import Vue from 'vue'</code> 执行的那一刻，一开始只是执行一些准备工作，然后到 <code>new Vue</code> 才开始执行核心的流程，也就是开始构建 MVVM。</p>
 <p>在上一篇博客有讲到， MVVM 其实就可以划分为2个阶段，“首次构建”+“重新渲染”。之所以会有“重新渲染”，是因为利用了响应式原理，当数据变化时需要重新渲染，还有强制重新渲染也是类似的。</p>
 <a id="more"></a>
@@ -1811,6 +1845,8 @@ Vue.prototype.$mount = function () {
         
         <tags>
             
+            <tag> 笔记副本 </tag>
+            
             <tag> 源码 </tag>
             
         </tags>
@@ -1819,7 +1855,7 @@ Vue.prototype.$mount = function () {
     
     <entry>
       <title><![CDATA[Vue2源码【1】Vue 的整体架构]]></title>
-      <url>https://blog.az22c.top/2020/09/01/vue2-src-code-00-data-drive/</url>
+      <url>https://blog.az22c.top/2020/09/04/vue2-src-code-00-data-drive/</url>
       <content type="html"><![CDATA[<p>本系列文章，主要是梳理一下 Vue 2.x 源码的一些脉络和总结一些值得学习的点。并不是像同话题下的文章带读者从0到1读懂源码。</p>
 <p>如题首先讲讲 Vue 的整体架构。</p>
 <a id="more"></a>
@@ -1869,6 +1905,1021 @@ Vue.prototype.$mount = function () {
         
         
         <tags>
+            
+            <tag> 笔记副本 </tag>
+            
+            <tag> 源码 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Vue-Router3源码拾遗【6】配套组件的实现]]></title>
+      <url>https://blog.az22c.top/2020/09/02/vue-router3-src-code-6-component/</url>
+      <content type="html"><![CDATA[<p>如下面章节标题所示：router-view 首次渲染和重新渲染的原理 和 router-link 的原理。</p>
+<p>至此，vue-router3 源码系列文章，完结。</p>
+<a id="more"></a>
+<h2 id="router-view-首次渲染的逻辑"><a class="header-anchor" href="#router-view-首次渲染的逻辑"></a>router-view 首次渲染的逻辑</h2>
+<p><strong>router-view 只不过是实现了render函数，算出要渲染哪个组件即可，没有黑科技。</strong></p>
+<p>路由最终的渲染离不开组件，Vue-Router 内置了 <code>&lt;router-view&gt;</code> 组件，它的定义在 <code>src/components/view.js</code> 中。</p>
+<ul>
+<li>前置知识：
+<ul>
+<li>用到的数据：<code>$route</code> 是定义在 <code>Vue.prototype</code> 上。<strong>每个组件实例访问 <code>$route</code> 属性，就是访问根实例的 <code>_route</code>，也就是当前的路由线路</strong>。(即数据代理：先前已Object.defineProperty定义Vue.prototype的$route为this._routerRoot._route)</li>
+<li><code>&lt;router-view&gt;</code> 是一个 <code>functional</code> 组件，它的渲染也是依赖 <code>render</code> 函数</li>
+</ul>
+</li>
+</ul>
+<p>因此直接看render即可：</p>
+<ul>
+<li><strong>router-view的render函数，即整体架构：</strong>
+<ul>
+<li>(props name 也就是 <code>&lt;router-view name=&quot;xxxx&quot; /&gt;</code>)</li>
+<li>【首先获取当前的路径】<code>route = parent.$route</code>  也就是可以粗浅理解为是当前路径 【见前面解释】</li>
+<li>【得出应该渲染哪个组件，支持嵌套】因为router-view和 路由配置表(和routerRecord)是映射关系，所以要根据它计算出对应显示的是啥组件
+<ul>
+<li>( 面向结果编程即可，循环判断父节点是否符合条件，没有黑科技就不看了 )</li>
+</ul>
+</li>
+<li>定义一个回调函数，以备之后更新 <code>matched.instances[name]</code>
+<ul>
+<li>(定义data.registerRouteInstance，方便后面实现<code>matched.instances[name] = val</code>。这样每个组件的导航钩子，都能拿到对应的组件实例)</li>
+</ul>
+</li>
+<li>调用h函数渲染</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-js">export default {
+  name: 'RouterView',
+  functional: true,
+  props: { /**/name },
+  render (_, { props, children, parent, data }) {
+    data.routerView = true
+
+    // 定义变量，飞速略过：
+    const h = parent.$createElement
+    const name = props.name
+    const route = parent.$route
+    const cache = parent._routerViewCache || (parent._routerViewCache = {})
+
+    // while (parent &amp;&amp; parent._routerRoot !== parent) {
+
+    // 【直接看到这里】
+    const matched = route.matched[depth]
+    if (!matched) {
+      cache[name] = null
+      return h()
+    }
+
+    const component = cache[name] = matched.components[name]
+    // 搞 matched.instances[name]
+    data.registerRouteInstance = (vm, val) =&gt; {/*  */ matched.instances[name] = val }
+    ;(data.hook || (data.hook = {})).prepatch = (_, vnode) =&gt; { matched.instances[name] = vnode.componentInstance }
+
+    // 关于data.props的逻辑先略过 
+    return h(component, data, children)
+  }
+}
+</code></pre>
+<p>整体架构就是这样，其中个别模块内容即便展开也没有黑科技，就不作详解了。</p>
+<h2 id="vue-router-中的响应式的实现-及-router-view-重新渲染"><a class="header-anchor" href="#vue-router-中的响应式的实现-及-router-view-重新渲染"></a>vue-router 中的响应式的实现 及 router-view 重新渲染</h2>
+<ul>
+<li>router-view和普通视图template都是调用了渲染watcher。</li>
+<li>$route：defineReactive + 可以有Dep.target</li>
+</ul>
+<p><strong>router-view同样有响应式原理(组件的渲染watcher)，这就是它 重新渲染 的原理：</strong></p>
+<p>在我们混入的 <code>beforeCreate</code> 钩子函数中有这么一段逻辑：</p>
+<pre><code class="language-js">Vue.mixin({
+  beforeCreate () {
+    if (isDef(this.$options.router)) {
+      Vue.util.defineReactive(this, '_route', this._router.history.current)
+    }
+    // ...
+  }
+})
+</code></pre>
+<ul>
+<li>依赖收集：我们在每个 <code>&lt;router-view&gt;</code> 执行 <code>render</code> 函数的时候，都会访问  <code>parent.$route</code>，如我们之前分析会访问 <code>this._routerRoot._route</code>，触发了它的 <code>getter</code>，相当于 <code>&lt;router-view&gt;</code> 对它有依赖</li>
+<li>派发更新：在执行完 <code>transitionTo</code> 后，修改 <code>app._route</code> 的时候，又触发了<code>setter</code>，因此会通知 <code>&lt;router-view&gt;</code> 的渲染 <code>watcher</code> 更新，重新渲染组件，也就是调用它的render函数。
+<ul>
+<li>因为vue在调用每个vm.$mount都会执行new Watcher，意味着每个普通视图组件实例都有渲染watcher</li>
+</ul>
+</li>
+</ul>
+<p>另，可以证明是，<strong>每个组件实例访问 <code>$route</code> 属性，就是访问根实例的 <code>_route</code>，也就是当前的路由线路</strong>，这是通过数据代理实现的。</p>
+<h2 id="router-link-内置组件"><a class="header-anchor" href="#router-link-内置组件"></a>router-link 内置组件</h2>
+<p>首先看看“官方文档”是怎么对比router-link和a标签的选择的：</p>
+<ul>
+<li>无论是 HTML5 history 模式还是 hash 模式，它的表现行为一致，所以，当你要切换路由模式，或者在 IE9 降级使用 hash 模式，无须作任何变动。</li>
+<li>在 HTML5 history 模式下，<code>router-link</code> 会守卫点击事件，让浏览器不再重新加载页面。</li>
+<li>当你在 HTML5 history 模式下使用 <code>base</code> 选项之后，所有的 <code>to</code> 属性都不需要写 (基路径) 了。</li>
+</ul>
+<p>总结成1句话就是，<strong>router-link底层利用 HTML5 browser history 或者 hash history，这样能够维持提供单页应用并且可实现页面局部更新。</strong></p>
+<p>再用文本总结下router-link的源码：(具体源码可以自行翻阅，里面没有复杂的东西)</p>
+<ul>
+<li>作为vue组件，实现了option render函数
+<ul>
+<li>router.resolve：计算出最终跳转的 <code>href</code></li>
+<li>“未来的html元素”的class处理</li>
+<li>按要求绑定click等事件回调，对于一般click回调有些细节处理，最终执行 <code>this实例.history</code> 的 <code>push</code> 和 <code>replace</code></li>
+</ul>
+</li>
+</ul>
+<p>源码的定义在 <code>src/components/link.js</code> 中：(render属性其实就是h(this.tag, data, this.$slots.default))</p>
+<pre><code class="language-js">export default {
+  name: 'RouterLink',
+  props: {
+    to, tag, exact, append, replace, event: /**/
+    activeClass: String,
+    exactActiveClass: String
+  },
+  render (h: Function) {
+    const [router, current] = [this.$router, this.$route]
+    const { location, route, href } = router.resolve(this.to, current, this.append)
+
+    // 对于class做处理
+    const classes = {}
+    const globalActiveClass = router.options.linkActiveClass // 全局配置
+    const globalExactActiveClass = router.options.linkExactActiveClass // 全局配置
+    // 降级：
+    const activeClassFallback = globalActiveClass == null
+            ? 'router-link-active'
+            : globalActiveClass
+    const exactActiveClassFallback = globalExactActiveClass == null
+            ? 'router-link-exact-active'
+            : globalExactActiveClass
+    const activeClass = this.activeClass == null
+            ? activeClassFallback
+            : this.activeClass
+    const exactActiveClass = this.exactActiveClass == null
+            ? exactActiveClassFallback
+            : this.exactActiveClass
+
+
+    const compareTarget = location.path
+      ? createRoute(null, location, null, router)
+      : route
+
+    classes[exactActiveClass] = isSameRoute(current, compareTarget)
+    classes[activeClass] = this.exact
+      ? classes[exactActiveClass]
+      : isIncludedRoute(current, compareTarget) // 是否是包含关系
+    // 以上都是处理 activeClass和 exactActiveClass
+
+    const handler = e =&gt; {
+      if (guardEvent(e)) {
+        if (this.replace) {
+          router.replace(location) // 里面就是this.history.replace
+        } else {
+          router.push(location) // 里面就是this.history.push
+        }
+      }
+    }
+
+    const on = { click: guardEvent }
+    if (Array.isArray(this.event)) {
+      this.event.forEach(e =&gt; { on[e] = handler })
+    } else {
+      on[this.event] = handler
+    }
+
+    const data: any = {
+      class: classes
+    }
+
+
+    // 最后判断当前 `tag` 是否是 `&lt;a&gt;` 标签，`&lt;router-link&gt;` 默认会渲染成 `&lt;a&gt;` 标签，当然我们也可以修改 `tag` 的 `prop` 渲染成其他节点，这种情况下会尝试找它子元素的 `&lt;a&gt;` 标签，如果有则把事件绑定到 `&lt;a&gt;` 标签上并添加 `href` 属性，否则绑定到外层元素本身。
+    if (this.tag === 'a') {
+      data.on = on
+      data.attrs = { href }
+    } else {
+      const a = findAnchor(this.$slots.default)
+      if (a) {
+        a.isStatic = false
+        const extend = _Vue.util.extend
+        const aData = a.data = extend({}, a.data)
+        aData.on = on
+        const aAttrs = a.data.attrs = extend({}, a.data.attrs)
+        aAttrs.href = href
+      } else {
+        data.on = on
+      }
+    }
+
+    return h(this.tag, data, this.$slots.default)
+  }
+}
+</code></pre>
+]]></content>
+      
+        <categories>
+            
+            <category> Vue </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 笔记副本 </tag>
+            
+            <tag> 源码 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Vue-Router3源码拾遗【5】改变url]]></title>
+      <url>https://blog.az22c.top/2020/09/02/vue-router3-src-code-5-api-n-url/</url>
+      <content type="html"><![CDATA[<p>上一篇文章已经介绍了核心模块。这篇文章介绍外围的提供给用户的 api 是怎么实现的，还有如何将变化同步到浏览器 url 的。</p>
+<p>对于外围 api，会考虑兼容降级调用浏览器提供的 BOM api，所以先要对这部分知识有一个基本的理解，可以参考本系列文章的第一篇。</p>
+<p>这部分代码是真的难读，<code>某某某.push</code>、<code>某某某.history</code>满屏幕都是，字段名又是命名得类似而且一词用于多义，有时候都分不清谁是谁了。再者考虑了兼容性问题，就算是搜出来的字段，经常不知道要点进哪个文件去看。</p>
+<a id="more"></a>
+<p>特别提醒：HTML5 history的 pushState 和 replaceState，可以<strong>设置history.state并改变 url 地址，但不会刷新页面</strong>。其被提出的目的，就是想像 hash History 一样，能实现类似单页应用的效果并且局部刷新页面。</p>
+<h2 id="router-push"><a class="header-anchor" href="#router-push"></a>router.push</h2>
+<p>当我们点击 <code>router-link</code> 的时候，或者直接函数式调用<code>this.$router.push</code>，实际上最终会执行 <code>router.push</code>，如下：</p>
+<pre><code class="language-js">push (location, onComplete, onAbort) {
+  this.history.push(location, onComplete, onAbort)
+}
+</code></pre>
+<p><strong><code>this.history.push</code> 函数，这个函数是子类实现的，不同模式下该函数的实现略有不同，我们来看一下平时使用比较多的 <code>hash</code> 模式该函数的实现，</strong> 在 <code>src/history/hash.js</code> 中：</p>
+<pre><code class="language-js">push (location: RawLocation, onComplete?: Function, onAbort?: Function) {
+  const { current: fromRoute } = this
+  this.transitionTo(location, route =&gt; {
+    pushHash(route.fullPath)
+    // handleScroll(this.router, route, fromRoute, false)
+    onComplete &amp;&amp; onComplete(route)
+  }, onAbort)
+}
+</code></pre>
+<blockquote>
+<p>history.replaceState 和 history.pushState 的区别的表现，就是 浏览器回退的时候，回退到上一条记录去哪</p>
+</blockquote>
+<p>其实主干逻辑很纯粹，复杂的代码就是在遇到需要兼容或者降级的时候区分执行的逻辑就行了。</p>
+<p><code>push</code> 函数会先执行 <code>this.transitionTo</code> 做路径切换，在其的回调函数中，执行 <code>pushHash</code> 函数：</p>
+<ul>
+<li>(<code>hash</code> 模式下的)push
+<ul>
+<li>this.transitionTo 做路径切换   (可能会调用 onComplete 或 onAbort。它们就类似于Promise的 resolve和 reject 回调 )</li>
+<li>在回调中执行 pushHash       (还有执行并列的handleScroll)。
+<ul>
+<li>(<code>supportsPushState</code>如果支持这个api则返回。 (其实是对ua的判断，也就是 <code>window.navigator.userAgent</code>))</li>
+<li>【判断浏览器如果支持 pushState】则获取当前完整的 <code>url</code>，执行 <code>pushState</code> 这个包装方法
+<ul>
+<li>调用浏览器原生的 <code>history</code> 的 <code>pushState</code> 接口或者 <code>replaceState</code> 接口，更新浏览器的 url 地址</li>
+</ul>
+</li>
+<li>【判断浏览器如果不支持 pushState】 则直接替换：<code>window.location.hash = path</code></li>
+</ul>
+</li>
+<li>(若有则)调用 onComplete</li>
+</ul>
+</li>
+</ul>
+<h2 id="点击浏览器前进或后退按钮的响应-即监听历史栈的变化"><a class="header-anchor" href="#点击浏览器前进或后退按钮的响应-即监听历史栈的变化"></a>点击浏览器前进或后退按钮的响应，即监听历史栈的变化</h2>
+<p><code>history</code> 的初始化中，会设置一个监听器，监听历史栈的变化：</p>
+<pre><code class="language-js">setupListeners () {
+  const router = this.router
+  // scroll相关....
+  window.addEventListener(supportsPushState ? 'popstate' : 'hashchange', () =&gt; {
+    if (!ensureSlash()) return;
+    this.transitionTo(getHash(), route =&gt; {
+      // scroll相关....
+      if (!supportsPushState) {
+        replaceHash(route.fullPath)
+      }
+    })
+  })
+}
+</code></pre>
+<p>当点击浏览器前进或后退按钮的时候，如果已经有 url 被压入历史栈，则会触发 <code>popstate</code> 事件，然后拿到当前要跳转的 <code>hash</code>，执行 <code>transtionTo</code> 方法做一次路径转换。</p>
+<h6 id="ensureslash-："><a class="header-anchor" href="#ensureslash-："></a>ensureSlash ：</h6>
+<p>同学们在使用 Vue-Router 开发项目的时候，打开调试页面 <code>http://localhost:8080</code> 后会自动把 url 修改为 <code>http://localhost:8080/#/</code>，这是怎么做到呢？原来在实例化 <code>HashHistory</code> 的时候，构造函数会执行 <code>ensureSlash()</code> 方法：</p>
+<p>原理：基于兼容包装replaceHash函数，也就是 <code>history.replaceState</code> 或者 <code>window.location.replace</code>。</p>
+<p>原理和实现的代码其实都很简单，就是正如开篇所说的兼容、函数套娃等原因，搞得很难读懂。</p>
+<pre><code class="language-js">function ensureSlash (): boolean {
+  const path = getHash()
+  if (path.charAt(0) === '/') {
+    return true
+  }
+  replaceHash('/' + path)
+  return false
+}
+
+export function getHash (): string {
+  // We can't use window.location.hash here because it's not
+  // consistent across browsers - Firefox will pre-decode it!
+  const href = window.location.href
+  const index = href.indexOf('#')
+  return index === -1 ? '' : href.slice(index + 1)
+}
+
+function getUrl (path) {
+  const href = window.location.href
+  const i = href.indexOf('#')
+  const base = i &gt;= 0 ? href.slice(0, i) : href
+  return `${base}#${path}`
+}
+
+function replaceHash (path) {
+  if (supportsPushState) {
+    replaceState(getUrl(path))
+  } else {
+    window.location.replace(getUrl(path))
+  }
+}
+
+export function replaceState (url?: string) {
+  pushState(url, true)
+}
+</code></pre>
+<h2 id="总结："><a class="header-anchor" href="#总结："></a>总结：</h2>
+<p>还是利用浏览器的api：</p>
+<ul>
+<li>(不严谨统计)</li>
+<li>history.replaceState</li>
+<li>history.pushState</li>
+<li>window.location.replace</li>
+<li>window.location.assign</li>
+<li>window.addEventListener(‘popstate’, function () {})</li>
+<li>window.addEventListener(‘hashchange’, function () {})</li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> Vue </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 笔记副本 </tag>
+            
+            <tag> 源码 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[【4运作核心】路径切换和路由守卫]]></title>
+      <url>https://blog.az22c.top/2020/09/02/vue-router3-src-code-4-switch-n-guard/</url>
+      <content type="html"><![CDATA[<p>如果没有处理路径切换，整个路由器就没法运作，就跟没用一样。可见路径切换模块在其中的核心地位。</p>
+<p>讲到“路径切换”，<code>history.transitionTo</code>是位于内部的核心。也就是绝大多数提供给用户的函数，最终都会执行到这里，开启路径切换的流程。</p>
+<p>其间值得注意的是，利用迭代器设计模式，可简洁实现路由守卫，是非常巧妙的代码设计，会提前详细介绍。</p>
+<p>到文章最后，文字描述路径切换的流程骨架。再剩余每个繁杂具体的 queue 钩子函数没有介绍，留给读者自行仔细研读。</p>
+<a id="more"></a>
+<p><strong>【<code>history.transitionTo</code>的架构地位：】</strong></p>
+<p>前言：<code>history.transitionTo</code> 是 Vue-Router 中非常重要的方法，当我们切换路由线路的时候，就会执行到该方法。</p>
+<p>history.push、history.replace实际上也会执行history.transitionTo。函数里的this.confirmTrasition 完成一次真正的路径切换(也是当前话题下的重点)。</p>
+<p><strong>【<code>history.transitionTo</code>的职责：】</strong></p>
+<p>(前一节我们分析了 <code>matcher</code> 的相关实现，知道它是如何找到匹配的新线路)，那么匹配到新线路后发生的事，就是要研究<code>history.transitionTo</code>。</p>
+<p>其实路径切换函数是作为回调传入<code>history.transitionTo</code>，只要实现路径切换和在其前后调用路由守卫就行了。</p>
+<p><strong>【内部真正执行路径切换的函数】</strong>：<code>history.transitionTo</code>内部会执行<code>confirmTrasition</code>，后者的代码才是真正去完成其职责。</p>
+<blockquote>
+<p>“里面那么多不止用于路由守卫的钩子函数具体是怎么样实现处理相应事务的?” 这么枯燥，相信绝大多数人都不需要去关心。在这里先上一点干货，来点有意思的，最后才去贴枯燥的流程解释。</p>
+</blockquote>
+<h2 id="迭代器-设计模式-敲黑板-划重点"><a class="header-anchor" href="#迭代器-设计模式-敲黑板-划重点"></a>迭代器 设计模式 #敲黑板，划重点</h2>
+<p>我们知道路径切换的时候，会依次执行路由守卫钩子，同时路由守卫有“拦截”的作用。实际上 Vue-Router 在此时执行的钩子函数远不止这么少，只是很多内部的钩子函数没有暴露给用户而已。</p>
+<p>“路由守卫”这个机制的实现，其实就是迭代器设计模式。在之后看源码的时候就会看到。</p>
+<p>先来一个“最简版”迭代器模式，作为demo跑一下，发现设计得挺巧妙的：(其中注释掉的代码是可以去掉的，“注释代码”其作用就是等整个迭代器执行完之后再调用cbOfQueue而已)</p>
+<pre><code class="language-JavaScript">function runQueue (queue, iterator, /* cbOfQueue */) {
+  var step = function (index) {
+    // if (index &gt;= queue.length) {
+      // cbOfQueue();
+    // } else {
+      if (queue[index]) {
+        iterator(queue[index], function () {
+          step(index + 1);
+        });
+      } else { step(index + 1); } // edge case:万一这下标没对应的数组元素
+    // }
+  };
+  step(0);
+}
+async function iterator (fn, next) {
+  await fn(); await /* 可以添加代码 */; next();
+}
+</code></pre>
+<p>我们需要把要执行的各种“事务”(也就是回调函数)放入queue这个数组就行了。</p>
+<p>我们看到iterator函数第2个参数是一个回调函数，我们称之为next，只要iterator执行了这个next回调，迭代器就能继续往下走。</p>
+<p>而iterator函数在每一次循环中的职责就是把第1个传入参数(即其也是一个函数)执行掉，就能去执行next回调了。next本身就是一个<code>() =&gt; step(index + 1)</code>，再通过下标来判断迭代器是否执行完毕即可。这就是满足实现迭代器的需要。</p>
+<p>可见如果不执行next，迭代器就不能往下走了，这就是“路由守卫”的原理。(如果不想执行next就可以注入一个abort回调函数供执行以通知外界，这也是官方源码所实现的)</p>
+<p>传入的钩子函数fn执行next回调之前，可以在fn中添加任意逻辑，这部分逻辑的载体又是一个回调函数，通常就是 Vue-Router 提供给用户自定义的钩子函数了。</p>
+<p><strong>如果能看懂代码，完全不需要看文字描述了！！！！！！！！！！</strong> “摘自源码的对应代码”如下，阅读难度稍稍提高了一点点：</p>
+<pre><code class="language-JavaScript">// runQueue摘自源码原文：
+/**
+ * @param {Array&lt;Function&gt;} queue 将要执行的函数 的队列
+ * @param {Function} iterator 传入 函数 给 iterator，iterator内可以执行函数，然后在合适的时候执行其回调(即step(index + 1)) 就能继续这个 runQueue。
+ * @param {*} cbOfQueue 队列执行完毕后的回调
+ */
+function runQueue (queue, fn, cbOfQueue) {
+  var step = function (index) {
+    if (index &gt;= queue.length) {
+      cbOfQueue();
+    } else {
+      if (queue[index]) {
+        fn(queue[index], function () { // fn === iterator
+          step(index + 1);
+        });
+      } else { step(index + 1); } // edge case:万一这下标没对应的数组元素
+    }
+  };
+  step(0);
+}
+// async function iterator (fn, next) {
+//   await fn(); await /* 可以添加代码 */; next();
+// }
+// change to:
+function iterator (fn, next) {
+  fn(function cbOfFn() { // 如果想中间插入任务，就把fn弄成可以接收回调的，最后“延迟”到在回调中执行next即可
+    next()
+  })
+};
+</code></pre>
+<p>经进一步理解之后，再把设计哲学上升一个高度：<strong>其实就是回调函数嵌套+哨兵变量 完成一个迭代器的逻辑。</strong></p>
+<blockquote>
+<p>好了，后面又是枯燥的“具体业务”解析环节：</p>
+</blockquote>
+<h2 id="传给-matcher-match-的-this-current-前置知识"><a class="header-anchor" href="#传给-matcher-match-的-this-current-前置知识"></a>传给 matcher.match 的 this.current #前置知识</h2>
+<p><code>this.current</code> 是 <code>history</code> 维护的当前路径，它的初始值是在 <code>history</code> 的构造函数中初始化的。</p>
+<pre><code class="language-js">this.current = START
+</code></pre>
+<p><code>START</code> 的定义在 <code>src/util/route.js</code> 中：</p>
+<pre><code class="language-js">export const START = createRoute(null, {
+  path: '/'
+})
+</code></pre>
+<p>这样就创建了一个初始的 <code>Route</code>，而 <code>transitionTo</code> 实际上也就是在切换 <code>this.current</code>，稍后我们会看到。</p>
+<h2 id="confirmtrasition-去做真正的路径切换且调用前后路由守卫"><a class="header-anchor" href="#confirmtrasition-去做真正的路径切换且调用前后路由守卫"></a>confirmTrasition 去做真正的路径切换且调用前后路由守卫</h2>
+<p>由于这个过程可能有一些异步的操作（如异步组件），所以整个 <code>confirmTransition</code> API 设计成带有成功回调函数和失败回调函数。</p>
+<ul>
+<li>confirmTransition
+<ul>
+<li>(首先定义了 <code>abort</code> 函数)</li>
+<li>然后判断如果满足计算后的 <code>route</code> 和 <code>current</code> 是相同路径的话，则直接调用 <code>this.ensureUrl</code> 和 <code>abort</code>。<code>ensureUrl</code> 这个函数我们之后会介绍。</li>
+<li>接着又根据 <code>current.matched</code> 和 <code>route.matched</code> 执行了 <code>resolveQueue</code> 方法解析出 3 个队列</li>
+<li>3组钩子外加其他钩子放入到queue数组</li>
+<li>runQueue(queue, iterator, callback) 迭代执行</li>
+</ul>
+</li>
+</ul>
+<h6 id="resolvequeue："><a class="header-anchor" href="#resolvequeue："></a>resolveQueue：</h6>
+<pre><code class="language-js">function resolveQueue (
+  current: Array&lt;RouteRecord&gt;,
+  next: Array&lt;RouteRecord&gt;
+): {
+  updated: Array&lt;RouteRecord&gt;,
+  activated: Array&lt;RouteRecord&gt;,
+  deactivated: Array&lt;RouteRecord&gt;
+} {
+  let i
+  const max = Math.max(current.length, next.length)
+  for (i = 0; i &lt; max; i++) {
+    if (current[i] !== next[i]) {
+      break
+    }
+  }
+  return {
+    updated: next.slice(0, i),
+    activated: next.slice(i),
+    deactivated: current.slice(i)
+  }
+}
+</code></pre>
+<p>因为 <code>route.matched</code> 是一个 <code>RouteRecord</code> 的数组，由于路径是由 <code>current</code> 变向 <code>next</code>，那么就遍历对比 2 边的 <code>RouteRecord</code>，找到一个不一样的位置 <code>i</code>：</p>
+<ul>
+<li>那么 <code>next</code> 中从 0 到 <code>i</code> 的 <code>RouteRecord</code> 是两边都一样，则为 <code>updated</code> 的部分；</li>
+<li>从 <code>i</code> 到最后的 <code>RouteRecord</code> 是 <code>next</code> 独有的，为 <code>activated</code> 的部分；</li>
+<li>而 <code>current</code> 中从 <code>i</code> 到最后的 <code>RouteRecord</code> 则没有了，为 <code>deactivated</code> 的部分。</li>
+</ul>
+<p>拿到 <code>updated</code>、<code>activated</code>、<code>deactivated</code> 3 个 <code>ReouteRecord</code> 数组后，接下来就是路径变换后的一个重要部分，执行一系列的钩子函数。</p>
+<p>这个计算很简洁，但是有点巧妙，比较典型的例子 foo/bar 切换 到 foo： current是<code>[{/*foo*/}, {/*bar*/}]</code> ； 而 next 是 <code>[{/*foo*/}]</code>。</p>
+<h6 id="反正就是3者算好之后-再和其他钩子放入到queue数组："><a class="header-anchor" href="#反正就是3者算好之后-再和其他钩子放入到queue数组："></a>反正就是3者算好之后，再和其他钩子放入到queue数组：</h6>
+<pre><code class="language-js">const queue: Array&lt;?NavigationGuard&gt; = [].concat(
+  extractLeaveGuards(deactivated),
+  this.router.beforeHooks,
+  extractUpdateHooks(updated),
+  activated.map(m =&gt; m.beforeEnter),
+  resolveAsyncComponents(activated)
+)
+</code></pre>
+<p>5步骤按照顺序如下：</p>
+<ol>
+<li>在失活的组件里调用离开守卫。</li>
+<li>调用全局的 <code>beforeEach</code> 守卫。</li>
+<li>在重用的组件里调用 <code>beforeRouteUpdate</code> 守卫</li>
+<li>在激活的路由配置里调用 <code>beforeEnter</code>。</li>
+<li>解析异步路由组件。</li>
+</ol>
+<h6 id="runqueue"><a class="header-anchor" href="#runqueue"></a>runQueue</h6>
+<p><code>NavigationGuard(to, from, next)</code>，原理参考前面已经提前介绍的“迭代器”设计模式，只是把变量名改改而已。</p>
+<p>再看可自定义的iterator，源码的实现，会根据一些条件执行 <code>abort</code> 或 <code>next</code>。</p>
+<pre><code class="language-JavaScript">  var iterator = function (hook, next) {
+    // 先不看pending相关逻辑
+    try {
+      hook(route, current, function (to) {
+        if (to === false) {
+          // next(false) -&gt; abort navigation, ensure current URL
+          this$1.ensureURL(true);
+          abort(createNavigationAbortedError(current, route));
+        } else if (isError(to)) {
+          this$1.ensureURL(true);
+          abort(to);
+        } else if (
+          typeof to === 'string' ||
+          (typeof to === 'object' &amp;&amp;
+            (typeof to.path === 'string' || typeof to.name === 'string'))
+        ) {
+          // next('/') or next({ path: '/' }) -&gt; redirect
+          abort(createNavigationRedirectedError(current, route));
+          if (typeof to === 'object' &amp;&amp; to.replace) {
+            this$1.replace(to);
+          } else {
+            this$1.push(to);
+          }
+        } else {
+          // confirm transition and pass on the value
+          next(to);  // 其实就是 step(index + 1)
+        }
+      });
+    } catch (e) {
+      abort(e);
+    }
+  };
+</code></pre>
+<blockquote>
+<p>大的流程骨架讲完了。剩下的就是“一个一个放入queue中的每个导航守卫是怎么实现的”讲解。首先它们的书写格式，为了满足迭代器的需要，格式已经被限制死了。无非就是其间想实现什么业务的区别而已。</p>
+<p>再讲到业务，其实笔者是有研读过导航守卫的具体内容的，这里面还有有一些有意思的代码，但是就算是你想实现相同的业务，这源码的可参考意义也不算很大，所以这里就不贴这些繁琐的代码了。所以本章节就在这里戛然结束了吧。</p>
+</blockquote>
+]]></content>
+      
+        <categories>
+            
+            <category> Vue </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 笔记副本 </tag>
+            
+            <tag> 源码 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Vue-Router3源码拾遗【3】matcher匹配器]]></title>
+      <url>https://blog.az22c.top/2020/09/02/vue-router3-src-code-3-matcher/</url>
+      <content type="html"><![CDATA[<p>方法论：只要明白了某个模块的目的或者功能(或者函数签名、函数参数和返回)，在多数情况下都不用关心其繁杂的具体实现。</p>
+<p>以本文内容为例，只要掌握了核心模块<code>createMatcher</code>函数，及其返回的方法<code>matcher.match</code> 二者的作用和原理，就能理清相关模块的整体架构。</p>
+<p>再后面就是枯燥的具体实现。如果你也想实现一个前端路由库并且想参考其源码，后半部分姑且可以当做字段字典来查阅。</p>
+<a id="more"></a>
+<h2 id="该模块的架构总结："><a class="header-anchor" href="#该模块的架构总结："></a>该模块的架构总结：</h2>
+<blockquote>
+<p>从“函数”的视角入手，掌握关键的函数，用自己的话赋予之“函数签名”，对整个架构的设计的理解就豁然开朗！</p>
+</blockquote>
+<p><strong>【核心模块：】</strong></p>
+<ul>
+<li><code>createMatcher</code> 接收 2 个参数，一个是 <code>router</code>，一个是 <code>routes</code>，它是用户定义的路由配置。<strong>内容就是根据路由表来创建各种映射表xxxMap，</strong> 返回(本身是matcher)参数有 match 和 addRouters。</li>
+<li><code>matcher.match</code> 会根据传入的位置和路径计算出新的位置，并匹配到对应的路由 record，然后根据新的位置和 record 创建新的路径并返回。</li>
+</ul>
+<p><strong>【还有周边的一些提供支持的模块：】</strong></p>
+<ul>
+<li>数据结构模块：Loaction、Route</li>
+<li>RouteRecord：抽象成数据结构，还是对路由表的数据做点增强，方便用于匹配</li>
+<li>addRoutes： createMatcher的返回结果：<code>addRoutes</code> 方法的作用是动态添加路由配置，因为在实际开发中有些场景是不能提前把路由写死的，需要根据一些条件动态添加路由，所以 Vue-Router 也提供了这一接口。</li>
+</ul>
+<blockquote>
+<p>后文就是枯燥的具体实现的解释了：</p>
+</blockquote>
+<h2 id="基础数据结构作为前置模块"><a class="header-anchor" href="#基础数据结构作为前置模块"></a>基础数据结构作为前置模块</h2>
+<h3 id="loaction-数据结构定义在-flow-declarations-js-中"><a class="header-anchor" href="#loaction-数据结构定义在-flow-declarations-js-中"></a>Loaction 数据结构定义在 <code>flow/declarations.js</code> 中</h3>
+<pre><code class="language-js">declare type Location = {
+  _normalized?: boolean;
+  name?: string;
+  path?: string;
+  hash?: string;
+  query?: Dictionary&lt;string&gt;;
+  params?: Dictionary&lt;string&gt;;
+  append?: boolean;
+  replace?: boolean;
+}
+</code></pre>
+<p>Vue-Router 中定义的 <code>Location</code> 数据结构和浏览器提供的 <code>window.location</code> 部分结构有点类似，它们都是对 <code>url</code> 的结构化描述。举个例子：<code>/abc?foo=bar&amp;baz=qux#hello</code>，它的 <code>path</code> 是 <code>/abc</code>，<code>query</code> 是 <code>{foo:'bar',baz:'qux'}</code>。<code>Location</code> 的其他属性我们之后会介绍。</p>
+<h3 id="route-数据结构定义在-flow-declarations-js-中"><a class="header-anchor" href="#route-数据结构定义在-flow-declarations-js-中"></a>Route 数据结构定义在 <code>flow/declarations.js</code> 中</h3>
+<pre><code class="language-js">declare type Route = {
+  path: string;
+  name: ?string;
+  hash: string;
+  query: Dictionary&lt;string&gt;;
+  params: Dictionary&lt;string&gt;;
+  fullPath: string;
+  matched: Array&lt;RouteRecord&gt;;
+  redirectedFrom?: string;
+  meta?: any;
+}
+</code></pre>
+<p><code>Route</code> 表示的是路由中的一条线路，它除了描述了类似 <code>Loctaion</code> 的 <code>path</code>、<code>query</code>、<code>hash</code> 这些概念，还有 <code>matched</code> 表示匹配到的所有的 <code>RouteRecord</code>。<code>Route</code> 的其他属性我们之后会介绍。</p>
+<h2 id="routerecord：还是对路由表的数据做点增强-方便用于匹配"><a class="header-anchor" href="#routerecord：还是对路由表的数据做点增强-方便用于匹配"></a>RouteRecord：还是对路由表的数据做点增强，方便用于匹配</h2>
+<ul>
+<li><code>path</code> 是规范化后的路径，它会根据 <code>parent</code> 的 <code>path</code> 做计算</li>
+<li><code>regex</code> 是一个正则表达式的扩展，它利用了<code>path-to-regexp</code> 这个工具库，把 <code>path</code> 解析成一个正则表达式的扩展</li>
+<li><code>components</code> 是一个对象，通常我们在配置中写的 <code>component</code> 实际上这里会被转换成 <code>{components: route.component}</code>；</li>
+<li><code>instances</code> 表示组件的实例，也是一个对象类型；</li>
+<li><code>parent</code> 表示父的 <code>RouteRecord</code>，因为我们配置的时候有时候会配置子路由，所以整个 <code>RouteRecord</code> 也就是一个树型结构。</li>
+<li></li>
+</ul>
+<pre><code class="language-js"> const record: RouteRecord = {
+  path: normalizedPath,
+  regex: compileRouteRegex(normalizedPath, pathToRegexpOptions),
+  components: route.components || { default: route.component },
+  instances: {},
+  name,
+  parent,
+  matchAs,
+  redirect: route.redirect,
+  beforeEnter: route.beforeEnter,
+  meta: route.meta || {},
+  props: route.props == null
+    ? {}
+    : route.components
+      ? route.props
+      : { default: route.props }
+}
+</code></pre>
+<h2 id="creatematcher-返回的正是-matcher-是做匹配用的"><a class="header-anchor" href="#creatematcher-返回的正是-matcher-是做匹配用的"></a>createMatcher 返回的正是 matcher，是做匹配用的</h2>
+<blockquote>
+<p><code>createRouteMap</code> 的定义在<code>src/create-route-map</code></p>
+</blockquote>
+<ul>
+<li><code>pathList</code> 是为了记录路由配置中的所有 `path</li>
+<li><code>pathMap</code> 和 <code>nameMap</code> 都是为了通过 <code>path</code> 和 <code>name</code> 能快速查到对应的 <code>RouteRecord</code>。</li>
+<li>(由于 <code>pathList</code>、<code>pathMap</code>、<code>nameMap</code> 都是引用类型，所以在遍历整个 <code>routes</code> 过程中去执行 <code>addRouteRecord</code> 方法，会不断给他们添加数据。)</li>
+</ul>
+<blockquote>
+<p><code>createMatcher</code> 接收 2 个参数，一个是 <code>router</code>，一个是 <code>routes</code>，它是用户定义的路由配置。**内容就是根据路由表来创建各种映射表xxxMap，**返回(本身是matcher)参数有 match 和 addRouters。</p>
+</blockquote>
+<ul>
+<li>createMathcer 把用户的路由配置转换成一张路由映射表
+<ul>
+<li><code>const { pathList, pathMap, nameMap } = createRouteMap(routes)</code> 创建一个路由映射表
+<ul>
+<li>递归遍历路由配置表，调用 addRouteRecord
+<ul>
+<li>normalizePath 略</li>
+<li>(省略)</li>
+<li><strong>如果配置了 <code>children</code>，那么递归执行 <code>addRouteRecord</code> 方法，并把当前的 <code>record</code> 作为 <code>parent</code> 传入，通过这样的深度遍历，我们就可以拿到一个 <code>route</code> 下的完整记录。</strong></li>
+<li>RouteRecord 添加到各种对应 xxxMap</li>
+<li>alias的逻辑就不看了</li>
+</ul>
+</li>
+<li>通配符<code>*</code>优先级问题</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>match相关的函数和逻辑，最终返回一条 <code>Route</code> 路径</li>
+</ul>
+<h2 id="addroutes：-creatematcher的返回结果"><a class="header-anchor" href="#addroutes：-creatematcher的返回结果"></a>addRoutes： createMatcher的返回结果</h2>
+<p><code>addRoutes</code> 方法的作用是动态添加路由配置，因为在实际开发中有些场景是不能提前把路由写死的，需要根据一些条件动态添加路由，所以 Vue-Router 也提供了这一接口。</p>
+<pre><code class="language-js">function addRoutes (routes) {
+  createRouteMap(routes, pathList, pathMap, nameMap)
+}
+</code></pre>
+<p><code>addRoutes</code> 的逻辑十分简单：再次调用 <code>createRouteMap</code> 即可，传入新的 <code>routes</code> 配置。由于 <code>pathList</code>、<code>pathMap</code>、<code>nameMap</code> 都是引用类型，执行 <code>addRoutes</code> 后会修改它们的值。</p>
+<h2 id="match：-creatematcher的返回结果"><a class="header-anchor" href="#match：-creatematcher的返回结果"></a>match： createMatcher的返回结果</h2>
+<p><code>match</code> 方法接收 3 个参数，其中 <code>raw</code> 是 <code>RawLocation</code> 类型，它可以是一个 <code>url</code> 字符串，也可以是一个 <code>Location</code> 对象；<code>currentRoute</code> 是 <code>Route</code> 类型，它表示当前的路径；<code>redirectedFrom</code> 和重定向相关，这里先忽略。</p>
+<p><code>match</code> 方法返回的是一个路径，它的作用是根据传入的 <code>raw</code> 和当前的路径 <code>currentRoute</code> 计算出一个新的路径(并返回)。加之通过这个心的路径找到它对应的Record，然后返回<code>_createRoute(...args) =&gt; createRoute(/*对应的Record*/, /*新的路径*/)</code></p>
+<blockquote>
+<p>在_createRoute中，我们先不考虑 <code>record.redirect</code> 和 <code>record.matchAs</code> 的情况。</p>
+</blockquote>
+<p>**createRoute返回的是一条 <code>Route</code> 路径，这个对 <code>Route</code> 的切换，组件的渲染都有非常重要的指导意义。**在 Vue-Router 中，所有的 <code>Route</code> 最终都会通过 <code>createRoute</code> 函数创建，并且它最后是不可以被外部修改的。</p>
+<p>【非常重要】<code>Route.matched</code> ，它通过 <code>formatMatch(record)</code> 计算而来：可以看它是通过 <code>record</code> 循环向上找 <code>parent</code>，直到找到最外层，并把所有的 <code>record</code> 都 push 到一个数组中，最终返回的就是 <code>record</code> 的数组，它记录了一条线路上的所有 <code>record</code>。<code>matched</code> 属性非常有用，它为之后渲染组件提供了依据。</p>
+<blockquote>
+<p>总结： match会根据传入的位置和路径计算出新的位置，并匹配到对应的路由 record，然后根据新的位置和 record 创建新的路径并返回。</p>
+</blockquote>
+<ul>
+<li>match
+<ul>
+<li>normalizeLocation 【看源码的单元测试，大概知道它的使用场景， 计算出新的 <code>location</code>】
+<ul>
+<li>(一些参数的处理)</li>
+<li>parsePath</li>
+<li>resolvePath、resolveQuery等等处理比较复杂的location</li>
+</ul>
+</li>
+<li>根据 新location，找到对应<code>Route</code>，并且一起传入调用 _createRoute</li>
+</ul>
+</li>
+</ul>
+<h6 id="重新计算-location-详解-可不看"><a class="header-anchor" href="#重新计算-location-详解-可不看"></a>重新计算 location #详解#可不看</h6>
+<p>，它主要处理了 <code>raw</code> 的两种情况：</p>
+<ul>
+<li>有 <code>params</code> 且没有 <code>path</code></li>
+<li>有 <code>path</code> 的</li>
+</ul>
+<p>对于第一种情况，如果 <code>current</code> 有 <code>name</code>，则计算出的 <code>location</code> 也有 <code>name</code>。</p>
+<h6 id="计算出新的-location后-怎么找到对应的record-详解-可不看"><a class="header-anchor" href="#计算出新的-location后-怎么找到对应的record-详解-可不看"></a>计算出新的 <code>location</code>后，怎么找到对应的record #详解#可不看</h6>
+<p>对 <code>location</code> 的 <code>name</code> 和 <code>path</code> 的两种情况做了处理。</p>
+<ul>
+<li><code>name</code></li>
+</ul>
+<p>有 <code>name</code> 的情况下就根据 <code>nameMap</code> 匹配到 <code>record</code>，它就是一个 <code>RouterRecord</code> 对象，如果 <code>record</code> 不存在，则匹配失败，返回一个空路径；然后拿到 <code>record</code> 对应的 <code>paramNames</code>，再对比 <code>currentRoute</code> 中的 <code>params</code>，把交集部分的 <code>params</code> 添加到 <code>location</code> 中，然后在通过 <code>fillParams</code> 方法根据 <code>record.path</code> 和 <code>location.path</code> 计算出 <code>location.path</code>，最后调用 <code>_createRoute(record, location, redirectedFrom)</code> 去生成一条新路径，该方法我们之后会介绍。</p>
+<ul>
+<li><code>path</code></li>
+</ul>
+<p>通过 <code>name</code> 我们可以很快的找到 <code>record</code>，但是通过 <code>path</code> 并不能，因为我们计算后的 <code>location.path</code> 是一个真实路径，而 <code>record</code> 中的 <code>path</code> 可能会有 <code>param</code>，因此需要对所有的 <code>pathList</code> 做顺序遍历， 然后通过 <code>matchRoute</code> 方法根据 <code>record.regex</code>、<code>location.path</code>、<code>location.params</code> 匹配，如果匹配到则也通过 <code>_createRoute(record, location, redirectedFrom)</code> 去生成一条新路径。因为是顺序遍历，所以我们书写路由配置要注意路径的顺序，因为写在前面的会优先尝试匹配。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Vue </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 笔记副本 </tag>
+            
+            <tag> 源码 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[【2】路由注册和VueRouter实例]]></title>
+      <url>https://blog.az22c.top/2020/09/02/vue-router3-src-code-2-instance/</url>
+      <content type="html"><![CDATA[<p>如果明白了上一篇文章，Vue-Router的核心原理，那么这一篇就没啥好看的，初始化和实例化工作，就是根据原理来枯燥地具体实现还有edge case的处理。</p>
+<p>枯燥预警！！！笔者也没挖掘出什么看点，如果你也想实现一个前端路由库并且想参考其源码，姑且可以当做字段字典来查阅。</p>
+<a id="more"></a>
+<ul>
+<li>读前须知
+<ul>
+<li>main.js 执行大Vue的时候传入router实例，若能在 this.$options.router 中拿到它，则为根Vue组件实例。根Vue组件实例在后面简称“根组件实例”</li>
+<li>变量指代思想：
+<ul>
+<li><code>_router</code>表示<code>router</code>实例，它是在 new实例化Vue组件 的时候传入的；</li>
+<li><code>_routerRoot</code>表示 实例化时传入了 <code>router</code> 对象作为配置 的自己或者离自己最近的父实例。</li>
+<li><code>this.app</code> 表示根 <code>Vue</code> 实例，<code>this.apps</code> 保存持有 <code>$options.router</code> 属性的 <code>Vue</code> 实例。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>install
+<ul>
+<li>(标记并且防止多处重复注册自己(即vue-router))</li>
+<li>【关键】vue.mixin({ beforeCreate, destroyed })    ，底层原理是 mergeOptions函数，目标是<strong>钩子函数拓展注入到每个组件的this上</strong></li>
+<li>拦截Vue.prototype的$router和$route，从根组件实例上获取即可  【为了优化重复注册】</li>
+<li><code>Vue.component('RouterView', View)；Vue.component('RouterLink', Link)</code></li>
+<li>拿到 Vue.config.optionMergeStrategies，统一配合设置 路由钩子 的“合并策略”</li>
+</ul>
+</li>
+<li>(-------------执行钩子函数-----------)
+<ul>
+<li>beforeCreate
+<ul>
+<li>【如果是实例化时传入router】this.$options.router.init(this)  + Vue.util.defineReactive(this, ‘_route’, this._router.history.current)， this._route是响应式的，渲染watcher可监听它；基于数据代理，this.$route是响应式的
+<ul>
+<li><code>this.$options.router.init(this)</code>
+<ul>
+<li>(存储 this.app 和 this.apps。<strong>init内，后面的逻辑，只针对根Vue组件实例</strong>)</li>
+<li>【对于hash模式】执行的是 history.transitionTo (即路由过渡)
+<ul>
+<li>实际上是调用了 <code>this.matcher.match</code> 方法去做匹配</li>
+<li>拿到结果传入this.confirmTrasition 完成一次真正的路径的切换</li>
+</ul>
+</li>
+<li>【重要】再执行history.listen</li>
+<li>【对于browser模式】  暂时略过</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>【如果是实例化时不传入router】设置它的 this._routerRoot 为 离它最近的传入了 <code>router</code> 对象作为配置而实例化的父实例</li>
+<li>registerInstance，即调用 vm.$options._parentVnode.registerRouteInstance</li>
+</ul>
+</li>
+<li>destroyed
+<ul>
+<li>registerInstance 同上</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="registerinstance-也就是-beforecreate-和-destroyed-都执行了它"><a class="header-anchor" href="#registerinstance-也就是-beforecreate-和-destroyed-都执行了它"></a>registerInstance  也就是 beforeCreate 和 destroyed 都执行了它</h2>
+<h2 id="new-vuerouter-和其实例"><a class="header-anchor" href="#new-vuerouter-和其实例"></a>new VueRouter 和其实例</h2>
+<p><strong>构造函数：</strong></p>
+<p><code>this.options</code> 保存传入的路由配置。</p>
+<p><code>this.matcher</code> 表示路由匹配器。</p>
+<ul>
+<li>beforeHooks、resolveHooks、afterHooks</li>
+</ul>
+<p><code>this.mode</code> 表示路由创建的模式，<code>this.history</code> 表示路由历史的具体的实现实例，它是根据 <code>this.mode</code> 的不同实现不同，不同的History Class，都是基于<code>History</code> 基类继承实现的。</p>
+<p>(<code>this.fallback</code> 表示在浏览器不支持 <code>history.pushState</code> 的情况下，根据传入的 <code>fallback</code> 配置参数，决定是否回退到hash模式)</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Vue </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 笔记副本 </tag>
+            
+            <tag> 源码 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Vue-Router3源码拾遗【1】概述]]></title>
+      <url>https://blog.az22c.top/2020/09/02/vue-router3-src-code-1-overview/</url>
+      <content type="html"><![CDATA[<p>若要深挖 Vue-Router 的源码，代码真的是又臭又长。本系列依旧提取源码中的核心原理并且尽量用文本概括繁杂的逻辑流程。</p>
+<p>Vue-Router 实际上只适用于单页应用(其实这个结论是可以推理出来的)。而像 Nuxt 之类的看似是用到了 Vue-Router 且像是多页的，实际上是它们是用到了多个 Vue-Router。记住单页与多页的区分，这个区分贯穿了本文的脉络。</p>
+<a id="more"></a>
+<p>说到“前端路由”，若不懂以下浏览器 BOM api，就没法往下说了。详细介绍 api 的工作还是留给其他人好了，以后除非要debug这些库，是接触不到这些经封装的底层的 api 的。这里主要是完整地列举一下原理用到的部分，好留一个印象。</p>
+<h2 id="前置知识"><a class="header-anchor" href="#前置知识"></a>前置知识</h2>
+<p>下面比较完整地列举了一下 Vue-Router 原理可能涉及到的3大类 BOM api：</p>
+<ul>
+<li>location： 全是多页的模式
+<ul>
+<li>------------  获取url参数 或 query参数: --------------</li>
+<li>url参数获取先略
+<ul>
+<li><a href="https://segmentfault.com/a/1190000009384087" target="_blank" rel="noopener">location的属性表 – 属性表，面试可先不看</a></li>
+</ul>
+</li>
+<li>query参数：从<code>location.search</code>获取才是正解
+<ul>
+<li><a href="https://segmentfault.com/a/1190000009384087" target="_blank" rel="noopener">https://segmentfault.com/a/1190000009384087</a></li>
+</ul>
+</li>
+<li>------------  利用location，重载页面或跳转 --------------</li>
+<li>【1】重新加载页面：<code>window.location.reload(/**/)</code>
+<ul>
+<li>如果不传任何参数 【相当于F5】</li>
+<li>如果传入参数true时 【这个参数因不在规范里面已经被废弃】【相当于ctrl + F5】
+<ul>
+<li>( 注意：给路径加上时间戳也可以实现ctrl + F5的效果。 )</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>【2】跳转：window.location.assign(url)或者直接修改window.location.href</li>
+<li>【3】“栈帧替换”跳转：window.location.replace(url)
+<ul>
+<li>用来实现过渡页面时，非常好用</li>
+<li>但是有些webview却是反而不支持这个老api的，那就改用<code>history.replaceState</code>+<code>window.location.reload()</code>
+<ul>
+<li>比如在开发的钉钉上的微应用的时候就不支持</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>history
+<ul>
+<li>早期history：history.go()、history.forward()、history.back()
+<ul>
+<li>(等价地囊括)对应用户的点击操作</li>
+<li>即可用于多页，也可用于单页</li>
+</ul>
+</li>
+<li>【重要】HTML5 history
+<ul>
+<li>pushState 和 replaceState，可以<strong>设置history.state并改变 url 地址，但不会刷新页面</strong></li>
+<li>popstate 事件，不会去监听 pushState/replaceState
+<ul>
+<li>无论在单页还是多页，主要作用就是监听前进后退</li>
+<li>点击浏览器前进后退 或者 调用早期history的 back() go() forward()方法的时候才会触发</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>hash：hash变化时不需要刷新页面
+<ul>
+<li>监听hashchange事件
+<ul>
+<li>window.onhashchange</li>
+<li>window.addEventListener(hashchange, /**/)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>再来(用大白话)总结一下：</p>
+<ul>
+<li>location 主要有2种作用：获取各种url参数+提供api主要用来控制页面的刷新和跳转</li>
+<li>location 的全部 api 就是把网页视为传统的“多页”的模式</li>
+<li>histroy api可以分为“早期 history”和“HTML5 history”</li>
+</ul>
+<p>这里我们看到“早期 history” vs “HTML5 history”；“单页” vs “多页”。下面我们再从另外一个分类的角度来重新看它们间的关系：</p>
+<h2 id="前端路由概述和对比：-重要"><a class="header-anchor" href="#前端路由概述和对比：-重要"></a>前端路由概述和对比： #重要</h2>
+<blockquote>
+<p><strong>vue-router只适用于单页应用</strong></p>
+<p>早期history：在单页应用的时代不是主力，但是仍有作用</p>
+</blockquote>
+<ul>
+<li>多页：后端路由返回不同html
+<ul>
+<li>可利用location实现跳转</li>
+<li>早期history</li>
+</ul>
+</li>
+<li>单页：【通过vue-router来了解】
+<ul>
+<li><strong>本质：监听url变化不刷新页面，而只更新部分内容</strong></li>
+<li>类型：
+<ul>
+<li>hash：在改变 hash 的情况下，访问的还是同一个页面，(不会去请求新页面，)只是局部更新html。
+<ul>
+<li>通过改变路由的hash值并且监听hash变化</li>
+</ul>
+</li>
+<li>HTML5 history + 早期history</li>
+<li>虚拟路由</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>以上，就涵盖了所有互联网上的浏览器网页的“路由”的实现原理。</p>
+<p>上面仅仅是基础知识，有了基础知识之后，我们再来看看相关的问题的解答：</p>
+<h2 id="单页的html5-history和hash对比-已齐全-面试常问"><a class="header-anchor" href="#单页的html5-history和hash对比-已齐全-面试常问"></a>单页的HTML5 history和hash对比 #已齐全 #面试常问</h2>
+<ul>
+<li>原理和本质：前者不同路由是不同地址；后者不同路由其实是同一个地址
+<ul>
+<li>( 前者基于url的pathname段，后者基于hash段 来标识。 )</li>
+<li>( 对于单页应用：api如上小节所说：HTML5 history + 早期history  vs hash )</li>
+</ul>
+</li>
+<li>适用范围：前者可用于多页和单页；后者只能单页</li>
+<li>兼容性：react更推荐前者，而后者能兼容更多浏览器</li>
+<li>刷新单页缺陷：<strong>刷新单页HTML5 history的页面需要服务器端配合：</strong>
+<ul>
+<li>当用户刷新页面之类的操作时，(真正地去访问对应url，)浏览器还是会给服务器发送请求页面。</li>
+<li>为了避免出现这种情况，所以这个实现需要服务器的支持：所有页面重定向到首页路由</li>
+</ul>
+</li>
+</ul>
+<p>明白了上述概念，再来看 Vue-Router的核心原理就不难了：</p>
+<h2 id="vue-router的实现原理概述"><a class="header-anchor" href="#vue-router的实现原理概述"></a>vue-router的实现原理概述</h2>
+<ul>
+<li>api：屏蔽底层的browser history和hash history
+<ul>
+<li>api降级：如果不支持HTML5 history(比如IE9环境下)，就会降级成hash</li>
+</ul>
+</li>
+<li>整体架构： 【react-router可能也不过如此???】
+<ul>
+<li>抽象出 route 当前路由对象，它和浏览器原生的 url 互相同步
+<ul>
+<li>提供路径切换的回调，承载改变url之类的操作</li>
+<li>核心函数调用路径切换回调和其前后的路由守卫</li>
+</ul>
+</li>
+<li>实现matcher</li>
+<li>提供视图渲染的组件 和 封装跳转的组件</li>
+</ul>
+</li>
+<li>设计模式
+<ul>
+<li>迭代器模式</li>
+</ul>
+</li>
+<li>( 记录访问过的路由。通过计算，让vue组件调用activated或者deactivated钩子 )</li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> Vue </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 笔记副本 </tag>
             
             <tag> 源码 </tag>
             
@@ -2186,11 +3237,11 @@ Vue.prototype.$mount = function () {
         
         <tags>
             
+            <tag> 进阶 </tag>
+            
             <tag> 笔记副本 </tag>
             
             <tag> 回顾 </tag>
-            
-            <tag> 进阶 </tag>
             
             <tag> 帧 </tag>
             
@@ -7972,11 +9023,11 @@ p {
         
         <tags>
             
-            <tag> HTML </tag>
-            
             <tag> H5 </tag>
             
             <tag> IFE </tag>
+            
+            <tag> HTML </tag>
             
         </tags>
         
@@ -8548,7 +9599,7 @@ float:right
     <entry>
       <title><![CDATA[移动开发事件入门概述]]></title>
       <url>https://blog.az22c.top/2017/02/25/webapp-events-intro/</url>
-      <content type="html"><![CDATA[<p>本文修改自<a href="http://www.infoq.com/cn/articles/touch-pointer-event" target="_blank" rel="noopener">PPK的《移动Web手册》</a></p>
+      <content type="html"><![CDATA[<p>本文修改自 <a href="http://www.infoq.com/cn/articles/touch-pointer-event" target="_blank" rel="noopener">PPK的《移动Web手册》</a></p>
 <a id="more"></a>
 <h2 id="前言"><a class="header-anchor" href="#前言"></a>前言</h2>
 <p>触摸事件为苹果发明，它将触摸和鼠标两种行为区分开，而微软的指针事件则将它们合并，此标准更具前瞻性，现已被W3C采纳为正式标准。</p>
