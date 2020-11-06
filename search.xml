@@ -3192,7 +3192,7 @@ function iterator (fn, next) {
 <p>在这里，我先把 <strong>结论</strong> 上了：(后文再解释浏览器具体是怎么利用“垂直同步信号”压制压低GPU频率，也就是网页刷新是怎么实现的)</p>
 <p>对于在网页上的多数情况：</p>
 <ul>
-<li>网页帧的频率(小于并且逼近60Hz)  ===  UI input回调(scoll resize mouseover等)触发的频率  ===  raq的触发频率
+<li>网页帧的频率(小于并且逼近60Hz)  ===  UI input回调(scoll resize mouseover等)触发的频率  ===  raf的触发频率
 <ul>
 <li>(requestAnimationFrame只知道这已是网页新的一帧，但是它不知道一帧需要多长的时间(也就是有可能一帧比16ms长)。)</li>
 </ul>
@@ -3213,7 +3213,7 @@ function iterator (fn, next) {
 </ul>
 <blockquote>
 <p>在那些特殊情况比如主线程就写了一个sleep多少秒函数的情况下，去讨论页面一帧能持续多久没有意义，变数太大了。</p>
-<p>要讨论就讨论当你使用raq想做一个流畅动画时，页面的一帧能持续多久。</p>
+<p>要讨论就讨论当你使用raf想做一个流畅动画时，页面的一帧能持续多久。</p>
 </blockquote>
 <p>可见，若想要推算出网页的“一帧有多长”， <strong>是非常不直观的。</strong> 另可由以上条件可以尝试推演出各不同情况下“一帧有多长”的结果。</p>
 <p>如果程序员需要利用requestAnimationFrame来实现动画，通常需要尽力简化每个event loop的任务队列并且压缩每个task的时长。</p>
@@ -3601,7 +3601,7 @@ for (var i = 0; i &lt; 10; i++) {
 <li>初始的重置工作：该&quot;模式&quot;下的函数给<strong>目标容器</strong>解除监听<strong>目标对象</strong>scroll等等事件绑定</li>
 <li>只针对和该api的“根元素”(默认就是视口viewport了)和<strong>目标对象</strong>做dom处理就够了
 <ul>
-<li>原理：Intersection Observer api (跟raq在event loop体系中触发的时机差不多)
+<li>原理：Intersection Observer api (跟raf在event loop体系中触发的时机差不多)
 <ul>
 <li>(通过observerOptions提供的数据来判断是否已在preload位置，一般情况下不会设置root的指向，那么其默认值就是视口)</li>
 </ul>

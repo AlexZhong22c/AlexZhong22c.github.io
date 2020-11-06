@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
 <meta property="og:description" content="摘要：垂直同步信号是什么？有啥用？网页会掉帧是什么原因？16ms的特殊意义？网页一帧有多长是怎么判定的？">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-11-03T01:47:56.393Z">
+<meta property="og:updated_time" content="2020-11-06T02:21:00.931Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网页一帧有多长 是如何判定的">
 <meta name="twitter:description" content="摘要：垂直同步信号是什么？有啥用？网页会掉帧是什么原因？16ms的特殊意义？网页一帧有多长是怎么判定的？">
@@ -563,7 +563,7 @@
 <p>在这里，我先把 <strong>结论</strong> 上了：(后文再解释浏览器具体是怎么利用“垂直同步信号”压制压低GPU频率，也就是网页刷新是怎么实现的)</p>
 <p>对于在网页上的多数情况：</p>
 <ul>
-<li>网页帧的频率(小于并且逼近60Hz)  ===  UI input回调(scoll resize mouseover等)触发的频率  ===  raq的触发频率
+<li>网页帧的频率(小于并且逼近60Hz)  ===  UI input回调(scoll resize mouseover等)触发的频率  ===  raf的触发频率
 <ul>
 <li>(requestAnimationFrame只知道这已是网页新的一帧，但是它不知道一帧需要多长的时间(也就是有可能一帧比16ms长)。)</li>
 </ul>
@@ -584,7 +584,7 @@
 </ul>
 <blockquote>
 <p>在那些特殊情况比如主线程就写了一个sleep多少秒函数的情况下，去讨论页面一帧能持续多久没有意义，变数太大了。</p>
-<p>要讨论就讨论当你使用raq想做一个流畅动画时，页面的一帧能持续多久。</p>
+<p>要讨论就讨论当你使用raf想做一个流畅动画时，页面的一帧能持续多久。</p>
 </blockquote>
 <p>可见，若想要推算出网页的“一帧有多长”， <strong>是非常不直观的。</strong> 另可由以上条件可以尝试推演出各不同情况下“一帧有多长”的结果。</p>
 <p>如果程序员需要利用requestAnimationFrame来实现动画，通常需要尽力简化每个event loop的任务队列并且压缩每个task的时长。</p>
@@ -606,7 +606,7 @@
         <p><span>本文标题:</span><a href="/2020/04/03/how-long-a-frame-is/">网页一帧有多长 是如何判定的</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2020-04-03, 20:31:40</p>
-        <!-- <p><span>最后更新:</span>2020-11-03, 09:47:56</p> -->
+        <!-- <p><span>最后更新:</span>2020-11-06, 10:21:00</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="网页一帧有多长 是如何判定的" href="/2020/04/03/how-long-a-frame-is/">https://blog.az22c.top/2020/04/03/how-long-a-frame-is/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://blog.az22c.top/2020/04/03/how-long-a-frame-is/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
