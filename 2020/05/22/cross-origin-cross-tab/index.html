@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
 <meta property="og:description" content="上一篇文章介绍了什么是“跨域”和“跨站”。可知，“同站”通信也是“跨域”的一种途径。 这次列举一下跨域通信的方法，同时对跨tab通信有启发性价值。 因为前人总结得实在是太齐全了！这里只是做到基本列举齐全，然后做一些小小的补充。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-11-05T08:21:33.184Z">
+<meta property="og:updated_time" content="2020-11-09T03:32:06.984Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="02-跨域通信和跨tab通信">
 <meta name="twitter:description" content="上一篇文章介绍了什么是“跨域”和“跨站”。可知，“同站”通信也是“跨域”的一种途径。 这次列举一下跨域通信的方法，同时对跨tab通信有启发性价值。 因为前人总结得实在是太齐全了！这里只是做到基本列举齐全，然后做一些小小的补充。">
@@ -624,7 +624,9 @@
 <p>浏览器同源指的是<strong>协议，域名，端口都相同</strong></p>
 <p>sessionStorage不能跨标签或者窗口</p>
 </blockquote>
-<p>只能“同源”的思路：</p>
+<p><strong>【1】只能“同源”的思路：</strong></p>
+<ul>
+<li>尝试使用各种本地化存储(列举了该问题场景下比较常用的几种)：
 <ul>
 <li>localStorage + onstorage事件（若设置了相同document.domain可以跨二级域名）
 <ul>
@@ -632,10 +634,16 @@
 </ul>
 </li>
 <li>IndexedDB也是基于浏览器数据存储，区别是其实现通信需要轮询</li>
+</ul>
+</li>
+<li>tab间 Worker
+<ul>
 <li>SharedWorker 共享工作线程（只能同源，兼容性差）</li>
 <li>Service Worker(加postMessage) (没有详细研究过)</li>
 </ul>
-<p>能跨域的思路：</p>
+</li>
+</ul>
+<p><strong>【2】能跨域的思路：(其实只要是客户端tab间跨域的，都能在这里答！！)</strong></p>
 <ul>
 <li>使用cookie（Cookie中的同源只关注域名，忽略协议和端口，也就是Cookie可以跨二级域名来访问，也可以称为“同站”）</li>
 <li>document.domain已介绍了不是特别好用</li>
@@ -661,7 +669,7 @@
         <p><span>本文标题:</span><a href="/2020/05/22/cross-origin-cross-tab/">02-跨域通信和跨tab通信</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2020-05-22, 17:40:44</p>
-        <!-- <p><span>最后更新:</span>2020-11-05, 16:21:33</p> -->
+        <!-- <p><span>最后更新:</span>2020-11-09, 11:32:06</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="02-跨域通信和跨tab通信" href="/2020/05/22/cross-origin-cross-tab/">https://blog.az22c.top/2020/05/22/cross-origin-cross-tab/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://blog.az22c.top/2020/05/22/cross-origin-cross-tab/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -764,7 +772,7 @@
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					
-						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,460</span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,511</span>
 					
 				</div>
             </div>

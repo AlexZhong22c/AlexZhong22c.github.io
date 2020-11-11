@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
 <meta property="og:description" content="摘要：垂直同步信号是什么？有啥用？网页会掉帧是什么原因？16ms的特殊意义？网页一帧有多长是怎么判定的？">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-11-06T02:21:00.931Z">
+<meta property="og:updated_time" content="2020-11-07T08:18:05.638Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网页一帧有多长 是如何判定的">
 <meta name="twitter:description" content="摘要：垂直同步信号是什么？有啥用？网页会掉帧是什么原因？16ms的特殊意义？网页一帧有多长是怎么判定的？">
@@ -505,7 +505,7 @@
 
 	<br />
 	<p style="height:7px;"/>
-	<p style="height:20px;font-family:KaiTi,LiSu,'宋体',sans-serif;color:#DBDBDB;font-size:12px;">预计阅读5分钟</p>
+	<p style="height:20px;font-family:KaiTi,LiSu,'宋体',sans-serif;color:#DBDBDB;font-size:12px;">预计阅读6分钟</p>
 
     </div>
   
@@ -545,7 +545,7 @@
 <a id="more"></a>
 <h2 id="什么是垂直同步信号："><a class="header-anchor" href="#什么是垂直同步信号："></a>什么是垂直同步信号：</h2>
 <p>我们知道，屏幕是由成千上万个像素点组成的大矩阵，而这个矩阵以极快的速度“从左往右，从上往下”刷新“扫描”每个像素点的值。而人眼感觉不到这种超快的“闪烁”，比如电脑刷新屏幕的物理频率大概是60Hz。当屏幕扫描完一横排像素就会产生“水平同步信号”，当屏幕扫描完所有横排即一屏的像素，就会产生“垂直同步信号”。<strong>也就是“垂直同步信号”反映的是屏幕刷新的频率。</strong></p>
-<p>(我们知道“帧”不仅仅可以描述反映屏幕刷新的频率，也可以描述反映网页渲染变化的频率，描述的对象如有省略，由文章的上下文来判断，这里先提前说明一下。)</p>
+<p>(我们知道“帧”不仅仅可以计量反映“屏幕刷新的频率”，也可以计量反映“网页渲染变化的频率”。如果文中某处把计量词省略为“帧”，其指代则具体通过文章的上下文来判断，这里先提前说明一下。)</p>
 <h2 id="垂直同步信号的意义："><a class="header-anchor" href="#垂直同步信号的意义："></a>垂直同步信号的意义：</h2>
 <blockquote>
 <p>垂直同步信号：如果GPU渲染频率比屏幕刷新频率高的话，会有两帧画面在一起出现。所以利用垂直同步信号压制GPU渲染的频率，以免浪费性能。因此如果有些游戏要求频率高，又开启了垂直同步，但是屏幕硬件的刷新频率低拖慢了被压制的GPU渲染频率，也会有掉帧的现象。(GPU渲染频率慢就会有掉帧的效果。) <a href="https://www.infoq.cn/article/javascript-high-performance-animation-and-page-rendering/" target="_blank" rel="noopener">via</a></p>
@@ -555,13 +555,16 @@
 <li>如果关闭“垂直同步信号”的问题：浪费GPU性能+两帧画面一起出现</li>
 <li>如果打开“垂直同步信号”以压制GPU频率：如果(机器的)屏幕刷新频率太慢，会导致掉帧。</li>
 </ul>
-<p>而如果把网页页面渲染比作游戏界面，其实正是开启了“垂直同步信号”的这种情况，即网页要靠“垂直同步信号”压制压低GPU频率，网页渲染也就天生地具备了“掉帧”的风险。</p>
+<p>而如果把网页页面渲染比作游戏界面，其实正是开启了“垂直同步信号”的这种情况，进一步来讲，实际是网页要靠“垂直同步信号”间接压制压低GPU频率，网页渲染也就天生地具备了“掉帧”的风险。</p>
 <h2 id="网页16ms界限的意义："><a class="header-anchor" href="#网页16ms界限的意义："></a>网页16ms界限的意义：</h2>
 <p>16ms也就是60Hz的时间间隔。因为网页渲染的机制引用了“垂直同步信号”压制压低GPU频率，所以可 <strong>从屏幕刷新的理念中沿用，</strong> 并确立一个16ms界限。</p>
 <p>假设网页渲染的每帧比16ms短是没有意义的(也就是浪费GPU性能并且超出屏幕当前的能力)。但是网页渲染每帧可以比16ms长。</p>
 <p><strong>屏幕刷新频率 vs 人眼的接收频率：</strong> 人眼每秒刷新20次，也就是以20Hz来接收光信号。但是机器一般要每秒刷新更多的次数，才能使得动画流畅。但是假设快如每秒60次，再往上，更快(对于一般的场景要求)已经察觉不到差别了。</p>
 <p>在这里，我先把 <strong>结论</strong> 上了：(后文再解释浏览器具体是怎么利用“垂直同步信号”压制压低GPU频率，也就是网页刷新是怎么实现的)</p>
 <p>对于在网页上的多数情况：</p>
+<blockquote>
+<p>注：网页帧的时间长度在每一轮各异，而“网页帧的频率”只不过是一个用于粗略概括的假想平均值</p>
+</blockquote>
 <ul>
 <li>网页帧的频率(小于并且逼近60Hz)  ===  UI input回调(scoll resize mouseover等)触发的频率  ===  raf的触发频率
 <ul>
@@ -571,7 +574,7 @@
 <li>GPU的潜力  &gt;  屏幕刷新频率(60Hz)  &gt;=  网页帧的频率(小于并且逼近60Hz)  &gt;  用户click操作频率</li>
 <li>event loop的频率  通常&gt;  屏幕刷新频率(60Hz)  &gt;=  网页帧的频率(小于并且逼近60Hz)  &gt;  用户click操作频率
 <ul>
-<li>在防抖节流的章节，我们通常设置80ms作为间隔，也就是12Hz的样子，当然防抖节流具体得看场景。</li>
+<li>防抖节流通常是针对用户的高频操作频率的，我们通常设置80ms作为间隔，也就是12Hz的样子，当然防抖节流具体得看场景。</li>
 </ul>
 </li>
 </ul>
@@ -584,7 +587,7 @@
 </ul>
 <blockquote>
 <p>在那些特殊情况比如主线程就写了一个sleep多少秒函数的情况下，去讨论页面一帧能持续多久没有意义，变数太大了。</p>
-<p>要讨论就讨论当你使用raf想做一个流畅动画时，页面的一帧能持续多久。</p>
+<p>要讨论就讨论比如当你使用raf想做一个流畅动画时，页面的一帧能持续多久。</p>
 </blockquote>
 <p>可见，若想要推算出网页的“一帧有多长”， <strong>是非常不直观的。</strong> 另可由以上条件可以尝试推演出各不同情况下“一帧有多长”的结果。</p>
 <p>如果程序员需要利用requestAnimationFrame来实现动画，通常需要尽力简化每个event loop的任务队列并且压缩每个task的时长。</p>
@@ -606,7 +609,7 @@
         <p><span>本文标题:</span><a href="/2020/04/03/how-long-a-frame-is/">网页一帧有多长 是如何判定的</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2020-04-03, 20:31:40</p>
-        <!-- <p><span>最后更新:</span>2020-11-06, 10:21:00</p> -->
+        <!-- <p><span>最后更新:</span>2020-11-07, 16:18:05</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="网页一帧有多长 是如何判定的" href="/2020/04/03/how-long-a-frame-is/">https://blog.az22c.top/2020/04/03/how-long-a-frame-is/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://blog.az22c.top/2020/04/03/how-long-a-frame-is/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -709,7 +712,7 @@
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					
-						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,565</span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,639</span>
 					
 				</div>
             </div>

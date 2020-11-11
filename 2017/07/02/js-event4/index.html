@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
 <meta property="og:description" content="此文用于快速回顾，不适合用来入门。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-11-05T08:21:33.194Z">
+<meta property="og:updated_time" content="2020-11-09T08:44:47.168Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浏览器事件冒泡或者捕获相关">
 <meta name="twitter:description" content="此文用于快速回顾，不适合用来入门。">
@@ -547,7 +547,6 @@
 <p><a href="https://www.cnblogs.com/st-leslie/p/5907556.html" target="_blank" rel="noopener">建议看：博客园谢灿勇 js事件流</a></p>
 <p>每次用addEventListener这个api，你需要<strong>选择绑定事件在冒泡阶段还是捕获阶段</strong>。（通常设置为false即为冒泡） 而这个api就是基于事件流的原理。</p>
 <ul>
-<li>事件流的本质：比如在页面上点击一个元素，这是一个点击事件。事实上，被点击的元素及其所有祖先元素都是能感知到的，只不过是，如果你没有绑定事件，它们就不会对应地触发事件响应。</li>
 <li>事件流的过程：<strong>事件流</strong>被分为三个阶段捕获过程、<strong>目标过程</strong>、冒泡过程。event对象的属性中，表示事件流中“某元素的某个被触发的事件”是绑定在哪个阶段的属性是<code>eventPhase</code>。</li>
 <li>一个完整的JS事件流是从window开始，最后回到window的一个过程（有些浏览器是到body）
 <ul>
@@ -669,7 +668,7 @@ var currentTarget = event.currentTarget;
         <p><span>本文标题:</span><a href="/2017/07/02/js-event4/">浏览器事件冒泡或者捕获相关</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2017-07-02, 16:30:27</p>
-        <!-- <p><span>最后更新:</span>2020-11-05, 16:21:33</p> -->
+        <!-- <p><span>最后更新:</span>2020-11-09, 16:44:47</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="浏览器事件冒泡或者捕获相关" href="/2017/07/02/js-event4/">https://blog.az22c.top/2017/07/02/js-event4/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://blog.az22c.top/2017/07/02/js-event4/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -772,7 +771,7 @@ var currentTarget = event.currentTarget;
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					
-						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,913</span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,836</span>
 					
 				</div>
             </div>
