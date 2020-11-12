@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
 <meta property="og:description" content="若要深挖 Vue-Router 的源码，代码真的是又臭又长。本系列依旧提取源码中的核心原理并且尽量用文本概括繁杂的逻辑流程。 Vue-Router 实际上只适用于单页应用(其实这个结论是可以推理出来的)。而像 Nuxt 之类的看似是用到了 Vue-Router 且像是多页的，实际上是它们是用到了多个 Vue-Router。记住单页与多页的区分，这个区分贯穿了本文的脉络。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-11-05T08:21:33.258Z">
+<meta property="og:updated_time" content="2020-11-12T08:19:56.737Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue-Router3源码拾遗【1】概述">
 <meta name="twitter:description" content="若要深挖 Vue-Router 的源码，代码真的是又臭又长。本系列依旧提取源码中的核心原理并且尽量用文本概括繁杂的逻辑流程。 Vue-Router 实际上只适用于单页应用(其实这个结论是可以推理出来的)。而像 Nuxt 之类的看似是用到了 Vue-Router 且像是多页的，实际上是它们是用到了多个 Vue-Router。记住单页与多页的区分，这个区分贯穿了本文的脉络。">
@@ -546,6 +546,9 @@
 <a id="more"></a>
 <p>说到“前端路由”，若不懂以下浏览器 BOM api，就没法往下说了。详细介绍 api 的工作还是留给其他人好了，以后除非要debug这些库，是接触不到这些经封装的底层的 api 的。这里主要是完整地列举一下原理用到的部分，好留一个印象。</p>
 <h2 id="前置知识"><a class="header-anchor" href="#前置知识"></a>前置知识</h2>
+<blockquote>
+<p><strong>在这一小节中，就算没掌握 api 的用法也没关系，关注的核心还是 history 系列 api ，而一起列举其他的 api 起到对比的作用。</strong></p>
+</blockquote>
 <p>下面比较完整地列举了一下 Vue-Router 原理可能涉及到的3大类 BOM api：</p>
 <ul>
 <li>location： 全是多页的模式
@@ -708,7 +711,7 @@
         <p><span>本文标题:</span><a href="/2020/09/02/vue-router3-src-code-1-overview/">Vue-Router3源码拾遗【1】概述</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2020-09-02, 21:01:00</p>
-        <!-- <p><span>最后更新:</span>2020-11-05, 16:21:33</p> -->
+        <!-- <p><span>最后更新:</span>2020-11-12, 16:19:56</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="Vue-Router3源码拾遗【1】概述" href="/2020/09/02/vue-router3-src-code-1-overview/">https://blog.az22c.top/2020/09/02/vue-router3-src-code-1-overview/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://blog.az22c.top/2020/09/02/vue-router3-src-code-1-overview/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -811,7 +814,7 @@
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					
-						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,351</span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,397</span>
 					
 				</div>
             </div>

@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
 <meta property="og:description" content="本系列文章，主要是梳理一下 Vue 2.x 源码的一些脉络和总结一些值得学习的点。并不是像同话题下的文章带读者从0到1读懂源码。 如题首先讲讲 Vue 的整体架构。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-11-05T08:21:33.353Z">
+<meta property="og:updated_time" content="2020-11-12T07:19:39.562Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue2源码【1】Vue 的整体架构">
 <meta name="twitter:description" content="本系列文章，主要是梳理一下 Vue 2.x 源码的一些脉络和总结一些值得学习的点。并不是像同话题下的文章带读者从0到1读懂源码。 如题首先讲讲 Vue 的整体架构。">
@@ -560,23 +560,23 @@
 </ul>
 <p>基于此，我们再从一个更大的视角来看 Vue 的架构设计：</p>
 <ul>
-<li>数据驱动
+<li>【数据驱动】
 <ul>
-<li>mvvm
+<li>【mvvm】
 <ul>
 <li>首次构建阶段</li>
 <li>异步更新</li>
 </ul>
 </li>
-<li>响应式原理：数据劫持+观察者模式</li>
-<li>data以外的响应式原理
+<li>【响应式原理】 = 数据劫持 + 观察者模式 = 依赖收集 + 派发更新 = defineReactive + 同时存在Dep.target</li>
+<li>【data以外的响应式原理】 原理同上
 <ul>
 <li>比如props是响应式的</li>
 <li>另见我另外一篇博客，详细讲解各种</li>
 </ul>
 </li>
-<li>双向绑定</li>
-<li>数据代理(原理极其简单)：数据劫持</li>
+<li>【双向绑定】数据劫持，更新到input控件上 + 监听input控件的键入事件，同步到数据上</li>
+<li>【数据代理】(原理极其简单)：数据劫持</li>
 </ul>
 </li>
 </ul>
@@ -589,7 +589,7 @@
         <p><span>本文标题:</span><a href="/2020/09/04/vue2-src-code-00-data-drive/">Vue2源码【1】Vue 的整体架构</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2020-09-04, 21:00:00</p>
-        <!-- <p><span>最后更新:</span>2020-11-05, 16:21:33</p> -->
+        <!-- <p><span>最后更新:</span>2020-11-12, 15:19:39</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="Vue2源码【1】Vue 的整体架构" href="/2020/09/04/vue2-src-code-00-data-drive/">https://blog.az22c.top/2020/09/04/vue2-src-code-00-data-drive/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://blog.az22c.top/2020/09/04/vue2-src-code-00-data-drive/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -692,7 +692,7 @@
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					
-						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：300</span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：346</span>
 					
 				</div>
             </div>

@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
 <meta property="og:description" content="对于同一个组件实例，其 vnode 其实包括其“占位符节点”和“真实节点”，它们是父子节点关系。基于这点知识，再去理解slot等机制并不难。 然后再解释了一下为什么slot和slotScope之流为什么不是响应式的。已经再介绍一下vue3正式登场的v-slot。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-11-05T08:21:33.921Z">
+<meta property="og:updated_time" content="2020-11-12T07:26:59.610Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue2源码【8-4】slot和slotScope">
 <meta name="twitter:description" content="对于同一个组件实例，其 vnode 其实包括其“占位符节点”和“真实节点”，它们是父子节点关系。基于这点知识，再去理解slot等机制并不难。 然后再解释了一下为什么slot和slotScope之流为什么不是响应式的。已经再介绍一下vue3正式登场的v-slot。">
@@ -544,7 +544,7 @@
 			<p>对于同一个组件实例，其 vnode 其实包括其“占位符节点”和“真实节点”，它们是父子节点关系。基于这点知识，再去理解slot等机制并不难。</p>
 <p>然后再解释了一下为什么slot和slotScope之流为什么不是响应式的。已经再介绍一下vue3正式登场的v-slot。</p>
 <a id="more"></a>
-<h2 id="slot的原理-2-6又稍微改了一下"><a class="header-anchor" href="#slot的原理-2-6又稍微改了一下"></a>slot的原理 #2.6又稍微改了一下</h2>
+<h2 id="slot的原理-这是2-6之前-之后又略微调整了"><a class="header-anchor" href="#slot的原理-这是2-6之前-之后又略微调整了"></a>slot的原理 #这是2.6之前(之后又略微调整了)</h2>
 <p><strong>总结：slot插槽(即传给子组件的props.children)的vnode的生成，已在父组件创建和渲染阶段完成。</strong></p>
 <p>可以打印中间过程的代码生成结果，来 <strong>验证</strong> 这个看法：</p>
 <p>父组件及其slot代码示例：<code>/* 父组件略 */&lt;h1 slot=&quot;header&quot;&gt;anything&lt;/h1&gt;/* 父组件略 */</code></p>
@@ -573,7 +573,7 @@ _c('div', {
     _c('main', [_t(&quot;default&quot;, [_v(&quot;默认内容&quot;)])], 2),
     _c('footer', [_t(&quot;footer&quot;)], 2)])
 </code></pre>
-<h2 id="slotscope的原理-2-6又稍微改了一下"><a class="header-anchor" href="#slotscope的原理-2-6又稍微改了一下"></a>slotScope的原理 #2.6又稍微改了一下</h2>
+<h2 id="slotscope的原理-这是2-6之前-之后又略微调整了"><a class="header-anchor" href="#slotscope的原理-这是2-6之前-之后又略微调整了"></a>slotScope的原理 #这是2.6之前(之后又略微调整了)</h2>
 <p><strong>总结：把 scopeSlot插槽 作为一个函数保留下来。scopeSlot插槽(即传给子组件占位符的props.children)的vnode的生成，要延迟到子组件的创建阶段</strong></p>
 <p>也是打印中间过程生成代码：</p>
 <p>父组件：</p>
@@ -672,7 +672,7 @@ _c('div',
         <p><span>本文标题:</span><a href="/2020/09/04/vue2-src-code-64-slot/">Vue2源码【8-4】slot和slotScope</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2020-09-04, 21:06:04</p>
-        <!-- <p><span>最后更新:</span>2020-11-05, 16:21:33</p> -->
+        <!-- <p><span>最后更新:</span>2020-11-12, 15:26:59</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="Vue2源码【8-4】slot和slotScope" href="/2020/09/04/vue2-src-code-64-slot/">https://blog.az22c.top/2020/09/04/vue2-src-code-64-slot/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://blog.az22c.top/2020/09/04/vue2-src-code-64-slot/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -708,7 +708,7 @@ _c('div',
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#slot的原理-2-6又稍微改了一下"><span class="toc-text">slot的原理 #2.6又稍微改了一下</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#slotscope的原理-2-6又稍微改了一下"><span class="toc-text">slotScope的原理 #2.6又稍微改了一下</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#插槽的数据更新-v2-6之前-：-通常在响应式系统-组件更新-的流程中-非响应式"><span class="toc-text">插槽的数据更新(v2.6之前)： 通常在响应式系统“组件更新”的流程中 #非响应式</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#slot和其他响应式更新子组件的方式对比-所以为什么说插槽不是响应式"><span class="toc-text">slot和其他响应式更新子组件的方式对比 #所以为什么说插槽不是响应式</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#响应式外-特殊情况的处理：也是手动-vm-forceupdate"><span class="toc-text">(响应式外)特殊情况的处理：也是手动 vm.$forceUpdate</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#v-slot-v2-6之后"><span class="toc-text">v-slot v2.6之后</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#数据更新时-v-slot的逻辑：-forceupdate将要作用于的组件实例更加准确"><span class="toc-text">数据更新时，v-slot的逻辑： forceUpdate将要作用于的组件实例更加准确</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结v-slot的特点"><span class="toc-text">总结v-slot的特点</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#slot的原理-这是2-6之前-之后又略微调整了"><span class="toc-text">slot的原理 #这是2.6之前(之后又略微调整了)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#slotscope的原理-这是2-6之前-之后又略微调整了"><span class="toc-text">slotScope的原理 #这是2.6之前(之后又略微调整了)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#插槽的数据更新-v2-6之前-：-通常在响应式系统-组件更新-的流程中-非响应式"><span class="toc-text">插槽的数据更新(v2.6之前)： 通常在响应式系统“组件更新”的流程中 #非响应式</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#slot和其他响应式更新子组件的方式对比-所以为什么说插槽不是响应式"><span class="toc-text">slot和其他响应式更新子组件的方式对比 #所以为什么说插槽不是响应式</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#响应式外-特殊情况的处理：也是手动-vm-forceupdate"><span class="toc-text">(响应式外)特殊情况的处理：也是手动 vm.$forceUpdate</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#v-slot-v2-6之后"><span class="toc-text">v-slot v2.6之后</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#数据更新时-v-slot的逻辑：-forceupdate将要作用于的组件实例更加准确"><span class="toc-text">数据更新时，v-slot的逻辑： forceUpdate将要作用于的组件实例更加准确</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结v-slot的特点"><span class="toc-text">总结v-slot的特点</span></a></li></ol>
         
     </div>
     <style>
@@ -775,7 +775,7 @@ _c('div',
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					
-						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,358</span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,368</span>
 					
 				</div>
             </div>

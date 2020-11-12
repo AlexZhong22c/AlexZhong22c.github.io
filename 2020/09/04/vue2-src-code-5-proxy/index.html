@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
 <meta property="og:description" content="Proxy，与其说是代理，还不如说代理是基于拦截的，在功能定位上，和defineProperty是不一样的。只是恰好Proxy覆盖了defineProperty的getter和setter两个api。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-11-05T08:21:33.833Z">
+<meta property="og:updated_time" content="2020-11-12T06:44:09.829Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue2源码【7】数据劫持使用Proxy的优势">
 <meta name="twitter:description" content="Proxy，与其说是代理，还不如说代理是基于拦截的，在功能定位上，和defineProperty是不一样的。只是恰好Proxy覆盖了defineProperty的getter和setter两个api。">
@@ -545,7 +545,7 @@
 <a id="more"></a>
 <h3 id="导论-要看看"><a class="header-anchor" href="#导论-要看看"></a>导论 #要看看</h3>
 <blockquote>
-<p>没想到vue双向绑定也依靠数据劫持：引用前文：能实现双向绑定的方式有很多，比如ng就是脏值检测，而vue还是数据劫持。KnockoutJS基于观察者模式的双向绑定，Ember基于数据模型的双向绑定。</p>
+<p>vue双向绑定也依靠数据劫持：引用前文：能实现双向绑定的方式有很多，比如ng就是脏值检测，而vue还是数据劫持。KnockoutJS基于观察者模式的双向绑定，Ember基于数据模型的双向绑定。</p>
 </blockquote>
 <ul>
 <li>所谓数据劫持，指的是在访问或者修改对象的某个属性时，通过一段代码拦截这个行为，进行额外的操作或者修改返回结果。
@@ -576,15 +576,15 @@
 </ul>
 </li>
 </ul>
-<p>**Object.defineProperty的缺点：**劫持机制不太完整：</p>
+<p><strong>Object.defineProperty的缺点：</strong> 劫持机制不太完整：</p>
 <ul>
 <li>1 拦截数组的变化不太方便
 <ul>
 <li>拦截直接修改数组元素：因为性能而在vue中放弃实现 <a href="https://juejin.im/post/5da29a87518825094e37301c" target="_blank" rel="noopener">只是性能问题</a></li>
-<li>defineProperty无法监听push等数组方法：hack方法就是“数组变异”：本质还是，还是需要重写这些方法</li>
+<li>defineProperty无法监听push等数组方法：hack方法就是“数组变异”：本质，还是需要重写这些方法</li>
 </ul>
 </li>
-<li>2 (get和set)劫持的是 对象的属性， 而不是整个对象。如果属性是对象类型，还需要递归去观测，会很消耗性能。</li>
+<li>2 (get和set)劫持的是 对象的属性， 而不是整个对象。</li>
 </ul>
 <p>以上缺点，Proxy都没有。</p>
 <p><strong>Proxy的缺陷：</strong></p>
@@ -598,7 +598,7 @@
         <p><span>本文标题:</span><a href="/2020/09/04/vue2-src-code-5-proxy/">Vue2源码【7】数据劫持使用Proxy的优势</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2020-09-04, 21:05:00</p>
-        <!-- <p><span>最后更新:</span>2020-11-05, 16:21:33</p> -->
+        <!-- <p><span>最后更新:</span>2020-11-12, 14:44:09</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="Vue2源码【7】数据劫持使用Proxy的优势" href="/2020/09/04/vue2-src-code-5-proxy/">https://blog.az22c.top/2020/09/04/vue2-src-code-5-proxy/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://blog.az22c.top/2020/09/04/vue2-src-code-5-proxy/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -701,7 +701,7 @@
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					
-						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：778</span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：750</span>
 					
 				</div>
             </div>
