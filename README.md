@@ -122,6 +122,7 @@
 - [Vue2源码【8-5】keep-alive](https://blog.az22c.top/2020/09/04/vue2-src-code-65-keep-alive/)&nbsp;&nbsp;|&nbsp;&nbsp;2020-09-04&nbsp;&nbsp;|&nbsp;&nbsp;标签：[笔记副本](https://blog.az22c.top/tags/笔记副本/) [源码](https://blog.az22c.top/tags/源码/)
   - <p>keep-alive是vue的内置组件，如果是用户想要自己实现一个类似keep-alive的组件是不可能的，因为需要vue的主干逻辑配合该组件的实现。</p>
   - <p>keep-alive的作用是缓存的是子组件的vnode，而其本身的render返回的也是vnode。</p>
+  - <p>keep-alive的原理依赖slot的机制。</p>
 - [Vue2源码【8-4】slot和slotScope](https://blog.az22c.top/2020/09/04/vue2-src-code-64-slot/)&nbsp;&nbsp;|&nbsp;&nbsp;2020-09-04&nbsp;&nbsp;|&nbsp;&nbsp;标签：[笔记副本](https://blog.az22c.top/tags/笔记副本/) [源码](https://blog.az22c.top/tags/源码/)
   - <p>对于同一个组件实例，其 vnode 其实包括其“占位符节点”和“真实节点”，它们是父子节点关系。基于这点知识，再去理解slot等机制并不难。</p>
   - <p>然后再解释了一下为什么slot和slotScope之流为什么不是响应式的。已经再介绍一下vue3正式登场的v-slot。</p>
@@ -155,7 +156,7 @@
   - <p><strong>响应式原理 = 数据劫持 + 观察者模式</strong>。另，我们知道可以用数据劫持实现数据代理。即：响应式原理不是全包含了数据劫持。</p>
 - [【4-1】响应式原理 之 观察者模式](https://blog.az22c.top/2020/09/04/vue2-src-code-21-observe-mode/)&nbsp;&nbsp;|&nbsp;&nbsp;2020-09-04&nbsp;&nbsp;|&nbsp;&nbsp;标签：[笔记副本](https://blog.az22c.top/tags/笔记副本/) [源码](https://blog.az22c.top/tags/源码/)
   - <p>Vue2的响应式原理，网上的资料太多了。这篇主要是把脉络梳理清楚，并且明确一些核心的概念是怎么实现的。比如依赖收集和派发更新具体指的是什么，还有一些细节处理，才造就了 Vue的合理运作。</p>
-  - <p>总之，<strong>响应式原理 = 数据劫持 + 观察者模式</strong></p>
+  - <p>总之，<strong>响应式原理 = 数据劫持 + 观察者模式 = 依赖收集 + 派发更新 = defineReactive + 同时存在Dep.target</strong></p>
 - [Vue2源码【3】patch的原理](https://blog.az22c.top/2020/09/04/vue2-src-code-12-patch/)&nbsp;&nbsp;|&nbsp;&nbsp;2020-09-04&nbsp;&nbsp;|&nbsp;&nbsp;标签：[笔记副本](https://blog.az22c.top/tags/笔记副本/) [源码](https://blog.az22c.top/tags/源码/)
   - <p><strong>从最高视角看：</strong> 已知patch阶段也是 vm.$mount 下的逻辑，但从patch这里开始，首次构建阶段和“数据变化驱动视图改变update阶段”的逻辑才开始明显出现区别。所以单独拿出一个章节来讲patch。</p>
   - <p><strong>从源码层面看：</strong> 可搜索<code>return function patch (oldVnode, vnode, hydrating, removeOnly)</code>，找到patch函数的源码。而 patch 函数，实际是由 createPatchFunction 这个工厂函数所返回的：createPatchFunction利用闭包，为 patch 缓存了一些对应运行环境的接口。因此 createPatchFunction 的具体实现先可以不用看，后面也会讲到。</p>
