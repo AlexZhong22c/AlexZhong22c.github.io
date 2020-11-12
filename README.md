@@ -231,8 +231,3 @@
 - [git暂存区知识梳理](https://blog.az22c.top/2017/10/12/git-stage/)&nbsp;&nbsp;|&nbsp;&nbsp;2017-10-12&nbsp;&nbsp;|&nbsp;&nbsp;标签：[随笔](https://blog.az22c.top/tags/随笔/) [git](https://blog.az22c.top/tags/git/) [基础](https://blog.az22c.top/tags/基础/) [指令](https://blog.az22c.top/tags/指令/)
   - <p>暂存区是git的一个重要概念，经过了一段时间的项目实践，总结一下个人对暂存区的一些理解。</p>
   - <p>当我们开始对git的一些知识进行梳理的时候，可以盗用以下这张图：</p>
-
-## ｜10 gulp 
-
-- [gulp的入门和一些简单使用](https://blog.az22c.top/2017/03/02/gulp-usage/)&nbsp;&nbsp;|&nbsp;&nbsp;2017-03-02&nbsp;&nbsp;|&nbsp;&nbsp;标签：[工程](https://blog.az22c.top/tags/工程/)
-  - <p>总结gulp的入门和一些简单使用，以便于快速上手。</p>
