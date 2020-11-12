@@ -78,18 +78,18 @@
 
 
 
-<meta name="description" content="Vue2的响应式原理，网上的资料太多了。这篇主要是把脉络梳理清楚，并且明确一些核心的概念是怎么实现的。比如依赖收集和派发更新具体指的是什么，还有一些细节处理，才造就了 Vue的合理运作。 总之，响应式原理 = 数据劫持 + 观察者模式">
+<meta name="description" content="Vue2的响应式原理，网上的资料太多了。这篇主要是把脉络梳理清楚，并且明确一些核心的概念是怎么实现的。比如依赖收集和派发更新具体指的是什么，还有一些细节处理，才造就了 Vue的合理运作。 总之，响应式原理 = 数据劫持 + 观察者模式 = 依赖收集 + 派发更新 = defineReactive + 同时存在Dep.target">
 <meta name="keywords" content="笔记副本,源码">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【4-1】响应式原理 之 观察者模式">
 <meta property="og:url" content="https://blog.az22c.top/2020/09/04/vue2-src-code-21-observe-mode/index.html">
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
-<meta property="og:description" content="Vue2的响应式原理，网上的资料太多了。这篇主要是把脉络梳理清楚，并且明确一些核心的概念是怎么实现的。比如依赖收集和派发更新具体指的是什么，还有一些细节处理，才造就了 Vue的合理运作。 总之，响应式原理 = 数据劫持 + 观察者模式">
+<meta property="og:description" content="Vue2的响应式原理，网上的资料太多了。这篇主要是把脉络梳理清楚，并且明确一些核心的概念是怎么实现的。比如依赖收集和派发更新具体指的是什么，还有一些细节处理，才造就了 Vue的合理运作。 总之，响应式原理 = 数据劫持 + 观察者模式 = 依赖收集 + 派发更新 = defineReactive + 同时存在Dep.target">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-11-05T08:21:33.486Z">
+<meta property="og:updated_time" content="2020-11-12T03:52:00.262Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【4-1】响应式原理 之 观察者模式">
-<meta name="twitter:description" content="Vue2的响应式原理，网上的资料太多了。这篇主要是把脉络梳理清楚，并且明确一些核心的概念是怎么实现的。比如依赖收集和派发更新具体指的是什么，还有一些细节处理，才造就了 Vue的合理运作。 总之，响应式原理 = 数据劫持 + 观察者模式">
+<meta name="twitter:description" content="Vue2的响应式原理，网上的资料太多了。这篇主要是把脉络梳理清楚，并且明确一些核心的概念是怎么实现的。比如依赖收集和派发更新具体指的是什么，还有一些细节处理，才造就了 Vue的合理运作。 总之，响应式原理 = 数据劫持 + 观察者模式 = 依赖收集 + 派发更新 = defineReactive + 同时存在Dep.target">
 
 
     <link rel="alternate" href="/atom.xml" title="Web前端 | Alex Zhong" type="application/atom+xml" data-no-instant>
@@ -505,7 +505,7 @@
 
 	<br />
 	<p style="height:7px;"/>
-	<p style="height:20px;font-family:KaiTi,LiSu,'宋体',sans-serif;color:#DBDBDB;font-size:12px;">预计阅读6分钟</p>
+	<p style="height:20px;font-family:KaiTi,LiSu,'宋体',sans-serif;color:#DBDBDB;font-size:12px;">预计阅读7分钟</p>
 
     </div>
   
@@ -542,7 +542,7 @@
           <div id="article-content" class="article-entry" itemprop="articleBody">
 			  
 			<p>Vue2的响应式原理，网上的资料太多了。这篇主要是把脉络梳理清楚，并且明确一些核心的概念是怎么实现的。比如依赖收集和派发更新具体指的是什么，还有一些细节处理，才造就了 Vue的合理运作。</p>
-<p>总之，<strong>响应式原理 = 数据劫持 + 观察者模式</strong></p>
+<p>总之，<strong>响应式原理 = 数据劫持 + 观察者模式 = 依赖收集 + 派发更新 = defineReactive + 同时存在Dep.target</strong></p>
 <a id="more"></a>
 <h2 id="dep：维护观察者队列"><a class="header-anchor" href="#dep：维护观察者队列"></a>Dep：维护观察者队列</h2>
 <p>其实Dep类职责很简单：</p>
@@ -628,14 +628,14 @@ export function popTarget () {
 <p>由 Watcher 的职责决定，其多数的实例方法都不会作为一个“事务”的起始。</p>
 <p>watcher.addDep 和 watcher.update都是等dep实例来调用的。搞得这么复杂就是为了解耦。</p>
 <ul>
-<li>
-<p>【解释 dep.depend 和 watcher.addDep】：dep.depend ==&gt; Dep.target.addDep(this)。核心逻辑是<code>dep.addSub(this/*即该watcher*/)</code>，这就是依赖收集。【记住这里绕了一圈，即还要绕去watcher那边搞点优化】</p>
-</li>
-<li>
-<p>【解释 dep.notify 和 watcher.update】：dep.notify ==&gt; subs[i].update()。核心逻辑就是 在未来执行 watcher.run()，也就是调用一开始存在 watcher的cb和watcher.get</p>
-</li>
-<li>
-<p>优化dep实例中的watcher队列</p>
+<li>【解释 dep.depend 和 watcher.addDep】：dep.depend ==&gt; Dep.target.addDep(this)。核心逻辑是<code>dep.addSub(this/*即该watcher*/)</code>，这就是依赖收集。【记住这里绕了一圈，即还要绕去watcher那边搞点优化】</li>
+<li>【解释 dep.notify 和 watcher.update】：dep.notify ==&gt; subs[i].update()。核心逻辑就是 在未来执行 watcher.run()，也就是调用一开始存在 watcher的cb和watcher.get</li>
+</ul>
+<blockquote>
+<p>在整体雏形的基础上，需要针对实际场景来进行优化：</p>
+</blockquote>
+<ul>
+<li>优化dep实例中的watcher队列
 <ul>
 <li><strong>从源码角度看：</strong> 就是watcher中，<code>[deps, depIds] vs [newDeps, newDepIds]</code> 和 <code>watcher.cleanupDeps()</code> 等等</li>
 <li>【1】以防止视图上已经不需要的watcher被触发
@@ -720,6 +720,9 @@ export default class Watcher {
 <li><code>dep.depend()</code>即<code>dep.addSub(watcher)</code>即为“依赖收集”；</li>
 <li><code>dep.notify()</code>，即把订阅的回调全都执行一遍，即为“派发更新”</li>
 </ul>
+<h2 id="总结"><a class="header-anchor" href="#总结"></a>总结</h2>
+<p>响应式原理 = 数据劫持 + 观察者模式 = 依赖收集 + 派发更新 = defineReactive + 同时存在Dep.target</p>
+<p>剩余未解释的部分将于后面的文章中解释。</p>
 
 		</div>
       
@@ -729,7 +732,7 @@ export default class Watcher {
         <p><span>本文标题:</span><a href="/2020/09/04/vue2-src-code-21-observe-mode/">【4-1】响应式原理 之 观察者模式</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2020-09-04, 21:02:10</p>
-        <!-- <p><span>最后更新:</span>2020-11-05, 16:21:33</p> -->
+        <!-- <p><span>最后更新:</span>2020-11-12, 11:52:00</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="【4-1】响应式原理 之 观察者模式" href="/2020/09/04/vue2-src-code-21-observe-mode/">https://blog.az22c.top/2020/09/04/vue2-src-code-21-observe-mode/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://blog.az22c.top/2020/09/04/vue2-src-code-21-observe-mode/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -765,7 +768,7 @@ export default class Watcher {
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#dep：维护观察者队列"><span class="toc-text">Dep：维护观察者队列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#watcher：观察者"><span class="toc-text">Watcher：观察者</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化-和-watcher-get"><span class="toc-text">初始化 和 watcher.get</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#剩下的实例方法"><span class="toc-text">剩下的实例方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#依赖收集-和-派发更新"><span class="toc-text">依赖收集 和 派发更新</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#dep：维护观察者队列"><span class="toc-text">Dep：维护观察者队列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#watcher：观察者"><span class="toc-text">Watcher：观察者</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化-和-watcher-get"><span class="toc-text">初始化 和 watcher.get</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#剩下的实例方法"><span class="toc-text">剩下的实例方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#依赖收集-和-派发更新"><span class="toc-text">依赖收集 和 派发更新</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
         
     </div>
     <style>
@@ -832,7 +835,7 @@ export default class Watcher {
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					
-						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,533</span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,619</span>
 					
 				</div>
             </div>

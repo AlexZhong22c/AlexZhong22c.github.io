@@ -749,6 +749,7 @@ function _proxy (data) {
       <url>https://blog.az22c.top/2020/09/04/vue2-src-code-3-next-tick/</url>
       <content type="html"><![CDATA[<p>nextTick这个api，并不是直接就帮你发起微任务的，只不过是把你传进来的回调加入到微任务的回调数组中，即作为一部分。</p>
 <a id="more"></a>
+<p><img src="https://cloud.az22c.top/vue_next-tick.png-az22cgithub" alt="vue_next-tick"></p>
 <h2 id="异步更新的原理"><a class="header-anchor" href="#异步更新的原理"></a>异步更新的原理</h2>
 <p>(经历响应式原理的派发更新)在每个watcher的update函数里面，主要就是 <code>queueWatcher(this)</code>。在同一个nextTick里面，对这些watcher去掉重复多余的。然后走<code>nextTick(flushSchedulerQueue)</code>。也就是尽量作为微任务的一部分去执行 flushSchedulerQueue。</p>
 <ul>
@@ -844,7 +845,7 @@ function _proxy (data) {
 <ul>
 <li>哪些是响应式的：
 <ul>
-<li>definedReactive + 渲染watcher、computed watcher、用户watcher</li>
+<li>原理：definedReactive + 渲染watcher、computed watcher、用户watcher (即Dep.target。搜索了源码，结果只有这几种 watcher)</li>
 <li>data</li>
 <li>props</li>
 <li>vuex的state(本质上是data)</li>
@@ -1434,7 +1435,7 @@ export function defineReactive (
       <title><![CDATA[【4-1】响应式原理 之 观察者模式]]></title>
       <url>https://blog.az22c.top/2020/09/04/vue2-src-code-21-observe-mode/</url>
       <content type="html"><![CDATA[<p>Vue2的响应式原理，网上的资料太多了。这篇主要是把脉络梳理清楚，并且明确一些核心的概念是怎么实现的。比如依赖收集和派发更新具体指的是什么，还有一些细节处理，才造就了 Vue的合理运作。</p>
-<p>总之，<strong>响应式原理 = 数据劫持 + 观察者模式</strong></p>
+<p>总之，<strong>响应式原理 = 数据劫持 + 观察者模式 = 依赖收集 + 派发更新 = defineReactive + 同时存在Dep.target</strong></p>
 <a id="more"></a>
 <h2 id="dep：维护观察者队列"><a class="header-anchor" href="#dep：维护观察者队列"></a>Dep：维护观察者队列</h2>
 <p>其实Dep类职责很简单：</p>
@@ -1520,14 +1521,14 @@ export function popTarget () {
 <p>由 Watcher 的职责决定，其多数的实例方法都不会作为一个“事务”的起始。</p>
 <p>watcher.addDep 和 watcher.update都是等dep实例来调用的。搞得这么复杂就是为了解耦。</p>
 <ul>
-<li>
-<p>【解释 dep.depend 和 watcher.addDep】：dep.depend ==&gt; Dep.target.addDep(this)。核心逻辑是<code>dep.addSub(this/*即该watcher*/)</code>，这就是依赖收集。【记住这里绕了一圈，即还要绕去watcher那边搞点优化】</p>
-</li>
-<li>
-<p>【解释 dep.notify 和 watcher.update】：dep.notify ==&gt; subs[i].update()。核心逻辑就是 在未来执行 watcher.run()，也就是调用一开始存在 watcher的cb和watcher.get</p>
-</li>
-<li>
-<p>优化dep实例中的watcher队列</p>
+<li>【解释 dep.depend 和 watcher.addDep】：dep.depend ==&gt; Dep.target.addDep(this)。核心逻辑是<code>dep.addSub(this/*即该watcher*/)</code>，这就是依赖收集。【记住这里绕了一圈，即还要绕去watcher那边搞点优化】</li>
+<li>【解释 dep.notify 和 watcher.update】：dep.notify ==&gt; subs[i].update()。核心逻辑就是 在未来执行 watcher.run()，也就是调用一开始存在 watcher的cb和watcher.get</li>
+</ul>
+<blockquote>
+<p>在整体雏形的基础上，需要针对实际场景来进行优化：</p>
+</blockquote>
+<ul>
+<li>优化dep实例中的watcher队列
 <ul>
 <li><strong>从源码角度看：</strong> 就是watcher中，<code>[deps, depIds] vs [newDeps, newDepIds]</code> 和 <code>watcher.cleanupDeps()</code> 等等</li>
 <li>【1】以防止视图上已经不需要的watcher被触发
@@ -1612,6 +1613,9 @@ export default class Watcher {
 <li><code>dep.depend()</code>即<code>dep.addSub(watcher)</code>即为“依赖收集”；</li>
 <li><code>dep.notify()</code>，即把订阅的回调全都执行一遍，即为“派发更新”</li>
 </ul>
+<h2 id="总结"><a class="header-anchor" href="#总结"></a>总结</h2>
+<p>响应式原理 = 数据劫持 + 观察者模式 = 依赖收集 + 派发更新 = defineReactive + 同时存在Dep.target</p>
+<p>剩余未解释的部分将于后面的文章中解释。</p>
 ]]></content>
       
         <categories>
