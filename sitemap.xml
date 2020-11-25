@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.az22c.top/2018/02/05/js-functional-intro/</loc>
+    
+    <lastmod>2020-11-25T14:55:05.959Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://blog.az22c.top/about/index.html</loc>
     
     <lastmod>2020-11-15T07:17:46.501Z</lastmod>
@@ -341,13 +348,6 @@
     <loc>https://blog.az22c.top/2017/08/12/js-inherit/</loc>
     
     <lastmod>2020-11-12T09:06:19.880Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://blog.az22c.top/2018/02/05/js-functional-intro/</loc>
-    
-    <lastmod>2020-11-12T09:06:19.879Z</lastmod>
     
   </url>
   
