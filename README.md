@@ -78,8 +78,8 @@
   - <p>上一篇文章详细介绍过 this的4种绑定规则，那如果在函数的调用位置上同时存在两种以上的绑定规则应该怎么办呢？本文将介绍this绑定的优先级：</p>
 - [结合this的4种绑定规则 深入理解this指向的判定](https://blog.az22c.top/2017/08/07/js-this/)&nbsp;&nbsp;|&nbsp;&nbsp;2017-08-07&nbsp;&nbsp;|&nbsp;&nbsp;标签：[IIFE](https://blog.az22c.top/tags/IIFE/) [进阶](https://blog.az22c.top/tags/进阶/) [this](https://blog.az22c.top/tags/this/) [闭包](https://blog.az22c.top/tags/闭包/)
   - <p>此文适合用于进阶对this的理解，不适合用来入门。</p>
-- [let和const旧话新编](https://blog.az22c.top/2017/05/08/let-n-const/)&nbsp;&nbsp;|&nbsp;&nbsp;2017-05-08&nbsp;&nbsp;|&nbsp;&nbsp;标签：[作用域](https://blog.az22c.top/tags/作用域/) [ES6](https://blog.az22c.top/tags/ES6/) [闭包](https://blog.az22c.top/tags/闭包/) [任务队列](https://blog.az22c.top/tags/任务队列/)
-  - <p>本文的结构是：首先看完了前文就能快速把代码从ES5的变量声明改到ES6，后续部分是作为拓展和详细的介绍：</p>
+- [let和const变量声明的特点](https://blog.az22c.top/2017/05/08/let-n-const/)&nbsp;&nbsp;|&nbsp;&nbsp;2017-05-08&nbsp;&nbsp;|&nbsp;&nbsp;标签：[作用域](https://blog.az22c.top/tags/作用域/) [ES6](https://blog.az22c.top/tags/ES6/) [闭包](https://blog.az22c.top/tags/闭包/) [任务队列](https://blog.az22c.top/tags/任务队列/)
+  - <p>本文的结构是：前文就是一个完整的内容提炼；后文是作为拓展和详细的介绍：</p>
 - [JavaScript Date对象回顾](https://blog.az22c.top/2017/05/07/js-date/)&nbsp;&nbsp;|&nbsp;&nbsp;2017-05-07&nbsp;&nbsp;|&nbsp;&nbsp;标签：[回顾](https://blog.az22c.top/tags/回顾/) [时间](https://blog.az22c.top/tags/时间/)
   - <p>此文用于快速回顾，不适合用来入门。</p>
   - <p>Date 对象：涉及基于1970年1月1日(世界标准时间)起的毫秒数。</p>
