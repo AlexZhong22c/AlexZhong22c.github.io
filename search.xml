@@ -3472,11 +3472,11 @@ function iterator (fn, next) {
             
             <tag> 跨域 </tag>
             
-            <tag> 跨tab </tag>
-            
             <tag> 面试题 </tag>
             
             <tag> 笔记副本 </tag>
+            
+            <tag> 跨tab </tag>
             
         </tags>
         
@@ -3577,13 +3577,13 @@ function iterator (fn, next) {
             
             <tag> 跨域 </tag>
             
-            <tag> 面试题 </tag>
-            
-            <tag> 笔记副本 </tag>
-            
             <tag> 跨站 </tag>
             
             <tag> Cookie </tag>
+            
+            <tag> 面试题 </tag>
+            
+            <tag> 笔记副本 </tag>
             
         </tags>
         
@@ -3622,11 +3622,11 @@ function iterator (fn, next) {
             
             <tag> 跨域 </tag>
             
+            <tag> 跨站 </tag>
+            
             <tag> 面试题 </tag>
             
             <tag> 笔记副本 </tag>
-            
-            <tag> 跨站 </tag>
             
         </tags>
         
@@ -6456,11 +6456,11 @@ instance2.sayName();//&quot;hu&quot;
         
         <tags>
             
-            <tag> 原理 </tag>
-            
             <tag> 面向对象 </tag>
             
             <tag> 原型系统 </tag>
+            
+            <tag> 原理 </tag>
             
         </tags>
         
@@ -8097,9 +8097,9 @@ MY_ARRAY = ['B']
             
             <tag> 作用域 </tag>
             
-            <tag> 闭包 </tag>
-            
             <tag> ES6 </tag>
+            
+            <tag> 闭包 </tag>
             
             <tag> 任务队列 </tag>
             
@@ -8261,11 +8261,11 @@ d.toUTCString()
             
             <tag> 复选框 </tag>
             
-            <tag> 插件 </tag>
+            <tag> 全选 </tag>
             
             <tag> 表格 </tag>
             
-            <tag> 全选 </tag>
+            <tag> 插件 </tag>
             
         </tags>
         
@@ -8643,9 +8643,9 @@ methods: {
         
         <tags>
             
-            <tag> 插件 </tag>
-            
             <tag> 表格 </tag>
+            
+            <tag> 插件 </tag>
             
             <tag> 条目 </tag>
             
@@ -9406,11 +9406,11 @@ p {
         
         <tags>
             
-            <tag> HTML </tag>
+            <tag> IFE </tag>
             
             <tag> H5 </tag>
             
-            <tag> IFE </tag>
+            <tag> HTML </tag>
             
         </tags>
         
