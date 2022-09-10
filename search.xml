@@ -254,7 +254,7 @@
 <p>这个主要特点就意味着这个组件不能直接使用“第三方组件自带的复选框显示逻辑”来实现。同时，交互逻辑都是需要自己自定义编写的。</p>
 <p>(另外，作为一个以“选择节点”作为功能的组件，这个组件需要把“已选择项”、“未选择项”、“将要选择项”，3者的信息同时表示出来。)</p>
 <p>(图示只是模拟复现图)
-<img src="https://cloud.az22c.top/custom-tree-table-mix-22091001.png-az22cgithub" alt="custom-tree-table-mix-22091001"></p>
+<img src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png" alt="custom-tree-table-mix-22091001"></p>
 <h2 id="实现要求"><a class="header-anchor" href="#实现要求"></a>实现要求</h2>
 <p><strong>我们再看进一步看看产品层面对这个组件还有什么实现的要求：</strong></p>
 <p>根据个人经验，确定任意普通的树形组件的实现方案，一般要考虑以下几个方面的功能点，基本上是“通用的”：</p>
