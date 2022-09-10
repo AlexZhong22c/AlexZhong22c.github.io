@@ -5086,7 +5086,7 @@ MMM.prototype.map = function(func) {
 <li>local branch代指某个<strong>本地分支</strong></li>
 <li>remote branch代指某个<strong>远程分支</strong></li>
 </ul>
-<p>正常情况下，本地分支 和 远程分支 存在着对应关系，比如，我们用本地的一个 master分支 对应远程的 master分支。</p>
+<p>正常情况下，本地分支 和 远程分支 存在着对应关系，比如，我们用本地的一个 main分支 对应远程的 main分支。</p>
 <p>git的作用围绕着 <code>“分支”</code> 这么一个对象来展开的。</p>
 <p>很明显这张图只考虑单分支（一对对应分支）的情形，这也是我们在工作中常见的情形。如果明白了单分支的玩法，多分支的玩法也是同理可得的。</p>
 <hr>
