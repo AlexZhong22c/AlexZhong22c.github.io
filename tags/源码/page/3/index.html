@@ -1,0 +1,2138 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="Alex Zhong">
+
+<script data-no-instant><!-- 移动端不需要的样式不加载 -->
+		function includeLinkStyle(url) {
+			var link = document.createElement("link");
+			link.rel = "stylesheet";
+			link.type = "text/css";
+			link.href = url;
+			var attr = document.createAttribute('data-no-instant');
+			link.setAttributeNode(attr);
+			document.getElementsByTagName("head")[0].appendChild(link);
+		}
+
+		function includeJavaScript(url){
+			var scriptObj = document.createElement("script");
+			scriptObj.src = url;
+			scriptObj.type = "text/javascript";
+			var attr = document.createAttribute('data-no-instant');
+			scriptObj.setAttributeNode(attr);
+			document.getElementsByTagName("head")[0].appendChild(scriptObj);
+		}
+
+		if(!navigator.userAgent.match(/(iPhone|iPod|Android|ios|Opera Mini|BlackBerry|webOS)/i)){
+			includeLinkStyle("/plugins/css/special.css");
+		//	includeLinkStyle("/plugins/font/style3.css");
+
+		//	includeLinkStyle("/plugins/heart/style.css");
+		//	includeLinkStyle("/search/css/cb-search.css");
+			
+				var link = document.createElement("link");
+				link.rel = "shortcut icon";
+				link.href = "/img/favicon.ico";
+				document.getElementsByTagName("head")[0].appendChild(link);
+			
+		} else {
+			if(navigator.userAgent.match(/(iPhone|iPod|iPad|ios)/i)){
+				var link = document.createElement("link");
+				link.rel = "apple-touch-icon";
+				link.href = "/img/favicon.ico";
+				document.getElementsByTagName("head")[0].appendChild(link);
+			}
+			includeLinkStyle("/plugins/prettify/themes/space-gray-dark.css");
+			includeLinkStyle("/search/css/cb-search-mobile.css");
+		}
+
+		function loadJS(url, callback){
+			var scriptObj = document.createElement("script");
+			scriptObj.src = url;
+			scriptObj.type = "text/javascript";
+			//var attr = document.createAttribute('data-no-instant');
+			//scriptObj.setAttributeNode(attr);
+			var loaded;
+			if(typeof callback === 'function'){
+	        scriptObj.onload = scriptObj.onreadystatechange = function(){
+	            if(!loaded && (!scriptObj.readyState || /loaded|complete/.test(scriptObj.readyState))){
+	                scriptObj.onload = scriptObj.onreadystatechange = null;
+	                loaded = true;
+	                callback();
+	            }
+	        }
+	    }
+			document.getElementsByTagName("head")[0].appendChild(scriptObj);
+		}
+</script>
+
+
+
+<meta name="description" content="Alex Zhong&apos;s blog">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Web前端 | Alex Zhong">
+<meta property="og:url" content="https://blog.az22c.top/tags/源码/page/3/index.html">
+<meta property="og:site_name" content="Web前端 | Alex Zhong">
+<meta property="og:description" content="Alex Zhong&apos;s blog">
+<meta property="og:locale" content="zh-Hans">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Web前端 | Alex Zhong">
+<meta name="twitter:description" content="Alex Zhong&apos;s blog">
+
+
+    <link rel="alternate" href="/atom.xml" title="Web前端 | Alex Zhong" type="application/atom+xml" data-no-instant>
+
+
+
+
+
+
+
+	<script data-no-instant>
+		paceOptions = {
+			ajax: false, // disabled
+			document: false, // disabled
+			eventLag: false, // disabled
+			restartOnRequestAfter: false,
+			restartOnPushState: false,
+			elements: {
+				selectors: ['.body-wrap']
+			}
+		};
+	</script>
+  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js" data-no-instant></script>
+  <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-bounce.css" rel="stylesheet" data-no-instant>
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Tag: 源码 | Web前端 | Alex Zhong</title>
+
+
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script data-no-instant>
+    var yiliaConfig = {
+        fancybox: false,
+        animate: false,
+        isHome: false,
+        isPost: false,
+        isArchive: false,
+        isTag: true,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script data-no-instant> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script data-no-instant> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+
+	<!-- 右下角搜索 -->
+<script><!-- 移动端不需要的样式不加载 -->
+		if(!navigator.userAgent.match(/(iPhone|iPod|Android|ios|Opera Mini|BlackBerry|webOS)/i)){
+			document.write("<script src='/search/js/bootstrap3-typeahead.min.js' data-no-instant><\/script>");
+		} else {
+			document.write("<script src='/search/js/bootstrap3-typeahead.min-mobile.js' data-no-instant><\/script>");
+		}
+</script>
+
+	<!-- <script src="/search/js/cb-search.js"></script> 已合并到after-footer.ejs-->
+	<!-- <script src="/plugins/js/jquery.lazyload.min.js"></script> -->
+	<script src="//cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js" data-no-instant></script>
+	<!--  -->
+		<!--prettify代码高亮主题css引入。注：为了减少请求数，已将此css合并到special.css-->
+		<!--<link href="/plugins/prettify/themes/space-gray-dark.css" rel="stylesheet">-->
+	<!--  -->
+
+	<script type="text/javascript">
+        //定义一个全局script的标记数组，用来标记是否某个script已经下载到本地
+        var scriptsArray = new Array();
+        $.cachedScript = function (url, options) {
+            //循环script标记数组
+            for (var s in scriptsArray) {
+                //console.log(scriptsArray[s]);
+                //如果某个数组已经下载到了本地
+                if (scriptsArray[s]==url) {
+
+                    return {  //则返回一个对象字面量，其中的done之所以叫做done是为了与下面$.ajax中的done相对应
+                        done: function (method) {
+                            if (typeof method == 'function'){  //如果传入参数为一个方法
+                                method();
+                            }
+                        }
+                    };
+                }
+            }
+            //这里是jquery官方提供类似getScript实现的方法，也就是说getScript其实也就是对ajax方法的一个拓展
+            options = $.extend(options || {}, {
+                dataType: "script",
+                url: url,
+                cache:true //其实现在这缓存加与不加没多大区别
+            });
+            scriptsArray.push(url); //将url地址放入script标记数组中
+            return $.ajax(options);
+        };
+    </script>
+</head>
+</html>
+<body>
+  <div id="container">
+    <div class="left-col" id="left_col_div" style="background-color:#fafafa;">
+    <div class="overlay" id="id_code_rain_div" style="opacity:0.2">
+    <canvas id="matrix" width="300" height="180"></canvas>
+</div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a id="id_avatar_a" href="/" class="profilepic">
+            <!-- <img src="/img/avatar.jpg" class="animated zoomIn"> -->
+        </a>
+        <hgroup id="id_hgroup_name">
+        <h1 id="ngudream_name" class="header-author"><!-- main.styl cl-effect-2 -->
+        <a href="/"><span style="background-color:#fafafa !important" data-hover="专注于Web前端的AZ">Alex Zhong</span></a>
+        </h1>
+        </hgroup>
+        
+        
+        <form id="search-form">
+            <!-- 搜索框相关 -->
+            <div class="col-3" style="float:left">
+                <input type="text" id="local-search-input" name="q" results="0" placeholder="搜索...(◕ܫ◕)" class="effect-2" autocomplete="off" autocorrect="off" style="padding-left:4px" />
+                <span class="focus-border"></span>
+                <!-- 搜索框动画 -->
+            </div>
+            <div style="float:right;margin-top:13px;">
+                <i id="search-delete" class="button pill" onclick="resetSearch()" style="margin-left:-26px;">删除</i>
+                <!-- 清空/重置搜索框 -->
+            </div>
+        </form>
+        <br/>
+        <br/>
+        <div id="local-search-result"></div>
+        <!-- 搜索结果区 -->
+        <p class="no-result" style="font-size:0.8em;text-align:center;">没有找到，空空如也...</p>
+        <!-- 无匹配时显示，注意请在 CSS 中设置默认隐藏 <i class='fa fa-spinner fa-pulse'></i>-->
+        
+        
+        <div id="switch-btn" class="switch-btn">
+            <div class="icon">
+                <div class="icon-ctn">
+                    <div class="icon-wrap icon-house" data-idx="0">
+                        <div class="birdhouse"></div>
+                        <div class="birdhouse_holes"></div>
+                    </div>
+                    <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                        <div class="ribbon"></div>
+                    </div>
+                    
+                    <div class="icon-wrap icon-link hide" data-idx="2">
+                        <div class="loopback_l"></div>
+                        <div class="loopback_r"></div>
+                    </div>
+                    
+                    
+                    <div class="icon-wrap icon-me hide" data-idx="3">
+                        <div class="user"></div>
+                        <div class="shoulder"></div>
+                    </div>
+                    
+                    
+                    <div class="icon-wrap icon-me hide" data-idx="4">
+                        <div class="user"></div>
+                        <div class="shoulder"></div>
+                    </div>
+                    
+                    
+                    <div class="icon-wrap icon-me hide" data-idx="5">
+                        <div class="user"></div>
+                        <div class="wechat_left"></div>
+                    </div>
+                    <div class="icon-wrap icon-me hide" data-idx="6">
+                        <div class="user"></div>
+                        <div class="wechat_left"></div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="tips-box hide">
+                <!-- 鸟屋 -->
+                <div class="tips-arrow"></div>
+                <ul class="tips-inner">
+                    <li>
+                        菜单
+                    </li>
+                    <li>
+                        标签
+                    </li>
+                    
+                    <li>
+                        友情链接
+                    </li>
+                    
+                    
+                    <li>
+                        个人签名
+                    </li>
+                    
+                    
+                    <li>
+                        最近访客
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul id="menu_ul">
+                            
+                            <!-- 菜单 -->
+                            <li class="cl-effect-1">
+                                
+                                <a href="/">
+                                    主页
+                                </a>
+                                
+                            </li>
+                            
+                            <!-- 菜单 -->
+                            <li class="cl-effect-1">
+                                
+                                <a href="/archives/">
+                                    归档
+                                </a>
+                                
+                            </li>
+                            
+                            <!-- 菜单 -->
+                            <li class="cl-effect-1">
+                                
+                                <a data-no-instant href="/tags/">
+                                    分类标签
+                                </a>
+                                
+                            </li>
+                            
+                            <!-- 菜单 -->
+                            <li class="cl-effect-1">
+                                
+                                <a href="/tags/回顾">
+                                    助记回顾
+                                </a>
+                                
+                            </li>
+                            
+                            <!-- 菜单 -->
+                            <li class="cl-effect-1">
+                                
+                                <a href="/about/">
+                                    关于我
+                                </a>
+                                
+                            </li>
+                            
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            <!-- 社交 -->
+                            
+                            
+                            <span class="hint  hint--top" data-hint="QQ"><a class="fa QQ" href="javascript:void(0)" style="margin-left:3px;"></a></span>
+                            
+                            
+                            
+                            <span class="hint  hint--top" data-hint="微信"><a class="fa WeChat" href="javascript:void(0)" style="margin-left:3px;"></a></span>
+                            
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/App/">App</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BFC/">BFC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS3/">CSS3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS选择器/">CSS选择器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cookie/">Cookie</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/H5/">H5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IFE/">IFE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IIFE/">IIFE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/">bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/caller/">caller</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/">express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/float/">float</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/font-face/">font-face</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/font-size/">font-size</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/line-height/">line-height</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/link标签/">link标签</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/list-style/">list-style</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/margin/">margin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meta标签/">meta标签</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/new/">new</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/radius/">radius</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/theme/">theme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/this/">this</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vertical-align/">vertical-align</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuex/">vuex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yelee/">yelee</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件/">事件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/交互/">交互</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/任务队列/">任务队列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/优先级/">优先级</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/优化/">优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/伪元素/">伪元素</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/作用域/">作用域</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/全选/">全选</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/函数属性/">函数属性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/函数式编程/">函数式编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/单例/">单例</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原型系统/">原型系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原理/">原理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/双飞翼布局/">双飞翼布局</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/回顾/">回顾</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图标/">图标</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/圣杯布局/">圣杯布局</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/基础/">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/复选框/">复选框</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字体/">字体</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/对象属性/">对象属性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/居中/">居中</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异步/">异步</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能优化/">性能优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/指令/">指令</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/指针事件/">指针事件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/插件/">插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/操作符/">操作符</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文字/">文字</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间/">时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/权重/">权重</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/条目/">条目</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/清除浮动/">清除浮动</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/源码/">源码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/特殊/">特殊</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记副本/">笔记副本</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/绝对定位/">绝对定位</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/表格/">表格</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/触摸事件/">触摸事件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨tab/">跨tab</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨站/">跨站</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/边框/">边框</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/进阶/">进阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/闭包/">闭包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/阻止上下外边距合并/">阻止上下外边距合并</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面向对象/">面向对象</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试题/">面试题</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                        
+                        <a class="main-nav-link switch-friends-link" href="https://hexo.io">
+                            Hexo
+                        </a>
+                        
+                        <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">
+                            GitHub
+                        </a>
+                        
+                        <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">
+                            MOxFIVE
+                        </a>
+                        
+                        <div style="margin-top:50px;">
+                            <span>感恩一路有你们的陪伴与帮助！</span>
+                        </div>
+                    </div>
+                </section>
+                
+                
+                
+                    <section class="switch-part switch-part4">
+                        
+                        <div id="js-aboutme" style="line-height:1.4rem !important">
+                            Write the code Change the world
+                        </div>
+                        <div style="text-align:center;" id="bee_div"></div>
+                    </section>
+                    
+                    
+                    <!-- 最近访客http://yeshaoting.cn/article/hexo/yelee%E4%B8%BB%E9%A2%98%E6%9C%80%E8%BF%91%E8%AE%BF%E5%AE%A2%E6%8C%82%E4%BB%B6/#more -->
+                    <section class="switch-part switch-part5">
+                        <div class="widget visitor" id="js-visitor">
+                        </div>
+                    </section>
+                    
+                    
+                    <section class="switch-part switch-part6">
+                        <div style="text-align:center;" id="qq_div">
+                        </div>
+                    </section>
+                    <section class="switch-part switch-part7" id="wechat_div">
+                        <div style="text-align:center;"></div>
+                    </section>
+                    
+                </div>
+            </div>
+        </header>
+    </div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Alex Zhong</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a id="id_avatar_a_mobile" href="/" class="profilepic">
+                <!-- <img src="/img/avatar.jpg" class="animated rotateIn" style="-vendor-animation-duration: 3s;-vendor-animation-delay: 2s;-vendor-animation-iteration-count: infinite;"> -->
+				<!--<img src="/img/avatar.jpg" > -->
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Alex Zhong</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">Coding Changes the World</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">归档</a></li>
+                
+                    <li><a href="/tags/">分类标签</a></li>
+                
+                    <li><a href="/tags/回顾">助记回顾</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+								
+									<a class="fa QQ" title="QQ" target="_self" href="/social/"></a>
+								
+                            
+								
+									<a class="fa WeChat" title="微信" target="_self" href="/social/""></a>
+								
+                            
+                        </ul>
+            </nav>
+        </header>
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="个人签名"/>
+</nav>
+
+      <div class="body-wrap">
+  
+  
+    
+    
+      
+      
+      <section id="id_archives" class="archives-wrap article">
+        <div class="archive-year-wrap">
+          <a href="/archives/2020" class="archive-year">2020</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+          <div class="article-meta">
+              <a href="/2020/09/02/vue-router3-src-code-4-switch-n-guard/" class="archive-article-date">
+      <time datetime="2020-09-02T13:04:00.000Z" itemprop="datePublished">09-02</time>
+</a>
+
+
+
+
+        </div>
+         
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2020/09/02/vue-router3-src-code-4-switch-n-guard/">【4运作核心】路径切换和路由守卫</a>
+    </h1>
+  
+
+        <div class="article-info info-on-archive"> 
+          
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Vue/">Vue</a>
+    </div>
+
+
+          
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/源码/">源码</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/笔记副本/">笔记副本</a></li></ul>
+    </div>
+
+
+        </div>
+        <div class="clearfix"></div>
+    </header>
+  </div>
+</article>
+  
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+          <div class="article-meta">
+              <a href="/2020/09/02/vue-router3-src-code-3-matcher/" class="archive-article-date">
+      <time datetime="2020-09-02T13:03:00.000Z" itemprop="datePublished">09-02</time>
+</a>
+
+
+
+
+        </div>
+         
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2020/09/02/vue-router3-src-code-3-matcher/">Vue-Router3源码拾遗【3】matcher匹配器</a>
+    </h1>
+  
+
+        <div class="article-info info-on-archive"> 
+          
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Vue/">Vue</a>
+    </div>
+
+
+          
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/源码/">源码</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/笔记副本/">笔记副本</a></li></ul>
+    </div>
+
+
+        </div>
+        <div class="clearfix"></div>
+    </header>
+  </div>
+</article>
+  
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+          <div class="article-meta">
+              <a href="/2020/09/02/vue-router3-src-code-2-instance/" class="archive-article-date">
+      <time datetime="2020-09-02T13:02:00.000Z" itemprop="datePublished">09-02</time>
+</a>
+
+
+
+
+        </div>
+         
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2020/09/02/vue-router3-src-code-2-instance/">【2】路由注册和VueRouter实例</a>
+    </h1>
+  
+
+        <div class="article-info info-on-archive"> 
+          
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Vue/">Vue</a>
+    </div>
+
+
+          
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/源码/">源码</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/笔记副本/">笔记副本</a></li></ul>
+    </div>
+
+
+        </div>
+        <div class="clearfix"></div>
+    </header>
+  </div>
+</article>
+  
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+          <div class="article-meta">
+              <a href="/2020/09/02/vue-router3-src-code-1-overview/" class="archive-article-date">
+      <time datetime="2020-09-02T13:01:00.000Z" itemprop="datePublished">09-02</time>
+</a>
+
+
+
+
+        </div>
+         
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2020/09/02/vue-router3-src-code-1-overview/">Vue-Router3源码拾遗【1】概述</a>
+    </h1>
+  
+
+        <div class="article-info info-on-archive"> 
+          
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Vue/">Vue</a>
+    </div>
+
+
+          
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/源码/">源码</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/笔记副本/">笔记副本</a></li></ul>
+    </div>
+
+
+        </div>
+        <div class="clearfix"></div>
+    </header>
+  </div>
+</article>
+  
+  
+    </div></section>
+  
+
+    
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/tags/源码/page/2/">&laquo; Prev</a><a class="page-number" href="/tags/源码/">1</a><a class="page-number" href="/tags/源码/page/2/">2</a><span class="page-number current">3</span>
+    </nav>
+  
+
+
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" style="text-align:center;">
+
+            <div class="footer-left" style="vertical-align:middle;">
+                <img src="" style="vertical-align:middle; opacity:0" height="24">
+                <i class="fa fa-copyright" style="vertical-align:middle;"></i>
+                2017-2022 Alex Zhong
+            </div>
+
+			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
+				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
+					
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">日拱一卒 总字数：114.1k</span>
+					
+				</div>
+            </div>
+				</div>
+				
+				<div style="text-align:center;" class="beian">
+					<a style="text-decoration: none;" href="http://www.beian.miit.gov.cn/" target="_blank"  rel="nofollow me noopener noreferrer">粤ICP备19013700号-1</a>
+				</div>
+
+        
+    </div>
+
+	<!-- 右下角的搜索 -->
+<div class="cb-search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+        opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+    <input type="text" class="cb-search-content" id="cb-search-content" style="width:50%;top:60px;left:300px;position:fixed; border-radius:50px; background-color:white; opacity:1 !important;" placeholder="请输入文章标题或标签" />
+
+	<div id="cb-close-div" style="position: fixed; top: 16px; right: 16px;">
+        <span class="hint  hint--left" data-hint="按ESC键关闭搜索" id="id_span_search_close"></span>
+    </div>
+</div>
+
+<div id="cb-search-div" style="position: fixed; right: 16px; bottom: 20px;">
+    <span class="hint  hint--left" data-hint="双击Ctrl键打开或关闭搜索" id="id_span_search_open"></span>
+</div>
+</footer>
+
+    </div>
+    
+<script src="/js/GithubRepoWidget.js"></script>
+
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js" defer async="true" data-no-instant></script>
+
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+             github: ".github-widget a", 
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+            
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script type="text/javascript" data-no-instant>
+String.prototype.endWith = function(s) {
+if(s==null||s==""||this.length==0||s.length>this.length)
+return false;
+if(this.substring(this.length-s.length)==s)
+return true;
+else
+return false;
+return true;
+}
+String.prototype.startWith = function(s) {
+if(s==null||s==""||this.length==0||s.length>this.length)
+return false;
+if(this.substr(0,s.length)==s)
+return true;
+else
+return false;
+return true;
+}
+//是否是文章
+function is_post(){//根据自己实际需要来判断
+var url = window.location.pathname;
+var urlArray = url.split("/");
+if(urlArray.length > 2){
+var id = $(".article").eq(0).attr("id");
+var resultUrl = "post-" + urlArray[urlArray.length - 2];
+if(resultUrl == id){
+return true;
+}
+}
+return false;
+// if($("#id_header_post").length > 0){
+//   return true;
+// }
+// return false;
+//return yiliaConfig.isPost;
+}
+function is_archive() {
+// if($("#id_archives").length > 0){
+//   return true;
+// }
+// return false;
+var url = window.location.pathname;
+if(url.startWith("/archives/")){
+return true;
+}
+return false;
+//return yiliaConfig.isArchive;
+}
+function is_tag() {
+var url = window.location.pathname;
+if(url.startWith("/tags/")){
+return true;
+}
+return false;
+}
+function is_category(){
+var url = window.location.pathname;
+if(url.startWith("/categories/")){
+return true;
+}
+return false;
+//return yiliaConfig.isCategory;
+}
+function is_home(){
+var url = window.location.pathname;
+if(url == '/'){
+return true;
+}
+return false;
+}
+var slide = function(idx) {
+// 修复IE10+切换无效的bug
+var $wrap = $(".switch-wrap"),
+transform = [
+'-webkit-transform: translate(-' + idx * 100 + '%, 0);',
+'-moz-transform: translate(-' + idx * 100 + '%, 0);',
+'-o-transform: translate(-' + idx * 100 + '%, 0);',
+'-ms-transform: translate(-' + idx * 100 + '%, 0);',
+'transform: translate(-' + idx * 100 + '%, 0);'
+];
+$wrap[0].style.cssText = transform.join('');
+$(".icon-wrap").addClass("hide");
+$(".icon-wrap").eq(idx).removeClass("hide");
+}
+var toggleTocArea = function(){
+var valueHide = yiliaConfig.toc[0];
+var valueShow = yiliaConfig.toc[1];
+if ($(".left-col").is(":hidden")) {
+$("#tocButton").attr("value", valueShow);
+}
+$("#tocButton").click(function() {
+if ($("#toc").is(":hidden")) {
+$("#tocButton").attr("value", valueHide);
+$("#toc").slideDown(320);
+$(".switch-btn, .switch-area").fadeOut(300);
+}
+else {
+$("#tocButton").attr("value", valueShow);
+$("#toc").slideUp(350);
+$(".switch-btn, .switch-area").fadeIn(500);
+}
+})
+}
+var HideTOCifNoHeader = function(){
+if (!$(".toc").length) {
+$("#toc, #tocButton").hide();
+$(".switch-btn, .switch-area").show();
+}
+}
+var clickIcon = function(){
+$("#toc .toc-item > i").click(function(){
+$(this).siblings(".toc-child").slideToggle(100);
+$(this).toggleClass("hide");
+$(this).siblings("i").toggleClass("hide");
+})
+}
+var clickTitle = function(){
+var $itemHasChild = $("#toc .toc-item:has(> .toc-child)");
+var $titleHasChild = $itemHasChild.children(".toc-link");
+$titleHasChild.dblclick(function(){//双击隐藏子目录
+$(this).siblings(".toc-child").hide(100);
+$(this).siblings("i").toggleClass("hide");
+})
+// After dblclick enent
+$titleHasChild.click(function(){
+var $curentTocChild = $(this).siblings(".toc-child");
+if ($curentTocChild.is(":hidden")) {
+$curentTocChild.show(100);
+$(this).siblings("i").toggleClass("hide");
+}
+})
+}
+var clickTocTitle = function(){
+var $itemHasChild = $("#toc .toc-item:has(> .toc-child)");
+var $titleHasChild = $itemHasChild.children(".toc-link");
+var $iconToExpand = $(".toc-item > .fa-caret-right");
+var $iconToFold = $(".toc-item > .fa-caret-down");
+var $subToc = $titleHasChild.next(".toc-child");
+$iconToExpand.addClass("hide");
+var $tocTitle = $("#toc .toc-title");
+if ($titleHasChild.length) {
+$tocTitle.addClass("clickable");
+$tocTitle.click(function(){
+if ($subToc.is(":hidden")) {
+$subToc.show(150);
+$iconToExpand.removeClass("hide");
+$iconToFold.addClass("hide");
+} else {
+$subToc.hide(100);
+$iconToExpand.addClass("hide");
+$iconToFold.removeClass("hide");
+}
+})
+// TOC on mobile
+if ($(".left-col").is(":hidden")) {
+$("#container .toc-article .toc").css("padding-left", "1.4em");
+$("#container .toc-article .toc-title").css("display", "initial");
+}
+}
+}
+var TocNoWarp = function(cond){
+if (cond) {
+var $tocLink = $(".toc li a");
+$tocLink.each(function(){
+var title = $(this).find('.toc-text').text();
+// Find elements with ellipsis
+if (this.offsetWidth < this.scrollWidth) {
+$(this).attr("title", title);
+if (!!$().tooltip) { $(this).tooltip() }
+}
+        //$(this).attr("href", "#" + title.toLowerCase());
+        //$(this).attr("onclick", alert("text"));
+})
+var isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
+if (isSafari) {
+$("#toc .toc-item i").css("bottom", ".1em");
+}
+}
+}
+// 异步加载css
+function loadCss (cssUrl, callback) {
+var elem, bl,
+isExecuted = false; // 防止在ie9中，callback执行两次
+if ( cssUrl == null ) {
+return String(cssUrl);
+}
+elem = document.createElement('link'),
+elem.rel = 'stylesheet';
+if ( typeof callback === 'function' )  {
+bl = true;
+}
+// for ie
+function handle() {
+if ( elem.readyState === 'loaded' || elem.readyState === 'complete' ) {
+if (bl && !isExecuted) {
+callback();
+isExecuted = true;
+}
+elem.onreadystatechange = null;
+}
+}
+elem.onreadystatechange = handle;
+// for 非ie
+if (bl && !isExecuted) {
+elem.onload = callback;
+isExecuted = true;
+}
+elem.href = cssUrl;
+document.getElementsByTagName('head')[0].appendChild(elem);
+}
+//异步加载js
+function loadScript(scriptUrl, callback) {
+var elem, bl,
+isExecuted = false; // 防止在ie9中，callback执行两次
+if (scriptUrl == null) {
+return String(fn);
+}
+elem = document.createElement('script');
+if ( typeof callback === 'function' )  {
+bl = true;
+}
+// for ie
+function handle(){
+var status = elem.readyState;
+if (status === 'loaded' || status === 'complete') {
+if (bl && !isExecuted) {
+callback();
+isExecuted = true;
+}
+elem.onreadystatechange = null;
+}
+}
+elem.onreadystatechange = handle;
+// for 非ie
+if (bl && !isExecuted) {
+elem.onload = callback;
+isExecuted = true;
+}
+elem.src = scriptUrl;
+document.getElementsByTagName('head')[0].appendChild(elem);
+}
+//instantclick回调
+var afterChange = function (isChange) {
+var isPostPage = null;
+if(isPostPage == null){
+isPostPage = is_post();
+}
+if(isPostPage && !isChange){//如果是文章，则设置目录功能
+$("#instantclick").remove();
+$("#instantclick-bar").remove();
+yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+toggleTocArea();
+HideTOCifNoHeader();
+var $itemHasChild = $("#toc .toc-item:has(> .toc-child)");
+var $titleHasChild = $itemHasChild.children(".toc-link");
+$itemHasChild.prepend("<i class='fa fa-caret-down'></i><i class='fa fa-caret-right'></i>");
+clickIcon();
+clickTitle();
+clickTocTitle();
+TocNoWarp(yiliaConfig.toc[2]);
+$(".article").css("opacity", "1.0");//结束后要将文章显示
+} else if(is_home() && !isChange){
+loadCss("//cdn.bootcss.com/semantic-ui/0.19.3/css/semantic.min.css", function(){
+jQuery.getScript("//cdn.bootcss.com/semantic-ui/0.19.3/javascript/semantic.min.js").done(function(){
+$(".article").removeClass("animated");
+$(".article").css("opacity", "1.0");//结束后要将文章显示
+});
+});
+} else {//暂时解决在分类标签页打开其它页面后，返回分类标签页加载页面出错的问题
+var url = window.location.pathname;
+if(!isChange){
+if(url == "/tags/"){
+window.location.reload();
+return;
+} else if(url.startWith("/page/")){
+$(".article").css("opacity", "1.0");//结束后要将文章显示
+}
+}
+}
+if(is_archive()){
+$("#id_archives").css("opacity", "1.0");
+}
+$(document).ready(function () {
+resetPageOpacity();
+hideLabels();
+resetTags();
+$("img.lazy").lazyload({
+placeholder : "/img/loading0_2.gif",
+effect : "fadeIn"
+});
+var avatarIcons = ["/img/avatar.jpg", "/img/Coding.png"];
+var iconIndex = Math.floor(Math.random()*(avatarIcons.length));
+var avatarPath = avatarIcons[iconIndex];
+//本机宽度798、高度638
+resetTitile();
+addAvatar(avatarPath);
+resetPageWidth();
+setTitleSerialNum();
+tipBoxFunc();
+otherSettings(isChange);
+baiduShare();
+if(isPostPage){
+setHightLigth();
+copyCode();
+copyRight();
+}
+leftSearch();
+mobileSearch();
+rightSearch();
+// $.cachedScript('https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js').done(function () {
+//   console.log("dddddddd");
+// });
+// includeJavaScript("https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js");
+
+if(isPostPage) {
+var curProtocol = window.location.protocol.split(':')[0];
+if (curProtocol === 'https') {
+$.cachedScript('//zz.bdstatic.com/linksubmit/push.js').done(function () {
+});
+} else {
+$.cachedScript('//push.zhanzhang.baidu.com/push.js').done(function () {
+});	
+}
+
+}
+addTextAnimation();
+playTextAnimation();
+textAnimationClick(avatarPath);
+codeRain();
+duoshuoComments();
+});
+}
+//左侧搜索
+var leftSearch = function() {
+if (yiliaConfig.search) {
+jQuery.getScript(yiliaConfig.rootUrl + 'js/search.js').done(function(){
+var inputArea = document.querySelector("#local-search-input");
+var $HideWhenSearch = $("#toc, #tocButton, .post-list, #post-nav-button a:nth-child(2)");
+var $resetButton = $("#search-form .button");
+var $resultArea = $("#local-search-result");
+var getSearchFile = function() {
+var search_path = "search.xml";
+var path = yiliaConfig.rootUrl + search_path;
+searchFunc(path, 'local-search-input', 'local-search-result');
+}
+var getFileOnload = inputArea.getAttribute('searchonload');
+if (yiliaConfig.search && getFileOnload === "true") {
+getSearchFile();
+} else {
+inputArea.onfocus = function() {
+getSearchFile()
+}
+}
+var HideTocArea = function() {
+$HideWhenSearch.css("visibility", "hidden");
+$resetButton.show();
+}
+inputArea.oninput = function() {
+HideTocArea()
+}
+inputArea.onkeydown = function() {
+if (event.keyCode == 13) return false
+}
+//搜索框删除按钮
+resetSearch = function() {
+$HideWhenSearch.css("visibility", "initial");
+$resultArea.html("");
+document.querySelector("#search-form").reset();
+$resetButton.hide();
+$(".no-result").hide();
+$("#left_col_div").css("overflow-y", "hidden");
+}
+//监控搜索框内容，内容为空时主动调用删除函数
+$(function() {
+$('#local-search-input').bind('input propertychange', function() {
+$('#result').html($(this).val().length + ' characters');
+var len = $(this).val().length;
+if (len <= 0) {
+var searchDel = document.getElementById("search-delete");
+searchDel.click();
+}
+});
+})
+$resultArea.bind("DOMNodeRemoved DOMNodeInserted", function(e) {
+if (!$(e.target).text()) {
+$(".no-result").show(200);
+$("#left_col_div").css("overflow-y", "hidden");
+} else {
+$(".no-result").hide();
+$("#left_col_div").css("overflow-y", "auto").css("overflow-x", "hidden");
+}
+})
+});
+}
+}
+//弹出鸟屋
+var tipBoxFunc = function() {
+var Tips = (function() {
+var $tipBox = $(".tips-box");
+return {
+show: function() {
+$tipBox.removeClass("hide");
+},
+hide: function() {
+$tipBox.addClass("hide");
+},
+init: function() {
+}
+}
+})();
+var bind = function() {
+var switchBtn = $("#myonoffswitch");
+var tagcloud = $(".second-part");
+var navDiv = $(".first-part");
+switchBtn.click(function() {
+if (switchBtn.hasClass("clicked")) {
+switchBtn.removeClass("clicked");
+tagcloud.removeClass("turn-left");
+navDiv.removeClass("turn-left");
+} else {
+switchBtn.addClass("clicked");
+tagcloud.addClass("turn-left");
+navDiv.addClass("turn-left");
+resetTags();
+}
+});
+var timeout;
+var isEnterBtn = false;
+var isEnterTips = false;
+$(".icon").bind("mouseenter", function() {
+isEnterBtn = true;
+Tips.show();
+}).bind("mouseleave", function() {
+isEnterBtn = false;
+setTimeout(function() {
+if (!isEnterTips) {
+Tips.hide();
+}
+}, 100);
+});
+$(".tips-box").bind("mouseenter", function() {
+isEnterTips = true;
+Tips.show();
+}).bind("mouseleave", function() {
+isEnterTips = false;
+setTimeout(function() {
+if (!isEnterBtn) {
+Tips.hide();
+}
+}, 100);
+});
+$(".tips-inner li").bind("click", function() { //控制鸟屋点击事件
+var idx = $(this).index();
+if(idx == 3){
+if ($("#my_signature").length <= 0) {
+$("#bee_div").append("<img id='my_signature' src='/img/bee.png' />");
+}
+} else if(idx == 4){
+if($("#ds-recent-visitors").length <= 0){
+$("#js-visitor").append("<ul class='ds-recent-visitors' data-num-items='28' data-avatar-size='50' id='ds-recent-visitors'></ul>");
+DUOSHUO.RecentVisitors($("#ds-recent-visitors"));
+}
+}
+slide(idx);
+Tips.hide();
+});
+$(".QQ").bind("click", function() { //qq扫码
+//var idx = $(this).index();
+if ($("#my_qq").length <= 0) {
+$("#qq_div").append("<img id='my_qq' src='/img/qq.png' style='cursor:pointer; margin-top:-8px;' />");
+$("#my_qq").bind("click", function() { //qq扫码
+if ($("#my_wechat").length <= 0) {
+$("#wechat_div").append("<img id='my_wechat' src='/img/wechat.png' style='cursor:pointer; margin-left:12px;' />");
+$("#my_wechat").bind("click", function() { //微信扫码
+slide(5);
+Tips.hide();
+});
+}
+slide(6);
+Tips.hide();
+});
+}
+slide(5);
+Tips.hide();
+});
+$(".WeChat").bind("click", function() { //微信扫码
+//var idx = $(this).index();
+if ($("#my_wechat").length <= 0) {
+$("#wechat_div").append("<img id='my_wechat' src='/img/wechat.png' style='cursor:pointer; margin-left:12px;' />");
+$("#my_wechat").bind("click", function() { //微信扫码
+if ($("#my_qq").length <= 0) {
+$("#qq_div").append("<img id='my_qq' src='/img/qq.png' style='cursor:pointer; margin-top:-8px;' />");
+$("#my_qq").bind("click", function() { //qq扫码
+slide(6);
+Tips.hide();
+});
+}
+slide(5);
+Tips.hide();
+});
+}
+slide(6);
+Tips.hide();
+});
+}
+bind();
+Tips.init();
+}
+//设置标签的背景色
+var resetTags = function(){
+if(!navigator.userAgent.match(/(iPhone|iPod|Android|ios|Opera Mini|BlackBerry|webOS)/i)){
+var tags = $(".tagcloud a");
+for(var i = 0; i < tags.length; i++){
+var num = Math.floor(Math.random()*7);
+tags.eq(i).addClass("color" + num);
+}
+$(".article-category a:nth-child(-n+2)").attr("class", "color0");
+}
+}
+var resetTitile = function () {
+<!-- 控制标题是否滚动 -->
+var totalwidth = $(window).width();
+var titles = document.getElementsByClassName("archive-item-title");
+for (var i = 0; i < titles.length; i++) {
+var title = titles[i];
+<!-- 设置标题最大显示长度 -->
+if (totalwidth >= 1800) {
+title.style.maxWidth = "600px";
+} else if (totalwidth >= 1550 && totalwidth < 1800) {
+title.style.maxWidth = "500px";
+} else if (totalwidth < 700) {
+title.style.maxWidth = "300px";
+title.style.marginLeft = "-10px";
+}
+<!--　添加跑马灯效果 -->
+var marquee = false;
+var realLength = 0;
+var str = title.innerText;
+for (var j = 0; j < str.length; j++) {
+charCode = str.charCodeAt(j);
+if (charCode >= 0 && charCode <= 128) {
+realLength += 1;
+} else {
+realLength += 2;
+}
+}
+var max = 40;
+if (totalwidth < 700) {
+max = 34;
+}
+if (realLength > max) {
+marquee = true;
+}
+if (marquee) {
+var mar = document.createElement("marquee");
+mar.setAttribute("behavior", "scroll");
+mar.onmouseover = function () {
+this.stop();
+}
+mar.onmouseout = function () {
+this.start();
+}
+var parent = title.parentNode;
+var _title = title.cloneNode(true);
+mar.appendChild(_title);
+parent.replaceChild(mar, title);
+}
+}
+//设置页面标题
+var str = document.title;
+if (str.indexOf("移动开发") != 0) {
+arr = str.split("|");
+document.title = arr[0] + "|" + arr[2];
+}
+}
+var addAvatar = function (avatarPath) {
+
+$("#id_avatar_a").append("<img src='/img/avatar.jpg' class='js-avatar' style='width: 100%;height: 100%;opacity: 1;' />");
+
+}
+var resetPageWidth = function () {
+//宽屏时设置页面宽度
+var totalwidth = $(window).width();
+if (totalwidth >= 1800) {
+$(".body-wrap").css("max-width", "85em");
+$(".body-wrap").css("width", "85em");
+} else if (totalwidth >= 1500 && totalwidth < 1800) {
+$(".body-wrap").css("max-width", "70em");
+$(".body-wrap").css("width", "70em");
+} else if (totalwidth <= 700) {
+<!-- 设置移动端页面样式 -->
+if (is_post() || is_archive() || is_category() || is_tag()) {
+$(".article").each(function () {
+$(this).css("margin-top", "0.625rem").css("margin-left", "-0.35rem").css("margin-right", "0.3rem").css("margin-bottom", "0.625rem");
+})
+} else {
+$(".article").each(function () {
+$(this).css("margin-top", "0.625rem").css("margin-left", "0.35rem").css("margin-right", "0.3rem").css("margin-bottom", "0.625rem");
+})
+}
+//在小屏时距边界左边有点大了，所以距离减小
+var curUrl = window.location.pathname;
+var tagUrl = "/tags/"
+var guestUrl = "/guestbook/";
+var aboutUrl = "/about/";
+var socialUrl = "/social/"
+if(curUrl == tagUrl || curUrl == guestUrl || curUrl == aboutUrl || curUrl == socialUrl){
+$(".article").each(function () {
+$(this).css("margin-top", "0.625rem").css("margin-left", "-0.35rem").css("margin-right", "0.3rem").css("margin-bottom", "0.625rem");
+})
+}
+//设置标题大小
+$(".article-title-big").each(function () {
+$(this).css("margin-left", "5px").css("font-size", "1.5rem");
+})
+$(".article-info-post").each(function () {
+$(this).css("margin-left", "5px");
+})
+}
+}
+//给标题加上序号
+var setTitleSerialNum = function () {
+if(is_post()){
+var existNumber = null;
+$("h2").each(function(){
+if($(this).attr("exist-number") != undefined) {
+existNumber = true;
+return false;
+}
+$(this).css("padding-top", "0.6em");
+$(this).css("margin-top", "1em");
+$(this).css("padding-bottom", "0.3em");
+$(this).css("border-top", "1px solid #ddd");
+var attr = $(this).attr("exist-number");
+if(null == attr || undefined == attr){
+$(this).attr("exist-number", true);
+}
+});
+//已经设置过序号，将直接返回
+if(existNumber){
+return;
+}
+$("h3").each(function(){//控制h3标题的间隔
+$(this).css("margin-top", "0.3em");
+$(this).css("margin-bottom", "0.2em");
+});
+$("h4").each(function(){//控制h4标题的间隔
+$(this).css("margin-top", "0.15em");
+$(this).css("margin-bottom", "0.15em");
+});
+doSetNumber()
+function doSetNumber() {
+// 因为前面逻辑耦合太严重了，所以从这里开始抽出来代码。
+// 但是没有办法为每页定制，所以只好全部都统一设置标题排序。
+var $article = $(".article-entry");
+var count = [0, 0, 0, 0, 0, 0];
+var mark = [0, 0, 0, 0, 0, 0];
+(function setMark() {
+var hTag = ["h1", "h2", "h3", "h4", "h5", "h6"];
+var index = 0;
+for (var i = 0; i < 6; ++i) {
+if ($article.children(hTag[i]).length > 0) {
+++index;
+mark[i] = index;
+}
+}
+})();
+$article.children(":header").each(function () {
+var t = $(this);
+var pos = 0;
+switch (t[0].tagName) {
+case "H1":
+pos = 0;
+break;
+case "H2":
+pos = 1;
+break;
+case "H3":
+pos = 2;
+break;
+case "H4":
+pos = 3;
+break;
+case "H5":
+pos = 4;
+break;
+case "H6":
+pos = 5;
+break;
+}
+var len = mark[pos];
+if (len < 6) {
+count[len] = 0;
+}
+count[len - 1]++;
+
+if (len == 1) {
+} else {
+  var listStr = "";
+  for (var i = 1; i < len; ++i) {
+    if (i === 1) { // 总体思想是从h3开始弄序号，所以前面的既不要序号，也不要点后缀
+      listStr += "" + count[i];
+    } else {
+      listStr += "." + count[i];
+    }
+  }
+  listStr += "➢ ";
+  t.html(listStr + t.html());
+}
+});
+}
+} else {
+//if (!navigator.userAgent.match(/(iPhone|iPod|Android|ios|Opera Mini|BlackBerry|webOS)/i)) {
+//  var heartspan = "<span class='htmleaf-links'><i class='heart' id='like3' rel='like'></i></span>";
+//  $("#footerdiv").append(heartspan);
+//底部红心动画
+//  $('body').on("click", '.heart', function () {
+//    var A = $(this).attr("id");
+//    var B = A.split("like");
+//    var messageID = B[1];
+//    var C = parseInt($("#likeCount" + messageID).html());
+//    $(this).css("background-position", "")
+//    var D = $(this).attr("rel");
+//    if (D === 'like') {
+//      $("#likeCount" + messageID).html(C + 1);
+//      $(this).addClass("heartAnimation").attr("rel", "unlike");
+//    }
+//    else {
+//      $("#likeCount" + messageID).html(C - 1);
+//      $(this).removeClass("heartAnimation").attr("rel", "like");
+//      $(this).css("background-position", "left");
+//    }
+//  });
+//}
+}
+}
+//代码高亮
+var setHightLigth = function () {
+<!-- prettify代码高亮脚本引入 http://jumpbyte.cn/2016/07/02/use-and-install-prettify/-->
+if (is_post()){
+jQuery.getScript("//cdn.bootcss.com/prettify/r298/prettify.min.js")
+.done(function() {
+/* 执行成功后的处理 */
+$('pre').addClass('prettyprint linenums').attr('style', 'white-space:pre;word-break: keep-all;overflow:auto;height:auto;width:auto;padding-top:5px;padding-bottom:5px;margin-bottom:10px;');
+<!-- 控制代码高度和滚动条 -->
+prettyPrint();
+})
+.fail(function() {
+/* 执行失败后的处理 */
+});
+}
+}
+var otherSettings = function (isChange) {
+var totalwidth = $(window).width();
+if (!navigator.userAgent.match(/(iPhone|iPod|Android|ios|Opera Mini|BlackBerry|webOS)/i)) {
+//flying
+if (totalwidth <= 900) {
+$(".body-wrap").css("margin-bottom", "116px");
+}
+// if($("#id_keep_div").length <= 0){
+// var flyingDiv = "<div id='id_keep_div' style='display:inline;'><span class='my-face' style='vertical-align:middle;'>日拱一卒</span>";
+// $(flyingDiv).insertBefore("#web_count_div");
+// }
+//添加左边栏ngudream效果
+$("#ngudream_name").attr("class", "header-author cl-effect-2");
+//移动端就不需要加载这几个图片了
+//$("#qq_div").append("<img id='my_qq' src='/img/qq.png' style='cursor:pointer; margin-top:-8px;' />");
+//$("#wechat_div").append("<img id='my_wechat' src='/img/wechat.png' style='cursor:pointer; margin-left:12px;' />");
+//$("#bee_div").append("<img src='/img/bee.png' />");
+//不显示右下角的搜索按钮
+//$("#cb-close-btn").css("opacity", 0);
+//$("#cb-search-btn").css("opacity", 0);
+//点击弹出心形
+if(isChange){
+// var loveClick = function(e,t,a){function n(){c(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"),o(),r()}function r(){for(var e=0;e<d.length;e++)try{d[e].alpha<=0?(t.body.removeChild(d[e].el),d.splice(e,1)):(d[e].y--,d[e].scale+=.004,d[e].alpha-=.013,d[e].el.style.cssText="left:"+d[e].x+"px;top:"+d[e].y+"px;opacity:"+d[e].alpha+";transform:scale("+d[e].scale+","+d[e].scale+") rotate(45deg);background:"+d[e].color+";z-index:99999");}catch(e){}requestAnimationFrame(r)}function o(){var t="function"==typeof e.onclick&&e.onclick;e.onclick=function(e){t&&t(),i(e)}}function i(e){var a=t.createElement("div");a.className="heart",d.push({el:a,x:e.clientX-5,y:e.clientY-5,scale:1,alpha:1,color:s()}),t.body.appendChild(a)}function c(e){var a=t.createElement("style");a.type="text/css";try{a.appendChild(t.createTextNode(e))}catch(t){a.styleSheet.cssText=e}t.getElementsByTagName("head")[0].appendChild(a)}function s(){return"rgb("+~~(255*Math.random())+","+~~(255*Math.random())+","+~~(255*Math.random())+")"}var d=[];e.requestAnimationFrame=function(){return e.requestAnimationFrame||e.webkitRequestAnimationFrame||e.mozRequestAnimationFrame||e.oRequestAnimationFrame||e.msRequestAnimationFrame||function(e){setTimeout(e,1e3/60)}}(),n()};
+// loveClick(window, document);
+$.cachedScript('/js/love.js').done(function () {
+});
+}
+var curUrl = window.location.pathname;
+var tagUrl = "/tags/"
+var guestUrl = "/guestbook/";
+var aboutUrl = "/about/";
+var archiveUrl = "/archives/";
+var welfareUrl = "/404.html";
+if(curUrl == tagUrl || curUrl == guestUrl || curUrl == aboutUrl || curUrl == archiveUrl || curUrl == welfareUrl){
+try {
+$(".tips-inner").find("li")[4].remove();
+} catch (e) {
+}
+}
+if(is_category() || is_tag()) {
+try {
+$(".tips-inner").find("li")[4].remove();
+} catch (e) {
+}
+}
+// console.log("screen.height = " + screen.height + ", screen.width = " + screen.width);
+} else {
+if (is_post()) {
+<!-- 移动端不显示提示 -->
+$("#copyright_author").attr("class", "");
+$("#copyright_url").attr("class", "");
+$("#copyright_license").attr("class", "");
+}
+$("#id_wordcount_span").css("margin-left", "");
+$(".body-wrap").css("margin-bottom", "110px");//移动端页面底部距离大一点
+// if (totalwidth > 900) {//已合并到special.css
+//   $("<link>")
+//         .attr({
+//           rel: "stylesheet",
+//           type: "text/css",
+//           href: "/plugins/hint/hint.min.css"
+//         })
+//         .appendTo("head");
+//   $("<link>")
+//         .attr({
+//             rel: "stylesheet",
+//             type: "text/css",
+//             href: "/plugins/font/style3.css"
+//         })
+//         .appendTo("head");
+//   $("<link>")
+//         .attr({
+//             rel: "stylesheet",
+//             type: "text/css",
+//             href: "/plugins/heart/style.css"
+//         })
+//         .appendTo("head");
+//   }
+//左边栏缩小
+if (totalwidth > 900 && totalwidth < 1200) {
+$(".left-col").css("width", "250px");
+$(".mid-col").css("margin-left", "-50px");
+if (is_post()) {
+$("#toc").css("width", "180px");
+$("#tocButton").css("margin-left", "-50px");
+$("#post-nav-button").css("margin-left", "-50px");
+}
+}
+//监听横竖屏转
+window.addEventListener('orientationchange', function (event) {
+if (window.orientation == 180 || window.orientation == 0) {
+window.location.reload();//横屏
+//$("#cb-search-div").removeAttr("style");
+//$("#cb-search-div").css("float", "left").css("margin-left", "15px");
+} else {
+window.location.reload();//竖屏
+}
+});
+$("#cb-search-content").removeAttr("style");
+$("#cb-search-content").css("margin-left", "-115px").css("width", "70%").css("font-size", "1.2em").css("height", "30px")
+.css("margin-top", "80px").css("border-radius", "50px");
+$("#cb-close-div").css("margin-top", "50px")
+//移动端显示公益为腾讯404
+$("#publicwelfare").attr("href", "/publicwelfare/baby-back-home.html");
+}
+}
+var copyCode = function () {
+<!-- 代码的复制功能 -->
+var totalwidth = $(window).width();
+var clipboard = new Clipboard('.copyspan');
+var nodes = document.getElementsByTagName("pre");
+for (var i = 0; i < nodes.length; i++) {
+var code = nodes[i];
+if($(code).find(".copyspan").length <= 0){
+code.onmouseover = function () {//鼠标进入时再显示复制按钮
+$(this).find(".copyspan").show();
+}
+code.onmouseout = function () {
+$(this).find(".copyspan").hide();
+}
+<!-- 添加复制按钮 -->
+var span = document.createElement("span");
+span.className = "copyspan";
+span.style.width = "100%";
+span.style.textAlign = "right";
+var copy = document.createElement("i");
+copy.style.cursor = "pointer";
+<!--  设置鼠标手形 -->
+copy.style.float = "right";
+copy.style.marginRight = "10px"
+copy.className = "fa fa-clipboard";
+copy.setAttribute("title", "●'◡'●点我复制");
+span.setAttribute("data-clipboard-text", code.innerText);
+<!-- 复制的内容为code块 -->
+span.appendChild(copy);
+var height = code.offsetHeight;
+if (totalwidth > 700) {
+if (height > 100) {
+copy.style.marginTop = "5px"
+code.insertBefore(span, code.firstChild);
+}
+} else {
+if (height > 100) {
+//code.insertAfter(span, code.firstChild);
+insertAfter(span, code.firstChild);
+}
+}
+$(span).hide();
+}
+}
+<!-- 在节点targetEl后面播入一个新元素newEl -->
+function insertAfter(newEl, targetEl) {
+var parentEl = targetEl.parentNode;
+if (parentEl.lastChild == targetEl) {
+parentEl.appendChild(newEl);
+} else {
+parentEl.insertBefore(newEl, targetEl.nextSibling);
+}
+}
+}
+var copyRight = function () {
+var pageRightCopy = new Clipboard('.copy-path');
+if (false && is_post()) {
+//复制网页内容自动添加版权信息
+var copyright = document.getElementsByClassName("copyright");
+if (copyright.length > 0) {
+function addCopyRight() {
+var clipboard = new Clipboard('.copycontent');
+var body_element = document.body;
+var selection = window.getSelection();
+if (window.clipboardData) { // Internet Explorer
+var pagelink = "\r\n\r\n 原文出自「Alex Zhong @ az22c」转载请保留原文链接: " + document.location.href + "";
+var copytext = selection + pagelink;
+window.clipboardData.setData("Text", copytext);
+return false;
+} else {
+var pagelink = "\r\n 原文出自「Alex Zhong @ az22c」转载请保留原文链接: " + document.location.href + "";
+var copytext = selection + pagelink;
+var newdiv = document.createElement('div');
+newdiv.className = "copycontent";
+newdiv.setAttribute("data-clipboard-text", copytext);
+body_element.appendChild(newdiv);
+newdiv.click();
+//selection.selectAllChildren(newdiv);
+window.setTimeout(function () {
+body_element.removeChild(newdiv);
+}, 0);
+}
+clipboard.destroy();
+}
+document.oncopy = addCopyRight;
+}
+}
+}
+var baiduShare = function () {
+//处理百度分享
+var elem = document.getElementsByClassName("bdsharebuttonbox");
+if (elem.length > 0) {
+var elemDiv = elem[0];
+var elem_child = elemDiv.childNodes;//得到参数元素的所有子元素
+for (var i = 0; i < elem_child.length; i++) { //遍历子元素
+var childA = elem_child[i];
+if (childA.className == "fa fa-share-alt bds_more") {
+childA.parentNode.removeChild(childA);//删除更多
+continue;
+}
+if (childA.className != undefined) {
+var span = document.createElement("span");
+var _sel = childA.cloneNode(true);
+_sel.title = "";
+span.appendChild(_sel);
+span.setAttribute("class", "hint  hint--top");
+span.setAttribute("data-hint", childA.title);
+childA.parentNode.replaceChild(span, childA);
+}
+}
+}
+}
+var rightSearch = function () {
+//右下角搜索
+var time1 = 0;
+var show = false;
+var names = new Array(); //文章名字等
+var urls = new Array(); //文章地址
+$(document).keyup(function (e) {
+var time2 = new Date().getTime();
+if (e.keyCode == 17) {
+var gap = time2 - time1;
+time1 = time2;
+if (gap < 500) {
+if (show) {
+$(".cb-search-tool").css("display", "none");
+show = false;
+} else {
+$(".cb-search-tool").css("display", "block");
+show = true;
+$("#cb-search-content").val("");
+$("#cb-search-content").focus();
+}
+time1 = 0;
+}
+} else if(e.keyCode == 27){
+$(".cb-search-tool").css("display", "none");
+show = false;
+time1 = 0;
+}
+});
+$("#cb-search-content").keyup(function (e) {
+var time2 = new Date().getTime();
+if (e.keyCode == 17) {
+var gap = time2 - time1;
+time1 = time2;
+if (gap < 500) {
+if (show) {
+$(".cb-search-tool").css("display", "none");
+show = false;
+} else {
+$(".cb-search-tool").css("display", "block");
+show = true;
+$("#cb-search-content").val("");
+$("#cb-search-content").focus();
+}
+time1 = 0;
+}
+}
+});
+$("#cb-close-btn").click(function () {
+$(".cb-search-tool").css("display", "none");
+show = false;
+time1 = 0;
+});
+$("#cb-search-btn").click(function(){
+$(".cb-search-tool").css("display", "block");
+show = true;
+$("#cb-search-content").val("");
+$("#cb-search-content").focus();
+time1 = 0;
+});
+$.getJSON("/search/cb-search.json").done(function (data) {
+if (data.code == 0) {
+for (var index in data.data) {
+var item = data.data[index];
+names.push(item.title);
+urls.push(item.url);
+}
+$("#dropdown-menu").css("font-size", "1.2em");
+$("#cb-search-content").typeahead({
+source: names,
+afterSelect: function (item) {
+$(".cb-search-tool").css("display", "none");
+show = false;
+window.location.href = (urls[names.indexOf(item)]);
+return item;
+}
+});
+}
+}).error(function(data, b) { console.log("json解析错误，搜索功能暂不可用，请检查文章title，确保不含有换行等特殊符号"); });
+}
+//移动端添加搜索图标
+var mobileSearch = function(){
+if(navigator.userAgent.match(/(iPhone|iPod|Android|ios|Opera Mini|BlackBerry|webOS)/i)){
+$("#id_span_search_close").append("<img src='/search/img/cb-close.png' id='cb-close-btn'/>");
+$("#id_span_search_open").append("<img src='/search/img/cb-search.png' id='cb-search-btn'/>");
+}
+}
+//左边栏coding change动画
+var addTextAnimation = function (){
+var textAnimations = [
+"rw-words rw-words-1", "cd-headline rotate-1", "cd-headline clip", "cd-headline slide",
+"cd-headline zoom", "cd-headline letters scale", "cd-headline push", "cd-headline loading-bar"
+],
+textLen = textAnimations.length,
+textIndex = Math.ceil(Math.random() * textLen) - 1,
+textAnimationName = textAnimations[textIndex];
+if(textIndex != 0){
+$("#id_span_change").remove();
+$("#id_normal_text_anim").remove();
+var textAnimView = "<div id='id_span_change'><span>Coding Changes the</span><span class='cd-words-wrapper' style='margin-left:4px;'><b class='is-visible' style='font-weight:normal !important;color: #6b889d;'>World</b><b style='font-weight:normal !important;color: #6b739d;'>Never</b><b style='font-weight:normal !important;color: #7a6b9d;'>Give</b><b style='font-weight:normal !important;color: #7a6b9d;'>Up</b><b style='font-weight:normal !important;color: #7a6b9d;'>Dream</b></span></div>";
+$("#id_hgroup_name").after(textAnimView);
+var newClass = textAnimationName + " header-subtitle";
+$("#id_span_change").attr("class", newClass);
+}
+}
+var playTextAnimation = function () {
+//set animation timing
+var animationDelay = 2500,
+//loading bar effect
+barAnimationDelay = 3800,
+barWaiting = barAnimationDelay - 3000, //3000 is the duration of the transition on the loading bar - set in the scss/css file
+//letters effect
+lettersDelay = 50,
+//type effect
+typeLettersDelay = 150,
+selectionDuration = 500,
+typeAnimationDelay = selectionDuration + 800,
+//clip effect
+revealDuration = 600,
+revealAnimationDelay = 1500;
+initHeadline();
+function initHeadline() {
+//insert <i> element for each letter of a changing word
+singleLetters($('.cd-headline.letters').find('b'));
+//initialise headline animation
+animateHeadline($('.cd-headline'));
+}
+function singleLetters($words) {
+$words.each(function(){
+var word = $(this),
+letters = word.text().split(''),
+selected = word.hasClass('is-visible');
+for (i in letters) {
+if(word.parents('.rotate-2').length > 0) letters[i] = '<em>' + letters[i] + '</em>';
+letters[i] = (selected) ? '<i class="in">' + letters[i] + '</i>': '<i>' + letters[i] + '</i>';
+}
+var newLetters = letters.join('');
+word.html(newLetters);
+});
+}
+function animateHeadline($headlines) {
+var duration = animationDelay;
+$headlines.each(function(){
+var headline = $(this);
+if(headline.hasClass('loading-bar')) {
+duration = barAnimationDelay;
+setTimeout(function(){ headline.find('.cd-words-wrapper').addClass('is-loading') }, barWaiting);
+} else if (headline.hasClass('clip')){
+var spanWrapper = headline.find('.cd-words-wrapper'),
+newWidth = spanWrapper.width() + 10
+spanWrapper.css('width', newWidth);
+} else if (!headline.hasClass('type') ) {
+//assign to .cd-words-wrapper the width of its longest word
+var words = headline.find('.cd-words-wrapper b'),
+width = 0;
+words.each(function(){
+var wordWidth = $(this).width();
+if (wordWidth > width) width = wordWidth;
+});
+headline.find('.cd-words-wrapper').css('width', width);
+};
+//trigger animation
+setTimeout(function(){ hideWord( headline.find('.is-visible').eq(0) ) }, duration);
+});
+}
+function hideWord($word) {
+var nextWord = takeNext($word);
+if($word.parents('.cd-headline').hasClass('type')) {
+var parentSpan = $word.parent('.cd-words-wrapper');
+parentSpan.addClass('selected').removeClass('waiting');
+setTimeout(function(){
+parentSpan.removeClass('selected');
+$word.removeClass('is-visible').addClass('is-hidden').children('i').removeClass('in').addClass('out');
+}, selectionDuration);
+setTimeout(function(){ showWord(nextWord, typeLettersDelay) }, typeAnimationDelay);
+} else if($word.parents('.cd-headline').hasClass('letters')) {
+var bool = ($word.children('i').length >= nextWord.children('i').length) ? true : false;
+hideLetter($word.find('i').eq(0), $word, bool, lettersDelay);
+showLetter(nextWord.find('i').eq(0), nextWord, bool, lettersDelay);
+}  else if($word.parents('.cd-headline').hasClass('clip')) {
+$word.parents('.cd-words-wrapper').animate({ width : '2px' }, revealDuration, function(){
+switchWord($word, nextWord);
+showWord(nextWord);
+});
+} else if ($word.parents('.cd-headline').hasClass('loading-bar')){
+$word.parents('.cd-words-wrapper').removeClass('is-loading');
+switchWord($word, nextWord);
+setTimeout(function(){ hideWord(nextWord) }, barAnimationDelay);
+setTimeout(function(){ $word.parents('.cd-words-wrapper').addClass('is-loading') }, barWaiting);
+} else {
+switchWord($word, nextWord);
+setTimeout(function(){ hideWord(nextWord) }, animationDelay);
+}
+}
+function showWord($word, $duration) {
+if($word.parents('.cd-headline').hasClass('type')) {
+showLetter($word.find('i').eq(0), $word, false, $duration);
+$word.addClass('is-visible').removeClass('is-hidden');
+}  else if($word.parents('.cd-headline').hasClass('clip')) {
+$word.parents('.cd-words-wrapper').animate({ 'width' : $word.width() + 10 }, revealDuration, function(){
+setTimeout(function(){ hideWord($word) }, revealAnimationDelay);
+});
+}
+}
+function hideLetter($letter, $word, $bool, $duration) {
+$letter.removeClass('in').addClass('out');
+if(!$letter.is(':last-child')) {
+setTimeout(function(){ hideLetter($letter.next(), $word, $bool, $duration); }, $duration);
+} else if($bool) {
+setTimeout(function(){ hideWord(takeNext($word)) }, animationDelay);
+}
+if($letter.is(':last-child') && $('html').hasClass('no-csstransitions')) {
+var nextWord = takeNext($word);
+switchWord($word, nextWord);
+}
+}
+function showLetter($letter, $word, $bool, $duration) {
+$letter.addClass('in').removeClass('out');
+if(!$letter.is(':last-child')) {
+setTimeout(function(){ showLetter($letter.next(), $word, $bool, $duration); }, $duration);
+} else {
+if($word.parents('.cd-headline').hasClass('type')) { setTimeout(function(){ $word.parents('.cd-words-wrapper').addClass('waiting'); }, 200);}
+if(!$bool) { setTimeout(function(){ hideWord($word) }, animationDelay) }
+}
+}
+function takeNext($word) {
+return (!$word.is(':last-child')) ? $word.next() : $word.parent().children().eq(0);
+}
+function takePrev($word) {
+return (!$word.is(':first-child')) ? $word.prev() : $word.parent().children().last();
+}
+function switchWord($oldWord, $newWord) {
+$oldWord.removeClass('is-visible').addClass('is-hidden');
+$newWord.removeClass('is-hidden').addClass('is-visible');
+}
+}
+var textAnimationClick = function (avatarPath) {
+var totalHeight = screen.height;
+if (!is_post()) {
+if(totalHeight >= 700){//左边栏足够高才显示图片
+if($("#left_show_div").length <= 0){
+var curDate = new Date();
+var date = curDate.getDate();
+var time = Date.parse(new Date());
+var lastTime = Date.parse("2017-02-01");
+var day = parseInt((time -lastTime)/(1000*60*60*24));
+var path = '/img/daily_pic/' + (day % 83) + '.png';
+var avatarIndex = Math.ceil(Math.random()*30);
+var newAvatar = '/img/avatar/' + avatarIndex + '.png';
+//console.log(path);
+var year_div = "<div align=center id='left_show_div' ><img src=" + path + " id='2017_year' style='cursor:pointer;'/></div>";
+$("#left_col_div").append(year_div);
+if(totalHeight >= 1000){
+$("#left_col_div").css("overflow-y", "auto").css("overflow-x", "hidden");
+} else if(totalHeight >= 700){
+$("#left_col_div").css("overflow-y", "hidden").css("overflow-x", "hidden");
+var clickCount = 0;
+$("#id_span_change").css("cursor", "pointer").click(function(){
+if((clickCount % 2) == 0){
+$("#left_col_div").css("overflow-y", "auto").css("overflow-x", "hidden");
+} else {
+$("#left_col_div").css("overflow-y", "hidden").css("overflow-x", "hidden");
+}
+clickCount++;
+});
+var avatarOut = false;
+$("#id_avatar_a").mouseenter(function(){
+if(!avatarOut){
+avatarOut = true;
+$("#blog_avatar").attr("src", newAvatar).attr("class", "animated rotateInDownLeft").css("background", "#fafafa").css("border-radius","50px");
+}
+});
+$("#id_avatar_a").mouseleave(function(){
+if(avatarOut){
+avatarOut = false;
+$("#blog_avatar").attr("src", avatarPath).attr("class", "animated rotateInDownRight");
+}
+});
+}
+$("#2017_year").click(function() {
+//$(this).remove();
+$(this).css("opacity", 0);
+$(this).parent().append("<img src='/img/daily_pic/35.png' style='position:absolute; margin-left:-270px;cursor:pointer;' id='eyes_img'/>");
+$("#eyes_img").click(function() {
+$(this).remove();
+$("#2017_year").css("opacity", 1);
+});
+});
+}
+}
+}
+}
+//代码雨
+var curTimer = null;//记录上一页面的timer，使用instantclick后，打开下一页面时需要取消上一个定时器
+var colorList = ["#6da336", "#ff945c", "#66CC66", "#99CC99", "#CC6666", "#76becc", "#c99979", "#918597", "#4d4d4d"];
+var id = null;
+var colorBGList = ["rgba(109,163,54,0.05)", "rgba(255,148,92, 0.05)", "rgba(102,204,102,0.05)", "rgba(153,204,153,0.05)", "rgba(204,102,102,0.05)", "rgba(118,190,204,0.05)", "rgba(201,153,121,0.05)", "rgba(145,133,151,0.05)", "rgba(77,77,77,0.05)"];
+var colorLetterList = ["#ffffff", "#000000", "#000000", "#000080", "#000000", "#FFFF00", "#000000", "#0F0", "#0F0"];
+var codeRain = function () {
+// Random Color 边栏顶部随机颜色
+// clearInterval(curTimer);
+// $("#matrix").remove();
+// $("#id_code_rain_div").append("<canvas id='matrix' width='300' height='180'></canvas>");
+id = Math.ceil(Math.random()*(colorList.length-1));
+// PC
+$("#container .left-col .overlay").css({"background-color": colorList[id],"opacity": .5});
+// Mobile
+$("#container #mobile-nav .overlay").css({"background-color": colorList[id],"opacity": .7});
+if(!navigator.userAgent.match(/(iPhone|iPod|Android|ios|Opera Mini|BlackBerry|webOS)/i)){
+if(curTimer == null){
+// 代码雨
+if(matrix != undefined){
+var width = matrix.width;
+var height = matrix.height;
+var letters = Array(256).join(1).split('');
+var draw = function () {
+if(typeof(matrix) == "undefined"){
+clearInterval(curTimer);
+return;
+}
+var ctx = matrix.getContext('2d')
+ctx.globalAlpha = 1.0;
+// 将稍透明的矩形放在上面：
+ctx.fillStyle = colorBGList[id];
+ctx.fillRect(0, 0, width, height);
+ctx.fillStyle = colorLetterList[id];
+ctx.font = "10pt Calibri";
+// "1" --> "110" --> "11010" --> 0
+letters.map(function (y_pos, index) {
+text = String.fromCharCode(48 + Math.floor(Math.random()*73));//英文字符：65 + Math.random() * 33 中文：3e4 + Math.random() * 33 数字：Math.floor(Math.random()*10)
+x_pos = index * 10;
+ctx.fillText(text, x_pos, y_pos);
+letters[index] = (y_pos > 180 + Math.random() * 1e4) ? 0 : y_pos + 10;
+});
+};
+}
+var timer = setInterval(draw, 60);
+curTimer = timer;
+window.onfocus = function() {//获取焦点时开始
+clearInterval(timer);
+timer = setInterval(draw, 60);//定时器
+}
+window.onblur = function() {//失去焦点时停止，包括按F12的时候
+clearInterval(timer);
+}
+}
+}
+}
+//多说评论首页显示评论数
+var duoshuoQuery = {short_name:"null"};
+var duoshuoComments = function() {
+
+}
+//隐藏categories、tags页面下的标签
+var hideLabels =  function() {
+// Hide Labels
+$("#id_archives").css("opacity", "1.0");
+if(is_archive() || is_tag() || is_category()) {
+var url = window.location.pathname;
+if(!url.endWith("/tags/")){
+$("#footer").after("<img id='id_eye_btn' class='hide-labels fa fa-eye animated infinite pulse' style='margin-left:5px;margin-top:5px;width:38px;height:18px;'></img>");
+$("#id_eye_btn").attr("src", "/img/eye.png");
+$(".hide-labels").click(function() {
+$(".article-info").toggle(200);
+})
+}
+}
+}
+var resetPageOpacity = function() {
+var url = window.location.pathname;
+if((url.startWith("/about/") && url.endWith("/about/")) || (url.startWith("/guestbook/") && url.endWith("/guestbook/"))){
+$("#page-undefined").css("opacity", "1.0");
+}
+}
+</script>
+<!-- 添加 InstantClick 预加载 -->
+<!-- 这段代码的含义是每次页面重载时，通过直接的函数调用来实现MathJax、百度统计、Google Code Prettify、Google Analytics的重新运行 -->
+<script data-no-instant>
+    if(!navigator.userAgent.match(/(iPhone|iPod|Android|ios|Opera Mini|BlackBerry|webOS)/i)){
+      jQuery.getScript("//cdn.bootcss.com/instantclick/3.0.1/instantclick.min.js")
+        .done(function() {
+          InstantClick.on('change', function (isInitialLoad) {
+//console.log(isInitialLoad);
+            if (isInitialLoad === false) {
+afterChange(isInitialLoad);
+if (typeof MathJax !== 'undefined'){ // support MathJax
+MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+}
+if (typeof prettyPrint !== 'undefined'){ // support google code prettify
+prettyPrint();
+}
+if (typeof _hmt !== 'undefined'){  // support 百度统计
+_hmt.push(['_trackPageview', location.pathname + location.search]);
+}
+if (typeof ga !== 'undefined'){  // support google analytics
+ga('send', 'pageview', location.pathname + location.search);
+}
+            } else {
+afterChange(isInitialLoad);
+}
+          });
+          InstantClick.init();
+        })
+        .fail(function() {
+        });
+    } else {
+afterChange(true);
+    }
+</script>
+  </div>
+</body>
+</html>
