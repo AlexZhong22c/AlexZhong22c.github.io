@@ -40,7 +40,7 @@
   - <p>对应代码的github仓库的地址：<a href="https://github.com/AlexZhong22c/IFE-CSS-learning" target="_blank" rel="noopener">https://github.com/AlexZhong22c/IFE-CSS-learning</a></p>
 - [border-radius属性](https://blog.az22c.top/2017/09/07/css-border1/)&nbsp;&nbsp;|&nbsp;&nbsp;2017-09-07&nbsp;&nbsp;|&nbsp;&nbsp;标签：[radius](https://blog.az22c.top/tags/radius/) [边框](https://blog.az22c.top/tags/边框/) [回顾](https://blog.az22c.top/tags/回顾/)
   - <p>border-radius，作为CSS3中经常被用及的属性，我们用一篇文章做一下总结。</p>
-- [闭合浮动和BFC](https://blog.az22c.top/2017/04/01/clearfix-n-bfc/)&nbsp;&nbsp;|&nbsp;&nbsp;2017-04-01&nbsp;&nbsp;|&nbsp;&nbsp;标签：[清除浮动](https://blog.az22c.top/tags/清除浮动/) [BFC](https://blog.az22c.top/tags/BFC/) [伪元素](https://blog.az22c.top/tags/伪元素/) [阻止上下外边距合并](https://blog.az22c.top/tags/阻止上下外边距合并/)
+- [闭合浮动和BFC](https://blog.az22c.top/2017/04/01/clearfix-n-bfc/)&nbsp;&nbsp;|&nbsp;&nbsp;2017-04-01&nbsp;&nbsp;|&nbsp;&nbsp;标签：[清除浮动](https://blog.az22c.top/tags/清除浮动/) [BFC](https://blog.az22c.top/tags/BFC/) [伪元素](https://blog.az22c.top/tags/伪元素/)
   - <p>本文部分内容参考 <a href="http://www.iyunlu.com/view/css-xhtml/55.html" target="_blank" rel="noopener">那些年我们一起清除过的浮动</a> ，但是 一丝冰凉 的这篇文章有很多地方我都不认同，取其精华去其糟粕，所以本文并没有包含那些我所不认同的内容。</p>
 - [IFE2017-CSS-task02笔记](https://blog.az22c.top/2017/04/01/ife-css-task02/)&nbsp;&nbsp;|&nbsp;&nbsp;2017-04-01&nbsp;&nbsp;|&nbsp;&nbsp;标签：[IFE](https://blog.az22c.top/tags/IFE/) [list-style](https://blog.az22c.top/tags/list-style/) [文字](https://blog.az22c.top/tags/文字/)
   - <p>对应代码的github仓库的地址：<a href="https://github.com/AlexZhong22c/IFE-CSS-learning" target="_blank" rel="noopener">https://github.com/AlexZhong22c/IFE-CSS-learning</a></p>
