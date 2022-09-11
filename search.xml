@@ -8654,7 +8654,7 @@ methods: {
     </entry>
     
     <entry>
-      <title><![CDATA[闭合浮动和BFC和阻止上下外边距的合并]]></title>
+      <title><![CDATA[闭合浮动和BFC]]></title>
       <url>https://blog.az22c.top/2017/04/01/clearfix-n-bfc/</url>
       <content type="html"><![CDATA[<p>本文部分内容参考 <a href="http://www.iyunlu.com/view/css-xhtml/55.html" target="_blank" rel="noopener">那些年我们一起清除过的浮动</a> ，但是 一丝冰凉 的这篇文章有很多地方我都不认同，取其精华去其糟粕，所以本文并没有包含那些我所不认同的内容。</p>
 <a id="more"></a>
@@ -8695,7 +8695,7 @@ methods: {
 </ul>
 <h3 id="不要使用方案3和4"><a class="header-anchor" href="#不要使用方案3和4"></a>不要使用方案3和4</h3>
 <p>方案3、4通过overflow闭合浮动，实际上已经创建了新的 块级格式化上下文，而它们设置的对象都是父元素，这将导致其布局和相对于浮动的行为等发生一系列的变化，闭合浮动只不过是一系列变化中的一个作用而已。所以为了闭合浮动去改变全局特性，这是不明智的，带来的风险就是一系列的bug，比如firefox 早期版本产生 focus，截断绝对定位的层等等。始终要明白，如果单单只是需要闭合浮动，overflow就不要使用，而不是某些文章所说的“慎用”。</p>
-<h3 id="父级div定义height的方法"><a class="header-anchor" href="#父级div定义height的方法"></a>父级div定义height的方法</h3>
+<h3 id="父级div定义height的方法-不灵活"><a class="header-anchor" href="#父级div定义height的方法-不灵活"></a>父级div定义height的方法 #不灵活</h3>
 <ul>
 <li>父级div定义height，这样就<strong>不必闭合浮动</strong>了</li>
 <li>不推荐使用，只建议高度固定的布局时使用</li>
@@ -8707,20 +8707,13 @@ methods: {
 <p>其三，「利用伪元素after作为“最后的元素”的“清除浮动”」之后再讲。</p>
 <h2 id="bfc知识"><a class="header-anchor" href="#bfc知识"></a>BFC知识</h2>
 <p><a href="http://www.w3.org/TR/CSS21/visuren.html#block-formatting" target="_blank" rel="noopener">Block formatting contexts </a>（块级格式化上下文），以下简称 BFC。在CSS3里面改动后称之为flow root。</p>
-<h3 id="bfc的特性"><a class="header-anchor" href="#bfc的特性"></a>BFC的特性</h3>
-<p>一丝冰凉 对于BFC的特征的解释非常模糊，甚至不正确。我认为她这部分内容所解释的现象只适用到IE7</p>
-<p>通俗地来说就是：</p>
-<ul>
-<li>创建了 BFC的元素就是一个独立的盒子，里面的子元素不会在布局上影响外面的元素，反过来外面的元素也不影响里面的元素</li>
-<li>同时BFC仍然属于文档中的普通流</li>
-</ul>
 <h3 id="如何触发bfc"><a class="header-anchor" href="#如何触发bfc"></a>如何触发BFC</h3>
 <ul>
-<li>float 除了none以外的值</li>
 <li>overflow 除了visible 以外的值（hidden，auto，scroll ）</li>
+<li>float 除了none以外的值</li>
+<li>position（absolute，fixed）</li>
 <li>display (table-cell，table-caption，inline-block)</li>
 <li>实际上，用<code>display:table</code>来产生匿名框也可以触发BFC，见文章 <a href="http://nicolasgallagher.com/micro-clearfix-hack/" target="_blank" rel="noopener">A new micro clearfix hack</a> 或见本节的备注</li>
-<li>position（absolute，fixed）</li>
 <li>fieldset元素</li>
 </ul>
 <blockquote>
@@ -8786,27 +8779,6 @@ content:&quot;.&quot;; display:block; height:0; visibility:hidden; clear:both; }
 </ul>
 <p>毕竟，<strong>使用after伪元素闭合浮动</strong>的时候，下外边距的合并已经被阻止了，为了上下看上去对称，before伪元素也应该这样。</p>
 <p>主要译自： <a href="http://nicolasgallagher.com/micro-clearfix-hack/" target="_blank" rel="noopener">A new micro clearfix hack</a></p>
-<h3 id="创新方案：零宽度空格"><a class="header-anchor" href="#创新方案：零宽度空格"></a>创新方案：零宽度空格</h3>
-<p>通过查询发现Unicode字符里有一个“零宽度空格”，也就是<a href="http://www.fileformat.info/info/unicode/char/200b/index.htm" target="_blank" rel="noopener">U+200B </a>，这个字符本身是不可见的，所以我们完全可以省略掉 visibility:hidden了</p>
-<pre><code>.clearfix:after {content:&quot;200B&quot;; display:block; height:0; clear:both; }
-.clearfix { *zoom:1; }
-</code></pre>
-<p>在实际开发中，由于存在Unicode字符不适合内嵌CSS的GB2312编码的页面，使用前面两个小方案完全可以解决我们的需求了。</p>
-<h3 id="别混淆了闭合浮动-bfc-阻止上下外边距的合并"><a class="header-anchor" href="#别混淆了闭合浮动-bfc-阻止上下外边距的合并"></a>别混淆了闭合浮动/BFC/阻止上下外边距的合并</h3>
-<p>这是一个比较详细的 <a href="https://github.com/AlexZhong22c/IFE-CSS-learning/blob/master/%E9%97%AD%E5%90%88%E6%B5%AE%E5%8A%A8%E5%92%8CBFC%E5%92%8C%E9%98%BB%E6%AD%A2%E4%B8%8A%E4%B8%8B%E5%A4%96%E8%BE%B9%E8%B7%9D%E7%9A%84%E5%90%88%E5%B9%B6.html" target="_blank" rel="noopener">demo</a>：</p>
-<p>这个demo里面加入了<strong>企图对伪元素用display:block配合content:&quot; &quot;闭合浮动</strong>这种不太恰当的方法。</p>
-<p>从这个demo可以看到：</p>
-<ul>
-<li><strong>使用伪元素闭合浮动</strong>必然会引发的一个效果是阻止下外边距的合并</li>
-<li>BFC必然会引发的一个效果是阻止上下外边距的合并</li>
-<li>闭合浮动 的方式不只有 触发BFC ，触发BFC 只是其中的一种方法</li>
-<li>阻止上下外边距合并的方式不只有 触发BFC，触发BFC 只是其中的一种方法</li>
-<li>而那些能触发BFC的方式可以参考本文前文的说明，其中就说明了浮动会触发BFC</li>
-<li>单独的display:block并不会触发BFC</li>
-<li>对伪元素用display:table会触发BFC</li>
-<li>不应当<strong>企图对伪元素用display:block配合content:&quot; &quot;闭合浮动</strong>，因为这种方式的清除浮动 只有在ie7以下的浏览器里才能阻止上下外边距的合并，所以使用它的话不同浏览器的样式会不统一</li>
-<li>要小心地对浮动的子元素设置下外边距，因为在IE7以下浏览器里面，如果没有其他子元素撑起父元素的高度，浮动的子元素的下外边距直接被解释为0(这是为了尽量减小页面的高度)，造成样式的不统一</li>
-</ul>
 ]]></content>
       
         <categories>
@@ -8823,8 +8795,6 @@ content:&quot;.&quot;; display:block; height:0; visibility:hidden; clear:both; }
             <tag> BFC </tag>
             
             <tag> 伪元素 </tag>
-            
-            <tag> 阻止上下外边距合并 </tag>
             
         </tags>
         
