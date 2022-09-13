@@ -1,4 +1,4 @@
-[个人技术博客2017~2022](https://blog.az22c.top) 总计大约73篇
+[个人技术博客2017~2022](https://blog.az22c.top) 总计大约72篇
 
 由于历史原因，分类不是很合理，但是划分得还是挺清晰的。
 
@@ -47,8 +47,6 @@
   - <p>这篇文章的内容基本没有用在 <a href="https://ife-css-learning.az22c.vercel.app/task02.html" target="_blank" rel="noopener">demo</a> 中，这只是一番拓展性总结。</p>
 - [CSS选择器优先级](https://blog.az22c.top/2017/03/31/css-selectors-specificity/)&nbsp;&nbsp;|&nbsp;&nbsp;2017-03-31&nbsp;&nbsp;|&nbsp;&nbsp;标签：[CSS选择器](https://blog.az22c.top/tags/CSS选择器/) [优先级](https://blog.az22c.top/tags/优先级/) [权重](https://blog.az22c.top/tags/权重/)
   - <p>CSS优先级计算的快速回顾，最后附上一些应用知识的实例。</p>
-- [float和绝对定位比较](https://blog.az22c.top/2017/03/04/float-n-absolute/)&nbsp;&nbsp;|&nbsp;&nbsp;2017-03-04&nbsp;&nbsp;|&nbsp;&nbsp;标签：[float](https://blog.az22c.top/tags/float/) [绝对定位](https://blog.az22c.top/tags/绝对定位/)
-  - <p>因为float实现的效果和绝对定位比较类似，稍后会对它们进行比较。</p>
 - [font-face--CSS3](https://blog.az22c.top/2017/01/25/font-face/)&nbsp;&nbsp;|&nbsp;&nbsp;2017-01-25&nbsp;&nbsp;|&nbsp;&nbsp;标签：[CSS3](https://blog.az22c.top/tags/CSS3/) [font-face](https://blog.az22c.top/tags/font-face/) [字体](https://blog.az22c.top/tags/字体/) [特殊](https://blog.az22c.top/tags/特殊/)
   - <p><code>@font-face</code>是一个css命令，用来导入服务器端字体，将该字体文件存放到 web 服务器上，它会在需要时被自动下载到用户的计算机上。因此本地浏览器浏览网页时，不需要设置字体，就可以自动看到@font-face设置的任何字体。</p>
   - <p>如果你看到一些英文网站或blog看到一些很漂亮的自定义Web字体，比如说首页的Logo，Tags以及页面中的手写英文体，这些都是**@font-face**实现的。</p>
