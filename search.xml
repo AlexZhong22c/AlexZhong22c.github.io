@@ -7644,9 +7644,9 @@ var currentTarget = event.currentTarget;
             
             <tag> 笔记副本 </tag>
             
-            <tag> 基础 </tag>
-            
             <tag> 回顾 </tag>
+            
+            <tag> 基础 </tag>
             
             <tag> 事件 </tag>
             
@@ -7794,9 +7794,9 @@ btn.attachEvent(&quot;onclick&quot;, function(){
         
         <tags>
             
-            <tag> 基础 </tag>
-            
             <tag> 回顾 </tag>
+            
+            <tag> 基础 </tag>
             
             <tag> 事件 </tag>
             
@@ -7926,9 +7926,9 @@ test.onclick= function(e){
         
         <tags>
             
-            <tag> 基础 </tag>
-            
             <tag> 回顾 </tag>
+            
+            <tag> 基础 </tag>
             
             <tag> 事件 </tag>
             
@@ -9363,9 +9363,9 @@ p {
             
             <tag> H5 </tag>
             
-            <tag> IFE </tag>
-            
             <tag> HTML </tag>
+            
+            <tag> IFE </tag>
             
         </tags>
         
