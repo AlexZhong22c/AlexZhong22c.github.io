@@ -224,7 +224,7 @@
             
             <tag> 性能优化 </tag>
             
-            <tag> 交互 </tag>
+            <tag> 交互实现 </tag>
             
             <tag> 复选框 </tag>
             
@@ -378,7 +378,7 @@
             
             <tag> 性能优化 </tag>
             
-            <tag> 交互 </tag>
+            <tag> 交互实现 </tag>
             
             <tag> 复选框 </tag>
             
@@ -4394,11 +4394,19 @@ i {
 <p>关于line-height的一些补充：</p>
 <p>首先<code>文字高度</code>和font-size只有间接的关系，详见 <a href="https://blog.az22c.top/2019/02/06/height-calculate/#%E4%BB%8Efont-size%E8%AE%B2%E8%B5%B7-%E8%AF%B4%E6%96%87%E5%AD%97%E9%AB%98%E5%BA%A6%EF%BC%9A">深入理解文字高度和行高的设置</a> 中第一章的内容。</p>
 <p>然后，line-height的计算是根据font-size的，详见 <a href="https://blog.az22c.top/2019/02/06/height-calculate/#line-height%E7%9A%84%E8%AE%A1%E7%AE%97-%E7%94%BB%E9%87%8D%E7%82%B9">深入理解文字高度和行高的设置</a> 。</p>
-<p>然后，对于一个inline或者inline-block元素：</p>
-<p>设置vertical-align为百分比的时候，是根据父元素的line-height来计算的。（补充，这个设置值也是为数不多的可以设置为负数的属性设置。）</p>
-<p>设置vertical-align为其他值的时候，很多都和父元素的line-height有关系。</p>
-<p>而如果你把上面的这些demo对于line-height的设置改为对于height的，vertical-align就无法发挥效果。（因为如果你只设置了height，line-height还是处于默认的状态，而vertical-align参考的还是line-height）</p>
-<p><strong>实际上，vertical-align的计算可以和line-height有关系，但和height没有关系。</strong></p>
+<ul>
+<li>最后，<strong>vertical-align的计算可以和line-height有关系，但和height没有关系。</strong> （当然，这个结论针对的对象是一个inline或者inline-block元素）
+<ul>
+<li>设置vertical-align为百分比的时候，是根据父元素的line-height来计算的。（补充，这个设置值也是为数不多的可以设置为负数的属性设置。）</li>
+<li>设置vertical-align为其他值的时候，很多都和父元素的line-height有关系。</li>
+<li>而如果你把上面的这些demo对于line-height的设置改为对于height的，vertical-align就无法发挥效果。
+<ul>
+<li>（因为如果你只设置了height，line-height还是处于默认的状态，而vertical-align参考的还是line-height）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 ]]></content>
       
         <categories>
@@ -4465,7 +4473,11 @@ i {
 <h4 id="备注："><a class="header-anchor" href="#备注："></a>备注：</h4>
 <ul>
 <li>特点是在IE8及以上浏览器的时候，<code>.grandparent</code> 的高度其实是可以自动适应的。</li>
-<li>兼容更老的IE的写法：
+</ul>
+<details>
+<summary>兼容更老的IE的写法：【展开见内容】</summary>
+<ul>
+<li>《兼容更老的IE的写法》
 <ul>
 <li>HTML结构需要多套两层div：<code>.grandparent</code>和<code>.child</code></li>
 <li>宽度、高度和背景等属性需要转移到<code>.grandparent</code> 这一级</li>
@@ -4509,6 +4521,7 @@ i {
 &lt;/div&gt;
 &lt;/body&gt;
 </code></pre>
+</details>
 <h3 id="c法：使用display-inline-block和vertical-align-middle-垂直居中"><a class="header-anchor" href="#c法：使用display-inline-block和vertical-align-middle-垂直居中"></a>C法：使用display: inline-block和vertical-align:middle–垂直居中</h3>
 <p>这里只给出近似垂直居中的例子，如果想设置为完美垂直居中的位置或者了解更多，详见<a href="https://blog.az22c.top/2019/02/05/vertical-align-middle/">深入理解vertical-align:middle</a> ：</p>
 <pre><code class="language-HTML">&lt;style&gt;
@@ -4532,7 +4545,10 @@ i {
 &lt;/p&gt;
 &lt;/body&gt;
 </code></pre>
-<h3 id="d法：flex布局-垂直居中"><a class="header-anchor" href="#d法：flex布局-垂直居中"></a>D法：flex布局–垂直居中</h3>
+<h3 id="d法：flex布局-grid布局-水平垂直居中"><a class="header-anchor" href="#d法：flex布局-grid布局-水平垂直居中"></a>D法：flex布局/grid布局–水平垂直居中</h3>
+<blockquote>
+<p>grid布局：(对于水平垂直居中这个问题，)方式和flex布局类似。因为浏览器兼容性不如flex，且flex能满足的场景挺多的。所以一般只用flex布局就够了。</p>
+</blockquote>
 <pre><code class="language-HTML">&lt;style&gt;
 .parent {
   width: 300px;
@@ -4556,21 +4572,13 @@ i {
 </ul>
 <h4 id="缺点：-v3"><a class="header-anchor" href="#缺点：-v3"></a>缺点：</h4>
 <ul>
-<li>IE要10才支持</li>
+<li>IE要10才支持
+<ul>
+<li>(兼容IE10的写法为：<code>display: -ms-flex;</code>； 而且要求<code>-ms-flex-preferred-size</code>（即第三个参数）带单位，所以必须写成<code>0px</code>或<code>0%</code>或<code>auto</code>。)</li>
+</ul>
+</li>
 <li>其实文字是可以自动换行的，这样就是多行文字了，但是需要IE11</li>
 </ul>
-<h4 id="备注：-v2"><a class="header-anchor" href="#备注：-v2"></a>备注：</h4>
-<ul>
-<li>兼容IE10的写法为：<code>display: -ms-flex;</code>； 而且要求<code>-ms-flex-preferred-size</code>（即第三个参数）带单位，所以必须写成<code>0px</code>或<code>0%</code>或<code>auto</code>。</li>
-<li>如果要兼容旧浏览器就惨了，这货换了好多次名字：</li>
-</ul>
-<pre><code>display: -webkit-box; /* Chrome 4+, Safari 3.1, iOS Safari 3.2+ */
-display: -moz-box; /* Firefox 17- */
-display: -webkit-flex; /* Chrome 21+, Safari 6.1+, iOS Safari 7+, Opera 15/16 */
-display: -moz-flex; /* Firefox 18+ */
-display: -ms-flexbox; /* IE 10 */
-display: flex; /* Chrome 29+, Firefox 22+, IE 11+, Opera 12.1/17/18, Android 4.4+ */
-</code></pre>
 <h2 id="里面的内容-为多行行内元素的时候-以多行文字为例"><a class="header-anchor" href="#里面的内容-为多行行内元素的时候-以多行文字为例"></a>“里面的内容”为多行行内元素的时候(以多行文字为例)</h2>
 <p><strong>参考上文B法</strong></p>
 <p><strong>参考上文C法</strong></p>
@@ -4593,7 +4601,7 @@ display: flex; /* Chrome 29+, Firefox 22+, IE 11+, Opera 12.1/17/18, Android 4.4
 &lt;div class=&quot;child&quot;&gt;这是文字这是文字这是文字这是文字这是文字这是文字&lt;/div&gt;
 &lt;/body&gt;
 </code></pre>
-<h4 id="备注：-v3"><a class="header-anchor" href="#备注：-v3"></a>备注：</h4>
+<h4 id="备注：-v2"><a class="header-anchor" href="#备注：-v2"></a>备注：</h4>
 <p>首先，元素定宽是必须的。然后，大家都知道，只要margin-left和margin-right都为auto就行了。</p>
 <h4 id="优点：-v3"><a class="header-anchor" href="#优点：-v3"></a>优点：</h4>
 <p>IE7及以上都是可以的</p>
@@ -4623,8 +4631,29 @@ display: flex; /* Chrome 29+, Firefox 22+, IE 11+, Opera 12.1/17/18, Android 4.4
 <ul>
 <li>要定宽高</li>
 </ul>
-<h4 id="备注：-v4"><a class="header-anchor" href="#备注：-v4"></a>备注：</h4>
+<h4 id="备注：-v3"><a class="header-anchor" href="#备注：-v3"></a>备注：</h4>
 <p>将<code>position: absolute;</code>改成<code>position: fixed;</code>也是可以的，相信大家都懂什么意思。但是在老版本IE下会不支持fixed，在网上抄一下怎么兼容就行了。</p>
+<h3 id="定宽高-绝对定位-calc"><a class="header-anchor" href="#定宽高-绝对定位-calc"></a>定宽高+绝对定位+calc</h3>
+<p>思路和上面“要求定宽高+负margin”一样。</p>
+<p>只不过特别之处在于，calc这个api，<strong>其实就是在这个问题中用于获取百分比数据作为临时量。</strong></p>
+<p>浏览器兼容性略差：即calc的兼容性和<code>transform: translate</code>方案相当。</p>
+<pre><code class="language-HTML">&lt;style&gt;
+.child {
+    width: 300px;
+    height: 250px;
+    background: green;
+
+    position: absolute;
+    top: calc(50% - 150px);
+    left: calc(50% - 125px);
+    /* margin-left: -150px; */
+    /* margin-top: -125px; */
+}
+&lt;/style&gt;
+&lt;body&gt;
+&lt;div class=&quot;child&quot;&gt;这是文字这是文字这是文字这是文字这是文字这是文字&lt;/div&gt;
+&lt;/body&gt;
+</code></pre>
 <h2 id="里面的内容-为不定宽高的块级元素的时候"><a class="header-anchor" href="#里面的内容-为不定宽高的块级元素的时候"></a>“里面的内容”为不定宽高的块级元素的时候</h2>
 <h3 id="绝对定位-margin-auto-水平垂直居中"><a class="header-anchor" href="#绝对定位-margin-auto-水平垂直居中"></a>绝对定位+margin:auto–水平垂直居中</h3>
 <pre><code class="language-HTML">&lt;style&gt;
@@ -4651,7 +4680,7 @@ display: flex; /* Chrome 29+, Firefox 22+, IE 11+, Opera 12.1/17/18, Android 4.4
 <p>符合人的直觉思维习惯</p>
 <h4 id="缺点：-v5"><a class="header-anchor" href="#缺点：-v5"></a>缺点：</h4>
 <p>需要IE8及以上</p>
-<h4 id="备注：-v5"><a class="header-anchor" href="#备注：-v5"></a>备注：</h4>
+<h4 id="备注：-v4"><a class="header-anchor" href="#备注：-v4"></a>备注：</h4>
 <ul>
 <li>定位改成用fixed也是可以的</li>
 <li>其原理参考：</li>
@@ -4683,7 +4712,7 @@ display: flex; /* Chrome 29+, Firefox 22+, IE 11+, Opera 12.1/17/18, Android 4.4
 <p>父子元素的width和height都可以自己定</p>
 <h4 id="缺点：-v6"><a class="header-anchor" href="#缺点：-v6"></a>缺点：</h4>
 <p>IE8及以下不兼容</p>
-<h4 id="备注：-v6"><a class="header-anchor" href="#备注：-v6"></a>备注：</h4>
+<h4 id="备注：-v5"><a class="header-anchor" href="#备注：-v5"></a>备注：</h4>
 <ul>
 <li>绝对定位也可以改写为相对定位：</li>
 </ul>
@@ -4699,21 +4728,10 @@ display: flex; /* Chrome 29+, Firefox 22+, IE 11+, Opera 12.1/17/18, Android 4.4
     transform: translateY(-50%);
 }
 </code></pre>
-<ul>
-<li>transform的兼容性写法：</li>
-</ul>
-<pre><code class="language-CSS">transform:translateY(-50%);
--ms-transform:translateY(-50%); 	/* IE 9 */
--moz-transform:translateY(-50%); 	/* Firefox */
--webkit-transform:translateY(-50%); /* Safari 和 Chrome */
--o-transform:translateY(-50%); 	/* Opera */
-</code></pre>
-<p>对于<code>transform</code>而言：</p>
-<p>Internet Explorer 10、Firefox、Opera 支持 transform 属性。</p>
-<p>Internet Explorer 9 支持替代的 -ms-transform 属性（仅适用于 2D 转换）。</p>
-<p>Safari 和 Chrome 支持替代的 -webkit-transform 属性（3D 和 2D 转换）。</p>
-<p>Opera 只支持 2D 转换。</p>
-<h3 id="flex布局-水平垂直居中"><a class="header-anchor" href="#flex布局-水平垂直居中"></a>flex布局–水平垂直居中</h3>
+<h3 id="flex布局-grid布局-水平垂直居中"><a class="header-anchor" href="#flex布局-grid布局-水平垂直居中"></a>flex布局/grid布局–水平垂直居中</h3>
+<blockquote>
+<p>grid布局：(对于水平垂直居中这个问题，)方式和flex布局类似。因为浏览器兼容性不如flex，且flex能满足的场景挺多的。所以一般只用flex布局就够了。</p>
+</blockquote>
 <p>flex布局在这里有点大才小用了。关键在于了解flex布局的特点。因为写法较多，参考网上的。</p>
 <h3 id="转换成行内块级元素-个别场景下适用-容易被忽略"><a class="header-anchor" href="#转换成行内块级元素-个别场景下适用-容易被忽略"></a>转换成行内块级元素 #个别场景下适用，容易被忽略</h3>
 <p>此次我们居中的目标是一个<code>块级元素的</code>块块，而非之前的<code>行内元素</code>。</p>
@@ -5061,11 +5079,11 @@ MMM.prototype.map = function(func) {
         
         <tags>
             
-            <tag> 性能优化 </tag>
-            
             <tag> 面试题 </tag>
             
             <tag> 笔记副本 </tag>
+            
+            <tag> 性能优化 </tag>
             
             <tag> 回顾 </tag>
             
@@ -5225,9 +5243,10 @@ git push               ::::将 本地分支的变化 同步到远程分支
 <p>一般来说我们 <strong>按照普通顺序编写HTML</strong> ：此时先写子栏的代码，再写main栏的代码。</p>
 <p>此时，如果想要形成三栏的布局，思路可再细分为二：</p>
 <h3 id="要么运用margin形成三栏的布局"><a class="header-anchor" href="#要么运用margin形成三栏的布局"></a>要么运用margin形成三栏的布局</h3>
-<p><a href="https://ife-css-learning.az22c.vercel.app/task03%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/%E6%8C%89%E6%99%AE%E9%80%9A%E9%A1%BA%E5%BA%8F%E7%BC%96%E5%86%99/1%E6%99%AE%E9%80%9A%E6%96%B9%E6%B3%95-%E7%94%A8margin%E5%88%86%E5%BC%80.html" target="_blank" rel="noopener">demo</a></p>
+<p><a href="https://alexzhong22c.github.io/IFE-CSS-learning/task03%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/%E6%8C%89%E6%99%AE%E9%80%9A%E9%A1%BA%E5%BA%8F%E7%BC%96%E5%86%99/1%E6%99%AE%E9%80%9A%E6%96%B9%E6%B3%95-%E7%94%A8margin%E5%88%86%E5%BC%80.html" target="_blank" rel="noopener">demo</a> 按照正常逻辑用margin拉开距离</p>
 <h3 id="要么用bfc形成三栏的布局"><a class="header-anchor" href="#要么用bfc形成三栏的布局"></a>要么用BFC形成三栏的布局</h3>
-<p><a href="https://ife-css-learning.az22c.vercel.app/task03%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/%E6%8C%89%E6%99%AE%E9%80%9A%E9%A1%BA%E5%BA%8F%E7%BC%96%E5%86%99/2%E4%BD%BF%E7%94%A8BFC%E6%96%B9%E6%B3%95.html" target="_blank" rel="noopener">demo</a> –  <a href="https://github.com/AlexZhong22c/IFE-CSS-learning/blob/master/task03%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/%E6%8C%89%E6%99%AE%E9%80%9A%E9%A1%BA%E5%BA%8F%E7%BC%96%E5%86%99/2%E4%BD%BF%E7%94%A8BFC%E6%96%B9%E6%B3%95.html" target="_blank" rel="noopener">源码</a></p>
+<p><a href="https://alexzhong22c.github.io/IFE-CSS-learning/task03%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/%E6%8C%89%E6%99%AE%E9%80%9A%E9%A1%BA%E5%BA%8F%E7%BC%96%E5%86%99/2%E4%BD%BF%E7%94%A8BFC%E6%96%B9%E6%B3%95.html" target="_blank" rel="noopener">demo</a> –  <a href="https://github.com/AlexZhong22c/IFE-CSS-learning/blob/master/task03%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/%E6%8C%89%E6%99%AE%E9%80%9A%E9%A1%BA%E5%BA%8F%E7%BC%96%E5%86%99/2%E4%BD%BF%E7%94%A8BFC%E6%96%B9%E6%B3%95.html" target="_blank" rel="noopener">源码</a></p>
+<p>这个其实比较巧妙。main栏的BFC令这个元素的“border-box区域”也受周围浮动元素的margin的排挤。</p>
 <blockquote>
 <p>注：这两个demo中的<code>clearfix</code>类是用来闭合浮动的。以满足“父元素的高度始终为子元素中最高的高度”这个要求。</p>
 <p>下文的各种方法也是需要闭合浮动的，为了方便演示我省略不写。</p>
@@ -5242,7 +5261,7 @@ git push               ::::将 本地分支的变化 同步到远程分支
 <li>extra 左浮动，宽度230，左外边距为-230px（道理同上，注意的是，负的左外边距值一定要大于或等于该DIV的宽度，才能靠到上一行去）</li>
 </ul>
 <p>当只使用负左外边距的方法时，能够实现<strong>先加载main栏</strong>，但是main栏的内容会被挡住：</p>
-<p><a href="https://ife-css-learning.az22c.vercel.app/task03%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/%E5%85%88%E5%8A%A0%E8%BD%BDmain%E6%A0%8F/1main%E7%9A%84%E5%86%85%E5%AE%B9%E8%A2%AB%E6%8C%A1%E4%BD%8F.html" target="_blank" rel="noopener">demo</a> –  <a href="https://github.com/AlexZhong22c/IFE-CSS-learning/blob/master/task03%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/%E5%85%88%E5%8A%A0%E8%BD%BDmain%E6%A0%8F/1main%E7%9A%84%E5%86%85%E5%AE%B9%E8%A2%AB%E6%8C%A1%E4%BD%8F.html" target="_blank" rel="noopener">源码</a></p>
+<p><a href="https://alexzhong22c.github.io/IFE-CSS-learning/task03%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/%E5%85%88%E5%8A%A0%E8%BD%BDmain%E6%A0%8F/1main%E7%9A%84%E5%86%85%E5%AE%B9%E8%A2%AB%E6%8C%A1%E4%BD%8F.html" target="_blank" rel="noopener">demo</a> –  <a href="https://github.com/AlexZhong22c/IFE-CSS-learning/blob/master/task03%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/%E5%85%88%E5%8A%A0%E8%BD%BDmain%E6%A0%8F/1main%E7%9A%84%E5%86%85%E5%AE%B9%E8%A2%AB%E6%8C%A1%E4%BD%8F.html" target="_blank" rel="noopener">源码</a></p>
 <blockquote>
 <p>因此，解决 main栏的内容被挡住 的思路可再细分为二：</p>
 <p>1.<strong>双飞翼布局</strong></p>
@@ -5250,7 +5269,7 @@ git push               ::::将 本地分支的变化 同步到远程分支
 <p>而在本文的最后，会介绍其他的方式来实现 三栏等高的 先加载main栏的 三栏式布局。</p>
 </blockquote>
 <h3 id="双飞翼布局"><a class="header-anchor" href="#双飞翼布局"></a>双飞翼布局</h3>
-<p>淘宝的双飞翼布局：在原来的基础上多套了一层div，并且增设margin。<a href="https://ife-css-learning.az22c.vercel.app/task03%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/%E5%85%88%E5%8A%A0%E8%BD%BDmain%E6%A0%8F/2-1%E5%8F%8C%E9%A3%9E%E7%BF%BC%E5%B8%83%E5%B1%80.html" target="_blank" rel="noopener">2-1淘宝双飞翼布局demo</a> –  <a href="https://github.com/AlexZhong22c/IFE-CSS-learning/blob/master/task03%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/%E5%85%88%E5%8A%A0%E8%BD%BDmain%E6%A0%8F/2-1%E5%8F%8C%E9%A3%9E%E7%BF%BC%E5%B8%83%E5%B1%80.html" target="_blank" rel="noopener">源码</a></p>
+<p>淘宝的双飞翼布局：在原来的基础上多套了一层div，并且增设margin。<a href="https://alexzhong22c.github.io/IFE-CSS-learning/task03%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/%E5%85%88%E5%8A%A0%E8%BD%BDmain%E6%A0%8F/2-1%E5%8F%8C%E9%A3%9E%E7%BF%BC%E5%B8%83%E5%B1%80.html" target="_blank" rel="noopener">2-1淘宝双飞翼布局demo</a> –  <a href="https://github.com/AlexZhong22c/IFE-CSS-learning/blob/master/task03%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/%E5%85%88%E5%8A%A0%E8%BD%BDmain%E6%A0%8F/2-1%E5%8F%8C%E9%A3%9E%E7%BF%BC%E5%B8%83%E5%B1%80.html" target="_blank" rel="noopener">源码</a></p>
 <h4 id="好处："><a class="header-anchor" href="#好处："></a>好处：</h4>
 <ul>
 <li>可以实现主要的内容先加载的优化</li>
@@ -5261,7 +5280,7 @@ git push               ::::将 本地分支的变化 同步到远程分支
 <li>位置不灵活，同时css对位置的控制很强</li>
 </ul>
 <h3 id="圣杯布局"><a class="header-anchor" href="#圣杯布局"></a>圣杯布局</h3>
-<p>圣杯布局的特点是它使用了padding和相对定位，当然它也使用了负左外边距。<a href="https://ife-css-learning.az22c.vercel.app/task03%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/%E5%85%88%E5%8A%A0%E8%BD%BDmain%E6%A0%8F/2-2%E5%9C%A3%E6%9D%AF%E5%B8%83%E5%B1%80.html" target="_blank" rel="noopener">2-2圣杯布局demo</a> –  <a href="https://github.com/AlexZhong22c/IFE-CSS-learning/blob/master/task03%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/%E5%85%88%E5%8A%A0%E8%BD%BDmain%E6%A0%8F/2-2%E5%9C%A3%E6%9D%AF%E5%B8%83%E5%B1%80.html" target="_blank" rel="noopener">源码</a></p>
+<p>圣杯布局的特点是它使用了padding和相对定位，当然它也使用了负左外边距。<a href="https://alexzhong22c.github.io/IFE-CSS-learning/task03%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/%E5%85%88%E5%8A%A0%E8%BD%BDmain%E6%A0%8F/2-2%E5%9C%A3%E6%9D%AF%E5%B8%83%E5%B1%80.html" target="_blank" rel="noopener">2-2圣杯布局demo</a> –  <a href="https://github.com/AlexZhong22c/IFE-CSS-learning/blob/master/task03%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/%E5%85%88%E5%8A%A0%E8%BD%BDmain%E6%A0%8F/2-2%E5%9C%A3%E6%9D%AF%E5%B8%83%E5%B1%80.html" target="_blank" rel="noopener">源码</a></p>
 <h4 id="好处：-v2"><a class="header-anchor" href="#好处：-v2"></a>好处：</h4>
 <ul>
 <li>可以实现主要的内容先加载的优化</li>
@@ -5274,7 +5293,7 @@ git push               ::::将 本地分支的变化 同步到远程分支
 <ul>
 <li>当浏览器宽度过窄时，子栏可能会消失，extra栏的内容可能会跑到主栏里面。</li>
 </ul>
-<p><a href="https://ife-css-learning.az22c.vercel.app/task03%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/%E5%85%88%E5%8A%A0%E8%BD%BDmain%E6%A0%8F/2-2-X%E8%AF%81%E6%98%8E%E5%9C%A3%E6%9D%AF%E5%B8%83%E5%B1%80%E5%86%85%E9%83%A8%E7%81%B5%E6%B4%BB.html" target="_blank" rel="noopener">证明圣杯布局内部灵活的demo</a> – <a href="https://github.com/AlexZhong22c/IFE-CSS-learning/blob/master/task03%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/%E5%85%88%E5%8A%A0%E8%BD%BDmain%E6%A0%8F/2-2-X%E8%AF%81%E6%98%8E%E5%9C%A3%E6%9D%AF%E5%B8%83%E5%B1%80%E5%86%85%E9%83%A8%E7%81%B5%E6%B4%BB.html" target="_blank" rel="noopener">证明圣杯布局内部灵活的源码</a></p>
+<p><a href="https://alexzhong22c.github.io/IFE-CSS-learning/task03%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/%E5%85%88%E5%8A%A0%E8%BD%BDmain%E6%A0%8F/2-2-X%E8%AF%81%E6%98%8E%E5%9C%A3%E6%9D%AF%E5%B8%83%E5%B1%80%E5%86%85%E9%83%A8%E7%81%B5%E6%B4%BB.html" target="_blank" rel="noopener">证明圣杯布局内部灵活的demo</a> – <a href="https://github.com/AlexZhong22c/IFE-CSS-learning/blob/master/task03%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/%E5%85%88%E5%8A%A0%E8%BD%BDmain%E6%A0%8F/2-2-X%E8%AF%81%E6%98%8E%E5%9C%A3%E6%9D%AF%E5%B8%83%E5%B1%80%E5%86%85%E9%83%A8%E7%81%B5%E6%B4%BB.html" target="_blank" rel="noopener">证明圣杯布局内部灵活的源码</a></p>
 <h2 id="实现三栏等高的其他方法"><a class="header-anchor" href="#实现三栏等高的其他方法"></a>// 实现三栏等高的其他方法</h2>
 <h3 id="用左右border作为两栏背景色-background-clip"><a class="header-anchor" href="#用左右border作为两栏背景色-background-clip"></a>用左右border作为两栏背景色+background-clip</h3>
 <p>.main元素的左右border区域作为两侧栏所在区域背景，实现伪等高效果；设置.main的padding实现栏间间隔。</p>
@@ -5450,9 +5469,6 @@ border-bottom-left-radius: 44px 88px;
 <li>如果需要用border-radius重置使得没有圆角：使用none无效，需要取值0</li>
 <li>border-radius对<code>&lt;img&gt;</code>没有任何效果</li>
 </ul>
-<h2 id="圆角相关话题"><a class="header-anchor" href="#圆角相关话题"></a>// 圆角相关话题</h2>
-<h3 id="圆角进化论"><a class="header-anchor" href="#圆角进化论"></a>圆角进化论</h3>
-<p><a href="https://github.com/AlexZhong22c/CSS-border-radius" target="_blank" rel="noopener">https://github.com/AlexZhong22c/CSS-border-radius</a></p>
 ]]></content>
       
         <categories>
@@ -6456,11 +6472,11 @@ instance2.sayName();//&quot;hu&quot;
         
         <tags>
             
+            <tag> 原理 </tag>
+            
             <tag> 面向对象 </tag>
             
             <tag> 原型系统 </tag>
-            
-            <tag> 原理 </tag>
             
         </tags>
         
@@ -8097,9 +8113,9 @@ MY_ARRAY = ['B']
             
             <tag> 作用域 </tag>
             
-            <tag> ES6 </tag>
-            
             <tag> 闭包 </tag>
+            
+            <tag> ES6 </tag>
             
             <tag> 任务队列 </tag>
             
@@ -8654,17 +8670,20 @@ methods: {
     </entry>
     
     <entry>
-      <title><![CDATA[闭合浮动和BFC]]></title>
+      <title><![CDATA[闭合浮动]]></title>
       <url>https://blog.az22c.top/2017/04/01/clearfix-n-bfc/</url>
-      <content type="html"><![CDATA[<p>本文部分内容参考 <a href="http://www.iyunlu.com/view/css-xhtml/55.html" target="_blank" rel="noopener">那些年我们一起清除过的浮动</a> ，但是 一丝冰凉 的这篇文章有很多地方我都不认同，取其精华去其糟粕，所以本文并没有包含那些我所不认同的内容。</p>
+      <content type="html"><![CDATA[<p>本文介绍闭合浮动，和对比两种“利用伪元素闭合浮动”的方案。</p>
 <a id="more"></a>
+<blockquote>
+<p>提示：本文章内容最后修改时间为2017年04月，部分内容可能已经过时</p>
+<p>本文部分内容参考 <a href="http://www.iyunlu.com/view/css-xhtml/55.html" target="_blank" rel="noopener">那些年我们一起清除过的浮动</a> ，但是 这位作者 的这篇文章有很多地方我都不认同，取其精华去其糟粕，所以本文并没有包含那些我所不认同的内容。</p>
+</blockquote>
 <h2 id="区分-清除浮动-和-闭合浮动"><a class="header-anchor" href="#区分-清除浮动-和-闭合浮动"></a>区分 清除浮动 和 闭合浮动</h2>
 <ul>
-<li>清除浮动：清除对应的英文单词是 clear，对应CSS中的属性是 clear：left | right | both | none；</li>
-<li>闭合浮动：更确切的含义是使浮动元素闭合，从而减少浮动带来的影响。</li>
+<li>清除浮动：对应CSS中的属性是 clear：left | right | both | none；</li>
+<li>闭合浮动：解决<strong>因为子元素浮动导致父元素高度塌陷</strong>的问题</li>
 </ul>
 <p>两者的区别 <a href="http://www.iyunlu.com/demo/enclosing-float-and-clearing-float/index.html" target="_blank" rel="noopener">请看Demo</a></p>
-<p>闭合浮动主要用来解决<strong>因为子元素浮动导致父元素高度塌陷</strong>的问题。</p>
 <h2 id="闭合浮动的一些老方法："><a class="header-anchor" href="#闭合浮动的一些老方法："></a>闭合浮动的一些老方法：</h2>
 <ul>
 <li>利用局部的“最后的元素”的“清除浮动”
@@ -8690,8 +8709,6 @@ methods: {
 <p>由于IE6-7不支持:after，要同时使用 zoom:1触发IE6和IE7的 hasLayout。<strong>在后面的demo中会介绍到。</strong></p>
 <ul>
 <li>优点：浏览器支持好，不容易出现怪问题（目前：大型网站都有使用，如：腾迅，网易，新浪等等）</li>
-<li>缺点：复用方式不当会造成代码量增加</li>
-<li>建议：定义公共类，以减少CSS代码</li>
 </ul>
 <h3 id="不要使用方案3和4"><a class="header-anchor" href="#不要使用方案3和4"></a>不要使用方案3和4</h3>
 <p>方案3、4通过overflow闭合浮动，实际上已经创建了新的 块级格式化上下文，而它们设置的对象都是父元素，这将导致其布局和相对于浮动的行为等发生一系列的变化，闭合浮动只不过是一系列变化中的一个作用而已。所以为了闭合浮动去改变全局特性，这是不明智的，带来的风险就是一系列的bug，比如firefox 早期版本产生 focus，截断绝对定位的层等等。始终要明白，如果单单只是需要闭合浮动，overflow就不要使用，而不是某些文章所说的“慎用”。</p>
@@ -8705,31 +8722,14 @@ methods: {
 <p>其一，通过在浮动元素的末尾添加一个空的元素</p>
 <p>其二，通过设置父元素 overflow 或者display：table 属性来闭合浮动，原理就是BFC，下面探讨一下：</p>
 <p>其三，「利用伪元素after作为“最后的元素”的“清除浮动”」之后再讲。</p>
-<h2 id="bfc知识"><a class="header-anchor" href="#bfc知识"></a>BFC知识</h2>
-<p><a href="http://www.w3.org/TR/CSS21/visuren.html#block-formatting" target="_blank" rel="noopener">Block formatting contexts </a>（块级格式化上下文），以下简称 BFC。在CSS3里面改动后称之为flow root。</p>
-<h3 id="如何触发bfc"><a class="header-anchor" href="#如何触发bfc"></a>如何触发BFC</h3>
-<ul>
-<li>overflow 除了visible 以外的值（hidden，auto，scroll ）</li>
-<li>float 除了none以外的值</li>
-<li>position（absolute，fixed）</li>
-<li>display (table-cell，table-caption，inline-block)</li>
-<li>实际上，用<code>display:table</code>来产生匿名框也可以触发BFC，见文章 <a href="http://nicolasgallagher.com/micro-clearfix-hack/" target="_blank" rel="noopener">A new micro clearfix hack</a> 或见本节的备注</li>
-<li>fieldset元素</li>
-</ul>
-<blockquote>
-<p>需要注意的是，display:table 本身并不会创建BFC，但是它会产生匿名框(anonymous boxes)，而匿名框中的display:table-cell可以创建新的BFC，换句话说，触发块级格式化上下文的是匿名框，而不是display:table。所以通过display:table和display:table-cell创建的BFC效果是不一样的。</p>
-<p>fieldset 元素在www.w3.org里目前没有任何有关这个触发行为的信息，直到HTML5标准里才出现。有些浏览器bugs（Webkit，Mozilla）提到过这个触发行为，但是没有任何官方声明。实际上，即使fieldset在大多数的浏览器上都能创建新的块级格式化上下文，开发者也不应该把这当做是理所当然的。CSS 2.1没有定义哪种属性适用于表单控件，也没有定义如何使用CSS来给它们添加样式。用户代理可能会给这些属性应用CSS属性，建议开发者们把这种支持当做实验性质的，更高版本的CSS可能会进一步规范这个。</p>
-</blockquote>
-<p><strong>由于浏览器的差异：</strong></p>
-<ul>
-<li>在支持BFC的浏览器（IE8+，firefox，chrome，safari）通过创建新的BFC闭合浮动；</li>
-<li>在不支持 BFC的浏览器 （IE6-7），通过触发 hasLayout 闭合浮动。IE6-7的hasLayout 可以等同于 BFC。</li>
-</ul>
 <h2 id="深入理解伪元素闭合浮动"><a class="header-anchor" href="#深入理解伪元素闭合浮动"></a>深入理解伪元素闭合浮动</h2>
-<p>上面已经列举了7种闭合浮动的方法，通过第三节分析的原理，我们发现其实更多的：对父元素使用display：table-cell，display：inline-block等只要触发了BFC的属性值都可以闭合浮动。从各个方面比较，<strong>方案7</strong>：after伪元素闭合浮动无疑是相对比较好的解决方案了。这种思路的演进历史可以参考文章：<a href="https://css-tricks.com/snippets/css/clear-fix/" target="_blank" rel="noopener">https://css-tricks.com/snippets/css/clear-fix/</a></p>
-<p>而最后，方案7里面有两个最优的小方案：</p>
-<h3 id="最优小方案1："><a class="header-anchor" href="#最优小方案1："></a>最优小方案1：</h3>
-<pre><code>.clearfix:before, .clearfix:after {
+<p>上面已经列举了7种闭合浮动的方法，通过第三节分析的原理，我们发现其实更多的：对父元素使用display：table-cell，display：inline-block等只要触发了BFC的属性值都可以闭合浮动。</p>
+<p>从各个方面比较，<strong>方案7</strong>：after伪元素闭合浮动无疑是相对比较好的解决方案了。这种思路的演进历史可以参考文章：<a href="https://css-tricks.com/snippets/css/clear-fix/" target="_blank" rel="noopener">https://css-tricks.com/snippets/css/clear-fix/</a></p>
+<p>而最后，方案7里面有两个最值得一提的“具体方案”：</p>
+<h3 id="具体方案1：-仅供对比参考效果-理解debug-相对地不常用"><a class="header-anchor" href="#具体方案1：-仅供对比参考效果-理解debug-相对地不常用"></a>具体方案1： #仅供对比参考效果、理解debug;相对地不常用</h3>
+<p>这种也是比较多人用的写法之一，但是流行程度相对地不如另一个写法。</p>
+<pre><code class="language-css">.clearfix:before,
+.clearfix:after {
 content:&quot;.&quot;; display:block; height:0; visibility:hidden; clear:both; }
 
 .clearfix { *zoom:1; }
@@ -8744,8 +8744,8 @@ content:&quot;.&quot;; display:block; height:0; visibility:hidden; clear:both; }
 <blockquote>
 <p>另外，不建议将content设置为空字符串&quot;&quot;，在firefox 7里面会看到它会产生空隙</p>
 </blockquote>
-<h3 id="最优小方案2："><a class="header-anchor" href="#最优小方案2："></a>最优小方案2：</h3>
-<pre><code>.clearfix:before,
+<h3 id="最优具体方案2：-这种最为常用"><a class="header-anchor" href="#最优具体方案2：-这种最为常用"></a>最优具体方案2： #这种最为常用</h3>
+<pre><code class="language-css">.clearfix:before,
 .clearfix:after {
     content: &quot; &quot;; /* 1 */
     display: table; /* 2 */
@@ -8764,20 +8764,14 @@ content:&quot;.&quot;; display:block; height:0; visibility:hidden; clear:both; }
 <blockquote>
 <p>需要注意的是，display:table 本身并不会创建BFC，但是它会产生匿名框(anonymous boxes)，而匿名框中的display:table-cell可以创建新的BFC，换句话说，触发块级格式化上下文的是匿名框，而不是display:table。所以通过display:table和display:table-cell创建的BFC效果是不一样的。</p>
 </blockquote>
-<p>这个小方案的好处是：不用隐藏用content属性产生的内容，并且代码量特别少。</p>
-<h4 id="firefox-3-5版本的问题"><a class="header-anchor" href="#firefox-3-5版本的问题"></a>Firefox &lt; 3.5版本的问题</h4>
-<p>Firefox &lt; 3.5禁止在body元素和它的第一个子元素之间插入多余的空格，所以</p>
-<ul>
-<li>要么对before伪类使用<code>content:&quot;.&quot;</code></li>
-<li>要么额外加上<code>visibility:hidden</code>等等属性来隐藏这种情况下所插入的字符(但这也不能解释淘宝网闭合浮动的写法，因为淘宝网主要把它用在after伪类上)</li>
-</ul>
+<p>**这个具体方案的好处是：**不用隐藏用content属性产生的内容，并且代码量特别少。</p>
 <h4 id="设置before伪元素的作用：间接产生bfc-以阻止上外边距合并-显得上下对称"><a class="header-anchor" href="#设置before伪元素的作用：间接产生bfc-以阻止上外边距合并-显得上下对称"></a>设置before伪元素的作用：间接产生BFC，以阻止上外边距合并，显得上下对称</h4>
-<p>设定before伪元素的属性<strong>并不是用来闭合浮动的</strong>，不过它能阻止上外边距的合并，这会带来两个好处：</p>
+<p>设定before伪元素的属性<strong>并不是用来闭合浮动的，不过它能阻止上外边距的合并，</strong> 这会带来两个好处：</p>
 <ul>
 <li>这种清除浮动的方式所表现出来的外貌看上去和 其他的清除浮动的方式(比如overflow:hidden)的 一致。</li>
 <li>和IE6/7使用zoom:1后的外貌保持一致</li>
 </ul>
-<p>毕竟，<strong>使用after伪元素闭合浮动</strong>的时候，下外边距的合并已经被阻止了，为了上下看上去对称，before伪元素也应该这样。</p>
+<p>毕竟，<strong>使用after伪元素闭合浮动</strong>的时候，<strong>下外边距的合并</strong>已经被阻止了，为了上下看上去对称，before伪元素也应该这样。</p>
 <p>主要译自： <a href="http://nicolasgallagher.com/micro-clearfix-hack/" target="_blank" rel="noopener">A new micro clearfix hack</a></p>
 ]]></content>
       
@@ -8925,7 +8919,7 @@ div#demo a{color: red;} /*特殊性值：0,1,0,2*/
 <p><a href="http://www.cnblogs.com/wangmeijian/p/4207433.html" target="_blank" rel="noopener">验证结果参考demo</a></p>
 <h3 id="应对常见疑问："><a class="header-anchor" href="#应对常见疑问："></a>应对常见疑问：</h3>
 <ul>
-<li>特殊性值不会进位</li>
+<li>这些所谓的“特殊性值”不会进位</li>
 <li><strong>假如特殊性值相同</strong>的两条规则应用到同一个元素，只有后声明的那条规则会生效</li>
 <li>由上文可得：外联样式优先级并不一定低于内联样式</li>
 </ul>
@@ -8940,7 +8934,15 @@ div#demo a{color: red;} /*特殊性值：0,1,0,2*/
 <li><strong>通配选择器 *</strong> 定义的规则 优先于 元素<strong>继承</strong>过来的规则</li>
 </ul>
 <h2 id="not伪类例外"><a class="header-anchor" href="#not伪类例外"></a><code>:not</code>伪类例外</h2>
-<p><code>:not</code> 否定伪类 在优先级计算中不会被看作是伪类，但是在计算选择器数量时还是会把<strong>其中的选择器</strong>当做普通选择器进行计数：</p>
+<ul>
+<li><code>:not</code> 否定伪类。
+<ul>
+<li>本身在优先级计算中不会被看作是伪类</li>
+<li>即本身对“特殊性值”没贡献</li>
+<li><strong>而它括号里面的选择器对“特殊性值”是有贡献的</strong></li>
+</ul>
+</li>
+</ul>
 <pre><code class="language-html">&lt;style type=&quot;text/css&quot;&gt;
 div.outer p {
   color:red;
@@ -8963,7 +8965,7 @@ div:not(.outer) p {
 <p>:not被忽略掉了。</p>
 <p>:not(.outer)中的.outer正常计数。</p>
 <h2 id="知识应用实例"><a class="header-anchor" href="#知识应用实例"></a>知识应用实例</h2>
-<h3 id="a的四种状态实例"><a class="header-anchor" href="#a的四种状态实例"></a>a的四种状态实例</h3>
+<h3 id="a的四种状态选择器"><a class="header-anchor" href="#a的四种状态选择器"></a>a的四种状态选择器</h3>
 <p>我们知道a标签有四种状态：链接访问前、链接访问后、鼠标滑过、激活，分别对应四种伪类:link、:visited、:hover、:active。</p>
 <p>如果用这四个伪类对同一个元素设置同一个属性，那它们的<strong>声明顺序</strong>应该有一定要求，一般大家都遵循“爱恨原则LVHA”（LoVe HAte），为什么是这个顺序？不能是其它顺序吗？</p>
 <blockquote>
@@ -8993,28 +8995,11 @@ p {
 <p>自己写 CSS 时不要滥用 <code>*</code>，reset.css 也只是设置 margin, padding, box-sizing 等少数几个属性时才使用，这几个被重置的属性都不继承。</p>
 <p>另外，不要用<code>*</code>设置font-family</p>
 <h2 id="进一步理解-important"><a class="header-anchor" href="#进一步理解-important"></a>进一步理解<code>!important</code></h2>
-<p>使用<code>!important</code>不是一个好习惯，因为它改变了你样式表本来的级联规则，从而难以调试。</p>
-<h3 id="一些不成文规则"><a class="header-anchor" href="#一些不成文规则"></a>一些不成文规则</h3>
-<ul>
-<li><strong>永远</strong>都要优先考虑使用样式规则的优先级来解决问题而不是<code>!important</code>。</li>
-<li>作为第三方样式层面，尽量不用<code>!important</code>
-<ul>
-<li><strong>不要</strong>在你的插件中使用<code>!important</code>。</li>
-</ul>
-</li>
-<li>作为业务层面，可以给一些全局的原子类用<code>!important</code>
-<ul>
-<li><strong>尽可能不要</strong>在全站范围的css中使用<code>!important</code>.</li>
-<li><strong>只在</strong>需要<strong>覆盖</strong>“全站范围的css或是外部css（例如引用的ExtJs或是YUI）”的时候才在指定的页面上使用<code>!important</code>。</li>
-</ul>
-</li>
-</ul>
-<p><strong>取而代之，你可以:</strong></p>
-<p>更好的利用CSS的级联属性</p>
-<p>更多的使用适合的选择器。比如在你需要选定的对象元素前加上更多的元素，使选择的范围缩小，你的选择器就变得更有针对性，从而提高优先级。(但是也可能增加了解析css选择器的负担，导致性能变差)</p>
+<p>绝大多数情况下，都不要直接用<code>!important</code>。</p>
+<p>因为(对于某个元素的样式)只要用1次了<code>!important</code>，绝大多数的其他的样式选择器规则都因为优先级不够而失效。那么后期再想覆盖它的样式，就需要继续增加<code>!important</code>类型样式，样式表极其难维护。</p>
 <h3 id="什么时候应该使用："><a class="header-anchor" href="#什么时候应该使用："></a>什么时候应该使用：</h3>
-<p>你的网站上有一个设定了全站样式的CSS文件，同时你（或是你同事）写了一些效果很差的行内样式（行内样式的优先级是最高的）。</p>
-<p>在这种情况下，你就可以在你全局的CSS文件中写一些<code>!important</code>的样式来覆盖掉那些直接写在元素上的行内样式。</p>
+<p>你的网站上有一个设定了全站样式的CSS文件，同时你（或是你同事）写了一些效果很差的<code>行内样式</code>（行内样式的优先级是最高的）。</p>
+<p>在这种情况下，你就可以在你全局的CSS文件中写一些<code>!important</code>的样式来覆盖掉那些直接写在元素上的<code>行内样式</code>。</p>
 <p>活生生的例子比如：有人在jQuery插件里写了糟糕的行内样式。</p>
 <hr>
 <p>参考：<a href="http://www.cnblogs.com/wangmeijian/p/4207433.html" target="_blank" rel="noopener">css优先级计算规则–王美建</a></p>
@@ -9376,9 +9361,9 @@ p {
         
         <tags>
             
-            <tag> IFE </tag>
-            
             <tag> H5 </tag>
+            
+            <tag> IFE </tag>
             
             <tag> HTML </tag>
             
@@ -9498,78 +9483,6 @@ myModule.doOtherThing();
             <tag> 作用域 </tag>
             
             <tag> 单例 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[float和绝对定位比较]]></title>
-      <url>https://blog.az22c.top/2017/03/04/float-n-absolute/</url>
-      <content type="html"><![CDATA[<p>因为float实现的效果和绝对定位比较类似，稍后会对它们进行比较。</p>
-<a id="more"></a>
-<h2 id="float"><a class="header-anchor" href="#float"></a>float</h2>
-<ul>
-<li>在浮动一张图片或者其他元素时，是在要求浏览器把它往上方推，直到它碰到父元素的内边界。</li>
-<li>浮动非图片元素时，要给它设定宽度。</li>
-<li>默认情况下浮动元素的位置一般要受到父元素位置的限制，而且改变浮动元素在html文档中的次序，有可能会影响float的实现效果。</li>
-</ul>
-<h2 id="position"><a class="header-anchor" href="#position"></a>position</h2>
-<ul>
-<li>static 静态定位，每个元素都处于常规文档流中</li>
-<li>relative 相对的是它原来在文档流中的位置（或者默认位置） 。
-<ul>
-<li>这个元素原来占据的空间没有动，其他元素也没动。</li>
-<li>top right bottom left(可以给top left属性设定负值，把元素向上向左移动)</li>
-</ul>
-</li>
-<li>absolute 绝对定位会把元素彻底从文档流中拿出来，再相对其他元素定位。</li>
-<li>fixed 固定定位元素的定位上下文是视口，因此它不会随页面滚动而移动。</li>
-</ul>
-<h2 id="float和绝对定位比较"><a class="header-anchor" href="#float和绝对定位比较"></a>float和绝对定位比较</h2>
-<p>我最常见的一个问题就是在一些布局中不知道用float好还是用绝对定位好，因为他们有一些相似的作用。</p>
-<p>float 的诞生本来就是为了让文字环绕图片。</p>
-<p><code>position: absolute</code>会导致元素脱离文档流，被定位的元素等于在文档中不占据任何位置，在另一个层呈现，可以设置z-index。PS的图层效果就是position: absolute。</p>
-<p>float也会导致元素脱离文档流，但还在文档或容器中占据位置(不会跑到父元素的外面去)，把文档流和其它float元素向左或向右挤，并可能导致换行。图片的文字环绕布局效果就是float：</p>
-<pre><code class="language-html">&lt;p&gt;
-This is some text. This is some text. This is some text.
-This is some text. This is some text. This is some text.
-This is some text. This is some text. This is some text.
-This is some text. This is some text. This is some text.
-&lt;img src=&quot;/i/eg_cute.gif&quot; /&gt;
-This is some text. This is some text. This is some text.
-This is some text. This is some text. This is some text.
-This is some text. This is some text. This is some text.
-This is some text. This is some text. This is some text.
-This is some text. This is some text. This is some text.
-This is some text. This is some text. This is some text.
-&lt;/p&gt;
-</code></pre>
-<p>CSS：</p>
-<pre><code class="language-css">img 
-{
-float:right
-}
-</code></pre>
-<h2 id="left-和-top属性"><a class="header-anchor" href="#left-和-top属性"></a>left 和 top属性</h2>
-<p>float和绝对定位可以一起用在同一个元素，但是效果不好。
-**left和top等属性应该用于position的定位，**但是我经常见到有些老手也会把它们用到float的元素上，这就很尴尬地滥用了，一般情况下这是因为对基础知识掌握不牢固所导致的。</p>
-<h2 id="用到float的三栏布局所带来的启发"><a class="header-anchor" href="#用到float的三栏布局所带来的启发"></a>用到float的三栏布局所带来的启发</h2>
-<p>需要说明的是，浮动布局依然遵循常规文档流，所以与绝对定位相比，浮动定位时HTML源文件中元素声明的位置显得格外重要。所以，在用到float实现的三栏布局中，交换左栏和右栏的声明次序会有很大影响，也有方法不用交换各栏的次序也可以实现同样的布局，但是，这就要用到一种比较晦涩的使用负边距值的方法。一般情况下，人们十有八九会选择交换源文件中左中两栏的声明次序。</p>
-]]></content>
-      
-        <categories>
-            
-            <category> CSS </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> float </tag>
-            
-            <tag> 绝对定位 </tag>
             
         </tags>
         
@@ -10084,13 +9997,13 @@ Kinect，它将身体动作转换成屏幕动作。这样你可以用你的手�
         
         <tags>
             
-            <tag> 交互 </tag>
-            
             <tag> 随笔 </tag>
             
             <tag> 触摸事件 </tag>
             
             <tag> 指针事件 </tag>
+            
+            <tag> 交互 </tag>
             
         </tags>
         
