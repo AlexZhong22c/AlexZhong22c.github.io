@@ -224,7 +224,7 @@
             
             <tag> 性能优化 </tag>
             
-            <tag> 交互实现 </tag>
+            <tag> 树形 </tag>
             
             <tag> 复选框 </tag>
             
@@ -378,7 +378,7 @@
             
             <tag> 性能优化 </tag>
             
-            <tag> 交互实现 </tag>
+            <tag> 树形 </tag>
             
             <tag> 复选框 </tag>
             
@@ -5079,11 +5079,11 @@ MMM.prototype.map = function(func) {
         
         <tags>
             
+            <tag> 性能优化 </tag>
+            
             <tag> 面试题 </tag>
             
             <tag> 笔记副本 </tag>
-            
-            <tag> 性能优化 </tag>
             
             <tag> 回顾 </tag>
             
@@ -5480,11 +5480,11 @@ border-bottom-left-radius: 44px 88px;
         
         <tags>
             
+            <tag> 回顾 </tag>
+            
             <tag> radius </tag>
             
             <tag> 边框 </tag>
-            
-            <tag> 回顾 </tag>
             
         </tags>
         
@@ -6472,11 +6472,11 @@ instance2.sayName();//&quot;hu&quot;
         
         <tags>
             
-            <tag> 原理 </tag>
-            
             <tag> 面向对象 </tag>
             
             <tag> 原型系统 </tag>
+            
+            <tag> 原理 </tag>
             
         </tags>
         
@@ -7644,9 +7644,9 @@ var currentTarget = event.currentTarget;
             
             <tag> 笔记副本 </tag>
             
-            <tag> 回顾 </tag>
-            
             <tag> 基础 </tag>
+            
+            <tag> 回顾 </tag>
             
             <tag> 事件 </tag>
             
@@ -7794,9 +7794,9 @@ btn.attachEvent(&quot;onclick&quot;, function(){
         
         <tags>
             
-            <tag> 回顾 </tag>
-            
             <tag> 基础 </tag>
+            
+            <tag> 回顾 </tag>
             
             <tag> 事件 </tag>
             
@@ -7926,9 +7926,9 @@ test.onclick= function(e){
         
         <tags>
             
-            <tag> 回顾 </tag>
-            
             <tag> 基础 </tag>
+            
+            <tag> 回顾 </tag>
             
             <tag> 事件 </tag>
             
