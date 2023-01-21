@@ -87,7 +87,7 @@
 <meta property="og:description" content="简要解释第三方cookie的原理和相关属性。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://cloud.az22c.top/with-credentials-vs-same-site.jpg-az22cgithub">
-<meta property="og:updated_time" content="2022-11-13T09:32:20.869Z">
+<meta property="og:updated_time" content="2023-01-19T08:04:14.318Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="02-第三方cookie(注：将被禁用)">
 <meta name="twitter:description" content="简要解释第三方cookie的原理和相关属性。">
@@ -479,7 +479,7 @@
 </blockquote>
 <h2 id="关于cookie跨站：withcredentials-和-samesite-属性"><a class="header-anchor" href="#关于cookie跨站：withcredentials-和-samesite-属性"></a>关于cookie跨站：withCredentials 和 sameSite 属性</h2>
 <blockquote>
-<p>【引用一下他处】什么是“同站”：浏览器同源指的是<strong>协议，域名，端口都相同</strong>；Cookie中的“同源”只关注域名，忽略协议和端口，也就是Cookie可以跨二级域名来访问，即也可以称为“同站”。</p>
+<p>【引用一下他处】什么是“同站”：浏览器同源指的是<strong>协议，主机名，端口都相同</strong>；Cookie中的“同源”只关注域名，忽略协议和端口，也就是Cookie可以跨二级域名来访问，即也可以称为“同站”。</p>
 <p>什么是“跨站”：浏览器本身是允许cookie同站通信的；而所谓的“跨站”，比如cookie跨站实现第三方cookie，实际上就是想利用浏览器更加“开放”的那些规则来突破“同站”的限制。</p>
 </blockquote>
 <p><img src="https://cloud.az22c.top/with-credentials-vs-same-site.jpg-az22cgithub" alt="!!!【必看 重要】概括说明图"></p>
@@ -537,7 +537,11 @@
 </ul>
 <h2 id="将被废弃的-第三方cookie的实现途径-本质上就是cookie跨站"><a class="header-anchor" href="#将被废弃的-第三方cookie的实现途径-本质上就是cookie跨站"></a>(将被废弃的)第三方Cookie的实现途径(本质上就是cookie跨站)</h2>
 <ul>
-<li><strong>第三方cookie(即cookie跨站)被告了，2023年将被全面禁止。谷歌的代替品链：  第三方Cookie(废弃)   ==&gt;  FLoC(还是能确定用户身份，推行受阻)  ==&gt; Topics(2022年年初提出)</strong></li>
+<li><strong>第三方cookie(即cookie跨站)被告了，2023年将被全面禁止。谷歌的代替品链：</strong>
+<ul>
+<li><strong>第三方Cookie(废弃)   ==&gt;  FLoC(还是能确定用户身份，推行受阻)  ==&gt; Topics(2022年年初提出)</strong></li>
+</ul>
+</li>
 <li>在过渡时期补足，可以使用浏览器指纹，但是效果当然没那么准确</li>
 <li>以往的被废弃的“第三方Cookie”的实现途径
 <ul>
@@ -560,7 +564,7 @@
         <p><span>本文标题:</span><a href="/2020/05/22/cross-origin-cross-site-cookie/">02-第三方cookie(注：将被禁用)</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2020-05-22, 17:39:45</p>
-        <!-- <p><span>最后更新:</span>2022-11-13, 17:32:20</p> -->
+        <!-- <p><span>最后更新:</span>2023-01-19, 16:04:14</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="02-第三方cookie(注：将被禁用)" href="/2020/05/22/cross-origin-cross-site-cookie/">https://blog.az22c.top/2020/05/22/cross-origin-cross-site-cookie/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://blog.az22c.top/2020/05/22/cross-origin-cross-site-cookie/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -657,13 +661,13 @@
             <div class="footer-left" style="vertical-align:middle;">
                 <img src="" style="vertical-align:middle; opacity:0" height="24">
                 <i class="fa fa-copyright" style="vertical-align:middle;"></i>
-                2017-2022 Alex Zhong
+                2017-2023 Alex Zhong
             </div>
 
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					
-						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,040</span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,041</span>
 					
 				</div>
             </div>

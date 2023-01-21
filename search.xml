@@ -3326,7 +3326,7 @@ function iterator (fn, next) {
 <p>因为前人总结得实在是太齐全了！这里只是做到基本列举齐全，然后做一些小小的补充。</p>
 <a id="more"></a>
 <h2 id="解决跨域问题"><a class="header-anchor" href="#解决跨域问题"></a>解决跨域问题</h2>
-<h3 id="同源限制：协议-域名-端口都相同"><a class="header-anchor" href="#同源限制：协议-域名-端口都相同"></a>同源限制：协议，域名，端口都相同</h3>
+<h3 id="同源限制：协议-主机名-端口都相同"><a class="header-anchor" href="#同源限制：协议-主机名-端口都相同"></a>同源限制：协议，主机名，端口都相同</h3>
 <p>更准确地来讲，同源限制体现在2个方面：</p>
 <p>1 <strong>若向工作在不同源的服务请求，限制响应的处理（client to server）</strong> 对于Ajax的影响在于，通过XMLHttpRequest实现的Ajax请求，能向不同的域提交请求，但是不允许获得响应的内容。例如，在abc.example.com下的页面，向def.example.com提交Ajax请求，响应的内容被限制 等等。</p>
 <p>2 <strong>无法获取不同源的document/浏览器存储数据等BOM和DOM （client to client）</strong> 可以说任何有关另外一个源的信息都无法得到：在baidu.com下的页面中包含的js代码，不能访问在google.com域名下的页面内容；甚至不同的子域名之间的页面也不能通过js代码互相访问。</p>
@@ -3357,9 +3357,9 @@ function iterator (fn, next) {
 </ul>
 </li>
 <li>CORS策略（跨域资源共享策略）：主要是后端的处理 <strong>(实质上主要用于ajax)</strong></li>
-<li>利用HTML5 postMessage （有关联的窗口/信道之间的按约定通信，若搭配iframe跨域能力更强）
+<li>利用HTML5 postMessage：postMessage(send) 和 onmessage。
 <ul>
-<li>postMessage(send) 和 onmessage。postMessage作为实例方法，关键是要搭配一个“window”或者channel的引用作为实例调用它</li>
+<li>想<strong>跨域</strong>则依赖另一个window对象的获取 比如window.opener或结合iframe</li>
 <li><a href="https://blog.csdn.net/zhuzhupozhuzhuxia/article/details/76795472" target="_blank" rel="noopener">postmessage辨别origin等能提高安全</a></li>
 </ul>
 </li>
@@ -3376,11 +3376,11 @@ function iterator (fn, next) {
 </li>
 <li>iframe + <code>window.name</code>
 <ul>
-<li>操作：iframe先引用跨域iframe再切换为引用同源的。后期同源即可从iframe外读取iframe里面的<code>window.name</code></li>
+<li>操作：iframe先引用跨域iframe再切换为引用同源的。最终iframe内外是同源，即可从iframe外读取iframe里面的<code>window.name</code></li>
 <li>原理：window.name属性的独特之处：name值在不同的页面（甚至不同域名）加载后依旧存在，并且可以支持非常长的 name 值（2MB）
 <ul>
 <li><strong>iframe就是持有window.name的“中间人”了</strong></li>
-<li>切换iframe的调度通常是用“监听iframe的onload事件”来实现</li>
+<li>切换iframe的网址：这个工作通常位于“监听iframe的onload事件”的回调中</li>
 </ul>
 </li>
 <li>缺点：每次通信都要创建一次iframe</li>
@@ -3391,7 +3391,7 @@ function iterator (fn, next) {
 <ul>
 <li>操作：多层嵌套iframe+最内层iframe是同源的+监听hash事件以驱动流程。</li>
 <li>原理：因为后来同源了，所以可以使用<code>window.parent.parent</code></li>
-<li>缺点：每次通信都要创建一次iframe；每次通信都要hash变化一次</li>
+<li>缺点：需要占用iframe的宿主的hash；每次通信都要创建2次iframe</li>
 </ul>
 </li>
 <li>Websocket：原生 WebSocket API 使用起来不太方便，我们使用Socket.io轮子
@@ -3423,42 +3423,8 @@ function iterator (fn, next) {
 <li>IE6-7，还是iframe，利用iframe父子引用+location.hash。</li>
 </ul>
 <h2 id="浏览器tab间通信"><a class="header-anchor" href="#浏览器tab间通信"></a>浏览器tab间通信</h2>
-<blockquote>
-<p>浏览器同源指的是<strong>协议，域名，端口都相同</strong></p>
-<p>sessionStorage不能跨标签或者窗口</p>
-</blockquote>
-<p><strong>【1】只能“同源”的思路：</strong></p>
-<ul>
-<li>尝试使用各种本地化存储(列举了该问题场景下比较常用的几种)：
-<ul>
-<li>localStorage + onstorage事件<del>（若设置了相同document.domain可以跨二级域名）</del>
-<ul>
-<li>onstorage事件是非当前(且需同源的)页面对localStorage进行修改时才会触发；当前页面修改localStorage不会触发本页面的监听函数</li>
-</ul>
-</li>
-<li>IndexedDB也是基于浏览器数据存储，区别是其实现通信需要轮询</li>
-</ul>
-</li>
-<li>tab间 Worker
-<ul>
-<li>SharedWorker 共享工作线程（只能同源，兼容性差）</li>
-<li>Service Worker(加postMessage) (没有详细研究过)</li>
-</ul>
-</li>
-</ul>
-<p><strong>【2】能跨域的思路：(其实就是在跨域的方法里面，能找到很多能应用到浏览器tab之间的！！)</strong></p>
-<ul>
-<li>使用cookie（Cookie中的同源只关注域名，忽略协议和端口，也就是Cookie可以跨二级域名来访问，也可以称为“同站”）</li>
-<li>【被废弃】document.domain已介绍了不是特别好用</li>
-<li>postMessage （能跨域） 尤其是可以在<code>window.open</code>父子tab之间使用
-<ul>
-<li>postMessage + MessageChannel</li>
-<li>postMessage + BroadCastChannel</li>
-</ul>
-</li>
-<li>websocket用服务器做中转</li>
-<li>iframe</li>
-</ul>
+<p><a href="https://juejin.cn/post/6844903811232825357" target="_blank" rel="noopener">建议直接阅读这篇文章</a></p>
+<p>链接中文章的各种方法按“能否跨域”来进行划分，是比较合理的。作为基础，本文已总结出“跨域通信”的方式，这样再看链接文就没有那么困难了。</p>
 ]]></content>
       
         <categories>
@@ -3492,7 +3458,7 @@ function iterator (fn, next) {
 </blockquote>
 <h2 id="关于cookie跨站：withcredentials-和-samesite-属性"><a class="header-anchor" href="#关于cookie跨站：withcredentials-和-samesite-属性"></a>关于cookie跨站：withCredentials 和 sameSite 属性</h2>
 <blockquote>
-<p>【引用一下他处】什么是“同站”：浏览器同源指的是<strong>协议，域名，端口都相同</strong>；Cookie中的“同源”只关注域名，忽略协议和端口，也就是Cookie可以跨二级域名来访问，即也可以称为“同站”。</p>
+<p>【引用一下他处】什么是“同站”：浏览器同源指的是<strong>协议，主机名，端口都相同</strong>；Cookie中的“同源”只关注域名，忽略协议和端口，也就是Cookie可以跨二级域名来访问，即也可以称为“同站”。</p>
 <p>什么是“跨站”：浏览器本身是允许cookie同站通信的；而所谓的“跨站”，比如cookie跨站实现第三方cookie，实际上就是想利用浏览器更加“开放”的那些规则来突破“同站”的限制。</p>
 </blockquote>
 <p><img src="https://cloud.az22c.top/with-credentials-vs-same-site.jpg-az22cgithub" alt="!!!【必看 重要】概括说明图"></p>
@@ -3550,7 +3516,11 @@ function iterator (fn, next) {
 </ul>
 <h2 id="将被废弃的-第三方cookie的实现途径-本质上就是cookie跨站"><a class="header-anchor" href="#将被废弃的-第三方cookie的实现途径-本质上就是cookie跨站"></a>(将被废弃的)第三方Cookie的实现途径(本质上就是cookie跨站)</h2>
 <ul>
-<li><strong>第三方cookie(即cookie跨站)被告了，2023年将被全面禁止。谷歌的代替品链：  第三方Cookie(废弃)   ==&gt;  FLoC(还是能确定用户身份，推行受阻)  ==&gt; Topics(2022年年初提出)</strong></li>
+<li><strong>第三方cookie(即cookie跨站)被告了，2023年将被全面禁止。谷歌的代替品链：</strong>
+<ul>
+<li><strong>第三方Cookie(废弃)   ==&gt;  FLoC(还是能确定用户身份，推行受阻)  ==&gt; Topics(2022年年初提出)</strong></li>
+</ul>
+</li>
 <li>在过渡时期补足，可以使用浏览器指纹，但是效果当然没那么准确</li>
 <li>以往的被废弃的“第三方Cookie”的实现途径
 <ul>
@@ -3920,9 +3890,9 @@ for (var i = 0; i &lt; 10; i++) {
 <h2 id="vue-lazyload-在使用方面"><a class="header-anchor" href="#vue-lazyload-在使用方面"></a>Vue-lazyload 在使用方面</h2>
 <p><strong>组件状态：</strong></p>
 <ul>
-<li>（pending --&gt; success  略）</li>
-<li>pending --&gt; loading</li>
-<li>pending --&gt; error</li>
+<li>loading</li>
+<li>loaded(即成功)</li>
+<li>error</li>
 <li>(兼容原生html，用到data-src，data-error，data-loading)</li>
 <li>相关的api：可以设置遇error重新请求的次数。loading的图片，error的图片。对应的回调能获取该img元素。</li>
 <li>样式钩子：内容没加载好之前，是需要显示loading的：loading的时候，会给img元素加上lazy=&quot;loading&quot;的属性，就用这个属性钩子来作为css的钩子就行了</li>
@@ -3962,7 +3932,7 @@ for (var i = 0; i &lt; 10; i++) {
 <h2 id="vue-lazyload-的实现原理"><a class="header-anchor" href="#vue-lazyload-的实现原理"></a>Vue-lazyload 的实现原理</h2>
 <p>监听sroll等等事件，可以选择 2 种模式(mode)的其一：</p>
 <blockquote>
-<p>一个是先保存引用作为订阅，之后再批量触发查询、判断；另一个是观察者模式</p>
+<p>一个是先保存大量引用作为订阅，之后再批量查询、判断；另一个是观察者模式</p>
 </blockquote>
 <ul>
 <li>event模式
@@ -5034,13 +5004,14 @@ MMM.prototype.map = function(func) {
 </li>
 <li>减少DOM显示数
 <ul>
-<li>(一个长度10000的商品列表，怎么显示)(移动设备内存存储数据过多dom也会崩掉)</li>
+<li>(移动设备内存存储数据过多dom也会崩掉)</li>
 <li>虚拟列表
 <ul>
 <li>(其实就保留三屏的列表，自制组件库scoll组件也面临这个性能问题)</li>
 <li>vue-virtual-scroller和react-virtualized等等</li>
 </ul>
 </li>
+<li>(一个长度10000的商品列表，怎么显示)：1懒加载 2时间分片 3虚拟列表</li>
 </ul>
 </li>
 <li>减少dom操作的次数</li>
@@ -7660,6 +7631,9 @@ var currentTarget = event.currentTarget;
       <content type="html"><![CDATA[<p>随着W3C不断推进DOM事件模型和IE浏览器事件模型的历史变化，为了方便理解，程序员们中逐渐形成 四种事件处理程序 的概念划分。</p>
 <a id="more"></a>
 <hr>
+<blockquote>
+<p>提示：本文章内容最后修改时间为2017年04月，部分内容可能已经过时</p>
+</blockquote>
 <p>在 JavaScript 中，通常分为四种事件处理程序：</p>
 <ol>
 <li>HTML事件处理程序</li>

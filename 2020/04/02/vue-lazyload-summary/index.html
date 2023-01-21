@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
 <meta property="og:description" content="Vue-lazyload 这个话题，可谓“前人之述备矣”。这里主要写写一些我认为比较重要的点，能够快速回顾这个“第三方组件”的原理和使用方法。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2022-11-13T09:32:20.878Z">
+<meta property="og:updated_time" content="2023-01-05T13:03:25.198Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue-lazyload 原理和使用 个人总结">
 <meta name="twitter:description" content="Vue-lazyload 这个话题，可谓“前人之述备矣”。这里主要写写一些我认为比较重要的点，能够快速回顾这个“第三方组件”的原理和使用方法。">
@@ -484,9 +484,9 @@
 <h2 id="vue-lazyload-在使用方面"><a class="header-anchor" href="#vue-lazyload-在使用方面"></a>Vue-lazyload 在使用方面</h2>
 <p><strong>组件状态：</strong></p>
 <ul>
-<li>（pending --&gt; success  略）</li>
-<li>pending --&gt; loading</li>
-<li>pending --&gt; error</li>
+<li>loading</li>
+<li>loaded(即成功)</li>
+<li>error</li>
 <li>(兼容原生html，用到data-src，data-error，data-loading)</li>
 <li>相关的api：可以设置遇error重新请求的次数。loading的图片，error的图片。对应的回调能获取该img元素。</li>
 <li>样式钩子：内容没加载好之前，是需要显示loading的：loading的时候，会给img元素加上lazy=&quot;loading&quot;的属性，就用这个属性钩子来作为css的钩子就行了</li>
@@ -526,7 +526,7 @@
 <h2 id="vue-lazyload-的实现原理"><a class="header-anchor" href="#vue-lazyload-的实现原理"></a>Vue-lazyload 的实现原理</h2>
 <p>监听sroll等等事件，可以选择 2 种模式(mode)的其一：</p>
 <blockquote>
-<p>一个是先保存引用作为订阅，之后再批量触发查询、判断；另一个是观察者模式</p>
+<p>一个是先保存大量引用作为订阅，之后再批量查询、判断；另一个是观察者模式</p>
 </blockquote>
 <ul>
 <li>event模式
@@ -571,7 +571,7 @@
         <p><span>本文标题:</span><a href="/2020/04/02/vue-lazyload-summary/">Vue-lazyload 原理和使用 个人总结</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2020-04-02, 12:00:44</p>
-        <!-- <p><span>最后更新:</span>2022-11-13, 17:32:20</p> -->
+        <!-- <p><span>最后更新:</span>2023-01-05, 21:03:25</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="Vue-lazyload 原理和使用 个人总结" href="/2020/04/02/vue-lazyload-summary/">https://blog.az22c.top/2020/04/02/vue-lazyload-summary/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://blog.az22c.top/2020/04/02/vue-lazyload-summary/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -668,13 +668,13 @@
             <div class="footer-left" style="vertical-align:middle;">
                 <img src="" style="vertical-align:middle; opacity:0" height="24">
                 <i class="fa fa-copyright" style="vertical-align:middle;"></i>
-                2017-2022 Alex Zhong
+                2017-2023 Alex Zhong
             </div>
 
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					
-						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,209</span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,208</span>
 					
 				</div>
             </div>

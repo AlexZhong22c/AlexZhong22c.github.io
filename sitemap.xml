@@ -2,6 +2,41 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.az22c.top/2017/07/01/js-event3/</loc>
+    
+    <lastmod>2023-01-21T13:21:52.999Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.az22c.top/2020/05/22/cross-origin-cross-tab/</loc>
+    
+    <lastmod>2023-01-20T12:47:51.122Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.az22c.top/2020/05/22/cross-origin-cross-site-cookie/</loc>
+    
+    <lastmod>2023-01-19T08:04:14.318Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.az22c.top/2020/04/02/vue-lazyload-summary/</loc>
+    
+    <lastmod>2023-01-05T13:03:25.198Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.az22c.top/2018/02/04/performance-optimized-summary/</loc>
+    
+    <lastmod>2023-01-05T09:19:38.589Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://blog.az22c.top/about/index.html</loc>
     
     <lastmod>2022-11-13T10:07:53.459Z</lastmod>
@@ -212,13 +247,6 @@
   </url>
   
   <url>
-    <loc>https://blog.az22c.top/2020/04/02/vue-lazyload-summary/</loc>
-    
-    <lastmod>2022-11-13T09:32:20.878Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://blog.az22c.top/2017/02/22/my-hexo-theme/</loc>
     
     <lastmod>2022-11-13T09:32:20.877Z</lastmod>
@@ -234,13 +262,6 @@
   
   <url>
     <loc>https://blog.az22c.top/2019/02/05/vertical-align-middle/</loc>
-    
-    <lastmod>2022-11-13T09:32:20.877Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://blog.az22c.top/2018/02/04/performance-optimized-summary/</loc>
     
     <lastmod>2022-11-13T09:32:20.877Z</lastmod>
     
@@ -380,13 +401,6 @@
   </url>
   
   <url>
-    <loc>https://blog.az22c.top/2017/07/01/js-event3/</loc>
-    
-    <lastmod>2022-11-13T09:32:20.873Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://blog.az22c.top/2017/03/27/ife-css-task01/</loc>
     
     <lastmod>2022-11-13T09:32:20.872Z</lastmod>
@@ -457,13 +471,6 @@
   </url>
   
   <url>
-    <loc>https://blog.az22c.top/2020/05/22/cross-origin-cross-tab/</loc>
-    
-    <lastmod>2022-11-13T09:32:20.870Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://blog.az22c.top/2017/09/07/css-border1/</loc>
     
     <lastmod>2022-11-13T09:32:20.870Z</lastmod>
@@ -486,13 +493,6 @@
   
   <url>
     <loc>https://blog.az22c.top/2022/05/22/admin-tree-widget/</loc>
-    
-    <lastmod>2022-11-13T09:32:20.869Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://blog.az22c.top/2020/05/22/cross-origin-cross-site-cookie/</loc>
     
     <lastmod>2022-11-13T09:32:20.869Z</lastmod>
     
