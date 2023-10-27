@@ -3549,11 +3549,11 @@ function iterator (fn, next) {
             
             <tag> 跨站 </tag>
             
+            <tag> Cookie </tag>
+            
             <tag> 面试题 </tag>
             
             <tag> 笔记副本 </tag>
-            
-            <tag> Cookie </tag>
             
         </tags>
         
@@ -5056,11 +5056,11 @@ MMM.prototype.map = function(func) {
         
         <tags>
             
-            <tag> 性能优化 </tag>
-            
             <tag> 面试题 </tag>
             
             <tag> 笔记副本 </tag>
+            
+            <tag> 性能优化 </tag>
             
             <tag> 回顾 </tag>
             
@@ -9343,9 +9343,9 @@ p {
             
             <tag> H5 </tag>
             
-            <tag> IFE </tag>
-            
             <tag> HTML </tag>
+            
+            <tag> IFE </tag>
             
         </tags>
         
