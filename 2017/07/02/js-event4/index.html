@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
 <meta property="og:description" content="此文用于快速回顾，不适合用来入门。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2022-11-13T09:32:20.873Z">
+<meta property="og:updated_time" content="2023-10-27T04:09:47.942Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浏览器事件冒泡或者捕获相关">
 <meta name="twitter:description" content="此文用于快速回顾，不适合用来入门。">
@@ -551,7 +551,7 @@ var currentTarget = event.currentTarget;
 <p>使用事件代理主要有两个优势：</p>
 <ol>
 <li>减少事件绑定，提升性能。之前你需要绑定一堆子节点，而现在你只需要绑定一个父节点即可。减少了绑定事件监听函数的数量。</li>
-<li>动态变化的 DOM 结构，仍然可以监听。以前，当一个 DOM 动态创建之后，不会带有任何事件监听，除非你重新执行事件监听函数；而使用事件监听无须担忧这个问题。</li>
+<li>动态变化的 DOM 结构，仍然可以监听。如果没有事件代理，当一个 DOM 动态创建之后，不会带有任何事件监听，除非你重新绑定事件监听函数；而使用事件代理无须担忧这个问题。</li>
 </ol>
 <h3 id="缺点："><a class="header-anchor" href="#缺点："></a>缺点：</h3>
 <p>好像没有缺点，妥善的管理和合理运用能够规避问题。</p>
@@ -581,7 +581,7 @@ var currentTarget = event.currentTarget;
 </code></pre>
 <h2 id="vue的事件冒泡和事件代理"><a class="header-anchor" href="#vue的事件冒泡和事件代理"></a>vue的事件冒泡和事件代理</h2>
 <ul>
-<li>vue在组件间不冒泡，在同一个组件内的事件是可以冒泡的。
+<li>vue在组件间不冒泡，在同一个组件内的事件是可以冒泡的。也就是组件内可以实现事件代理
 <ul>
 <li>(如果，以后能够成功实现组件间冒泡，那么就可以通过冒泡或事件代理来实现“跨组件通信”了)</li>
 </ul>
@@ -597,7 +597,7 @@ var currentTarget = event.currentTarget;
         <p><span>本文标题:</span><a href="/2017/07/02/js-event4/">浏览器事件冒泡或者捕获相关</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2017-07-02, 16:30:27</p>
-        <!-- <p><span>最后更新:</span>2022-11-13, 17:32:20</p> -->
+        <!-- <p><span>最后更新:</span>2023-10-27, 12:09:47</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="浏览器事件冒泡或者捕获相关" href="/2017/07/02/js-event4/">https://blog.az22c.top/2017/07/02/js-event4/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://blog.az22c.top/2017/07/02/js-event4/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -700,7 +700,7 @@ var currentTarget = event.currentTarget;
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					
-						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,836</span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,856</span>
 					
 				</div>
             </div>

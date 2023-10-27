@@ -3549,11 +3549,11 @@ function iterator (fn, next) {
             
             <tag> 跨站 </tag>
             
-            <tag> Cookie </tag>
-            
             <tag> 面试题 </tag>
             
             <tag> 笔记副本 </tag>
+            
+            <tag> Cookie </tag>
             
         </tags>
         
@@ -3900,17 +3900,22 @@ for (var i = 0; i &lt; 10; i++) {
 <p>--------------------------------    【我是分割线】   ----------------------------------</p>
 <p><strong>组件类型：</strong></p>
 <ul>
-<li><code>lazyImage</code> vs <code>lazyComponent</code>   最终转化为这2种自定义组件
+<li><code>lazyImage</code> vs <code>lazyComponent</code>   最终分别转化为这2种vue自定义组件。主要是用于懒加载图片；偶尔用于懒加载组件</li>
+<li>【1】懒加载图片：
 <ul>
-<li>主要是懒加载图片，偶尔懒加载组件</li>
-<li>lazyComponent该组件由库方提供，你只需要传入default slot（里面会调用this.$slots.default）就行了，这样可以<strong>随便传组件进去</strong>。</li>
+<li><code>v-lazy</code>和 它的变体<code>vue-lazy:background-image</code></li>
+<li><code>v-lazy-container(v-lazy.container)</code> 指定目标图片的外层容器
+<ul>
+<li>更精确指定<strong>被监听滚动</strong>的容器，<strong>若未定义则为最近一个overflow值为auto或scroll的父元素，</strong> 这个规则很实用
+<ul>
+<li>坑点 <a href="https://www.jianshu.com/p/d6f8bf71eb11" target="_blank" rel="noopener">container图片路径的使用规则又不一样</a></li>
 </ul>
 </li>
-<li><code>v-lazy</code> vs <code>v-lazy-container(v-lazy.container)</code>     + <code>vue-lazy:background-image</code>
-<ul>
-<li>v-lazy-container:更精确指定<strong>被监听滚动</strong>的容器，<strong>若未定义则为最近一个overflow值为auto或scroll的父元素，</strong> 这个规则很实用</li>
 </ul>
 </li>
+</ul>
+</li>
+<li>【2】懒加载组件：lazyComponent该组件由库方提供，你只需要传入default slot（里面会调用this.$slots.default）就行了，这样可以<strong>随便传组件进去</strong>。</li>
 </ul>
 <p>这样总结，是不是比网上的很多文章的脉络清晰多了？一下就能定位到自己想要的实现效果，根据思路一下就能理解它的很多api。</p>
 <h3 id="vue-lazyload-好用的地方："><a class="header-anchor" href="#vue-lazyload-好用的地方："></a>Vue-lazyload 好用的地方：</h3>
@@ -3954,7 +3959,7 @@ for (var i = 0; i &lt; 10; i++) {
 <ul>
 <li>操作：普通的传参和调用即可：
 <ul>
-<li>(初始的重置工作：该&quot;模式&quot;下的函数给<strong>目标容器</strong>解除监听<strong>目标对象</strong>scroll等等事件绑定)</li>
+<li>(初始的重置工作：该&quot;模式&quot;下的函数令<strong>目标对象</strong>解除监听<strong>目标容器</strong>scroll等等事件绑定)</li>
 <li>只需关注该api的“根元素”(默认就是视口viewport了)和<strong>目标对象</strong>做dom处理就够了</li>
 <li>通过observerOptions提供的数据来判断是否已在preload位置</li>
 </ul>
@@ -4904,9 +4909,10 @@ MMM.prototype.map = function(func) {
 </li>
 <li><strong>减少网络传输数量和次数</strong>
 <ul>
-<li>页面懒加载和图片懒加载
+<li>页面懒加载、组件懒加载、图片懒加载
 <ul>
-<li>vue-lazyload</li>
+<li>vue-lazyload (只支持vue2，vue3版本目前闭源待更新)</li>
+<li>vue3的(实验阶段)内置组件<code>&lt;Suspense&gt;</code></li>
 <li>图片异步懒加载</li>
 </ul>
 </li>
@@ -4917,7 +4923,6 @@ MMM.prototype.map = function(func) {
 <li>如果频率比较高的话改用redis存图片</li>
 </ul>
 </li>
-<li>避免空的src和href</li>
 <li>http keep-alive(也称为“长连接”)</li>
 <li>利用文件打包阶段的策略：来控制个数和大小和按使用频率分包
 <ul>
@@ -4945,7 +4950,7 @@ MMM.prototype.map = function(func) {
 <li>利用webpack按需引入</li>
 </ul>
 </li>
-<li>取代Cookies + Cookie free (减小http包体积)</li>
+<li>取代Cookie + Cookie free (减小http包体积)</li>
 <li>js、css打包压缩</li>
 <li>减少字体体积</li>
 <li>压缩html</li>
@@ -4959,13 +4964,14 @@ MMM.prototype.map = function(func) {
 <li>(图片格式选择：)
 <ul>
 <li>色彩丰富的小图用png（支持透明）</li>
-<li>大图(背景图、轮播图)要用jpg：体积小，不支持透明</li>
+<li>大图(背景图、轮播图)要用jpg：体积小，但不支持透明</li>
 <li>webp 但兼容性不是那么好，需要调研一下
 <ul>
+<li>（体积小，支持透明。越来越多图片查看器支持打开）</li>
 <li>微信基本用的是webp</li>
 </ul>
 </li>
-<li>svg：矢量图体积小，因为是标签需额外的计算，只不过不用网络请求：比如icon-font</li>
+<li>svg：矢量图体积小，因为是标签，需额外的计算，只不过不用网络请求：比如icon-font</li>
 <li>base64：在webpack打包的时候file-loader自动把小图转成base64</li>
 <li>CSS代替图片(减少dom)：image-background和border-image等</li>
 </ul>
@@ -4996,7 +5002,7 @@ MMM.prototype.map = function(func) {
 </li>
 <li>首屏临时显示各种的loading提示 或者懒加载
 <ul>
-<li>无限滚动懒加载列表</li>
+<li>无限滚动懒加载列表：上拉加载、下拉加载</li>
 <li>骨架屏：vue-skeleton-webpack-plugin</li>
 <li>首屏简单loading动画</li>
 <li>NProgress 顶部加载进度条</li>
@@ -5005,17 +5011,17 @@ MMM.prototype.map = function(func) {
 <li>减少DOM显示数
 <ul>
 <li>(移动设备内存存储数据过多dom也会崩掉)</li>
-<li>虚拟列表
+<li>《一个长度10000的商品列表，怎么显示》：1懒加载 2时间分片 3虚拟列表</li>
+<li>虚拟列表(其实就保留三屏的列表)
 <ul>
-<li>(其实就保留三屏的列表，自制组件库scoll组件也面临这个性能问题)</li>
 <li>vue-virtual-scroller和react-virtualized等等</li>
 </ul>
 </li>
-<li>(一个长度10000的商品列表，怎么显示)：1懒加载 2时间分片 3虚拟列表</li>
+<li>时间分片(requestAnimationFrame+DocumentFragments)</li>
 </ul>
 </li>
 <li>减少dom操作的次数</li>
-<li>减少重排重绘 <strong>(和避免强制重排强制重绘)</strong></li>
+<li>减少重排重绘 <strong>(和“避免强制重排强制重绘”)</strong></li>
 <li>事件委托</li>
 <li>web workers分担主线程的“任务”</li>
 <li>提高css选择器的效率</li>
@@ -5451,11 +5457,11 @@ border-bottom-left-radius: 44px 88px;
         
         <tags>
             
-            <tag> 回顾 </tag>
-            
             <tag> radius </tag>
             
             <tag> 边框 </tag>
+            
+            <tag> 回顾 </tag>
             
         </tags>
         
@@ -6443,11 +6449,11 @@ instance2.sayName();//&quot;hu&quot;
         
         <tags>
             
+            <tag> 原理 </tag>
+            
             <tag> 面向对象 </tag>
             
             <tag> 原型系统 </tag>
-            
-            <tag> 原理 </tag>
             
         </tags>
         
@@ -7565,7 +7571,7 @@ var currentTarget = event.currentTarget;
 <p>使用事件代理主要有两个优势：</p>
 <ol>
 <li>减少事件绑定，提升性能。之前你需要绑定一堆子节点，而现在你只需要绑定一个父节点即可。减少了绑定事件监听函数的数量。</li>
-<li>动态变化的 DOM 结构，仍然可以监听。以前，当一个 DOM 动态创建之后，不会带有任何事件监听，除非你重新执行事件监听函数；而使用事件监听无须担忧这个问题。</li>
+<li>动态变化的 DOM 结构，仍然可以监听。如果没有事件代理，当一个 DOM 动态创建之后，不会带有任何事件监听，除非你重新绑定事件监听函数；而使用事件代理无须担忧这个问题。</li>
 </ol>
 <h3 id="缺点："><a class="header-anchor" href="#缺点："></a>缺点：</h3>
 <p>好像没有缺点，妥善的管理和合理运用能够规避问题。</p>
@@ -7595,7 +7601,7 @@ var currentTarget = event.currentTarget;
 </code></pre>
 <h2 id="vue的事件冒泡和事件代理"><a class="header-anchor" href="#vue的事件冒泡和事件代理"></a>vue的事件冒泡和事件代理</h2>
 <ul>
-<li>vue在组件间不冒泡，在同一个组件内的事件是可以冒泡的。
+<li>vue在组件间不冒泡，在同一个组件内的事件是可以冒泡的。也就是组件内可以实现事件代理
 <ul>
 <li>(如果，以后能够成功实现组件间冒泡，那么就可以通过冒泡或事件代理来实现“跨组件通信”了)</li>
 </ul>
@@ -7632,7 +7638,7 @@ var currentTarget = event.currentTarget;
 <a id="more"></a>
 <hr>
 <blockquote>
-<p>提示：本文章内容最后修改时间为2017年04月，部分内容可能已经过时</p>
+<p>提示：本文章内容最后修改时间为2017年07月，部分内容可能已经过时</p>
 </blockquote>
 <p>在 JavaScript 中，通常分为四种事件处理程序：</p>
 <ol>
@@ -9337,9 +9343,9 @@ p {
             
             <tag> H5 </tag>
             
-            <tag> HTML </tag>
-            
             <tag> IFE </tag>
+            
+            <tag> HTML </tag>
             
         </tags>
         

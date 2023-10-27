@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
 <meta property="og:description" content="Vue-lazyload 这个话题，可谓“前人之述备矣”。这里主要写写一些我认为比较重要的点，能够快速回顾这个“第三方组件”的原理和使用方法。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2023-01-05T13:03:25.198Z">
+<meta property="og:updated_time" content="2023-10-27T04:09:48.366Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue-lazyload 原理和使用 个人总结">
 <meta name="twitter:description" content="Vue-lazyload 这个话题，可谓“前人之述备矣”。这里主要写写一些我认为比较重要的点，能够快速回顾这个“第三方组件”的原理和使用方法。">
@@ -434,7 +434,7 @@
 
 	<br />
 	<p style="height:7px;"/>
-	<p style="height:20px;font-family:KaiTi,LiSu,'宋体',sans-serif;color:#DBDBDB;font-size:12px;">预计阅读4分钟</p>
+	<p style="height:20px;font-family:KaiTi,LiSu,'宋体',sans-serif;color:#DBDBDB;font-size:12px;">预计阅读5分钟</p>
 
     </div>
   
@@ -494,17 +494,22 @@
 <p>--------------------------------    【我是分割线】   ----------------------------------</p>
 <p><strong>组件类型：</strong></p>
 <ul>
-<li><code>lazyImage</code> vs <code>lazyComponent</code>   最终转化为这2种自定义组件
+<li><code>lazyImage</code> vs <code>lazyComponent</code>   最终分别转化为这2种vue自定义组件。主要是用于懒加载图片；偶尔用于懒加载组件</li>
+<li>【1】懒加载图片：
 <ul>
-<li>主要是懒加载图片，偶尔懒加载组件</li>
-<li>lazyComponent该组件由库方提供，你只需要传入default slot（里面会调用this.$slots.default）就行了，这样可以<strong>随便传组件进去</strong>。</li>
+<li><code>v-lazy</code>和 它的变体<code>vue-lazy:background-image</code></li>
+<li><code>v-lazy-container(v-lazy.container)</code> 指定目标图片的外层容器
+<ul>
+<li>更精确指定<strong>被监听滚动</strong>的容器，<strong>若未定义则为最近一个overflow值为auto或scroll的父元素，</strong> 这个规则很实用
+<ul>
+<li>坑点 <a href="https://www.jianshu.com/p/d6f8bf71eb11" target="_blank" rel="noopener">container图片路径的使用规则又不一样</a></li>
 </ul>
 </li>
-<li><code>v-lazy</code> vs <code>v-lazy-container(v-lazy.container)</code>     + <code>vue-lazy:background-image</code>
-<ul>
-<li>v-lazy-container:更精确指定<strong>被监听滚动</strong>的容器，<strong>若未定义则为最近一个overflow值为auto或scroll的父元素，</strong> 这个规则很实用</li>
 </ul>
 </li>
+</ul>
+</li>
+<li>【2】懒加载组件：lazyComponent该组件由库方提供，你只需要传入default slot（里面会调用this.$slots.default）就行了，这样可以<strong>随便传组件进去</strong>。</li>
 </ul>
 <p>这样总结，是不是比网上的很多文章的脉络清晰多了？一下就能定位到自己想要的实现效果，根据思路一下就能理解它的很多api。</p>
 <h3 id="vue-lazyload-好用的地方："><a class="header-anchor" href="#vue-lazyload-好用的地方："></a>Vue-lazyload 好用的地方：</h3>
@@ -548,7 +553,7 @@
 <ul>
 <li>操作：普通的传参和调用即可：
 <ul>
-<li>(初始的重置工作：该&quot;模式&quot;下的函数给<strong>目标容器</strong>解除监听<strong>目标对象</strong>scroll等等事件绑定)</li>
+<li>(初始的重置工作：该&quot;模式&quot;下的函数令<strong>目标对象</strong>解除监听<strong>目标容器</strong>scroll等等事件绑定)</li>
 <li>只需关注该api的“根元素”(默认就是视口viewport了)和<strong>目标对象</strong>做dom处理就够了</li>
 <li>通过observerOptions提供的数据来判断是否已在preload位置</li>
 </ul>
@@ -571,7 +576,7 @@
         <p><span>本文标题:</span><a href="/2020/04/02/vue-lazyload-summary/">Vue-lazyload 原理和使用 个人总结</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2020-04-02, 12:00:44</p>
-        <!-- <p><span>最后更新:</span>2023-01-05, 21:03:25</p> -->
+        <!-- <p><span>最后更新:</span>2023-10-27, 12:09:48</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="Vue-lazyload 原理和使用 个人总结" href="/2020/04/02/vue-lazyload-summary/">https://blog.az22c.top/2020/04/02/vue-lazyload-summary/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://blog.az22c.top/2020/04/02/vue-lazyload-summary/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -674,7 +679,7 @@
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					
-						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,208</span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,254</span>
 					
 				</div>
             </div>
