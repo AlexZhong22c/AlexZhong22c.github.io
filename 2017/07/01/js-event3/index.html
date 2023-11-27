@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
 <meta property="og:description" content="随着W3C不断推进DOM事件模型和IE浏览器事件模型的历史变化，为了方便理解，程序员们中逐渐形成 四种事件处理程序 的概念划分。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2023-11-27T13:23:37.901Z">
+<meta property="og:updated_time" content="2023-11-27T13:29:30.905Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js四种事件处理程序">
 <meta name="twitter:description" content="随着W3C不断推进DOM事件模型和IE浏览器事件模型的历史变化，为了方便理解，程序员们中逐渐形成 四种事件处理程序 的概念划分。">
@@ -513,10 +513,10 @@
 </table>
 <h2 id="html事件处理程序"><a class="header-anchor" href="#html事件处理程序"></a>HTML事件处理程序</h2>
 <p>在HTML的内联属性中添加事件处理。</p>
-<pre><code class="language-html">&lt;button onclick=&quot;alert('Hello world!')&quot;&gt;按钮&lt;button/&gt;
+<pre><code class="language-html">&lt;button onclick=&quot;alert('Hello world!')&quot;&gt;按钮&lt;/button&gt;
 </code></pre>
 <p>如上，可直接在<code>onclick = &quot;&quot;</code>里添加执行语句；也可如下，调用一个函数：</p>
-<pre><code class="language-html">&lt;button onclick=&quot;showMessage()&quot;&gt;按钮&lt;button/&gt;
+<pre><code class="language-html">&lt;button onclick=&quot;showMessage()&quot;&gt;按钮&lt;/button&gt;
 &lt;script&gt; function showMessage(){ alert(&quot;Hello world!&quot;); } &lt;/script&gt;
 </code></pre>
 <p><strong>优势：</strong> 代码直观、方便。</p>
@@ -531,14 +531,17 @@ element.onclick = function(){
 };
 </code></pre>
 <p>在事件的冒泡阶段触发回调。</p>
-<p><strong>优势：</strong> 具有跨浏览器的优势。</p>
-<p><strong>劣势</strong>：</p>
-<p>因为直接赋值给对应 DOM object 属性，如果你在后面代码中再次为 <code>element</code> 绑定一个回调函数，会覆盖掉之前回调函数的内容。通俗来说就是很难实现多个绑定。</p>
+<ul>
+<li><strong>优势：</strong> 具有跨浏览器的优势。</li>
+<li><strong>劣势</strong>：只能绑定1个回调函数
+<ul>
+<li>因为直接赋值给对应 DOM object 属性，如果你在后面代码中再次为 <code>element</code> 绑定一个回调函数，会覆盖掉之前回调函数的内容。通俗来说就是很难实现多个绑定。</li>
+<li>虽然也可以用一些小技巧实现<strong>多个绑定</strong>，但还是推荐下面的DOM2级事件处理程序实现<strong>多个绑定</strong></li>
+</ul>
+</li>
+</ul>
 <blockquote>
-<p>虽然也可以用一些小技巧实现<strong>多个绑定</strong>，但还是推荐下面的DOM2级事件处理程序实现<strong>多个绑定</strong></p>
-</blockquote>
-<blockquote>
-<p>1级DOM–(为什么没有1级DOM)</p>
+<p>1级DOM-----(为什么没有1级DOM)</p>
 <p>DOM级别1于1998年10月1日成为W3C推荐标准。1级DOM标准中并没有定义事件相关的内容，所以没有所谓的1级DOM事件模型。在2级DOM中除了定义了一些DOM相关的操作之外还定义了一个事件模型 ，这个标准下的事件模型就是我们所说的2级DOM事件模型</p>
 </blockquote>
 <h2 id="dom2级事件处理程序"><a class="header-anchor" href="#dom2级事件处理程序"></a>DOM2级事件处理程序</h2>
@@ -548,7 +551,7 @@ btn.addEventListener('click', function(){
 }, false);
 </code></pre>
 <p>addEventListener是<strong>标准的事件处理程序</strong>，亦称为绑定事件监听，提供三个参数可供传递。(IE9+也支持addEventListener)</p>
-<p>第三个参数是一个布尔值，<code>true</code>表示在捕获阶段被处理，<code>fasle</code>表示在冒泡阶段被处理，考虑到浏览器的兼容问题，一般使用<code>false</code>。</p>
+<p>第三个参数是一个布尔值，<code>true</code>表示在捕获阶段被处理，<code>false</code>表示在冒泡阶段被处理，考虑到浏览器的兼容问题，一般使用<code>false</code>。</p>
 <p><strong>优势：</strong> 可以为一个元素添加多个事件处理程序。</p>
 <h2 id="ie事件处理程序"><a class="header-anchor" href="#ie事件处理程序"></a>IE事件处理程序</h2>
 <blockquote>
@@ -565,11 +568,11 @@ btn.attachEvent(&quot;onclick&quot;, function(){
 <p>区别在于，第二个参数传入的是<code>onclick</code>而并非<code>click</code>，且IE只支持在冒泡阶段进行程序处理，所以没有第三个参数布尔值的选择。</p>
 <p>此外，如果为同一个元素添加了两个事件处理程序，addEventListener会以添加的顺序依次执行事件处理，而attachEvent则相反。</p>
 <blockquote>
-<p>如果要封装兼容attachEvent和addEventListener：因为attachEvent没有第三个参数，也就是说attachEvent只支持监听冒泡，所以为了统一，在使用addEventListener的时候第三参数设置为 false。</p>
+<p>如果要封装兼容attachEvent和addEventListener：因为attachEvent没有第三个参数，也就是说attachEvent只支持监听冒泡，所以为了与IE表现一致，在使用addEventListener的时候第三参数设置为 false。</p>
 </blockquote>
 <h2 id="总结"><a class="header-anchor" href="#总结"></a>总结</h2>
 <ul>
-<li>一般情况下为了最大限度发挥事件处理程序的作用，使用标准事件处理程序，即addEventListener，并且把第三个参数设为<code>fasle</code>；</li>
+<li>一般情况下为了最大限度发挥事件处理程序的作用，使用标准事件处理程序，即addEventListener，并且把第三个参数设为<code>false</code>；</li>
 <li>如果专门为了兼容IE，则使用attachEvent；</li>
 <li>如果是在编写一个小demo，为了简单快捷，可以使用DOM0级处理程序或者考虑HTML处理程序。</li>
 </ul>
@@ -602,7 +605,7 @@ element.removeEventListener('click', fun, false);
         <p><span>本文标题:</span><a href="/2017/07/01/js-event3/">js四种事件处理程序</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2017-07-01, 16:30:27</p>
-        <!-- <p><span>最后更新:</span>2023-11-27, 21:23:37</p> -->
+        <!-- <p><span>最后更新:</span>2023-11-27, 21:29:30</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="js四种事件处理程序" href="/2017/07/01/js-event3/">https://blog.az22c.top/2017/07/01/js-event3/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://blog.az22c.top/2017/07/01/js-event3/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -705,7 +708,7 @@ element.removeEventListener('click', fun, false);
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					
-						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,369</span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,383</span>
 					
 				</div>
             </div>
