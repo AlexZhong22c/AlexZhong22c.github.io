@@ -7658,7 +7658,7 @@ var currentTarget = event.currentTarget;
 <li>DOM2事件处理程序</li>
 <li>IE事件处理程序</li>
 </ol>
-<h2 id="简单比较"><a class="header-anchor" href="#简单比较"></a>简单比较</h2>
+<hr>
 <table>
 <thead>
 <tr>
