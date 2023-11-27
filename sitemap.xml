@@ -2,6 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.az22c.top/2017/07/01/js-event3/</loc>
+    
+    <lastmod>2023-11-27T12:38:30.605Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.az22c.top/2020/05/22/cross-origin-cross-tab/</loc>
+    
+    <lastmod>2023-11-21T04:13:07.432Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.az22c.top/2020/05/22/cross-origin-cross-site/</loc>
+    
+    <lastmod>2023-11-20T09:17:38.359Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.az22c.top/2018/02/04/performance-optimized-summary/</loc>
+    
+    <lastmod>2023-11-16T07:33:59.826Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://blog.az22c.top/2017/02/24/webapp-intro/</loc>
     
     <lastmod>2023-10-27T04:09:48.866Z</lastmod>
@@ -233,13 +261,6 @@
   </url>
   
   <url>
-    <loc>https://blog.az22c.top/2018/02/04/performance-optimized-summary/</loc>
-    
-    <lastmod>2023-10-27T04:09:48.259Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://blog.az22c.top/2017/02/22/my-hexo-theme/</loc>
     
     <lastmod>2023-10-27T04:09:48.242Z</lastmod>
@@ -352,13 +373,6 @@
   </url>
   
   <url>
-    <loc>https://blog.az22c.top/2017/07/01/js-event3/</loc>
-    
-    <lastmod>2023-10-27T04:09:47.918Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://blog.az22c.top/2017/05/07/js-date/</loc>
     
     <lastmod>2023-10-27T04:09:47.901Z</lastmod>
@@ -446,20 +460,6 @@
     <loc>https://blog.az22c.top/2017/09/07/css-border1/</loc>
     
     <lastmod>2023-10-27T04:09:47.649Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://blog.az22c.top/2020/05/22/cross-origin-cross-tab/</loc>
-    
-    <lastmod>2023-10-27T04:09:47.633Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://blog.az22c.top/2020/05/22/cross-origin-cross-site/</loc>
-    
-    <lastmod>2023-10-27T04:09:47.617Z</lastmod>
     
   </url>
   

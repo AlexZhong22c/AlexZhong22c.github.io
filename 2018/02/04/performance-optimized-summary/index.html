@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
 <meta property="og:description" content="此文用于快速回顾，不适合用来入门。如果想做一个系统性的归纳总结、以便查询，可以参考以下概述。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2023-10-27T04:09:48.259Z">
+<meta property="og:updated_time" content="2023-11-16T07:33:59.826Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Web前端性能优化概述">
 <meta name="twitter:description" content="此文用于快速回顾，不适合用来入门。如果想做一个系统性的归纳总结、以便查询，可以参考以下概述。">
@@ -434,7 +434,7 @@
 
 	<br />
 	<p style="height:7px;"/>
-	<p style="height:20px;font-family:KaiTi,LiSu,'宋体',sans-serif;color:#DBDBDB;font-size:12px;">预计阅读5分钟</p>
+	<p style="height:20px;font-family:KaiTi,LiSu,'宋体',sans-serif;color:#DBDBDB;font-size:12px;">预计阅读6分钟</p>
 
     </div>
   
@@ -495,6 +495,11 @@
 <ul>
 <li>如果你的网站性能，优化到能令用户满意，就不用无端作死追求极致的性能</li>
 <li>性能优化难有终点和尽头，尤其是多人协作项目，如果追求极致优化通常会引入隐性的问题和bug</li>
+</ul>
+</li>
+<li>基于业务场景数量关系：在纯技术角度的性能优化达到瓶颈之后，尝试基于业务进行性能优化。
+<ul>
+<li>即，根据监控系统的数据分析，xxx量（比如展示商品数量） 和 xxx性能指标（比如首屏渲染耗时） 之间的关系，看看有没有飙升或者升到一个不合理的范围。</li>
 </ul>
 </li>
 </ul>
@@ -617,7 +622,7 @@
 <li>NProgress 顶部加载进度条</li>
 </ul>
 </li>
-<li>减少DOM显示数
+<li>减少DOM显示数（和减少DOM嵌套层级）
 <ul>
 <li>(移动设备内存存储数据过多dom也会崩掉)</li>
 <li>《一个长度10000的商品列表，怎么显示》：1懒加载 2时间分片 3虚拟列表</li>
@@ -663,7 +668,7 @@
         <p><span>本文标题:</span><a href="/2018/02/04/performance-optimized-summary/">Web前端性能优化概述</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2018-02-04, 16:30:27</p>
-        <!-- <p><span>最后更新:</span>2023-10-27, 12:09:48</p> -->
+        <!-- <p><span>最后更新:</span>2023-11-16, 15:33:59</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="Web前端性能优化概述" href="/2018/02/04/performance-optimized-summary/">https://blog.az22c.top/2018/02/04/performance-optimized-summary/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://blog.az22c.top/2018/02/04/performance-optimized-summary/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -766,7 +771,7 @@
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					
-						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,522</span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,629</span>
 					
 				</div>
             </div>

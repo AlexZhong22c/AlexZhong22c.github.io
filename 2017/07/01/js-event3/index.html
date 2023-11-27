@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
 <meta property="og:description" content="随着W3C不断推进DOM事件模型和IE浏览器事件模型的历史变化，为了方便理解，程序员们中逐渐形成 四种事件处理程序 的概念划分。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2023-10-27T04:09:47.918Z">
+<meta property="og:updated_time" content="2023-11-27T12:38:30.605Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js四种事件处理程序">
 <meta name="twitter:description" content="随着W3C不断推进DOM事件模型和IE浏览器事件模型的历史变化，为了方便理解，程序员们中逐渐形成 四种事件处理程序 的概念划分。">
@@ -491,7 +491,7 @@
 <th>HTML</th>
 <th>DOM0级</th>
 <th>DOM2级</th>
-<th>IE</th>
+<th>IE【后于2022年报废】</th>
 </tr>
 </thead>
 <tbody>
@@ -503,71 +503,82 @@
 <td><code>attachEvent()</code></td>
 </tr>
 <tr>
-<td>作用域</td>
-<td>扩展的作用域（全局）</td>
-<td>元素的作用域</td>
-<td>元素的作用域</td>
-<td>全局作用域</td>
-</tr>
-<tr>
 <td>触发阶段</td>
 <td></td>
 <td>冒泡阶段</td>
-<td>冒泡/捕获阶段</td>
+<td>冒泡/捕获阶段皆可</td>
 <td>冒泡阶段</td>
 </tr>
 </tbody>
 </table>
 <h2 id="html事件处理程序"><a class="header-anchor" href="#html事件处理程序"></a>HTML事件处理程序</h2>
 <p>在HTML的内联属性中添加事件处理。</p>
-<pre><code>&lt;input type=&quot;button&quot; value=&quot;Click&quot; onclick=&quot;alert('Hello world!')&quot; /&gt;
+<pre><code class="language-html">&lt;button onclick=&quot;alert('Hello world!')&quot;&gt;按钮&lt;button/&gt;
 </code></pre>
 <p>如上，可直接在<code>onclick = &quot;&quot;</code>里添加执行语句；也可如下，调用一个函数：</p>
-<pre><code>&lt;input type=&quot;button&quot; value=&quot;Click Me&quot; onclick=&quot;showMessage()&quot; /&gt;
-&lt;script type=&quot;text/javascript&quot;&gt; function showMessage(){ alert(&quot;Hello world!&quot;); } &lt;/script&gt;
+<pre><code class="language-html">&lt;button onclick=&quot;showMessage()&quot;&gt;按钮&lt;button/&gt;
+&lt;script&gt; function showMessage(){ alert(&quot;Hello world!&quot;); } &lt;/script&gt;
 </code></pre>
-<p>关于它的执行作用域，比较特别，是不断扩展、修改的。可以访问到document以及元素本身的成员，就像访问局部变量一样。</p>
-<p><strong>优势：</strong></p>
-<p>显而易见的直观、方便，在某些情况下使用尤其便捷，比如统计某个按钮/链接的点击次数。</p>
-<p><strong>劣势</strong>：</p>
-<p>html和javascript耦合，当需要修改时，就会一下进行两处变动，可维护性是很差的。</p>
-<p>在事件与调用函数分离时，如果调用函数较晚加载，就会出现点击事件而无响应的情况。</p>
+<p><strong>优势：</strong> 代码直观、方便。</p>
+<p><strong>劣势：</strong> 放任其中前1种写法会导致html和javascript重度耦合，代码不易读。</p>
 <blockquote>
-<p>而在现今，比如Vue.js，框架本身能够补足这种写法的劣势，越来越多的主流JavaScript框架都是推崇这种内联属性的写法。</p>
+<p>而在现今，比如Vue.js，框架与使用者通过规范化代码能够削弱“代码耦合”这种缺点，越来越多的主流JavaScript框架都是推崇这种内联属性的写法。</p>
 </blockquote>
 <h2 id="dom0级事件处理程序"><a class="header-anchor" href="#dom0级事件处理程序"></a>DOM0级事件处理程序</h2>
-<pre><code>var element = document.getElementById(&quot;myBtn&quot;); 
+<pre><code class="language-JavaScript">var element = document.getElementById(&quot;myBtn&quot;); 
 element.onclick = function(){
 //操作
 };
 </code></pre>
-<p>在事件的冒泡阶段被处理。</p>
-<p>作用域是元素的作用域，换句话说，就是程序中的 <code>this</code>引用当前元素。</p>
-<p><strong>优势：</strong></p>
-<p>简单明晰，易于使用和理解。并且具有跨浏览器的优势。</p>
+<p>在事件的冒泡阶段触发回调。</p>
+<p><strong>优势：</strong> 具有跨浏览器的优势。</p>
 <p><strong>劣势</strong>：</p>
-<p>因为直接赋值给对应属性，如果你在后面代码中再次为 <code>element</code> 绑定一个回调函数，会覆盖掉之前回调函数的内容，通俗来说就是很难实现多个绑定。</p>
-<p>代码运行以前不会指定事件处理程序,因此如果这些代码在页面中位于按钮后面,就有可能在一段时间内没有响应。</p>
+<p>因为直接赋值给对应 DOM object 属性，如果你在后面代码中再次为 <code>element</code> 绑定一个回调函数，会覆盖掉之前回调函数的内容。通俗来说就是很难实现多个绑定。</p>
 <blockquote>
 <p>虽然也可以用一些小技巧实现<strong>多个绑定</strong>，但还是推荐下面的DOM2级事件处理程序实现<strong>多个绑定</strong></p>
 </blockquote>
-<h3 id="dom0移除事件绑定"><a class="header-anchor" href="#dom0移除事件绑定"></a>DOM0移除事件绑定</h3>
-<p>如果想要删除element的点击事件，将其置为null即可：</p>
-<pre><code>element.onclick = null
-</code></pre>
 <blockquote>
 <p>1级DOM–(为什么没有1级DOM)</p>
 <p>DOM级别1于1998年10月1日成为W3C推荐标准。1级DOM标准中并没有定义事件相关的内容，所以没有所谓的1级DOM事件模型。在2级DOM中除了定义了一些DOM相关的操作之外还定义了一个事件模型 ，这个标准下的事件模型就是我们所说的2级DOM事件模型</p>
 </blockquote>
 <h2 id="dom2级事件处理程序"><a class="header-anchor" href="#dom2级事件处理程序"></a>DOM2级事件处理程序</h2>
-<pre><code>var btn = document.getElementById('btn');
+<pre><code class="language-JavaScript">var btn = document.getElementById('btn');
 btn.addEventListener('click', function(){ 
   alert('你点击了这里');
 }, false);
 </code></pre>
 <p>addEventListener是<strong>标准的事件处理程序</strong>，亦称为绑定事件监听，提供三个参数可供传递。(IE9+也支持addEventListener)</p>
-<p>第三个参数是一个布尔值，<code>true</code>表示在捕获阶段被处理，<code>fasle</code>表示在冒泡阶段被处理，考虑到IE的兼容问题，一般不使用<code>true</code>。</p>
+<p>第三个参数是一个布尔值，<code>true</code>表示在捕获阶段被处理，<code>fasle</code>表示在冒泡阶段被处理，考虑到浏览器的兼容问题，一般使用<code>false</code>。</p>
 <p><strong>优势：</strong> 可以为一个元素添加多个事件处理程序。</p>
+<h2 id="ie事件处理程序"><a class="header-anchor" href="#ie事件处理程序"></a>IE事件处理程序</h2>
+<blockquote>
+<p>【对于许多年前】IE 浏览器就是特立独行，它对于事件的操作与标准有一些差异。不过 IE 浏览器现在也开始慢慢努力改造，让浏览器变得更加标准。
+【对于2022年后】IE正式宣布报废。只有极少数装着旧Windows系统的机器在用。</p>
+</blockquote>
+<pre><code class="language-js">var btn = document.getElementById(&quot;myBtn&quot;);
+btn.attachEvent(&quot;onclick&quot;, function(){ 
+  alert(&quot;Clicked&quot;);
+});
+</code></pre>
+<p>（IE事件处理程序：IE5到IE10支持，IE11就不再支持了。但是最好应用于IE5到IE8，因为IE9之后又略有变化）</p>
+<p>实际上与addEventListener的使用十分相似。</p>
+<p>区别在于，第二个参数传入的是<code>onclick</code>而并非<code>click</code>，且IE只支持在冒泡阶段进行程序处理，所以没有第三个参数布尔值的选择。</p>
+<p>此外，如果为同一个元素添加了两个事件处理程序，addEventListener会以添加的顺序依次执行事件处理，而attachEvent则相反。</p>
+<blockquote>
+<p>如果要封装兼容attachEvent和addEventListener：因为attachEvent没有第三个参数，也就是说attachEvent只支持监听冒泡，所以为了统一，在使用addEventListener的时候第三参数设置为 false。</p>
+</blockquote>
+<h2 id="总结"><a class="header-anchor" href="#总结"></a>总结</h2>
+<ul>
+<li>一般情况下为了最大限度发挥事件处理程序的作用，使用标准事件处理程序，即addEventListener，并且把第三个参数设为<code>fasle</code>；</li>
+<li>如果专门为了兼容IE，则使用attachEvent；</li>
+<li>如果是在编写一个小demo，为了简单快捷，可以使用DOM0级处理程序或者考虑HTML处理程序。</li>
+</ul>
+<p>所谓的跨浏览器的事件处理程序代码，就是基于以上这些api来实现的。</p>
+<h2 id="附录"><a class="header-anchor" href="#附录"></a>附录</h2>
+<h3 id="dom0移除事件绑定"><a class="header-anchor" href="#dom0移除事件绑定"></a>DOM0移除事件绑定</h3>
+<p>如果想要移除element的“点击事件绑定”，将其置为null即可：</p>
+<pre><code>element.onclick = null
+</code></pre>
 <h3 id="dom2移除事件监听"><a class="header-anchor" href="#dom2移除事件监听"></a>DOM2移除事件监听</h3>
 <p>需要注意的是，<strong>绑定事件时的回调函数一般不能是匿名函数，</strong> 必须是一个声明的函数，因为解除事件绑定时需要传递这个回调函数的引用，才可以断开绑定。例如：</p>
 <pre><code class="language-javascript">var fun = function() {
@@ -577,28 +588,11 @@ btn.addEventListener('click', function(){
 element.addEventListener('click', fun, false);
 element.removeEventListener('click', fun, false);
 </code></pre>
-<h2 id="ie事件处理程序"><a class="header-anchor" href="#ie事件处理程序"></a>IE事件处理程序</h2>
-<blockquote>
-<p>IE 浏览器就是特立独行，它对于事件的操作与标准有一些差异。不过 IE 浏览器现在也开始慢慢努力改造，让浏览器变得更加标准。</p>
-</blockquote>
-<pre><code class="language-js">var btn = document.getElementById(&quot;myBtn&quot;);
-btn.attachEvent(&quot;onclick&quot;, function(){ 
-  alert(&quot;Clicked&quot;);
-});
-</code></pre>
-<p>（IE事件处理程序：IE5到IE10支持，IE11就不再支持了。但是最好应用于IE5到IE8，因为IE9之后又略有变化）</p>
-<p>实际上与addEventListener的使用十分相似。</p>
-<p>区别在于，第二个参数传入的是<code>onclick</code>而并非<code>click</code>，且IE只支持在冒泡阶段进行程序处理，所以没有第三个参数布尔值的选择。
-它的作用域为全局作用域，即<code>this</code>指向<code>window</code>。
-此外，如果为同一个元素添加了两个事件处理程序，addEventListener会以添加的顺序依次执行事件处理，而attachEvent则相反。</p>
-<blockquote>
-<p>如果要封装兼容attachEvent和addEventListener：因为attachEvent没有第三个参数，也就是说attachEvent只支持监听冒泡，所以为了统一，在使用addEventListener的时候第三参数传递 false。</p>
-</blockquote>
 <h3 id="ie移除事件监听"><a class="header-anchor" href="#ie移除事件监听"></a>IE移除事件监听</h3>
 <p>detachEvent()，用法与DOM2级的removeEventListener类似</p>
-<h2 id="总结"><a class="header-anchor" href="#总结"></a>总结</h2>
-<p>一般情况下为了最大限度发挥事件处理程序的作用，使用标准事件处理程序，即addEventListener，并且把第三个参数设为<code>fasle</code>；如果专门为了兼容IE，则使用attachEvent；如果是在编写一个小程序，为了简单快捷，可以使用DOM0级处理程序或者考虑HTML处理程序。</p>
-<p>另外，依照上面的知识，如果想要得到跨浏览器的事件处理程序代码，请在网上自行搜索，找到一款合适自己的。</p>
+<h3 id="函数作用域"><a class="header-anchor" href="#函数作用域"></a>函数作用域</h3>
+<p>最直观的查看办法就是在函数回调里面加debugger，触发回调后，就能在控制台看到其作用域。</p>
+<p>讨论事件处理程序的作用域的意义不大：一般意义上的作用域主要服务于“变量的访问”，而正好 事件处理程序 的“根层级函数”基本上都是靠dom、不需要依靠作用域来实现“变量的访问”。</p>
 
 		</div>
       
@@ -608,7 +602,7 @@ btn.attachEvent(&quot;onclick&quot;, function(){
         <p><span>本文标题:</span><a href="/2017/07/01/js-event3/">js四种事件处理程序</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2017-07-01, 16:30:27</p>
-        <!-- <p><span>最后更新:</span>2023-10-27, 12:09:47</p> -->
+        <!-- <p><span>最后更新:</span>2023-11-27, 20:38:30</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="js四种事件处理程序" href="/2017/07/01/js-event3/">https://blog.az22c.top/2017/07/01/js-event3/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://blog.az22c.top/2017/07/01/js-event3/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -644,7 +638,7 @@ btn.attachEvent(&quot;onclick&quot;, function(){
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#简单比较"><span class="toc-text">简单比较</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#html事件处理程序"><span class="toc-text">HTML事件处理程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#dom0级事件处理程序"><span class="toc-text">DOM0级事件处理程序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#dom0移除事件绑定"><span class="toc-text">DOM0移除事件绑定</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#dom2级事件处理程序"><span class="toc-text">DOM2级事件处理程序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#dom2移除事件监听"><span class="toc-text">DOM2移除事件监听</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ie事件处理程序"><span class="toc-text">IE事件处理程序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ie移除事件监听"><span class="toc-text">IE移除事件监听</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#简单比较"><span class="toc-text">简单比较</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#html事件处理程序"><span class="toc-text">HTML事件处理程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#dom0级事件处理程序"><span class="toc-text">DOM0级事件处理程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#dom2级事件处理程序"><span class="toc-text">DOM2级事件处理程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ie事件处理程序"><span class="toc-text">IE事件处理程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#附录"><span class="toc-text">附录</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#dom0移除事件绑定"><span class="toc-text">DOM0移除事件绑定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dom2移除事件监听"><span class="toc-text">DOM2移除事件监听</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ie移除事件监听"><span class="toc-text">IE移除事件监听</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#函数作用域"><span class="toc-text">函数作用域</span></a></li></ol></li></ol>
         
     </div>
     <style>
@@ -711,7 +705,7 @@ btn.attachEvent(&quot;onclick&quot;, function(){
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					
-						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,464</span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,369</span>
 					
 				</div>
             </div>
