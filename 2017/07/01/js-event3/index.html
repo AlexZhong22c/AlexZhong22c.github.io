@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
 <meta property="og:description" content="随着W3C不断推进DOM事件模型和IE浏览器事件模型的历史变化，为了方便理解，程序员们中逐渐形成 四种事件处理程序 的概念划分。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2023-11-27T12:38:30.605Z">
+<meta property="og:updated_time" content="2023-11-27T13:19:37.623Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js四种事件处理程序">
 <meta name="twitter:description" content="随着W3C不断推进DOM事件模型和IE浏览器事件模型的历史变化，为了方便理解，程序员们中逐渐形成 四种事件处理程序 的概念划分。">
@@ -504,7 +504,7 @@
 </tr>
 <tr>
 <td>触发阶段</td>
-<td></td>
+<td>冒泡阶段</td>
 <td>冒泡阶段</td>
 <td>冒泡/捕获阶段皆可</td>
 <td>冒泡阶段</td>
@@ -552,8 +552,8 @@ btn.addEventListener('click', function(){
 <p><strong>优势：</strong> 可以为一个元素添加多个事件处理程序。</p>
 <h2 id="ie事件处理程序"><a class="header-anchor" href="#ie事件处理程序"></a>IE事件处理程序</h2>
 <blockquote>
-<p>【对于许多年前】IE 浏览器就是特立独行，它对于事件的操作与标准有一些差异。不过 IE 浏览器现在也开始慢慢努力改造，让浏览器变得更加标准。
-【对于2022年后】IE正式宣布报废。只有极少数装着旧Windows系统的机器在用。</p>
+<p>【对于许多年前】IE 浏览器就是特立独行，它对于事件的操作与标准有一些差异。不过 IE 浏览器现在也开始慢慢努力改造，让浏览器变得更加标准。</p>
+<p>【对于2022年后】IE正式宣布报废。只有极少数装着旧Windows系统的机器在用。</p>
 </blockquote>
 <pre><code class="language-js">var btn = document.getElementById(&quot;myBtn&quot;);
 btn.attachEvent(&quot;onclick&quot;, function(){ 
@@ -602,7 +602,7 @@ element.removeEventListener('click', fun, false);
         <p><span>本文标题:</span><a href="/2017/07/01/js-event3/">js四种事件处理程序</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2017-07-01, 16:30:27</p>
-        <!-- <p><span>最后更新:</span>2023-11-27, 20:38:30</p> -->
+        <!-- <p><span>最后更新:</span>2023-11-27, 21:19:37</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="js四种事件处理程序" href="/2017/07/01/js-event3/">https://blog.az22c.top/2017/07/01/js-event3/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://blog.az22c.top/2017/07/01/js-event3/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -705,7 +705,7 @@ element.removeEventListener('click', fun, false);
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					
-						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,369</span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,373</span>
 					
 				</div>
             </div>

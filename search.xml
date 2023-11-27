@@ -7679,7 +7679,7 @@ var currentTarget = event.currentTarget;
 </tr>
 <tr>
 <td>触发阶段</td>
-<td></td>
+<td>冒泡阶段</td>
 <td>冒泡阶段</td>
 <td>冒泡/捕获阶段皆可</td>
 <td>冒泡阶段</td>
@@ -7727,8 +7727,8 @@ btn.addEventListener('click', function(){
 <p><strong>优势：</strong> 可以为一个元素添加多个事件处理程序。</p>
 <h2 id="ie事件处理程序"><a class="header-anchor" href="#ie事件处理程序"></a>IE事件处理程序</h2>
 <blockquote>
-<p>【对于许多年前】IE 浏览器就是特立独行，它对于事件的操作与标准有一些差异。不过 IE 浏览器现在也开始慢慢努力改造，让浏览器变得更加标准。
-【对于2022年后】IE正式宣布报废。只有极少数装着旧Windows系统的机器在用。</p>
+<p>【对于许多年前】IE 浏览器就是特立独行，它对于事件的操作与标准有一些差异。不过 IE 浏览器现在也开始慢慢努力改造，让浏览器变得更加标准。</p>
+<p>【对于2022年后】IE正式宣布报废。只有极少数装着旧Windows系统的机器在用。</p>
 </blockquote>
 <pre><code class="language-js">var btn = document.getElementById(&quot;myBtn&quot;);
 btn.attachEvent(&quot;onclick&quot;, function(){ 
