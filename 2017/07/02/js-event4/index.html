@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
 <meta property="og:description" content="此文用于快速回顾，不适合用来入门。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2023-10-27T04:09:47.942Z">
+<meta property="og:updated_time" content="2023-11-28T10:21:32.599Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浏览器事件冒泡或者捕获相关">
 <meta name="twitter:description" content="此文用于快速回顾，不适合用来入门。">
@@ -434,7 +434,7 @@
 
 	<br />
 	<p style="height:7px;"/>
-	<p style="height:20px;font-family:KaiTi,LiSu,'宋体',sans-serif;color:#DBDBDB;font-size:12px;">预计阅读7分钟</p>
+	<p style="height:20px;font-family:KaiTi,LiSu,'宋体',sans-serif;color:#DBDBDB;font-size:12px;">预计阅读6分钟</p>
 
     </div>
   
@@ -485,7 +485,7 @@
 </li>
 </ul>
 <h4 id="并不是所有事件都支持冒泡-局限性"><a class="header-anchor" href="#并不是所有事件都支持冒泡-局限性"></a>并不是所有事件都支持冒泡 #局限性</h4>
-<p>1、最适合使用事件冒泡/事件委托技术的事件包括click、mousedown、mouseup、keydown、keyup和keypress</p>
+<p>1、最适合使用事件冒泡/事件委托技术的事件包括click、keydown、keyup、keypress、mousedown、mouseup</p>
 <p>2、<strong>某些事件类型天生就不支持事件冒泡！不支持事件冒泡就更谈不上事件委托了。</strong></p>
 <ul>
 <li>blur: 在元素失去焦点时触发，该事件不支持冒泡</li>
@@ -551,21 +551,16 @@ var currentTarget = event.currentTarget;
 <p>使用事件代理主要有两个优势：</p>
 <ol>
 <li>减少事件绑定，提升性能。之前你需要绑定一堆子节点，而现在你只需要绑定一个父节点即可。减少了绑定事件监听函数的数量。</li>
-<li>动态变化的 DOM 结构，仍然可以监听。如果没有事件代理，当一个 DOM 动态创建之后，不会带有任何事件监听，除非你重新绑定事件监听函数；而使用事件代理无须担忧这个问题。</li>
+<li>动态变化的 DOM 结构，仍然可以监听。如果没有事件代理，当一个 DOM 动态创建之后，不会带有任何事件监听，因而往往需要你重新绑定事件监听函数；而使用事件代理无须担忧这个问题。</li>
 </ol>
 <h3 id="缺点："><a class="header-anchor" href="#缺点："></a>缺点：</h3>
 <p>好像没有缺点，妥善的管理和合理运用能够规避问题。</p>
-<h3 id="实战技巧-合理运用"><a class="header-anchor" href="#实战技巧-合理运用"></a>实战技巧，合理运用</h3>
+<h3 id="实战技巧：就近委托"><a class="header-anchor" href="#实战技巧：就近委托"></a>实战技巧：就近委托</h3>
 <ul>
-<li>通常需要就近委托或者不需要委托：
+<li>通常需要就近委托：
 <ul>
 <li>如果层级过多，或者绑定在靠近底层的元素上，冒泡过程中，可能会被某层阻止掉。</li>
 <li>理论上委托会导致浏览器频繁调用处理函数，虽然很可能不需要处理。所以建议就近委托，比如在ul上代理li，而不是在document上代理li。</li>
-</ul>
-</li>
-<li>考虑因项目协作可能引发的冲突：
-<ul>
-<li>把所有事件都用代理就可能会出现事件误判。比如，在document中代理了所有button的click事件，另外的人在引用改js时，可能不知道，造成单击button触发了两个click事件。</li>
 </ul>
 </li>
 </ul>
@@ -573,9 +568,9 @@ var currentTarget = event.currentTarget;
 <p><a href="https://juejin.im/post/58fd95bcac502e0063b197db" target="_blank" rel="noopener">如果想学代码封装实现 事件代理 可以看这篇</a></p>
 <p>如果使用原生的方式实现事件代理，需要注意过滤非目标节点，可以通过 id、class 或者 tagname 等等，例如：</p>
 <pre><code class="language-js">element.addEventListener('click', function(event) {
-    // 判断是否是 a 节点
-    if ( event.target.tagName == 'A' ) {
-        // a 的一些交互操作
+    // 判断是否是 b 节点
+    if ( event.target.tagName == 'B' ) {
+        // 针对 b 的一些交互操作绑定
     }
 }, false);
 </code></pre>
@@ -597,7 +592,7 @@ var currentTarget = event.currentTarget;
         <p><span>本文标题:</span><a href="/2017/07/02/js-event4/">浏览器事件冒泡或者捕获相关</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2017-07-02, 16:30:27</p>
-        <!-- <p><span>最后更新:</span>2023-10-27, 12:09:47</p> -->
+        <!-- <p><span>最后更新:</span>2023-11-28, 18:21:32</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="浏览器事件冒泡或者捕获相关" href="/2017/07/02/js-event4/">https://blog.az22c.top/2017/07/02/js-event4/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://blog.az22c.top/2017/07/02/js-event4/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -633,7 +628,7 @@ var currentTarget = event.currentTarget;
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#事件流-事件捕获或者冒泡相关"><span class="toc-text">事件流（事件捕获或者冒泡相关）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#并不是所有事件都支持冒泡-局限性"><span class="toc-text">并不是所有事件都支持冒泡 #局限性</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何应用：冒泡或者捕获事件-在事件绑定的时候"><span class="toc-text">如何应用：冒泡或者捕获事件  在事件绑定的时候</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#事件处理程序的event对象-ie兼容"><span class="toc-text">事件处理程序的Event对象 IE兼容</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#提取冷知识："><span class="toc-text">提取冷知识：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件代理-你所需要知道的"><span class="toc-text">事件代理 你所需要知道的</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#优点："><span class="toc-text">优点：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#缺点："><span class="toc-text">缺点：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实战技巧-合理运用"><span class="toc-text">实战技巧，合理运用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何利用原生实现事件代理"><span class="toc-text">如何利用原生实现事件代理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vue的事件冒泡和事件代理"><span class="toc-text">vue的事件冒泡和事件代理</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#事件流-事件捕获或者冒泡相关"><span class="toc-text">事件流（事件捕获或者冒泡相关）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#并不是所有事件都支持冒泡-局限性"><span class="toc-text">并不是所有事件都支持冒泡 #局限性</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何应用：冒泡或者捕获事件-在事件绑定的时候"><span class="toc-text">如何应用：冒泡或者捕获事件  在事件绑定的时候</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#事件处理程序的event对象-ie兼容"><span class="toc-text">事件处理程序的Event对象 IE兼容</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#提取冷知识："><span class="toc-text">提取冷知识：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件代理-你所需要知道的"><span class="toc-text">事件代理 你所需要知道的</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#优点："><span class="toc-text">优点：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#缺点："><span class="toc-text">缺点：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实战技巧：就近委托"><span class="toc-text">实战技巧：就近委托</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何利用原生实现事件代理"><span class="toc-text">如何利用原生实现事件代理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vue的事件冒泡和事件代理"><span class="toc-text">vue的事件冒泡和事件代理</span></a></li></ol>
         
     </div>
     <style>
@@ -700,7 +695,7 @@ var currentTarget = event.currentTarget;
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					
-						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,856</span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,784</span>
 					
 				</div>
             </div>

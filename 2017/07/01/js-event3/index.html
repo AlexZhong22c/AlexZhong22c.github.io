@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
 <meta property="og:description" content="随着W3C不断推进DOM事件模型和IE浏览器事件模型的历史变化，为了方便理解，程序员们中逐渐形成 四种事件处理程序 的概念划分。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2023-11-27T13:29:30.905Z">
+<meta property="og:updated_time" content="2023-11-28T10:04:40.431Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js四种事件处理程序">
 <meta name="twitter:description" content="随着W3C不断推进DOM事件模型和IE浏览器事件模型的历史变化，为了方便理解，程序员们中逐渐形成 四种事件处理程序 的概念划分。">
@@ -478,7 +478,7 @@
 </blockquote>
 <p>在 JavaScript 中，通常分为四种事件处理程序：</p>
 <ol>
-<li>HTML事件处理程序</li>
+<li>HTML内联事件处理程序</li>
 <li>DOM0事件处理程序</li>
 <li>DOM2事件处理程序</li>
 <li>IE事件处理程序</li>
@@ -488,7 +488,7 @@
 <thead>
 <tr>
 <th></th>
-<th>HTML</th>
+<th>HTML内联</th>
 <th>DOM0级</th>
 <th>DOM2级</th>
 <th>IE【后于2022年报废】</th>
@@ -511,7 +511,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="html事件处理程序"><a class="header-anchor" href="#html事件处理程序"></a>HTML事件处理程序</h2>
+<h2 id="html内联事件处理程序"><a class="header-anchor" href="#html内联事件处理程序"></a>HTML内联事件处理程序</h2>
 <p>在HTML的内联属性中添加事件处理。</p>
 <pre><code class="language-html">&lt;button onclick=&quot;alert('Hello world!')&quot;&gt;按钮&lt;/button&gt;
 </code></pre>
@@ -519,11 +519,14 @@
 <pre><code class="language-html">&lt;button onclick=&quot;showMessage()&quot;&gt;按钮&lt;/button&gt;
 &lt;script&gt; function showMessage(){ alert(&quot;Hello world!&quot;); } &lt;/script&gt;
 </code></pre>
-<p><strong>优势：</strong> 代码直观、方便。</p>
-<p><strong>劣势：</strong> 放任其中前1种写法会导致html和javascript重度耦合，代码不易读。</p>
-<blockquote>
-<p>而在现今，比如Vue.js，框架与使用者通过规范化代码能够削弱“代码耦合”这种缺点，越来越多的主流JavaScript框架都是推崇这种内联属性的写法。</p>
-</blockquote>
+<ul>
+<li><strong>优势：</strong> 代码直观、方便。</li>
+<li><strong>劣势：</strong> 放任其中前1种写法会导致html和javascript重度耦合，代码不易读。
+<ul>
+<li>而在现今，比如Vue.js，框架与使用者通过规范化代码能够削弱“代码耦合”这种缺点，越来越多的主流JavaScript框架都是推崇这种内联属性的写法。</li>
+</ul>
+</li>
+</ul>
 <h2 id="dom0级事件处理程序"><a class="header-anchor" href="#dom0级事件处理程序"></a>DOM0级事件处理程序</h2>
 <pre><code class="language-JavaScript">var element = document.getElementById(&quot;myBtn&quot;); 
 element.onclick = function(){
@@ -574,7 +577,7 @@ btn.attachEvent(&quot;onclick&quot;, function(){
 <ul>
 <li>一般情况下为了最大限度发挥事件处理程序的作用，使用标准事件处理程序，即addEventListener，并且把第三个参数设为<code>false</code>；</li>
 <li>如果专门为了兼容IE，则使用attachEvent；</li>
-<li>如果是在编写一个小demo，为了简单快捷，可以使用DOM0级处理程序或者考虑HTML处理程序。</li>
+<li>如果是在编写一个小demo，为了简单快捷，可以使用DOM0级处理程序或者考虑HTML内联处理程序。</li>
 </ul>
 <p>所谓的跨浏览器的事件处理程序代码，就是基于以上这些api来实现的。</p>
 <h2 id="附录"><a class="header-anchor" href="#附录"></a>附录</h2>
@@ -605,7 +608,7 @@ element.removeEventListener('click', fun, false);
         <p><span>本文标题:</span><a href="/2017/07/01/js-event3/">js四种事件处理程序</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2017-07-01, 16:30:27</p>
-        <!-- <p><span>最后更新:</span>2023-11-27, 21:29:30</p> -->
+        <!-- <p><span>最后更新:</span>2023-11-28, 18:04:40</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="js四种事件处理程序" href="/2017/07/01/js-event3/">https://blog.az22c.top/2017/07/01/js-event3/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://blog.az22c.top/2017/07/01/js-event3/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -641,7 +644,7 @@ element.removeEventListener('click', fun, false);
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#html事件处理程序"><span class="toc-text">HTML事件处理程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#dom0级事件处理程序"><span class="toc-text">DOM0级事件处理程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#dom2级事件处理程序"><span class="toc-text">DOM2级事件处理程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ie事件处理程序"><span class="toc-text">IE事件处理程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#附录"><span class="toc-text">附录</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#dom0移除事件绑定"><span class="toc-text">DOM0移除事件绑定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dom2移除事件监听"><span class="toc-text">DOM2移除事件监听</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ie移除事件监听"><span class="toc-text">IE移除事件监听</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#函数作用域"><span class="toc-text">函数作用域</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#html内联事件处理程序"><span class="toc-text">HTML内联事件处理程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#dom0级事件处理程序"><span class="toc-text">DOM0级事件处理程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#dom2级事件处理程序"><span class="toc-text">DOM2级事件处理程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ie事件处理程序"><span class="toc-text">IE事件处理程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#附录"><span class="toc-text">附录</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#dom0移除事件绑定"><span class="toc-text">DOM0移除事件绑定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dom2移除事件监听"><span class="toc-text">DOM2移除事件监听</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ie移除事件监听"><span class="toc-text">IE移除事件监听</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#函数作用域"><span class="toc-text">函数作用域</span></a></li></ol></li></ol>
         
     </div>
     <style>
@@ -708,7 +711,7 @@ element.removeEventListener('click', fun, false);
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					
-						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,383</span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,391</span>
 					
 				</div>
             </div>
