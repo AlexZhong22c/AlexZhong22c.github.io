@@ -5067,11 +5067,11 @@ MMM.prototype.map = function(func) {
         
         <tags>
             
+            <tag> 性能优化 </tag>
+            
             <tag> 面试题 </tag>
             
             <tag> 笔记副本 </tag>
-            
-            <tag> 性能优化 </tag>
             
             <tag> 回顾 </tag>
             
@@ -6460,11 +6460,11 @@ instance2.sayName();//&quot;hu&quot;
         
         <tags>
             
-            <tag> 原理 </tag>
-            
             <tag> 面向对象 </tag>
             
             <tag> 原型系统 </tag>
+            
+            <tag> 原理 </tag>
             
         </tags>
         
@@ -7576,13 +7576,13 @@ var currentTarget = event.currentTarget;
 <h2 id="事件代理-你所需要知道的"><a class="header-anchor" href="#事件代理-你所需要知道的"></a>事件代理 你所需要知道的</h2>
 <h3 id="优点："><a class="header-anchor" href="#优点："></a>优点：</h3>
 <ul>
-<li>减少了事件的注册，节省内存。</li>
+<li>减少了事件的注册总量，节省内存。</li>
 <li>在新增/移除DOM时，节省了的事件绑定/解绑。</li>
 </ul>
-<p>使用事件代理主要有两个优势：</p>
+<p>即，详细来说，事件代理主要有两个优点：</p>
 <ol>
-<li>减少事件绑定，提升性能。之前你需要绑定一堆子节点，而现在你只需要绑定一个父节点即可。减少了绑定事件监听函数的数量。</li>
-<li>动态变化的 DOM 结构，仍然可以监听。如果没有事件代理，当一个 DOM 动态创建之后，不会带有任何事件监听，因而往往需要你重新绑定事件监听函数；而使用事件代理无须担忧这个问题。</li>
+<li>减少事件绑定，提升性能。之前你需要绑定一堆子节点，而现在你只需要绑定一个祖先节点即可。减少了绑定事件监听函数的总量。</li>
+<li>动态变化的 DOM 结构，仍然可以监听。如果没有事件代理，当一个 DOM 动态创建之后，不会带有任何事件监听，因而往往需要你重新绑定事件监听函数；而使用事件代理则没有这种麻烦。</li>
 </ol>
 <h3 id="缺点："><a class="header-anchor" href="#缺点："></a>缺点：</h3>
 <p>好像没有缺点，妥善的管理和合理运用能够规避问题。</p>
@@ -7590,7 +7590,7 @@ var currentTarget = event.currentTarget;
 <ul>
 <li>通常需要就近委托：
 <ul>
-<li>如果层级过多，或者绑定在靠近底层的元素上，冒泡过程中，可能会被某层阻止掉。</li>
+<li>如果层级过多，或者绑定在靠近根层的元素上，冒泡过程中，可能会被某层阻止掉。</li>
 <li>理论上委托会导致浏览器频繁调用处理函数，虽然很可能不需要处理。所以建议就近委托，比如在ul上代理li，而不是在document上代理li。</li>
 </ul>
 </li>
@@ -7627,9 +7627,9 @@ var currentTarget = event.currentTarget;
             
             <tag> 笔记副本 </tag>
             
-            <tag> 回顾 </tag>
-            
             <tag> 基础 </tag>
+            
+            <tag> 回顾 </tag>
             
             <tag> 事件 </tag>
             
@@ -7780,9 +7780,9 @@ element.removeEventListener('click', fun, false);
         
         <tags>
             
-            <tag> 回顾 </tag>
-            
             <tag> 基础 </tag>
+            
+            <tag> 回顾 </tag>
             
             <tag> 事件 </tag>
             
@@ -7912,9 +7912,9 @@ test.onclick= function(e){
         
         <tags>
             
-            <tag> 回顾 </tag>
-            
             <tag> 基础 </tag>
+            
+            <tag> 回顾 </tag>
             
             <tag> 事件 </tag>
             
@@ -9347,9 +9347,9 @@ p {
         
         <tags>
             
-            <tag> H5 </tag>
-            
             <tag> HTML </tag>
+            
+            <tag> H5 </tag>
             
             <tag> IFE </tag>
             
