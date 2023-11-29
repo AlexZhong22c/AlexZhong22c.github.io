@@ -22,7 +22,7 @@
   - <p>此文用于快速回顾，不适合用来入门。</p>
 - [js四种事件处理程序](https://blog.az22c.top/2017/07/01/js-event3/)&nbsp;&nbsp;|&nbsp;&nbsp;2017-07-01&nbsp;&nbsp;|&nbsp;&nbsp;标签：[回顾](https://blog.az22c.top/tags/回顾/) [基础](https://blog.az22c.top/tags/基础/) [事件](https://blog.az22c.top/tags/事件/)
   - <p>随着W3C不断推进DOM事件模型和IE浏览器事件模型的历史变化，为了方便理解，程序员们中逐渐形成 四种事件处理程序 的概念划分。</p>
-- [js取消默认事件行为](https://blog.az22c.top/2017/07/01/js-pv-default/)&nbsp;&nbsp;|&nbsp;&nbsp;2017-07-01&nbsp;&nbsp;|&nbsp;&nbsp;标签：[回顾](https://blog.az22c.top/tags/回顾/) [基础](https://blog.az22c.top/tags/基础/) [事件](https://blog.az22c.top/tags/事件/)
+- [考古：js取消默认事件行为](https://blog.az22c.top/2017/07/01/js-pv-default/)&nbsp;&nbsp;|&nbsp;&nbsp;2017-07-01&nbsp;&nbsp;|&nbsp;&nbsp;标签：[回顾](https://blog.az22c.top/tags/回顾/) [基础](https://blog.az22c.top/tags/基础/) [事件](https://blog.az22c.top/tags/事件/)
   - <p>常见的默认行为有，点击<code>&lt;a&gt;</code>标签链接后，浏览器跳转到指定页面；再比如<code>&lt;form&gt;</code>表单元素的&quot;submit&quot;事件。
 
 ## ｜02 CSS 
