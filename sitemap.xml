@@ -2,6 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.az22c.top/2017/08/09/js-prototype-practice/</loc>
+    
+    <lastmod>2024-01-03T13:00:26.198Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.az22c.top/2017/07/01/js-pv-default/</loc>
+    
+    <lastmod>2024-01-03T12:38:29.201Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.az22c.top/2017/08/08/js-proto/</loc>
+    
+    <lastmod>2024-01-03T12:38:29.200Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.az22c.top/2017/08/12/js-new-happen/</loc>
+    
+    <lastmod>2024-01-03T12:38:29.195Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://blog.az22c.top/2017/07/02/js-event4/</loc>
     
     <lastmod>2023-11-28T12:46:18.704Z</lastmod>
@@ -296,27 +324,6 @@
   </url>
   
   <url>
-    <loc>https://blog.az22c.top/2017/07/01/js-pv-default/</loc>
-    
-    <lastmod>2023-10-27T04:09:48.160Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://blog.az22c.top/2017/08/09/js-prototype-practice/</loc>
-    
-    <lastmod>2023-10-27T04:09:48.136Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://blog.az22c.top/2017/08/08/js-proto/</loc>
-    
-    <lastmod>2023-10-27T04:09:48.119Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://blog.az22c.top/2017/02/11/js-operators/</loc>
     
     <lastmod>2023-10-27T04:09:48.103Z</lastmod>
@@ -341,13 +348,6 @@
     <loc>https://blog.az22c.top/2017/09/03/js-obj-prop1/</loc>
     
     <lastmod>2023-10-27T04:09:48.049Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://blog.az22c.top/2017/08/12/js-new-happen/</loc>
-    
-    <lastmod>2023-10-27T04:09:48.024Z</lastmod>
     
   </url>
   

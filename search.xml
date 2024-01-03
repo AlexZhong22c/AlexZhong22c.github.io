@@ -6516,7 +6516,7 @@ Person.say(); // Person.say is not a function
 	return typeof result === 'object' ? result || obj : obj;
 }
 </code></pre>
-<p>可以看到，这里的obj经返回后会被赋给john变量：</p>
+<p>可以看到，这里的obj经返回后会被赋给<code>var john</code>变量：</p>
 <p>obj.name是在<code>Person.call(obj,&quot;John&quot;)</code>这句话执行之后就有了“John”这个值；</p>
 <p>等到obj经返回被赋给john之后，john.name就是“John”了。</p>
 <p>画出最终<code>var john = new Person(&quot;John&quot;);</code>这一句代码涉及到的对象和它们间的关系：</p>
@@ -6652,7 +6652,7 @@ console.log(person1 instanceof Person);//true
 console.log(person1.constructor === Person);//false，解释见下一个demo：
 console.log(person1.constructor === Object);//true
 </code></pre>
-<p>当一个实例对象被创建时，该原型对象的constructor属性自动创建，并指向该函数。当使用对象字面形式改写原型对象Person.prototype时，需要在改写原型对象时手动重置其constructor属性：</p>
+<p>一般而言，当一个构造函数Person（即普通函数）被创建时，它的原型对象（Person.prototype）的constructor属性将自动创建，并指向回该函数。而当使用对象字面形式改写原型对象Person.prototype时，需要在改写原型对象时手动重置其constructor属性：</p>
 <pre><code class="language-JavaScript">function Person(name){
     this.name = name;
 }
@@ -6755,7 +6755,7 @@ console.log(Foo.prototype.constructor === Foo);//false
       <url>https://blog.az22c.top/2017/08/08/js-proto/</url>
       <content type="html"><![CDATA[<p>理解对象和函数的prototype、__proto__和constructor等关系：</p>
 <a id="more"></a>
-<p>在JavaScript中，函数也是对象。</p>
+<p>结论在本文的最后。</p>
 <h2 id="概述"><a class="header-anchor" href="#概述"></a>概述</h2>
 <p>先给出 构造函数 实例对象 原型对象 三者的关系：</p>
 <pre><code class="language-JavaScript">//  概述demo：
@@ -6833,7 +6833,7 @@ console.log(Foo.prototype.__proto__ === Object.prototype);//true
 <pre><code class="language-JavaScript">console.log(Object.prototype.__proto__ === null);//true
 </code></pre>
 <h2 id="函数foo和函数object也可以被视为实例对象"><a class="header-anchor" href="#函数foo和函数object也可以被视为实例对象"></a>函数Foo和函数Object也可以被视为实例对象</h2>
-<p>前面已经介绍过，函数也是对象，只不过是具有特殊功能的对象而已。任何函数都可以看做是通过Function()构造函数的new操作实例化的结果</p>
+<p>任何函数都可以看做是通过Function()构造函数的new操作实例化的结果。</p>
 <p>如果把函数Foo当成实例对象的话，其构造函数是Function()，其原型对象是Function.prototype；类似地，函数Object的构造函数也是Function()，其原型对象是Function.prototype</p>
 <pre><code class="language-JavaScript">function Foo(){};
 var f1 = new Foo;
@@ -6854,7 +6854,7 @@ console.log(Object.hasOwnProperty('constructor'));//false
 </blockquote>
 <p><img src="https://cloud.az22c.top/js-prototype-4.png-az22cgithub" alt="js-prototype-4"></p>
 <h2 id="视function为实例对象"><a class="header-anchor" href="#视function为实例对象"></a>视Function为实例对象</h2>
-<p><strong>所有的函数都可以看成是构造函数Function()的new操作的实例化对象。</strong> 那么，Function可以看成是调用其自身的new操作的实例化的结果</p>
+<p><strong>所有的函数都可以看成是构造函数Function()的new操作而产生的实例对象。</strong> 那么，Function可以看成是调用其自身的new操作的实例化的结果</p>
 <p>所以，如果Function作为实例对象，其构造函数是Function，其原型对象是Function.prototype</p>
 <pre><code class="language-js">console.log(Function.__proto__ === Function.prototype);//true
 console.log(Function.prototype.constructor === Function);//true
@@ -6880,8 +6880,8 @@ var f1 = new Foo;
 </code></pre>
 <p>其涉及到的构造函数 实例对象 原型对象 以及它们之间的关系如图所示：</p>
 <p><img src="https://cloud.az22c.top/js-prototype-4.png-az22cgithub" alt="js-prototype-4"></p>
-<p>【1】函数(Function也是函数)是new Function的结果，所以函数可以作为实例对象，其构造函数是Function()，原型对象是Function.prototype</p>
-<p>【2】对象(函数也是对象)是new Object的结果，所以对象可以作为实例对象，其构造函数是Object()，原型对象是Object.prototype</p>
+<p>【1】函数(Function也是函数)是new Function的结果，所以函数可以视作实例对象，其构造函数是Function()，原型对象是Function.prototype</p>
+<p>【2】一般的对象(除了null和由指定的构造函数所产生的对象) 是new Object的结果，所以一般的对象可以视作实例对象，其构造函数是Object()，原型对象是Object.prototype</p>
 <p>【3】Object.prototype的原型对象是null</p>
 ]]></content>
       
@@ -7791,17 +7791,23 @@ element.removeEventListener('click', fun, false);
     </entry>
     
     <entry>
-      <title><![CDATA[js取消默认事件行为]]></title>
+      <title><![CDATA[考古：js取消默认事件行为]]></title>
       <url>https://blog.az22c.top/2017/07/01/js-pv-default/</url>
-      <content type="html"><![CDATA[<p>常见的默认行为有，点击链接后，浏览器跳转到指定页面；再比如<code>&lt;form&gt;</code>表单元素的&quot;submit&quot;事件，当我们触发表单的提交事件时，就可以提交当前表单。</p>
+      <content type="html"><![CDATA[<p>常见的默认行为有，点击<code>a</code>标签链接后，浏览器跳转到指定页面；再比如<code>&lt;form&gt;</code>表单元素的&quot;submit&quot;事件。</p>
 <a id="more"></a>
+<blockquote>
+<p>提示：本文章内容成篇于2017年07月，部分内容可能已经过时</p>
+</blockquote>
+<p>IE被废弃之前，同一个命令有不同的写法，而且为了满足兼容性导致处理方式错综复杂，所以重度依赖jquery来简化；</p>
+<p>2022年IE被废弃之后，编写这个单一的命令变简洁了很多。历史前后形成鲜明对比。</p>
+<hr>
 <p>关于取消默认行为的属性包括cancelable、defaultPrevented、preventDefault()和returnValue。</p>
 <p>而“return false”这种方式不算是属性，我们后面会介绍到。</p>
 <blockquote>
-<p>作为程序员，原本我们应该优先考虑cancelable属性，</p>
+<p>作为程序员，原本我们应该优先判别cancelable属性，</p>
 <p>不过我们先拿preventDefault()、returnValue和“return false”这三者来讲：</p>
 <p>在DOM0级事件处理程序中取消默认行为，这三者都有效；</p>
-<p>在DOM2级事件处理程序中取消默认行为，使用”return false“无效;</p>
+<p>在DOM2级事件处理程序中取消默认行为，使用“return false”无效;</p>
 <p>在IE事件处理程序中取消默认行为，使用preventDefault()无效。</p>
 </blockquote>
 <h2 id="preventdefault"><a class="header-anchor" href="#preventdefault"></a>preventDefault()</h2>
@@ -7829,7 +7835,7 @@ test.onclick= function(e){
 <blockquote>
 <p>我们先拿preventDefault()、returnValue和“return false”这三者来讲：</p>
 <p>在DOM0级事件处理程序中取消默认行为，这三者都有效；</p>
-<p>在DOM2级事件处理程序中取消默认行为，使用”return false“无效;</p>
+<p>在DOM2级事件处理程序中取消默认行为，使用“return false”无效;</p>
 <p>在IE事件处理程序中取消默认行为，使用preventDefault()无效。</p>
 </blockquote>
 <p>所以，如果<strong>不使用到DOM0</strong>，考虑兼容可以这么写：</p>
@@ -7853,7 +7859,7 @@ test.onclick= function(e){
 &lt;/script&gt;
 </code></pre>
 <p>HTML5规范中有指出在mouseover等几种特殊事件情况下，return false;并不一定能终止事件。所以，在实际使用中，我们需要尽量避免通过&quot;return false&quot;的方式来取消事件的默认行为。</p>
-<p>**若使用的是jquery，“return false ”既会阻止默认行为，也会阻止事件的冒泡。**这样使用return false往往会造成意想不到的失误。</p>
+<p><strong>若使用的是jquery，“return false ”既会阻止默认行为，也会阻止事件的冒泡。</strong> 这样使用return false往往会造成意想不到的失误。</p>
 <hr>
 <h2 id="cancelable"><a class="header-anchor" href="#cancelable"></a>cancelable</h2>
 <p>cancelable属性返回一个布尔值，表示事件是否可以取消。</p>
@@ -7883,7 +7889,7 @@ test.onclick= function(e){
 &lt;/script&gt;
 </code></pre>
 <blockquote>
-<p>很明显 cancelable属性 和 defaultPrevented属性 针对的不是同一回事。</p>
+<p>很明显 cancelable属性 和 defaultPrevented属性，一个是说明“能不能”，而另1个表示的是状态。后者主要是方便debug的时候查询状态。</p>
 </blockquote>
 <hr>
 <h2 id="jquery的写法："><a class="header-anchor" href="#jquery的写法："></a>JQuery的写法：</h2>
