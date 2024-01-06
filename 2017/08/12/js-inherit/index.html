@@ -88,7 +88,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://cloud.az22c.top/js-inherit-sumary.png-az22cgithub">
 <meta property="og:image" content="https://cloud.az22c.top/js-inherit-sumary.png-az22cgithub">
-<meta property="og:updated_time" content="2024-01-04T14:38:30.680Z">
+<meta property="og:updated_time" content="2024-01-06T09:50:11.769Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="es5实现继承的6种方式">
 <meta name="twitter:description" content="对关于继承的内容做一番整理。是早期编写的文章，直接看到最后的结论即可。后面可以优化一下行文的思路。">
@@ -552,14 +552,14 @@ var child = new Child();
 <p>实际上，<code>Object.create()</code>方法规范化了原型式继承：</p>
 <ul>
 <li>（原型式继承只是将原型链继承进行简单的改造：改造了1个缺点，仍剩下一个缺点）</li>
-<li>改造了1个缺点后：<code>Child.prototype = Object.create(Parent.protoptype)</code>：没有调用<code>new Parent</code>， <strong>对于<code>Child.prototype</code></strong> ，可以不继承父类的实例上的属性(包括Parent构造函数将赋予的属性)</li>
+<li>改造了1个缺点后：<code>Child.prototype = Object.create(Parent.protoptype)</code>：没有调用<code>new Parent</code>，因而<strong>对于<code>Child.prototype</code></strong> ，可以不继承父类的实例上的属性(包括Parent构造函数将赋予的属性)</li>
 <li>仍然残留1个缺点：子类实例之间共享属性就容易造成属性混淆使用</li>
 </ul>
 <h2 id="寄生式继承"><a class="header-anchor" href="#寄生式继承"></a>寄生式继承</h2>
 <p>寄生式继承创建一个仅用于封装继承过程的函数，该函数在内部以各种定义属性来增强对象，最后返回对象：</p>
 <pre><code class="language-javascript">function parasite(original){
     var clone = Object.create(original);//通过调用函数创建一个新对象
-    clone.sayHi = function(){ //以各种定义属性来增强这个对象。若再参考其他方式，更适合抽取到其他地方来定义属性
+    clone.sayHi = function(){ //以各种定义属性来增强这个对象。（若再参考其他方式，更适合改为抽取到其他地方来定义属性）
         console.log(&quot;hi&quot;);
     };
     return clone;//返回这个对象
@@ -568,7 +568,7 @@ var superObj = {
     colors: ['red','blue','green']
 };
 var subObj1 = parasite(superObj);
-// 上一句，即相当于 Child.prototype = Object.create(Parent.protoptype)
+// 上一句，2者都在原型链上平移1位。即相当于 Child.prototype = Object.create(Parent.protoptype)
 subObj1.colors.push('black');
 var subObj2 = parasite(superObj);
 subObj2.colors.push('white');
@@ -579,14 +579,15 @@ console.log(subObj1.colors);//[&quot;red&quot;, &quot;blue&quot;, &quot;green&qu
 <ul>
 <li>寄生式继承实际上只是原型式继承的再包装，缺点依旧。
 <ul>
-<li>总而言之改进链条为： 原型链式继承 --&gt; 原型式继承 --&gt; 寄生式继承</li>
+<li>总而言之，现有改进链条为： 原型链式继承 --&gt; 原型式继承 --&gt; 寄生式继承</li>
 </ul>
 </li>
 <li>（ 随着之后的代码改造，将<code>clone.sayHi</code>抽取到其他地方来定义，才会效果更好）</li>
 </ul>
 <h2 id="借用构造函数"><a class="header-anchor" href="#借用构造函数"></a>借用构造函数</h2>
 <p>借用构造函数(constructor stealing)的技术(有时候也叫做伪类继承或经典继承)。</p>
-<p>基本思想相当简单，即在子类构造函数的内部调用父类构造函数，通过使用apply()和call()方法在新创建的对象上执行构造函数：</p>
+<p>基本思想相当简单，即在子类构造函数的内部调用父类构造函数。</p>
+<p>在代码层面，通过使用apply()和call()方法令新创建的对象this上调用构造函数：</p>
 <pre><code class="language-javascript">function Super(){
     this.colors = ['red','blue','green'];
 }
@@ -702,7 +703,7 @@ var instance1 = new Sub(&quot;bai&quot;,29);// 第二次调用Super()
 <li>寄生组合式继承，可以从各自2个角度理解它的产生：
 <ul>
 <li>可以说是 寄生式继承，参考 组合式继承的形式，而与 构造函数式继承组合，得到</li>
-<li>也可以说是，组合式继承将其中的 原型链式继承 改造为 寄生式继承（或原型式继承），得到</li>
+<li>也可以说是，基于组合式继承，将其中的 原型链式继承 改造为 寄生式继承（或原型式继承），得到</li>
 </ul>
 </li>
 <li>寄生组合式继承 受以上各种“方式”的启发，又消除了 以上各种“方式”的缺点</li>
@@ -784,7 +785,7 @@ instance2.sayName();//&quot;hu&quot;
         <p><span>本文标题:</span><a href="/2017/08/12/js-inherit/">es5实现继承的6种方式</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2017-08-12, 20:22:30</p>
-        <!-- <p><span>最后更新:</span>2024-01-04, 22:38:30</p> -->
+        <!-- <p><span>最后更新:</span>2024-01-06, 17:50:11</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="es5实现继承的6种方式" href="/2017/08/12/js-inherit/">https://blog.az22c.top/2017/08/12/js-inherit/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://blog.az22c.top/2017/08/12/js-inherit/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -887,7 +888,7 @@ instance2.sayName();//&quot;hu&quot;
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					
-						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：2,208</span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：2,233</span>
 					
 				</div>
             </div>
