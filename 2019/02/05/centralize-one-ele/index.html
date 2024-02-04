@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
 <meta property="og:description" content="明白单一对象的水平/垂直居中的写法和原理，有助于我们构造更加复杂的居中布局。 我们按照居中的“里面的内容”来分类，展开全文：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2023-10-27T04:09:47.559Z">
+<meta property="og:updated_time" content="2024-02-04T09:24:47.611Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="总结：使单一对象水平&#x2F;垂直居中">
 <meta name="twitter:description" content="明白单一对象的水平/垂直居中的写法和原理，有助于我们构造更加复杂的居中布局。 我们按照居中的“里面的内容”来分类，展开全文：">
@@ -482,8 +482,13 @@
 }
 </code></pre>
 <p>事实上，不需要对于height属性的设置也是可以的。</p>
-<h4 id="缺点："><a class="header-anchor" href="#缺点："></a>缺点：</h4>
-<p>只能居中一行文字：如果不想在页面缩放的时候让文字跑出元素的范围外，建议在后面加上<code>overflow: hidden</code> 。</p>
+<ul>
+<li>【缺点】：只能居中一行文字：
+<ul>
+<li>如果不想在页面缩放的时候让文字跑出元素的范围外，建议在后面加上<code>overflow: hidden</code> 。</li>
+</ul>
+</li>
+</ul>
 <h3 id="b法：使用display-table-cell和vertical-align-middle-垂直居中"><a class="header-anchor" href="#b法：使用display-table-cell和vertical-align-middle-垂直居中"></a>B法：使用display:table-cell和vertical-align:middle–垂直居中</h3>
 <pre><code class="language-html">&lt;style&gt;
 .parent {
@@ -504,7 +509,7 @@
 <li>height和line-height可以自由定义，这方便内容从单行文字发展为多行文字</li>
 <li>在浏览器缩放的时候表现优异</li>
 </ul>
-<h4 id="缺点：-v2"><a class="header-anchor" href="#缺点：-v2"></a>缺点：</h4>
+<h4 id="缺点："><a class="header-anchor" href="#缺点："></a>缺点：</h4>
 <ul>
 <li>设置.parent为<code>float:left</code>或者<code>positon:absolute</code>或者<code>position:fixed</code> 时居中会失效。如需兼顾他们，此时需要外面套多一层元素。（因为<code>vertical-align</code>只适用于inline/inline-block元素或者table-cell元素，详见 <a href="https://blog.az22c.top/2019/02/05/vertical-align-middle/">深入理解vertical-align:middle</a>）</li>
 <li>IE7及以下都不支持</li>
@@ -573,14 +578,14 @@
   display: inline-block;
   vertical-align: middle;
   
-  line-height: normal;
-  text-align: left;
-  max-width: 100%;
+  line-height: normal;/* 此例中，重置对上级的该属性的继承 */
+  /* text-align: left; */
+  /* max-width: 100%; */
 }
 &lt;/style&gt;
 &lt;body&gt;
 &lt;p class=&quot;parent&quot;&gt;
-&lt;span class=&quot;text&quot;&gt;一行文字&lt;br&gt;一行文字&lt;br&gt;一行文字&lt;/span&gt;&lt;!-- 兼容IE7,这里要换行或空格 --&gt;
+&lt;span class=&quot;text&quot;&gt;一行文字AAA&lt;br&gt;一行文字&lt;br&gt;一行文字&lt;/span&gt;&lt;!-- 兼容IE7,这里要换行或空格 --&gt;
 &lt;/p&gt;
 &lt;/body&gt;
 </code></pre>
@@ -594,8 +599,8 @@
   height: 250px;
   background: green;
 
-  display: -webkit-flex;
-  display: -ms-flex;/* IE 10 */
+  /* display: -webkit-flex; */
+  /* display: -ms-flex; *//* IE 10 */
   display: flex;
   align-items: center;
 }
@@ -604,19 +609,19 @@
   &lt;div class=&quot;parent&quot;&gt;这是文字这是文字&lt;/div&gt;
 &lt;/body&gt;
 </code></pre>
-<h4 id="优点：-v2"><a class="header-anchor" href="#优点：-v2"></a>优点：</h4>
+<ul>
+<li>【优点】：
 <ul>
 <li><code>.parent</code>元素不用定高</li>
 <li>代码简单</li>
 </ul>
-<h4 id="缺点：-v3"><a class="header-anchor" href="#缺点：-v3"></a>缺点：</h4>
-<ul>
-<li>IE要10才支持
+</li>
+<li>【缺点】：其实文字是可以自动换行的，这样就是多行文字了，但是需要IE11</li>
+<li>【兼容性】：IE要10才支持
 <ul>
 <li>(兼容IE10的写法为：<code>display: -ms-flex;</code>； 而且要求<code>-ms-flex-preferred-size</code>（即第三个参数）带单位，所以必须写成<code>0px</code>或<code>0%</code>或<code>auto</code>。)</li>
 </ul>
 </li>
-<li>其实文字是可以自动换行的，这样就是多行文字了，但是需要IE11</li>
 </ul>
 <h2 id="里面的内容-为多行行内元素的时候-以多行文字为例"><a class="header-anchor" href="#里面的内容-为多行行内元素的时候-以多行文字为例"></a>“里面的内容”为多行行内元素的时候(以多行文字为例)</h2>
 <p><strong>参考上文B法</strong></p>
@@ -640,10 +645,9 @@
 &lt;div class=&quot;child&quot;&gt;这是文字这是文字这是文字这是文字这是文字这是文字&lt;/div&gt;
 &lt;/body&gt;
 </code></pre>
-<h4 id="备注：-v2"><a class="header-anchor" href="#备注：-v2"></a>备注：</h4>
-<p>首先，元素定宽是必须的。然后，大家都知道，只要margin-left和margin-right都为auto就行了。</p>
-<h4 id="优点：-v3"><a class="header-anchor" href="#优点：-v3"></a>优点：</h4>
-<p>IE7及以上都是可以的</p>
+<ul>
+<li>【兼容性】：IE7及以上都是可以的</li>
+</ul>
 <h3 id="定宽高-绝对定位-负margin-水平垂直居中"><a class="header-anchor" href="#定宽高-绝对定位-负margin-水平垂直居中"></a>定宽高+绝对定位+负margin–水平垂直居中</h3>
 <pre><code class="language-HTML">&lt;style&gt;
 .child {
@@ -662,15 +666,10 @@
 &lt;div class=&quot;child&quot;&gt;这是文字这是文字这是文字这是文字这是文字这是文字&lt;/div&gt;
 &lt;/body&gt;
 </code></pre>
-<h4 id="优点：-v4"><a class="header-anchor" href="#优点：-v4"></a>优点：</h4>
 <ul>
-<li>兼容性好</li>
+<li>【兼容性】：兼容性好</li>
 </ul>
-<h4 id="缺点：-v4"><a class="header-anchor" href="#缺点：-v4"></a>缺点：</h4>
-<ul>
-<li>要定宽高</li>
-</ul>
-<h4 id="备注：-v3"><a class="header-anchor" href="#备注：-v3"></a>备注：</h4>
+<h4 id="备注：-v2"><a class="header-anchor" href="#备注：-v2"></a>备注：</h4>
 <p>将<code>position: absolute;</code>改成<code>position: fixed;</code>也是可以的，相信大家都懂什么意思。但是在老版本IE下会不支持fixed，在网上抄一下怎么兼容就行了。</p>
 <h3 id="定宽高-绝对定位-calc"><a class="header-anchor" href="#定宽高-绝对定位-calc"></a>定宽高+绝对定位+calc</h3>
 <p>思路和上面“要求定宽高+负margin”一样。</p>
@@ -715,11 +714,10 @@
 &lt;div class=&quot;child&quot;&gt;这是文字这是文字这是文字&lt;/div&gt;
 &lt;/body&gt;
 </code></pre>
-<h4 id="优点：-v5"><a class="header-anchor" href="#优点：-v5"></a>优点：</h4>
-<p>符合人的直觉思维习惯</p>
-<h4 id="缺点：-v5"><a class="header-anchor" href="#缺点：-v5"></a>缺点：</h4>
-<p>需要IE8及以上</p>
-<h4 id="备注：-v4"><a class="header-anchor" href="#备注：-v4"></a>备注：</h4>
+<ul>
+<li>【兼容性】：需要IE8及以上</li>
+</ul>
+<h4 id="备注：-v3"><a class="header-anchor" href="#备注：-v3"></a>备注：</h4>
 <ul>
 <li>定位改成用fixed也是可以的</li>
 <li>其原理参考：</li>
@@ -747,31 +745,15 @@
 &lt;/div&gt;
 &lt;/body&gt;
 </code></pre>
-<h4 id="优点"><a class="header-anchor" href="#优点"></a>优点:</h4>
-<p>父子元素的width和height都可以自己定</p>
-<h4 id="缺点：-v6"><a class="header-anchor" href="#缺点：-v6"></a>缺点：</h4>
-<p>IE8及以下不兼容</p>
-<h4 id="备注：-v5"><a class="header-anchor" href="#备注：-v5"></a>备注：</h4>
 <ul>
-<li>绝对定位也可以改写为相对定位：</li>
+<li>【优点】:父子元素的width和height都可以自己定</li>
+<li>【兼容性】：IE8及以下不兼容</li>
 </ul>
-<pre><code class="language-CSS">.parent {
-  	/*子元素相对定位，父元素定高*/
-    width: 300px;
-    height: 250px;
-    background: green;
-}
-.child {
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-}
-</code></pre>
 <h3 id="flex布局-grid布局-水平垂直居中"><a class="header-anchor" href="#flex布局-grid布局-水平垂直居中"></a>flex布局/grid布局–水平垂直居中</h3>
-<blockquote>
-<p>grid布局：(对于水平垂直居中这个问题，)方式和flex布局类似。因为浏览器兼容性不如flex，且flex能满足的场景挺多的。所以一般只用flex布局就够了。</p>
-</blockquote>
-<p>flex布局在这里有点大才小用了。关键在于了解flex布局的特点。因为写法较多，参考网上的。</p>
+<ul>
+<li>（对比grid布局：(对于水平垂直居中这个问题，)方式和flex布局类似。因为grid的浏览器兼容性不如flex，且flex能满足的场景挺多的。所以一般只用flex布局就够了。）</li>
+<li>（flex布局在这个场景有点大才小用了。）</li>
+</ul>
 <h3 id="转换成行内块级元素-个别场景下适用-容易被忽略"><a class="header-anchor" href="#转换成行内块级元素-个别场景下适用-容易被忽略"></a>转换成行内块级元素 #个别场景下适用，容易被忽略</h3>
 <p>此次我们居中的目标是一个<code>块级元素的</code>块块，而非之前的<code>行内元素</code>。</p>
 <p>我们需要加上<code>display: inline-block;</code>使它变成行内块级元素，然后就可以参考行内元素的居中来弄了。</p>
@@ -784,7 +766,7 @@
         <p><span>本文标题:</span><a href="/2019/02/05/centralize-one-ele/">总结：使单一对象水平/垂直居中</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2019-02-05, 10:14:25</p>
-        <!-- <p><span>最后更新:</span>2023-10-27, 12:09:47</p> -->
+        <!-- <p><span>最后更新:</span>2024-02-04, 17:24:47</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="总结：使单一对象水平/垂直居中" href="/2019/02/05/centralize-one-ele/">https://blog.az22c.top/2019/02/05/centralize-one-ele/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://blog.az22c.top/2019/02/05/centralize-one-ele/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -820,7 +802,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#里面的内容-为单行行内元素的时候-以单行文字为例"><span class="toc-text">“里面的内容”为单行行内元素的时候(以单行文字为例)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#a法：令line-height和height相等-垂直居中"><span class="toc-text">A法：令line-height和height相等–垂直居中</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#缺点："><span class="toc-text">缺点：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#b法：使用display-table-cell和vertical-align-middle-垂直居中"><span class="toc-text">B法：使用display:table-cell和vertical-align:middle–垂直居中</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#优点："><span class="toc-text">优点：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#缺点：-v2"><span class="toc-text">缺点：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#备注："><span class="toc-text">备注：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#c法：使用display-inline-block和vertical-align-middle-垂直居中"><span class="toc-text">C法：使用display: inline-block和vertical-align:middle–垂直居中</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#d法：flex布局-grid布局-水平垂直居中"><span class="toc-text">D法：flex布局/grid布局–水平垂直居中</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#优点：-v2"><span class="toc-text">优点：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#缺点：-v3"><span class="toc-text">缺点：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#里面的内容-为多行行内元素的时候-以多行文字为例"><span class="toc-text">“里面的内容”为多行行内元素的时候(以多行文字为例)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#里面的内容-为大小不固定的图片的时候"><span class="toc-text">“里面的内容”为大小不固定的图片的时候</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#里面的内容-为定宽高的块级元素的时候"><span class="toc-text">“里面的内容”为定宽高的块级元素的时候</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定宽-margin-auto-水平居中"><span class="toc-text">定宽+margin auto–水平居中</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#备注：-v2"><span class="toc-text">备注：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#优点：-v3"><span class="toc-text">优点：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定宽高-绝对定位-负margin-水平垂直居中"><span class="toc-text">定宽高+绝对定位+负margin–水平垂直居中</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#优点：-v4"><span class="toc-text">优点：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#缺点：-v4"><span class="toc-text">缺点：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#备注：-v3"><span class="toc-text">备注：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定宽高-绝对定位-calc"><span class="toc-text">定宽高+绝对定位+calc</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#里面的内容-为不定宽高的块级元素的时候"><span class="toc-text">“里面的内容”为不定宽高的块级元素的时候</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#绝对定位-margin-auto-水平垂直居中"><span class="toc-text">绝对定位+margin:auto–水平垂直居中</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#优点：-v5"><span class="toc-text">优点：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#缺点：-v5"><span class="toc-text">缺点：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#备注：-v4"><span class="toc-text">备注：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#绝对定位-translate-水平垂直居中"><span class="toc-text">绝对定位+translate–水平垂直居中</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#优点"><span class="toc-text">优点:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#缺点：-v6"><span class="toc-text">缺点：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#备注：-v5"><span class="toc-text">备注：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flex布局-grid布局-水平垂直居中"><span class="toc-text">flex布局/grid布局–水平垂直居中</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#转换成行内块级元素-个别场景下适用-容易被忽略"><span class="toc-text">转换成行内块级元素 #个别场景下适用，容易被忽略</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#里面的内容-为单行行内元素的时候-以单行文字为例"><span class="toc-text">“里面的内容”为单行行内元素的时候(以单行文字为例)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#a法：令line-height和height相等-垂直居中"><span class="toc-text">A法：令line-height和height相等–垂直居中</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#b法：使用display-table-cell和vertical-align-middle-垂直居中"><span class="toc-text">B法：使用display:table-cell和vertical-align:middle–垂直居中</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#优点："><span class="toc-text">优点：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#缺点："><span class="toc-text">缺点：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#备注："><span class="toc-text">备注：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#c法：使用display-inline-block和vertical-align-middle-垂直居中"><span class="toc-text">C法：使用display: inline-block和vertical-align:middle–垂直居中</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#d法：flex布局-grid布局-水平垂直居中"><span class="toc-text">D法：flex布局/grid布局–水平垂直居中</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#里面的内容-为多行行内元素的时候-以多行文字为例"><span class="toc-text">“里面的内容”为多行行内元素的时候(以多行文字为例)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#里面的内容-为大小不固定的图片的时候"><span class="toc-text">“里面的内容”为大小不固定的图片的时候</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#里面的内容-为定宽高的块级元素的时候"><span class="toc-text">“里面的内容”为定宽高的块级元素的时候</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定宽-margin-auto-水平居中"><span class="toc-text">定宽+margin auto–水平居中</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定宽高-绝对定位-负margin-水平垂直居中"><span class="toc-text">定宽高+绝对定位+负margin–水平垂直居中</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#备注：-v2"><span class="toc-text">备注：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定宽高-绝对定位-calc"><span class="toc-text">定宽高+绝对定位+calc</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#里面的内容-为不定宽高的块级元素的时候"><span class="toc-text">“里面的内容”为不定宽高的块级元素的时候</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#绝对定位-margin-auto-水平垂直居中"><span class="toc-text">绝对定位+margin:auto–水平垂直居中</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#备注：-v3"><span class="toc-text">备注：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#绝对定位-translate-水平垂直居中"><span class="toc-text">绝对定位+translate–水平垂直居中</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flex布局-grid布局-水平垂直居中"><span class="toc-text">flex布局/grid布局–水平垂直居中</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#转换成行内块级元素-个别场景下适用-容易被忽略"><span class="toc-text">转换成行内块级元素 #个别场景下适用，容易被忽略</span></a></li></ol></li></ol>
         
     </div>
     <style>
@@ -887,7 +869,7 @@
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					
-						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,804</span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,718</span>
 					
 				</div>
             </div>
