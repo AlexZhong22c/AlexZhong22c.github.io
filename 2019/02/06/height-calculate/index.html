@@ -93,7 +93,7 @@
 <meta property="og:image" content="https://cloud.az22c.top/font-line.jpg-az22cgithub">
 <meta property="og:image" content="https://cloud.az22c.top/font-forge.jpg-az22cgithub">
 <meta property="og:image" content="https://cloud.az22c.top/set-line-height-1.jpg-az22cgithub">
-<meta property="og:updated_time" content="2023-10-27T04:09:47.772Z">
+<meta property="og:updated_time" content="2024-02-12T14:07:44.843Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入理解文字高度和行高的设置">
 <meta name="twitter:description" content="font-size设置的是什么?line-height设置的是什么?各种行高是怎么计算出来的?你真的知道吗?">
@@ -488,7 +488,7 @@
 <p><img src="https://cloud.az22c.top/font-line.jpg-az22cgithub" alt="font-line"></p>
 <p>先说结论：</p>
 <p><strong>font-size 相同时，font-family 不同，得到的<code>文字高度</code>也不同</strong>：</p>
-<p><img src="https://cloud.az22c.top/diff-font.jpg-az22cgithub" alt="diff-fon"></p>
+<p><img src="https://cloud.az22c.top/diff-font.jpg-az22cgithub" alt="font-family不同-得到的文字高度也不同"></p>
 <p>上图表明，同样是font-size为100px，三款不同字体在浏览器画面上的高度是不同的。</p>
 <p>我们再来分析一下，在font-size设置为100px时，Catamaran字体的那164px是怎么构成的：</p>
 <p><img src="https://cloud.az22c.top/catamaran-font.jpg-az22cgithub" alt="catamaran-font"></p>
@@ -497,12 +497,12 @@
 <blockquote>
 <p>(em-square这个概念的产生是有历史原因的，但是这点我们不用理会。)</p>
 <p>em-square之内，图中&quot;B&quot;上方预留的小区域，大概是考虑到有些字母模仿手写体会有起笔效果，需要一定的位置；&quot;a&quot;下方预留的区域是为了写类似g这样的字母的时候，下方需要一定的区域。</p>
-<p>em-square之外，上方和下方都预留了一定空白区域，这样可以防止行与行间文字挤在一起。</p>
+<p>em-square之外，上方和下方都预留了一定空白区域，这样可以防止某些字体有头尾癖好而导致行与行间文字挤在一起。</p>
 <p>事实上对于所有font-family而言，规则都是这样的，对于中文字体而言也是如此。</p>
 </blockquote>
 <p>我们可以得到第二个结论：</p>
 <p><strong>font-size不能直接控制文字的高度(content-area的高度)，它控制的是文字主体部分的高度(em-square的高度)。</strong> 而content-area和em-square之间的比例，完全是由字体设计师决定，作为程序员是无法统一的。</p>
-<p>所以再经过调查， <strong>没有属性能<code>直接</code>控制文字的高度，我们只能这样通过font-size<code>间接</code> 控制文字的高度。</strong></p>
+<p>所以再经过调查， <strong>没有属性能<code>直接</code>控制文字的高度，我们只能这样通过font-size<code>间接</code> 控制文字的实际高度。</strong></p>
 <h2 id="计算一个p元素的内容高度"><a class="header-anchor" href="#计算一个p元素的内容高度"></a>计算一个p元素的<code>内容高度</code></h2>
 <p>(我们既然说是<code>内容高度</code>，就直接把margin、border厚度、padding排除在外了。)</p>
 <p>当 p 元素出现在屏幕上时，它可能包含了多行的内容，其内容高度由<code>每一行的高度</code>堆叠而成。这点很好理解。</p>
@@ -523,7 +523,7 @@
 </blockquote>
 <h2 id="line-height的作用"><a class="header-anchor" href="#line-height的作用"></a>line-height的作用</h2>
 <p><strong>当我们没有设置line-height的时候，一个line-box的默认高度由这行内的最大高度决定。</strong></p>
-<p>所以通常情况下，line-box的高度 &gt;= content-area的高度 &gt; em-square的高度</p>
+<p>所以通常情况下（对于某个字和它所属的行，）： line-box的高度 &gt;= content-area的高度 &gt; em-square的高度</p>
 <hr>
 <p><strong>当我们设置了line-height的时候，line-box的高度就是由line-height所设定的。</strong>  因此此时我们可以把line-box的高度设置得比content-area甚至em-square小，导致文字看上去挤在一起。</p>
 <blockquote>
@@ -539,13 +539,12 @@
 <h2 id="line-height是怎么计算的"><a class="header-anchor" href="#line-height是怎么计算的"></a>line-height是怎么计算的</h2>
 <p>官方对<code>line-height</code>的定义是：</p>
 <blockquote>
-<p>两行文字基线(baseline)之间的距离。</p>
+<p><strong>两行文字基线(baseline)之间的距离。</strong></p>
 </blockquote>
 <h3 id="额外谈谈-基线"><a class="header-anchor" href="#额外谈谈-基线"></a>额外谈谈&quot;基线&quot;</h3>
 <p>为什么是基线呢？</p>
-<p>line-height可不可以定义为是两行文字的“中线”之间的距离呢？</p>
-<p>可不可以定义为是两行文字的“底线”之间的距离呢？</p>
-<p>张鑫旭认为都是都可以的。</p>
+<p>line-height可不可以定义为是两行文字的“中线”之间的距离呢？可不可以定义为是两行文字的“底线”之间的距离呢？</p>
+<p>个人认为都是都可以说得通的。</p>
 <p>那么为什么选基线作为定义的依据？</p>
 <p>因为， <strong>基线乃其他线定义之根本也。</strong></p>
 <p>了解“基线”大有好处。</p>
@@ -556,13 +555,18 @@
 <blockquote>
 <p>首先说明的是HHead Ascent是针对macOS的计算值，Win Ascent是针对Windows系统的计算值，这点可以不用理会。</p>
 </blockquote>
-<p>设计一款字体的时候从基线开始定位。</p>
-<p>我们看到，Em Size设置为1000，就是<code>基线到基线以上1000个单位的那片区域</code>都是em-square的区域。</p>
-<p>Ascent设置为770，就是Ascender线距离基线770个单位。</p>
-<p>Descent设置为230，就是Descender线距离基线230个单位。</p>
-<p>Capital Height是680，也是相对于基线的。是大写字母顶部位置的线距离基线多少。</p>
-<p>X Height是485，也是相对于基线而言的。是小写字母顶部位置的线距离基线多少。</p>
-<p><code>Ascender线到Descender线之间的高度</code> 加上Line Gap就是content-area的总高度。（笔者注：这点可能有误）</p>
+<ul>
+<li>设计一款字体的时候，所有线的位置参数都是相对于基线的位置而确定的：
+<ul>
+<li>我们看到，Em Size设置为1000，就是<code>基线到基线以上1000个单位的那片区域</code>都是em-square的区域。</li>
+<li>Ascent设置为770，就是Ascender线距离基线770个单位。</li>
+<li>Descent设置为230，就是Descender线距离基线230个单位。</li>
+<li>Capital Height是680，也是相对于基线的。是大写字母顶部位置的线距离基线多少。</li>
+<li>X Height是485，也是相对于基线而言的。是小写字母顶部位置的线距离基线多少。</li>
+<li><code>Ascender线到Descender线之间的高度</code> 加上Line Gap就是content-area的总高度。（笔者注：这点可能有误）</li>
+</ul>
+</li>
+</ul>
 <hr>
 <p>所以说，我们选基线来定义line-height：line-height是两行文字基线(baseline)之间的距离。</p>
 <p>但是这个定义说了等于没说，因为它不能告诉我们怎么设置line-height啊！</p>
@@ -588,10 +592,12 @@
 <p>张鑫旭大神鼓励大家用数字来设置line-height。</p>
 <ul>
 <li>如果是博客类型的网站，line-height设置为1.5到1.6，行与行之间比较宽，适合舒适地阅读。</li>
-<li>如果是研发正规的产品，推荐大家使用<code>20px匹配法</code> ，方便计算。</li>
+<li>如果是研发正规的产品（并且不适用UI设计工具导出位置参数），推荐大家使用<code>20px匹配法</code> ，方便计算。</li>
 </ul>
-<h4 id="20px匹配法"><a class="header-anchor" href="#20px匹配法"></a>20px匹配法</h4>
-<p>为什么呢？</p>
+<h4 id="20px匹配法-内容可能已经过时"><a class="header-anchor" href="#20px匹配法-内容可能已经过时"></a>20px匹配法 【内容可能已经过时】</h4>
+<details>
+<summary>20px匹配法【点击左侧箭头展开内容】</summary>
+为什么呢？
 <p>首先我们一般来说会设置font-size在14px到16px之间，然后content-area的高度也不会比这个高太多的吧。所以我们想着让line-height设置为20px应该够用了。而且20px方便计算。像这样：</p>
 <pre><code class="language-CSS">body { font-size: 14px; line-height:??? }
 </code></pre>
@@ -605,10 +611,11 @@
 <p>或者是这样：</p>
 <pre><code class="language-CSS">body { font-size: 14px/1.4286 'microsoft yahei'; }
 </code></pre>
+</details>
 <h4 id="补充：line-height-1-5和line-height-150-的区别？"><a class="header-anchor" href="#补充：line-height-1-5和line-height-150-的区别？"></a>补充：line-height: 1.5和line-height: 150%的区别？</h4>
 <p>这是一个在网上被人讲烂了的知识点了，line-height设置为数字和百分数时之间的区别：</p>
 <ul>
-<li><code>line-height:1.5</code>： 所以可继承元素根据font-size重新计算行高</li>
+<li><code>line-height:1.5</code>： 所有可继承元素根据font-size重新计算行高</li>
 <li><code>line-height:150%</code>： 当前元素根据font-size计算行高，继承给下面的元素</li>
 <li><code>line-height: 1.5em</code> ：当前元素根据font-size计算行高，继承给下面的元素(与百分比效果相同)</li>
 </ul>
@@ -636,13 +643,9 @@
 <li>当我们没有设置line-height的时候，一个line-box的默认高度由这行内的最大高度决定。</li>
 <li>当我们设置了line-height的时候，line-box的高度就是由line-height所设定的。</li>
 </ul>
-<h3 id="预告：文字在一行中的位置的计算"><a class="header-anchor" href="#预告：文字在一行中的位置的计算"></a>预告：文字在一行中的位置的计算?</h3>
-<p>有没有发现？根据我们上面的理论，如果想要确定一段文字在一行(line-box模型)中的位置太难了！是不是垂直居中？文字位置偏上还是偏下？要经过一系列计算才能得出结论。</p>
-<p>进而，我们联想到，平时我们想让行内元素垂直居中的办法：设置<code>vertical-align:middle</code>，<strong>这种居中方法是错的吗？</strong></p>
-<p>嗯，是错的，这只能使得行内元素近似垂直居中。</p>
-<p>如果想要行内的文字或者图片完美居中，就要研究清楚line-height和vertical:middle的原理了。</p>
-<p>你可以系统地看一看张鑫旭在慕课网上的视频教程。如果急着想看结论，直接翻到他每个视频的最后一章就可以了。</p>
-<p>或者你可以直接翻看我下一篇文章 <a href="https://blog.az22c.top/2019/02/05/vertical-align-middle/">深入理解vertical-align:middle</a> 的结论。</p>
+<h3 id="预告：文字在一行中如何垂直居中"><a class="header-anchor" href="#预告：文字在一行中如何垂直居中"></a>预告：文字在一行中如何垂直居中?</h3>
+<p>有没有发现？根据我们上面的理论，如果想要确定一段文字在一行(line-box模型)中的位置太难了！是不是垂直居中？或者文字位置偏上还是偏下？都要经过一系列计算才能得出结论。</p>
+<p>浏览器提供的<code>vertical-align:middle</code>，对于实现垂直居中来说，虽然不完整不精准，但是在掌握了一定的规律后，还是能利用起来的。我下一篇文章 <a href="https://blog.az22c.top/2019/02/05/vertical-align-middle/">vertical-align:middle近似居中和完美居中</a> 。</p>
 <h2 id="参考："><a class="header-anchor" href="#参考："></a>参考：</h2>
 <p><a href="http://iamvdo.me/en/blog/css-font-metrics-line-height-and-vertical-align" target="_blank" rel="noopener">css-font-metrics-line-height-and-vertical-align</a></p>
 <p><a href="https://zhuanlan.zhihu.com/p/25808995?group_id=825729887779307520" target="_blank" rel="noopener">译文，部分内容有误</a></p>
@@ -656,7 +659,7 @@
         <p><span>本文标题:</span><a href="/2019/02/06/height-calculate/">深入理解文字高度和行高的设置</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2019-02-06, 13:15:57</p>
-        <!-- <p><span>最后更新:</span>2023-10-27, 12:09:47</p> -->
+        <!-- <p><span>最后更新:</span>2024-02-12, 22:07:44</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="深入理解文字高度和行高的设置" href="/2019/02/06/height-calculate/">https://blog.az22c.top/2019/02/06/height-calculate/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://blog.az22c.top/2019/02/06/height-calculate/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -692,7 +695,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#从font-size讲起-说文字高度："><span class="toc-text">从font-size讲起，说文字高度：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#计算一个p元素的内容高度"><span class="toc-text">计算一个p元素的内容高度</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#line-box的默认高度"><span class="toc-text">line-box的默认高度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#line-height的作用"><span class="toc-text">line-height的作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#line-height是怎么计算的"><span class="toc-text">line-height是怎么计算的</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#额外谈谈-基线"><span class="toc-text">额外谈谈&quot;基线&quot;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#line-height的计算-画重点"><span class="toc-text">line-height的计算（画重点！）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#line-height-normal的时候"><span class="toc-text">line-height:normal的时候</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#line-height设为数字-百分数的时候"><span class="toc-text">line-height设为数字/百分数的时候</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#20px匹配法"><span class="toc-text">20px匹配法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#补充：line-height-1-5和line-height-150-的区别？"><span class="toc-text">补充：line-height: 1.5和line-height: 150%的区别？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#后记："><span class="toc-text">后记：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#全文总结"><span class="toc-text">全文总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#预告：文字在一行中的位置的计算"><span class="toc-text">预告：文字在一行中的位置的计算?</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考："><span class="toc-text">参考：</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#从font-size讲起-说文字高度："><span class="toc-text">从font-size讲起，说文字高度：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#计算一个p元素的内容高度"><span class="toc-text">计算一个p元素的内容高度</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#line-box的默认高度"><span class="toc-text">line-box的默认高度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#line-height的作用"><span class="toc-text">line-height的作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#line-height是怎么计算的"><span class="toc-text">line-height是怎么计算的</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#额外谈谈-基线"><span class="toc-text">额外谈谈&quot;基线&quot;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#line-height的计算-画重点"><span class="toc-text">line-height的计算（画重点！）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#line-height-normal的时候"><span class="toc-text">line-height:normal的时候</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#line-height设为数字-百分数的时候"><span class="toc-text">line-height设为数字/百分数的时候</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#20px匹配法-内容可能已经过时"><span class="toc-text">20px匹配法 【内容可能已经过时】</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#补充：line-height-1-5和line-height-150-的区别？"><span class="toc-text">补充：line-height: 1.5和line-height: 150%的区别？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#后记："><span class="toc-text">后记：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#全文总结"><span class="toc-text">全文总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#预告：文字在一行中如何垂直居中"><span class="toc-text">预告：文字在一行中如何垂直居中?</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考："><span class="toc-text">参考：</span></a></li></ol>
         
     </div>
     <style>
@@ -759,7 +762,7 @@
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					
-						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：2,979</span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：2,965</span>
 					
 				</div>
             </div>
