@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
 <meta property="og:description" content="明白单一对象的水平/垂直居中的写法和原理，有助于我们构造更加复杂的居中布局。 我们按照居中的“里面的内容”来分类，展开全文：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2024-02-04T11:35:11.446Z">
+<meta property="og:updated_time" content="2024-02-12T09:27:30.237Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="总结：使单一对象水平&#x2F;垂直居中">
 <meta name="twitter:description" content="明白单一对象的水平/垂直居中的写法和原理，有助于我们构造更加复杂的居中布局。 我们按照居中的“里面的内容”来分类，展开全文：">
@@ -434,7 +434,7 @@
 
 	<br />
 	<p style="height:7px;"/>
-	<p style="height:20px;font-family:KaiTi,LiSu,'宋体',sans-serif;color:#DBDBDB;font-size:12px;">预计阅读7分钟</p>
+	<p style="height:20px;font-family:KaiTi,LiSu,'宋体',sans-serif;color:#DBDBDB;font-size:12px;">预计阅读8分钟</p>
 
     </div>
   
@@ -483,7 +483,7 @@
 </code></pre>
 <p>事实上，不需要对于height属性的设置也是可以的。</p>
 <ul>
-<li>【缺点】：只能用于居中一行文字（不然就改为用别的方法）</li>
+<li>【缺点】：只能用于居中一行文字（否则就改为用别的方法）</li>
 </ul>
 <h3 id="b法：使用display-table-cell和vertical-align-middle-垂直居中"><a class="header-anchor" href="#b法：使用display-table-cell和vertical-align-middle-垂直居中"></a>B法：使用display:table-cell和vertical-align:middle–垂直居中</h3>
 <pre><code class="language-html">&lt;style&gt;
@@ -500,6 +500,7 @@
 &lt;div class=&quot;parent&quot;&gt;这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字&lt;/div&gt;
 &lt;/body&gt;
 </code></pre>
+<p>另外，常见的table-cell外面套一层<code>display:table</code>元素的作用：对table-cell元素设置百分比（如100%）的宽高值时无效的，但是可以将父元素设置display:table，再将父元素设置百分比宽高，子元素table-cell会自动撑满父元素。这就可以做相对于整个页面的水平垂直居中。</p>
 <h4 id="优点："><a class="header-anchor" href="#优点："></a>优点：</h4>
 <ul>
 <li>height和line-height可以自由定义，这方便内容从单行文字发展为多行文字</li>
@@ -507,7 +508,11 @@
 </ul>
 <h4 id="缺点："><a class="header-anchor" href="#缺点："></a>缺点：</h4>
 <ul>
-<li>设置.parent为<code>float:left</code>或者<code>positon:absolute</code>或者<code>position:fixed</code> 时居中会失效。如需兼顾他们，此时需要外面套多一层元素。（因为<code>vertical-align</code>只适用于inline/inline-block元素或者table-cell元素，详见 <a href="https://blog.az22c.top/2019/02/05/vertical-align-middle/">深入理解vertical-align:middle</a>）</li>
+<li>设置.parent为<code>float:left</code>或者<code>positon:absolute</code>或者<code>position:fixed</code> 时居中会失效。如需兼顾他们，此时需要外面套多一层元素。
+<ul>
+<li>（因为<code>vertical-align</code>只适用于inline/inline-block元素或者table-cell元素，详见 <a href="https://blog.az22c.top/2019/02/05/vertical-align-middle/">深入理解vertical-align:middle</a>）</li>
+</ul>
+</li>
 <li>IE7及以下都不支持</li>
 </ul>
 <h4 id="备注："><a class="header-anchor" href="#备注："></a>备注：</h4>
@@ -563,26 +568,55 @@
 </code></pre>
 </details>
 <h3 id="c法：使用display-inline-block和vertical-align-middle-垂直居中"><a class="header-anchor" href="#c法：使用display-inline-block和vertical-align-middle-垂直居中"></a>C法：使用display: inline-block和vertical-align:middle–垂直居中</h3>
-<p>这里只给出近似垂直居中的例子，如果想设置为完美垂直居中的位置或者了解更多，详见<a href="https://blog.az22c.top/2019/02/05/vertical-align-middle/">深入理解vertical-align:middle</a> ：</p>
+<p>这里只给出近似垂直居中的例子，在实际项目中用得比较多；如果想设置为完美垂直居中或者了解更多，详见<a href="https://blog.az22c.top/2019/02/05/vertical-align-middle/">深入理解vertical-align:middle</a> ：</p>
+<ul>
+<li>统一封装、普适适用于“居中单行文字”、“居中图片”和“居中多行文字”（包括“居中单行文字”）：
+<ul>
+<li>再加上简单记忆一些其他的样式实现手段，就能快捷完成开发。</li>
+<li>（当欲设置verticial-align:middle时，img可视为一个低配版的inline-block元素。）</li>
+<li>效果：这样，父容器可以选择使用line-height或者height来撑高，放宽了适用场景
+<ul>
+<li>（具体来讲：）
+<ul>
+<li>反例就是对于只有图片，父容器必须选择使用line-height，不然连“居中”效果都达不到。解决办法就是增加“居中的兄弟元素”来打破“只有图片”的条件；</li>
+<li>或者 图片 受兄弟元素（含父元素的伪元素）的vertical-align:middle影响而已经达到居中，则可不强制使用line-height</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>（备注：这个辅助元素可以是伪元素，也可以是 i 元素。）</li>
+</ul>
 <pre><code class="language-HTML">&lt;style&gt;
-.parent {
-  line-height: 300px;
-  text-align: center;
-  background: green;
+.vertical-center:before {
+    content:'';
+    width: 0; /* 如果为了应对各种场景而普适省事，可以加上 width: 0 */
+
+    display:inline-block;
+    vertical-align:middle;
+    height:100%;
 }
-.text {
+/* 灵活：在此垂直居中基础上，加上水平居中 */
+.vertical-center { text-align: center; }
+/* 【灵活】所有子元素 灵活 添加 vertical-align:middle 即可： */
+.vertical-center &gt; img {
+  vertical-align: middle;
+}
+.vertical-center &gt; .vertical-center__text {
   display: inline-block;
   vertical-align: middle;
-  
-  line-height: normal;/* 此例中，重置对上级的该属性的继承 */
-  /* text-align: left; */
-  /* max-width: 100%; */
 }
+/* 【测试代码，可删】： *//* 效果是：放宽了适用场景 */
+.vertical-center { height: 300px }
 &lt;/style&gt;
 &lt;body&gt;
-&lt;p class=&quot;parent&quot;&gt;
-&lt;span class=&quot;text&quot;&gt;一行文字AAA&lt;br&gt;一行文字&lt;br&gt;一行文字&lt;/span&gt;&lt;!-- 兼容IE7,这里要换行或空格 --&gt;
-&lt;/p&gt;
+  &lt;div class=&quot;vertical-center&quot;&gt;
+    &lt;img src=&quot;&quot; alt=&quot;图片src要设置!!&quot;/&gt;
+    &lt;span class=&quot;vertical-center__text&quot;&gt;一行文字AAA&lt;br&gt;一行文字&lt;br&gt;一行文字&lt;/span&gt;
+    &lt;span class=&quot;vertical-center__text&quot;&gt;单行文字&lt;/span&gt;
+    &lt;!-- 如上，单行文字，如果想垂直居中，应放入span元素里面，然后和“多行文字”的样式处理一致：一致span套上对应的class --&gt;
+  &lt;/div&gt;
 &lt;/body&gt;
 </code></pre>
 <h3 id="d法：flex布局-grid布局-水平垂直居中"><a class="header-anchor" href="#d法：flex布局-grid布局-水平垂直居中"></a>D法：flex布局/grid布局–水平垂直居中</h3>
@@ -769,7 +803,7 @@
         <p><span>本文标题:</span><a href="/2019/02/05/centralize-one-ele/">总结：使单一对象水平/垂直居中</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2019-02-05, 10:14:25</p>
-        <!-- <p><span>最后更新:</span>2024-02-04, 19:35:11</p> -->
+        <!-- <p><span>最后更新:</span>2024-02-12, 17:27:30</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="总结：使单一对象水平/垂直居中" href="/2019/02/05/centralize-one-ele/">https://blog.az22c.top/2019/02/05/centralize-one-ele/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://blog.az22c.top/2019/02/05/centralize-one-ele/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -872,7 +906,7 @@
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					
-						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：1,702</span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：2,154</span>
 					
 				</div>
             </div>
