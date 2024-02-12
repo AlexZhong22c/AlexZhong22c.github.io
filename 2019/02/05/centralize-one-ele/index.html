@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
 <meta property="og:description" content="明白单一对象的水平/垂直居中的写法和原理，有助于我们构造更加复杂的居中布局。 我们按照居中的“里面的内容”来分类，展开全文：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2024-02-12T09:27:30.237Z">
+<meta property="og:updated_time" content="2024-02-12T11:49:29.042Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="总结：使单一对象水平&#x2F;垂直居中">
 <meta name="twitter:description" content="明白单一对象的水平/垂直居中的写法和原理，有助于我们构造更加复杂的居中布局。 我们按照居中的“里面的内容”来分类，展开全文：">
@@ -578,8 +578,8 @@
 <ul>
 <li>（具体来讲：）
 <ul>
-<li>反例就是对于只有图片，父容器必须选择使用line-height，不然连“居中”效果都达不到。解决办法就是增加“居中的兄弟元素”来打破“只有图片”的条件；</li>
-<li>或者 图片 受兄弟元素（含父元素的伪元素）的vertical-align:middle影响而已经达到居中，则可不强制使用line-height</li>
+<li>遇到最坏的情况就是对于只有图片，父容器必须选择使用line-height，不然连“居中”效果都达不到。解决办法就是增加“居中的兄弟元素”来打破“只有图片”的场景；</li>
+<li>或者 图片 受兄弟元素（含父元素的伪元素）的vertical-align:middle影响而已经达到近似居中，则可不强制使用line-height</li>
 </ul>
 </li>
 </ul>
@@ -597,9 +597,6 @@
     vertical-align:middle;
     height:100%;
 }
-/* 灵活：在此垂直居中基础上，加上水平居中 */
-.vertical-center { text-align: center; }
-/* 【灵活】所有子元素 灵活 添加 vertical-align:middle 即可： */
 .vertical-center &gt; img {
   vertical-align: middle;
 }
@@ -607,6 +604,8 @@
   display: inline-block;
   vertical-align: middle;
 }
+/* 灵活：在此垂直居中基础上，加上水平居中 */
+.vertical-center { text-align: center; }
 /* 【测试代码，可删】： *//* 效果是：放宽了适用场景 */
 .vertical-center { height: 300px }
 &lt;/style&gt;
@@ -803,7 +802,7 @@
         <p><span>本文标题:</span><a href="/2019/02/05/centralize-one-ele/">总结：使单一对象水平/垂直居中</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2019-02-05, 10:14:25</p>
-        <!-- <p><span>最后更新:</span>2024-02-12, 17:27:30</p> -->
+        <!-- <p><span>最后更新:</span>2024-02-12, 19:49:29</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="总结：使单一对象水平/垂直居中" href="/2019/02/05/centralize-one-ele/">https://blog.az22c.top/2019/02/05/centralize-one-ele/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://blog.az22c.top/2019/02/05/centralize-one-ele/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -906,7 +905,7 @@
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					
-						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：2,154</span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：2,145</span>
 					
 				</div>
             </div>

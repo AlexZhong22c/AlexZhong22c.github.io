@@ -4278,6 +4278,7 @@ for (var i = 0; i &lt; 10; i++) {
 <li>（如果选择用height，且图片还有其他兄弟元素，可能图片能受影响以达到近似垂直居中）</li>
 </ul>
 </li>
+<li>总之，这里若想要“完美居中”，还要再加上一个条件：使用line-height（而不是别的）来控制父容器高度。</li>
 </ul>
 <pre><code class="language-HTML">&lt;style&gt;
   /* 添加： */
@@ -4313,7 +4314,7 @@ for (var i = 0; i &lt; 10; i++) {
 <h3 id="近似居中-v2"><a class="header-anchor" href="#近似居中-v2"></a>近似居中</h3>
 <pre><code class="language-HTML">&lt;style&gt;
 .box {
-  line-height: 300px; /* 前文已解释过。若想“完美”垂直，必要条件就是选line-height */
+  line-height: 300px; /* 前文已解释过。若想“完美”垂直居中，必要条件就是选line-height */
   text-align: center;
 }
 .box &gt; .text {
@@ -4361,10 +4362,10 @@ i {
 <li>【推导过程】看完前面我们发现，
 <ul>
 <li>实际开发中，垂直居中如果能达到近似居中的效果就可以了</li>
-<li>而完美居中要求我们使用line-height而不是height，这点要求就是不普适、不快捷
+<li>而<strong>完美居中要求之一是必须使用line-height而不是height</strong>，这点要求就是不普适、不快捷
 <ul>
 <li>解释：如果选择用line-height，影响子元素样式大，导致“居中图片”和“居中多行文字”代码不统一难封装，又不方便记忆</li>
-<li>解释：完美居中只限line-height，想要再实现其他样式也不灵活。</li>
+<li>解释：完美居中只限line-height。用了line-height若想要再实现其他样式也不灵活。</li>
 </ul>
 </li>
 <li>所以我们在实战中，直接使用近似居中来封装即可，这样可以方便统一普适封装“居中图片”和“居中多行文字”
@@ -4377,9 +4378,13 @@ i {
 </ul>
 <hr>
 <ul>
-<li>（当欲设置verticial-align:middle时，img可视为一个低配版的inline-block元素。）</li>
-<li>（当欲设置verticial-align:middle时，“居中单行文字”其实可以和“居中多行文字”使用相同的手段。）</li>
-<li>普适封装：“居中图片”和“居中多行文字”（包括“居中单行文字”）皆可用它
+<li>（解释适用对象和对应代码：）
+<ul>
+<li>当欲设置verticial-align:middle时，img可视为一个低配版的inline-block元素。</li>
+<li>当欲设置verticial-align:middle时，“居中单行文字”其实可以和“居中多行文字”使用相同的手段。</li>
+</ul>
+</li>
+<li>普适封装： “居中图片”和“居中多行文字”（包括“居中单行文字”）皆可用它
 <ul>
 <li>效果已确定为近似垂直居中【原因上面已分析】</li>
 <li>选择使用“添加辅助元素”方案 （仅因为比font-size方案更普适）</li>
@@ -4387,8 +4392,8 @@ i {
 <ul>
 <li>（具体来讲：）
 <ul>
-<li>反例就是对于只有图片，父容器必须选择使用line-height，不然连“居中”效果都达不到。解决办法就是增加“居中的兄弟元素”来打破“只有图片”的条件；</li>
-<li>或者 图片 受兄弟元素（含父元素的伪元素）的vertical-align:middle影响而已经达到居中，则可不强制使用line-height</li>
+<li>遇到最坏的情况就是对于只有图片，父容器必须选择使用line-height，不然连“居中”效果都达不到。解决办法就是增加“居中的兄弟元素”来打破“只有图片”的场景；</li>
+<li>或者 图片 受兄弟元素（含父元素的伪元素）的vertical-align:middle影响而已经达到近似居中，则可不强制使用line-height</li>
 </ul>
 </li>
 </ul>
@@ -4418,9 +4423,6 @@ i {
     vertical-align:middle;
     height:100%;
 }
-/* 灵活：在此垂直居中基础上，加上水平居中 */
-.vertical-center { text-align: center; }
-/* 【灵活】所有子元素 灵活 添加 vertical-align:middle 即可： */
 .vertical-center &gt; img {
   vertical-align: middle;
 }
@@ -4428,6 +4430,8 @@ i {
   display: inline-block;
   vertical-align: middle;
 }
+/* 灵活：在此垂直居中基础上，加上水平居中 */
+.vertical-center { text-align: center; }
 /* 【测试代码，可删】： *//* 效果是：放宽了适用场景 */
 .vertical-center { height: 300px }
 &lt;/style&gt;
@@ -4572,8 +4576,8 @@ i {
 <ul>
 <li>（具体来讲：）
 <ul>
-<li>反例就是对于只有图片，父容器必须选择使用line-height，不然连“居中”效果都达不到。解决办法就是增加“居中的兄弟元素”来打破“只有图片”的条件；</li>
-<li>或者 图片 受兄弟元素（含父元素的伪元素）的vertical-align:middle影响而已经达到居中，则可不强制使用line-height</li>
+<li>遇到最坏的情况就是对于只有图片，父容器必须选择使用line-height，不然连“居中”效果都达不到。解决办法就是增加“居中的兄弟元素”来打破“只有图片”的场景；</li>
+<li>或者 图片 受兄弟元素（含父元素的伪元素）的vertical-align:middle影响而已经达到近似居中，则可不强制使用line-height</li>
 </ul>
 </li>
 </ul>
@@ -4591,9 +4595,6 @@ i {
     vertical-align:middle;
     height:100%;
 }
-/* 灵活：在此垂直居中基础上，加上水平居中 */
-.vertical-center { text-align: center; }
-/* 【灵活】所有子元素 灵活 添加 vertical-align:middle 即可： */
 .vertical-center &gt; img {
   vertical-align: middle;
 }
@@ -4601,6 +4602,8 @@ i {
   display: inline-block;
   vertical-align: middle;
 }
+/* 灵活：在此垂直居中基础上，加上水平居中 */
+.vertical-center { text-align: center; }
 /* 【测试代码，可删】： *//* 效果是：放宽了适用场景 */
 .vertical-center { height: 300px }
 &lt;/style&gt;
