@@ -4508,7 +4508,7 @@ i {
 <ul>
 <li>设置.parent为<code>float:left</code>或者<code>positon:absolute</code>或者<code>position:fixed</code> 时居中会失效。如需兼顾他们，此时需要外面套多一层元素。
 <ul>
-<li>（因为<code>vertical-align</code>只适用于inline/inline-block元素或者table-cell元素，详见 <a href="https://blog.az22c.top/2019/02/05/vertical-align-middle/">深入理解vertical-align:middle</a>）</li>
+<li>（因为<code>vertical-align</code>只适用于inline/inline-block元素或者table-cell元素，详见 <a href="https://blog.az22c.top/2019/02/05/vertical-align-middle/">vertical-align:middle近似居中和完美居中</a>）</li>
 </ul>
 </li>
 <li>IE7及以下都不支持</li>
@@ -4566,22 +4566,13 @@ i {
 </code></pre>
 </details>
 <h3 id="c法：使用display-inline-block和vertical-align-middle-垂直居中"><a class="header-anchor" href="#c法：使用display-inline-block和vertical-align-middle-垂直居中"></a>C法：使用display: inline-block和vertical-align:middle–垂直居中</h3>
-<p>这里只给出近似垂直居中的例子，在实际项目中用得比较多；如果想设置为完美垂直居中或者了解更多，详见<a href="https://blog.az22c.top/2019/02/05/vertical-align-middle/">深入理解vertical-align:middle</a> ：</p>
+<p>这里只给出近似垂直居中的例子，在实际项目中用得最多；而如果想设置为完美垂直居中或者了解更多，详见<a href="https://blog.az22c.top/2019/02/05/vertical-align-middle/">深入理解vertical-align:middle</a> ：</p>
 <ul>
 <li>统一封装、普适适用于“居中单行文字”、“居中图片”和“居中多行文字”（包括“居中单行文字”）：
 <ul>
 <li>再加上简单记忆一些其他的样式实现手段，就能快捷完成开发。</li>
 <li>（当欲设置verticial-align:middle时，img可视为一个低配版的inline-block元素。）</li>
-<li>效果：这样，父容器可以选择使用line-height或者height来撑高，放宽了适用场景
-<ul>
-<li>（具体来讲：）
-<ul>
-<li>遇到最坏的情况就是对于只有图片，父容器必须选择使用line-height，不然连“居中”效果都达不到。解决办法就是增加“居中的兄弟元素”来打破“只有图片”的场景；</li>
-<li>或者 图片 受兄弟元素（含父元素的伪元素）的vertical-align:middle影响而已经达到近似居中，则可不强制使用line-height</li>
-</ul>
-</li>
-</ul>
-</li>
+<li>效果：父容器可以选择使用line-height或者height来撑高，放宽了适用场景</li>
 </ul>
 </li>
 <li>（备注：这个辅助元素可以是伪元素，也可以是 i 元素。）</li>
