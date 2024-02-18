@@ -87,7 +87,7 @@
 <meta property="og:description" content="一个基于 Vue2 和 Ant Design Vue 1.x 实现的，树形表格组件。这个是个人做过的“集成功能点最复杂的”组件。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://cloud.az22c.top/custom-tree-table-mix-22091001.png-az22cgithub">
-<meta property="og:updated_time" content="2024-02-18T07:52:37.880Z">
+<meta property="og:updated_time" content="2024-02-18T08:03:11.540Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="定制化的树形表格组件">
 <meta name="twitter:description" content="一个基于 Vue2 和 Ant Design Vue 1.x 实现的，树形表格组件。这个是个人做过的“集成功能点最复杂的”组件。">
@@ -478,6 +478,8 @@
 <p>本文将给出该组件的<strong>实现效果和大概的实现思路、经验</strong>。</p>
 <p>本文前面 2 个章节是介绍“实现效果”的；之后都是讲“实现的思路、经验”的。<strong>如果读者并不需要做同样的需求，看前面 2 个章节即可。</strong></p>
 <ul>
+<li>本文章节目录：
+<ul>
 <li><a href="#%E4%B8%BB%E8%A6%81%E7%89%B9%E7%82%B9">主要特点</a></li>
 <li><a href="#%E5%AE%9E%E7%8E%B0%E8%A6%81%E6%B1%82">实现要求</a></li>
 <li>-----------内容分割线-----------</li>
@@ -485,10 +487,18 @@
 <li><a href="#%E9%99%8D%E4%BD%8E%E5%AE%9E%E7%8E%B0%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95">降低实现复杂度的解决办法</a></li>
 <li><a href="#%E5%AE%8F%E8%A7%82%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF">宏观的实现思路</a></li>
 </ul>
+</li>
+</ul>
 <h2 id="主要特点"><a class="header-anchor" href="#主要特点"></a>主要特点</h2>
-<p>首先观察到它最主要的特点是：<strong>第二列的数据，也是分别从属于某个第一列数据的“子级”。</strong> 如图所示</p>
-<p>即，是树形表格。第一列数据之间存在多层树形父子级关系。同时，第二列的数据，也是分别从属于某个第一列数据的“子级”。</p>
-<p>这个主要特点就意味着这个组件不能直接使用“第三方组件自带的复选框显示逻辑”来实现。同时，交互逻辑都是需要自己自定义编写的。</p>
+<ul>
+<li>首先观察到它最主要的特点是：<strong>第二列的数据，也是分别从属于某个第一列数据的“子级”。</strong> 如图所示
+<ul>
+<li>即，是树形表格。第一列数据之间存在多层树形父子级关系。</li>
+<li>同时，第二列的数据，也是分别从属于某个第一列数据的“子级”。</li>
+</ul>
+</li>
+</ul>
+<p>这个<code>主要特点</code>就意味着这个组件不能直接使用“第三方组件自带的复选框显示逻辑”来实现。同时，交互逻辑都是需要自己自定义编写的。</p>
 <p>(另外，作为一个以“选择节点”作为功能的组件，这个组件需要把“已选择项”、“未选择项”、“将要选择项”，3者的信息同时表示出来。)</p>
 <p>(图示只是模拟复现图)
 <img src="https://cloud.az22c.top/custom-tree-table-mix-22091001.png-az22cgithub" alt="custom-tree-table-mix-22091001"></p>
@@ -496,7 +506,7 @@
 <p><strong>我们再看进一步看看产品层面对这个组件还有什么实现的要求：</strong></p>
 <p>根据个人经验，确定任意普通的树形组件的实现方案，一般要考虑以下几个方面的功能点，基本上是“通用的”：</p>
 <ul>
-<li>一般而言，“通用的”的实现要求：
+<li>一般而言，“通用的”的实现要求，有：
 <ul>
 <li>是否需要懒加载</li>
 <li>查询功能</li>
@@ -528,17 +538,17 @@
 <p>只是使用了 Ant Design Vue 的 a-table 的基础样式、节点展开控制样式。其他都是如上所说自行计算、控制。</p>
 <h2 id="内容分割线"><a class="header-anchor" href="#内容分割线"></a>-----------内容分割线-----------</h2>
 <blockquote>
-<p>至此，该组件的“实现效果”介绍完毕。之后都是讲“实现的思路、经验”的。如果读者不是需要做同样的需求，后面的内容基本上可以不看。</p>
+<p>至此，该组件的“实现效果”介绍完毕。之后都是讲“实现的思路、经验”的。如果读者并不需要做同样的需求，后面的内容基本上可以不看。</p>
 </blockquote>
 <h2 id="提取出以上实现方案的难点"><a class="header-anchor" href="#提取出以上实现方案的难点"></a>提取出以上实现方案的难点</h2>
-<p>【1】梳理兼顾父子节点间联动</p>
+<p>【1】梳理兼顾父子节点间联动：</p>
 <ul>
 <li>(一开始我做错方向了：参考的是Ant Design Vue给出的a-tree-table等常规的联动方式：“子节点被选择的，其祖先节点可以不被选择”。)</li>
 <li>按这种规则实现后才发现，这种规则是和我想要实现的业务需求相互冲突的，无论调整提交数据都是存在bug的</li>
 <li>父被勾选能联动子被勾选，子被勾选也能联动父被勾选</li>
 <li>后面补一条规则说明，如上方的用户提示所示：“若某节点被勾选，则自动勾选其所有直系祖先节点”</li>
 </ul>
-<p>【2】考虑要不要做懒加载子节点</p>
+<p>【2】考虑要不要做懒加载子节点：</p>
 <ul>
 <li>如果懒加载，联动关系很难兼容处理。</li>
 <li>基本在专供大量数据使用的另一版“特供版”中，也没有实现懒加载。
@@ -600,11 +610,14 @@
 </li>
 </ul>
 <p><code>综上2点</code>：只是使用了 a-table 的基础样式、节点展开控制样式。其他都是自行计算、控制。</p>
-<p>其中比较困难的点有： （单个组件代码规模越大，越难进行抉择）</p>
+<ul>
+<li>其中比较困难的点有： （单个组件代码规模越大，越难进行抉择）
 <ul>
 <li>状态更新的事务处理：确定要做什么，确定涉及到的树节点，确定要做的顺序</li>
 <li>需要花费大量开发自测的时间检查实现的完整程度</li>
 <li>这个组件集成了很多的功能要求。如果一开始没有梳理清楚，调整方案折返重做的成本很大</li>
+</ul>
+</li>
 </ul>
 
 		</div>
@@ -615,7 +628,7 @@
         <p><span>本文标题:</span><a href="/2022/05/22/admin-custom-tree-table/">定制化的树形表格组件</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2022-05-22, 20:31:40</p>
-        <!-- <p><span>最后更新:</span>2024-02-18, 15:52:37</p> -->
+        <!-- <p><span>最后更新:</span>2024-02-18, 16:03:11</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="定制化的树形表格组件" href="/2022/05/22/admin-custom-tree-table/">https://blog.az22c.top/2022/05/22/admin-custom-tree-table/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://blog.az22c.top/2022/05/22/admin-custom-tree-table/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -718,7 +731,7 @@
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					
-						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：2,056</span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：2,063</span>
 					
 				</div>
             </div>
