@@ -78,19 +78,19 @@
 
 
 
-<meta name="description" content="一个基于 Vue2 和 Ant Design Vue 1.x 实现的，树形表格组件。这个是个人做过的“集成功能点最复杂的”组件。">
+<meta name="description" content="一种基于 Vue 和 Ant Design Vue / Element-ui 实现的，树形表格组件。这一种组件用于选择树状数据中的多个节点。同时在各行各业后管需求中比较普遍常见。">
 <meta name="keywords" content="性能优化,树形,复选框">
 <meta property="og:type" content="article">
-<meta property="og:title" content="定制化的树形表格组件">
+<meta property="og:title" content="一种常见的树形表格组件">
 <meta property="og:url" content="https://blog.az22c.top/2022/05/22/admin-custom-tree-table/index.html">
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
-<meta property="og:description" content="一个基于 Vue2 和 Ant Design Vue 1.x 实现的，树形表格组件。这个是个人做过的“集成功能点最复杂的”组件。">
+<meta property="og:description" content="一种基于 Vue 和 Ant Design Vue / Element-ui 实现的，树形表格组件。这一种组件用于选择树状数据中的多个节点。同时在各行各业后管需求中比较普遍常见。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://cloud.az22c.top/custom-tree-table-mix-22091001.png-az22cgithub">
-<meta property="og:updated_time" content="2024-02-18T09:21:02.723Z">
+<meta property="og:updated_time" content="2024-02-21T14:00:29.456Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="定制化的树形表格组件">
-<meta name="twitter:description" content="一个基于 Vue2 和 Ant Design Vue 1.x 实现的，树形表格组件。这个是个人做过的“集成功能点最复杂的”组件。">
+<meta name="twitter:title" content="一种常见的树形表格组件">
+<meta name="twitter:description" content="一种基于 Vue 和 Ant Design Vue / Element-ui 实现的，树形表格组件。这一种组件用于选择树状数据中的多个节点。同时在各行各业后管需求中比较普遍常见。">
 <meta name="twitter:image" content="https://cloud.az22c.top/custom-tree-table-mix-22091001.png-az22cgithub">
 
 
@@ -125,7 +125,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>定制化的树形表格组件 | Web前端 | Alex Zhong</title>
+<title>一种常见的树形表格组件 | Web前端 | Alex Zhong</title>
 
 
 
@@ -436,7 +436,7 @@
 
 	<br />
 	<p style="height:7px;"/>
-	<p style="height:20px;font-family:KaiTi,LiSu,'宋体',sans-serif;color:#DBDBDB;font-size:12px;">预计阅读7分钟</p>
+	<p style="height:20px;font-family:KaiTi,LiSu,'宋体',sans-serif;color:#DBDBDB;font-size:12px;">预计阅读8分钟</p>
 
     </div>
   
@@ -447,7 +447,7 @@
         
   
     <h1 class="article-title-big" itemprop="name">
-      定制化的树形表格组件
+      一种常见的树形表格组件
     </h1>
   
 
@@ -472,13 +472,14 @@
     
           <div id="article-content" class="article-entry" itemprop="articleBody">
 			  
-			<p>一个基于 Vue2 和 Ant Design Vue 1.x 实现的，树形表格组件。这个是个人做过的“集成功能点最复杂的”组件。</p>
+			<p>一种基于 Vue 和 Ant Design Vue / Element-ui 实现的，树形表格组件。这一种组件用于选择树状数据中的多个节点。同时在各行各业后管需求中比较普遍常见。</p>
 <a id="more"></a>
-<p>该组件用于选择树状数据中的多个节点。而实际业务中常常遇到像这样的情况，因为比普通树形图组件稍微多了一套要实现的数据关系，所以只能定制化实现。</p>
-<p>本文将给出该组件的<strong>实现效果和大概的实现思路、经验</strong>。</p>
+<p>对于许多实际业务，因为往往比普通树形图组件稍微多了一套要实现的数据关系，所以单纯调用 Ant Design Vue 等等实现不了，只能二次开发实现。</p>
+<p>本文将给出对于这一种组件，普遍通用的<strong>实现效果和大概的实现思路、经验</strong>。</p>
 <p>本文前面 2 个章节是介绍“实现效果”的；之后都是讲“实现的思路、经验”的。<strong>如果读者并不需要做同样的需求，看前面 2 个章节即可。</strong></p>
+<p>（本文尝试做一个“普遍通用”的总结，所以后文并不包含任何具体的实现代码。）</p>
 <ul>
-<li>本文的章节目录：
+<li>本文的章节目录：  (即本文页面左侧显示的目录导航)
 <ul>
 <li><a href="#%E4%B8%BB%E8%A6%81%E7%89%B9%E7%82%B9">主要特点</a></li>
 <li><a href="#%E5%AE%9E%E7%8E%B0%E8%A6%81%E6%B1%82">实现要求</a></li>
@@ -498,13 +499,13 @@
 </ul>
 </li>
 </ul>
-<p>这个<code>主要特点</code>就意味着这个组件不能直接使用“第三方组件自带的复选框显示逻辑”来实现。同时，交互逻辑都是需要自己自定义编写的。</p>
-<p>(另外，作为一个以“选择节点”作为功能的组件，这个组件需要把“已选择项”、“未选择项”、“将要选择项”，3者的信息同时表示出来。)</p>
-<p>(图示只是模拟复现图)
+<p>二次开发：上述的<code>主要特点</code>就意味着这个组件不能直接使用“第三方组件库自带的复选框显示逻辑”来实现。同时，交互逻辑都是需要自己二次开发编写的。</p>
+<p>(另外，作为一种以“选择节点”作为功能的组件，这个组件需要把“已选择项”、“未选择项”、“将要选择项”，3者的信息同时表示出来。)</p>
+<p>(图示只是仿造模拟图)
 <img src="https://cloud.az22c.top/custom-tree-table-mix-22091001.png-az22cgithub" alt="custom-tree-table-mix-22091001"></p>
 <h2 id="实现要求"><a class="header-anchor" href="#实现要求"></a>实现要求</h2>
-<p><strong>我们再看进一步看看产品层面对这个组件还有什么实现的要求：</strong></p>
-<p>根据个人经验，确定任意普通的树形组件的实现方案，一般要考虑以下几个方面的功能点，基本上是“通用的”：</p>
+<p>我们再进一步，<strong>看看在一般的产品层面，对这一种组件还有什么实现的要求：</strong></p>
+<p>根据个人经验，在更广括看到同类事物层面，即规划“各种的树形组件”的实现方案，一般要考虑以下几个方面的功能点，基本上是“通用的”：</p>
 <ul>
 <li>一般而言，“通用的”的实现要求，有：
 <ul>
@@ -519,56 +520,60 @@
 </li>
 </ul>
 <hr>
-<p>以上“通用的”要考虑的实现功能点，对于这个组件，<strong>具体表现为：</strong></p>
+<p>以上“通用的”要考虑的实现功能点，对于这一种组件，<strong>具体表现为：</strong></p>
 <ol>
 <li>初始化组件时，对于先前已选择项，<strong>回显</strong>它们的勾选状态</li>
 <li>初始化组件 或 没有查询条件时，<strong>根据 已选择项 ，统计展开它们的祖先节点。</strong> 这样是为了方便系统使用者查看</li>
-<li>(初始化组件时，解析后端传来的数据，兼容反映孤立节点：若某子孙节点是选择状态，同时某一个祖先节点未被选择时，让该祖先节点显示为“半选”状态)</li>
+<li>(初始化组件时，解析后端传来的数据回显，兼容“反映孤立节点”：若某子孙节点是选择状态，同时某一个祖先节点未被选择时，让该祖先节点显示为“半选”状态)</li>
 <li>当某子孙节点被选择时，<strong>联动</strong> 让祖先节点被勾选。
 <ol>
 <li>(比如示例图中的“用户修改”节点被选择时，需要联动让“部门用户管理test”和“用户管理test”被勾选上)</li>
 </ol>
 </li>
-<li>查询框输入了内容，按查询条件查询时，<strong>展示查询过滤后的树和节点。</strong></li>
+<li>查询筛选：查询框输入了内容，按查询条件查询时，<strong>展示查询筛选后的树和节点。</strong></li>
 <li>（还要兼顾实现树形图的常规联动交互：勾选某一节点时，联动其所有子孙节点勾选上）</li>
-<li>（常规需求：表格最顶部有个全选框，点击全选，更新所有节点状态为被选中）</li>
+<li>（常规“全选”功能需求：表格最顶部有个全选框，点击全选，更新所有节点状态为被选中）</li>
 </ol>
-<p>(<code>综上所述</code>，除了“懒加载”效果，其他效果都实现了。)</p>
+<p>(<code>综上所述</code>，除了“懒加载”效果，其他效果都在这一种组件中实现了。)</p>
 <p>当这些功能需要叠加到同一个组件来实现的时候，组件复杂程度开始显著上升。</p>
-<p>只是使用了 Ant Design Vue 的 a-table 的基础样式、节点展开控制样式。其他都是如上所说自行计算、控制。</p>
+<p>只是使用了 Ant Design Vue 的 a-table 的基础样式、节点展开控制样式（Element-ui同理，不涉及代码时都一样的）。而其他都是如上所说自行计算、控制，即所谓的“二次开发”的部分。</p>
 <h2 id="内容分割线"><a class="header-anchor" href="#内容分割线"></a>-----------内容分割线-----------</h2>
 <blockquote>
-<p>至此，该组件的“实现效果”介绍完毕。之后都是讲“实现的思路、经验”的。如果读者并不需要做同样的需求，后面的内容基本上可以不看。</p>
+<p>至此，这一种组件的“实现效果”介绍完毕。之后都是讲“实现的思路、经验”的。如果读者并不需要做同样的需求，后面的内容基本上可以不看。</p>
 </blockquote>
 <h2 id="提取出以上实现方案的难点"><a class="header-anchor" href="#提取出以上实现方案的难点"></a>提取出以上实现方案的难点</h2>
-<p>【1】梳理兼顾父子节点间联动：</p>
+<p>【1】梳理如何兼顾父子节点间联动：</p>
 <ul>
-<li>(一开始我做错方向了：参考的是Ant Design Vue给出的a-tree-table等常规的联动方式：“子节点被选择的，其祖先节点可以不被选择”。)</li>
-<li>按这种规则实现后才发现，这种规则是和我想要实现的业务需求相互冲突的，无论调整提交数据都是存在bug的</li>
-<li>父被勾选能联动子被勾选，子被勾选也能联动父被勾选</li>
-<li>后面补一条规则说明，如上方的用户提示所示：“若某节点被勾选，则自动勾选其所有直系祖先节点”</li>
+<li>(警惕组件库给出的不适宜方案：Ant Design Vue给出的a-tree-table等常规的联动方案：“子节点被选择的，其祖先节点可以不被选择”——是在这里不适用的)</li>
+<li>如果试过就会知道，这种联动方案是和我们想要实现的效果相互冲突的，无论如何调整提交数据都是存在bug的</li>
+<li>“父被勾选”能联动“子被勾选”，“子被勾选”也能联动“父被勾选”</li>
+<li>通常需要再补一条“使用规则说明”，如上方的用户提示所示：“若某节点被勾选，则自动勾选其所有直系祖先节点”</li>
 </ul>
 <p>【2】考虑要不要做懒加载子节点：</p>
 <ul>
-<li>如果懒加载，联动关系很难兼容处理。</li>
-<li>基本在专供大量数据使用的另一版“特供版”中，也没有实现懒加载。
+<li>如果已经实现懒加载，联动关系很难做兼容处理。</li>
+<li>通常，在专供大量数据使用的另一版“特供版”中，也没有实现懒加载。
 <ul>
-<li>“特供版”组件就是在初始化时只展开第一层的节点，性能还是可以的。</li>
+<li>解释“特供版”：面对大量数据的需求，往往为了性能流畅需要对“便利性”做一些牺牲：“特供版”组件通常就是在初始化时只展开第一层的节点，以此牺牲换取更高的性能效果。
+<ul>
+<li>也就是通过拷贝组件代码，削减成为另外单独一份组件代码来实现“特供版”。</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 <h2 id="降低实现复杂度的解决办法"><a class="header-anchor" href="#降低实现复杂度的解决办法"></a>降低实现复杂度的解决办法</h2>
 <ul>
-<li>维护都是用于呈现于视图的母子树：查询的时候，整树切换数据来显示
+<li>维护都是“用于呈现于视图的”母子树：查询筛选数据的时候，整树切换数据来显示
 <ul>
-<li>试想，假设查询树形表格前后，都是双向绑定同一树形数据。每次切换一次，需要计算并且更新的数据状态是很多的。
+<li>对比别的方案：试想，假设查询树形表格前后，都是双向绑定同一树形数据。每次切换显示一次，需要计算并且更新的数据状态是很多的。
 <ul>
 <li>其中首先要做一次对比算法</li>
-<li>对比完之后，根据全树差异，还要做一个实施对针对差异的“变更算法”。</li>
+<li>对比完之后，根据全树差异，实施数据的变更：还要做一个“变更算法”。</li>
 <li>可见，这个比常规的对比算法还要复杂很多层次。</li>
 </ul>
 </li>
-<li>具体操作：
+<li>“母子树”具体操作：
 <ul>
 <li>任何对树的变更，都是从母树单向同步到子树</li>
 <li>没有查询条件的时候：在视图上，显示母树，隐藏子树</li>
@@ -584,38 +589,38 @@
 </li>
 <li>缓存由树状数据转化而来的一维数据，作为副本
 <ul>
-<li>最好在任意一处代码都能获取到这些数据</li>
+<li>（最好在任意一处代码都能获取到这些数据）</li>
 <li>数据副本多了也会带来副作用，增加了要考虑的问题：要不要更新这个数据，什么时候更新这个数据等等</li>
 </ul>
 </li>
-<li>某个节点的parentId和childrenIds，最好都在这个节点用字段记录一下</li>
+<li>任1个节点的parentId和childrenIds，最好都在“此某1个节点”用字段记录下来</li>
 </ul>
 <h2 id="宏观的实现思路"><a class="header-anchor" href="#宏观的实现思路"></a>宏观的实现思路</h2>
 <ul>
-<li>还是要传给 Ant Design Vue 的 a-table 的部分模块：
+<li>还是要传给 Ant Design Vue 的 a-table 的部分模块：（Element-ui同理）
 <ul>
 <li>表示整体结构的数据：树状数据，树中每个节点包括视图的所有状态相关的字段</li>
 <li>展开收起树形中的节点的交互还是交给 a-table 来处理和维护：a-table 组件接收的 expandedRowKeys 字段</li>
 </ul>
 </li>
-<li>需要自己实现和从 a-table 接管的部分模块：
+<li>需要自己实现和从 a-table 接管的部分模块：（即“二次开发”）
 <ul>
 <li>编写 slot 取缔 a-table 的所有视图上的复选框的状态显示和事件处理</li>
 <li>自行维护并计算一份“全树中的目前被勾选的节点的id集合”，也就是代表所有复选框的状态
 <ul>
-<li>这个集合需要一直保持更新：事件触发计算，然后更新到“树状数据”每个节点的对应字段，引发视图更新</li>
+<li>这个集合需要一直保持更新：事件触发计算，然后更新到“树状数据”每个节点的对应字段，以引发视图更新</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<p><code>综上2点</code>：只是使用了 a-table 的基础样式、节点展开控制样式。其他都是自行计算、控制。</p>
+<p><code>综上2点</code>：只是使用了 a-table 的基础样式、节点展开控制样式。其他都是自行计算、控制，即所谓的“二次开发”的部分。</p>
 <ul>
 <li>其中比较困难的点有： （单个组件代码规模越大，越难进行抉择）
 <ul>
-<li>状态更新的事务处理：确定要做什么，确定涉及到的树节点，确定要做的顺序</li>
+<li>状态更新的事务安排：确定要做什么，确定涉及到的树节点，确定要做的顺序</li>
+<li>折返成本大：这个组件集成了很多的功能要求。如果一开始没有梳理清楚，切换方案折返重做的成本很大</li>
 <li>需要花费大量开发自测的时间检查实现的完整程度</li>
-<li>这个组件集成了很多的功能要求。如果一开始没有梳理清楚，调整方案折返重做的成本很大</li>
 </ul>
 </li>
 </ul>
@@ -625,12 +630,12 @@
   
      <!-- 版权署名授权 -->
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2022/05/22/admin-custom-tree-table/">定制化的树形表格组件</a></p>
+        <p><span>本文标题:</span><a href="/2022/05/22/admin-custom-tree-table/">一种常见的树形表格组件</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2022-05-22, 20:31:40</p>
-        <!-- <p><span>最后更新:</span>2024-02-18, 17:21:02</p> -->
+        <!-- <p><span>最后更新:</span>2024-02-21, 22:00:29</p> -->
         <p>
-            <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="定制化的树形表格组件" href="/2022/05/22/admin-custom-tree-table/">https://blog.az22c.top/2022/05/22/admin-custom-tree-table/</a>
+            <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="一种常见的树形表格组件" href="/2022/05/22/admin-custom-tree-table/">https://blog.az22c.top/2022/05/22/admin-custom-tree-table/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://blog.az22c.top/2022/05/22/admin-custom-tree-table/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
         </p>
         <p style="color: #696969;">
@@ -708,7 +713,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/05/22/admin-tree-widget/">后管常见的树形组件的vue实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/05/22/admin-custom-tree-table/">定制化的树形表格组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/04/vue2-src-code-summary/">Vue2源码【9】收获总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/04/vue2-src-code-66-directive/">Vue2源码【8-6】指令</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/04/vue2-src-code-65-keep-alive/">Vue2源码【8-5】keep-alive</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/04/vue2-src-code-64-slot/">Vue2源码【8-4】slot和slotScope</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/04/vue2-src-code-62-v-model/">Vue2源码【8-2】v-model</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/04/vue2-src-code-61-event/">Vue2源码【8-1】event</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/04/vue2-src-code-5-proxy/">Vue2源码【7】数据劫持使用Proxy的优势</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/04/vue2-src-code-4-data-proxy/">Vue2源码【6】数据代理</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/04/vue2-src-code-3-next-tick/">Vue2源码【5】异步更新和nextTick的原理</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/04/vue2-src-code-24-whether-responsive/">【4-6】响应式原理 之 哪些api是响应式的，哪些不是响应式的</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/04/vue2-src-code-23-props/">【4-5】响应式原理 之 props 是响应式的证明</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/04/vue2-src-code-222-computed-n-watch/">【4-4】【附录】响应式原理 之 数据劫持之computed和watch的具体源码</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/04/vue2-src-code-221-deepin-observe/">【4-3】响应式原理 之 数据劫持之observe的细节</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/04/vue2-src-code-220-data-hijack/">【4-2】响应式原理 之 数据劫持</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/04/vue2-src-code-21-observe-mode/">【4-1】响应式原理 之 观察者模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/04/vue2-src-code-12-patch/">Vue2源码【3】patch的原理</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/04/vue2-src-code-11-mvvm/">Vue2源码【2】Vue MVVM 的工作流程</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/04/vue2-src-code-00-data-drive/">Vue2源码【1】Vue 的整体架构</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/02/vue-router3-src-code-6-component/">Vue-Router3源码拾遗【6】配套组件的实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/02/vue-router3-src-code-5-api-n-url/">Vue-Router3源码拾遗【5】改变url</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/02/vue-router3-src-code-4-switch-n-guard/">【4运作核心】路径切换和路由守卫</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/02/vue-router3-src-code-3-matcher/">Vue-Router3源码拾遗【3】matcher匹配器</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/02/vue-router3-src-code-2-instance/">【2】路由注册和VueRouter实例</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/02/vue-router3-src-code-1-overview/">Vue-Router3源码拾遗【1】概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/22/cross-origin-cross-tab/">03-跨域通信和跨tab通信</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/22/cross-origin-cross-site-cookie/">02-第三方cookie(注：将被禁用)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/22/cross-origin-cross-site/">01-跨域和跨站的基本概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/02/settimeout-0-to-9/">面试题：改造代码，使之隔秒输出0 - 9</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/02/vue-lazyload-summary/">Vue-lazyload 原理和使用 个人总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/06/height-calculate/">深入理解文字高度和行高的设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/05/vertical-align-middle/">vertical-align:middle近似居中和完美居中</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/05/centralize-one-ele/">总结：使单一对象水平/垂直居中</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/05/js-functional-intro/">到底什么是函数式编程 精简总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/04/performance-optimized-summary/">Web前端性能优化概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/12/git-stage/">git暂存区知识梳理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/17/ife-css-task03/">三栏式布局--IFE2017-CSS-task03笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/07/css-border1/">border-radius属性</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/03/js-obj-prop1/">对象属性的操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/02/js-obj-prop2/">对象属性描述符</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/01/js-obj-prop3/">对象属性之对象状态</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/12/js-inherit/">es5实现继承的6种方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/12/js-new-happen/">new创建对象的过程发生了什么</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/09/js-prototype-practice/">原型对象 实战使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/08/js-proto/">理解prototype、__proto__和constructor等关系</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/07/js-this2/">this绑定的优先级</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/07/js-this/">结合this的4种绑定规则 深入理解this指向的判定</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/02/js-event4/">浏览器事件冒泡或者捕获相关</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/01/js-event3/">js四种事件处理程序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/01/js-pv-default/">考古：js取消默认事件行为</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/08/let-n-const/">let和const变量声明的特点</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/07/js-date/">JavaScript Date对象回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/07/vue-checkbox-table/">纯vue实现checkbox父子联动</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/25/vue-time-tracker/">经典vue单页路由入门全家桶</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/15/vue-table-nav/">按条目展示表格数据小插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/clearfix-n-bfc/">闭合浮动</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/ife-css-task02/">IFE2017-CSS-task02笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/31/css-selectors-specificity/">CSS选择器优先级</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/28/h5-new-ele/">H5新标签和被H5拥抱的老元素们</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/27/ife-css-task01/">IFE2017-CSS-task01笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/10/iife-intro/">IIFE回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/about-margin/">和margin有关的知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/27/icon-usage/">桌面端和移动端图标的引入</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/25/webapp-events-intro/">移动开发事件入门概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/24/webapp-intro/">移动开发入门概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/my-hexo-theme/">yelee主题改bug总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/17/todo-app/">ToDo小应用完工总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/equality-operators/">相等操作符回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/js-operators/">操作符回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/25/font-face/">font-face--CSS3</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/13/js-function/">js函数基础回顾</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/05/22/admin-tree-widget/">后管常见的树形组件的vue实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/05/22/admin-custom-tree-table/">一种常见的树形表格组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/04/vue2-src-code-summary/">Vue2源码【9】收获总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/04/vue2-src-code-66-directive/">Vue2源码【8-6】指令</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/04/vue2-src-code-65-keep-alive/">Vue2源码【8-5】keep-alive</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/04/vue2-src-code-64-slot/">Vue2源码【8-4】slot和slotScope</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/04/vue2-src-code-62-v-model/">Vue2源码【8-2】v-model</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/04/vue2-src-code-61-event/">Vue2源码【8-1】event</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/04/vue2-src-code-5-proxy/">Vue2源码【7】数据劫持使用Proxy的优势</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/04/vue2-src-code-4-data-proxy/">Vue2源码【6】数据代理</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/04/vue2-src-code-3-next-tick/">Vue2源码【5】异步更新和nextTick的原理</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/04/vue2-src-code-24-whether-responsive/">【4-6】响应式原理 之 哪些api是响应式的，哪些不是响应式的</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/04/vue2-src-code-23-props/">【4-5】响应式原理 之 props 是响应式的证明</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/04/vue2-src-code-222-computed-n-watch/">【4-4】【附录】响应式原理 之 数据劫持之computed和watch的具体源码</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/04/vue2-src-code-221-deepin-observe/">【4-3】响应式原理 之 数据劫持之observe的细节</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/04/vue2-src-code-220-data-hijack/">【4-2】响应式原理 之 数据劫持</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/04/vue2-src-code-21-observe-mode/">【4-1】响应式原理 之 观察者模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/04/vue2-src-code-12-patch/">Vue2源码【3】patch的原理</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/04/vue2-src-code-11-mvvm/">Vue2源码【2】Vue MVVM 的工作流程</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/04/vue2-src-code-00-data-drive/">Vue2源码【1】Vue 的整体架构</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/02/vue-router3-src-code-6-component/">Vue-Router3源码拾遗【6】配套组件的实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/02/vue-router3-src-code-5-api-n-url/">Vue-Router3源码拾遗【5】改变url</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/02/vue-router3-src-code-4-switch-n-guard/">【4运作核心】路径切换和路由守卫</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/02/vue-router3-src-code-3-matcher/">Vue-Router3源码拾遗【3】matcher匹配器</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/02/vue-router3-src-code-2-instance/">【2】路由注册和VueRouter实例</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/09/02/vue-router3-src-code-1-overview/">Vue-Router3源码拾遗【1】概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/22/cross-origin-cross-tab/">03-跨域通信和跨tab通信</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/22/cross-origin-cross-site-cookie/">02-第三方cookie(注：将被禁用)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/22/cross-origin-cross-site/">01-跨域和跨站的基本概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/02/settimeout-0-to-9/">面试题：改造代码，使之隔秒输出0 - 9</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/02/vue-lazyload-summary/">Vue-lazyload 原理和使用 个人总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/06/height-calculate/">深入理解文字高度和行高的设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/05/vertical-align-middle/">vertical-align:middle近似居中和完美居中</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/05/centralize-one-ele/">总结：使单一对象水平/垂直居中</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/05/js-functional-intro/">到底什么是函数式编程 精简总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/04/performance-optimized-summary/">Web前端性能优化概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/12/git-stage/">git暂存区知识梳理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/17/ife-css-task03/">三栏式布局--IFE2017-CSS-task03笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/07/css-border1/">border-radius属性</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/03/js-obj-prop1/">对象属性的操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/02/js-obj-prop2/">对象属性描述符</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/01/js-obj-prop3/">对象属性之对象状态</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/12/js-inherit/">es5实现继承的6种方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/12/js-new-happen/">new创建对象的过程发生了什么</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/09/js-prototype-practice/">原型对象 实战使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/08/js-proto/">理解prototype、__proto__和constructor等关系</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/07/js-this2/">this绑定的优先级</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/07/js-this/">结合this的4种绑定规则 深入理解this指向的判定</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/02/js-event4/">浏览器事件冒泡或者捕获相关</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/01/js-event3/">js四种事件处理程序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/01/js-pv-default/">考古：js取消默认事件行为</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/08/let-n-const/">let和const变量声明的特点</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/07/js-date/">JavaScript Date对象回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/07/vue-checkbox-table/">纯vue实现checkbox父子联动</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/25/vue-time-tracker/">经典vue单页路由入门全家桶</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/15/vue-table-nav/">按条目展示表格数据小插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/clearfix-n-bfc/">闭合浮动</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/ife-css-task02/">IFE2017-CSS-task02笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/31/css-selectors-specificity/">CSS选择器优先级</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/28/h5-new-ele/">H5新标签和被H5拥抱的老元素们</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/27/ife-css-task01/">IFE2017-CSS-task01笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/10/iife-intro/">IIFE回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/04/about-margin/">和margin有关的知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/27/icon-usage/">桌面端和移动端图标的引入</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/25/webapp-events-intro/">移动开发事件入门概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/24/webapp-intro/">移动开发入门概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/my-hexo-theme/">yelee主题改bug总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/17/todo-app/">ToDo小应用完工总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/equality-operators/">相等操作符回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/js-operators/">操作符回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/25/font-face/">font-face--CSS3</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/13/js-function/">js函数基础回顾</a></li></ul>
 
 
 
@@ -731,7 +736,7 @@
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					
-						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：2,064</span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：2,328</span>
 					
 				</div>
             </div>
