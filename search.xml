@@ -3461,11 +3461,11 @@ function iterator (fn, next) {
             
             <tag> 跨域 </tag>
             
-            <tag> 跨tab </tag>
-            
             <tag> 面试题 </tag>
             
             <tag> 笔记副本 </tag>
+            
+            <tag> 跨tab </tag>
             
         </tags>
         
@@ -3570,11 +3570,11 @@ function iterator (fn, next) {
             
             <tag> 跨域 </tag>
             
+            <tag> 跨站 </tag>
+            
             <tag> 面试题 </tag>
             
             <tag> 笔记副本 </tag>
-            
-            <tag> 跨站 </tag>
             
             <tag> Cookie </tag>
             
@@ -3620,11 +3620,11 @@ function iterator (fn, next) {
             
             <tag> 跨域 </tag>
             
+            <tag> 跨站 </tag>
+            
             <tag> 面试题 </tag>
             
             <tag> 笔记副本 </tag>
-            
-            <tag> 跨站 </tag>
             
         </tags>
         
@@ -5156,11 +5156,11 @@ MMM.prototype.map = function(func) {
         
         <tags>
             
+            <tag> 性能优化 </tag>
+            
             <tag> 面试题 </tag>
             
             <tag> 笔记副本 </tag>
-            
-            <tag> 性能优化 </tag>
             
             <tag> 回顾 </tag>
             
@@ -6612,11 +6612,11 @@ instance2.sayName();//&quot;hu&quot;
         
         <tags>
             
+            <tag> 原理 </tag>
+            
             <tag> 面向对象 </tag>
             
             <tag> 原型系统 </tag>
-            
-            <tag> 原理 </tag>
             
         </tags>
         
@@ -7642,9 +7642,9 @@ displayColor.call(null);//TypeError: Cannot read property 'color' of null
             
             <tag> IIFE </tag>
             
-            <tag> 闭包 </tag>
-            
             <tag> this </tag>
+            
+            <tag> 闭包 </tag>
             
         </tags>
         
@@ -8257,9 +8257,9 @@ MY_ARRAY = ['B']
             
             <tag> 作用域 </tag>
             
-            <tag> ES6 </tag>
-            
             <tag> 闭包 </tag>
+            
+            <tag> ES6 </tag>
             
             <tag> 任务队列 </tag>
             
@@ -9507,9 +9507,9 @@ p {
             
             <tag> H5 </tag>
             
-            <tag> IFE </tag>
-            
             <tag> HTML </tag>
+            
+            <tag> IFE </tag>
             
         </tags>
         
@@ -10339,9 +10339,9 @@ Kinect，它将身体动作转换成屏幕动作。这样你可以用你的手�
         
         <tags>
             
-            <tag> 随笔 </tag>
-            
             <tag> H5 </tag>
+            
+            <tag> 随笔 </tag>
             
         </tags>
         
