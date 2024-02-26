@@ -452,7 +452,7 @@
 
     
 
-	<div class="ui red ribbon label" style="line-height: 1.3; min-width:100px; max-width:450px;"> <!-- 主页各文章标题 -->
+	<div class="ui blue ribbon label" style="line-height: 1.3; min-width:100px; max-width:450px;"> <!-- 主页各文章标题 -->
 		<span class="archive-item-title" style="display:block; height:100%; max-width:400px;white-space:nowrap; text-transform:none;" >
 			
   
@@ -539,7 +539,7 @@
 
     
 
-	<div class="ui green ribbon label" style="line-height: 1.3; min-width:100px; max-width:450px;"> <!-- 主页各文章标题 -->
+	<div class="ui teal ribbon label" style="line-height: 1.3; min-width:100px; max-width:450px;"> <!-- 主页各文章标题 -->
 		<span class="archive-item-title" style="display:block; height:100%; max-width:400px;white-space:nowrap; text-transform:none;" >
 			
   
@@ -1908,7 +1908,7 @@ var date = curDate.getDate();
 var time = Date.parse(new Date());
 var lastTime = Date.parse("2017-02-01");
 var day = parseInt((time -lastTime)/(1000*60*60*24));
-var path = '/img/daily_pic/' + (day % 83) + '.png';
+var path = '/img/daily_pic/38.png';
 var avatarIndex = Math.ceil(Math.random()*30);
 var newAvatar = '/img/avatar/' + avatarIndex + '.png';
 //console.log(path);
@@ -1944,7 +1944,7 @@ $("#blog_avatar").attr("src", avatarPath).attr("class", "animated rotateInDownRi
 $("#2017_year").click(function() {
 //$(this).remove();
 $(this).css("opacity", 0);
-$(this).parent().append("<img src='/img/daily_pic/35.png' style='position:absolute; margin-left:-270px;cursor:pointer;' id='eyes_img'/>");
+$(this).parent().append("<img src='/img/daily_pic/38.png' style='position:absolute; margin-left:-270px;cursor:pointer;' id='eyes_img'/>");
 $("#eyes_img").click(function() {
 $(this).remove();
 $("#2017_year").css("opacity", 1);

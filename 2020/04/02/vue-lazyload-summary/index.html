@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
 <meta property="og:description" content="Vue-lazyload 这个话题，可谓“前人之述备矣”。这里主要写写一些我认为比较重要的点，能够快速回顾这个“第三方组件”的原理和使用方法。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2023-10-27T04:09:48.366Z">
+<meta property="og:updated_time" content="2024-01-03T12:38:29.207Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue-lazyload 原理和使用 个人总结">
 <meta name="twitter:description" content="Vue-lazyload 这个话题，可谓“前人之述备矣”。这里主要写写一些我认为比较重要的点，能够快速回顾这个“第三方组件”的原理和使用方法。">
@@ -576,7 +576,7 @@
         <p><span>本文标题:</span><a href="/2020/04/02/vue-lazyload-summary/">Vue-lazyload 原理和使用 个人总结</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2020-04-02, 12:00:44</p>
-        <!-- <p><span>最后更新:</span>2023-10-27, 12:09:48</p> -->
+        <!-- <p><span>最后更新:</span>2024-01-03, 20:38:29</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="Vue-lazyload 原理和使用 个人总结" href="/2020/04/02/vue-lazyload-summary/">https://blog.az22c.top/2020/04/02/vue-lazyload-summary/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://blog.az22c.top/2020/04/02/vue-lazyload-summary/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -1962,7 +1962,7 @@ var date = curDate.getDate();
 var time = Date.parse(new Date());
 var lastTime = Date.parse("2017-02-01");
 var day = parseInt((time -lastTime)/(1000*60*60*24));
-var path = '/img/daily_pic/' + (day % 83) + '.png';
+var path = '/img/daily_pic/38.png';
 var avatarIndex = Math.ceil(Math.random()*30);
 var newAvatar = '/img/avatar/' + avatarIndex + '.png';
 //console.log(path);
@@ -1998,7 +1998,7 @@ $("#blog_avatar").attr("src", avatarPath).attr("class", "animated rotateInDownRi
 $("#2017_year").click(function() {
 //$(this).remove();
 $(this).css("opacity", 0);
-$(this).parent().append("<img src='/img/daily_pic/35.png' style='position:absolute; margin-left:-270px;cursor:pointer;' id='eyes_img'/>");
+$(this).parent().append("<img src='/img/daily_pic/38.png' style='position:absolute; margin-left:-270px;cursor:pointer;' id='eyes_img'/>");
 $("#eyes_img").click(function() {
 $(this).remove();
 $("#2017_year").css("opacity", 1);

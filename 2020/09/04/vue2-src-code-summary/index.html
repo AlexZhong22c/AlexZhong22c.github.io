@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
 <meta property="og:description" content="Vue2源码系列终于要完结了。最后总结一下阅读过程中的一些收获，主要分为4个方面： “架构设计方面”、“目录和模块设计”、“编程具体模块的实现”、“怎么看源码”">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2023-10-27T04:09:48.826Z">
+<meta property="og:updated_time" content="2024-01-03T12:38:29.230Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue2源码【9】收获总结">
 <meta name="twitter:description" content="Vue2源码系列终于要完结了。最后总结一下阅读过程中的一些收获，主要分为4个方面： “架构设计方面”、“目录和模块设计”、“编程具体模块的实现”、“怎么看源码”">
@@ -567,7 +567,7 @@ export function once (fn: Function): Function {
         <p><span>本文标题:</span><a href="/2020/09/04/vue2-src-code-summary/">Vue2源码【9】收获总结</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2020-09-04, 21:09:00</p>
-        <!-- <p><span>最后更新:</span>2023-10-27, 12:09:48</p> -->
+        <!-- <p><span>最后更新:</span>2024-01-03, 20:38:29</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="Vue2源码【9】收获总结" href="/2020/09/04/vue2-src-code-summary/">https://blog.az22c.top/2020/09/04/vue2-src-code-summary/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://blog.az22c.top/2020/09/04/vue2-src-code-summary/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -1953,7 +1953,7 @@ var date = curDate.getDate();
 var time = Date.parse(new Date());
 var lastTime = Date.parse("2017-02-01");
 var day = parseInt((time -lastTime)/(1000*60*60*24));
-var path = '/img/daily_pic/' + (day % 83) + '.png';
+var path = '/img/daily_pic/38.png';
 var avatarIndex = Math.ceil(Math.random()*30);
 var newAvatar = '/img/avatar/' + avatarIndex + '.png';
 //console.log(path);
@@ -1989,7 +1989,7 @@ $("#blog_avatar").attr("src", avatarPath).attr("class", "animated rotateInDownRi
 $("#2017_year").click(function() {
 //$(this).remove();
 $(this).css("opacity", 0);
-$(this).parent().append("<img src='/img/daily_pic/35.png' style='position:absolute; margin-left:-270px;cursor:pointer;' id='eyes_img'/>");
+$(this).parent().append("<img src='/img/daily_pic/38.png' style='position:absolute; margin-left:-270px;cursor:pointer;' id='eyes_img'/>");
 $("#eyes_img").click(function() {
 $(this).remove();
 $("#2017_year").css("opacity", 1);

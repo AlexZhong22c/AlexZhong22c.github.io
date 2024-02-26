@@ -2174,7 +2174,7 @@ var date = curDate.getDate();
 var time = Date.parse(new Date());
 var lastTime = Date.parse("2017-02-01");
 var day = parseInt((time -lastTime)/(1000*60*60*24));
-var path = '/img/daily_pic/' + (day % 83) + '.png';
+var path = '/img/daily_pic/38.png';
 var avatarIndex = Math.ceil(Math.random()*30);
 var newAvatar = '/img/avatar/' + avatarIndex + '.png';
 //console.log(path);
@@ -2210,7 +2210,7 @@ $("#blog_avatar").attr("src", avatarPath).attr("class", "animated rotateInDownRi
 $("#2017_year").click(function() {
 //$(this).remove();
 $(this).css("opacity", 0);
-$(this).parent().append("<img src='/img/daily_pic/35.png' style='position:absolute; margin-left:-270px;cursor:pointer;' id='eyes_img'/>");
+$(this).parent().append("<img src='/img/daily_pic/38.png' style='position:absolute; margin-left:-270px;cursor:pointer;' id='eyes_img'/>");
 $("#eyes_img").click(function() {
 $(this).remove();
 $("#2017_year").css("opacity", 1);

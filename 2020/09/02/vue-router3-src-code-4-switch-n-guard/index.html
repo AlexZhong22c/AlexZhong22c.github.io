@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
 <meta property="og:description" content="如果没有处理路径切换，整个路由器就没法运作，就跟没用一样。可见路径切换模块在其中的核心地位。 讲到“路径切换”，history.transitionTo是位于内部的核心。也就是绝大多数提供给用户的函数，最终都会执行到这里，开启路径切换的流程。 其间值得注意的是，利用迭代器设计模式，可简洁实现路由守卫，是非常巧妙的代码设计，会提前详细介绍。 到文章最后，文字描述路径切换的流程骨架。再剩余每个繁杂具体">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2023-10-27T04:09:48.444Z">
+<meta property="og:updated_time" content="2024-01-03T12:38:29.212Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【4运作核心】路径切换和路由守卫">
 <meta name="twitter:description" content="如果没有处理路径切换，整个路由器就没法运作，就跟没用一样。可见路径切换模块在其中的核心地位。 讲到“路径切换”，history.transitionTo是位于内部的核心。也就是绝大多数提供给用户的函数，最终都会执行到这里，开启路径切换的流程。 其间值得注意的是，利用迭代器设计模式，可简洁实现路由守卫，是非常巧妙的代码设计，会提前详细介绍。 到文章最后，文字描述路径切换的流程骨架。再剩余每个繁杂具体">
@@ -667,7 +667,7 @@ function iterator (fn, next) {
         <p><span>本文标题:</span><a href="/2020/09/02/vue-router3-src-code-4-switch-n-guard/">【4运作核心】路径切换和路由守卫</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2020-09-02, 21:04:00</p>
-        <!-- <p><span>最后更新:</span>2023-10-27, 12:09:48</p> -->
+        <!-- <p><span>最后更新:</span>2024-01-03, 20:38:29</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="【4运作核心】路径切换和路由守卫" href="/2020/09/02/vue-router3-src-code-4-switch-n-guard/">https://blog.az22c.top/2020/09/02/vue-router3-src-code-4-switch-n-guard/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://blog.az22c.top/2020/09/02/vue-router3-src-code-4-switch-n-guard/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -2053,7 +2053,7 @@ var date = curDate.getDate();
 var time = Date.parse(new Date());
 var lastTime = Date.parse("2017-02-01");
 var day = parseInt((time -lastTime)/(1000*60*60*24));
-var path = '/img/daily_pic/' + (day % 83) + '.png';
+var path = '/img/daily_pic/38.png';
 var avatarIndex = Math.ceil(Math.random()*30);
 var newAvatar = '/img/avatar/' + avatarIndex + '.png';
 //console.log(path);
@@ -2089,7 +2089,7 @@ $("#blog_avatar").attr("src", avatarPath).attr("class", "animated rotateInDownRi
 $("#2017_year").click(function() {
 //$(this).remove();
 $(this).css("opacity", 0);
-$(this).parent().append("<img src='/img/daily_pic/35.png' style='position:absolute; margin-left:-270px;cursor:pointer;' id='eyes_img'/>");
+$(this).parent().append("<img src='/img/daily_pic/38.png' style='position:absolute; margin-left:-270px;cursor:pointer;' id='eyes_img'/>");
 $("#eyes_img").click(function() {
 $(this).remove();
 $("#2017_year").css("opacity", 1);
