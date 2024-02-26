@@ -4189,7 +4189,7 @@ for (var i = 0; i &lt; 10; i++) {
 </ul>
 <h2 id="预告：文字在一行中如何垂直居中"><a class="header-anchor" href="#预告：文字在一行中如何垂直居中"></a>预告：文字在一行中如何垂直居中?</h2>
 <p>有没有发现？根据我们上面的理论，如果想要确定一段文字在一行(line-box模型)中的位置太难了！是不是垂直居中？或者文字位置偏上还是偏下？都要经过一系列计算才能得出结论。</p>
-<p>继而浏览器提供了<code>vertical-align:middle</code>，对于“实现垂直居中”来说，虽然不完全、不精准，但是在掌握了一定的规律后，还是能利用起来的。详见我下一篇文章 <a href="https://blog.az22c.top/2019/02/05/vertical-align-middle/">vertical-align:middle近似居中和完美居中</a> 。</p>
+<p>继而浏览器提供了<code>vertical-align:middle</code>，对于“实现垂直居中”来说，虽然不完全、不精准，但是在掌握了一定的规律后，还是能利用起来的。详见我下一篇文章 <a href="/2019/02/05/vertical-align-middle/">vertical-align:middle近似居中和完美居中</a> 。</p>
 <h2 id="参考："><a class="header-anchor" href="#参考："></a>参考：</h2>
 <p><a href="http://iamvdo.me/en/blog/css-font-metrics-line-height-and-vertical-align" target="_blank" rel="noopener">css-font-metrics-line-height-and-vertical-align</a></p>
 <p><a href="https://zhuanlan.zhihu.com/p/25808995?group_id=825729887779307520" target="_blank" rel="noopener">译文，部分内容有误</a></p>
@@ -4261,7 +4261,7 @@ for (var i = 0; i &lt; 10; i++) {
 <p>而实际上这仍不是完美的垂直居中。因为我们知道，通过设置<code>vertical-align: middle;</code>，图片的中线的位置被确定为<code>从行内基线往上1/2 x-height 的位置</code> 。</p>
 <blockquote>
 <p>(备注：在英文字体设计中，通常以小写字母&quot;x&quot;的高度作为其他小写字母高度的设计的基础。因此x-height被用于表示一款字体中的小写字母&quot;x&quot;的高度。)</p>
-<p>(备注：文字处于的位置高度和line-height之间关系的计算非常麻烦，详见我另一篇文章<a href="https://blog.az22c.top/2019/02/06/height-calculate/">深入理解文字高度和行高的设置</a>。只需记住绝大多数情况下是：文字&quot;x&quot;的中心高度(即基线往上1/2 x-height处) 比line-height的中线高度要低。有些人称这种现象为&quot;字符下沉&quot;)</p>
+<p>(备注：文字处于的位置高度和line-height之间关系的计算非常麻烦，详见我另一篇文章<a href="/2019/02/06/height-calculate/">深入理解文字高度和行高的设置</a>。只需记住绝大多数情况下是：文字&quot;x&quot;的中心高度(即基线往上1/2 x-height处) 比line-height的中线高度要低。有些人称这种现象为&quot;字符下沉&quot;)</p>
 </blockquote>
 <p><img src="https://cloud.az22c.top/x-height.png-az22cgithub" alt="二分之一 x-height"></p>
 <p>也就是说，假如现在给img后面添加一个&quot;x&quot;作为文字，图片所处的高度不会变，图片的中线位置就穿过文字&quot;x&quot;的中心，这时，图片的中线的位置实际上是比容器行内的中线位置要低的。<strong>所以，此乃近似垂直居中。</strong></p>
@@ -4285,7 +4285,7 @@ for (var i = 0; i &lt; 10; i++) {
   font-size: 0;
 }
 </code></pre>
-<p>如果读过<a href="https://blog.az22c.top/2019/02/06/height-calculate/">深入理解文字高度和行高的设置</a> 这篇文章的原理分析，我们会发现，如果设置字号为0，基线、x-height线等等线都合为一体（因为它们之间的距离为0嘛）。所以1/2 x-height 的位置也变成在行内最中间的那里，图片就完美居中了。</p>
+<p>如果读过<a href="/2019/02/06/height-calculate/">深入理解文字高度和行高的设置</a> 这篇文章的原理分析，我们会发现，如果设置字号为0，基线、x-height线等等线都合为一体（因为它们之间的距离为0嘛）。所以1/2 x-height 的位置也变成在行内最中间的那里，图片就完美居中了。</p>
 <h3 id="完美居中-添加辅助元素"><a class="header-anchor" href="#完美居中-添加辅助元素"></a>完美居中–添加辅助元素</h3>
 <p>完美居中：在&quot;近似居中&quot;的基础上，添加一个辅助元素使得其变成完美居中：</p>
 <p>首先HTML结构中插入一个 i 元素；</p>
@@ -4532,7 +4532,7 @@ i {
 <ul>
 <li>设置.parent为<code>float:left</code>或者<code>positon:absolute</code>或者<code>position:fixed</code> 时居中会失效。如需兼顾他们，此时需要外面套多一层元素。
 <ul>
-<li>（因为<code>vertical-align</code>只适用于inline/inline-block元素或者table-cell元素，详见 <a href="https://blog.az22c.top/2019/02/05/vertical-align-middle/">vertical-align:middle近似居中和完美居中</a>）</li>
+<li>（因为<code>vertical-align</code>只适用于inline/inline-block元素或者table-cell元素，详见 <a href="/2019/02/05/vertical-align-middle/">vertical-align:middle近似居中和完美居中</a>）</li>
 </ul>
 </li>
 <li>IE7及以下都不支持</li>
@@ -4590,7 +4590,7 @@ i {
 </code></pre>
 </details>
 <h3 id="c法：使用display-inline-block和vertical-align-middle-垂直居中"><a class="header-anchor" href="#c法：使用display-inline-block和vertical-align-middle-垂直居中"></a>C法：使用display: inline-block和vertical-align:middle–垂直居中</h3>
-<p>这里只给出近似垂直居中的例子，在实际项目中用得最多；而如果想设置为完美垂直居中或者了解更多，详见<a href="https://blog.az22c.top/2019/02/05/vertical-align-middle/">vertical-align:middle近似居中和完美居中</a> ：</p>
+<p>这里只给出近似垂直居中的例子，在实际项目中用得最多；而如果想设置为完美垂直居中或者了解更多，详见<a href="/2019/02/05/vertical-align-middle/">vertical-align:middle近似居中和完美居中</a> ：</p>
 <ul>
 <li>统一封装、普适适用于“居中单行文字”、“居中图片”和“居中多行文字”（包括“居中单行文字”）：
 <ul>
@@ -5840,9 +5840,9 @@ console.log(Object.getOwnPropertyNames(obj));//['c','b']
 <h2 id="相关话题："><a class="header-anchor" href="#相关话题："></a>// 相关话题：</h2>
 <p>【1】对象属性的操作： “内容即本文。”</p>
 <p>属性操作可分为属性查询、属性设置、属性删除，还包括属性继承。</p>
-<p>【2】对象属性描述符： <a href="https://blog.az22c.top/2017/09/02/js-obj-prop2/">链接</a></p>
+<p>【2】对象属性描述符： <a href="/2017/09/02/js-obj-prop2/">链接</a></p>
 <p>属性描述符用来描述对象的值、是否可配置、是否可修改以及是否可枚举。</p>
-<p>【3】对象状态： <a href="https://blog.az22c.top/2017/09/01/js-obj-prop3/">链接</a></p>
+<p>【3】对象状态： <a href="/2017/09/01/js-obj-prop3/">链接</a></p>
 <p>属性描述符只能用来控制对象中一个属性的状态，而如果要控制整个对象的状态，就要用到6种对象状态。</p>
 ]]></content>
       
@@ -6140,11 +6140,11 @@ console.log(o.a);//undefined
 </code></pre>
 <hr>
 <h2 id="相关话题："><a class="header-anchor" href="#相关话题："></a>// 相关话题：</h2>
-<p>【1】对象属性的操作： <a href="https://blog.az22c.top/2017/09/03/js-obj-prop1/">链接</a></p>
+<p>【1】对象属性的操作： <a href="/2017/09/03/js-obj-prop1/">链接</a></p>
 <p>属性操作可分为属性查询、属性设置、属性删除，还包括属性继承。</p>
 <p>【2】对象属性描述符： “内容即本文。”</p>
 <p>属性描述符用来描述对象的值、是否可配置、是否可修改以及是否可枚举。</p>
-<p>【3】对象状态： <a href="https://blog.az22c.top/2017/09/01/js-obj-prop3/">链接</a></p>
+<p>【3】对象状态： <a href="/2017/09/01/js-obj-prop3/">链接</a></p>
 <p>属性描述符只能用来控制对象中一个属性的状态，而如果要控制整个对象的状态，就要用到6种对象状态。</p>
 ]]></content>
       
@@ -6267,9 +6267,9 @@ console.log(Object.getOwnPropertyDescriptor(o,'a'));
 </code></pre>
 <hr>
 <h2 id="相关话题："><a class="header-anchor" href="#相关话题："></a>// 相关话题：</h2>
-<p>【1】对象属性的操作： <a href="https://blog.az22c.top/2017/09/03/js-obj-prop1/">链接</a></p>
+<p>【1】对象属性的操作： <a href="/2017/09/03/js-obj-prop1/">链接</a></p>
 <p>属性操作可分为属性查询、属性设置、属性删除，还包括属性继承。</p>
-<p>【2】对象属性描述符： <a href="https://blog.az22c.top/2017/09/02/js-obj-prop2/">链接</a></p>
+<p>【2】对象属性描述符： <a href="/2017/09/02/js-obj-prop2/">链接</a></p>
 <p>属性描述符用来描述对象的值、是否可配置、是否可修改以及是否可枚举。</p>
 <p>【3】对象状态： “内容即本文。”</p>
 <p>属性描述符只能用来控制对象中一个属性的状态，而如果要控制整个对象的状态，就要用到6种对象状态。</p>
@@ -6674,7 +6674,7 @@ Person.say(); // Person.say is not a function
 <p>画出最终<code>var john = new Person(&quot;John&quot;);</code>这一句代码涉及到的对象和它们间的关系：</p>
 <p><img src="https://cloud.az22c.top/js-new-process-1.png-az22cgithub" alt="js-new-process-1"></p>
 <blockquote>
-<p>如果看不懂图，可以先看我以往文章的介绍： <a href="https://blog.az22c.top/2017/08/08/js-proto/">理解prototype、proto和constructor等关系</a></p>
+<p>如果看不懂图，可以先看我以往文章的介绍： <a href="/2017/08/08/js-proto/">理解prototype、proto和constructor等关系</a></p>
 </blockquote>
 <h2 id="控制台结果解析"><a class="header-anchor" href="#控制台结果解析"></a>控制台结果解析</h2>
 <p>分析完了 john 的产生过程，我们再分析一下控制台输出结果：</p>
@@ -6696,7 +6696,7 @@ Person.say(); // Person.say is not a function
 </ul>
 <p>需要注意的是，Person 先查找自身的 name，找到了 name，<strong>但这个 name 并不是我们定义的 name，而是函数对象内置的属性</strong>，一般情况下，函数对象在产生时会内置 name 属性并将函数名作为赋值（仅函数对象）。</p>
 <p>另外，Person 在自身没有找到 say() 方法，也会沿着其原型链查找：</p>
-<p>Person 的原型链： <strong>Person-&gt;Function.prototype-&gt;Object.prototype-&gt;null</strong> ，这原型链在 <a href="https://blog.az22c.top/2017/08/08/js-proto/">往期文章</a> 里面我有介绍到。</p>
+<p>Person 的原型链： <strong>Person-&gt;Function.prototype-&gt;Object.prototype-&gt;null</strong> ，这原型链在 <a href="/2017/08/08/js-proto/">往期文章</a> 里面我有介绍到。</p>
 <p>由于 Person 的原型链上也没有定义 say 方法，因此返回异常提示。</p>
 <h2 id="总结new的过程中发生了什么"><a class="header-anchor" href="#总结new的过程中发生了什么"></a>总结new的过程中发生了什么</h2>
 <p>[1] 导致john继承了Person.prototype：</p>
@@ -6731,7 +6731,7 @@ john instanceof Person; //true
       <title><![CDATA[原型对象 实战使用]]></title>
       <url>https://blog.az22c.top/2017/08/09/js-prototype-practice/</url>
       <content type="html"><![CDATA[<p>一般地，javascript使用构造函数和原型对象来进行面向对象编程，它们的表现与其他面向对象编程语言中的“类”相似而又不同。</p>
-<p>在 <a href="https://blog.az22c.top/2017/08/08/js-proto/">上一篇文章</a> 已经做过对 构造函数 和 原型对象 的简单介绍。在这篇文章主要介绍使用实战，你可不要小看“实战”，坑点还是挺多的。</p>
+<p>在 <a href="/2017/08/08/js-proto/">上一篇文章</a> 已经做过对 构造函数 和 原型对象 的简单介绍。在这篇文章主要介绍使用实战，你可不要小看“实战”，坑点还是挺多的。</p>
 <a id="more"></a>
 <h2 id="原型对象-属性的查找"><a class="header-anchor" href="#原型对象-属性的查找"></a>原型对象 属性的查找</h2>
 <p>对象属性查找，经常会查找到原型对象上：</p>
@@ -6848,7 +6848,7 @@ console.log(person1.constructor === Object);//false
 </code></pre>
 <h2 id="构造函数-原型对象和实例对象之间的-关系-和-其指向判断"><a class="header-anchor" href="#构造函数-原型对象和实例对象之间的-关系-和-其指向判断"></a>构造函数、原型对象和实例对象之间的 关系 和 其指向判断</h2>
 <blockquote>
-<p>如果没有了解基础知识，可参考我的上一篇文章： <a href="https://blog.az22c.top/2017/08/08/js-proto/">理解prototype、proto和constructor等关系</a></p>
+<p>如果没有了解基础知识，可参考我的上一篇文章： <a href="/2017/08/08/js-proto/">理解prototype、proto和constructor等关系</a></p>
 </blockquote>
 <p>构造函数、原型对象和实例对象之间的关系是<strong>实例对象和构造函数之间没有直接联系。</strong></p>
 <pre><code class="language-JavaScript">function Foo(){};
@@ -7699,7 +7699,7 @@ displayColor.call(null);//TypeError: Cannot read property 'color' of null
 }
 </code></pre>
 <h3 id="事件处理程序的event对象-ie兼容"><a class="header-anchor" href="#事件处理程序的event对象-ie兼容"></a>事件处理程序的Event对象 IE兼容</h3>
-<p>首先作为基础，要稍微了解一下<a href="https://blog.az22c.top/2017/07/01/js-event3/">浏览器js的四种事件处理程序</a>。</p>
+<p>首先作为基础，要稍微了解一下<a href="/2017/07/01/js-event3/">浏览器js的四种事件处理程序</a>。</p>
 <p><a href="http://yujiangshui.com/javascript-event/#%E4%BA%8B%E4%BB%B6%E8%BF%9B%E9%98%B6%E8%AF%9D%E9%A2%98" target="_blank" rel="noopener">摘自：于江水</a></p>
 <p>IE 中往回调函数中传递的事件对象与标准有一些差异，你需要使用 <code>window.event</code> 来获取事件对象。所以你通常会写出下面代码来获取事件对象：</p>
 <pre><code class="language-js">event = event || window.event
@@ -8945,7 +8945,7 @@ content:&quot;.&quot;; display:block; height:0; visibility:hidden; clear:both; }
 <p>这篇文章的内容基本没有用在 <a href="https://ife-css-learning.az22c.vercel.app/task02.html" target="_blank" rel="noopener">demo</a> 中，这只是一番拓展性总结。</p>
 <a id="more"></a>
 <h2 id="css选择器优先级"><a class="header-anchor" href="#css选择器优先级"></a>CSS选择器优先级</h2>
-<p>在文章 <a href="https://blog.az22c.top/2017/03/31/css-selectors-specificity/">CSS选择器优先级</a> 中我整合了这部分笔记。</p>
+<p>在文章 <a href="/2017/03/31/css-selectors-specificity/">CSS选择器优先级</a> 中我整合了这部分笔记。</p>
 <h2 id="list-style-xxx"><a class="header-anchor" href="#list-style-xxx"></a>list-style-xxx</h2>
 <p>我们常用list-style，实则它是一个 简写属性。</p>
 <h3 id="list-style-type"><a class="header-anchor" href="#list-style-type"></a>list-style-type</h3>
@@ -9493,7 +9493,7 @@ p {
 <li>在HTML5之后，哪些新标签可以放心使用、哪些老标签需要继续使用？</li>
 <li>这个demo用到的标签的详细介绍？</li>
 </ul>
-<p>这些话题的主要内容都写到了我的博客里： <a href="https://blog.az22c.top/2017/03/28/h5-new-ele/">H5新标签和被H5拥抱的老元素们</a></p>
+<p>这些话题的主要内容都写到了我的博客里： <a href="/2017/03/28/h5-new-ele/">H5新标签和被H5拥抱的老元素们</a></p>
 ]]></content>
       
         <categories>
@@ -10853,7 +10853,7 @@ a || b : 将a, b转换为Boolean类型, 再执行逻辑或, true返回a, false�
 </li>
 </ul>
 <h2 id="相等操作符"><a class="header-anchor" href="#相等操作符"></a>相等操作符</h2>
-<p>见另外一篇文章 <a href="https://blog.az22c.top/2017/02/11/equality-operators/">相等操作符</a></p>
+<p>见另外一篇文章 <a href="/2017/02/11/equality-operators/">相等操作符</a></p>
 ]]></content>
       
         <categories>
@@ -11183,7 +11183,7 @@ console.log(boundObjectWithRange(10)); // Output: true
 </code></pre>
 <p>显然后者更加灵活一点。用<code>bind</code>改变this的指向，一个对象可以使用另外一个对象里面的方法，这是一种常见用法。</p>
 <hr>
-<p>再来一个例子，说明一下 <a href="https://blog.az22c.top/2017/08/07/js-this/">this的指向</a> 和 <strong>函数的调用者（点运算符之前的对象或者window全局）</strong> 的区别：</p>
+<p>再来一个例子，说明一下 <a href="/2017/08/07/js-this/">this的指向</a> 和 <strong>函数的调用者（点运算符之前的对象或者window全局）</strong> 的区别：</p>
 <pre><code>this.x = 9;
 var module = {
     x: 81,
