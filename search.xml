@@ -4076,7 +4076,7 @@ for (var i = 0; i &lt; 10; i++) {
 <ul>
 <li>img元素、input元素、svg元素等</li>
 <li><code>display:inline-block</code>、<code>display:inline-table</code>、<code>display:inline-flex</code> 的元素</li>
-<li>处于某种特殊格式化上下文的内联元素：例如 flexbox 元素中的子元素都处于 <a href="http://link.zhihu.com/?target=https%3A//www.w3.org/TR/css-flexbox-1/%23flex-items" target="_blank" rel="noopener">flex formatting context（弹性格式化上下文）</a>中，这些子元素的 display 值都是「blockified」</li>
+<li>处于某种特殊格式化上下文的内联元素：例如 flexbox 元素中的子元素都处于 <a href="https://www.w3.org/TR/css-flexbox-1/#flex-items" target="_blank" rel="noopener">flex formatting context（弹性格式化上下文）</a>中，这些子元素的 display 值都是「blockified」</li>
 </ul>
 <p>这些<code>行内块级元素</code>，其所占的高度通常由height，margin，border，padding盒子模型的高度来决定。</p>
 <p>如果你将其 height 设置为 auto 的话，那么其高度的取值就是 line-height，其 content-area 的取值也是 line-height。</p>
@@ -6612,11 +6612,11 @@ instance2.sayName();//&quot;hu&quot;
         
         <tags>
             
+            <tag> 原理 </tag>
+            
             <tag> 面向对象 </tag>
             
             <tag> 原型系统 </tag>
-            
-            <tag> 原理 </tag>
             
         </tags>
         
@@ -7642,9 +7642,9 @@ displayColor.call(null);//TypeError: Cannot read property 'color' of null
             
             <tag> IIFE </tag>
             
-            <tag> this </tag>
-            
             <tag> 闭包 </tag>
+            
+            <tag> this </tag>
             
         </tags>
         
@@ -9507,9 +9507,9 @@ p {
             
             <tag> H5 </tag>
             
-            <tag> IFE </tag>
-            
             <tag> HTML </tag>
+            
+            <tag> IFE </tag>
             
         </tags>
         
@@ -11183,7 +11183,7 @@ console.log(boundObjectWithRange(10)); // Output: true
 </code></pre>
 <p>显然后者更加灵活一点。用<code>bind</code>改变this的指向，一个对象可以使用另外一个对象里面的方法，这是一种常见用法。</p>
 <hr>
-<p>再来一个例子，说明一下 <a href="/2017/08/07/js-this/">this的指向</a> 和 <strong>函数的调用者（点运算符之前的对象或者window全局）</strong> 的区别：</p>
+<p>再来一个例子，说明一下 <a href="/2017/08/07/js-this/">结合this的4种绑定规则 深入理解this指向的判定</a> 和 <strong>函数的调用者（点运算符之前的对象或者window全局）</strong> 的区别：</p>
 <pre><code>this.x = 9;
 var module = {
     x: 81,
