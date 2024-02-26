@@ -6,7 +6,7 @@
     <entry>
       <title><![CDATA[后管常见的树形组件的vue实现]]></title>
       <url>https://blog.az22c.top/2022/05/22/admin-tree-widget/</url>
-      <content type="html"><![CDATA[<p>本文主要展示一下4种树形组件基于 Vue2 和 Ant Design Vue 1.x 的一般的“实现效果”，和分析它们大致的“实现思路、经验”。</p>
+      <content type="html"><![CDATA[<p>本文主要展示一下4种树形组件基于 Vue2 和 Ant Design Vue 1.x 的一般的“实现效果”，和分析它们大致的“实现思路、经验”。【后文有图示】</p>
 <a id="more"></a>
 <h2 id="前言-须知"><a class="header-anchor" href="#前言-须知"></a>前言——须知</h2>
 <p>在后台管理系统页面中，各类树形组件不可或缺，并且实现起来相对复杂。本文主要介绍其中<strong>几种最常见的</strong> ：</p>
@@ -70,7 +70,7 @@
 <li>不必在树形图中实现“全选所有节点”的功能————因为在懒加载的场景下勾选“全选”有挺大的操作歧义</li>
 </ul>
 <blockquote>
-<p>植入一条广告：一种比较全面地实现各个功能点的树形组件，见“隔壁文章” <a href="https://blog.az22c.top/2022/05/22/admin-custom-tree-table/">一种常见的树形表格组件</a></p>
+<p>植入一条广告：一种比较全面地实现各个功能点的树形组件，见“隔壁文章” <a href="https://blog.az22c.top/2022/05/22/admin-custom-tree-table/">一种常见的多层级树形表格组件</a></p>
 </blockquote>
 <p>【2】而因为是懒加载场景，树形图计算“勾选联动”之类的，无法交给第三方组件 a-tree 组件那边计算，需要自行实现。</p>
 <h2 id="树形图-单选选择框"><a class="header-anchor" href="#树形图-单选选择框"></a>树形图 单选选择框</h2>
@@ -233,9 +233,9 @@
     </entry>
     
     <entry>
-      <title><![CDATA[一种常见的树形表格组件]]></title>
+      <title><![CDATA[一种常见的多层级树形表格组件]]></title>
       <url>https://blog.az22c.top/2022/05/22/admin-custom-tree-table/</url>
-      <content type="html"><![CDATA[<p>一种基于 Vue 和 Ant Design Vue / Element-ui 实现的，树形表格组件。这一种组件用于选择树状数据中的多个节点。同时在各行各业后管需求中比较普遍常见。</p>
+      <content type="html"><![CDATA[<p>一种基于 Vue 和 Ant Design Vue / Element-ui 实现的，树形表格组件。这一种组件用于选择多层级树状数据中的多个节点。同时在各行各业后管需求中比较普遍常见。【后文有图示】</p>
 <a id="more"></a>
 <p>对于许多实际业务，因为往往比普通树形图组件稍微多了一套要实现的数据关系，所以单纯调用 Ant Design Vue 等等实现不了，只能二次开发实现。</p>
 <p>本文将给出对于这一种组件，普遍通用的<strong>实现效果和大概的实现思路、经验</strong>。</p>
