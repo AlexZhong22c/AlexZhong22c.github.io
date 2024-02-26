@@ -7,7 +7,7 @@
 ## ｜01 浏览器 
 
 - [03-跨域通信和跨tab通信](https://blog.az22c.top/2020/05/22/cross-origin-cross-tab/)&nbsp;&nbsp;|&nbsp;&nbsp;2020-05-22
-  - <p>标签：[笔记副本](https://blog.az22c.top/tags/笔记副本/) [跨域](https://blog.az22c.top/tags/跨域/) [跨tab](https://blog.az22c.top/tags/跨tab/) [面试题](https://blog.az22c.top/tags/面试题/)</p>
+  - 标签：[笔记副本](https://blog.az22c.top/tags/笔记副本/) [跨域](https://blog.az22c.top/tags/跨域/) [跨tab](https://blog.az22c.top/tags/跨tab/) [面试题](https://blog.az22c.top/tags/面试题/)
   - <p>上一篇文章介绍了什么是“跨域”和“跨站”。可知，“同站”通信也是“跨域”的一种途径。</p>
   - <p>这次列举一下跨域通信的方法，同时对跨tab通信有启发性价值。</p>
   - <p>因为前人总结得实在是太齐全了！这里只是做到基本列举齐全，然后做一些小小的补充。</p>
