@@ -3572,11 +3572,11 @@ function iterator (fn, next) {
             
             <tag> 跨站 </tag>
             
+            <tag> Cookie </tag>
+            
             <tag> 面试题 </tag>
             
             <tag> 笔记副本 </tag>
-            
-            <tag> Cookie </tag>
             
         </tags>
         
@@ -7642,9 +7642,9 @@ displayColor.call(null);//TypeError: Cannot read property 'color' of null
             
             <tag> IIFE </tag>
             
-            <tag> this </tag>
-            
             <tag> 闭包 </tag>
+            
+            <tag> this </tag>
             
         </tags>
         
@@ -8257,9 +8257,9 @@ MY_ARRAY = ['B']
             
             <tag> 作用域 </tag>
             
-            <tag> 闭包 </tag>
-            
             <tag> ES6 </tag>
+            
+            <tag> 闭包 </tag>
             
             <tag> 任务队列 </tag>
             
@@ -9507,9 +9507,9 @@ p {
             
             <tag> H5 </tag>
             
-            <tag> HTML </tag>
-            
             <tag> IFE </tag>
+            
+            <tag> HTML </tag>
             
         </tags>
         
@@ -10339,9 +10339,9 @@ Kinect，它将身体动作转换成屏幕动作。这样你可以用你的手�
         
         <tags>
             
-            <tag> 随笔 </tag>
-            
             <tag> H5 </tag>
+            
+            <tag> 随笔 </tag>
             
         </tags>
         
