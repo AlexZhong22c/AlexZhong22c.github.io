@@ -218,7 +218,7 @@
         </a>
         <hgroup id="id_hgroup_name">
         <h1 id="ngudream_name" class="header-author"><!-- main.styl cl-effect-2 -->
-        <a href="/"><span style="background-color:#fafafa !important" data-hover="专注于Web前端的AZ">Alex Zhong</span></a>
+        <a href="/"><span style="background-color:#fafafa !important" data-hover="专注于Web前端">Alex Zhong</span></a>
         </h1>
         </hgroup>
         
@@ -912,11 +912,12 @@ $.cachedScript('//push.zhanzhang.baidu.com/push.js').done(function () {
 }
 
 }
-addTextAnimation();
-playTextAnimation();
-textAnimationClick(avatarPath);
+// 隐藏：
+// addTextAnimation();
+// playTextAnimation();
+// textAnimationClick(avatarPath);
 codeRain();
-duoshuoComments();
+// duoshuoComments();
 });
 }
 //左侧搜索
@@ -1164,7 +1165,10 @@ document.title = arr[0] + "|" + arr[2];
 }
 var addAvatar = function (avatarPath) {
 
+var isExist = $("#id_avatar_a .js-avatar")
+if (!isExist.length) {
 $("#id_avatar_a").append("<img src='/img/avatar.jpg' class='js-avatar' style='width: 100%;height: 100%;opacity: 1;' />");
+}
 
 }
 var resetPageWidth = function () {
@@ -1420,6 +1424,7 @@ $(".body-wrap").css("margin-bottom", "110px");//移动端页面底部距离大�
 //左边栏缩小
 if (totalwidth > 900 && totalwidth < 1200) {
 $(".left-col").css("width", "250px");
+$(".left-col").css("overflow-x", "hidden");
 $(".mid-col").css("margin-left", "-50px");
 if (is_post()) {
 $("#toc").css("width", "180px");
@@ -1654,12 +1659,12 @@ textLen = textAnimations.length,
 textIndex = Math.ceil(Math.random() * textLen) - 1,
 textAnimationName = textAnimations[textIndex];
 if(textIndex != 0){
-$("#id_span_change").remove();
+// $("#id_span_change").remove();
 $("#id_normal_text_anim").remove();
 var textAnimView = "<div id='id_span_change'><span>Coding Changes the</span><span class='cd-words-wrapper' style='margin-left:4px;'><b class='is-visible' style='font-weight:normal !important;color: #6b889d;'>World</b><b style='font-weight:normal !important;color: #6b739d;'>Never</b><b style='font-weight:normal !important;color: #7a6b9d;'>Give</b><b style='font-weight:normal !important;color: #7a6b9d;'>Up</b><b style='font-weight:normal !important;color: #7a6b9d;'>Dream</b></span></div>";
 $("#id_hgroup_name").after(textAnimView);
 var newClass = textAnimationName + " header-subtitle";
-$("#id_span_change").attr("class", newClass);
+// $("#id_span_change").attr("class", newClass);
 }
 }
 var playTextAnimation = function () {
@@ -1814,14 +1819,14 @@ $("#left_col_div").css("overflow-y", "auto").css("overflow-x", "hidden");
 } else if(totalHeight >= 700){
 $("#left_col_div").css("overflow-y", "hidden").css("overflow-x", "hidden");
 var clickCount = 0;
-$("#id_span_change").css("cursor", "pointer").click(function(){
-if((clickCount % 2) == 0){
-$("#left_col_div").css("overflow-y", "auto").css("overflow-x", "hidden");
-} else {
-$("#left_col_div").css("overflow-y", "hidden").css("overflow-x", "hidden");
-}
-clickCount++;
-});
+// $("#id_span_change").css("cursor", "pointer").click(function(){
+// if((clickCount % 2) == 0){
+// $("#left_col_div").css("overflow-y", "auto").css("overflow-x", "hidden");
+// } else {
+// $("#left_col_div").css("overflow-y", "hidden").css("overflow-x", "hidden");
+// }
+// clickCount++;
+// });
 var avatarOut = false;
 $("#id_avatar_a").mouseenter(function(){
 if(!avatarOut){

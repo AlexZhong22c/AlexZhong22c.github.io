@@ -3572,11 +3572,11 @@ function iterator (fn, next) {
             
             <tag> 跨站 </tag>
             
-            <tag> Cookie </tag>
-            
             <tag> 面试题 </tag>
             
             <tag> 笔记副本 </tag>
+            
+            <tag> Cookie </tag>
             
         </tags>
         
@@ -5557,11 +5557,11 @@ border-bottom-left-radius: 44px 88px;
         
         <tags>
             
-            <tag> 回顾 </tag>
-            
             <tag> radius </tag>
             
             <tag> 边框 </tag>
+            
+            <tag> 回顾 </tag>
             
         </tags>
         
@@ -7642,9 +7642,9 @@ displayColor.call(null);//TypeError: Cannot read property 'color' of null
             
             <tag> IIFE </tag>
             
-            <tag> this </tag>
-            
             <tag> 闭包 </tag>
+            
+            <tag> this </tag>
             
         </tags>
         
@@ -8421,11 +8421,11 @@ d.toUTCString()
             
             <tag> 复选框 </tag>
             
-            <tag> 插件 </tag>
+            <tag> 全选 </tag>
             
             <tag> 表格 </tag>
             
-            <tag> 全选 </tag>
+            <tag> 插件 </tag>
             
         </tags>
         
@@ -8803,9 +8803,9 @@ methods: {
         
         <tags>
             
-            <tag> 插件 </tag>
-            
             <tag> 表格 </tag>
+            
+            <tag> 插件 </tag>
             
             <tag> 条目 </tag>
             
@@ -10339,9 +10339,9 @@ Kinect，它将身体动作转换成屏幕动作。这样你可以用你的手�
         
         <tags>
             
-            <tag> H5 </tag>
-            
             <tag> 随笔 </tag>
+            
+            <tag> H5 </tag>
             
         </tags>
         
