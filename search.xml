@@ -36,7 +36,7 @@
 <h2 id="树形图-多选选择框"><a class="header-anchor" href="#树形图-多选选择框"></a>树形图 多选选择框</h2>
 <p>通常，“选择 业务系统 / 部门 这些类型的数据”的业务逻辑，可以用这种组件来实现。</p>
 <p>这些类型的业务数据，如果一次性加载，可能总共有接近 1000 个节点，个人尝试过把这个量的数据直接放到 Ant Design Vue 的 a-select-tree 等组件里面，结果在首次弹出显示这样实现的组件和数据时太卡了；点击选择某个数据项的时候也会卡。官方又不予以优化。</p>
-<p><strong>针对上述卡顿问题，可以自己二次开发封装实现组件来取而代之，并且实现了“懒加载”来优化。</strong></p>
+<p><strong>小结，针对上述卡顿问题，可以自己二次开发封装实现组件来取而代之，并且实现了“懒加载”来优化。</strong></p>
 <p>其实还是用的 Ant Design Vue 的组件，只不过是基于它们做上层二次开发(并且自定义接管了部分Ant Design Vue组件的逻辑处理)。</p>
 <p><img src="https://cloud.az22c.top/multi-select-tree-outer-22090901.png-az22cgithub" alt="multi-select-tree-outer-22090901"></p>
 <p>( 图1 ↑ )(图示只是仿造模拟图)</p>
@@ -76,7 +76,7 @@
 <h2 id="树形图-单选选择框"><a class="header-anchor" href="#树形图-单选选择框"></a>树形图 单选选择框</h2>
 <p>通常，“选择 业务系统 / 部门 / 菜单资源 / 组织 这些类型的数据”的业务逻辑，可以用这种组件来实现。</p>
 <p>与上述“树形图 多选选择框”相同，该组件加载对应的业务数据同样可能有接近 1000 个节点，有些甚至总量能去到大几千。</p>
-<p>所以同样地，也是基于 Ant Design Vue 的组件，二次开发以实现。</p>
+<p>所以同样地， <strong>“节点多导致卡顿，用懒加载解决”</strong> ，也是基于 Ant Design Vue 的组件，二次开发以实现。</p>
 <p><img src="https://cloud.az22c.top/single-select-tree-22090502.png-az22cgithub" alt="single-select-tree-22090502"></p>
 <p>( 图3 ↑ )(图示只是仿造模拟了表面的样式：点击弹出该浮窗)</p>
 <h3 id="树形图-单选选择框-效果："><a class="header-anchor" href="#树形图-单选选择框-效果："></a>“树形图 单选选择框”效果：</h3>
@@ -3572,11 +3572,11 @@ function iterator (fn, next) {
             
             <tag> 跨站 </tag>
             
+            <tag> Cookie </tag>
+            
             <tag> 面试题 </tag>
             
             <tag> 笔记副本 </tag>
-            
-            <tag> Cookie </tag>
             
         </tags>
         
@@ -5557,11 +5557,11 @@ border-bottom-left-radius: 44px 88px;
         
         <tags>
             
+            <tag> 回顾 </tag>
+            
             <tag> radius </tag>
             
             <tag> 边框 </tag>
-            
-            <tag> 回顾 </tag>
             
         </tags>
         
@@ -8257,9 +8257,9 @@ MY_ARRAY = ['B']
             
             <tag> 作用域 </tag>
             
-            <tag> 闭包 </tag>
-            
             <tag> ES6 </tag>
+            
+            <tag> 闭包 </tag>
             
             <tag> 任务队列 </tag>
             
@@ -8421,11 +8421,11 @@ d.toUTCString()
             
             <tag> 复选框 </tag>
             
-            <tag> 全选 </tag>
+            <tag> 插件 </tag>
             
             <tag> 表格 </tag>
             
-            <tag> 插件 </tag>
+            <tag> 全选 </tag>
             
         </tags>
         
@@ -8803,9 +8803,9 @@ methods: {
         
         <tags>
             
-            <tag> 表格 </tag>
-            
             <tag> 插件 </tag>
+            
+            <tag> 表格 </tag>
             
             <tag> 条目 </tag>
             

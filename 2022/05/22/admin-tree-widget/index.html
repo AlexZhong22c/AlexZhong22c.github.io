@@ -93,7 +93,7 @@
 <meta property="og:image" content="https://cloud.az22c.top/lazy-tree-table-2-col-22090801.png-az22cgithub">
 <meta property="og:image" content="https://cloud.az22c.top/custom-tree-table-22090902.png-az22cgithub">
 <meta property="og:image" content="https://cloud.az22c.top/custom-tree-table-outter-22090801.png-az22cgithub">
-<meta property="og:updated_time" content="2024-02-26T12:53:47.360Z">
+<meta property="og:updated_time" content="2024-02-27T17:22:25.772Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="后管常见的树形组件的vue实现">
 <meta name="twitter:description" content="本文主要展示一下4种树形组件基于 Vue2 和 Ant Design Vue 1.x 的一般的“实现效果”，和分析它们大致的“实现思路、经验”。【后文有图示】">
@@ -390,10 +390,10 @@
       </div>
     <div class="intrude-less">
         <header id="header" class="inner">
-            <a id="id_avatar_a_mobile" href="/" class="profilepic">
+            <!-- <a id="id_avatar_a_mobile" href="/" class="profilepic"> -->
                 <!-- <img src="/img/avatar.jpg" class="animated rotateIn" style="-vendor-animation-duration: 3s;-vendor-animation-delay: 2s;-vendor-animation-iteration-count: infinite;"> -->
 				<!--<img src="/img/avatar.jpg" > -->
-            </a>
+            <!-- </a> -->
             <hgroup>
               <h1 class="header-author"><a href="/" title="回到主页">Alex Zhong</a></h1>
             </hgroup>
@@ -508,7 +508,7 @@
 <h2 id="树形图-多选选择框"><a class="header-anchor" href="#树形图-多选选择框"></a>树形图 多选选择框</h2>
 <p>通常，“选择 业务系统 / 部门 这些类型的数据”的业务逻辑，可以用这种组件来实现。</p>
 <p>这些类型的业务数据，如果一次性加载，可能总共有接近 1000 个节点，个人尝试过把这个量的数据直接放到 Ant Design Vue 的 a-select-tree 等组件里面，结果在首次弹出显示这样实现的组件和数据时太卡了；点击选择某个数据项的时候也会卡。官方又不予以优化。</p>
-<p><strong>针对上述卡顿问题，可以自己二次开发封装实现组件来取而代之，并且实现了“懒加载”来优化。</strong></p>
+<p><strong>小结，针对上述卡顿问题，可以自己二次开发封装实现组件来取而代之，并且实现了“懒加载”来优化。</strong></p>
 <p>其实还是用的 Ant Design Vue 的组件，只不过是基于它们做上层二次开发(并且自定义接管了部分Ant Design Vue组件的逻辑处理)。</p>
 <p><img src="https://cloud.az22c.top/multi-select-tree-outer-22090901.png-az22cgithub" alt="multi-select-tree-outer-22090901"></p>
 <p>( 图1 ↑ )(图示只是仿造模拟图)</p>
@@ -548,7 +548,7 @@
 <h2 id="树形图-单选选择框"><a class="header-anchor" href="#树形图-单选选择框"></a>树形图 单选选择框</h2>
 <p>通常，“选择 业务系统 / 部门 / 菜单资源 / 组织 这些类型的数据”的业务逻辑，可以用这种组件来实现。</p>
 <p>与上述“树形图 多选选择框”相同，该组件加载对应的业务数据同样可能有接近 1000 个节点，有些甚至总量能去到大几千。</p>
-<p>所以同样地，也是基于 Ant Design Vue 的组件，二次开发以实现。</p>
+<p>所以同样地， <strong>“节点多导致卡顿，用懒加载解决”</strong> ，也是基于 Ant Design Vue 的组件，二次开发以实现。</p>
 <p><img src="https://cloud.az22c.top/single-select-tree-22090502.png-az22cgithub" alt="single-select-tree-22090502"></p>
 <p>( 图3 ↑ )(图示只是仿造模拟了表面的样式：点击弹出该浮窗)</p>
 <h3 id="树形图-单选选择框-效果："><a class="header-anchor" href="#树形图-单选选择框-效果："></a>“树形图 单选选择框”效果：</h3>
@@ -692,7 +692,7 @@
         <p><span>本文标题:</span><a href="/2022/05/22/admin-tree-widget/">后管常见的树形组件的vue实现</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">Alex Zhong</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2022-05-22, 20:31:43</p>
-        <!-- <p><span>最后更新:</span>2024-02-26, 20:53:47</p> -->
+        <!-- <p><span>最后更新:</span>2024-02-28, 01:22:25</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="后管常见的树形组件的vue实现" href="/2022/05/22/admin-tree-widget/">https://blog.az22c.top/2022/05/22/admin-tree-widget/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://blog.az22c.top/2022/05/22/admin-tree-widget/　　作者: Alex Zhong" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -787,7 +787,7 @@
 			<div id="footer_right_div" class="footer-right" style="text-align:center;overflow:hidden;">
 				<div id="web_count_div" class="post-count-bottom" style="display:inline;">
 					
-						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：3,427</span>
+						<span id="id_wordcount_span" style="margin-left:20px;vertical-align:middle;">本文字数：3,442</span>
 					
 				</div>
             </div>

@@ -224,9 +224,10 @@ a {
 }
 #container #mobile-nav {
   display: none;
+/* @TODO:以后有时间再移除对应js */
 }
 #container #mobile-nav .overlay {
-  height: 110px;
+  height: 70px;
   position: absolute;
   width: 100%;
   background: #4d4d4d;
@@ -235,6 +236,11 @@ a {
   position: fixed;
   height: 42px;
   z-index: 99;
+}
+#container #mobile-nav .header-subtitle {
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden;
 }
 #container #mobile-nav #header {
   padding: 10px 0 0 0;
@@ -319,6 +325,16 @@ a {
   }
   #container .header-author.fixed a {
     color: #fff;
+  }
+  #container .overlay .slider-trigger {
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden;
+  }
+  #container .overlay .slider-trigger::before {
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden;
   }
   #container .overlay .slider-trigger {
     position: absolute;
@@ -412,6 +428,13 @@ a {
   #container .archives .article-info {
     display: none;
   }
+  #container .archives .archive-article-title {
+    color: #7a4fd6;
+  }
+  #container .archives .archive-article-title:before {
+    content: '> ';
+    color: #333;
+  }
   #container .archive-article-inner .article-meta .archive-article-date,
   #container .share {
     padding: 3px 10px;
@@ -424,6 +447,9 @@ a {
   }
   #container #mobile-nav {
     display: block;
+  }
+  #container #mobile-nav .social {
+    display: none;
   }
   #container #page-nav .extend {
     opacity: 1;
