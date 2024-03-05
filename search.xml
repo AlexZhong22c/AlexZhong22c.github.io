@@ -5,7 +5,7 @@
     
     <entry>
       <title><![CDATA[后管常见的树形组件的vue实现]]></title>
-      <url>https://blog.az22c.top/2022/05/22/admin-tree-widget/</url>
+      <url>https://az22c.gitee.io/2022/05/22/admin-tree-widget/</url>
       <content type="html"><![CDATA[<p>本文主要展示一下4种树形组件基于 Vue2 和 Ant Design Vue 1.x 的一般的“实现效果”，和分析它们大致的“实现思路、经验”。【后文有图示】</p>
 <a id="more"></a>
 <h2 id="前言-须知"><a class="header-anchor" href="#前言-须知"></a>前言——须知</h2>
@@ -234,7 +234,7 @@
     
     <entry>
       <title><![CDATA[一种常见的多层级树形表格组件]]></title>
-      <url>https://blog.az22c.top/2022/05/22/admin-custom-tree-table/</url>
+      <url>https://az22c.gitee.io/2022/05/22/admin-custom-tree-table/</url>
       <content type="html"><![CDATA[<p>一种基于 Vue 和 Ant Design Vue / Element-ui 实现的，树形表格组件。这一种组件用于选择多层级树状数据中的多个节点。同时在各行各业后管需求中比较普遍常见。【后文有图示】</p>
 <a id="more"></a>
 <p>对于许多实际业务，因为往往比普通树形图组件稍微多了一套要实现的数据关系，所以单纯调用 Ant Design Vue 等等实现不了，只能二次开发实现。</p>
@@ -410,7 +410,7 @@
     
     <entry>
       <title><![CDATA[Vue2源码【9】收获总结]]></title>
-      <url>https://blog.az22c.top/2020/09/04/vue2-src-code-summary/</url>
+      <url>https://az22c.gitee.io/2020/09/04/vue2-src-code-summary/</url>
       <content type="html"><![CDATA[<p>Vue2源码系列终于要完结了。最后总结一下阅读过程中的一些收获，主要分为4个方面：</p>
 <p>“架构设计方面”、“目录和模块设计”、“编程具体模块的实现”、“怎么看源码”</p>
 <a id="more"></a>
@@ -520,7 +520,7 @@ export function once (fn: Function): Function {
     
     <entry>
       <title><![CDATA[Vue2源码【8-6】指令]]></title>
-      <url>https://blog.az22c.top/2020/09/04/vue2-src-code-66-directive/</url>
+      <url>https://az22c.gitee.io/2020/09/04/vue2-src-code-66-directive/</url>
       <content type="html"><![CDATA[<p>“指令”这部分源码，也容易看得晕头转向，这部分代码贯穿了整个核心流程，是没有独立出来的。而常见的指令v-bind、v-on、v-model、v-if v-show等等都是通过这套机制来实现的。</p>
 <p>这篇文章干货不多，主要是再对前面已经讲过原理的各种指令的实现有一个宏观的认识。</p>
 <a id="more"></a>
@@ -568,7 +568,7 @@ export function once (fn: Function): Function {
     
     <entry>
       <title><![CDATA[Vue2源码【8-5】keep-alive]]></title>
-      <url>https://blog.az22c.top/2020/09/04/vue2-src-code-65-keep-alive/</url>
+      <url>https://az22c.gitee.io/2020/09/04/vue2-src-code-65-keep-alive/</url>
       <content type="html"><![CDATA[<p>keep-alive是vue的内置组件，如果是用户想要自己实现一个类似keep-alive的组件是不可能的，因为需要vue的主干逻辑配合该组件的实现。</p>
 <p>keep-alive的作用是缓存的是子组件的vnode，而其本身的render返回的也是vnode。</p>
 <p>keep-alive的原理依赖slot的机制。</p>
@@ -665,7 +665,7 @@ export function once (fn: Function): Function {
     
     <entry>
       <title><![CDATA[Vue2源码【8-4】slot和slotScope]]></title>
-      <url>https://blog.az22c.top/2020/09/04/vue2-src-code-64-slot/</url>
+      <url>https://az22c.gitee.io/2020/09/04/vue2-src-code-64-slot/</url>
       <content type="html"><![CDATA[<p>对于同一个组件实例，其 vnode 其实包括其“占位符节点”和“真实节点”，它们是父子节点关系。基于这点知识，再去理解slot等机制并不难。</p>
 <p>然后再解释了一下为什么slot和slotScope之流为什么不是响应式的。已经再介绍一下vue3正式登场的v-slot。</p>
 <a id="more"></a>
@@ -809,7 +809,7 @@ _c('div',
     
     <entry>
       <title><![CDATA[Vue2源码【8-2】v-model]]></title>
-      <url>https://blog.az22c.top/2020/09/04/vue2-src-code-62-v-model/</url>
+      <url>https://az22c.gitee.io/2020/09/04/vue2-src-code-62-v-model/</url>
       <content type="html"><![CDATA[<p>v-model相关的源码，其实极其复杂。这里主要用文本来概括流程，并且挖掘一些特别的点。</p>
 <p>可以划分为“v-model 在控件的实现”和“v-model 在自定义组件的实现”两部分。</p>
 <a id="more"></a>
@@ -897,7 +897,7 @@ _c('div',
     
     <entry>
       <title><![CDATA[Vue2源码【8-1】event]]></title>
-      <url>https://blog.az22c.top/2020/09/04/vue2-src-code-61-event/</url>
+      <url>https://az22c.gitee.io/2020/09/04/vue2-src-code-61-event/</url>
       <content type="html"><![CDATA[<p>event即事件系统，这部分源码让人看得头皮发麻。但是理解之后发现这部分的逻辑是很重要的，在这里试着用几句话概括流程。</p>
 <p>事件系统分为“DOM 事件”和“自定义事件”，分别为两套处理流程，先有个大概的印象即可。</p>
 <a id="more"></a>
@@ -1036,7 +1036,7 @@ function remove (event, fn) {
     
     <entry>
       <title><![CDATA[Vue2源码【7】数据劫持使用Proxy的优势]]></title>
-      <url>https://blog.az22c.top/2020/09/04/vue2-src-code-5-proxy/</url>
+      <url>https://az22c.gitee.io/2020/09/04/vue2-src-code-5-proxy/</url>
       <content type="html"><![CDATA[<p>Proxy，与其说是代理，还不如说代理是基于<strong>拦截</strong>的，<strong>在功能定位上，和defineProperty是不一样的</strong>。只是恰好Proxy覆盖了defineProperty的getter和setter两个api。</p>
 <a id="more"></a>
 <h3 id="导论-要看看"><a class="header-anchor" href="#导论-要看看"></a>导论 #要看看</h3>
@@ -1106,7 +1106,7 @@ function remove (event, fn) {
     
     <entry>
       <title><![CDATA[Vue2源码【6】数据代理]]></title>
-      <url>https://blog.az22c.top/2020/09/04/vue2-src-code-4-data-proxy/</url>
+      <url>https://az22c.gitee.io/2020/09/04/vue2-src-code-4-data-proxy/</url>
       <content type="html"><![CDATA[<p>经过对概念的区分，我认为：数据代理，其原理是数据劫持。数据代理的原理是最简单的。</p>
 <a id="more"></a>
 <h2 id="数据代理-其原理是数据劫持"><a class="header-anchor" href="#数据代理-其原理是数据劫持"></a>数据代理，其原理是数据劫持</h2>
@@ -1152,7 +1152,7 @@ function _proxy (data) {
     
     <entry>
       <title><![CDATA[Vue2源码【5】异步更新和nextTick的原理]]></title>
-      <url>https://blog.az22c.top/2020/09/04/vue2-src-code-3-next-tick/</url>
+      <url>https://az22c.gitee.io/2020/09/04/vue2-src-code-3-next-tick/</url>
       <content type="html"><![CDATA[<p>nextTick这个api，并不是直接就帮你发起微任务的，只不过是把你传进来的回调加入到微任务的回调数组中，即作为一部分。</p>
 <a id="more"></a>
 <p><img src="https://cloud.az22c.top/vue_next-tick.png-az22cgithub" alt="vue_next-tick"></p>
@@ -1240,7 +1240,7 @@ function _proxy (data) {
     
     <entry>
       <title><![CDATA[【4-6】响应式原理 之 哪些api是响应式的，哪些不是响应式的]]></title>
-      <url>https://blog.az22c.top/2020/09/04/vue2-src-code-24-whether-responsive/</url>
+      <url>https://az22c.gitee.io/2020/09/04/vue2-src-code-24-whether-responsive/</url>
       <content type="html"><![CDATA[<p>《哪些api是响应式的，哪些不是响应式的》：</p>
 <p>总结一下 Vue 体系内，哪些api是响应式的，哪些不是响应式的。对于个别原理，如provide inject做出一些详细解释。</p>
 <a id="more"></a>
@@ -1372,7 +1372,7 @@ initProvide(vm) // resolve provide after data/props
     
     <entry>
       <title><![CDATA[【4-5】响应式原理 之 props 是响应式的证明]]></title>
-      <url>https://blog.az22c.top/2020/09/04/vue2-src-code-23-props/</url>
+      <url>https://az22c.gitee.io/2020/09/04/vue2-src-code-23-props/</url>
       <content type="html"><![CDATA[<p>《props 是响应式的证明》：</p>
 <p>这一篇主要从源码的执行层面，解释为何 props 是响应式的。</p>
 <a id="more"></a>
@@ -1441,7 +1441,7 @@ initProvide(vm) // resolve provide after data/props
     
     <entry>
       <title><![CDATA[【4-4】【附录】响应式原理 之 数据劫持之computed和watch的具体源码]]></title>
-      <url>https://blog.az22c.top/2020/09/04/vue2-src-code-222-computed-n-watch/</url>
+      <url>https://az22c.gitee.io/2020/09/04/vue2-src-code-222-computed-n-watch/</url>
       <content type="html"><![CDATA[<p>《数据劫持之computed和watch的具体源码》：</p>
 <p>这一篇是【附录】，比较细地记录computed和watch具体的执行过程。其实还是有利于理解依赖收集和派发更新具体是什么时候发生了，能和 mvvm “首次构建” 和 “重新渲染” 的流程结合起来看。</p>
 <p>说是附录，其实如果掌握了其中一些核心的时间点，对于对vue的源码理解是有帮助的。</p>
@@ -1538,7 +1538,7 @@ initProvide(vm) // resolve provide after data/props
     
     <entry>
       <title><![CDATA[【4-3】响应式原理 之 数据劫持之observe的细节]]></title>
-      <url>https://blog.az22c.top/2020/09/04/vue2-src-code-221-deepin-observe/</url>
+      <url>https://az22c.gitee.io/2020/09/04/vue2-src-code-221-deepin-observe/</url>
       <content type="html"><![CDATA[<p>《数据劫持之observe的细节》：</p>
 <p>之前一个章节讲数据劫持，主要是讲 defineReactive，以支持理解整个宏观的流程。</p>
 <p>这里特别讲 observe 和其所调用的 Observer构造函数，就是想探讨一下<strong>细节和各种特殊情况</strong>的。</p>
@@ -1703,7 +1703,7 @@ initProvide(vm) // resolve provide after data/props
     
     <entry>
       <title><![CDATA[【4-2】响应式原理 之 数据劫持]]></title>
-      <url>https://blog.az22c.top/2020/09/04/vue2-src-code-220-data-hijack/</url>
+      <url>https://az22c.gitee.io/2020/09/04/vue2-src-code-220-data-hijack/</url>
       <content type="html"><![CDATA[<p><strong>响应式原理 = 数据劫持 + 观察者模式</strong>。另，我们知道可以用数据劫持实现数据代理。即：响应式原理不是全包含了数据劫持。</p>
 <a id="more"></a>
 <ul>
@@ -1839,7 +1839,7 @@ export function defineReactive (
     
     <entry>
       <title><![CDATA[【4-1】响应式原理 之 观察者模式]]></title>
-      <url>https://blog.az22c.top/2020/09/04/vue2-src-code-21-observe-mode/</url>
+      <url>https://az22c.gitee.io/2020/09/04/vue2-src-code-21-observe-mode/</url>
       <content type="html"><![CDATA[<p>Vue2的响应式原理，网上的资料太多了。这篇主要是把脉络梳理清楚，并且明确一些核心的概念是怎么实现的。比如依赖收集和派发更新具体指的是什么，还有一些细节处理，才造就了 Vue的合理运作。</p>
 <p>总之，<strong>响应式原理 = 数据劫持 + 观察者模式 = 依赖收集 + 派发更新 = defineReactive + 同时存在Dep.target</strong></p>
 <a id="more"></a>
@@ -2043,7 +2043,7 @@ export default class Watcher {
     
     <entry>
       <title><![CDATA[Vue2源码【3】patch的原理]]></title>
-      <url>https://blog.az22c.top/2020/09/04/vue2-src-code-12-patch/</url>
+      <url>https://az22c.gitee.io/2020/09/04/vue2-src-code-12-patch/</url>
       <content type="html"><![CDATA[<p><strong>从最高视角看：</strong> 已知patch阶段也是 vm.$mount 下的逻辑，但从patch这里开始，首次构建阶段和“数据变化驱动视图改变update阶段”的逻辑才开始明显出现区别。所以单独拿出一个章节来讲patch。</p>
 <p><strong>从源码层面看：</strong> 可搜索<code>return function patch (oldVnode, vnode, hydrating, removeOnly)</code>，找到patch函数的源码。而 patch 函数，实际是由 createPatchFunction 这个工厂函数所返回的：createPatchFunction利用闭包，为 patch 缓存了一些对应运行环境的接口。因此 createPatchFunction 的具体实现先可以不用看，后面也会讲到。</p>
 <a id="more"></a>
@@ -2138,7 +2138,7 @@ export default class Watcher {
     
     <entry>
       <title><![CDATA[Vue2源码【2】Vue MVVM 的工作流程]]></title>
-      <url>https://blog.az22c.top/2020/09/04/vue2-src-code-11-mvvm/</url>
+      <url>https://az22c.gitee.io/2020/09/04/vue2-src-code-11-mvvm/</url>
       <content type="html"><![CDATA[<p>整个 Vue 的运作其实始于 <code>import Vue from 'vue'</code> 执行的那一刻，一开始只是执行一些准备工作，然后到 <code>new Vue</code> 才开始执行核心的流程，也就是开始构建 MVVM。</p>
 <p>在上一篇博客有讲到， MVVM 其实就可以划分为2个阶段，“首次构建”+“重新渲染”。之所以会有“重新渲染”，是因为利用了响应式原理，当数据变化时需要重新渲染，还有强制重新渲染也是类似的。</p>
 <a id="more"></a>
@@ -2265,7 +2265,7 @@ Vue.prototype.$mount = function () {
     
     <entry>
       <title><![CDATA[Vue2源码【1】Vue 的整体架构]]></title>
-      <url>https://blog.az22c.top/2020/09/04/vue2-src-code-00-data-drive/</url>
+      <url>https://az22c.gitee.io/2020/09/04/vue2-src-code-00-data-drive/</url>
       <content type="html"><![CDATA[<p>本系列文章，主要是梳理一下 Vue 2.x 源码的一些脉络和总结一些值得学习的点。并不是像同话题下的文章带读者从0到1读懂源码。</p>
 <p>如题首先讲讲 Vue 的整体架构。</p>
 <a id="more"></a>
@@ -2326,7 +2326,7 @@ Vue.prototype.$mount = function () {
     
     <entry>
       <title><![CDATA[Vue-Router3源码拾遗【6】配套组件的实现]]></title>
-      <url>https://blog.az22c.top/2020/09/02/vue-router3-src-code-6-component/</url>
+      <url>https://az22c.gitee.io/2020/09/02/vue-router3-src-code-6-component/</url>
       <content type="html"><![CDATA[<p>如下面章节标题所示：router-view 首次渲染和重新渲染的原理 和 router-link 的原理。</p>
 <p>至此，vue-router3 源码系列文章，完结。</p>
 <a id="more"></a>
@@ -2543,7 +2543,7 @@ Vue.prototype.$mount = function () {
     
     <entry>
       <title><![CDATA[Vue-Router3源码拾遗【5】改变url]]></title>
-      <url>https://blog.az22c.top/2020/09/02/vue-router3-src-code-5-api-n-url/</url>
+      <url>https://az22c.gitee.io/2020/09/02/vue-router3-src-code-5-api-n-url/</url>
       <content type="html"><![CDATA[<p>上一篇文章已经介绍了核心模块。这篇文章介绍外围的提供给用户的 api 是怎么实现的，还有如何将变化同步到浏览器 url 的。</p>
 <p>对于外围 api，会考虑兼容降级调用浏览器提供的 BOM api，所以先要对这部分知识有一个基本的理解，可以参考本系列文章的第一篇。</p>
 <p>这部分代码是真的难读，<code>某某某.push</code>、<code>某某某.history</code>满屏幕都是，字段名又是命名得类似而且一词用于多义，有时候都分不清谁是谁了。再者考虑了兼容性问题，就算是搜出来的字段，经常不知道要点进哪个文件去看。</p>
@@ -2678,7 +2678,7 @@ export function replaceState (url?: string) {
     
     <entry>
       <title><![CDATA[【4运作核心】路径切换和路由守卫]]></title>
-      <url>https://blog.az22c.top/2020/09/02/vue-router3-src-code-4-switch-n-guard/</url>
+      <url>https://az22c.gitee.io/2020/09/02/vue-router3-src-code-4-switch-n-guard/</url>
       <content type="html"><![CDATA[<p>如果没有处理路径切换，整个路由器就没法运作，就跟没用一样。可见路径切换模块在其中的核心地位。</p>
 <p>讲到“路径切换”，<code>history.transitionTo</code>是位于内部的核心。也就是绝大多数提供给用户的函数，最终都会执行到这里，开启路径切换的流程。</p>
 <p>其间值得注意的是，利用迭代器设计模式，可简洁实现路由守卫，是非常巧妙的代码设计，会提前详细介绍。</p>
@@ -2888,7 +2888,7 @@ function iterator (fn, next) {
     
     <entry>
       <title><![CDATA[Vue-Router3源码拾遗【3】matcher匹配器]]></title>
-      <url>https://blog.az22c.top/2020/09/02/vue-router3-src-code-3-matcher/</url>
+      <url>https://az22c.gitee.io/2020/09/02/vue-router3-src-code-3-matcher/</url>
       <content type="html"><![CDATA[<p>方法论：只要明白了某个模块的目的或者功能(或者函数签名、函数参数和返回)，在多数情况下都不用关心其繁杂的具体实现。</p>
 <p>以本文内容为例，只要掌握了核心模块<code>createMatcher</code>函数，及其返回的方法<code>matcher.match</code> 二者的作用和原理，就能理清相关模块的整体架构。</p>
 <p>再后面就是枯燥的具体实现。如果你也想实现一个前端路由库并且想参考其源码，后半部分姑且可以当做字段字典来查阅。</p>
@@ -3069,7 +3069,7 @@ function iterator (fn, next) {
     
     <entry>
       <title><![CDATA[【2】路由注册和VueRouter实例]]></title>
-      <url>https://blog.az22c.top/2020/09/02/vue-router3-src-code-2-instance/</url>
+      <url>https://az22c.gitee.io/2020/09/02/vue-router3-src-code-2-instance/</url>
       <content type="html"><![CDATA[<p>如果明白了上一篇文章，Vue-Router的核心原理，那么这一篇就没啥好看的，初始化和实例化工作，就是根据原理来枯燥地具体实现还有edge case的处理。</p>
 <p>枯燥预警！！！笔者也没挖掘出什么看点，如果你也想实现一个前端路由库并且想参考其源码，姑且可以当做字段字典来查阅。</p>
 <a id="more"></a>
@@ -3159,7 +3159,7 @@ function iterator (fn, next) {
     
     <entry>
       <title><![CDATA[Vue-Router3源码拾遗【1】概述]]></title>
-      <url>https://blog.az22c.top/2020/09/02/vue-router3-src-code-1-overview/</url>
+      <url>https://az22c.gitee.io/2020/09/02/vue-router3-src-code-1-overview/</url>
       <content type="html"><![CDATA[<p>若要深挖 Vue-Router 的源码，代码真的是又臭又长。本系列依旧提取源码中的核心原理并且尽量用文本概括繁杂的逻辑流程。</p>
 <p>Vue-Router 实际上只适用于单页应用(其实这个结论是可以推理出来的)。而像 Nuxt 之类的看似是用到了 Vue-Router 且像是多页的，实际上是它们是用到了多个 Vue-Router。记住单页与多页的区分，这个区分贯穿了本文的脉络。</p>
 <a id="more"></a>
@@ -3342,7 +3342,7 @@ function iterator (fn, next) {
     
     <entry>
       <title><![CDATA[03-跨域通信和跨tab通信]]></title>
-      <url>https://blog.az22c.top/2020/05/22/cross-origin-cross-tab/</url>
+      <url>https://az22c.gitee.io/2020/05/22/cross-origin-cross-tab/</url>
       <content type="html"><![CDATA[<p>上一篇文章介绍了什么是“跨域”和“跨站”。可知，“同站”通信也是“跨域”的一种途径。</p>
 <p>这次列举一下跨域通信的方法，同时对跨tab通信有启发性价值。</p>
 <p>因为前人总结得实在是太齐全了！这里只是做到基本列举齐全，然后做一些小小的补充。</p>
@@ -3473,7 +3473,7 @@ function iterator (fn, next) {
     
     <entry>
       <title><![CDATA[02-第三方cookie(注：将被禁用)]]></title>
-      <url>https://blog.az22c.top/2020/05/22/cross-origin-cross-site-cookie/</url>
+      <url>https://az22c.gitee.io/2020/05/22/cross-origin-cross-site-cookie/</url>
       <content type="html"><![CDATA[<p>简要解释第三方cookie的原理和相关属性。</p>
 <a id="more"></a>
 <blockquote>
@@ -3572,11 +3572,11 @@ function iterator (fn, next) {
             
             <tag> 跨站 </tag>
             
+            <tag> Cookie </tag>
+            
             <tag> 面试题 </tag>
             
             <tag> 笔记副本 </tag>
-            
-            <tag> Cookie </tag>
             
         </tags>
         
@@ -3584,7 +3584,7 @@ function iterator (fn, next) {
     
     <entry>
       <title><![CDATA[01-跨域和跨站的基本概念]]></title>
-      <url>https://blog.az22c.top/2020/05/22/cross-origin-cross-site/</url>
+      <url>https://az22c.gitee.io/2020/05/22/cross-origin-cross-site/</url>
       <content type="html"><![CDATA[<p>介绍一下跨域和跨站的基本概念。</p>
 <a id="more"></a>
 <h2 id="一级域名-二级域名-三级域名"><a class="header-anchor" href="#一级域名-二级域名-三级域名"></a>一级域名 二级域名  三级域名</h2>
@@ -3632,7 +3632,7 @@ function iterator (fn, next) {
     
     <entry>
       <title><![CDATA[面试题：改造代码，使之隔秒输出0 - 9]]></title>
-      <url>https://blog.az22c.top/2020/04/02/settimeout-0-to-9/</url>
+      <url>https://az22c.gitee.io/2020/04/02/settimeout-0-to-9/</url>
       <content type="html"><![CDATA[<p>通过一道面试题，文末总结一下js【变量快照】和【缓存变量值】的手法。原题考察的是对js作用域和对setTimeout api的理解，在本文主要给出5种解法。</p>
 <a id="more"></a>
 <hr>
@@ -3903,7 +3903,7 @@ for (var i = 0; i &lt; 10; i++) {
     
     <entry>
       <title><![CDATA[Vue-lazyload 原理和使用 个人总结]]></title>
-      <url>https://blog.az22c.top/2020/04/02/vue-lazyload-summary/</url>
+      <url>https://az22c.gitee.io/2020/04/02/vue-lazyload-summary/</url>
       <content type="html"><![CDATA[<p>Vue-lazyload 这个话题，可谓“前人之述备矣”。这里主要写写一些我认为比较重要的点，能够快速回顾这个“第三方组件”的原理和使用方法。</p>
 <a id="more"></a>
 <hr>
@@ -4022,7 +4022,7 @@ for (var i = 0; i &lt; 10; i++) {
     
     <entry>
       <title><![CDATA[深入理解文字高度和行高的设置]]></title>
-      <url>https://blog.az22c.top/2019/02/06/height-calculate/</url>
+      <url>https://az22c.gitee.io/2019/02/06/height-calculate/</url>
       <content type="html"><![CDATA[<p>font-size设置的是什么?line-height设置的是什么?各种行高是怎么计算出来的?你真的知道吗?</p>
 <a id="more"></a>
 <h2 id="从font-size讲起-说文字高度："><a class="header-anchor" href="#从font-size讲起-说文字高度："></a>从font-size讲起，说文字高度：</h2>
@@ -4219,7 +4219,7 @@ for (var i = 0; i &lt; 10; i++) {
     
     <entry>
       <title><![CDATA[vertical-align:middle近似居中和完美居中]]></title>
-      <url>https://blog.az22c.top/2019/02/05/vertical-align-middle/</url>
+      <url>https://az22c.gitee.io/2019/02/05/vertical-align-middle/</url>
       <content type="html"><![CDATA[<p>很多人想要垂直居中的时候，第一时间就想到了<code>vertical-align:middle</code>，用完之后，疑惑它怎么会无效呢?</p>
 <p>——原来<code>vertical-align</code> 是有适用范围的限制的。</p>
 <p>因为水平垂直居中直接就包括了垂直居中，本文直接给出水平垂直居中的例子，并说明其中垂直居中的原理。</p>
@@ -4491,7 +4491,7 @@ i {
     
     <entry>
       <title><![CDATA[总结：使单一对象水平/垂直居中]]></title>
-      <url>https://blog.az22c.top/2019/02/05/centralize-one-ele/</url>
+      <url>https://az22c.gitee.io/2019/02/05/centralize-one-ele/</url>
       <content type="html"><![CDATA[<p>明白单一对象的水平/垂直居中的写法和原理，有助于我们构造更加复杂的居中布局。</p>
 <p>我们按照居中的“里面的内容”来分类，展开全文：</p>
 <a id="more"></a>
@@ -4829,7 +4829,7 @@ i {
     
     <entry>
       <title><![CDATA[到底什么是函数式编程 精简总结]]></title>
-      <url>https://blog.az22c.top/2018/02/05/js-functional-intro/</url>
+      <url>https://az22c.gitee.io/2018/02/05/js-functional-intro/</url>
       <content type="html"><![CDATA[<p>此文用于快速回顾，不适合用来入门。</p>
 <p>到底什么是函数式编程？我将分别用一段话来总结其 特点 和 作用。</p>
 <a id="more"></a>
@@ -4955,7 +4955,7 @@ MMM.prototype.map = function(func) {
     
     <entry>
       <title><![CDATA[Web前端性能优化概述]]></title>
-      <url>https://blog.az22c.top/2018/02/04/performance-optimized-summary/</url>
+      <url>https://az22c.gitee.io/2018/02/04/performance-optimized-summary/</url>
       <content type="html"><![CDATA[<p>此文用于快速回顾，不适合用来入门。如果想做一个系统性的归纳总结、以便查询，可以参考以下概述。</p>
 <a id="more"></a>
 <h2 id="性能优化的指导思想："><a class="header-anchor" href="#性能优化的指导思想："></a>性能优化的指导思想：</h2>
@@ -5170,7 +5170,7 @@ MMM.prototype.map = function(func) {
     
     <entry>
       <title><![CDATA[git暂存区知识梳理]]></title>
-      <url>https://blog.az22c.top/2017/10/12/git-stage/</url>
+      <url>https://az22c.gitee.io/2017/10/12/git-stage/</url>
       <content type="html"><![CDATA[<p>暂存区是git的一个重要概念，经过了一段时间的项目实践，总结一下个人对暂存区的一些理解。</p>
 <p>当我们开始对git的一些知识进行梳理的时候，可以盗用以下这张图：</p>
 <a id="more"></a>
@@ -5290,7 +5290,7 @@ git push               ::::将 本地分支的变化 同步到远程分支
     
     <entry>
       <title><![CDATA[三栏式布局--IFE2017-CSS-task03笔记]]></title>
-      <url>https://blog.az22c.top/2017/09/17/ife-css-task03/</url>
+      <url>https://az22c.gitee.io/2017/09/17/ife-css-task03/</url>
       <content type="html"><![CDATA[<p>对应代码的github仓库的地址：<a href="https://github.com/AlexZhong22c/IFE-CSS-learning" target="_blank" rel="noopener">https://github.com/AlexZhong22c/IFE-CSS-learning</a></p>
 <a id="more"></a>
 <blockquote>
@@ -5421,7 +5421,7 @@ git push               ::::将 本地分支的变化 同步到远程分支
     
     <entry>
       <title><![CDATA[border-radius属性]]></title>
-      <url>https://blog.az22c.top/2017/09/07/css-border1/</url>
+      <url>https://az22c.gitee.io/2017/09/07/css-border1/</url>
       <content type="html"><![CDATA[<p>border-radius，作为CSS3中经常被用及的属性，我们用一篇文章做一下总结。</p>
 <a id="more"></a>
 <p>先给出一个div作为演示用：</p>
@@ -5557,11 +5557,11 @@ border-bottom-left-radius: 44px 88px;
         
         <tags>
             
+            <tag> 回顾 </tag>
+            
             <tag> radius </tag>
             
             <tag> 边框 </tag>
-            
-            <tag> 回顾 </tag>
             
         </tags>
         
@@ -5569,7 +5569,7 @@ border-bottom-left-radius: 44px 88px;
     
     <entry>
       <title><![CDATA[对象属性的操作]]></title>
-      <url>https://blog.az22c.top/2017/09/03/js-obj-prop1/</url>
+      <url>https://az22c.gitee.io/2017/09/03/js-obj-prop1/</url>
       <content type="html"><![CDATA[<p>类似于“增删改查”的基本操作，属性操作可分为属性查询、属性设置、属性删除，还包括属性继承。</p>
 <a id="more"></a>
 <h2 id="属性查询"><a class="header-anchor" href="#属性查询"></a>属性查询</h2>
@@ -5865,7 +5865,7 @@ console.log(Object.getOwnPropertyNames(obj));//['c','b']
     
     <entry>
       <title><![CDATA[对象属性描述符]]></title>
-      <url>https://blog.az22c.top/2017/09/02/js-obj-prop2/</url>
+      <url>https://az22c.gitee.io/2017/09/02/js-obj-prop2/</url>
       <content type="html"><![CDATA[<p>对于操作系统中的文件，我们可以驾轻就熟将其设置为只读、隐藏、系统文件或普通文件。</p>
 <p>于对象来说，属性描述符提供类似的功能，用来描述对象的值、是否可配置、是否可修改以及是否可枚举。</p>
 <a id="more"></a>
@@ -6167,7 +6167,7 @@ console.log(o.a);//undefined
     
     <entry>
       <title><![CDATA[对象属性之对象状态]]></title>
-      <url>https://blog.az22c.top/2017/09/01/js-obj-prop3/</url>
+      <url>https://az22c.gitee.io/2017/09/01/js-obj-prop3/</url>
       <content type="html"><![CDATA[<p>我们知道，属性描述符只能用来控制对象中一个属性的状态。而如果要控制对象的状态，就要用到下面的6种方法：</p>
 <a id="more"></a>
 <blockquote>
@@ -6294,7 +6294,7 @@ console.log(Object.getOwnPropertyDescriptor(o,'a'));
     
     <entry>
       <title><![CDATA[es5实现继承的6种方式]]></title>
-      <url>https://blog.az22c.top/2017/08/12/js-inherit/</url>
+      <url>https://az22c.gitee.io/2017/08/12/js-inherit/</url>
       <content type="html"><![CDATA[<p>对关于继承的内容做一番整理。是早期编写的文章，直接看到最后的结论即可。后面可以优化一下行文的思路。</p>
 <a id="more"></a>
 <p>把结论图拷贝放到本文的最前面：</p>
@@ -6612,11 +6612,11 @@ instance2.sayName();//&quot;hu&quot;
         
         <tags>
             
-            <tag> 原理 </tag>
-            
             <tag> 面向对象 </tag>
             
             <tag> 原型系统 </tag>
+            
+            <tag> 原理 </tag>
             
         </tags>
         
@@ -6624,7 +6624,7 @@ instance2.sayName();//&quot;hu&quot;
     
     <entry>
       <title><![CDATA[new创建对象的过程发生了什么]]></title>
-      <url>https://blog.az22c.top/2017/08/12/js-new-happen/</url>
+      <url>https://az22c.gitee.io/2017/08/12/js-new-happen/</url>
       <content type="html"><![CDATA[<p>用面向对象语言们通用的观点来看：new 是用来实例化一个类，从而在内存中分配一个实例对象。</p>
 <a id="more"></a>
 <p>我们通过一个例子来讨论<strong>new的过程中发生了什么</strong> ：</p>
@@ -6729,7 +6729,7 @@ john instanceof Person; //true
     
     <entry>
       <title><![CDATA[原型对象 实战使用]]></title>
-      <url>https://blog.az22c.top/2017/08/09/js-prototype-practice/</url>
+      <url>https://az22c.gitee.io/2017/08/09/js-prototype-practice/</url>
       <content type="html"><![CDATA[<p>一般地，javascript使用构造函数和原型对象来进行面向对象编程，它们的表现与其他面向对象编程语言中的“类”相似而又不同。</p>
 <p>在 <a href="/2017/08/08/js-proto/">上一篇文章</a> 已经做过对 构造函数 和 原型对象 的简单介绍。在这篇文章主要介绍使用实战，你可不要小看“实战”，坑点还是挺多的。</p>
 <a id="more"></a>
@@ -6904,7 +6904,7 @@ console.log(Foo.prototype.constructor === Foo);//false
     
     <entry>
       <title><![CDATA[理解prototype、__proto__和constructor等关系]]></title>
-      <url>https://blog.az22c.top/2017/08/08/js-proto/</url>
+      <url>https://az22c.gitee.io/2017/08/08/js-proto/</url>
       <content type="html"><![CDATA[<p>理解对象和函数的prototype、__proto__和constructor等关系：</p>
 <a id="more"></a>
 <p>结论在本文的最后。</p>
@@ -7058,7 +7058,7 @@ var f1 = new Foo;
     
     <entry>
       <title><![CDATA[this绑定的优先级]]></title>
-      <url>https://blog.az22c.top/2017/08/07/js-this2/</url>
+      <url>https://az22c.gitee.io/2017/08/07/js-this2/</url>
       <content type="html"><![CDATA[<p>上一篇文章详细介绍过 this的4种绑定规则，那如果在函数的调用位置上同时存在两种以上的绑定规则应该怎么办呢？本文将介绍this绑定的优先级：</p>
 <a id="more"></a>
 <h2 id="显式绑定-pk-隐式绑定"><a class="header-anchor" href="#显式绑定-pk-隐式绑定"></a>显式绑定 pk 隐式绑定</h2>
@@ -7140,7 +7140,7 @@ console.log( baz.a ); // 3
     
     <entry>
       <title><![CDATA[结合this的4种绑定规则 深入理解this指向的判定]]></title>
-      <url>https://blog.az22c.top/2017/08/07/js-this/</url>
+      <url>https://az22c.gitee.io/2017/08/07/js-this/</url>
       <content type="html"><![CDATA[<p>此文适合用于进阶对this的理解，不适合用来入门。</p>
 <a id="more"></a>
 <h2 id="概述"><a class="header-anchor" href="#概述"></a>概述</h2>
@@ -7642,9 +7642,9 @@ displayColor.call(null);//TypeError: Cannot read property 'color' of null
             
             <tag> IIFE </tag>
             
-            <tag> 闭包 </tag>
-            
             <tag> this </tag>
+            
+            <tag> 闭包 </tag>
             
         </tags>
         
@@ -7652,7 +7652,7 @@ displayColor.call(null);//TypeError: Cannot read property 'color' of null
     
     <entry>
       <title><![CDATA[浏览器事件冒泡或者捕获相关]]></title>
-      <url>https://blog.az22c.top/2017/07/02/js-event4/</url>
+      <url>https://az22c.gitee.io/2017/07/02/js-event4/</url>
       <content type="html"><![CDATA[<p>此文用于快速回顾，不适合用来入门。</p>
 <a id="more"></a>
 <h2 id="事件流-事件捕获或者冒泡相关"><a class="header-anchor" href="#事件流-事件捕获或者冒泡相关"></a>事件流（事件捕获或者冒泡相关）</h2>
@@ -7779,9 +7779,9 @@ var currentTarget = event.currentTarget;
             
             <tag> 笔记副本 </tag>
             
-            <tag> 回顾 </tag>
-            
             <tag> 基础 </tag>
+            
+            <tag> 回顾 </tag>
             
             <tag> 事件 </tag>
             
@@ -7791,7 +7791,7 @@ var currentTarget = event.currentTarget;
     
     <entry>
       <title><![CDATA[js四种事件处理程序]]></title>
-      <url>https://blog.az22c.top/2017/07/01/js-event3/</url>
+      <url>https://az22c.gitee.io/2017/07/01/js-event3/</url>
       <content type="html"><![CDATA[<p>随着W3C不断推进DOM事件模型和IE浏览器事件模型的历史变化，为了方便理解，程序员们中逐渐形成 四种事件处理程序 的概念划分。</p>
 <a id="more"></a>
 <hr>
@@ -7932,9 +7932,9 @@ element.removeEventListener('click', fun, false);
         
         <tags>
             
-            <tag> 回顾 </tag>
-            
             <tag> 基础 </tag>
+            
+            <tag> 回顾 </tag>
             
             <tag> 事件 </tag>
             
@@ -7944,7 +7944,7 @@ element.removeEventListener('click', fun, false);
     
     <entry>
       <title><![CDATA[考古：js取消默认事件行为]]></title>
-      <url>https://blog.az22c.top/2017/07/01/js-pv-default/</url>
+      <url>https://az22c.gitee.io/2017/07/01/js-pv-default/</url>
       <content type="html"><![CDATA[<p>常见的默认行为有，点击<code>a</code>标签链接后，浏览器跳转到指定页面；再比如<code>&lt;form&gt;</code>表单元素的&quot;submit&quot;事件。</p>
 <a id="more"></a>
 <blockquote>
@@ -8070,9 +8070,9 @@ test.onclick= function(e){
         
         <tags>
             
-            <tag> 回顾 </tag>
-            
             <tag> 基础 </tag>
+            
+            <tag> 回顾 </tag>
             
             <tag> 事件 </tag>
             
@@ -8082,7 +8082,7 @@ test.onclick= function(e){
     
     <entry>
       <title><![CDATA[let和const变量声明的特点]]></title>
-      <url>https://blog.az22c.top/2017/05/08/let-n-const/</url>
+      <url>https://az22c.gitee.io/2017/05/08/let-n-const/</url>
       <content type="html"><![CDATA[<p>本文的结构是：前文就是一个完整的内容提炼；后文是作为拓展和详细的介绍：</p>
 <a id="more"></a>
 <hr>
@@ -8257,9 +8257,9 @@ MY_ARRAY = ['B']
             
             <tag> 作用域 </tag>
             
-            <tag> ES6 </tag>
-            
             <tag> 闭包 </tag>
+            
+            <tag> ES6 </tag>
             
             <tag> 任务队列 </tag>
             
@@ -8269,7 +8269,7 @@ MY_ARRAY = ['B']
     
     <entry>
       <title><![CDATA[JavaScript Date对象回顾]]></title>
-      <url>https://blog.az22c.top/2017/05/07/js-date/</url>
+      <url>https://az22c.gitee.io/2017/05/07/js-date/</url>
       <content type="html"><![CDATA[<p>此文用于快速回顾，不适合用来入门。</p>
 <p>Date 对象：涉及基于1970年1月1日(世界标准时间)起的毫秒数。</p>
 <a id="more"></a>
@@ -8365,7 +8365,7 @@ d.toUTCString()
     
     <entry>
       <title><![CDATA[纯vue实现checkbox父子联动]]></title>
-      <url>https://blog.az22c.top/2017/05/07/vue-checkbox-table/</url>
+      <url>https://az22c.gitee.io/2017/05/07/vue-checkbox-table/</url>
       <content type="html"><![CDATA[<p>对应代码的github仓库的地址：<a href="https://github.com/AlexZhong22c/vue-checkbox-table" target="_blank" rel="noopener">https://github.com/AlexZhong22c/vue-checkbox-table</a></p>
 <p><a href="https://alexzhong22c.github.io/vue-checkbox-table/vue-checkbox-table.html" target="_blank" rel="noopener">demo</a> (在线演示初次加载会有点慢，请稍等)</p>
 <p>vue.js的出现，导致很多小插件的简单实现成为可能。</p>
@@ -8433,7 +8433,7 @@ d.toUTCString()
     
     <entry>
       <title><![CDATA[经典vue单页路由入门全家桶]]></title>
-      <url>https://blog.az22c.top/2017/04/25/vue-time-tracker/</url>
+      <url>https://az22c.gitee.io/2017/04/25/vue-time-tracker/</url>
       <content type="html"><![CDATA[<p>vue-cli + vue2 + vue-router + axios + vuex2 + express + mongoose</p>
 <p>一个简单的ToDoList——经典vue单页路由入门全家桶，我在大神们demo的基础上不断地改进。</p>
 <p>对应代码的github仓库的地址：<a href="https://github.com/AlexZhong22c/vue-time-tracker" target="_blank" rel="noopener">https://github.com/AlexZhong22c/vue-time-tracker</a></p>
@@ -8509,7 +8509,7 @@ d.toUTCString()
 </code></pre>
 <p>此后，当我们调试或者打包项目的时候就不会因为这个new语法报错。</p>
 <p>如果你想要了解各个eslint配置的含义，强烈推荐去 <a href="http://eslint.cn/" target="_blank" rel="noopener">eslint中文官网</a> 在官网用搜索栏一搜就能查到含义。</p>
-<p>另外，可以看到这个demo的eslint配置主要是在引入 <em>eslint-config-standard</em> 的基础上稍稍修改的，其他的配置如果你不想浪费时间在自定义上，你可以参考我的博文：<a href="https://blog.az22c.top/2017/03/11/try-eslint/">https://blog.az22c.top/2017/03/11/try-eslint/</a></p>
+<p>另外，可以看到这个demo的eslint配置主要是在引入 <em>eslint-config-standard</em> 的基础上稍稍修改的，其他的配置如果你不想浪费时间在自定义上，你可以参考我的博文：<a href="https://az22c.gitee.io/2017/03/11/try-eslint/">https://az22c.gitee.io/2017/03/11/try-eslint/</a></p>
 <h3 id="app-vue文件"><a class="header-anchor" href="#app-vue文件"></a>App.vue文件</h3>
 <ul>
 <li><code>main.js</code>将会作为我们应用的入口文件而<code>App.vue</code>会作为我们应用的初始化组件</li>
@@ -8761,7 +8761,7 @@ methods: {
     
     <entry>
       <title><![CDATA[按条目展示表格数据小插件]]></title>
-      <url>https://blog.az22c.top/2017/04/15/vue-table-nav/</url>
+      <url>https://az22c.gitee.io/2017/04/15/vue-table-nav/</url>
       <content type="html"><![CDATA[<p>对应代码的github仓库的地址：<a href="https://github.com/AlexZhong22c/vue-table-nav" target="_blank" rel="noopener">https://github.com/AlexZhong22c/vue-table-nav</a></p>
 <p><a href="https://alexzhong22c.github.io/vue-table-nav/vue-table-nav.html" target="_blank" rel="noopener">demo</a> (在线演示初次加载会有点慢，请稍等)</p>
 <a id="more"></a>
@@ -8815,7 +8815,7 @@ methods: {
     
     <entry>
       <title><![CDATA[闭合浮动]]></title>
-      <url>https://blog.az22c.top/2017/04/01/clearfix-n-bfc/</url>
+      <url>https://az22c.gitee.io/2017/04/01/clearfix-n-bfc/</url>
       <content type="html"><![CDATA[<p>本文介绍闭合浮动，和对比两种“利用伪元素闭合浮动”的方案。</p>
 <a id="more"></a>
 <blockquote>
@@ -8940,7 +8940,7 @@ content:&quot;.&quot;; display:block; height:0; visibility:hidden; clear:both; }
     
     <entry>
       <title><![CDATA[IFE2017-CSS-task02笔记]]></title>
-      <url>https://blog.az22c.top/2017/04/01/ife-css-task02/</url>
+      <url>https://az22c.gitee.io/2017/04/01/ife-css-task02/</url>
       <content type="html"><![CDATA[<p>对应代码的github仓库的地址：<a href="https://github.com/AlexZhong22c/IFE-CSS-learning" target="_blank" rel="noopener">https://github.com/AlexZhong22c/IFE-CSS-learning</a></p>
 <p>这篇文章的内容基本没有用在 <a href="https://ife-css-learning.az22c.vercel.app/task02.html" target="_blank" rel="noopener">demo</a> 中，这只是一番拓展性总结。</p>
 <a id="more"></a>
@@ -9040,7 +9040,7 @@ content:&quot;.&quot;; display:block; height:0; visibility:hidden; clear:both; }
     
     <entry>
       <title><![CDATA[CSS选择器优先级]]></title>
-      <url>https://blog.az22c.top/2017/03/31/css-selectors-specificity/</url>
+      <url>https://az22c.gitee.io/2017/03/31/css-selectors-specificity/</url>
       <content type="html"><![CDATA[<p>CSS优先级计算的快速回顾，最后附上一些应用知识的实例。</p>
 <a id="more"></a>
 <h2 id="计算特殊性值的情况"><a class="header-anchor" href="#计算特殊性值的情况"></a>计算特殊性值的情况</h2>
@@ -9170,7 +9170,7 @@ p {
     
     <entry>
       <title><![CDATA[H5新标签和被H5拥抱的老元素们]]></title>
-      <url>https://blog.az22c.top/2017/03/28/h5-new-ele/</url>
+      <url>https://az22c.gitee.io/2017/03/28/h5-new-ele/</url>
       <content type="html"><![CDATA[<p>事实上，所有元素都能被归类为几个 元素内容模型（content model），详情请参考MDN：</p>
 <p><a href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/HTML/Content_categories" target="_blank" rel="noopener">https://developer.mozilla.org/zh-CN/docs/Web/Guide/HTML/Content_categories</a></p>
 <p>这里不大谈内容模型，只不过按照这种思路划分我们的元素，谈谈那些比较广为接受的HTML5新元素和那些被HTML5拥抱的老元素。</p>
@@ -9424,7 +9424,7 @@ p {
     
     <entry>
       <title><![CDATA[IFE2017-CSS-task01笔记]]></title>
-      <url>https://blog.az22c.top/2017/03/27/ife-css-task01/</url>
+      <url>https://az22c.gitee.io/2017/03/27/ife-css-task01/</url>
       <content type="html"><![CDATA[<p>因为大家对html代码不是很重视，所以整理了一些容易忽略的问题并且对一些知识点作了梳理。</p>
 <p>对应代码的github仓库的地址：<a href="https://github.com/AlexZhong22c/IFE-CSS-learning" target="_blank" rel="noopener">https://github.com/AlexZhong22c/IFE-CSS-learning</a></p>
 <p>task01其实就是对HTML的学习，对应的代码其实就是task02的<a href="https://ife-css-learning.az22c.vercel.app/task02.html" target="_blank" rel="noopener">demo</a>的HTML部分。</p>
@@ -9507,9 +9507,9 @@ p {
             
             <tag> H5 </tag>
             
-            <tag> HTML </tag>
-            
             <tag> IFE </tag>
+            
+            <tag> HTML </tag>
             
         </tags>
         
@@ -9517,7 +9517,7 @@ p {
     
     <entry>
       <title><![CDATA[IIFE回顾]]></title>
-      <url>https://blog.az22c.top/2017/03/10/iife-intro/</url>
+      <url>https://az22c.gitee.io/2017/03/10/iife-intro/</url>
       <content type="html"><![CDATA[<p>此文用于快速回顾，不适合用来入门。</p>
 <a id="more"></a>
 <h2 id="定义"><a class="header-anchor" href="#定义"></a>定义</h2>
@@ -9634,7 +9634,7 @@ myModule.doOtherThing();
     
     <entry>
       <title><![CDATA[和margin有关的知识]]></title>
-      <url>https://blog.az22c.top/2017/03/04/about-margin/</url>
+      <url>https://az22c.gitee.io/2017/03/04/about-margin/</url>
       <content type="html"><![CDATA[<p>总结一下和margin有关的基本知识，属于必须了解的范畴。</p>
 <a id="more"></a>
 <h2 id="基本知识"><a class="header-anchor" href="#基本知识"></a>基本知识</h2>
@@ -9761,7 +9761,7 @@ myModule.doOtherThing();
     
     <entry>
       <title><![CDATA[桌面端和移动端图标的引入]]></title>
-      <url>https://blog.az22c.top/2017/02/27/icon-usage/</url>
+      <url>https://az22c.gitee.io/2017/02/27/icon-usage/</url>
       <content type="html"><![CDATA[<blockquote>
 <p>本文翻译自<a href="https://bitsofco.de/all-about-favicons-and-touch-icons/" target="_blank" rel="noopener">All About Favicons-bitsofcode</a> ：</p>
 </blockquote>
@@ -9939,7 +9939,7 @@ myModule.doOtherThing();
     
     <entry>
       <title><![CDATA[移动开发事件入门概述]]></title>
-      <url>https://blog.az22c.top/2017/02/25/webapp-events-intro/</url>
+      <url>https://az22c.gitee.io/2017/02/25/webapp-events-intro/</url>
       <content type="html"><![CDATA[<p>本文修改自 <a href="http://www.infoq.com/cn/articles/touch-pointer-event" target="_blank" rel="noopener">PPK的《移动Web手册》</a></p>
 <a id="more"></a>
 <h2 id="前言"><a class="header-anchor" href="#前言"></a>前言</h2>
@@ -10155,7 +10155,7 @@ Kinect，它将身体动作转换成屏幕动作。这样你可以用你的手�
     
     <entry>
       <title><![CDATA[移动开发入门概述]]></title>
-      <url>https://blog.az22c.top/2017/02/24/webapp-intro/</url>
+      <url>https://az22c.gitee.io/2017/02/24/webapp-intro/</url>
       <content type="html"><![CDATA[<p><strong>PPK的《移动Web手册》</strong> 是对移动Web现状（2014年夏）的一个系统检阅，市场上有不少公司将赌注放在HTML5上，因此对于HTML5在移动Web上的应用多有炒作，但实际上如何呢？看完本书能让你有个清醒的认识。</p>
 <p>移动浏览器虽然大都实现了桌面浏览器的功能，但实际上移动设备上的情况更加复杂，而且由于Android系统的碎片化直接导致浏览器的碎片化，它们对于一些和桌面不同情况的处理，以及一些最新特性的支持都是不尽相同的。</p>
 <p><strong>所以HTML5在移动Web上的兼容性目前是很差的，</strong> 还有像触摸事件向指针事件标准化的过渡，估计最少需要5-10年才能达到一个比较理想的状态。</p>
@@ -10349,7 +10349,7 @@ Kinect，它将身体动作转换成屏幕动作。这样你可以用你的手�
     
     <entry>
       <title><![CDATA[yelee主题改bug总结]]></title>
-      <url>https://blog.az22c.top/2017/02/22/my-hexo-theme/</url>
+      <url>https://az22c.gitee.io/2017/02/22/my-hexo-theme/</url>
       <content type="html"><![CDATA[<p>从找一个喜欢的hexo主题到修改好bug发布到博客上面，整个过程花了我不少时间，下面是对这个改bug过程中发现的小问题做的总结。</p>
 <p>此文无图。</p>
 <a id="more"></a>
@@ -10479,7 +10479,7 @@ Kinect，它将身体动作转换成屏幕动作。这样你可以用你的手�
     
     <entry>
       <title><![CDATA[ToDo小应用完工总结]]></title>
-      <url>https://blog.az22c.top/2017/02/17/todo-app/</url>
+      <url>https://az22c.gitee.io/2017/02/17/todo-app/</url>
       <content type="html"><![CDATA[<p>完成了百度IFE2015的 <a href="https://github.com/baidu-ife/ife/tree/master/2015_spring/task/task0003" target="_blank" rel="noopener">task3</a> ，实现了一个 ToDo 的单页应用，功能颇为强大。</p>
 <p>使用 localStorage 存储数据，JSON 模拟数据表，实现了分类和待办状态的改变，具有良好的交互体验。</p>
 <p>旧项目地址：<a href="https://github.com/AlexZhong22c/ToDoApp-IFE2015" target="_blank" rel="noopener">https://github.com/AlexZhong22c/ToDoApp-IFE2015</a></p>
@@ -10696,7 +10696,7 @@ function queryAllCates() {
     
     <entry>
       <title><![CDATA[相等操作符回顾]]></title>
-      <url>https://blog.az22c.top/2017/02/11/equality-operators/</url>
+      <url>https://az22c.gitee.io/2017/02/11/equality-operators/</url>
       <content type="html"><![CDATA[<p>最早的ECMAscript中的相等和不相等操作符会在执行比较之前，先将对象转换成相似的类型(即，强制转型)。</p>
 <p>后来有人对这种转换的合理性提出质疑。</p>
 <p>最后，ECMAcript的解决方案是提供两组操作符：</p>
@@ -10773,7 +10773,7 @@ true == 2 返回true
     
     <entry>
       <title><![CDATA[操作符回顾]]></title>
-      <url>https://blog.az22c.top/2017/02/11/js-operators/</url>
+      <url>https://az22c.gitee.io/2017/02/11/js-operators/</url>
       <content type="html"><![CDATA[<p>ECMAScript 操作符的与众不同之处在于，它们能适用于很多种基本数据类型的值，例如字符串、数字值、布尔值、甚至对象。</p>
 <p>不过，在应用于对象时，响应的操作符通常都会调用对象的valueOf()和（或）toString()方法，以便取得可以操作的值。</p>
 <a id="more"></a>
@@ -10875,7 +10875,7 @@ a || b : 将a, b转换为Boolean类型, 再执行逻辑或, true返回a, false�
     
     <entry>
       <title><![CDATA[font-face--CSS3]]></title>
-      <url>https://blog.az22c.top/2017/01/25/font-face/</url>
+      <url>https://az22c.gitee.io/2017/01/25/font-face/</url>
       <content type="html"><![CDATA[<p><code>@font-face</code>是一个css命令，用来导入服务器端字体，将该字体文件存放到 web 服务器上，它会在需要时被自动下载到用户的计算机上。因此本地浏览器浏览网页时，不需要设置字体，就可以自动看到@font-face设置的任何字体。</p>
 <p>如果你看到一些英文网站或blog看到一些很漂亮的自定义Web字体，比如说首页的Logo，Tags以及页面中的手写英文体，这些都是**@font-face**实现的。</p>
 <a id="more"></a>
@@ -10970,7 +10970,7 @@ a || b : 将a, b转换为Boolean类型, 再执行逻辑或, true返回a, false�
     
     <entry>
       <title><![CDATA[js函数基础回顾]]></title>
-      <url>https://blog.az22c.top/2017/01/13/js-function/</url>
+      <url>https://az22c.gitee.io/2017/01/13/js-function/</url>
       <content type="html"><![CDATA[<p>此文用于快速回顾，不适合用来入门。</p>
 <a id="more"></a>
 <h2 id="创建函数对象的三种方法"><a class="header-anchor" href="#创建函数对象的三种方法"></a>创建函数对象的三种方法</h2>
