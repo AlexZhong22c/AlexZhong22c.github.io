@@ -233,11 +233,11 @@ require([], function (){
     $("table").wrap("<div class='table-area'></div>");
 
     // Hide Comment Button
-    $(document).ready(function() {
-        if ($("#comments").length < 1) {
-            $("#scroll > a:nth-child(2)").hide();
-        }
-    })
+    // $(document).ready(function() {
+    //     if ($("#comments").length < 1) {
+    //         $("#scroll > a:nth-child(2)").hide();
+    //     }
+    // })
 
     // Hide Labels
     if(yiliaConfig.isArchive || yiliaConfig.isTag || yiliaConfig.isCategory) {

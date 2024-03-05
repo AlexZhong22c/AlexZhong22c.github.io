@@ -79,7 +79,7 @@
 
 
 <meta name="description" content="因为大家对html代码不是很重视，所以整理了一些容易忽略的问题并且对一些知识点作了梳理。 对应代码的github仓库的地址：https://github.com/AlexZhong22c/IFE-CSS-learning task01其实就是对HTML的学习，对应的代码其实就是task02的demo的HTML部分。">
-<meta name="keywords" content="IFE,HTML,H5">
+<meta name="keywords" content="IFE,H5,HTML">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IFE2017-CSS-task01笔记">
 <meta property="og:url" content="https://az22c.gitee.io/2017/03/27/ife-css-task01/index.html">
@@ -692,7 +692,8 @@
 
 <div class="scroll" id="scroll">
     <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
-    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <!-- <a href="javascript:void(0)" title="评论区已关闭"><i class="fa fa-comments-o"></i></a> -->
+    <!-- <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a> -->
     <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
 </div>
 <script>
@@ -1574,7 +1575,7 @@ window.location.reload();//竖屏
 }
 });
 $("#cb-search-content").removeAttr("style");
-$("#cb-search-content").css("margin-left", "-115px").css("width", "70%").css("font-size", "1.2em").css("height", "30px")
+$("#cb-search-content").css("width", "70%").css("font-size", "1.2em").css("height", "30px")
 .css("margin-top", "80px").css("border-radius", "50px");
 $("#cb-close-div").css("margin-top", "50px")
 //移动端显示公益为腾讯404

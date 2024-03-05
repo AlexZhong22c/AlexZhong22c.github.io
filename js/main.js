@@ -161,11 +161,11 @@ require([], function (){
     $("table").wrap("<div class='table-area'></div>");
 
     // Hide Comment Button
-    $(document).ready(function() {
-        if ($("#comments").length < 1) {
-            $("#scroll > a:nth-child(2)").hide();
-        }
-    })
+    // $(document).ready(function() {
+    //     if ($("#comments").length < 1) {
+    //         $("#scroll > a:nth-child(2)").hide();
+    //     }
+    // })
 
     // Task lists in markdown
     $('ul > li').each(function() {

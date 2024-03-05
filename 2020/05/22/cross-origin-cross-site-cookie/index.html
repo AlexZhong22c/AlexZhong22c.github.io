@@ -79,7 +79,7 @@
 
 
 <meta name="description" content="简要解释第三方cookie的原理和相关属性。">
-<meta name="keywords" content="跨域,跨站,Cookie,面试题,笔记副本">
+<meta name="keywords" content="跨域,跨站,面试题,笔记副本,Cookie">
 <meta property="og:type" content="article">
 <meta property="og:title" content="02-第三方cookie(注：将被禁用)">
 <meta property="og:url" content="https://az22c.gitee.io/2020/05/22/cross-origin-cross-site-cookie/index.html">
@@ -708,7 +708,8 @@
 
 <div class="scroll" id="scroll">
     <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
-    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <!-- <a href="javascript:void(0)" title="评论区已关闭"><i class="fa fa-comments-o"></i></a> -->
+    <!-- <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a> -->
     <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
 </div>
 <script>
@@ -1590,7 +1591,7 @@ window.location.reload();//竖屏
 }
 });
 $("#cb-search-content").removeAttr("style");
-$("#cb-search-content").css("margin-left", "-115px").css("width", "70%").css("font-size", "1.2em").css("height", "30px")
+$("#cb-search-content").css("width", "70%").css("font-size", "1.2em").css("height", "30px")
 .css("margin-top", "80px").css("border-radius", "50px");
 $("#cb-close-div").css("margin-top", "50px")
 //移动端显示公益为腾讯404
