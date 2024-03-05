@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
 <meta property="og:description" content="整个 Vue 的运作其实始于 import Vue from &apos;vue&apos; 执行的那一刻，一开始只是执行一些准备工作，然后到 new Vue 才开始执行核心的流程，也就是开始构建 MVVM。 在上一篇博客有讲到， MVVM 其实就可以划分为2个阶段，“首次构建”+“重新渲染”。之所以会有“重新渲染”，是因为利用了响应式原理，当数据变化时需要重新渲染，还有强制重新渲染也是类似的。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2024-02-26T12:45:26.361Z">
+<meta property="og:updated_time" content="2024-03-05T08:03:04.917Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue2源码【2】Vue MVVM 的工作流程">
 <meta name="twitter:description" content="整个 Vue 的运作其实始于 import Vue from &apos;vue&apos; 执行的那一刻，一开始只是执行一些准备工作，然后到 new Vue 才开始执行核心的流程，也就是开始构建 MVVM。 在上一篇博客有讲到， MVVM 其实就可以划分为2个阶段，“首次构建”+“重新渲染”。之所以会有“重新渲染”，是因为利用了响应式原理，当数据变化时需要重新渲染，还有强制重新渲染也是类似的。">
@@ -584,7 +584,7 @@ Vue.prototype.$mount = function () {
         <p><span>本文标题:</span><a href="/2020/09/04/vue2-src-code-11-mvvm/">Vue2源码【2】Vue MVVM 的工作流程</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">az22c 博客</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2020-09-04, 21:01:10</p>
-        <!-- <p><span>最后更新:</span>2024-02-26, 20:45:26</p> -->
+        <!-- <p><span>最后更新:</span>2024-03-05, 16:03:04</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="Vue2源码【2】Vue MVVM 的工作流程" href="/2020/09/04/vue2-src-code-11-mvvm/">https://az22c.gitee.io/2020/09/04/vue2-src-code-11-mvvm/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://az22c.gitee.io/2020/09/04/vue2-src-code-11-mvvm/　　作者: az22c 博客" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -1079,11 +1079,12 @@ $.cachedScript('//push.zhanzhang.baidu.com/push.js').done(function () {
 }
 
 }
-addTextAnimation();
-playTextAnimation();
-textAnimationClick(avatarPath);
+// 隐藏：
+// addTextAnimation();
+// playTextAnimation();
+// textAnimationClick(avatarPath);
 codeRain();
-duoshuoComments();
+// duoshuoComments();
 });
 }
 //左侧搜索
@@ -1331,7 +1332,10 @@ document.title = arr[0] + "|" + arr[2];
 }
 var addAvatar = function (avatarPath) {
 
+var isExist = $("#id_avatar_a .js-avatar")
+if (!isExist.length) {
 $("#id_avatar_a").append("<img src='/img/avatar.jpg' class='js-avatar' style='width: 100%;height: 100%;opacity: 1;' />");
+}
 
 }
 var resetPageWidth = function () {
@@ -1587,6 +1591,7 @@ $(".body-wrap").css("margin-bottom", "110px");//移动端页面底部距离大�
 //左边栏缩小
 if (totalwidth > 900 && totalwidth < 1200) {
 $(".left-col").css("width", "250px");
+$(".left-col").css("overflow-x", "hidden");
 $(".mid-col").css("margin-left", "-50px");
 if (is_post()) {
 $("#toc").css("width", "180px");
@@ -1821,12 +1826,12 @@ textLen = textAnimations.length,
 textIndex = Math.ceil(Math.random() * textLen) - 1,
 textAnimationName = textAnimations[textIndex];
 if(textIndex != 0){
-$("#id_span_change").remove();
+// $("#id_span_change").remove();
 $("#id_normal_text_anim").remove();
 var textAnimView = "<div id='id_span_change'><span>Coding Changes the</span><span class='cd-words-wrapper' style='margin-left:4px;'><b class='is-visible' style='font-weight:normal !important;color: #6b889d;'>World</b><b style='font-weight:normal !important;color: #6b739d;'>Never</b><b style='font-weight:normal !important;color: #7a6b9d;'>Give</b><b style='font-weight:normal !important;color: #7a6b9d;'>Up</b><b style='font-weight:normal !important;color: #7a6b9d;'>Dream</b></span></div>";
 $("#id_hgroup_name").after(textAnimView);
 var newClass = textAnimationName + " header-subtitle";
-$("#id_span_change").attr("class", newClass);
+// $("#id_span_change").attr("class", newClass);
 }
 }
 var playTextAnimation = function () {
@@ -1981,14 +1986,14 @@ $("#left_col_div").css("overflow-y", "auto").css("overflow-x", "hidden");
 } else if(totalHeight >= 700){
 $("#left_col_div").css("overflow-y", "hidden").css("overflow-x", "hidden");
 var clickCount = 0;
-$("#id_span_change").css("cursor", "pointer").click(function(){
-if((clickCount % 2) == 0){
-$("#left_col_div").css("overflow-y", "auto").css("overflow-x", "hidden");
-} else {
-$("#left_col_div").css("overflow-y", "hidden").css("overflow-x", "hidden");
-}
-clickCount++;
-});
+// $("#id_span_change").css("cursor", "pointer").click(function(){
+// if((clickCount % 2) == 0){
+// $("#left_col_div").css("overflow-y", "auto").css("overflow-x", "hidden");
+// } else {
+// $("#left_col_div").css("overflow-y", "hidden").css("overflow-x", "hidden");
+// }
+// clickCount++;
+// });
 var avatarOut = false;
 $("#id_avatar_a").mouseenter(function(){
 if(!avatarOut){

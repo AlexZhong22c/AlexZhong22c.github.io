@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
 <meta property="og:description" content="此文用于快速回顾，不适合用来入门。如果想做一个系统性的归纳总结、以便查询，可以参考以下概述。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2024-02-26T12:45:26.354Z">
+<meta property="og:updated_time" content="2024-03-05T08:03:04.909Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Web前端性能优化概述">
 <meta name="twitter:description" content="此文用于快速回顾，不适合用来入门。如果想做一个系统性的归纳总结、以便查询，可以参考以下概述。">
@@ -668,7 +668,7 @@
         <p><span>本文标题:</span><a href="/2018/02/04/performance-optimized-summary/">Web前端性能优化概述</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">az22c 博客</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2018-02-04, 16:30:27</p>
-        <!-- <p><span>最后更新:</span>2024-02-26, 20:45:26</p> -->
+        <!-- <p><span>最后更新:</span>2024-03-05, 16:03:04</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="Web前端性能优化概述" href="/2018/02/04/performance-optimized-summary/">https://az22c.gitee.io/2018/02/04/performance-optimized-summary/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://az22c.gitee.io/2018/02/04/performance-optimized-summary/　　作者: az22c 博客" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -1163,11 +1163,12 @@ $.cachedScript('//push.zhanzhang.baidu.com/push.js').done(function () {
 }
 
 }
-addTextAnimation();
-playTextAnimation();
-textAnimationClick(avatarPath);
+// 隐藏：
+// addTextAnimation();
+// playTextAnimation();
+// textAnimationClick(avatarPath);
 codeRain();
-duoshuoComments();
+// duoshuoComments();
 });
 }
 //左侧搜索
@@ -1415,7 +1416,10 @@ document.title = arr[0] + "|" + arr[2];
 }
 var addAvatar = function (avatarPath) {
 
+var isExist = $("#id_avatar_a .js-avatar")
+if (!isExist.length) {
 $("#id_avatar_a").append("<img src='/img/avatar.jpg' class='js-avatar' style='width: 100%;height: 100%;opacity: 1;' />");
+}
 
 }
 var resetPageWidth = function () {
@@ -1671,6 +1675,7 @@ $(".body-wrap").css("margin-bottom", "110px");//移动端页面底部距离大�
 //左边栏缩小
 if (totalwidth > 900 && totalwidth < 1200) {
 $(".left-col").css("width", "250px");
+$(".left-col").css("overflow-x", "hidden");
 $(".mid-col").css("margin-left", "-50px");
 if (is_post()) {
 $("#toc").css("width", "180px");
@@ -1905,12 +1910,12 @@ textLen = textAnimations.length,
 textIndex = Math.ceil(Math.random() * textLen) - 1,
 textAnimationName = textAnimations[textIndex];
 if(textIndex != 0){
-$("#id_span_change").remove();
+// $("#id_span_change").remove();
 $("#id_normal_text_anim").remove();
 var textAnimView = "<div id='id_span_change'><span>Coding Changes the</span><span class='cd-words-wrapper' style='margin-left:4px;'><b class='is-visible' style='font-weight:normal !important;color: #6b889d;'>World</b><b style='font-weight:normal !important;color: #6b739d;'>Never</b><b style='font-weight:normal !important;color: #7a6b9d;'>Give</b><b style='font-weight:normal !important;color: #7a6b9d;'>Up</b><b style='font-weight:normal !important;color: #7a6b9d;'>Dream</b></span></div>";
 $("#id_hgroup_name").after(textAnimView);
 var newClass = textAnimationName + " header-subtitle";
-$("#id_span_change").attr("class", newClass);
+// $("#id_span_change").attr("class", newClass);
 }
 }
 var playTextAnimation = function () {
@@ -2065,14 +2070,14 @@ $("#left_col_div").css("overflow-y", "auto").css("overflow-x", "hidden");
 } else if(totalHeight >= 700){
 $("#left_col_div").css("overflow-y", "hidden").css("overflow-x", "hidden");
 var clickCount = 0;
-$("#id_span_change").css("cursor", "pointer").click(function(){
-if((clickCount % 2) == 0){
-$("#left_col_div").css("overflow-y", "auto").css("overflow-x", "hidden");
-} else {
-$("#left_col_div").css("overflow-y", "hidden").css("overflow-x", "hidden");
-}
-clickCount++;
-});
+// $("#id_span_change").css("cursor", "pointer").click(function(){
+// if((clickCount % 2) == 0){
+// $("#left_col_div").css("overflow-y", "auto").css("overflow-x", "hidden");
+// } else {
+// $("#left_col_div").css("overflow-y", "hidden").css("overflow-x", "hidden");
+// }
+// clickCount++;
+// });
 var avatarOut = false;
 $("#id_avatar_a").mouseenter(function(){
 if(!avatarOut){

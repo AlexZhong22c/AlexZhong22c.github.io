@@ -87,7 +87,7 @@
 <meta property="og:description" content="完成了百度IFE2015的 task3 ，实现了一个 ToDo 的单页应用，功能颇为强大。 使用 localStorage 存储数据，JSON 模拟数据表，实现了分类和待办状态的改变，具有良好的交互体验。 旧项目地址：https://github.com/AlexZhong22c/ToDoApp-IFE2015 新增了 升级版 修复了一些bug，并且适配移动端：https://github.com">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://cloud.az22c.top/caller%E7%9A%84%E7%BB%8F%E5%85%B8%E7%94%A8%E6%B3%95.png-az22cgithub">
-<meta property="og:updated_time" content="2024-02-26T12:45:26.354Z">
+<meta property="og:updated_time" content="2024-03-05T08:03:04.909Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ToDo小应用完工总结">
 <meta name="twitter:description" content="完成了百度IFE2015的 task3 ，实现了一个 ToDo 的单页应用，功能颇为强大。 使用 localStorage 存储数据，JSON 模拟数据表，实现了分类和待办状态的改变，具有良好的交互体验。 旧项目地址：https://github.com/AlexZhong22c/ToDoApp-IFE2015 新增了 升级版 修复了一些bug，并且适配移动端：https://github.com">
@@ -674,7 +674,7 @@ function queryAllCates() {
         <p><span>本文标题:</span><a href="/2017/02/17/todo-app/">ToDo小应用完工总结</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">az22c 博客</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2017-02-17, 22:44:31</p>
-        <!-- <p><span>最后更新:</span>2024-02-26, 20:45:26</p> -->
+        <!-- <p><span>最后更新:</span>2024-03-05, 16:03:04</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="ToDo小应用完工总结" href="/2017/02/17/todo-app/">https://az22c.gitee.io/2017/02/17/todo-app/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://az22c.gitee.io/2017/02/17/todo-app/　　作者: az22c 博客" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -1169,11 +1169,12 @@ $.cachedScript('//push.zhanzhang.baidu.com/push.js').done(function () {
 }
 
 }
-addTextAnimation();
-playTextAnimation();
-textAnimationClick(avatarPath);
+// 隐藏：
+// addTextAnimation();
+// playTextAnimation();
+// textAnimationClick(avatarPath);
 codeRain();
-duoshuoComments();
+// duoshuoComments();
 });
 }
 //左侧搜索
@@ -1421,7 +1422,10 @@ document.title = arr[0] + "|" + arr[2];
 }
 var addAvatar = function (avatarPath) {
 
+var isExist = $("#id_avatar_a .js-avatar")
+if (!isExist.length) {
 $("#id_avatar_a").append("<img src='/img/avatar.jpg' class='js-avatar' style='width: 100%;height: 100%;opacity: 1;' />");
+}
 
 }
 var resetPageWidth = function () {
@@ -1677,6 +1681,7 @@ $(".body-wrap").css("margin-bottom", "110px");//移动端页面底部距离大�
 //左边栏缩小
 if (totalwidth > 900 && totalwidth < 1200) {
 $(".left-col").css("width", "250px");
+$(".left-col").css("overflow-x", "hidden");
 $(".mid-col").css("margin-left", "-50px");
 if (is_post()) {
 $("#toc").css("width", "180px");
@@ -1911,12 +1916,12 @@ textLen = textAnimations.length,
 textIndex = Math.ceil(Math.random() * textLen) - 1,
 textAnimationName = textAnimations[textIndex];
 if(textIndex != 0){
-$("#id_span_change").remove();
+// $("#id_span_change").remove();
 $("#id_normal_text_anim").remove();
 var textAnimView = "<div id='id_span_change'><span>Coding Changes the</span><span class='cd-words-wrapper' style='margin-left:4px;'><b class='is-visible' style='font-weight:normal !important;color: #6b889d;'>World</b><b style='font-weight:normal !important;color: #6b739d;'>Never</b><b style='font-weight:normal !important;color: #7a6b9d;'>Give</b><b style='font-weight:normal !important;color: #7a6b9d;'>Up</b><b style='font-weight:normal !important;color: #7a6b9d;'>Dream</b></span></div>";
 $("#id_hgroup_name").after(textAnimView);
 var newClass = textAnimationName + " header-subtitle";
-$("#id_span_change").attr("class", newClass);
+// $("#id_span_change").attr("class", newClass);
 }
 }
 var playTextAnimation = function () {
@@ -2071,14 +2076,14 @@ $("#left_col_div").css("overflow-y", "auto").css("overflow-x", "hidden");
 } else if(totalHeight >= 700){
 $("#left_col_div").css("overflow-y", "hidden").css("overflow-x", "hidden");
 var clickCount = 0;
-$("#id_span_change").css("cursor", "pointer").click(function(){
-if((clickCount % 2) == 0){
-$("#left_col_div").css("overflow-y", "auto").css("overflow-x", "hidden");
-} else {
-$("#left_col_div").css("overflow-y", "hidden").css("overflow-x", "hidden");
-}
-clickCount++;
-});
+// $("#id_span_change").css("cursor", "pointer").click(function(){
+// if((clickCount % 2) == 0){
+// $("#left_col_div").css("overflow-y", "auto").css("overflow-x", "hidden");
+// } else {
+// $("#left_col_div").css("overflow-y", "hidden").css("overflow-x", "hidden");
+// }
+// clickCount++;
+// });
 var avatarOut = false;
 $("#id_avatar_a").mouseenter(function(){
 if(!avatarOut){
