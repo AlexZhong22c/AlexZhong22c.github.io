@@ -82,11 +82,11 @@
 <meta name="keywords" content="笔记副本,源码">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Vue2源码【2】Vue MVVM 的工作流程">
-<meta property="og:url" content="https://az22c.gitee.io/2020/09/04/vue2-src-code-11-mvvm/index.html">
+<meta property="og:url" content="https://blog.az22c.top/2020/09/04/vue2-src-code-11-mvvm/index.html">
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
 <meta property="og:description" content="整个 Vue 的运作其实始于 import Vue from &apos;vue&apos; 执行的那一刻，一开始只是执行一些准备工作，然后到 new Vue 才开始执行核心的流程，也就是开始构建 MVVM。 在上一篇博客有讲到， MVVM 其实就可以划分为2个阶段，“首次构建”+“重新渲染”。之所以会有“重新渲染”，是因为利用了响应式原理，当数据变化时需要重新渲染，还有强制重新渲染也是类似的。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2024-03-05T08:03:04.917Z">
+<meta property="og:updated_time" content="2024-05-10T10:41:00.278Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue2源码【2】Vue MVVM 的工作流程">
 <meta name="twitter:description" content="整个 Vue 的运作其实始于 import Vue from &apos;vue&apos; 执行的那一刻，一开始只是执行一些准备工作，然后到 new Vue 才开始执行核心的流程，也就是开始构建 MVVM。 在上一篇博客有讲到， MVVM 其实就可以划分为2个阶段，“首次构建”+“重新渲染”。之所以会有“重新渲染”，是因为利用了响应式原理，当数据变化时需要重新渲染，还有强制重新渲染也是类似的。">
@@ -584,10 +584,10 @@ Vue.prototype.$mount = function () {
         <p><span>本文标题:</span><a href="/2020/09/04/vue2-src-code-11-mvvm/">Vue2源码【2】Vue MVVM 的工作流程</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">az22c 博客</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2020-09-04, 21:01:10</p>
-        <!-- <p><span>最后更新:</span>2024-03-05, 16:03:04</p> -->
+        <!-- <p><span>最后更新:</span>2024-05-10, 18:41:00</p> -->
         <p>
-            <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="Vue2源码【2】Vue MVVM 的工作流程" href="/2020/09/04/vue2-src-code-11-mvvm/">https://az22c.gitee.io/2020/09/04/vue2-src-code-11-mvvm/</a>
-            <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://az22c.gitee.io/2020/09/04/vue2-src-code-11-mvvm/　　作者: az22c 博客" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="Vue2源码【2】Vue MVVM 的工作流程" href="/2020/09/04/vue2-src-code-11-mvvm/">https://blog.az22c.top/2020/09/04/vue2-src-code-11-mvvm/</a>
+            <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://blog.az22c.top/2020/09/04/vue2-src-code-11-mvvm/　　作者: az22c 博客" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
         </p>
         <p style="color: #696969;">
             <span>许可协议:</span><i class="fa fa-creative-commons"></i><a id="copyright_license" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target = "_blank" class="hint  hint--bottom" data-hint="中国大陆 (CC BY-NC-SA 3.0 CN)">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。

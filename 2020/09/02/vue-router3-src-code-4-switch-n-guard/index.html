@@ -82,11 +82,11 @@
 <meta name="keywords" content="笔记副本,源码">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【4运作核心】路径切换和路由守卫">
-<meta property="og:url" content="https://az22c.gitee.io/2020/09/02/vue-router3-src-code-4-switch-n-guard/index.html">
+<meta property="og:url" content="https://blog.az22c.top/2020/09/02/vue-router3-src-code-4-switch-n-guard/index.html">
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
 <meta property="og:description" content="如果没有处理路径切换，整个路由器就没法运作，就跟没用一样。可见路径切换模块在其中的核心地位。 讲到“路径切换”，history.transitionTo是位于内部的核心。也就是绝大多数提供给用户的函数，最终都会执行到这里，开启路径切换的流程。 其间值得注意的是，利用迭代器设计模式，可简洁实现路由守卫，是非常巧妙的代码设计，会提前详细介绍。 到文章最后，文字描述路径切换的流程骨架。再剩余每个繁杂具体">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2024-03-05T08:03:04.917Z">
+<meta property="og:updated_time" content="2024-05-10T10:41:00.277Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【4运作核心】路径切换和路由守卫">
 <meta name="twitter:description" content="如果没有处理路径切换，整个路由器就没法运作，就跟没用一样。可见路径切换模块在其中的核心地位。 讲到“路径切换”，history.transitionTo是位于内部的核心。也就是绝大多数提供给用户的函数，最终都会执行到这里，开启路径切换的流程。 其间值得注意的是，利用迭代器设计模式，可简洁实现路由守卫，是非常巧妙的代码设计，会提前详细介绍。 到文章最后，文字描述路径切换的流程骨架。再剩余每个繁杂具体">
@@ -667,10 +667,10 @@ function iterator (fn, next) {
         <p><span>本文标题:</span><a href="/2020/09/02/vue-router3-src-code-4-switch-n-guard/">【4运作核心】路径切换和路由守卫</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">az22c 博客</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2020-09-02, 21:04:00</p>
-        <!-- <p><span>最后更新:</span>2024-03-05, 16:03:04</p> -->
+        <!-- <p><span>最后更新:</span>2024-05-10, 18:41:00</p> -->
         <p>
-            <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="【4运作核心】路径切换和路由守卫" href="/2020/09/02/vue-router3-src-code-4-switch-n-guard/">https://az22c.gitee.io/2020/09/02/vue-router3-src-code-4-switch-n-guard/</a>
-            <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://az22c.gitee.io/2020/09/02/vue-router3-src-code-4-switch-n-guard/　　作者: az22c 博客" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="【4运作核心】路径切换和路由守卫" href="/2020/09/02/vue-router3-src-code-4-switch-n-guard/">https://blog.az22c.top/2020/09/02/vue-router3-src-code-4-switch-n-guard/</a>
+            <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://blog.az22c.top/2020/09/02/vue-router3-src-code-4-switch-n-guard/　　作者: az22c 博客" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
         </p>
         <p style="color: #696969;">
             <span>许可协议:</span><i class="fa fa-creative-commons"></i><a id="copyright_license" rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target = "_blank" class="hint  hint--bottom" data-hint="中国大陆 (CC BY-NC-SA 3.0 CN)">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
