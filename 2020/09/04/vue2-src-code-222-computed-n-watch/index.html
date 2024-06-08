@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
 <meta property="og:description" content="《数据劫持之computed和watch的具体源码》： 这一篇是【附录】，比较细地记录computed和watch具体的执行过程。其实还是有利于理解依赖收集和派发更新具体是什么时候发生了，能和 mvvm “首次构建” 和 “重新渲染” 的流程结合起来看。 说是附录，其实如果掌握了其中一些核心的时间点，对于对vue的源码理解是有帮助的。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2024-05-10T10:41:00.290Z">
+<meta property="og:updated_time" content="2024-05-19T16:47:16.352Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【4-4】【附录】响应式原理 之 数据劫持之computed和watch的具体源码">
 <meta name="twitter:description" content="《数据劫持之computed和watch的具体源码》： 这一篇是【附录】，比较细地记录computed和watch具体的执行过程。其实还是有利于理解依赖收集和派发更新具体是什么时候发生了，能和 mvvm “首次构建” 和 “重新渲染” 的流程结合起来看。 说是附录，其实如果掌握了其中一些核心的时间点，对于对vue的源码理解是有帮助的。">
@@ -554,7 +554,7 @@
         <p><span>本文标题:</span><a href="/2020/09/04/vue2-src-code-222-computed-n-watch/">【4-4】【附录】响应式原理 之 数据劫持之computed和watch的具体源码</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">az22c 博客</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2020-09-04, 21:02:22</p>
-        <!-- <p><span>最后更新:</span>2024-05-10, 18:41:00</p> -->
+        <!-- <p><span>最后更新:</span>2024-05-20, 00:47:16</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="【4-4】【附录】响应式原理 之 数据劫持之computed和watch的具体源码" href="/2020/09/04/vue2-src-code-222-computed-n-watch/">https://blog.az22c.top/2020/09/04/vue2-src-code-222-computed-n-watch/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://blog.az22c.top/2020/09/04/vue2-src-code-222-computed-n-watch/　　作者: az22c 博客" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -664,7 +664,7 @@
 				</div>
 				
 				<div style="text-align:center;" class="beian">
-					<a style="text-decoration: none;" href="http://www.beian.miit.gov.cn/" target="_blank"  rel="nofollow me noopener noreferrer">粤ICP备19013700号-1</a>
+					<a style="text-decoration: none;" href="https://beian.miit.gov.cn/" target="_blank"  rel="nofollow me noopener noreferrer">粤ICP备19013700号-1</a>
 				</div>
 
         

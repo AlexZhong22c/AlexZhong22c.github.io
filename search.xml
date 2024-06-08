@@ -3465,11 +3465,11 @@ function iterator (fn, next) {
             
             <tag> 跨域 </tag>
             
+            <tag> 跨tab </tag>
+            
             <tag> 面试题 </tag>
             
             <tag> 笔记副本 </tag>
-            
-            <tag> 跨tab </tag>
             
         </tags>
         
@@ -3574,13 +3574,13 @@ function iterator (fn, next) {
             
             <tag> 跨域 </tag>
             
-            <tag> 跨站 </tag>
-            
-            <tag> Cookie </tag>
-            
             <tag> 面试题 </tag>
             
             <tag> 笔记副本 </tag>
+            
+            <tag> 跨站 </tag>
+            
+            <tag> Cookie </tag>
             
         </tags>
         
@@ -3624,11 +3624,11 @@ function iterator (fn, next) {
             
             <tag> 跨域 </tag>
             
-            <tag> 跨站 </tag>
-            
             <tag> 面试题 </tag>
             
             <tag> 笔记副本 </tag>
+            
+            <tag> 跨站 </tag>
             
         </tags>
         
@@ -3891,11 +3891,11 @@ for (var i = 0; i &lt; 10; i++) {
         
         <tags>
             
+            <tag> 回顾 </tag>
+            
             <tag> 面试题 </tag>
             
             <tag> 笔记副本 </tag>
-            
-            <tag> 回顾 </tag>
             
             <tag> 作用域 </tag>
             
@@ -4016,9 +4016,9 @@ for (var i = 0; i &lt; 10; i++) {
         
         <tags>
             
-            <tag> 笔记副本 </tag>
-            
             <tag> 回顾 </tag>
+            
+            <tag> 笔记副本 </tag>
             
         </tags>
         
@@ -4947,9 +4947,9 @@ MMM.prototype.map = function(func) {
         
         <tags>
             
-            <tag> 笔记副本 </tag>
-            
             <tag> 回顾 </tag>
+            
+            <tag> 笔记副本 </tag>
             
             <tag> 函数式编程 </tag>
             
@@ -5162,11 +5162,11 @@ MMM.prototype.map = function(func) {
             
             <tag> 性能优化 </tag>
             
+            <tag> 回顾 </tag>
+            
             <tag> 面试题 </tag>
             
             <tag> 笔记副本 </tag>
-            
-            <tag> 回顾 </tag>
             
         </tags>
         
@@ -7781,9 +7781,9 @@ var currentTarget = event.currentTarget;
         
         <tags>
             
-            <tag> 笔记副本 </tag>
-            
             <tag> 回顾 </tag>
+            
+            <tag> 笔记副本 </tag>
             
             <tag> 基础 </tag>
             
@@ -8261,9 +8261,9 @@ MY_ARRAY = ['B']
             
             <tag> 作用域 </tag>
             
-            <tag> 闭包 </tag>
-            
             <tag> ES6 </tag>
+            
+            <tag> 闭包 </tag>
             
             <tag> 任务队列 </tag>
             
@@ -9509,11 +9509,11 @@ p {
         
         <tags>
             
-            <tag> HTML </tag>
-            
             <tag> H5 </tag>
             
             <tag> IFE </tag>
+            
+            <tag> HTML </tag>
             
         </tags>
         
