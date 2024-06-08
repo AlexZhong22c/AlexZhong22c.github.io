@@ -3465,11 +3465,11 @@ function iterator (fn, next) {
             
             <tag> 跨域 </tag>
             
-            <tag> 跨tab </tag>
-            
             <tag> 面试题 </tag>
             
             <tag> 笔记副本 </tag>
+            
+            <tag> 跨tab </tag>
             
         </tags>
         
@@ -3574,11 +3574,11 @@ function iterator (fn, next) {
             
             <tag> 跨域 </tag>
             
+            <tag> 跨站 </tag>
+            
             <tag> 面试题 </tag>
             
             <tag> 笔记副本 </tag>
-            
-            <tag> 跨站 </tag>
             
             <tag> Cookie </tag>
             
@@ -3624,11 +3624,11 @@ function iterator (fn, next) {
             
             <tag> 跨域 </tag>
             
+            <tag> 跨站 </tag>
+            
             <tag> 面试题 </tag>
             
             <tag> 笔记副本 </tag>
-            
-            <tag> 跨站 </tag>
             
         </tags>
         
@@ -5561,11 +5561,11 @@ border-bottom-left-radius: 44px 88px;
         
         <tags>
             
-            <tag> 回顾 </tag>
-            
             <tag> radius </tag>
             
             <tag> 边框 </tag>
+            
+            <tag> 回顾 </tag>
             
         </tags>
         
@@ -7646,9 +7646,9 @@ displayColor.call(null);//TypeError: Cannot read property 'color' of null
             
             <tag> IIFE </tag>
             
-            <tag> this </tag>
-            
             <tag> 闭包 </tag>
+            
+            <tag> this </tag>
             
         </tags>
         
@@ -7783,9 +7783,9 @@ var currentTarget = event.currentTarget;
             
             <tag> 笔记副本 </tag>
             
-            <tag> 基础 </tag>
-            
             <tag> 回顾 </tag>
+            
+            <tag> 基础 </tag>
             
             <tag> 事件 </tag>
             
@@ -7936,9 +7936,9 @@ element.removeEventListener('click', fun, false);
         
         <tags>
             
-            <tag> 基础 </tag>
-            
             <tag> 回顾 </tag>
+            
+            <tag> 基础 </tag>
             
             <tag> 事件 </tag>
             
@@ -8074,9 +8074,9 @@ test.onclick= function(e){
         
         <tags>
             
-            <tag> 基础 </tag>
-            
             <tag> 回顾 </tag>
+            
+            <tag> 基础 </tag>
             
             <tag> 事件 </tag>
             
@@ -8261,9 +8261,9 @@ MY_ARRAY = ['B']
             
             <tag> 作用域 </tag>
             
-            <tag> 闭包 </tag>
-            
             <tag> ES6 </tag>
+            
+            <tag> 闭包 </tag>
             
             <tag> 任务队列 </tag>
             
@@ -9509,11 +9509,11 @@ p {
         
         <tags>
             
+            <tag> HTML </tag>
+            
             <tag> H5 </tag>
             
             <tag> IFE </tag>
-            
-            <tag> HTML </tag>
             
         </tags>
         
@@ -10343,9 +10343,9 @@ Kinect，它将身体动作转换成屏幕动作。这样你可以用你的手�
         
         <tags>
             
-            <tag> 随笔 </tag>
-            
             <tag> H5 </tag>
+            
+            <tag> 随笔 </tag>
             
         </tags>
         
