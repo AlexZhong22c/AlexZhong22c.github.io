@@ -6616,11 +6616,11 @@ instance2.sayName();//&quot;hu&quot;
         
         <tags>
             
+            <tag> 原理 </tag>
+            
             <tag> 面向对象 </tag>
             
             <tag> 原型系统 </tag>
-            
-            <tag> 原理 </tag>
             
         </tags>
         
@@ -7783,9 +7783,9 @@ var currentTarget = event.currentTarget;
             
             <tag> 笔记副本 </tag>
             
-            <tag> 基础 </tag>
-            
             <tag> 回顾 </tag>
+            
+            <tag> 基础 </tag>
             
             <tag> 事件 </tag>
             
@@ -7936,9 +7936,9 @@ element.removeEventListener('click', fun, false);
         
         <tags>
             
-            <tag> 基础 </tag>
-            
             <tag> 回顾 </tag>
+            
+            <tag> 基础 </tag>
             
             <tag> 事件 </tag>
             
@@ -8074,9 +8074,9 @@ test.onclick= function(e){
         
         <tags>
             
-            <tag> 基础 </tag>
-            
             <tag> 回顾 </tag>
+            
+            <tag> 基础 </tag>
             
             <tag> 事件 </tag>
             
@@ -9509,11 +9509,11 @@ p {
         
         <tags>
             
+            <tag> H5 </tag>
+            
             <tag> IFE </tag>
             
             <tag> HTML </tag>
-            
-            <tag> H5 </tag>
             
         </tags>
         
