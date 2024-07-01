@@ -3465,11 +3465,11 @@ function iterator (fn, next) {
             
             <tag> 跨域 </tag>
             
+            <tag> 跨tab </tag>
+            
             <tag> 面试题 </tag>
             
             <tag> 笔记副本 </tag>
-            
-            <tag> 跨tab </tag>
             
         </tags>
         
@@ -3574,11 +3574,11 @@ function iterator (fn, next) {
             
             <tag> 跨域 </tag>
             
-            <tag> 跨站 </tag>
-            
             <tag> 面试题 </tag>
             
             <tag> 笔记副本 </tag>
+            
+            <tag> 跨站 </tag>
             
             <tag> Cookie </tag>
             
@@ -3624,11 +3624,11 @@ function iterator (fn, next) {
             
             <tag> 跨域 </tag>
             
-            <tag> 跨站 </tag>
-            
             <tag> 面试题 </tag>
             
             <tag> 笔记副本 </tag>
+            
+            <tag> 跨站 </tag>
             
         </tags>
         
@@ -4211,9 +4211,9 @@ for (var i = 0; i &lt; 10; i++) {
             
             <tag> 进阶 </tag>
             
-            <tag> line-height </tag>
-            
             <tag> 居中 </tag>
+            
+            <tag> line-height </tag>
             
             <tag> font-size </tag>
             
@@ -4485,9 +4485,9 @@ i {
             
             <tag> 进阶 </tag>
             
-            <tag> 居中 </tag>
-            
             <tag> vertical-align </tag>
+            
+            <tag> 居中 </tag>
             
         </tags>
         
@@ -4823,9 +4823,9 @@ i {
             
             <tag> 进阶 </tag>
             
-            <tag> 居中 </tag>
-            
             <tag> vertical-align </tag>
+            
+            <tag> 居中 </tag>
             
         </tags>
         
@@ -7783,9 +7783,9 @@ var currentTarget = event.currentTarget;
             
             <tag> 笔记副本 </tag>
             
-            <tag> 基础 </tag>
-            
             <tag> 回顾 </tag>
+            
+            <tag> 基础 </tag>
             
             <tag> 事件 </tag>
             
@@ -7936,9 +7936,9 @@ element.removeEventListener('click', fun, false);
         
         <tags>
             
-            <tag> 基础 </tag>
-            
             <tag> 回顾 </tag>
+            
+            <tag> 基础 </tag>
             
             <tag> 事件 </tag>
             
@@ -8074,9 +8074,9 @@ test.onclick= function(e){
         
         <tags>
             
-            <tag> 基础 </tag>
-            
             <tag> 回顾 </tag>
+            
+            <tag> 基础 </tag>
             
             <tag> 事件 </tag>
             
@@ -9509,11 +9509,11 @@ p {
         
         <tags>
             
-            <tag> IFE </tag>
+            <tag> HTML </tag>
             
             <tag> H5 </tag>
             
-            <tag> HTML </tag>
+            <tag> IFE </tag>
             
         </tags>
         
