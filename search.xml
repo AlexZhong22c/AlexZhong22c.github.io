@@ -3576,11 +3576,11 @@ function iterator (fn, next) {
             
             <tag> 跨站 </tag>
             
-            <tag> Cookie </tag>
-            
             <tag> 面试题 </tag>
             
             <tag> 笔记副本 </tag>
+            
+            <tag> Cookie </tag>
             
         </tags>
         
@@ -5561,11 +5561,11 @@ border-bottom-left-radius: 44px 88px;
         
         <tags>
             
+            <tag> 回顾 </tag>
+            
             <tag> radius </tag>
             
             <tag> 边框 </tag>
-            
-            <tag> 回顾 </tag>
             
         </tags>
         
@@ -6616,11 +6616,11 @@ instance2.sayName();//&quot;hu&quot;
         
         <tags>
             
-            <tag> 原理 </tag>
-            
             <tag> 面向对象 </tag>
             
             <tag> 原型系统 </tag>
+            
+            <tag> 原理 </tag>
             
         </tags>
         
@@ -8261,9 +8261,9 @@ MY_ARRAY = ['B']
             
             <tag> 作用域 </tag>
             
-            <tag> ES6 </tag>
-            
             <tag> 闭包 </tag>
+            
+            <tag> ES6 </tag>
             
             <tag> 任务队列 </tag>
             
@@ -9511,9 +9511,9 @@ p {
             
             <tag> H5 </tag>
             
-            <tag> IFE </tag>
-            
             <tag> HTML </tag>
+            
+            <tag> IFE </tag>
             
         </tags>
         
