@@ -3576,11 +3576,11 @@ function iterator (fn, next) {
             
             <tag> 跨站 </tag>
             
+            <tag> Cookie </tag>
+            
             <tag> 面试题 </tag>
             
             <tag> 笔记副本 </tag>
-            
-            <tag> Cookie </tag>
             
         </tags>
         
@@ -7783,9 +7783,9 @@ var currentTarget = event.currentTarget;
             
             <tag> 笔记副本 </tag>
             
-            <tag> 回顾 </tag>
-            
             <tag> 基础 </tag>
+            
+            <tag> 回顾 </tag>
             
             <tag> 事件 </tag>
             
@@ -7936,9 +7936,9 @@ element.removeEventListener('click', fun, false);
         
         <tags>
             
-            <tag> 回顾 </tag>
-            
             <tag> 基础 </tag>
+            
+            <tag> 回顾 </tag>
             
             <tag> 事件 </tag>
             
@@ -8074,9 +8074,9 @@ test.onclick= function(e){
         
         <tags>
             
-            <tag> 回顾 </tag>
-            
             <tag> 基础 </tag>
+            
+            <tag> 回顾 </tag>
             
             <tag> 事件 </tag>
             
@@ -9509,11 +9509,11 @@ p {
         
         <tags>
             
+            <tag> IFE </tag>
+            
             <tag> HTML </tag>
             
             <tag> H5 </tag>
-            
-            <tag> IFE </tag>
             
         </tags>
         
