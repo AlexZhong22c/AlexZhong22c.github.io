@@ -2046,7 +2046,7 @@ $("#page-undefined").css("opacity", "1.0");
 <!-- 这段代码的含义是每次页面重载时，通过直接的函数调用来实现MathJax、百度统计、Google Code Prettify、Google Analytics的重新运行 -->
 <script data-no-instant>
     if(!navigator.userAgent.match(/(iPhone|iPod|Android|ios|Opera Mini|BlackBerry|webOS)/i)){
-      jQuery.getScript("//cdn.jsdelivr.net/npm/instantclick@3.1.0-2/dist/instantclick.min.js")
+      jQuery.getScript("//blog.az22c.top/js/instantclick-3.0.1.min.js")
         .done(function() {
           InstantClick.on('change', function (isInitialLoad) {
 //console.log(isInitialLoad);

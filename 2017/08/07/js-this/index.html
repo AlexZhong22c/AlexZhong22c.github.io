@@ -79,7 +79,7 @@
 
 
 <meta name="description" content="此文适合用于进阶对this的理解，不适合用来入门。">
-<meta name="keywords" content="进阶,IIFE,this,闭包">
+<meta name="keywords" content="进阶,IIFE,闭包,this">
 <meta property="og:type" content="article">
 <meta property="og:title" content="结合this的4种绑定规则 深入理解this指向的判定">
 <meta property="og:url" content="https://blog.az22c.top/2017/08/07/js-this/index.html">
@@ -2493,7 +2493,7 @@ $("#page-undefined").css("opacity", "1.0");
 <!-- 这段代码的含义是每次页面重载时，通过直接的函数调用来实现MathJax、百度统计、Google Code Prettify、Google Analytics的重新运行 -->
 <script data-no-instant>
     if(!navigator.userAgent.match(/(iPhone|iPod|Android|ios|Opera Mini|BlackBerry|webOS)/i)){
-      jQuery.getScript("//cdn.jsdelivr.net/npm/instantclick@3.1.0-2/dist/instantclick.min.js")
+      jQuery.getScript("//blog.az22c.top/js/instantclick-3.0.1.min.js")
         .done(function() {
           InstantClick.on('change', function (isInitialLoad) {
 //console.log(isInitialLoad);
