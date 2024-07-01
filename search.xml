@@ -8261,9 +8261,9 @@ MY_ARRAY = ['B']
             
             <tag> 作用域 </tag>
             
-            <tag> 闭包 </tag>
-            
             <tag> ES6 </tag>
+            
+            <tag> 闭包 </tag>
             
             <tag> 任务队列 </tag>
             
@@ -9509,11 +9509,11 @@ p {
         
         <tags>
             
+            <tag> HTML </tag>
+            
             <tag> H5 </tag>
             
             <tag> IFE </tag>
-            
-            <tag> HTML </tag>
             
         </tags>
         
@@ -10343,9 +10343,9 @@ Kinect，它将身体动作转换成屏幕动作。这样你可以用你的手�
         
         <tags>
             
-            <tag> H5 </tag>
-            
             <tag> 随笔 </tag>
+            
+            <tag> H5 </tag>
             
         </tags>
         
