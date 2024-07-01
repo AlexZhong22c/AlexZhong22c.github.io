@@ -5160,11 +5160,11 @@ MMM.prototype.map = function(func) {
         
         <tags>
             
+            <tag> 性能优化 </tag>
+            
             <tag> 面试题 </tag>
             
             <tag> 笔记副本 </tag>
-            
-            <tag> 性能优化 </tag>
             
             <tag> 回顾 </tag>
             
@@ -5561,11 +5561,11 @@ border-bottom-left-radius: 44px 88px;
         
         <tags>
             
-            <tag> 回顾 </tag>
-            
             <tag> radius </tag>
             
             <tag> 边框 </tag>
+            
+            <tag> 回顾 </tag>
             
         </tags>
         
@@ -7646,9 +7646,9 @@ displayColor.call(null);//TypeError: Cannot read property 'color' of null
             
             <tag> IIFE </tag>
             
-            <tag> 闭包 </tag>
-            
             <tag> this </tag>
+            
+            <tag> 闭包 </tag>
             
         </tags>
         
@@ -8261,9 +8261,9 @@ MY_ARRAY = ['B']
             
             <tag> 作用域 </tag>
             
-            <tag> ES6 </tag>
-            
             <tag> 闭包 </tag>
+            
+            <tag> ES6 </tag>
             
             <tag> 任务队列 </tag>
             
@@ -9511,9 +9511,9 @@ p {
             
             <tag> H5 </tag>
             
-            <tag> HTML </tag>
-            
             <tag> IFE </tag>
+            
+            <tag> HTML </tag>
             
         </tags>
         

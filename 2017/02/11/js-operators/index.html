@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Web前端 | Alex Zhong">
 <meta property="og:description" content="ECMAScript 操作符的与众不同之处在于，它们能适用于很多种基本数据类型的值，例如字符串、数字值、布尔值、甚至对象。 不过，在应用于对象时，响应的操作符通常都会调用对象的valueOf()和（或）toString()方法，以便取得可以操作的值。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2024-05-19T16:47:16.322Z">
+<meta property="og:updated_time" content="2024-06-15T13:36:40.113Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="操作符回顾">
 <meta name="twitter:description" content="ECMAScript 操作符的与众不同之处在于，它们能适用于很多种基本数据类型的值，例如字符串、数字值、布尔值、甚至对象。 不过，在应用于对象时，响应的操作符通常都会调用对象的valueOf()和（或）toString()方法，以便取得可以操作的值。">
@@ -112,23 +112,23 @@
 			}
 		};
 	</script>
-  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js" data-no-instant></script>
-  <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-bounce.css" rel="stylesheet" data-no-instant>
+  <script src="//cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js" data-no-instant></script>
+  <link href="//cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-bounce.css" rel="stylesheet" data-no-instant>
 
 
 <link rel="stylesheet" href="/css/style.css">
 
 
 
-<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+<link href="//cdn.jsdelivr.net/npm/font-awesome@4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
 <title>操作符回顾 | Web前端 | Alex Zhong</title>
 
 
 
-<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
-<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/clipboard@1.5.10/dist/clipboard.min.js"></script>
 
 <script data-no-instant>
     var yiliaConfig = {
@@ -139,8 +139,8 @@
         isArchive: false,
         isTag: false,
         isCategory: false,
-        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
-        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        fancybox_js: "//cdn.jsdelivr.net/npm/fancybox@2.1.5/dist/js/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.jsdelivr.net/npm/scrollreveal@3.1.4/dist/scrollreveal.min.js",
         search: true
     }
 </script>
@@ -169,7 +169,7 @@
 
 	<!-- <script src="/search/js/cb-search.js"></script> 已合并到after-footer.ejs-->
 	<!-- <script src="/plugins/js/jquery.lazyload.min.js"></script> -->
-	<script src="//cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js" data-no-instant></script>
+	<script src="//cdn.jsdelivr.net/npm/jquery_lazyload@1.9.3/jquery.lazyload.min.js" data-no-instant></script>
 	<!--  -->
 		<!--prettify代码高亮主题css引入。注：为了减少请求数，已将此css合并到special.css-->
 		<!--<link href="/plugins/prettify/themes/space-gray-dark.css" rel="stylesheet">-->
@@ -559,7 +559,7 @@ a || b : 将a, b转换为Boolean类型, 再执行逻辑或, true返回a, false�
         <p><span>本文标题:</span><a href="/2017/02/11/js-operators/">操作符回顾</a></p>
         <p><span>文章作者:</span><a id="copyright_author" href="/" class="hint  hint--right" data-hint="回到主页">az22c 博客</a></p>
         <p style="color: #696969;"><span>发布时间:</span>2017-02-11, 13:12:40</p>
-        <!-- <p><span>最后更新:</span>2024-05-20, 00:47:16</p> -->
+        <!-- <p><span>最后更新:</span>2024-06-15, 21:36:40</p> -->
         <p>
             <span>原始链接:</span><a id="copyright_url" class="post-url hint  hint--top" data-hint="操作符回顾" href="/2017/02/11/js-operators/">https://blog.az22c.top/2017/02/11/js-operators/</a>
             <span class="copy-path hint  hint--right" data-clipboard-text="原文: https://blog.az22c.top/2017/02/11/js-operators/　　作者: az22c 博客" data-hint="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -697,7 +697,7 @@ a || b : 将a, b转换为Boolean类型, 再执行逻辑或, true返回a, false�
     
 <script src="/js/GithubRepoWidget.js"></script>
 
-<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js" defer async="true" data-no-instant></script>
+<script data-main="/js/main.js" src="//cdn.jsdelivr.net/npm/requirejs@2.2.0/require.min.js" defer async="true" data-no-instant></script>
 
 
 
@@ -995,8 +995,8 @@ clickTocTitle();
 TocNoWarp(yiliaConfig.toc[2]);
 $(".article").css("opacity", "1.0");//结束后要将文章显示
 } else if(is_home() && !isChange){
-loadCss("//cdn.bootcss.com/semantic-ui/0.19.3/css/semantic.min.css", function(){
-jQuery.getScript("//cdn.bootcss.com/semantic-ui/0.19.3/javascript/semantic.min.js").done(function(){
+loadCss("//cdn.jsdelivr.net/npm/semantic-ui@1.12.3/dist/semantic.min.css", function(){
+jQuery.getScript("//cdn.jsdelivr.net/npm/semantic-ui@1.12.3/dist/semantic.min.js").done(function(){
 $(".article").removeClass("animated");
 $(".article").css("opacity", "1.0");//结束后要将文章显示
 });
@@ -1477,7 +1477,7 @@ if (len == 1) {
 var setHightLigth = function () {
 <!-- prettify代码高亮脚本引入 http://jumpbyte.cn/2016/07/02/use-and-install-prettify/-->
 if (is_post()){
-jQuery.getScript("//cdn.bootcss.com/prettify/r298/prettify.min.js")
+jQuery.getScript("//blog.az22c.top/js/prettify-r298.min.js")
 .done(function() {
 /* 执行成功后的处理 */
 $('pre').addClass('prettyprint linenums').attr('style', 'white-space:pre;word-break: keep-all;overflow:auto;height:auto;width:auto;padding-top:5px;padding-bottom:5px;margin-bottom:10px;');
@@ -2087,7 +2087,7 @@ $("#page-undefined").css("opacity", "1.0");
 <!-- 这段代码的含义是每次页面重载时，通过直接的函数调用来实现MathJax、百度统计、Google Code Prettify、Google Analytics的重新运行 -->
 <script data-no-instant>
     if(!navigator.userAgent.match(/(iPhone|iPod|Android|ios|Opera Mini|BlackBerry|webOS)/i)){
-      jQuery.getScript("//cdn.bootcss.com/instantclick/3.0.1/instantclick.min.js")
+      jQuery.getScript("//cdn.jsdelivr.net/npm/instantclick@3.1.0-2/dist/instantclick.min.js")
         .done(function() {
           InstantClick.on('change', function (isInitialLoad) {
 //console.log(isInitialLoad);
